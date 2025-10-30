@@ -1,0 +1,101 @@
+{
+  "last_updated": "2025-10-30",
+  "account": {
+    "broker": "Fidelity",
+    "type": "Roth IRA",
+    "starting_value": 10000,
+    "current_value": 10000,
+    "cash_available": 2030
+  },
+  "positions": {
+    "active": {
+      "REKR": {
+        "entry_date": "2025-10-27",
+        "entry_price": 2.83,
+        "shares": 353,
+        "score": 65,
+        "catalyst": "AI traffic management, Q3 revenue $13.9-14.3M expected",
+        "days_held": 3,
+        "stop_status": "NO_STOP_UNTIL_2025-11-26"
+      },
+      "OSS": {
+        "entry_date": "2025-10-27", 
+        "entry_price": 5.26,
+        "shares": 190,
+        "score": 60,
+        "catalyst": "Defense contracts, $6.5M recent award",
+        "days_held": 3,
+        "stop_status": "NO_STOP_UNTIL_2025-11-26"
+      },
+      "ANIX": {
+        "entry_date": "2025-10-27",
+        "entry_price": 4.23,
+        "shares": 236,
+        "score": 70,
+        "catalyst": "Breast cancer vaccine Phase 1, CAR-T trials ongoing",
+        "days_held": 3,
+        "stop_status": "NO_STOP_UNTIL_2025-11-26"
+      },
+      "TLSA": {
+        "entry_date": "2025-10-27",
+        "entry_price": 1.96,
+        "shares": 510,
+        "score": 65,
+        "catalyst": "Intranasal foralumab Phase 2 for MS/Alzheimer's",
+        "days_held": 3,
+        "stop_status": "NO_STOP_UNTIL_2025-11-26"
+      }
+    },
+    "closed": {
+      "JRSH_2025-10-29": {
+        "entry_date": "2025-10-27",
+        "entry_price": 3.43,
+        "exit_date": "2025-10-29",
+        "exit_price": 3.25,
+        "shares": 291,
+        "score": 45,
+        "catalyst": "None - apparel manufacturer",
+        "days_held": 2,
+        "pnl_percent": -5.25,
+        "pnl_dollars": -52.38,
+        "exit_reason": "No catalyst, score too low"
+      }
+    }
+  },
+  "watchlist": {
+    "TNXP": {
+      "date_added": "2025-10-30",
+      "score": 87,
+      "price": 0.75,
+      "catalyst": "FDA Fast Track fibromyalgia decision, DTRA funding",
+      "catalyst_date": "2025-11-15",
+      "action": "BUY if <$1.00"
+    },
+    "SNGX": {
+      "date_added": "2025-10-30",
+      "score": 78,
+      "price": 3.00,
+      "catalyst": "Phase 2a Behçet's Disease, 3M float",
+      "catalyst_date": "2025-11-30",
+      "action": "BUY if <$3.50"
+    }
+  },
+  "daily_screens": {
+    "2025-10-30": {
+      "screened": 47,
+      "passed_initial": 12,
+      "scored_75_plus": 2,
+      "actions_taken": ["Sold JRSH", "Added TNXP to watchlist", "Added SNGX to watchlist"]
+    }
+  },
+  "performance": {
+    "total_trades": 1,
+    "winners": 0,
+    "losers": 1,
+    "win_rate": 0,
+    "avg_win": 0,
+    "avg_loss": -5.25,
+    "total_pnl_dollars": -52.38,
+    "total_pnl_percent": -0.52
+  }
+}
