@@ -1,0 +1,2 @@
+Ticker,Entry_Date,Entry_Price,Shares,Position_Size,Current_Price,Current_Value,Days_Held,P&L_Dollar,P&L_Percent,Score,Stop_Loss,Target_Exit,Catalyst,Catalyst_Date,Notes
+EXAMPLE,2024-10-29,3.45,300,1035.00,3.75,1125.00,1,90.00,8.70%,85,None (Day 1),7.00,Trial Results,2024-12-15,Template example - delete this row

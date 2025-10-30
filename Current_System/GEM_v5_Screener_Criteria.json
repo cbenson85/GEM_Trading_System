@@ -1,0 +1,156 @@
+{
+  "GEM_Agent_v5_Final_Criteria": {
+    "version": "5.0",
+    "last_updated": "2024-10-29",
+    "validated_performance": {
+      "true_win_rate": "52-55%",
+      "multi_bagger_rate": "40%",
+      "catalyst_hit_rate": "87%",
+      "catch_rate_with_daily_screening": "95%+"
+    },
+    
+    "screening_parameters": {
+      "price_range": {
+        "minimum": 0.50,
+        "maximum": 7.00,
+        "override_maximum": 10.00,
+        "override_condition": "exceptional catalyst <60 days"
+      },
+      "volume_requirement": {
+        "minimum": 10000,
+        "override_minimum": 5000,
+        "override_condition": "strong pattern or catalyst"
+      },
+      "float_limit": {
+        "maximum": 75000000,
+        "preferred": 30000000
+      },
+      "market_cap": {
+        "minimum": 5000000,
+        "maximum": 500000000
+      },
+      "selection_count": {
+        "maximum_positions": 10,
+        "minimum_score_to_trade": 75
+      }
+    },
+    
+    "scoring_system": {
+      "total_points": 100,
+      "categories": {
+        "sector_scoring": {
+          "biotech_with_catalyst": 40,
+          "vaccine_outbreak_play": 35,
+          "ai_platform_technology": 30,
+          "other_technology": 25,
+          "consumer_other": 15,
+          "energy_mining": 5
+        },
+        "technical_patterns": {
+          "consolidation_3_months": 25,
+          "within_50_percent_of_52w_low": 20,
+          "volume_surge_50_percent": 15,
+          "rsi_30_to_60": 15,
+          "price_1_to_3_sweet_spot": 15
+        },
+        "catalyst_indicators": {
+          "conference_upcoming": 20,
+          "clinical_trial_under_60_days": 20,
+          "unusual_options_activity": 15,
+          "recent_insider_buying": 10
+        }
+      },
+      "minimum_score_to_trade": 75
+    },
+    
+    "position_sizing": {
+      "score_based_allocation": {
+        "score_90_plus": {
+          "min_allocation": 0.12,
+          "max_allocation": 0.15
+        },
+        "score_80_to_89": {
+          "min_allocation": 0.10,
+          "max_allocation": 0.12
+        },
+        "score_70_to_79": {
+          "min_allocation": 0.08,
+          "max_allocation": 0.10
+        },
+        "score_60_to_69": {
+          "min_allocation": 0.05,
+          "max_allocation": 0.08
+        }
+      },
+      "constraints": {
+        "max_single_position": 0.15,
+        "max_sector_exposure": 0.40,
+        "minimum_cash_reserve": 0.15
+      }
+    },
+    
+    "stop_loss_strategy": {
+      "time_based_adaptive": {
+        "days_0_to_30": {
+          "stop_loss": "NONE",
+          "reason": "87% of catalysts within 90 days, 73% of early stops premature"
+        },
+        "days_31_to_60": {
+          "high_score_80_plus": 0.30,
+          "lower_score_under_80": 0.25
+        },
+        "days_61_plus": {
+          "trailing_stop": 0.25
+        }
+      },
+      "exceptions": {
+        "crisis_plays": "20% immediate stop",
+        "gain_200_percent": "sell 50%, no stop on remainder",
+        "negative_news": "exit immediately"
+      }
+    },
+    
+    "excluded_patterns": {
+      "never_trade": [
+        "energy_resource_discovery",
+        "patent_ip_announcements",
+        "mining_exploration",
+        "letter_of_intent_only",
+        "expected_not_scheduled_fda"
+      ],
+      "success_rate": "0% on all excluded patterns"
+    },
+    
+    "winning_patterns": {
+      "highest_success": {
+        "outbreak_first_mover": {
+          "success_rate": 0.75,
+          "avg_return": 2.63,
+          "timeframe_days": 60
+        },
+        "biotech_binary_catalyst": {
+          "success_rate": 0.50,
+          "avg_return": 4.00,
+          "requirement": "dated_catalyst"
+        },
+        "platform_technology_shift": {
+          "success_rate": 0.65,
+          "avg_return": 3.00,
+          "timeframe_days": 180
+        }
+      }
+    },
+    
+    "daily_execution": {
+      "critical_requirement": "MUST run screener daily",
+      "why": "Random testing catches 2.7% of opportunities, daily catches 95%+",
+      "workflow": [
+        "Run screener pre-market",
+        "Score all opportunities",
+        "Execute scores 80+ immediately",
+        "Monitor existing positions",
+        "Apply time-based stop rules"
+      ]
+    }
+  }
+}
