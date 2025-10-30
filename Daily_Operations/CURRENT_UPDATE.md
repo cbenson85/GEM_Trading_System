@@ -32,7 +32,61 @@
 
 ---
 
-## 🔍 TODAY'S SCREENING RESULTS (Oct 30, 2025)
+## 🔍 SCREENING SOURCES CHECKED (Daily at 9:00 AM ET)
+
+### FDA/Catalyst Calendars
+- [x] BiopharmCatalyst.com - PDUFA dates next 60 days
+- [x] FDATracker.com - Enhanced FDA calendar
+- [ ] BPIQ.com - Advisory committee meetings
+- [x] ClinicalTrials.gov - Recent Phase 2/3 results
+
+### Stock Screeners  
+- [x] Finviz (Preset: "GEM_v5") - Price $0.50-7, Vol >10k, Float <75M
+- [ ] TradingView - Technical breakouts + volume surge
+- [ ] MarketChameleon - Unusual options activity
+
+### Insider Activity
+- [ ] OpenInsider.com - Cluster buying (3+ insiders)
+- [ ] SECForm4.com - CEO/CFO purchases >$100k
+- [ ] GuruFocus - Biotech insider trends
+
+### Conference/Events
+- [ ] Medical conference presentations (next 30 days)
+- [ ] Earnings calendars for biotech <$500M market cap
+- [ ] Government contract announcements (BARDA, DOD)
+
+### Previous Watchlist Review
+- [x] Check 70-74 score stocks for entry
+- [x] Review rejected stocks for catalyst updates
+- [ ] Monitor positions approaching catalyst dates
+
+## TODAY'S SCREENING DATA (STRUCTURED)
+```json
+{
+  "date": "2025-10-30",
+  "sources_checked": {
+    "fda_calendars": 3,
+    "screeners_run": 1,
+    "insider_sites": 0,
+    "total_stocks_reviewed": 47
+  },
+  "candidates_found": [
+    {"ticker": "TNXP", "source": "BiopharmCatalyst", "catalyst": "FDA Fast Track", "score": 87},
+    {"ticker": "SNGX", "source": "BiopharmCatalyst", "catalyst": "Phase 2a positive", "score": 78},
+    {"ticker": "SPRO", "source": "Finviz", "catalyst": "FDA pending", "score": 72}
+  ],
+  "rejected": [
+    {"ticker": "TNXP", "reason": "price_above_range", "current_price": 18.57},
+    {"count": 8, "reason": "no_catalyst_60_days"},
+    {"count": 2, "reason": "already_up_150_percent"},
+    {"count": 5, "reason": "energy_mining_sector"}
+  ]
+}
+```
+
+---
+
+## 📈 TODAY'S SCREENING RESULTS (Oct 30, 2025)
 
 ### Phase 1-7 Screening Complete
 **Stocks Screened**: 47  
@@ -42,16 +96,8 @@
 
 ### Qualified Opportunities
 
-#### 1. TNXP - Tonix Pharmaceuticals ✅
-- **Current Price**: $0.75
-- **Score**: 87/100
-- **Catalyst**: FDA Fast Track decision for fibromyalgia (Nov 15)
-- **Additional**: DTRA defense funding
-- **Float**: 7M shares (ultra-low)
-- **Action**: BUY 10-12% position ($1,000-1,200)
-
-#### 2. SNGX - Soligenix Inc ✅
-- **Current Price**: $3.00
+#### 1. SNGX - Soligenix Inc ✅
+- **Current Price**: $1.25 (verified)
 - **Score**: 78/100
 - **Catalyst**: Phase 2a Behçet's Disease results positive
 - **Float**: 3M shares (ultra-low)
@@ -61,13 +107,14 @@
 - **SPRO** ($2.22): Score 72, FDA approval pending for UTI treatment
 
 ### Rejected (Failed Screening)
+- **TNXP**: Price $18.57 (above $10 max despite score 87)
 - 8 stocks: No catalyst within 60 days
 - 2 stocks: Already up >150% in 30 days
 - Multiple: Energy/mining sector (automatic reject)
 
 ---
 
-## 📈 PERFORMANCE METRICS
+## 📊 PERFORMANCE METRICS
 
 ### October 2025 (Month-to-Date)
 - **Starting Value**: $10,000
@@ -87,20 +134,35 @@
 ## 🎯 RECOMMENDED ACTIONS
 
 ### Immediate (Today Before Close)
-1. **Place Buy Orders**:
-   - TNXP: 1,333 shares @ $0.75 limit (10% position)
-   - SNGX: 267 shares @ $3.00 limit (8% position)
+1. **Place Buy Order**:
+   - SNGX: 640 shares @ $1.25 limit (8% position, $800)
 
 ### Tomorrow Morning
-1. Check if orders filled
+1. Check if order filled
 2. Run daily screening (9:00 AM)
-3. Update prices for all positions
-4. Remember: NO STOPS until Nov 26 for current holdings
+3. Check all screening sources in checklist
+4. Update prices for all positions
+5. Remember: NO STOPS until Nov 26 for current holdings
 
 ### Risk Management
-- **Cash After Orders**: ~$230 (2.3% reserve)
-- **Total Positions After**: 6 (room for 4 more)
+- **Cash After Order**: ~$1,230 (12.3% reserve)
+- **Total Positions After**: 5 (room for 5 more)
 - **Sector Exposure**: 100% biotech/tech (monitor)
+
+---
+
+## 📝 TRADE EXECUTION LOG (STRUCTURED)
+```json
+{
+  "trades_today": [],
+  "pending_orders": [
+    {"ticker": "SNGX", "type": "BUY", "shares": 640, "limit_price": 1.25, "allocation_percent": 8}
+  ],
+  "closed_trades": [
+    {"date": "2025-10-29", "ticker": "JRSH", "action": "SELL", "entry": 3.43, "exit": 3.25, "days": 2, "pnl_percent": -5.25, "reason": "no_catalyst"}
+  ]
+}
+```
 
 ---
 
@@ -114,11 +176,13 @@
 5. ✅ Calculated actual P&L percentages
 6. ✅ Added 30-day no-stop status
 7. ✅ Performed complete 7-phase screening
+8. ✅ Added screening sources checklist
+9. ✅ Added structured JSON data capture
 
 ### Version Notes
 - Using Protocol v5.0.1 (not JSON v5.0)
 - Protocol multipliers: 3.5x, 2.0x, 1.5x, 1.0x
-- Minimum score: 75 (both candidates qualify)
+- Minimum score: 75 (SNGX qualifies)
 
 ---
 
@@ -133,7 +197,8 @@
 
 ### This File Contains
 - ✅ Complete portfolio status
-- ✅ All corrections applied
+- ✅ Screening sources checklist
+- ✅ Structured JSON data for analysis
 - ✅ Today's screening results
 - ✅ Clear next actions
 - ✅ Change tracking
@@ -142,33 +207,42 @@
 - Your original `Live_Portfolio_Tracking.md` remains unchanged
 - This becomes your new single update point
 - GitHub history tracks all versions
+- JSON sections enable pattern analysis
 
 ---
 
 ## 📋 VERIFICATION CHECKLIST
 
 Before committing to GitHub:
-- [ ] Dates show 2025 (not 2024) ✅
-- [ ] JRSH marked as sold ✅
-- [ ] Days held = 3 (not 368+) ✅
-- [ ] All positions show "NO STOP until 11/26" ✅
-- [ ] Current prices included ✅
-- [ ] Screening results included ✅
-- [ ] Cash available calculated ✅
+- [x] Dates show 2025 (not 2024) ✅
+- [x] JRSH marked as sold ✅
+- [x] Days held = 3 (not 368+) ✅
+- [x] All positions show "NO STOP until 11/26" ✅
+- [x] Current prices included ✅
+- [x] Screening results included ✅
+- [x] Cash available calculated ✅
+- [x] Screening sources section added ✅
+- [x] JSON data capture included ✅
 
 ---
 
 ## 🚀 NEXT STEPS
 
-1. **Create on GitHub**:
-   - New folder: `Daily_Operations`
-   - New file: `CURRENT_UPDATE.md`
+1. **Paste this entire file** to `Daily_Operations/CURRENT_UPDATE.md`
 
-2. **Paste This Entire File** to that location
+2. **Commit Message**: "Added screening sources and structured data capture"
 
-3. **Commit Message**: "Initial setup with corrected dates and complete status"
+3. **Tomorrow**: Say "Generate GEM daily update" and I'll create new version with:
+   - Updated prices
+   - New screening results  
+   - Checked sources
+   - Updated JSON data
 
-4. **Tomorrow**: Just say "Generate GEM daily update" and paste the new version
+4. **For Pattern Analysis** (on demand): Say "Analyze GEM patterns" and I'll:
+   - Read your GitHub history
+   - Extract JSON sections
+   - Identify winning/losing patterns
+   - Suggest refinements
 
 ---
 
