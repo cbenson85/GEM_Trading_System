@@ -1,7 +1,8 @@
 {
   "GEM_Agent_v5_Final_Criteria": {
-    "version": "5.0",
-    "last_updated": "2024-10-29",
+    "version": "5.0.1",
+    "last_updated": "2025-10-30",
+    "protocol_reference": "GEM_v5_Master_Screening_Protocol.md v5.0.1",
     "validated_performance": {
       "true_win_rate": "52-55%",
       "multi_bagger_rate": "40%",
@@ -29,63 +30,142 @@
         "minimum": 5000000,
         "maximum": 500000000
       },
-      "selection_count": {
-        "maximum_positions": 10,
-        "minimum_score_to_trade": 75
-      }
+      "exchanges": ["NYSE", "NASDAQ"],
+      "exclude": ["Chinese ADRs", "OTC", "Pink Sheets"]
     },
     
     "scoring_system": {
-      "total_points": 100,
-      "categories": {
-        "sector_scoring": {
-          "biotech_with_catalyst": 40,
-          "vaccine_outbreak_play": 35,
-          "ai_platform_technology": 30,
-          "other_technology": 25,
-          "consumer_other": 15,
-          "energy_mining": 5
+      "total_possible_points": 100,
+      "minimum_score_to_trade": 75,
+      "multiplier_system": {
+        "catalyst": 3.5,
+        "timing": 2.0,
+        "technical": 1.5,
+        "short_interest": 1.0,
+        "sector": 1.5,
+        "float": 1.0
+      },
+      
+      "scoring_components": {
+        "A_catalyst_score": {
+          "multiplier": 3.5,
+          "max_points": 35,
+          "base_values": {
+            "FDA_PDUFA_approval": 10,
+            "phase_2_3_binary_data": 9,
+            "outbreak_first_mover": 10,
+            "government_contract": 8,
+            "conference_presentation": 7,
+            "partnership_expected": 6,
+            "earnings_binary": 6,
+            "no_clear_catalyst": 0
+          }
         },
-        "technical_patterns": {
-          "consolidation_3_months": 25,
-          "within_50_percent_of_52w_low": 20,
-          "volume_surge_50_percent": 15,
-          "rsi_30_to_60": 15,
-          "price_1_to_3_sweet_spot": 15
+        "B_timing_score": {
+          "multiplier": 2.0,
+          "max_points": 20,
+          "base_values": {
+            "0_14_days": 10,
+            "15_30_days": 9,
+            "31_45_days": 8,
+            "46_60_days": 7,
+            "61_90_days": 5,
+            "over_90_days": 2,
+            "unknown": 0
+          }
         },
-        "catalyst_indicators": {
-          "conference_upcoming": 20,
-          "clinical_trial_under_60_days": 20,
-          "unusual_options_activity": 15,
-          "recent_insider_buying": 10
+        "C_technical_score": {
+          "multiplier": 1.5,
+          "max_points": 15,
+          "components": {
+            "consolidation_3_months": 4,
+            "within_50pct_52w_low": 2,
+            "rsi_30_60": 2,
+            "volume_surge_50pct": 2,
+            "all_met": 10
+          }
+        },
+        "D_short_interest_score": {
+          "multiplier": 1.0,
+          "max_points": 10,
+          "base_values": {
+            "over_30pct_with_catalyst": 10,
+            "20_30pct_with_catalyst": 8,
+            "15_20pct": 6,
+            "10_15pct": 4,
+            "under_10pct": 2
+          }
+        },
+        "E_sector_score": {
+          "multiplier": 1.5,
+          "max_points": 15,
+          "base_values": {
+            "biotech_with_catalyst": 10,
+            "outbreak_vaccine_play": 10,
+            "ai_platform_early": 9,
+            "technology_general": 7,
+            "consumer_other": 5,
+            "energy_mining": 1
+          }
+        },
+        "F_float_score": {
+          "multiplier": 1.0,
+          "max_points": 5,
+          "base_values": {
+            "under_10M": 5,
+            "10_30M": 4,
+            "30_50M": 3,
+            "50_75M": 2,
+            "over_75M": 0
+          }
         }
       },
-      "minimum_score_to_trade": 75
+      
+      "adjustments": {
+        "red_flags_penalty": -20,
+        "multi_catalyst_bonus": 5,
+        "first_mover_bonus": 5
+      }
     },
     
     "position_sizing": {
       "score_based_allocation": {
-        "score_90_plus": {
+        "score_90_100": {
+          "action": "Strong Buy",
           "min_allocation": 0.12,
-          "max_allocation": 0.15
+          "max_allocation": 0.15,
+          "max_positions": 2
         },
-        "score_80_to_89": {
+        "score_80_89": {
+          "action": "Buy",
           "min_allocation": 0.10,
-          "max_allocation": 0.12
+          "max_allocation": 0.12,
+          "max_positions": 3
         },
-        "score_70_to_79": {
+        "score_75_79": {
+          "action": "Small Buy",
           "min_allocation": 0.08,
-          "max_allocation": 0.10
+          "max_allocation": 0.10,
+          "max_positions": 4
         },
-        "score_60_to_69": {
-          "min_allocation": 0.05,
-          "max_allocation": 0.08
+        "score_70_74": {
+          "action": "Watch Only",
+          "min_allocation": 0.00,
+          "max_allocation": 0.00,
+          "max_positions": 0
+        },
+        "score_below_70": {
+          "action": "Ignore",
+          "min_allocation": 0.00,
+          "max_allocation": 0.00,
+          "max_positions": 0
         }
       },
       "constraints": {
         "max_single_position": 0.15,
         "max_sector_exposure": 0.40,
-        "minimum_cash_reserve": 0.15
+        "minimum_cash_reserve": 0.15,
+        "max_total_positions": 10
       }
     },
     
@@ -110,47 +190,73 @@
       }
     },
     
-    "excluded_patterns": {
-      "never_trade": [
-        "energy_resource_discovery",
-        "patent_ip_announcements",
-        "mining_exploration",
-        "letter_of_intent_only",
-        "expected_not_scheduled_fda"
+    "pattern_verification": {
+      "high_confidence_patterns": {
+        "outbreak_first_mover": {"win_rate": 0.75, "avg_return": 2.63},
+        "biotech_binary_catalyst": {"win_rate": 0.50, "avg_return": 4.00},
+        "platform_technology_shift": {"win_rate": 0.65, "avg_return": 3.00},
+        "multi_catalyst_stack": {"requirement": "2+ catalysts"}
+      },
+      "medium_confidence_patterns": [
+        "consolidation_breakout",
+        "insider_cluster_buying",
+        "conference_presentation_play",
+        "short_squeeze_setup"
       ],
-      "success_rate": "0% on all excluded patterns"
+      "automatic_disqualifiers": [
+        "energy_mining_exploration",
+        "patent_trolls",
+        "chinese_small_caps",
+        "letter_of_intent_only",
+        "no_revenue_no_catalyst"
+      ]
     },
     
-    "winning_patterns": {
-      "highest_success": {
-        "outbreak_first_mover": {
-          "success_rate": 0.75,
-          "avg_return": 2.63,
-          "timeframe_days": 60
-        },
-        "biotech_binary_catalyst": {
-          "success_rate": 0.50,
-          "avg_return": 4.00,
-          "requirement": "dated_catalyst"
-        },
-        "platform_technology_shift": {
-          "success_rate": 0.65,
-          "avg_return": 3.00,
-          "timeframe_days": 180
-        }
-      }
+    "false_signal_checks": {
+      "management_red_flags": [
+        "CEO_change_90_days",
+        "CFO_resignation",
+        "multiple_executive_departures",
+        "SEC_investigation"
+      ],
+      "financial_red_flags": [
+        "going_concern_warning",
+        "recent_toxic_financing",
+        "warrant_overhang_50pct",
+        "customer_concentration_50pct"
+      ],
+      "technical_red_flags": [
+        "already_up_150pct_30days",
+        "volume_under_5k",
+        "multiple_failed_resistance",
+        "delisting_warning"
+      ]
+    },
+    
+    "seven_phase_execution": {
+      "phase_1": "Initial Filter",
+      "phase_2": "Catalyst Identification",
+      "phase_3": "Scoring Calculation",
+      "phase_4": "Pattern Verification",
+      "phase_5": "False Signal Check",
+      "phase_6": "Position Sizing",
+      "phase_7": "Execution Checklist",
+      "critical_rule": "ALL 7 PHASES MUST BE COMPLETED"
     },
     
     "daily_execution": {
       "critical_requirement": "MUST run screener daily",
       "why": "Random testing catches 2.7% of opportunities, daily catches 95%+",
       "workflow": [
-        "Run screener pre-market",
+        "Run screener pre-market (9:00 AM)",
+        "Complete all 7 phases",
         "Score all opportunities",
-        "Execute scores 80+ immediately",
+        "Execute scores 75+ immediately",
         "Monitor existing positions",
-        "Apply time-based stop rules"
-      ]
+        "Apply time-based stop rules",
+        "Document in CURRENT_UPDATE.md"
+      ],
+      "no_catalyst_no_trade": true
     }
   }
 }
