@@ -20,7 +20,7 @@ If cannot verify: MUST state "CANNOT VERIFY"
 Critical Rule:
 You WILL NOT FABRICATE INFORMATION. If you cannot access, see, or fulfill the request, YOU MUST TELL ME IMMEDIATELY.
 📊 COMPLETE SCREENING PROCESS - ALL PHASES
-PHASE 1: INITIAL FILTER (9:00-9:05 AM)
+PHASE 1: INITIAL FILTER
 Hard Filters (Non-Negotiable):
 Price Range: $0.50 - $7.00
 Volume: > 10,000 average daily
@@ -41,7 +41,7 @@ Report: "[X] met volume criteria" or "VOLUME DATA UNAVAILABLE"
 Report: "[X] met float criteria" or "FLOAT DATA UNAVAILABLE"
 List all tickers advancing or state "CANNOT DETERMINE"
 
-PHASE 2: CATALYST IDENTIFICATION (9:05-9:15 AM)
+PHASE 2: CATALYST IDENTIFICATION
 Check EVERY stock from Phase 1 for:
 Tier 1 Catalysts (Highest Priority):
 FDA PDUFA date within 60 days
@@ -73,7 +73,7 @@ For each stock: State catalyst found with source or "NO CATALYST FOUND"
 If cannot verify catalyst: "CATALYST CANNOT BE VERIFIED"
 Include source link for each catalyst claim
 
-PHASE 3: SCORING CALCULATION (9:15-9:20 AM)
+PHASE 3: SCORING CALCULATION
 For EACH stock with catalyst, calculate:
 A. CATALYST SCORE (Base 0-10 × 3.5 multiplier = max 35 points)
 FDA PDUFA/Approval: 10 points
@@ -130,7 +130,7 @@ Each score component must cite source
 If data missing, score that component as "DATA NOT AVAILABLE" and adjust total
 Mark any estimated scores as [UNVERIFIED]
 
-PHASE 4: PATTERN VERIFICATION (9:20-9:25 AM)
+PHASE 4: PATTERN VERIFICATION
 For stocks scoring 75+, verify ONE of these patterns:
 ✅ HIGH CONFIDENCE PATTERNS:
 Outbreak first-mover (75% historical win rate)
@@ -153,7 +153,7 @@ TRANSPARENCY DISCLOSURES REQUIRED:
 State what patterns found with source or "CANNOT ACCESS HISTORICAL DATA"
 Note if pattern verification limited due to missing data
 
-PHASE 5: FALSE SIGNAL CHECK (9:25-9:28 AM)
+PHASE 5: FALSE SIGNAL CHECK
 Check for Red Flags that Override Everything:
 Management Red Flags:
 CEO change in last 90 days
@@ -176,7 +176,7 @@ TRANSPARENCY DISCLOSURES REQUIRED:
 State findings with sources or "CANNOT VERIFY RED FLAGS"
 List specific checks that couldn't be performed
 
-PHASE 6: POSITION SIZING (9:28-9:30 AM)
+PHASE 6: POSITION SIZING
 Based on FINAL score after adjustments:
 Final Score	Action	Position Size	Max Positions
 90-100	Strong Buy	12-15%	2 maximum
@@ -194,7 +194,7 @@ TRANSPARENCY DISCLOSURES REQUIRED:
 State if sizing based on incomplete data
 Note "POSITION SIZE PROVISIONAL - MISSING: [data type]"
 
-PHASE 7: EXECUTION CHECKLIST (9:30 AM)
+PHASE 7: EXECUTION CHECKLIST
 Before Placing ANY Order:
 Verify Score: [ ] Recalculate to confirm ≥75
 Check News: [ ] No negative news in last hour
