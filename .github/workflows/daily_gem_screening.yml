@@ -2,9 +2,11 @@ name: Daily GEM Screening with Real Data
 
 on:
   schedule:
-    # Runs at 9:30 AM ET every weekday
     - cron: '30 13 * * 1-5'
-  workflow_dispatch:  # Allows manual trigger from GitHub Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   run-gem-screening:
@@ -13,8 +15,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -38,5 +38,4 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GEM Screening Bot"
           git add Daily_Operations/CURRENT_UPDATE.md
-          git diff --cached --exit-code || git commit -m "Daily GEM Screening Update - $(date +'%Y-%m-%d %H:%M')"
-          git push
+          git diff --cached --quiet || git commit -m "Daily GEM Screening Update - $(date +'%Y-%m-%d %H:%M')" && git push
