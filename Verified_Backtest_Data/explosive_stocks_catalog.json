@@ -1,0 +1,53 @@
+{
+  "scan_info": {
+    "scan_date": "2025-11-01 21:43:36",
+    "scan_period_start": "2023-01-01",
+    "scan_period_end": "2024-10-31",
+    "criteria": "500%+ gain in any 180-day window",
+    "data_sources": [
+      "Polygon API",
+      "Yahoo Finance"
+    ],
+    "total_stocks_scanned": 100,
+    "total_explosive_stocks_found": 2,
+    "data_errors": 30,
+    "api_calls_made": 112,
+    "scan_complete": true
+  },
+  "stocks": [
+    {
+      "ticker": "AAOI",
+      "year_discovered": 2023,
+      "catalyst_date": "2023-08-07",
+      "entry_price": 1.92,
+      "peak_price": 13.17,
+      "gain_percent": 585.9,
+      "days_to_peak": 147,
+      "entry_date": "2023-01-04",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 100
+    },
+    {
+      "ticker": "AAOI",
+      "year_discovered": 2024,
+      "catalyst_date": "2024-11-29",
+      "entry_price": 6.87,
+      "peak_price": 43.05,
+      "gain_percent": 526.6,
+      "days_to_peak": 80,
+      "entry_date": "2024-08-07",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 3
+    }
+  ],
+  "metadata": {
+    "last_updated": "2025-11-01 21:43:36",
+    "verified_by": "Automated scan with Polygon API",
+    "quality_checks_passed": true,
+    "notes": "Initial scan complete - sectors to be classified manually"
+  }
+}
