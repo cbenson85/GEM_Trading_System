@@ -1,0 +1,17 @@
+{
+  "discovery_info": {
+    "last_updated": "2025-11-01",
+    "total_patterns_found": 0,
+    "analysis_complete": false
+  },
+  "patterns": [
+  ],
+  "scoring_weights": {
+    "note": "Will be populated based on correlation strength of discovered patterns"
+  },
+  "metadata": {
+    "analysis_method": "Pre-catalyst correlation analysis across all 500%+ stocks",
+    "sample_size": 0,
+    "confidence_level": "To be determined"
+  }
+}
