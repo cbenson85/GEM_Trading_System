@@ -1,0 +1,63 @@
+{
+  "version": "5.0.1-REBUILD",
+  "current_phase": "Phase 2: System Requirements & Data Infrastructure",
+  "situation_summary": "System being rebuilt from ground up. Previous model fabricated backtest data. Starting fresh with verified data only.",
+  "immediate_priority": "Build catch-up prompt system, then create data infrastructure for verified backtesting",
+  "portfolio_status": "CLEARED - Starting fresh",
+  "cash_available": "$10,000 (reset)",
+  "system_stage": "Pre-Development - Planning & Infrastructure",
+  "last_phase": "Phase 1: Discovery & Documentation Audit - COMPLETE",
+  "next_phase": "Phase 2: System Requirements & Data Infrastructure",
+  "data_verification_status": "\n- Current Prices: \u2705 VERIFIED (Polygon API)\n- Volume Data: \u2705 VERIFIED (Polygon API)\n- Float Data: \u26a0\ufe0f PARTIAL (Polygon API - not all stocks)\n- Backtest Results: \u274c UNVERIFIED (marked for removal)\n- Catalyst Data: \u274c NOT YET IMPLEMENTED\n- Historical Analysis: \u274c NOT YET STARTED\n                ",
+  "verified_files": "\n- `/Current_System/GEM_v5_Master_Screening_Protocol.md` - Core screening rules\n- `/Current_System/Trading_Rules_Complete.md` - Trading operations guide\n- `/Polygon_Integration/daily_screener.py` - Working Polygon integration\n- `/Daily_Operations/CURRENT_UPDATE.md` - Daily update template\n                ",
+  "data_files": "\n- `/Verified_Backtest_Data/` - TO BE CREATED\n- `/Verified_Backtest_Data/explosive_stocks_catalog.json` - TO BE CREATED\n- `/Verified_Backtest_Data/pre_catalyst_analysis/` - TO BE CREATED\n- `/Verified_Backtest_Data/backtest_runs/` - TO BE CREATED\n                ",
+  "unverified_content": "\n- `/Backtest_Results/` - MARKED UNVERIFIED, kept as framework reference\n- `/Strategy_Evolution/` - MARKED UNVERIFIED, contains unproven claims\n- All Python backtest scripts - MARKED UNVERIFIED, frameworks only\n                ",
+  "backtesting_approach": "\n1. Find stocks with 500%+ gains in any 6-month window (last 10 years)\n2. Deep dive into 180 days PRE-CATALYST for each stock\n3. Analyze: price, volume, sentiment, leadership, news, patterns\n4. Identify correlations between explosive stocks\n5. Build screener based on correlations\n6. Backtest on random historical dates\n7. Apply FALSE MISS principle to discarded stocks\n8. Track picks AND discards with full performance data\n9. Refine until consistent 10-year performance\n10. Store ALL data for future refinement\n                ",
+  "backtesting_progress": "NOT STARTED - Building infrastructure first",
+  "data_sources": "\n- Price/Volume: Polygon API (Developer tier) + Yahoo Finance backup\n- News/Sentiment: Web scraping (Google, Yahoo Finance)\n- Insider Trading: Free sources (Finviz, OpenInsider, SEC Form 4)\n- SEC Filings: SEC EDGAR (free)\n- Float/Shares: Polygon API + manual verification\n                ",
+  "verified_patterns": "NONE YET - Will be discovered during analysis phase",
+  "scoring_criteria": "CURRENT v5.0.1 CRITERIA - Will be updated based on pattern discovery",
+  "refinement_history": [],
+  "key_decisions": [
+    "Mark all previous backtest results as UNVERIFIED",
+    "Clear all current portfolio positions - starting fresh",
+    "Build from verified data only - no fabrication",
+    "Use 500%+ in 6 months as explosive stock criteria",
+    "Analyze 180 days pre-catalyst for pattern discovery",
+    "Store all backtest data (picks AND discards) for refinement",
+    "Apply false miss principle in all backtests",
+    "User only does copy/paste - full automation required",
+    "Free data sources only (no paid APIs except Polygon)"
+  ],
+  "rules_established": [
+    "NEVER fabricate data - verify or say you can't",
+    "FALSE MISS CHECK - Always check discarded stocks for explosive growth",
+    "STORE EVERYTHING - All decisions, data, refinements must be saved",
+    "COPY/PASTE ONLY - User should never manually enter data",
+    "10-YEAR VALIDATION - System must prove consistency before live trading"
+  ],
+  "next_steps": [
+    "1. Create catch-up prompt system (IN PROGRESS)",
+    "2. Build data infrastructure folders and files",
+    "3. Create explosive stock discovery script",
+    "4. Run 10-year scan for 500%+ stocks",
+    "5. Build pre-catalyst analysis framework",
+    "6. Begin deep-dive analyses"
+  ],
+  "blockers": "None currently",
+  "data_storage_location": "/Verified_Backtest_Data/ (to be created in GitHub)",
+  "progress_log": [
+    {
+      "date": "2025-11-01 20:41",
+      "phase": "Phase 1",
+      "action": "Completed audit of existing system",
+      "result": "Identified fabricated backtest data, cleared portfolio, established new methodology"
+    },
+    {
+      "date": "2025-11-01 20:41",
+      "phase": "Phase 2",
+      "action": "Creating catch-up prompt system",
+      "result": "IN PROGRESS"
+    }
+  ]
+}
