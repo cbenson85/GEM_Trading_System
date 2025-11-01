@@ -1,5 +1,5 @@
 # GEM Trading System - AI Catch-Up Prompt
-**Last Updated**: 2025-11-01 22:26:01
+**Last Updated**: 2025-11-01 22:39:37
 **System Version**: 5.0.1-REBUILD
 **Current Phase**: Phase 3: Stock Discovery & Catalog Building
 
@@ -38,6 +38,8 @@ Full 10-year scan running (2-4 hrs). Filter script ready to apply COVID-era excl
 
 ## 🗂️ FILE STRUCTURE & LOCATIONS
 
+**Repository**: https://github.com/cbenson85/GEM_Trading_System
+
 ### Core System Files (VERIFIED)
 
 - `/Current_System/GEM_v5_Master_Screening_Protocol.md` - Core screening rules
@@ -48,13 +50,13 @@ Full 10-year scan running (2-4 hrs). Filter script ready to apply COVID-era excl
 
 ### Data Files (Location & Status)
 
-- `/Verified_Backtest_Data/` - ✅ CREATED (empty, awaiting scan results)
-- `/Verified_Backtest_Data/explosive_stocks_catalog.json` - ✅ TEMPLATE CREATED
-- `/Verified_Backtest_Data/pre_catalyst_analysis/` - ✅ FOLDER CREATED
-- `/Verified_Backtest_Data/backtest_runs/` - ✅ FOLDER CREATED  
-- `/Verified_Backtest_Data/correlations_discovered.json` - ✅ TEMPLATE CREATED
-- `/Verified_Backtest_Data/refinement_history.json` - ✅ TEMPLATE CREATED
-- `/Archive_Unverified/` - ✅ CREATED (old backtest files marked unverified)
+- `/Verified_Backtest_Data/` - ✅ CREATED
+- `/Verified_Backtest_Data/explosive_stocks_catalog.json` - ✅ LIVE (updated by scans)
+- `/Verified_Backtest_Data/explosive_stocks_CLEAN.json` - To be created after filtering
+- `/Verified_Backtest_Data/explosive_stocks_COVID_ERA.json` - To be created after filtering
+- `/Verified_Backtest_Data/refinement_history.json` - ✅ ACTIVE
+- `/Verified_Backtest_Data/correlations_discovered.json` - ✅ TEMPLATE
+- `/GITHUB_FILE_CATALOG.md` - ✅ Complete file reference with all links
 
 
 ### Unverified/Archived Content
@@ -63,6 +65,31 @@ Full 10-year scan running (2-4 hrs). Filter script ready to apply COVID-era excl
 - `/Strategy_Evolution/` - MARKED UNVERIFIED, contains unproven claims
 - All Python backtest scripts - MARKED UNVERIFIED, frameworks only
                 
+
+### 📂 Complete GitHub File Catalog
+
+**Key Files for AI to Read:**
+
+**System State:**
+- [CURRENT_CATCHUP_PROMPT.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/System_State/CURRENT_CATCHUP_PROMPT.md) - Latest state
+- [system_state.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/System_State/system_state.json) - Current data
+
+**Core Protocols:**
+- [GEM_v5_Master_Screening_Protocol.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Current_System/GEM_v5_Master_Screening_Protocol.md) - 7-phase screening
+- [Trading_Rules_Complete.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Current_System/Trading_Rules_Complete.md) - Operations
+- [COVID_ERA_EXCLUSION_RULE.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/COVID_ERA_EXCLUSION_RULE.md) - Critical filter
+
+**Live Data:**
+- [explosive_stocks_catalog.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/explosive_stocks_catalog.json) - Scan results
+- [refinement_history.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/refinement_history.json) - Changes log
+
+**Active Scripts:**
+- [explosive_stock_scanner.py](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/explosive_stock_scanner.py) - Scanner
+- [filter_covid_era.py](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/filter_covid_era.py) - Data filter
+- [explosive_stock_scan_workflow.yml](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/.github/workflows/explosive_stock_scan_workflow.yml) - Automation
+
+**Full Catalog:**
+- [GITHUB_FILE_CATALOG.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/GITHUB_FILE_CATALOG.md) - Complete file list with all links
 
 ---
 
@@ -191,6 +218,10 @@ Waiting for full scan to complete (running in background)
 **2025-11-01 22:26** - Phase 2
 - Action: Created COVID-era exclusion filter and documentation
 - Result: Filter script ready - will exclude 2020-2021 anomalies from pattern analysis
+
+**2025-11-01 22:39** - System Maintenance
+- Action: Created complete GitHub file catalog with links
+- Result: Full file structure documented. All files accessible via direct links in catch-up prompt.
 
 
 ---
