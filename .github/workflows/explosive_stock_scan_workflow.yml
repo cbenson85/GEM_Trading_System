@@ -1,0 +1,92 @@
+name: Explosive Stock Scanner - Automated
+
+on:
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      scan_mode:
+        description: 'Scan mode (test or full)'
+        required: true
+        default: 'test'
+        type: choice
+        options:
+          - test
+          - full
+      start_year:
+        description: 'Start year'
+        required: true
+        default: '2023'
+      end_year:
+        description: 'End year'
+        required: true
+        default: '2024'
+  
+  # Optional: Schedule for automatic runs
+  # schedule:
+  #   - cron: '0 2 * * 6'  # Every Saturday at 2 AM
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests yfinance pandas
+    
+    - name: Create data directories
+      run: |
+        mkdir -p Verified_Backtest_Data/pre_catalyst_analysis
+        mkdir -p Verified_Backtest_Data/backtest_runs
+    
+    - name: Run explosive stock scanner
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+        SCAN_MODE: ${{ github.event.inputs.scan_mode || 'test' }}
+        START_YEAR: ${{ github.event.inputs.start_year || '2023' }}
+        END_YEAR: ${{ github.event.inputs.end_year || '2024' }}
+      run: |
+        python explosive_stock_scanner.py
+    
+    - name: Check for results
+      run: |
+        if [ -f "Verified_Backtest_Data/explosive_stocks_catalog.json" ]; then
+          echo "✅ Scan complete!"
+          echo "Results found in explosive_stocks_catalog.json"
+          cat Verified_Backtest_Data/explosive_stocks_catalog.json | head -50
+        else
+          echo "❌ No results file found"
+          exit 1
+        fi
+    
+    - name: Commit results
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add Verified_Backtest_Data/explosive_stocks_catalog.json
+        git diff --staged --quiet || git commit -m "🤖 Automated scan: explosive stocks catalog updated"
+    
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+    
+    - name: Generate summary
+      run: |
+        echo "## 🚀 Explosive Stock Scanner Results" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        if [ -f "Verified_Backtest_Data/explosive_stocks_catalog.json" ]; then
+          TOTAL=$(jq '.scan_info.total_explosive_stocks_found' Verified_Backtest_Data/explosive_stocks_catalog.json)
+          echo "**Total explosive stocks found:** $TOTAL" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Results committed to repository." >> $GITHUB_STEP_SUMMARY
+        fi
