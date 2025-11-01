@@ -1,19 +1,16 @@
-# Manual trigger test
 name: Daily GEM Screening with Real Data
 
 on:
   schedule:
-    # Runs at 9:30 AM ET every weekday
     - cron: '30 13 * * 1-5'
-  workflow_dispatch:  # Allows manual trigger from GitHub Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   run-gem-screening:
     runs-on: ubuntu-latest
-    
-    # Add permissions for the workflow
-    permissions:
-      contents: write
     
     steps:
       - name: Checkout repository
@@ -35,28 +32,10 @@ jobs:
         run: |
           cd Polygon_Integration
           python daily_screener.py
-        continue-on-error: false
-      
-      - name: Check if update file was created
-        run: |
-          if [ -f "Daily_Operations/CURRENT_UPDATE.md" ]; then
-            echo "✅ CURRENT_UPDATE.md was created"
-            echo "File size: $(wc -c < Daily_Operations/CURRENT_UPDATE.md) bytes"
-          else
-            echo "❌ CURRENT_UPDATE.md was NOT created"
-            exit 1
-          fi
       
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GEM Screening Bot"
           git add Daily_Operations/CURRENT_UPDATE.md
-          
-          # Only commit if there are changes
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "Daily GEM Screening Update - $(date +'%Y-%m-%d %H:%M')"
-            git push
-          fi
+          git diff --cached --quiet || git commit -m "Daily GEM Screening Update - $(date +'%Y-%m-%d %H:%M')" && git push
