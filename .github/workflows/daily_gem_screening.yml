@@ -3,7 +3,7 @@ name: Daily GEM Screening with Real Data
 on:
   schedule:
     - cron: '30 13 * * 1-5'
-  workflow_dispatch:
+-main
 
 permissions:
   contents: write
