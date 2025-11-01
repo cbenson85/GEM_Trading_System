@@ -43,6 +43,8 @@ class CatchUpPromptGenerator:
 
 ## 🗂️ FILE STRUCTURE & LOCATIONS
 
+**Repository**: https://github.com/cbenson85/GEM_Trading_System
+
 ### Core System Files (VERIFIED)
 {verified_files}
 
@@ -51,6 +53,31 @@ class CatchUpPromptGenerator:
 
 ### Unverified/Archived Content
 {unverified_content}
+
+### 📂 Complete GitHub File Catalog
+
+**Key Files for AI to Read:**
+
+**System State:**
+- [CURRENT_CATCHUP_PROMPT.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/System_State/CURRENT_CATCHUP_PROMPT.md) - Latest state
+- [system_state.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/System_State/system_state.json) - Current data
+
+**Core Protocols:**
+- [GEM_v5_Master_Screening_Protocol.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Current_System/GEM_v5_Master_Screening_Protocol.md) - 7-phase screening
+- [Trading_Rules_Complete.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Current_System/Trading_Rules_Complete.md) - Operations
+- [COVID_ERA_EXCLUSION_RULE.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/COVID_ERA_EXCLUSION_RULE.md) - Critical filter
+
+**Live Data:**
+- [explosive_stocks_catalog.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/explosive_stocks_catalog.json) - Scan results
+- [refinement_history.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/refinement_history.json) - Changes log
+
+**Active Scripts:**
+- [explosive_stock_scanner.py](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/explosive_stock_scanner.py) - Scanner
+- [filter_covid_era.py](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/filter_covid_era.py) - Data filter
+- [explosive_stock_scan_workflow.yml](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/.github/workflows/explosive_stock_scan_workflow.yml) - Automation
+
+**Full Catalog:**
+- [GITHUB_FILE_CATALOG.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/GITHUB_FILE_CATALOG.md) - Complete file list with all links
 
 ---
 
