@@ -1,5 +1,5 @@
 # GEM Trading System - AI Catch-Up Prompt
-**Last Updated**: 2025-11-01 21:13:36
+**Last Updated**: 2025-11-01 22:26:01
 **System Version**: 5.0.1-REBUILD
 **Current Phase**: Phase 3: Stock Discovery & Catalog Building
 
@@ -11,7 +11,7 @@
 System being rebuilt from ground up. Previous model fabricated backtest data. Starting fresh with verified data only.
 
 ### Immediate Priority
-User uploads scanner + workflow to GitHub, runs automated scan via Actions
+Full 10-year scan running (2-4 hrs). Filter script ready to apply COVID-era exclusion when complete.
 
 ---
 
@@ -84,7 +84,13 @@ User uploads scanner + workflow to GitHub, runs automated scan via Actions
 
 
 ### Current Progress
-Infrastructure complete - awaiting 10-year explosive stock scan results
+
+CURRENT: Full 10-year scan running on GitHub Actions (2014-2024)
+- Expected duration: 2-4 hours
+- Expected results: 50-150 explosive stocks
+- COVID-era filter ready to apply upon completion
+- Will separate: Clean dataset (2014-2019, 2022-2024) vs COVID-era (2020-2021)
+
 
 ### Data Sources
 
@@ -122,6 +128,7 @@ No refinements yet - starting fresh
 8. User only does copy/paste - full automation required
 9. Free data sources only (no paid APIs except Polygon)
 10. Use GitHub Actions for full automation (no local execution)
+11. Exclude 2020-2021 from pattern discovery (COVID-era market anomalies)
 
 
 ### Rules Established
@@ -130,6 +137,7 @@ No refinements yet - starting fresh
 3. STORE EVERYTHING - All decisions, data, refinements must be saved
 4. COPY/PASTE ONLY - User should never manually enter data
 5. 10-YEAR VALIDATION - System must prove consistency before live trading
+6. COVID-ERA EXCLUSION: Ignore 2020-2021 data (stimulus, zero rates, pandemic anomalies) - not repeatable conditions
 
 
 ---
@@ -137,17 +145,15 @@ No refinements yet - starting fresh
 ## 📝 WHAT NEEDS TO HAPPEN NEXT
 
 ### Immediate Next Steps
-1. USER ACTION: Disable old failing Daily GEM Screening workflow (stops emails)
-2. USER ACTION: Upload explosive_stock_scanner.py (updated version)
-3. USER ACTION: Upload .github/workflows/explosive_stock_scan_workflow.yml (new file)
-4. USER ACTION: Click 'Run workflow' in Actions tab
-5. AUTOMATED: GitHub Actions runs scanner, commits results
-6. USER ACTION: Copy/paste explosive_stocks_catalog.json to Claude
-7. AI ACTION: Analyze results, proceed to Phase 3
+1. RUNNING: Full 10-year explosive stock scan (2014-2024)
+2. WHEN COMPLETE: Apply COVID-era filter to results
+3. AI ACTION: Analyze clean dataset for patterns
+4. AI ACTION: Build pre-catalyst analysis framework
+5. AI ACTION: Begin 180-day deep dives on clean stocks
 
 
 ### Blockers/Questions
-None - GitHub Actions has full network access to Polygon API
+Waiting for full scan to complete (running in background)
 
 ---
 
@@ -181,6 +187,10 @@ None - GitHub Actions has full network access to Polygon API
 **2025-11-01 21:13** - Phase 2
 - Action: Switched to GitHub Actions for full automation (no local execution needed)
 - Result: Complete automation - user just clicks 'Run workflow', results auto-commit to repo
+
+**2025-11-01 22:26** - Phase 2
+- Action: Created COVID-era exclusion filter and documentation
+- Result: Filter script ready - will exclude 2020-2021 anomalies from pattern analysis
 
 
 ---
