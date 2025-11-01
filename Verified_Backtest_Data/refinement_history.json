@@ -1,0 +1,36 @@
+{
+  "system_version": "5.0.1-REBUILD",
+  "refinement_log": [
+    {
+      "date": "2025-11-01",
+      "version": "5.0.1-REBUILD",
+      "change": "System reset - cleared all unverified data",
+      "reason": "Previous model fabricated backtest results",
+      "impact": "Starting from verified data only",
+      "backtest_performance_before": "N/A",
+      "backtest_performance_after": "N/A"
+    },
+    {
+      "date": "2025-11-01",
+      "version": "5.0.1-REBUILD",
+      "change": "COVID-era exclusion rule (2020-2021)",
+      "reason": "Unprecedented market conditions: $5T stimulus, zero rates, meme stock mania, pandemic anomalies. These patterns are not repeatable in normal markets.",
+      "impact": "Pattern discovery will use only 2014-2019 and 2022-2024 data. COVID-era stocks archived for reference but excluded from screener development.",
+      "backtest_performance_before": "N/A - rule established before analysis",
+      "backtest_performance_after": "Pending - will ensure screener works in normal conditions"
+    }
+  ],
+  "current_criteria": {
+    "price_min": 0.5,
+    "price_max": 7.0,
+    "volume_min": 10000,
+    "float_max": 75000000,
+    "minimum_score": 75,
+    "note": "Will be updated based on pattern discovery from CLEAN dataset (excluding 2020-2021 COVID era)"
+  },
+  "metadata": {
+    "last_updated": "2025-11-01",
+    "total_refinements": 2,
+    "methodology": "Data-driven refinement based on backtest results and false miss analysis"
+  }
+}
