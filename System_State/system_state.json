@@ -2,7 +2,7 @@
   "version": "5.0.1-REBUILD",
   "current_phase": "Phase 3: Stock Discovery & Catalog Building",
   "situation_summary": "System being rebuilt from ground up. Previous model fabricated backtest data. Starting fresh with verified data only.",
-  "immediate_priority": "User uploads scanner + workflow to GitHub, runs automated scan via Actions",
+  "immediate_priority": "Full 10-year scan running (2-4 hrs). Filter script ready to apply COVID-era exclusion when complete.",
   "portfolio_status": "CLEARED - Starting fresh",
   "cash_available": "$10,000 (reset)",
   "system_stage": "Pre-Development - Planning & Infrastructure",
@@ -13,7 +13,7 @@
   "data_files": "\n- `/Verified_Backtest_Data/` - \u2705 CREATED (empty, awaiting scan results)\n- `/Verified_Backtest_Data/explosive_stocks_catalog.json` - \u2705 TEMPLATE CREATED\n- `/Verified_Backtest_Data/pre_catalyst_analysis/` - \u2705 FOLDER CREATED\n- `/Verified_Backtest_Data/backtest_runs/` - \u2705 FOLDER CREATED  \n- `/Verified_Backtest_Data/correlations_discovered.json` - \u2705 TEMPLATE CREATED\n- `/Verified_Backtest_Data/refinement_history.json` - \u2705 TEMPLATE CREATED\n- `/Archive_Unverified/` - \u2705 CREATED (old backtest files marked unverified)\n",
   "unverified_content": "\n- `/Backtest_Results/` - MARKED UNVERIFIED, kept as framework reference\n- `/Strategy_Evolution/` - MARKED UNVERIFIED, contains unproven claims\n- All Python backtest scripts - MARKED UNVERIFIED, frameworks only\n                ",
   "backtesting_approach": "\n1. Find stocks with 500%+ gains via AUTOMATED GitHub Actions scan\n2. Deep dive into 180 days PRE-CATALYST for each stock\n3. Analyze: price, volume, sentiment, leadership, news, patterns\n4. Identify correlations between explosive stocks\n5. Build screener based on correlations\n6. Backtest on random historical dates\n7. Apply FALSE MISS principle to discarded stocks\n8. Track picks AND discards with full performance data\n9. Refine until consistent 10-year performance\n10. Store ALL data for future refinement\n11. ALL VIA GITHUB ACTIONS - zero manual work except triggering\n",
-  "backtesting_progress": "Infrastructure complete - awaiting 10-year explosive stock scan results",
+  "backtesting_progress": "\nCURRENT: Full 10-year scan running on GitHub Actions (2014-2024)\n- Expected duration: 2-4 hours\n- Expected results: 50-150 explosive stocks\n- COVID-era filter ready to apply upon completion\n- Will separate: Clean dataset (2014-2019, 2022-2024) vs COVID-era (2020-2021)\n",
   "data_sources": "\n- Price/Volume: Polygon API (via GitHub Actions - no network restrictions)\n- Automation: GitHub Actions (runs on GitHub servers)\n- Backup: Yahoo Finance (if Polygon fails)\n- Manual Input: None - fully automated\n",
   "verified_patterns": "NONE YET - Will be discovered during analysis phase",
   "scoring_criteria": "CURRENT v5.0.1 CRITERIA - Will be updated based on pattern discovery",
@@ -28,25 +28,25 @@
     "Apply false miss principle in all backtests",
     "User only does copy/paste - full automation required",
     "Free data sources only (no paid APIs except Polygon)",
-    "Use GitHub Actions for full automation (no local execution)"
+    "Use GitHub Actions for full automation (no local execution)",
+    "Exclude 2020-2021 from pattern discovery (COVID-era market anomalies)"
   ],
   "rules_established": [
     "NEVER fabricate data - verify or say you can't",
     "FALSE MISS CHECK - Always check discarded stocks for explosive growth",
     "STORE EVERYTHING - All decisions, data, refinements must be saved",
     "COPY/PASTE ONLY - User should never manually enter data",
-    "10-YEAR VALIDATION - System must prove consistency before live trading"
+    "10-YEAR VALIDATION - System must prove consistency before live trading",
+    "COVID-ERA EXCLUSION: Ignore 2020-2021 data (stimulus, zero rates, pandemic anomalies) - not repeatable conditions"
   ],
   "next_steps": [
-    "1. USER ACTION: Disable old failing Daily GEM Screening workflow (stops emails)",
-    "2. USER ACTION: Upload explosive_stock_scanner.py (updated version)",
-    "3. USER ACTION: Upload .github/workflows/explosive_stock_scan_workflow.yml (new file)",
-    "4. USER ACTION: Click 'Run workflow' in Actions tab",
-    "5. AUTOMATED: GitHub Actions runs scanner, commits results",
-    "6. USER ACTION: Copy/paste explosive_stocks_catalog.json to Claude",
-    "7. AI ACTION: Analyze results, proceed to Phase 3"
+    "1. RUNNING: Full 10-year explosive stock scan (2014-2024)",
+    "2. WHEN COMPLETE: Apply COVID-era filter to results",
+    "3. AI ACTION: Analyze clean dataset for patterns",
+    "4. AI ACTION: Build pre-catalyst analysis framework",
+    "5. AI ACTION: Begin 180-day deep dives on clean stocks"
   ],
-  "blockers": "None - GitHub Actions has full network access to Polygon API",
+  "blockers": "Waiting for full scan to complete (running in background)",
   "data_storage_location": "/Verified_Backtest_Data/ (to be created in GitHub)",
   "progress_log": [
     {
@@ -78,6 +78,12 @@
       "phase": "Phase 2",
       "action": "Switched to GitHub Actions for full automation (no local execution needed)",
       "result": "Complete automation - user just clicks 'Run workflow', results auto-commit to repo"
+    },
+    {
+      "date": "2025-11-01 22:26",
+      "phase": "Phase 2",
+      "action": "Created COVID-era exclusion filter and documentation",
+      "result": "Filter script ready - will exclude 2020-2021 anomalies from pattern analysis"
     }
   ]
 }
