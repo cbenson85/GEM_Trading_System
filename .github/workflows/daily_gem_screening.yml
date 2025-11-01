@@ -1,3 +1,4 @@
+# Manual trigger test
 name: Daily GEM Screening with Real Data
 
 on:
