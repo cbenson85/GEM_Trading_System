@@ -71,9 +71,9 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git pull origin main --rebase
         git add Verified_Backtest_Data/explosive_stocks_catalog.json
         git diff --staged --quiet || git commit -m "🤖 Automated scan: explosive stocks catalog updated"
+        git pull origin main --rebase --autostash
     
     - name: Push changes
       uses: ad-m/github-push-action@master
