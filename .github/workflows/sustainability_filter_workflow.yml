@@ -14,7 +14,7 @@ on:
 jobs:
   filter-sustainability:
     runs-on: ubuntu-latest
-    timeout-minutes: 900  # 15 hours max (safety limit)
+    timeout-minutes: 60  # 1 hour max (plenty for 5-15 min runtime)
     
     steps:
       - name: Checkout repository
@@ -43,7 +43,7 @@ jobs:
           print(f'  Total: {len(stocks)} stocks')
           "
           echo ""
-          echo "⏱️  ESTIMATED RUNTIME: 8-13 hours for 200 stocks"
+          echo "⚡ ESTIMATED RUNTIME: 5-15 minutes for 200 stocks (Developer tier)"
           echo "🔬 CRITERIA: 80% retention 21 days after peak"
           echo ""
       
@@ -54,8 +54,8 @@ jobs:
           echo "Output: Verified_Backtest_Data/explosive_stocks_UNSUSTAINABLE.json"
           echo "Criteria: 80% retention 21 days after peak"
           echo ""
-          echo "⚠️  This will take 8-13 hours due to API rate limits"
-          echo "⚠️  Progress will be logged every 5 stocks"
+          echo "⚡ Developer Tier: Unlimited API requests!"
+          echo "⏱️  Expected completion: 5-15 minutes"
           echo ""
           python filter_sustainability.py
         env:
