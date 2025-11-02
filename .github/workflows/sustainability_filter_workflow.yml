@@ -1,0 +1,67 @@
+name: Sustainability Filter Workflow
+
+on:
+  workflow_dispatch:  # Manual trigger
+    inputs:
+      reason:
+        description: 'Reason for running filter'
+        required: false
+        default: 'Manual sustainability filter run'
+
+jobs:
+  filter-sustainability:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+      
+      - name: Run Sustainability Filter
+        run: |
+          echo "🔬 Starting Sustainability Filter..."
+          echo "Input: Verified_Backtest_Data/explosive_stocks_CLEAN.json"
+          echo "Output: Verified_Backtest_Data/explosive_stocks_UNSUSTAINABLE.json"
+          echo ""
+          python filter_sustainability.py
+        env:
+          PYTHONUNBUFFERED: 1
+      
+      - name: Verify Filter Results
+        run: |
+          echo "📊 Filter Results:"
+          echo ""
+          echo "✅ CLEAN.json (Sustainable Stocks Only):"
+          python -c "import json; data = json.load(open('Verified_Backtest_Data/explosive_stocks_CLEAN.json')); print(f'  Total: {len(data)} stocks')"
+          echo ""
+          echo "❌ UNSUSTAINABLE.json (Pump & Dumps):"
+          python -c "import json; data = json.load(open('Verified_Backtest_Data/explosive_stocks_UNSUSTAINABLE.json')); print(f'  Total: {len(data)} stocks')"
+          echo ""
+          echo "📈 Summary Statistics:"
+          cat Verified_Backtest_Data/sustainability_summary.json
+      
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add Verified_Backtest_Data/explosive_stocks_CLEAN.json
+          git add Verified_Backtest_Data/explosive_stocks_UNSUSTAINABLE.json
+          git add Verified_Backtest_Data/sustainability_summary.json
+          git diff --staged --quiet || git commit -m "🔬 Sustainability filter: Update CLEAN.json and UNSUSTAINABLE.json
+          
+          - Tested stocks for 30-day hold sustainability
+          - Removed unsustainable stocks from CLEAN.json
+          - Archived unsustainable stocks to UNSUSTAINABLE.json
+          - Generated summary statistics
+          
+          Reason: ${{ github.event.inputs.reason }}"
+          git push
