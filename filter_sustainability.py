@@ -5,30 +5,38 @@ Version: 3.0
 Created: 2025-11-02
 
 PURPOSE:
-Test stocks for SUSTAINED gains over extended periods, not just peak retention.
-This filters out pump & dumps while keeping stocks that maintain elevation through market corrections.
+Test stocks for SUSTAINED gains over realistic trading windows.
+This filters out pump & dumps while keeping stocks with clear selling windows.
 
 KEY INSIGHT:
-A stock that gains 500% over 3 months and holds 400%+ through corrections is SUSTAINABLE.
-A stock that gains 500% in 1 week and collapses to +50% is a PUMP & DUMP.
+We don't hold stocks forever. Test within realistic 120-day trading window.
+Fast movers must hold gains longer to prove they're not pumps.
+
+TRADING WINDOW: 120 Days from Catalyst Entry
+- Day 0: Entry (catalyst starts)
+- Day 0-120: Our trading window
+- Peak: Use actual peak OR day 120 (whichever comes first)
+- Test: 30 days after peak (realistic selling window)
 
 METHODOLOGY:
-1. Find the explosive window (already identified in CLEAN.json)
-2. Track the stock for 60 days AFTER peak
-3. Calculate MINIMUM gain maintained during entire period (entry → peak+60)
-4. Speed-adjusted thresholds:
-   - Fast gains (<30 days): Must hold 250%+ minimum
+1. Find the explosive window (entry point identified in CLEAN.json)
+2. Track stock for up to 150 days (120 trading + 30 observation)
+3. Peak = actual peak within 120 days OR day 120 price (cap it)
+4. Test 30 days after peak
+5. Calculate MINIMUM gain maintained during entire test period
+6. Speed-adjusted thresholds:
+   - Fast gains (<30 days): Must hold 250%+ minimum (pumps fail here)
    - Medium gains (30-90 days): Must hold 200%+ minimum  
-   - Slow gains (90+ days): Must hold 150%+ minimum
+   - Slow gains (90-120 days): Must hold 150%+ minimum
 
 This identifies stocks with:
 ✅ Fundamental strength (sustained elevation)
-✅ Tradeable patterns (we can hold positions)
-✅ Clear risk management levels (minimum gain = stop loss reference)
+✅ Clear selling windows (30 days to exit)
+✅ Realistic holding periods (120 days max)
 
-INPUT: explosive_stocks_CLEAN.json
+INPUT: explosive_stocks_CLEAN.json (master stock list - NEVER modified by enrichment)
 OUTPUT:
-  - explosive_stocks_CLEAN.json (updated - sustainable stocks only)
+  - explosive_stocks_CLEAN.json (UPDATED - sustainable stocks only)
   - explosive_stocks_UNSUSTAINABLE.json (pump & dumps)
   - sustained_gain_summary.json (statistics + position management insights)
 """
@@ -46,6 +54,7 @@ POLYGON_BASE_URL = "https://api.polygon.io/v2"
 # File paths
 DATA_DIR = "Verified_Backtest_Data"
 INPUT_FILE = f"{DATA_DIR}/explosive_stocks_CLEAN.json"
+OUTPUT_SUSTAINABLE = f"{DATA_DIR}/explosive_stocks_SUSTAINABLE.json"
 OUTPUT_UNSUSTAINABLE = f"{DATA_DIR}/explosive_stocks_UNSUSTAINABLE.json"
 SUMMARY_FILE = f"{DATA_DIR}/sustained_gain_summary.json"
 
@@ -54,8 +63,8 @@ FAST_GAIN_THRESHOLD = 2.50    # <30 days: must hold 250%+ minimum
 MEDIUM_GAIN_THRESHOLD = 2.00  # 30-90 days: must hold 200%+ minimum
 SLOW_GAIN_THRESHOLD = 1.50    # 90+ days: must hold 150%+ minimum
 
-# Test period: track for 60 days after peak
-TEST_DAYS_AFTER_PEAK = 60
+# Test period: track for 30 days after peak (realistic selling window)
+TEST_DAYS_AFTER_PEAK = 30
 
 
 def get_daily_prices(ticker, start_date, end_date, api_key):
@@ -210,13 +219,56 @@ def test_sustained_gain(stock, api_key):
         peak_price = window['peak_price']
         days_to_peak = window['days_to_peak']
     
-    # Calculate test period (entry to peak + 60 days)
+    # Calculate test period
+    # Our trading window: Entry → 120 days max
+    # Peak: Use actual peak OR day 120 (whichever comes first)
+    # Test: 30 days after peak
+    
     entry_dt = datetime.strptime(entry_date, '%Y-%m-%d')
     peak_dt = datetime.strptime(peak_date, '%Y-%m-%d')
+    
+    # Cap peak at 120 days from entry
+    max_peak_dt = entry_dt + timedelta(days=120)
+    if peak_dt > max_peak_dt:
+        print(f"  ⚠️  Peak at day {(peak_dt - entry_dt).days} exceeds 120-day window")
+        print(f"     Using day 120 as effective peak for testing")
+        peak_dt = max_peak_dt
+        peak_date = peak_dt.strftime('%Y-%m-%d')
+        
+        # Get price at day 120
+        prices_at_120 = get_daily_prices(ticker, peak_date, peak_date, api_key)
+        if prices_at_120:
+            peak_price = prices_at_120[0]['close']
+            print(f"     Day 120 price: ${peak_price:.2f}")
+        else:
+            return {
+                'sustainable': False,
+                'reason': 'Could not fetch day 120 price data',
+                'test_data': None
+            }
+    
+    # Test date: 30 days after peak
     test_end_dt = peak_dt + timedelta(days=TEST_DAYS_AFTER_PEAK)
     
+    # Check if test date is in the future (too recent to test)
+    if test_end_dt > datetime.now():
+        days_until_testable = (test_end_dt - datetime.now()).days
+        return {
+            'sustainable': None,
+            'reason': f'Stock too recent - need {days_until_testable} more days of data',
+            'test_data': {
+                'entry_date': entry_date,
+                'entry_price': entry_price,
+                'peak_date': peak_date,
+                'peak_price': peak_price,
+                'days_to_peak': days_to_peak,
+                'test_date': test_end_dt.strftime('%Y-%m-%d'),
+                'note': 'Cannot test yet - waiting for 30 days post-peak data'
+            }
+        }
+    
     print(f"  📅 Test period: {entry_date} → {test_end_dt.strftime('%Y-%m-%d')}")
-    print(f"     (Entry → Peak+{TEST_DAYS_AFTER_PEAK} days)")
+    print(f"     (Entry → Peak+{TEST_DAYS_AFTER_PEAK} days, max 150 days total)")
     
     # Get all prices during test period
     prices = get_daily_prices(
@@ -361,7 +413,8 @@ def run_filter():
         file_structure = {}
     
     print(f"✅ Loaded {len(all_stocks)} stocks from CLEAN.json")
-    print(f"ℹ️  Testing sustained gain over extended periods\n")
+    print(f"ℹ️  CLEAN.json will NOT be modified (master stock list)")
+    print(f"ℹ️  Results will be saved to separate SUSTAINABLE.json file\n")
     
     # Load existing unsustainable (for merge logic)
     existing_unsustainable = []
@@ -434,16 +487,11 @@ def run_filter():
     print("💾 SAVING RESULTS")
     print("="*70)
     
-    # Update CLEAN.json with only sustainable stocks
-    if file_structure:
-        clean_output = file_structure.copy()
-        clean_output['stocks'] = sustainable
-    else:
-        clean_output = sustainable
-    
-    with open(INPUT_FILE, 'w') as f:
-        json.dump(clean_output, f, indent=2)
-    print(f"✅ Updated CLEAN.json: {len(sustainable)} sustainable stocks")
+    # Save sustainable stocks to SEPARATE file (DO NOT modify CLEAN.json)
+    with open(OUTPUT_SUSTAINABLE, 'w') as f:
+        json.dump(sustainable, f, indent=2)
+    print(f"✅ Saved SUSTAINABLE.json: {len(sustainable)} stocks")
+    print(f"ℹ️  CLEAN.json unchanged (master list preserved)")
     
     # Save unsustainable
     with open(OUTPUT_UNSUSTAINABLE, 'w') as f:
