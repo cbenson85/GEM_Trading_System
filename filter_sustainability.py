@@ -64,8 +64,8 @@ def get_daily_prices(ticker, start_date, end_date, api_key):
         response = requests.get(url, params=params, timeout=30)
         
         if response.status_code == 429:
-            print(f"  ⚠️  Rate limited, waiting 60 seconds...")
-            time.sleep(60)
+            print(f"  ⚠️  Rate limited, waiting 5 seconds...")
+            time.sleep(5)
             return get_daily_prices(ticker, start_date, end_date, api_key)
         
         if response.status_code == 200:
@@ -361,10 +361,9 @@ def run_filter():
         
         stats['tested'] += 1
         
-        # Rate limiting (5 requests per minute)
-        if i % 5 == 0 and i < len(all_stocks):
-            print(f"\n⏸️  Rate limit pause...")
-            time.sleep(12)
+        # No rate limiting needed - Developer tier has unlimited requests
+        # Just a small delay to avoid overwhelming the API
+        time.sleep(0.1)  # 100ms between stocks
     
     # Save results
     print("\n" + "="*70)
