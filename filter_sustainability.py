@@ -1,34 +1,36 @@
 #!/usr/bin/env python3
 """
-GEM Trading System - Sustainability Filter (Proper Version)
-Version: 2.0
+GEM Trading System - Sustained Gain Window Filter V3.0
+Version: 3.0
 Created: 2025-11-02
 
 PURPOSE:
-Test stocks from CLEAN.json for sustainability using Polygon API.
-Only test stocks already in CLEAN.json - do NOT scan all stocks.
+Test stocks for SUSTAINED gains over extended periods, not just peak retention.
+This filters out pump & dumps while keeping stocks that maintain elevation through market corrections.
 
-SUSTAINABILITY CRITERIA:
-- Stock must hold ≥80% of peak gain 21 days after peak
-- This filters out pump & dumps and untradeable flukes
+KEY INSIGHT:
+A stock that gains 500% over 3 months and holds 400%+ through corrections is SUSTAINABLE.
+A stock that gains 500% in 1 week and collapses to +50% is a PUMP & DUMP.
 
-PROCESS:
-1. Read stock list from CLEAN.json (200 stocks)
-2. For each stock:
-   - Use Polygon API to scan that stock's year
-   - Find the 180-day window with 500%+ gain (catalyst window)
-   - Get catalyst start date (entry date)
-   - Get peak price within window
-   - Get test price 21 days after peak
-   - Calculate retention: (test_price - entry_price) / (peak_price - entry_price)
-3. If retention >= 80%: Keep in CLEAN.json
-4. If retention < 80%: Move to UNSUSTAINABLE.json
+METHODOLOGY:
+1. Find the explosive window (already identified in CLEAN.json)
+2. Track the stock for 60 days AFTER peak
+3. Calculate MINIMUM gain maintained during entire period (entry → peak+60)
+4. Speed-adjusted thresholds:
+   - Fast gains (<30 days): Must hold 250%+ minimum
+   - Medium gains (30-90 days): Must hold 200%+ minimum  
+   - Slow gains (90+ days): Must hold 150%+ minimum
 
-INPUT: explosive_stocks_CLEAN.json (200 stocks from master list)
+This identifies stocks with:
+✅ Fundamental strength (sustained elevation)
+✅ Tradeable patterns (we can hold positions)
+✅ Clear risk management levels (minimum gain = stop loss reference)
+
+INPUT: explosive_stocks_CLEAN.json
 OUTPUT:
   - explosive_stocks_CLEAN.json (updated - sustainable stocks only)
   - explosive_stocks_UNSUSTAINABLE.json (pump & dumps)
-  - sustainability_summary.json (statistics)
+  - sustained_gain_summary.json (statistics + position management insights)
 """
 
 import json
@@ -45,11 +47,15 @@ POLYGON_BASE_URL = "https://api.polygon.io/v2"
 DATA_DIR = "Verified_Backtest_Data"
 INPUT_FILE = f"{DATA_DIR}/explosive_stocks_CLEAN.json"
 OUTPUT_UNSUSTAINABLE = f"{DATA_DIR}/explosive_stocks_UNSUSTAINABLE.json"
-SUMMARY_FILE = f"{DATA_DIR}/sustainability_summary.json"
+SUMMARY_FILE = f"{DATA_DIR}/sustained_gain_summary.json"
 
-# Sustainability criteria
-RETENTION_THRESHOLD = 0.80  # 80% of peak gain must be retained
-TEST_DAYS_AFTER_PEAK = 21   # Test 21 days after peak
+# Sustained gain criteria (minimum % gain that must be maintained)
+FAST_GAIN_THRESHOLD = 2.50    # <30 days: must hold 250%+ minimum
+MEDIUM_GAIN_THRESHOLD = 2.00  # 30-90 days: must hold 200%+ minimum
+SLOW_GAIN_THRESHOLD = 1.50    # 90+ days: must hold 150%+ minimum
+
+# Test period: track for 60 days after peak
+TEST_DAYS_AFTER_PEAK = 60
 
 
 def get_daily_prices(ticker, start_date, end_date, api_key):
@@ -71,7 +77,6 @@ def get_daily_prices(ticker, start_date, end_date, api_key):
         if response.status_code == 200:
             data = response.json()
             if data.get('resultsCount', 0) > 0 and 'results' in data:
-                # Convert timestamps to dates
                 prices = []
                 for bar in data['results']:
                     prices.append({
@@ -103,9 +108,9 @@ def find_explosive_window(ticker, year, target_gain_pct, api_key):
         'gain_percent': float
     }
     """
-    # Get all daily prices for the year (plus buffer for windows)
-    start_date = f"{year - 1}-07-01"  # Start 6 months before to catch windows
-    end_date = f"{year + 1}-06-30"     # End 6 months after
+    # Get all daily prices for the year (plus buffer)
+    start_date = f"{year - 1}-07-01"
+    end_date = f"{year + 1}-06-30"
     
     print(f"  📊 Fetching price data for {ticker} ({start_date} to {end_date})...")
     prices = get_daily_prices(ticker, start_date, end_date, api_key)
@@ -138,7 +143,7 @@ def find_explosive_window(ticker, year, target_gain_pct, api_key):
         gain_pct = ((peak_price - entry_price) / entry_price) * 100
         
         # Check if this window matches target gain
-        if gain_pct >= target_gain_pct * 0.9:  # Allow 10% tolerance
+        if gain_pct >= target_gain_pct * 0.9:  # 10% tolerance
             if gain_pct > max_gain:
                 max_gain = gain_pct
                 best_window = {
@@ -160,37 +165,9 @@ def find_explosive_window(ticker, year, target_gain_pct, api_key):
     return best_window
 
 
-def get_test_price(ticker, peak_date, test_days, api_key):
+def test_sustained_gain(stock, api_key):
     """
-    Get stock price X days after peak
-    Returns: price or None
-    """
-    peak_dt = datetime.strptime(peak_date, '%Y-%m-%d')
-    test_date = peak_dt + timedelta(days=test_days)
-    
-    # Fetch price data around test date (buffer for weekends/holidays)
-    buffer_start = (test_date - timedelta(days=5)).strftime('%Y-%m-%d')
-    buffer_end = (test_date + timedelta(days=5)).strftime('%Y-%m-%d')
-    
-    prices = get_daily_prices(ticker, buffer_start, buffer_end, api_key)
-    
-    if not prices:
-        return None
-    
-    # Find closest date to test date
-    test_date_str = test_date.strftime('%Y-%m-%d')
-    
-    for day in prices:
-        if day['date'] >= test_date_str:
-            return day['close']
-    
-    # If no exact match, use last available price
-    return prices[-1]['close'] if prices else None
-
-
-def test_sustainability(stock, api_key):
-    """
-    Test if stock meets sustainability criteria
+    Test if stock maintained significant gains over extended period
     Returns: dict with test results
     """
     ticker = stock.get('ticker')
@@ -213,11 +190,9 @@ def test_sustainability(stock, api_key):
         print(f"  ℹ️  Using existing enriched data")
         entry_date = stock['entry_date']
         entry_price = stock['entry_price']
-        peak_date = stock.get('catalyst_date', entry_date)
+        peak_date = stock.get('catalyst_date') or stock.get('peak_date') or entry_date
         peak_price = stock['peak_price']
-        
-        # Still need to get test price
-        test_price = get_test_price(ticker, peak_date, TEST_DAYS_AFTER_PEAK, api_key)
+        days_to_peak = stock.get('days_to_peak', 0)
     else:
         # Find explosive window using Polygon
         window = find_explosive_window(ticker, year, gain_percent, api_key)
@@ -233,53 +208,125 @@ def test_sustainability(stock, api_key):
         entry_price = window['entry_price']
         peak_date = window['peak_date']
         peak_price = window['peak_price']
-        
-        # Get test price
-        print(f"  📅 Getting price {TEST_DAYS_AFTER_PEAK} days after peak...")
-        test_price = get_test_price(ticker, peak_date, TEST_DAYS_AFTER_PEAK, api_key)
+        days_to_peak = window['days_to_peak']
     
-    if not test_price:
+    # Calculate test period (entry to peak + 60 days)
+    entry_dt = datetime.strptime(entry_date, '%Y-%m-%d')
+    peak_dt = datetime.strptime(peak_date, '%Y-%m-%d')
+    test_end_dt = peak_dt + timedelta(days=TEST_DAYS_AFTER_PEAK)
+    
+    print(f"  📅 Test period: {entry_date} → {test_end_dt.strftime('%Y-%m-%d')}")
+    print(f"     (Entry → Peak+{TEST_DAYS_AFTER_PEAK} days)")
+    
+    # Get all prices during test period
+    prices = get_daily_prices(
+        ticker,
+        entry_date,
+        test_end_dt.strftime('%Y-%m-%d'),
+        api_key
+    )
+    
+    if not prices or len(prices) < 10:
         return {
             'sustainable': False,
-            'reason': f'Could not fetch price {TEST_DAYS_AFTER_PEAK} days after peak',
+            'reason': f'Insufficient price data during test period (only {len(prices)} days)',
             'test_data': {
                 'entry_date': entry_date,
                 'entry_price': entry_price,
                 'peak_date': peak_date,
                 'peak_price': peak_price,
-                'test_date': None,
-                'test_price': None
+                'days_to_peak': days_to_peak
             }
         }
     
-    # Calculate retention
-    peak_gain = peak_price - entry_price
-    test_gain = test_price - entry_price
-    retention = test_gain / peak_gain if peak_gain > 0 else 0
+    print(f"  ✅ Got {len(prices)} days of price data for test period")
     
-    test_dt = datetime.strptime(peak_date, '%Y-%m-%d') + timedelta(days=TEST_DAYS_AFTER_PEAK)
+    # Calculate gain for each day
+    gains = []
+    min_gain = float('inf')
+    min_gain_date = None
+    max_gain = 0
+    max_gain_date = None
     
-    sustainable = retention >= RETENTION_THRESHOLD
+    for price_bar in prices:
+        daily_gain = (price_bar['close'] - entry_price) / entry_price
+        gains.append({
+            'date': price_bar['date'],
+            'price': price_bar['close'],
+            'gain': daily_gain,
+            'gain_pct': daily_gain * 100
+        })
+        
+        if daily_gain < min_gain:
+            min_gain = daily_gain
+            min_gain_date = price_bar['date']
+            min_gain_price = price_bar['close']
+        
+        if daily_gain > max_gain:
+            max_gain = daily_gain
+            max_gain_date = price_bar['date']
     
-    print(f"\n  📊 RESULTS:")
-    print(f"     Entry: ${entry_price:.2f} on {entry_date}")
-    print(f"     Peak:  ${peak_price:.2f} on {peak_date}")
-    print(f"     Test:  ${test_price:.2f} on {test_dt.strftime('%Y-%m-%d')} ({TEST_DAYS_AFTER_PEAK} days later)")
-    print(f"     Retention: {retention*100:.1f}%")
+    min_gain_pct = min_gain * 100
+    max_gain_pct = max_gain * 100
+    
+    # Determine speed category and threshold
+    if days_to_peak < 30:
+        speed_category = 'FAST'
+        threshold = FAST_GAIN_THRESHOLD
+        threshold_pct = threshold * 100
+    elif days_to_peak < 90:
+        speed_category = 'MEDIUM'
+        threshold = MEDIUM_GAIN_THRESHOLD
+        threshold_pct = threshold * 100
+    else:
+        speed_category = 'SLOW'
+        threshold = SLOW_GAIN_THRESHOLD
+        threshold_pct = threshold * 100
+    
+    # Test sustainability
+    sustainable = min_gain >= threshold
+    
+    print(f"\n  📊 SUSTAINED GAIN ANALYSIS:")
+    print(f"     Speed Category: {speed_category} ({days_to_peak} days to peak)")
+    print(f"     Required Minimum: {threshold_pct:.0f}% sustained gain")
+    print(f"     ")
+    print(f"     Peak Gain: {max_gain_pct:.1f}% on {max_gain_date}")
+    print(f"     Minimum Gain: {min_gain_pct:.1f}% on {min_gain_date}")
+    print(f"     Price at minimum: ${min_gain_price:.2f}")
+    print(f"     ")
     print(f"     Result: {'✅ SUSTAINABLE' if sustainable else '❌ UNSUSTAINABLE'}")
+    
+    if not sustainable:
+        print(f"     Reason: Only held {min_gain_pct:.1f}% minimum (need {threshold_pct:.0f}%+)")
+    else:
+        print(f"     Stock maintained >{threshold_pct:.0f}% gain throughout period!")
+    
+    # Position management insights
+    drawdown_from_peak = ((min_gain_price - peak_price) / peak_price) * 100
     
     return {
         'sustainable': sustainable,
-        'reason': 'Sustainable' if sustainable else f'Only retained {retention*100:.1f}% of gain (need {RETENTION_THRESHOLD*100}%)',
+        'reason': 'Sustainable' if sustainable else f'Only held {min_gain_pct:.1f}% minimum (need {threshold_pct:.0f}%+)',
         'test_data': {
             'entry_date': entry_date,
             'entry_price': entry_price,
             'peak_date': peak_date,
             'peak_price': peak_price,
-            'test_date': test_dt.strftime('%Y-%m-%d'),
-            'test_price': test_price,
-            'retention_percent': round(retention * 100, 2),
-            'threshold_percent': RETENTION_THRESHOLD * 100
+            'days_to_peak': days_to_peak,
+            'speed_category': speed_category,
+            'threshold_required_pct': threshold_pct,
+            'max_gain_pct': round(max_gain_pct, 2),
+            'max_gain_date': max_gain_date,
+            'min_gain_pct': round(min_gain_pct, 2),
+            'min_gain_date': min_gain_date,
+            'min_gain_price': round(min_gain_price, 2),
+            'drawdown_from_peak_pct': round(drawdown_from_peak, 2),
+            'test_period_days': len(prices),
+            'position_management': {
+                'stop_loss_reference': f"{min_gain_pct:.1f}% from entry",
+                'max_drawdown_observed': f"{abs(drawdown_from_peak):.1f}% from peak",
+                'holding_period_tested': f"{len(prices)} days"
+            }
         }
     }
 
@@ -287,10 +334,13 @@ def test_sustainability(stock, api_key):
 def run_filter():
     """Main filter execution"""
     print("\n" + "="*70)
-    print("🔬 GEM SUSTAINABILITY FILTER V2.0")
+    print("🔬 GEM SUSTAINED GAIN WINDOW FILTER V3.0")
     print("="*70)
     print(f"📅 Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"🎯 Criteria: {RETENTION_THRESHOLD*100}% retention {TEST_DAYS_AFTER_PEAK} days after peak")
+    print(f"🎯 Criteria: Sustained minimum gain over extended period")
+    print(f"   - FAST gains (<30d): {FAST_GAIN_THRESHOLD*100:.0f}%+ sustained")
+    print(f"   - MEDIUM gains (30-90d): {MEDIUM_GAIN_THRESHOLD*100:.0f}%+ sustained")
+    print(f"   - SLOW gains (90+d): {SLOW_GAIN_THRESHOLD*100:.0f}%+ sustained")
     print("="*70 + "\n")
     
     # Load CLEAN.json
@@ -311,24 +361,30 @@ def run_filter():
         file_structure = {}
     
     print(f"✅ Loaded {len(all_stocks)} stocks from CLEAN.json")
-    print(f"ℹ️  These are the ONLY stocks we'll test\n")
+    print(f"ℹ️  Testing sustained gain over extended periods\n")
     
     # Load existing unsustainable (for merge logic)
     existing_unsustainable = []
     if Path(OUTPUT_UNSUSTAINABLE).exists():
         with open(OUTPUT_UNSUSTAINABLE, 'r') as f:
-            existing_unsustainable = json.load(f)
+            unsust_data = json.load(f)
+            existing_unsustainable = unsust_data if isinstance(unsust_data, list) else unsust_data.get('stocks', [])
         print(f"📊 Found {len(existing_unsustainable)} existing unsustainable stocks\n")
     
     # Test each stock
     sustainable = []
     unsustainable = list(existing_unsustainable)
+    
     stats = {
         'total_stocks': len(all_stocks),
         'tested': 0,
         'sustainable': 0,
         'unsustainable': 0,
-        'skipped': 0,
+        'by_speed': {
+            'FAST': {'total': 0, 'sustainable': 0},
+            'MEDIUM': {'total': 0, 'sustainable': 0},
+            'SLOW': {'total': 0, 'sustainable': 0}
+        },
         'errors': 0
     }
     
@@ -338,32 +394,40 @@ def run_filter():
         
         print(f"\n[{i}/{len(all_stocks)}] {ticker} ({year})")
         
-        result = test_sustainability(stock, POLYGON_API_KEY)
+        result = test_sustained_gain(stock, POLYGON_API_KEY)
         
         # Add test results to stock
         stock_with_test = stock.copy()
-        stock_with_test['sustainability_test'] = {
+        stock_with_test['sustained_gain_test'] = {
             'sustainable': result['sustainable'],
             'reason': result['reason'],
             'test_date': datetime.now().strftime('%Y-%m-%d'),
-            'criteria': f"{RETENTION_THRESHOLD*100}% retention {TEST_DAYS_AFTER_PEAK} days after peak"
+            'filter_version': '3.0',
+            'test_method': 'Sustained Gain Window (entry to peak+60 days)'
         }
         
         if result['test_data']:
-            stock_with_test['sustainability_test'].update(result['test_data'])
+            stock_with_test['sustained_gain_test'].update(result['test_data'])
+            
+            # Update speed category stats
+            speed = result['test_data'].get('speed_category', 'UNKNOWN')
+            if speed in stats['by_speed']:
+                stats['by_speed'][speed]['total'] += 1
         
         if result['sustainable']:
             sustainable.append(stock_with_test)
             stats['sustainable'] += 1
+            
+            if result['test_data'] and result['test_data'].get('speed_category') in stats['by_speed']:
+                stats['by_speed'][result['test_data']['speed_category']]['sustainable'] += 1
         else:
             unsustainable.append(stock_with_test)
             stats['unsustainable'] += 1
         
         stats['tested'] += 1
         
-        # No rate limiting needed - Developer tier has unlimited requests
-        # Just a small delay to avoid overwhelming the API
-        time.sleep(0.1)  # 100ms between stocks
+        # Small delay to be polite to API
+        time.sleep(0.1)
     
     # Save results
     print("\n" + "="*70)
@@ -386,9 +450,21 @@ def run_filter():
         json.dump(unsustainable, f, indent=2)
     print(f"✅ Saved UNSUSTAINABLE.json: {len(unsustainable)} stocks")
     
+    # Calculate additional stats
+    for speed in ['FAST', 'MEDIUM', 'SLOW']:
+        total = stats['by_speed'][speed]['total']
+        sust = stats['by_speed'][speed]['sustainable']
+        stats['by_speed'][speed]['sustainability_rate'] = f"{(sust/total*100):.1f}%" if total > 0 else "0%"
+    
     # Save summary
     stats['filter_date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    stats['criteria'] = f"{RETENTION_THRESHOLD*100}% retention {TEST_DAYS_AFTER_PEAK} days after peak"
+    stats['filter_version'] = '3.0'
+    stats['test_method'] = 'Sustained Gain Window'
+    stats['criteria'] = {
+        'FAST': f"{FAST_GAIN_THRESHOLD*100:.0f}%+ sustained (<30 days to peak)",
+        'MEDIUM': f"{MEDIUM_GAIN_THRESHOLD*100:.0f}%+ sustained (30-90 days to peak)",
+        'SLOW': f"{SLOW_GAIN_THRESHOLD*100:.0f}%+ sustained (90+ days to peak)"
+    }
     
     with open(SUMMARY_FILE, 'w') as f:
         json.dump(stats, f, indent=2)
@@ -396,12 +472,18 @@ def run_filter():
     
     # Final summary
     print("="*70)
-    print("📊 SUSTAINABILITY FILTER COMPLETE")
+    print("📊 SUSTAINED GAIN FILTER COMPLETE")
     print("="*70)
     print(f"Total Stocks: {stats['total_stocks']}")
     print(f"Tested: {stats['tested']}")
     print(f"✅ Sustainable: {stats['sustainable']} ({stats['sustainable']/stats['total_stocks']*100:.1f}%)")
     print(f"❌ Unsustainable: {stats['unsustainable']} ({stats['unsustainable']/stats['total_stocks']*100:.1f}%)")
+    print(f"\nBy Speed Category:")
+    for speed in ['FAST', 'MEDIUM', 'SLOW']:
+        total = stats['by_speed'][speed]['total']
+        sust = stats['by_speed'][speed]['sustainable']
+        rate = stats['by_speed'][speed]['sustainability_rate']
+        print(f"  {speed:8} : {sust}/{total} sustainable ({rate})")
     print("="*70)
 
 
