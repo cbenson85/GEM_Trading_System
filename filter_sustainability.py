@@ -1,21 +1,32 @@
 #!/usr/bin/env python3
 """
-GEM Trading System - Sustainability Filter
-Version: 1.0
+GEM Trading System - Sustainability Filter (Proper Version)
+Version: 2.0
 Created: 2025-11-02
 
 PURPOSE:
-Filter explosive stocks based on 30-day sustainability test.
-Only keep stocks that held ≥90% of peak gain for 30 days after peak.
+Test stocks from CLEAN.json for sustainability using Polygon API.
+Only test stocks already in CLEAN.json - do NOT scan all stocks.
 
 SUSTAINABILITY CRITERIA:
-- Stock must reach 500%+ gain (already filtered)
-- Stock must hold ≥90% of peak gain 30 days later
-- This filters out: pump & dumps, untradeable flukes, thin stocks
+- Stock must hold ≥80% of peak gain 21 days after peak
+- This filters out pump & dumps and untradeable flukes
 
-INPUT: explosive_stocks_CLEAN.json (200 stocks)
-OUTPUT: 
-  - explosive_stocks_SUSTAINABLE.json (tradeable stocks)
+PROCESS:
+1. Read stock list from CLEAN.json (200 stocks)
+2. For each stock:
+   - Use Polygon API to scan that stock's year
+   - Find the 180-day window with 500%+ gain (catalyst window)
+   - Get catalyst start date (entry date)
+   - Get peak price within window
+   - Get test price 21 days after peak
+   - Calculate retention: (test_price - entry_price) / (peak_price - entry_price)
+3. If retention >= 80%: Keep in CLEAN.json
+4. If retention < 80%: Move to UNSUSTAINABLE.json
+
+INPUT: explosive_stocks_CLEAN.json (200 stocks from master list)
+OUTPUT:
+  - explosive_stocks_CLEAN.json (updated - sustainable stocks only)
   - explosive_stocks_UNSUSTAINABLE.json (pump & dumps)
   - sustainability_summary.json (statistics)
 """
@@ -30,368 +41,370 @@ from pathlib import Path
 POLYGON_API_KEY = "pvv6DNmKAoxojCc0B5HOaji6I_k1egv0"
 POLYGON_BASE_URL = "https://api.polygon.io/v2"
 
-# File paths - use Verified_Backtest_Data directory
+# File paths
 DATA_DIR = "Verified_Backtest_Data"
 INPUT_FILE = f"{DATA_DIR}/explosive_stocks_CLEAN.json"
 OUTPUT_UNSUSTAINABLE = f"{DATA_DIR}/explosive_stocks_UNSUSTAINABLE.json"
 SUMMARY_FILE = f"{DATA_DIR}/sustainability_summary.json"
 
-# Sustainability threshold (90% of peak gain must be retained after 30 days)
-SUSTAINABILITY_THRESHOLD = 0.90
+# Sustainability criteria
+RETENTION_THRESHOLD = 0.80  # 80% of peak gain must be retained
+TEST_DAYS_AFTER_PEAK = 21   # Test 21 days after peak
 
 
-def load_existing_file(filepath):
-    """Load existing file if it exists, return empty list if not"""
-    if Path(filepath).exists():
-        with open(filepath, 'r') as f:
-            return json.load(f)
-    return []
-
-
-def get_price_on_date(ticker, target_date, api_key):
+def get_daily_prices(ticker, start_date, end_date, api_key):
     """
-    Get stock price on or near a specific date using Polygon API
-    Returns: price (float) or None if not available
+    Get daily price data for a ticker within date range
+    Returns: list of {date, open, high, low, close, volume}
     """
-    # Format date for API (YYYY-MM-DD)
-    date_str = target_date.strftime('%Y-%m-%d')
-    
-    # Try to get data for the specific date
-    # Use aggregates endpoint with 1-day range
-    url = f"{POLYGON_BASE_URL}/aggs/ticker/{ticker}/range/1/day/{date_str}/{date_str}"
-    params = {"apiKey": api_key}
+    url = f"{POLYGON_BASE_URL}/aggs/ticker/{ticker}/range/1/day/{start_date}/{end_date}"
+    params = {"apiKey": api_key, "adjusted": "true", "sort": "asc", "limit": 50000}
     
     try:
-        response = requests.get(url, params=params, timeout=10)
+        response = requests.get(url, params=params, timeout=30)
         
-        # Handle rate limiting
         if response.status_code == 429:
             print(f"  ⚠️  Rate limited, waiting 60 seconds...")
             time.sleep(60)
-            return get_price_on_date(ticker, target_date, api_key)
+            return get_daily_prices(ticker, start_date, end_date, api_key)
         
         if response.status_code == 200:
             data = response.json()
             if data.get('resultsCount', 0) > 0 and 'results' in data:
-                # Get closing price
-                return data['results'][0]['c']
+                # Convert timestamps to dates
+                prices = []
+                for bar in data['results']:
+                    prices.append({
+                        'date': datetime.fromtimestamp(bar['t'] / 1000).strftime('%Y-%m-%d'),
+                        'open': bar['o'],
+                        'high': bar['h'],
+                        'low': bar['l'],
+                        'close': bar['c'],
+                        'volume': bar['v']
+                    })
+                return prices
         
-        # If exact date not available, try previous 5 days (market might have been closed)
-        for days_back in range(1, 6):
-            alt_date = target_date - timedelta(days=days_back)
-            alt_date_str = alt_date.strftime('%Y-%m-%d')
-            
-            url = f"{POLYGON_BASE_URL}/aggs/ticker/{ticker}/range/1/day/{alt_date_str}/{alt_date_str}"
-            response = requests.get(url, params=params, timeout=10)
-            
-            if response.status_code == 200:
-                data = response.json()
-                if data.get('resultsCount', 0) > 0 and 'results' in data:
-                    print(f"  📅 Used date {alt_date_str} (market closed on {date_str})")
-                    return data['results'][0]['c']
-        
-        return None
+        return []
         
     except Exception as e:
-        print(f"  ❌ Error fetching price for {ticker}: {e}")
-        return None
+        print(f"  ❌ Error fetching prices for {ticker}: {e}")
+        return []
 
 
-def parse_date(date_str):
-    """Parse date string to datetime object"""
-    if not date_str or date_str == "Unknown":
-        return None
-    
-    try:
-        return datetime.strptime(date_str, '%Y-%m-%d')
-    except ValueError:
-        return None
-
-
-def calculate_sustainability(stock, api_key):
+def find_explosive_window(ticker, year, target_gain_pct, api_key):
     """
-    Test if stock held ≥90% of peak gain for 30 days
-    
-    Returns: dict with sustainability test results
+    Find the 180-day window with the target gain percentage
+    Returns: {
+        'entry_date': date,
+        'entry_price': price,
+        'peak_date': date,
+        'peak_price': price,
+        'days_to_peak': int,
+        'gain_percent': float
+    }
     """
-    ticker = stock['ticker']
+    # Get all daily prices for the year (plus buffer for windows)
+    start_date = f"{year - 1}-07-01"  # Start 6 months before to catch windows
+    end_date = f"{year + 1}-06-30"     # End 6 months after
     
-    # Parse catalyst/peak date
-    catalyst_date = parse_date(stock.get('catalyst_date'))
-    if not catalyst_date:
-        # Try to extract from other fields if available
-        if 'entry_date' in stock and 'days_to_peak' in stock:
-            entry_date = parse_date(stock['entry_date'])
-            if entry_date:
-                catalyst_date = entry_date + timedelta(days=stock['days_to_peak'])
+    print(f"  📊 Fetching price data for {ticker} ({start_date} to {end_date})...")
+    prices = get_daily_prices(ticker, start_date, end_date, api_key)
     
-    if not catalyst_date:
+    if len(prices) < 180:
+        print(f"  ⚠️  Insufficient data: only {len(prices)} days")
+        return None
+    
+    print(f"  ✅ Got {len(prices)} days of price data")
+    
+    # Find 180-day windows with target gain
+    best_window = None
+    max_gain = 0
+    
+    print(f"  🔍 Scanning for 180-day windows with {target_gain_pct}%+ gain...")
+    
+    for i in range(len(prices) - 180):
+        window_prices = prices[i:i+180]
+        entry_price = window_prices[0]['close']
+        
+        # Find peak within window
+        peak_idx = 0
+        peak_price = entry_price
+        
+        for j, day in enumerate(window_prices):
+            if day['high'] > peak_price:
+                peak_price = day['high']
+                peak_idx = j
+        
+        gain_pct = ((peak_price - entry_price) / entry_price) * 100
+        
+        # Check if this window matches target gain
+        if gain_pct >= target_gain_pct * 0.9:  # Allow 10% tolerance
+            if gain_pct > max_gain:
+                max_gain = gain_pct
+                best_window = {
+                    'entry_date': window_prices[0]['date'],
+                    'entry_price': entry_price,
+                    'peak_date': window_prices[peak_idx]['date'],
+                    'peak_price': peak_price,
+                    'days_to_peak': peak_idx,
+                    'gain_percent': gain_pct
+                }
+    
+    if best_window:
+        print(f"  ✅ Found window: {best_window['entry_date']} → {best_window['peak_date']}")
+        print(f"     Entry: ${best_window['entry_price']:.2f}, Peak: ${best_window['peak_price']:.2f}")
+        print(f"     Gain: {best_window['gain_percent']:.1f}%, Days: {best_window['days_to_peak']}")
+    else:
+        print(f"  ❌ No window found with {target_gain_pct}%+ gain")
+    
+    return best_window
+
+
+def get_test_price(ticker, peak_date, test_days, api_key):
+    """
+    Get stock price X days after peak
+    Returns: price or None
+    """
+    peak_dt = datetime.strptime(peak_date, '%Y-%m-%d')
+    test_date = peak_dt + timedelta(days=test_days)
+    
+    # Fetch price data around test date (buffer for weekends/holidays)
+    buffer_start = (test_date - timedelta(days=5)).strftime('%Y-%m-%d')
+    buffer_end = (test_date + timedelta(days=5)).strftime('%Y-%m-%d')
+    
+    prices = get_daily_prices(ticker, buffer_start, buffer_end, api_key)
+    
+    if not prices:
+        return None
+    
+    # Find closest date to test date
+    test_date_str = test_date.strftime('%Y-%m-%d')
+    
+    for day in prices:
+        if day['date'] >= test_date_str:
+            return day['close']
+    
+    # If no exact match, use last available price
+    return prices[-1]['close'] if prices else None
+
+
+def test_sustainability(stock, api_key):
+    """
+    Test if stock meets sustainability criteria
+    Returns: dict with test results
+    """
+    ticker = stock.get('ticker')
+    year = stock.get('year', stock.get('year_discovered'))
+    gain_percent = stock.get('gain_percent')
+    
+    if not all([ticker, year, gain_percent]):
         return {
             'sustainable': False,
-            'reason': 'No catalyst date available',
-            'test_price': None,
-            'retention_percent': None
+            'reason': 'Missing required data (ticker, year, or gain_percent)',
+            'test_data': None
         }
     
-    # Calculate test date (30 days after peak)
-    test_date = catalyst_date + timedelta(days=30)
+    print(f"\n{'='*70}")
+    print(f"Testing {ticker} ({year}) - Target: {gain_percent}% gain")
+    print(f"{'='*70}")
     
-    # Don't test stocks where test date is in the future
-    if test_date > datetime.now():
-        return {
-            'sustainable': False,
-            'reason': 'Test date in future (too recent)',
-            'test_price': None,
-            'retention_percent': None
-        }
-    
-    # Get entry and peak prices
-    entry_price = stock.get('entry_price')
-    peak_price = stock.get('peak_price')
-    
-    if not entry_price or not peak_price:
-        return {
-            'sustainable': False,
-            'reason': 'Missing entry/peak price data',
-            'test_price': None,
-            'retention_percent': None
-        }
-    
-    # Fetch price 30 days after peak
-    print(f"  🔍 Testing {ticker} - Peak: {catalyst_date.strftime('%Y-%m-%d')}, Test: {test_date.strftime('%Y-%m-%d')}")
-    test_price = get_price_on_date(ticker, test_date, api_key)
+    # Check if stock already has enriched data
+    if 'entry_date' in stock and 'entry_price' in stock and 'peak_price' in stock:
+        print(f"  ℹ️  Using existing enriched data")
+        entry_date = stock['entry_date']
+        entry_price = stock['entry_price']
+        peak_date = stock.get('catalyst_date', entry_date)
+        peak_price = stock['peak_price']
+        
+        # Still need to get test price
+        test_price = get_test_price(ticker, peak_date, TEST_DAYS_AFTER_PEAK, api_key)
+    else:
+        # Find explosive window using Polygon
+        window = find_explosive_window(ticker, year, gain_percent, api_key)
+        
+        if not window:
+            return {
+                'sustainable': False,
+                'reason': 'Could not find explosive window in Polygon data',
+                'test_data': None
+            }
+        
+        entry_date = window['entry_date']
+        entry_price = window['entry_price']
+        peak_date = window['peak_date']
+        peak_price = window['peak_price']
+        
+        # Get test price
+        print(f"  📅 Getting price {TEST_DAYS_AFTER_PEAK} days after peak...")
+        test_price = get_test_price(ticker, peak_date, TEST_DAYS_AFTER_PEAK, api_key)
     
     if not test_price:
         return {
             'sustainable': False,
-            'reason': 'Could not fetch test date price',
-            'test_price': None,
-            'retention_percent': None
+            'reason': f'Could not fetch price {TEST_DAYS_AFTER_PEAK} days after peak',
+            'test_data': {
+                'entry_date': entry_date,
+                'entry_price': entry_price,
+                'peak_date': peak_date,
+                'peak_price': peak_price,
+                'test_date': None,
+                'test_price': None
+            }
         }
     
-    # Calculate retention percentage
-    # Retention = (test_price - entry_price) / (peak_price - entry_price)
+    # Calculate retention
     peak_gain = peak_price - entry_price
     test_gain = test_price - entry_price
     retention = test_gain / peak_gain if peak_gain > 0 else 0
     
-    # Check if stock meets sustainability threshold
-    sustainable = retention >= SUSTAINABILITY_THRESHOLD
+    test_dt = datetime.strptime(peak_date, '%Y-%m-%d') + timedelta(days=TEST_DAYS_AFTER_PEAK)
+    
+    sustainable = retention >= RETENTION_THRESHOLD
+    
+    print(f"\n  📊 RESULTS:")
+    print(f"     Entry: ${entry_price:.2f} on {entry_date}")
+    print(f"     Peak:  ${peak_price:.2f} on {peak_date}")
+    print(f"     Test:  ${test_price:.2f} on {test_dt.strftime('%Y-%m-%d')} ({TEST_DAYS_AFTER_PEAK} days later)")
+    print(f"     Retention: {retention*100:.1f}%")
+    print(f"     Result: {'✅ SUSTAINABLE' if sustainable else '❌ UNSUSTAINABLE'}")
     
     return {
         'sustainable': sustainable,
-        'reason': 'Sustainable' if sustainable else f'Only retained {retention*100:.1f}% of gain',
-        'test_price': test_price,
-        'test_date': test_date.strftime('%Y-%m-%d'),
-        'retention_percent': round(retention * 100, 2),
-        'peak_gain_percent': stock.get('gain_percent'),
-        'entry_price': entry_price,
-        'peak_price': peak_price
+        'reason': 'Sustainable' if sustainable else f'Only retained {retention*100:.1f}% of gain (need {RETENTION_THRESHOLD*100}%)',
+        'test_data': {
+            'entry_date': entry_date,
+            'entry_price': entry_price,
+            'peak_date': peak_date,
+            'peak_price': peak_price,
+            'test_date': test_dt.strftime('%Y-%m-%d'),
+            'test_price': test_price,
+            'retention_percent': round(retention * 100, 2),
+            'threshold_percent': RETENTION_THRESHOLD * 100
+        }
     }
 
 
-def filter_sustainability(input_file, output_unsustainable, summary_file):
-    """
-    Main filter function - test all stocks for sustainability
-    Uses merge logic to preserve existing results
-    Automatically removes unsustainable stocks from CLEAN.json
-    """
+def run_filter():
+    """Main filter execution"""
     print("\n" + "="*70)
-    print("🔬 GEM SUSTAINABILITY FILTER")
+    print("🔬 GEM SUSTAINABILITY FILTER V2.0")
     print("="*70)
     print(f"📅 Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"🎯 Threshold: {SUSTAINABILITY_THRESHOLD*100}% gain retention after 30 days")
+    print(f"🎯 Criteria: {RETENTION_THRESHOLD*100}% retention {TEST_DAYS_AFTER_PEAK} days after peak")
     print("="*70 + "\n")
     
-    # Load input data
-    print(f"📂 Loading input file: {input_file}")
-    if not Path(input_file).exists():
-        print(f"❌ ERROR: {input_file} not found!")
+    # Load CLEAN.json
+    print(f"📂 Loading {INPUT_FILE}...")
+    if not Path(INPUT_FILE).exists():
+        print(f"❌ ERROR: {INPUT_FILE} not found!")
         return
     
-    with open(input_file, 'r') as f:
-        data = json.load(f)
+    with open(INPUT_FILE, 'r') as f:
+        clean_data = json.load(f)
     
-    # Handle nested structure (stocks may be in a "stocks" key)
-    if isinstance(data, dict) and 'stocks' in data:
-        all_stocks = data['stocks']
-        file_metadata = {k: v for k, v in data.items() if k != 'stocks'}
+    # Extract stocks
+    if isinstance(clean_data, dict) and 'stocks' in clean_data:
+        all_stocks = clean_data['stocks']
+        file_structure = {k: v for k, v in clean_data.items() if k != 'stocks'}
     else:
-        all_stocks = data
-        file_metadata = {}
+        all_stocks = clean_data
+        file_structure = {}
     
-    print(f"✅ Loaded {len(all_stocks)} stocks from {input_file}\n")
-    print(f"🔄 This filter will automatically update {input_file}")
-    print(f"   - SUSTAINABLE stocks stay in {input_file}")
-    print(f"   - UNSUSTAINABLE stocks moved to {output_unsustainable}\n")
+    print(f"✅ Loaded {len(all_stocks)} stocks from CLEAN.json")
+    print(f"ℹ️  These are the ONLY stocks we'll test\n")
     
-    # Load existing results (merge logic)
-    # Note: Sustainable stocks are in input_file (CLEAN.json)
-    # On first run, all_stocks ARE the sustainable candidates
-    # On subsequent runs, we need to merge with existing unsustainable
-    existing_unsustainable = load_existing_file(output_unsustainable)
+    # Load existing unsustainable (for merge logic)
+    existing_unsustainable = []
+    if Path(OUTPUT_UNSUSTAINABLE).exists():
+        with open(OUTPUT_UNSUSTAINABLE, 'r') as f:
+            existing_unsustainable = json.load(f)
+        print(f"📊 Found {len(existing_unsustainable)} existing unsustainable stocks\n")
     
-    print(f"📊 Existing Results:")
-    print(f"   - Sustainable candidates: {len(all_stocks)} stocks (in CLEAN.json)")
-    print(f"   - Already unsustainable: {len(existing_unsustainable)} stocks\n")
-    
-    # Create lookup sets for existing stocks (ticker + year key)
-    existing_unsustainable_keys = {
-        f"{s['ticker']}_{s.get('year_discovered', s.get('year'))}" 
-        for s in existing_unsustainable
-    }
-    
-    # Results
-    # Sustainable list starts empty - we'll build it as we test
-    # Unsustainable list starts with existing unsustainable stocks
+    # Test each stock
     sustainable = []
     unsustainable = list(existing_unsustainable)
     stats = {
-        'total_tested': 0,
-        'sustainable_count': 0,
-        'unsustainable_count': len(existing_unsustainable),
-        'skipped_already_tested': 0,
-        'skipped_missing_data': 0,
-        'skipped_too_recent': 0,
-        'skipped_no_price': 0,
-        'new_sustainable': 0,
-        'new_unsustainable': 0,
-        'avg_retention_sustainable': 0,
-        'avg_retention_unsustainable': 0
+        'total_stocks': len(all_stocks),
+        'tested': 0,
+        'sustainable': 0,
+        'unsustainable': 0,
+        'skipped': 0,
+        'errors': 0
     }
     
-    retention_sustainable = []
-    retention_unsustainable = []
-    
-    # Process each stock
     for i, stock in enumerate(all_stocks, 1):
-        ticker = stock['ticker']
-        year = stock.get('year_discovered', stock.get('year'))
-        stock_key = f"{ticker}_{year}"
+        ticker = stock.get('ticker')
+        year = stock.get('year', stock.get('year_discovered'))
         
-        print(f"\n[{i}/{len(all_stocks)}] Processing {ticker} ({year})")
+        print(f"\n[{i}/{len(all_stocks)}] {ticker} ({year})")
         
-        # Skip if already tested as unsustainable
-        if stock_key in existing_unsustainable_keys:
-            print(f"  ⏭️  Already tested as unsustainable - skipping")
-            stats['skipped_already_tested'] += 1
-            continue
+        result = test_sustainability(stock, POLYGON_API_KEY)
         
-        stats['total_tested'] += 1
-        
-        # Test sustainability
-        result = calculate_sustainability(stock, POLYGON_API_KEY)
-        
-        # Add test results to stock data
+        # Add test results to stock
         stock_with_test = stock.copy()
-        stock_with_test['sustainability_test'] = result
-        stock_with_test['tested_date'] = datetime.now().strftime('%Y-%m-%d')
+        stock_with_test['sustainability_test'] = {
+            'sustainable': result['sustainable'],
+            'reason': result['reason'],
+            'test_date': datetime.now().strftime('%Y-%m-%d'),
+            'criteria': f"{RETENTION_THRESHOLD*100}% retention {TEST_DAYS_AFTER_PEAK} days after peak"
+        }
         
-        # Categorize
+        if result['test_data']:
+            stock_with_test['sustainability_test'].update(result['test_data'])
+        
         if result['sustainable']:
             sustainable.append(stock_with_test)
-            stats['new_sustainable'] += 1
-            stats['sustainable_count'] += 1
-            if result['retention_percent']:
-                retention_sustainable.append(result['retention_percent'])
-            print(f"  ✅ SUSTAINABLE - Retained {result['retention_percent']}% of gain")
+            stats['sustainable'] += 1
         else:
             unsustainable.append(stock_with_test)
-            stats['new_unsustainable'] += 1
-            stats['unsustainable_count'] += 1
-            if result['retention_percent']:
-                retention_unsustainable.append(result['retention_percent'])
-            print(f"  ❌ UNSUSTAINABLE - {result['reason']}")
-            
-            # Track skip reasons
-            if 'Missing' in result['reason']:
-                stats['skipped_missing_data'] += 1
-            elif 'future' in result['reason']:
-                stats['skipped_too_recent'] += 1
-            elif 'Could not fetch' in result['reason']:
-                stats['skipped_no_price'] += 1
+            stats['unsustainable'] += 1
         
-        # Rate limiting - 5 requests per minute for free tier
-        if stats['total_tested'] % 5 == 0:
-            print(f"\n  ⏸️  Rate limit pause (5 requests/minute)...")
+        stats['tested'] += 1
+        
+        # Rate limiting (5 requests per minute)
+        if i % 5 == 0 and i < len(all_stocks):
+            print(f"\n⏸️  Rate limit pause...")
             time.sleep(12)
-    
-    # Calculate averages
-    if retention_sustainable:
-        stats['avg_retention_sustainable'] = round(sum(retention_sustainable) / len(retention_sustainable), 2)
-    if retention_unsustainable:
-        stats['avg_retention_unsustainable'] = round(sum(retention_unsustainable) / len(retention_unsustainable), 2)
     
     # Save results
     print("\n" + "="*70)
     print("💾 SAVING RESULTS")
-    print("="*70 + "\n")
+    print("="*70)
     
-    # CRITICAL: Overwrite CLEAN.json with ONLY sustainable stocks
-    # Preserve the file structure if it had metadata
-    if file_metadata:
-        clean_output = file_metadata.copy()
+    # Update CLEAN.json with only sustainable stocks
+    if file_structure:
+        clean_output = file_structure.copy()
         clean_output['stocks'] = sustainable
-        # Update filter_info if it exists
-        if 'filter_info' in clean_output:
-            clean_output['filter_info']['sustainability_filter_date'] = datetime.now().strftime('%Y-%m-%d')
-            clean_output['filter_info']['sustainability_threshold'] = SUSTAINABILITY_THRESHOLD
-            clean_output['filter_info']['original_count'] = len(all_stocks)
-            clean_output['filter_info']['sustainable_count'] = len(sustainable)
-            clean_output['filter_info']['unsustainable_count'] = len(unsustainable)
     else:
         clean_output = sustainable
     
-    with open(input_file, 'w') as f:
+    with open(INPUT_FILE, 'w') as f:
         json.dump(clean_output, f, indent=2)
-    print(f"✅ Updated {input_file} with {len(sustainable)} SUSTAINABLE stocks (removed {len(unsustainable)} unsustainable)")
+    print(f"✅ Updated CLEAN.json: {len(sustainable)} sustainable stocks")
     
-    with open(output_unsustainable, 'w') as f:
+    # Save unsustainable
+    with open(OUTPUT_UNSUSTAINABLE, 'w') as f:
         json.dump(unsustainable, f, indent=2)
-    print(f"✅ Saved {len(unsustainable)} UNSUSTAINABLE stocks to {output_unsustainable}")
+    print(f"✅ Saved UNSUSTAINABLE.json: {len(unsustainable)} stocks")
     
-    # Add metadata to summary
+    # Save summary
     stats['filter_date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    stats['sustainability_threshold'] = SUSTAINABILITY_THRESHOLD
-    stats['input_file'] = input_file
-    stats['sustainable_percentage'] = round((stats['sustainable_count'] / len(all_stocks)) * 100, 2)
-    stats['removed_from_clean'] = len(unsustainable)
+    stats['criteria'] = f"{RETENTION_THRESHOLD*100}% retention {TEST_DAYS_AFTER_PEAK} days after peak"
     
-    with open(summary_file, 'w') as f:
+    with open(SUMMARY_FILE, 'w') as f:
         json.dump(stats, f, indent=2)
-    print(f"✅ Saved summary to {summary_file}\n")
+    print(f"✅ Saved summary\n")
     
-    # Print final summary
+    # Final summary
     print("="*70)
-    print("📊 SUSTAINABILITY FILTER SUMMARY")
+    print("📊 SUSTAINABILITY FILTER COMPLETE")
     print("="*70)
-    print(f"Total Stocks Processed: {len(all_stocks)}")
-    print(f"Already Tested (Skipped): {stats['skipped_already_tested']}")
-    print(f"Newly Tested: {stats['total_tested']}")
-    print(f"\n✅ SUSTAINABLE: {stats['sustainable_count']} ({stats['sustainable_percentage']}%)")
-    print(f"   - New: {stats['new_sustainable']}")
-    print(f"   - Avg Retention: {stats['avg_retention_sustainable']}%")
-    print(f"   - Kept in {input_file}")
-    print(f"\n❌ UNSUSTAINABLE: {stats['unsustainable_count']}")
-    print(f"   - New: {stats['new_unsustainable']}")
-    print(f"   - Avg Retention: {stats['avg_retention_unsustainable']}%")
-    print(f"   - Moved to {output_unsustainable}")
-    print(f"\n⏭️  SKIPPED:")
-    print(f"   - Missing Data: {stats['skipped_missing_data']}")
-    print(f"   - Too Recent: {stats['skipped_too_recent']}")
-    print(f"   - No Price Data: {stats['skipped_no_price']}")
-    print("="*70 + "\n")
-    
-    print(f"✅ Filter complete: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"📂 Results saved:")
-    print(f"   - {input_file} (UPDATED - sustainable stocks only)")
-    print(f"   - {output_unsustainable} (unsustainable stocks archived)")
-    print(f"   - {summary_file} (statistics)\n")
+    print(f"Total Stocks: {stats['total_stocks']}")
+    print(f"Tested: {stats['tested']}")
+    print(f"✅ Sustainable: {stats['sustainable']} ({stats['sustainable']/stats['total_stocks']*100:.1f}%)")
+    print(f"❌ Unsustainable: {stats['unsustainable']} ({stats['unsustainable']/stats['total_stocks']*100:.1f}%)")
+    print("="*70)
 
 
 if __name__ == "__main__":
-    filter_sustainability(
-        INPUT_FILE,
-        OUTPUT_UNSUSTAINABLE,
-        SUMMARY_FILE
-    )
+    run_filter()
