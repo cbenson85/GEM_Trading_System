@@ -1,8 +1,8 @@
 {
-  "started": "2025-11-02 19:32:42",
+  "started": "2025-11-02 19:52:44",
   "total_stocks": 200,
-  "enriched": 79,
-  "already_enriched": 30,
+  "enriched": 0,
+  "already_enriched": 109,
   "failed": 91,
   "skipped": 0,
   "failures": [
@@ -462,5 +462,5 @@
       "reason": "Could not find explosive window in Polygon data"
     }
   ],
-  "completed": "2025-11-02 19:33:52"
+  "completed": "2025-11-02 19:53:17"
 }
