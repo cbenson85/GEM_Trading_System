@@ -32,8 +32,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-      with:
-        fetch-depth: 0  # Full history for proper rebase
     
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -61,7 +59,7 @@ jobs:
     - name: Check scanner results
       run: |
         if [ -f "Verified_Backtest_Data/explosive_stocks_catalog.json" ]; then
-          echo "✅ Scan complete!"
+          echo "✅ Scanner complete!"
           echo "Results found in explosive_stocks_catalog.json"
           cat Verified_Backtest_Data/explosive_stocks_catalog.json | head -50
         else
@@ -69,45 +67,33 @@ jobs:
           exit 1
         fi
     
-    - name: Run COVID-era filter (with merge logic)
+    - name: Run COVID-era filter with merge logic
       run: |
-        echo "🔄 Running filter to merge new stocks into CLEAN and COVID datasets..."
+        echo "🔄 Running filter to merge results..."
         python filter_covid_era.py
     
     - name: Verify filter results
       run: |
-        echo "📊 Filter Results:"
-        if [ -f "Verified_Backtest_Data/filter_summary.json" ]; then
-          cat Verified_Backtest_Data/filter_summary.json
-        fi
-        
-        echo ""
-        echo "📈 Dataset Sizes:"
         if [ -f "Verified_Backtest_Data/explosive_stocks_CLEAN.json" ]; then
+          echo "✅ Filter complete!"
+          echo "CLEAN.json updated"
           CLEAN_COUNT=$(jq '.stocks | length' Verified_Backtest_Data/explosive_stocks_CLEAN.json)
-          echo "CLEAN dataset: $CLEAN_COUNT stocks"
-        fi
-        
-        if [ -f "Verified_Backtest_Data/explosive_stocks_COVID_ERA.json" ]; then
           COVID_COUNT=$(jq '.stocks | length' Verified_Backtest_Data/explosive_stocks_COVID_ERA.json)
-          echo "COVID dataset: $COVID_COUNT stocks"
+          echo "📊 CLEAN stocks: $CLEAN_COUNT"
+          echo "📊 COVID stocks: $COVID_COUNT"
+        else
+          echo "⚠️ Filter may have failed, but continuing..."
         fi
     
-    - name: Commit results
+    - name: Commit all results (catalog + filtered files)
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        
-        # Add all updated data files
         git add Verified_Backtest_Data/explosive_stocks_catalog.json
         git add Verified_Backtest_Data/explosive_stocks_CLEAN.json
         git add Verified_Backtest_Data/explosive_stocks_COVID_ERA.json
         git add Verified_Backtest_Data/filter_summary.json
-        
-        # Commit if there are changes
-        git diff --staged --quiet || git commit -m "🤖 Automated scan: Updated catalog, CLEAN (merged), and COVID datasets"
-        
-        # Pull and rebase any remote changes
+        git diff --staged --quiet || git commit -m "🤖 Automated scan + filter: Updated catalog, CLEAN (merged), COVID, and summary"
         git pull origin main --rebase --autostash
     
     - name: Push changes
@@ -119,37 +105,25 @@ jobs:
     
     - name: Generate summary
       run: |
-        echo "## 🚀 Explosive Stock Scanner Results" >> $GITHUB_STEP_SUMMARY
+        echo "## 🚀 Explosive Stock Scanner + Filter Results" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        
         if [ -f "Verified_Backtest_Data/explosive_stocks_catalog.json" ]; then
           CATALOG_TOTAL=$(jq '.scan_info.total_explosive_stocks_found' Verified_Backtest_Data/explosive_stocks_catalog.json)
-          echo "**📊 Latest Scan:** $CATALOG_TOTAL stocks found" >> $GITHUB_STEP_SUMMARY
+          echo "**📊 Catalog stocks found:** $CATALOG_TOTAL" >> $GITHUB_STEP_SUMMARY
         fi
-        
-        echo "" >> $GITHUB_STEP_SUMMARY
-        
+        if [ -f "Verified_Backtest_Data/explosive_stocks_CLEAN.json" ]; then
+          CLEAN_COUNT=$(jq '.stocks | length' Verified_Backtest_Data/explosive_stocks_CLEAN.json)
+          COVID_COUNT=$(jq '.stocks | length' Verified_Backtest_Data/explosive_stocks_COVID_ERA.json)
+          echo "**✅ Total CLEAN stocks (merged):** $CLEAN_COUNT" >> $GITHUB_STEP_SUMMARY
+          echo "**📁 Total COVID stocks (archived):** $COVID_COUNT" >> $GITHUB_STEP_SUMMARY
+        fi
         if [ -f "Verified_Backtest_Data/filter_summary.json" ]; then
-          CLEAN_TOTAL=$(jq '.clean_dataset.total' Verified_Backtest_Data/filter_summary.json)
-          CLEAN_NEW=$(jq '.clean_dataset.new_additions' Verified_Backtest_Data/filter_summary.json)
-          CLEAN_DUPES=$(jq '.clean_dataset.duplicates_skipped' Verified_Backtest_Data/filter_summary.json)
-          
-          COVID_TOTAL=$(jq '.covid_dataset.total' Verified_Backtest_Data/filter_summary.json)
-          COVID_NEW=$(jq '.covid_dataset.new_additions' Verified_Backtest_Data/filter_summary.json)
-          
-          echo "**📈 CLEAN Dataset (2014-2019, 2022-2024):**" >> $GITHUB_STEP_SUMMARY
-          echo "- Total: $CLEAN_TOTAL stocks" >> $GITHUB_STEP_SUMMARY
-          echo "- New additions: $CLEAN_NEW" >> $GITHUB_STEP_SUMMARY
-          echo "- Duplicates skipped: $CLEAN_DUPES" >> $GITHUB_STEP_SUMMARY
+          NEW_CLEAN=$(jq '.merge_stats.clean_added' Verified_Backtest_Data/filter_summary.json)
+          NEW_COVID=$(jq '.merge_stats.covid_added' Verified_Backtest_Data/filter_summary.json)
           echo "" >> $GITHUB_STEP_SUMMARY
-          
-          echo "**📋 COVID Dataset (2020-2021 - Archived):**" >> $GITHUB_STEP_SUMMARY
-          echo "- Total: $COVID_TOTAL stocks" >> $GITHUB_STEP_SUMMARY
-          echo "- New additions: $COVID_NEW" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**🆕 New additions this scan:**" >> $GITHUB_STEP_SUMMARY
+          echo "- CLEAN: +$NEW_CLEAN" >> $GITHUB_STEP_SUMMARY
+          echo "- COVID: +$NEW_COVID" >> $GITHUB_STEP_SUMMARY
         fi
-        
-        echo "✅ All datasets updated and committed to repository." >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Results committed to repository." >> $GITHUB_STEP_SUMMARY
-        fi
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "All files committed and pushed to repository." >> $GITHUB_STEP_SUMMARY
