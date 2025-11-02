@@ -1,10 +1,10 @@
 {
   "system_info": {
-    "version": "5.0.4-REALISTIC-FILTER",
-    "last_updated": "2025-11-02T20:30:00Z",
-    "current_phase": "Phase 3: Stock Discovery & Pre-Catalyst Analysis",
-    "current_task": "Re-run enrichment, then filter with realistic V4.0",
-    "next_milestone": "Get 90-100 tradeable stocks, begin Phase 3 analysis"
+    "version": "5.1.0-SCANNER-APPROACH",
+    "last_updated": "2025-11-02T21:00:00Z",
+    "current_phase": "Phase 3: Data Collection",
+    "current_task": "Testing 2022-2024 scanner run, then 2010-2019",
+    "next_milestone": "Complete scanner runs, add drawdown velocity, filter, begin Phase 3"
   },
   "portfolio": {
     "status": "CLEARED",
@@ -17,117 +17,145 @@
       "exit_requirement": "Must be able to fill stops (no >35% gaps)"
     }
   },
-  "data_status": {
-    "explosive_stocks_total": 200,
-    "enriched_current": 109,
-    "enriched_expected_after_rerun": "140-160",
-    "tradeable_expected": "90-100",
-    "enrichment_success_rate_current": "54.5%",
-    "enrichment_success_rate_expected": "70-80%"
+  "current_approach": {
+    "method": "RE-RUN SCANNER",
+    "reason": "CLEAN.json lacks entry dates - enrichment impossible without them",
+    "status": "Testing 2022-2024 now",
+    "next": "Run 2010-2019 if test succeeds"
   },
-  "filter_evolution_complete": {
-    "v1": {
-      "criteria": "90% retention, 30 days",
-      "result": "All failed",
-      "issue": "Wrong criteria, missing data"
+  "scanner_runs": {
+    "test_run_2022_2024": {
+      "status": "IN PROGRESS",
+      "start_year": 2022,
+      "end_year": 2024,
+      "expected_stocks": "80-100",
+      "expected_time": "30-45 minutes",
+      "purpose": "Verify complete data structure"
     },
-    "v2": {
-      "criteria": "80% retention, 21 days from peak",
-      "result": "17/200 (8.5%)",
-      "issue": "Peak timing captures market corrections"
+    "full_run_2010_2019": {
+      "status": "PENDING",
+      "start_year": 2010,
+      "end_year": 2019,
+      "expected_stocks": "120-150",
+      "expected_time": "2-4 hours",
+      "purpose": "Complete pre-COVID dataset"
     },
-    "v3": {
-      "criteria": "120-day window, speed-adjusted",
-      "result": "0/200 (all failed)",
-      "issue": "No enriched data, couldn't find windows"
+    "combined_result": {
+      "expected_total": "200-250 stocks",
+      "data_completeness": "100% (entry_date, entry_price, peak_date, peak_price)",
+      "coverage": "2010-2024 excluding COVID 2020-2021"
+    }
+  },
+  "root_cause_analysis": {
+    "original_problem": "CLEAN.json only had ticker, year, gain_percent, days_to_peak",
+    "missing_data": "entry_date, entry_price, peak_date, peak_price",
+    "why_enrichment_failed": "Cannot find explosive windows without knowing when they occurred",
+    "enrichment_results": "109/200 (54.5%) - 91 failed 'Could not find window'",
+    "attempts_made": [
+      "Enrichment with 90% tolerance - failed",
+      "Enrichment with ANY 500%+ window - failed",
+      "Widened search window to ±2 years - failed"
+    ],
+    "why_all_failed": "Fundamental issue - guessing where windows are without entry dates",
+    "solution": "Scanner already captures all data - just re-run it"
+  },
+  "scanner_data_structure": {
+    "scanner_output": {
+      "ticker": "string",
+      "year_discovered": "int",
+      "entry_date": "YYYY-MM-DD (HAS THIS)",
+      "entry_price": "float (HAS THIS)",
+      "peak_date": "YYYY-MM-DD (HAS THIS)",
+      "peak_price": "float (HAS THIS)",
+      "gain_percent": "float",
+      "days_to_peak": "int",
+      "data_source": "string"
     },
-    "v4_final": {
-      "criteria": "Drawdown velocity <35%, 200%+ gain",
-      "method": "Two-stage: enrich first, filter second",
-      "expected_result": "90-100/200 (45-50%)",
-      "status": "READY - awaiting enrichment rerun"
+    "current_clean_json": {
+      "ticker": "string",
+      "year": "int",
+      "gain_percent": "float",
+      "days_to_peak": "int",
+      "missing": "entry_date, entry_price, peak_date, peak_price"
+    },
+    "after_scanner_reruns": {
+      "will_have": "ALL fields from scanner output",
+      "enrichment_needed": "Only drawdown velocity analysis",
+      "filtering_ready": "Yes - complete data for all tests"
+    }
+  },
+  "filter_evolution_summary": {
+    "v1_v2_v3": "All failed due to incomplete data in CLEAN.json",
+    "v4_realistic": {
+      "status": "READY",
+      "criteria": "35% max drop, 200%+ gain, 120-day window",
+      "waiting_for": "Complete data from scanner"
+    }
+  },
+  "pipeline_after_scanner": {
+    "step_1": {
+      "action": "Scanner completes",
+      "output": "CLEAN.json with 200-250 stocks",
+      "data": "Complete: entry dates, prices, peaks"
+    },
+    "step_2": {
+      "action": "Run enrichment (drawdown velocity only)",
+      "script": "enrich_stock_data.py",
+      "adds": "max_single_day_drop, tradeable_classification",
+      "time": "15-20 minutes"
+    },
+    "step_3": {
+      "action": "Run realistic filter V4.0",
+      "script": "filter_sustainability.py",
+      "filters": "35% gaps, <200% gains",
+      "expected_output": "90-100 tradeable stocks"
+    },
+    "step_4": {
+      "action": "Begin Phase 3",
+      "tasks": [
+        "Pre-catalyst data collection",
+        "Pattern discovery",
+        "Correlation analysis",
+        "Build screening criteria"
+      ]
     }
   },
   "drawdown_velocity_system": {
-    "purpose": "Ensure positions can be exited (35% trailing stop must fill)",
+    "purpose": "Ensure 35% trailing stop can fill",
     "classifications": {
-      "IDEAL": "0% drops - plenty of time to exit",
+      "IDEAL": "0% max drop - plenty of time to exit",
       "TRADEABLE": "<25% max drop - stop should fill",
       "RISKY": "25-35% max drop - might gap through",
       "UNTRADEABLE": ">35% max drop - would gap past stop"
     },
-    "key_insight": "No velocity = best case (stable moves)",
-    "filter_threshold": "35% (based on trailing stop loss)"
+    "filter_threshold": "35% (based on trailing stop loss)",
+    "key_insight": "No velocity = best case (stable moves)"
   },
-  "enrichment_improvements": {
-    "original_issue": "Searched for exact target gain (90% tolerance)",
-    "fix_applied": "Accept ANY 180-day window with 500%+ gain",
-    "impact": "Should enrich 30-50 more stocks",
-    "status": "UPDATED - ready to rerun"
-  },
-  "realistic_filter_v4": {
-    "criteria": {
-      "tradeable": "Max single-day drop <35%",
-      "profitable": "200%+ gain captured",
-      "realistic": "Within 120 days OR sustained growth"
-    },
-    "filters_out": [
-      "Stocks with >35% single-day drops (can't exit)",
-      "Stocks with <200% gains (not profitable)"
-    ],
-    "keeps": [
-      "Everything meeting criteria",
-      "Un-enriched stocks (for now)"
-    ],
-    "expected_pass_rate": "90% of enriched stocks"
-  },
-  "next_steps": {
-    "step_1": {
-      "action": "Re-run enrichment with updated script",
-      "file": "enrich_stock_data.py (accepts any 500%+ window)",
-      "expected_time": "15-20 minutes",
-      "expected_result": "140-160 enriched stocks"
-    },
-    "step_2": {
-      "action": "Run realistic filter V4.0",
-      "file": "filter_sustainability.py (V4.0)",
-      "expected_time": "2-3 minutes",
-      "expected_result": "90-100 tradeable stocks"
-    },
-    "step_3": {
-      "action": "Analyze results and proceed to Phase 3",
-      "tasks": [
-        "Review filter summary",
-        "Verify drawdown velocity data",
-        "Confirm tradeable dataset",
-        "Begin pre-catalyst data collection"
-      ]
-    }
+  "files_status": {
+    "explosive_stock_scanner.py": "READY - has all data fields",
+    "filter_covid_era.py": "READY - makes output cumulative",
+    "enrich_stock_data.py": "READY - adds drawdown only (no window finding)",
+    "filter_sustainability.py": "READY - V4.0 realistic filter",
+    "explosive_stocks_CLEAN.json": "PENDING - being rebuilt by scanner"
   },
   "key_learnings": {
-    "architecture": [
-      "Two-stage process: enrich THEN filter",
-      "CLEAN.json is master list (filter modifies it)",
-      "Drawdown velocity = exit-ability = tradeable"
+    "mistakes": [
+      "Tried to fix incomplete data with enrichment",
+      "Spent hours on complex solutions to wrong problem",
+      "Multiple filter iterations without addressing root cause"
     ],
-    "criteria": [
-      "35% trailing stop loss (trading rule)",
-      "Test exit-ability not peak timing",
-      "No velocity drops = ideal scenario",
-      "Realistic thresholds: 200%+, <35% gap"
+    "insights": [
+      "Scanner has the data - use it",
+      "Can't find windows without entry dates",
+      "Complete data at source > retroactive enrichment"
     ],
-    "data": [
-      "70-80% enrichment is acceptable",
-      "Some stocks have no Polygon data",
-      "Warrants/delisted often fail",
-      "Accept imperfect data and proceed"
-    ]
+    "solution": "Re-run scanner with complete pipeline"
   },
-  "files_ready": {
-    "enrich_stock_data.py": "UPDATED - accepts any 500%+ window, adds drawdown",
-    "filter_sustainability.py": "UPDATED - V4.0 realistic with 35% threshold",
-    "enrich_stock_data_workflow.yml": "READY",
-    "sustainability_filter_workflow.yml": "READY"
+  "expected_final_results": {
+    "after_scanner": "200-250 stocks with complete data",
+    "after_enrichment": "200-250 stocks with drawdown velocity",
+    "after_filter": "90-100 tradeable stocks (45-50%)",
+    "phase_3_ready": "Sufficient dataset for pattern discovery"
   },
   "api_configuration": {
     "polygon": {
@@ -136,15 +164,16 @@
       "key_active": true
     }
   },
-  "expected_outcomes": {
-    "after_enrichment": "140-160 stocks with complete data + drawdown analysis",
-    "after_filter": "90-100 tradeable stocks ready for Phase 3",
-    "phase_3_ready": "Sufficient dataset for pattern discovery and screening"
+  "immediate_status": {
+    "user_action": "Testing 2022-2024 scanner run",
+    "waiting_for": "Test results to verify data structure",
+    "next_if_success": "Run 2010-2019 scanner (2-4 hours)",
+    "next_if_failure": "Debug scanner output format"
   },
   "metadata": {
-    "generated_by": "GEM Catch-Up Prompt System v2.5",
+    "generated_by": "GEM Catch-Up Prompt System v3.0",
     "paired_file": "CURRENT_CATCHUP_PROMPT.md",
-    "last_sync": "2025-11-02T20:30:00Z",
-    "session_summary": "Finalized drawdown velocity testing and realistic filter V4.0"
+    "last_sync": "2025-11-02T21:00:00Z",
+    "conversation_summary": "Discovered root cause: CLEAN.json lacks entry dates. Solution: Re-run scanner to get complete data from source."
   }
 }
