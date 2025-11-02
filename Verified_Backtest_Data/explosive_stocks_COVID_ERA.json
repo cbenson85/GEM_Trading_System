@@ -1,0 +1,510 @@
+{
+  "scan_info": {
+    "scan_date": "2025-11-01",
+    "scan_period_start": "2014-01-01",
+    "scan_period_end": "2024-12-31",
+    "criteria": "500%+ gain in any 180-day window",
+    "data_sources": [
+      "Polygon API",
+      "Yahoo Finance"
+    ],
+    "total_stocks_scanned": 11000,
+    "total_explosive_stocks_found": 244,
+    "data_errors": 5043,
+    "api_calls_made": 11066,
+    "scan_complete": true,
+    "scan_method": "GitHub Actions - Full 10-year historical scan"
+  },
+  "filter_info": {
+    "period": "2020-2021",
+    "reason": "COVID-era market anomalies - unprecedented conditions"
+  },
+  "stocks": [
+    {
+      "ticker": "AACG",
+      "year": 2020,
+      "gain_percent": 2413,
+      "days_to_peak": 179,
+      "covid_era": true
+    },
+    {
+      "ticker": "AAME",
+      "year": 2020,
+      "gain_percent": 904,
+      "days_to_peak": 140,
+      "covid_era": true
+    },
+    {
+      "ticker": "ABAT",
+      "year": 2020,
+      "gain_percent": 1010,
+      "days_to_peak": 100,
+      "covid_era": true
+    },
+    {
+      "ticker": "ABTS",
+      "year": 2020,
+      "gain_percent": 647,
+      "days_to_peak": 166,
+      "covid_era": true
+    },
+    {
+      "ticker": "ABUS",
+      "year": 2020,
+      "gain_percent": 705,
+      "days_to_peak": 81,
+      "covid_era": true
+    },
+    {
+      "ticker": "ACMR",
+      "year": 2020,
+      "gain_percent": 529,
+      "days_to_peak": 95,
+      "covid_era": true
+    },
+    {
+      "ticker": "ACRS",
+      "year": 2020,
+      "gain_percent": 1389,
+      "days_to_peak": 163,
+      "covid_era": true
+    },
+    {
+      "ticker": "ADAMM",
+      "year": 2020,
+      "gain_percent": 501,
+      "days_to_peak": 171,
+      "covid_era": true
+    },
+    {
+      "ticker": "ADAMN",
+      "year": 2020,
+      "gain_percent": 500,
+      "days_to_peak": 165,
+      "covid_era": true
+    },
+    {
+      "ticker": "ADXN",
+      "year": 2020,
+      "gain_percent": 506,
+      "days_to_peak": 37,
+      "covid_era": true
+    },
+    {
+      "ticker": "AEMD",
+      "year": 2020,
+      "gain_percent": 857,
+      "days_to_peak": 178,
+      "covid_era": true
+    },
+    {
+      "ticker": "AEYE",
+      "year": 2020,
+      "gain_percent": 580,
+      "days_to_peak": 111,
+      "covid_era": true
+    },
+    {
+      "ticker": "AHG",
+      "year": 2020,
+      "gain_percent": 727,
+      "days_to_peak": 104,
+      "covid_era": true
+    },
+    {
+      "ticker": "AHT",
+      "year": 2020,
+      "gain_percent": 504,
+      "days_to_peak": 151,
+      "covid_era": true
+    },
+    {
+      "ticker": "AHTpD",
+      "year": 2020,
+      "gain_percent": 521,
+      "days_to_peak": 101,
+      "covid_era": true
+    },
+    {
+      "ticker": "AHTpF",
+      "year": 2020,
+      "gain_percent": 521,
+      "days_to_peak": 100,
+      "covid_era": true
+    },
+    {
+      "ticker": "AHTpG",
+      "year": 2020,
+      "gain_percent": 524,
+      "days_to_peak": 101,
+      "covid_era": true
+    },
+    {
+      "ticker": "AHTpH",
+      "year": 2020,
+      "gain_percent": 525,
+      "days_to_peak": 120,
+      "covid_era": true
+    },
+    {
+      "ticker": "AHTpI",
+      "year": 2020,
+      "gain_percent": 535,
+      "days_to_peak": 102,
+      "covid_era": true
+    },
+    {
+      "ticker": "AI",
+      "year": 2020,
+      "gain_percent": 6665,
+      "days_to_peak": 154,
+      "covid_era": true
+    },
+    {
+      "ticker": "AIFF",
+      "year": 2020,
+      "gain_percent": 907,
+      "days_to_peak": 168,
+      "covid_era": true
+    },
+    {
+      "ticker": "AIHS",
+      "year": 2020,
+      "gain_percent": 636,
+      "days_to_peak": 76,
+      "covid_era": true
+    },
+    {
+      "ticker": "AIM",
+      "year": 2020,
+      "gain_percent": 1066,
+      "days_to_peak": 45,
+      "covid_era": true
+    },
+    {
+      "ticker": "ALT",
+      "year": 2020,
+      "gain_percent": 691,
+      "days_to_peak": 83,
+      "covid_era": true
+    },
+    {
+      "ticker": "AMC",
+      "year": 2020,
+      "gain_percent": 1075,
+      "days_to_peak": 79,
+      "covid_era": true
+    },
+    {
+      "ticker": "AMPY",
+      "year": 2020,
+      "gain_percent": 538,
+      "days_to_peak": 87,
+      "covid_era": true
+    },
+    {
+      "ticker": "AMTX",
+      "year": 2020,
+      "gain_percent": 1164,
+      "days_to_peak": 169,
+      "covid_era": true
+    },
+    {
+      "ticker": "ANVS",
+      "year": 2020,
+      "gain_percent": 1102,
+      "days_to_peak": 96,
+      "covid_era": true
+    },
+    {
+      "ticker": "ANY",
+      "year": 2020,
+      "gain_percent": 732,
+      "days_to_peak": 68,
+      "covid_era": true
+    },
+    {
+      "ticker": "APM",
+      "year": 2020,
+      "gain_percent": 1066,
+      "days_to_peak": 1,
+      "covid_era": true
+    },
+    {
+      "ticker": "APPN",
+      "year": 2020,
+      "gain_percent": 590,
+      "days_to_peak": 165,
+      "covid_era": true
+    },
+    {
+      "ticker": "APPS",
+      "year": 2020,
+      "gain_percent": 616,
+      "days_to_peak": 154,
+      "covid_era": true
+    },
+    {
+      "ticker": "APT",
+      "year": 2020,
+      "gain_percent": 804,
+      "days_to_peak": 26,
+      "covid_era": true
+    },
+    {
+      "ticker": "APVO",
+      "year": 2020,
+      "gain_percent": 1124,
+      "days_to_peak": 135,
+      "covid_era": true
+    },
+    {
+      "ticker": "APWC",
+      "year": 2020,
+      "gain_percent": 817,
+      "days_to_peak": 167,
+      "covid_era": true
+    },
+    {
+      "ticker": "AQB",
+      "year": 2020,
+      "gain_percent": 599,
+      "days_to_peak": 174,
+      "covid_era": true
+    },
+    {
+      "ticker": "AQMS",
+      "year": 2020,
+      "gain_percent": 650,
+      "days_to_peak": 158,
+      "covid_era": true
+    },
+    {
+      "ticker": "AQST",
+      "year": 2020,
+      "gain_percent": 515,
+      "days_to_peak": 125,
+      "covid_era": true
+    },
+    {
+      "ticker": "AR",
+      "year": 2020,
+      "gain_percent": 545,
+      "days_to_peak": 179,
+      "covid_era": true
+    },
+    {
+      "ticker": "ARCT",
+      "year": 2020,
+      "gain_percent": 601,
+      "days_to_peak": 165,
+      "covid_era": true
+    },
+    {
+      "ticker": "AREC",
+      "year": 2020,
+      "gain_percent": 972,
+      "days_to_peak": 157,
+      "covid_era": true
+    },
+    {
+      "ticker": "ARTL",
+      "year": 2020,
+      "gain_percent": 702,
+      "days_to_peak": 71,
+      "covid_era": true
+    },
+    {
+      "ticker": "ASTC",
+      "year": 2020,
+      "gain_percent": 611,
+      "days_to_peak": 3,
+      "covid_era": true
+    },
+    {
+      "ticker": "ATHE",
+      "year": 2020,
+      "gain_percent": 1070,
+      "days_to_peak": 97,
+      "covid_era": true
+    },
+    {
+      "ticker": "ATLX",
+      "year": 2020,
+      "gain_percent": 3400,
+      "days_to_peak": 177,
+      "covid_era": true
+    },
+    {
+      "ticker": "ATOM",
+      "year": 2020,
+      "gain_percent": 578,
+      "days_to_peak": 178,
+      "covid_era": true
+    },
+    {
+      "ticker": "ATON",
+      "year": 2020,
+      "gain_percent": 10809,
+      "days_to_peak": 1,
+      "covid_era": true
+    },
+    {
+      "ticker": "ATOS",
+      "year": 2020,
+      "gain_percent": 652,
+      "days_to_peak": 115,
+      "covid_era": true
+    },
+    {
+      "ticker": "ATXS",
+      "year": 2020,
+      "gain_percent": 504,
+      "days_to_peak": 56,
+      "covid_era": true
+    },
+    {
+      "ticker": "AVXL",
+      "year": 2020,
+      "gain_percent": 694,
+      "days_to_peak": 164,
+      "covid_era": true
+    },
+    {
+      "ticker": "AYTU",
+      "year": 2020,
+      "gain_percent": 759,
+      "days_to_peak": 1,
+      "covid_era": true
+    },
+    {
+      "ticker": "BB",
+      "year": 2020,
+      "gain_percent": 551,
+      "days_to_peak": 176,
+      "covid_era": true
+    },
+    {
+      "ticker": "AACG",
+      "year": 2021,
+      "gain_percent": 1574,
+      "days_to_peak": 22,
+      "covid_era": true
+    },
+    {
+      "ticker": "AAME",
+      "year": 2021,
+      "gain_percent": 646,
+      "days_to_peak": 23,
+      "covid_era": true
+    },
+    {
+      "ticker": "ABTS",
+      "year": 2021,
+      "gain_percent": 647,
+      "days_to_peak": 53,
+      "covid_era": true
+    },
+    {
+      "ticker": "AEHR",
+      "year": 2021,
+      "gain_percent": 698,
+      "days_to_peak": 92,
+      "covid_era": true
+    },
+    {
+      "ticker": "AEMD",
+      "year": 2021,
+      "gain_percent": 711,
+      "days_to_peak": 18,
+      "covid_era": true
+    },
+    {
+      "ticker": "ALF",
+      "year": 2021,
+      "gain_percent": 633,
+      "days_to_peak": 19,
+      "covid_era": true
+    },
+    {
+      "ticker": "AMC",
+      "year": 2021,
+      "gain_percent": 1075,
+      "days_to_peak": 79,
+      "covid_era": true
+    },
+    {
+      "ticker": "AMR",
+      "year": 2021,
+      "gain_percent": 505,
+      "days_to_peak": 157,
+      "covid_era": true
+    },
+    {
+      "ticker": "AMTX",
+      "year": 2021,
+      "gain_percent": 604,
+      "days_to_peak": 39,
+      "covid_era": true
+    },
+    {
+      "ticker": "ANVS",
+      "year": 2021,
+      "gain_percent": 1102,
+      "days_to_peak": 96,
+      "covid_era": true
+    },
+    {
+      "ticker": "ANY",
+      "year": 2021,
+      "gain_percent": 804,
+      "days_to_peak": 71,
+      "covid_era": true
+    },
+    {
+      "ticker": "ARQQW",
+      "year": 2021,
+      "gain_percent": 561,
+      "days_to_peak": 54,
+      "covid_era": true
+    },
+    {
+      "ticker": "ATER",
+      "year": 2021,
+      "gain_percent": 513,
+      "days_to_peak": 15,
+      "covid_era": true
+    },
+    {
+      "ticker": "ATLX",
+      "year": 2021,
+      "gain_percent": 3400,
+      "days_to_peak": 13,
+      "covid_era": true
+    },
+    {
+      "ticker": "ATOS",
+      "year": 2021,
+      "gain_percent": 594,
+      "days_to_peak": 104,
+      "covid_era": true
+    },
+    {
+      "ticker": "AUUDW",
+      "year": 2021,
+      "gain_percent": 901,
+      "days_to_peak": 16,
+      "covid_era": true
+    },
+    {
+      "ticker": "AVXL",
+      "year": 2021,
+      "gain_percent": 509,
+      "days_to_peak": 120,
+      "covid_era": true
+    }
+  ],
+  "metadata": {
+    "note": "Archive only - not used for pattern discovery"
+  }
+}

@@ -1,0 +1,1050 @@
+{
+  "scan_info": {
+    "scan_date": "2025-11-01",
+    "scan_period_start": "2014-01-01",
+    "scan_period_end": "2024-12-31",
+    "criteria": "500%+ gain in any 180-day window",
+    "data_sources": [
+      "Polygon API",
+      "Yahoo Finance"
+    ],
+    "total_stocks_scanned": 11000,
+    "total_explosive_stocks_found": 244,
+    "data_errors": 5043,
+    "api_calls_made": 11066,
+    "scan_complete": true,
+    "scan_method": "GitHub Actions - Full 10-year historical scan"
+  },
+  "filter_info": {
+    "filter_date": "2025-11-01",
+    "filter_applied": "COVID-era exclusion (2020-2021)",
+    "original_count": 239,
+    "clean_count": 170,
+    "excluded_count": 69
+  },
+  "stocks": [
+    {
+      "ticker": "ABVC",
+      "year": 2014,
+      "gain_percent": 900,
+      "days_to_peak": 28
+    },
+    {
+      "ticker": "AEMD",
+      "year": 2014,
+      "gain_percent": 620,
+      "days_to_peak": 47
+    },
+    {
+      "ticker": "AMTX",
+      "year": 2014,
+      "gain_percent": 515,
+      "days_to_peak": 113
+    },
+    {
+      "ticker": "ASTH",
+      "year": 2014,
+      "gain_percent": 1011,
+      "days_to_peak": 1
+    },
+    {
+      "ticker": "ATON",
+      "year": 2014,
+      "gain_percent": 1462,
+      "days_to_peak": 1
+    },
+    {
+      "ticker": "ATRA",
+      "year": 2014,
+      "gain_percent": 502,
+      "days_to_peak": 128
+    },
+    {
+      "ticker": "ABVC",
+      "year": 2015,
+      "gain_percent": 416567,
+      "days_to_peak": 24
+    },
+    {
+      "ticker": "AEMD",
+      "year": 2015,
+      "gain_percent": 620,
+      "days_to_peak": 47
+    },
+    {
+      "ticker": "AMTX",
+      "year": 2015,
+      "gain_percent": 515,
+      "days_to_peak": 113
+    },
+    {
+      "ticker": "ASTH",
+      "year": 2015,
+      "gain_percent": 1011,
+      "days_to_peak": 1
+    },
+    {
+      "ticker": "AYTU",
+      "year": 2015,
+      "gain_percent": 1150,
+      "days_to_peak": 46
+    },
+    {
+      "ticker": "AAOI",
+      "year": 2016,
+      "gain_percent": 510,
+      "days_to_peak": 174
+    },
+    {
+      "ticker": "ABAT",
+      "year": 2016,
+      "gain_percent": 500,
+      "days_to_peak": 8
+    },
+    {
+      "ticker": "ACB",
+      "year": 2016,
+      "gain_percent": 795,
+      "days_to_peak": 86
+    },
+    {
+      "ticker": "ACFN",
+      "year": 2016,
+      "gain_percent": 512,
+      "days_to_peak": 69
+    },
+    {
+      "ticker": "AG",
+      "year": 2016,
+      "gain_percent": 525,
+      "days_to_peak": 117
+    },
+    {
+      "ticker": "AMPY",
+      "year": 2016,
+      "gain_percent": 49900,
+      "days_to_peak": 10
+    },
+    {
+      "ticker": "AREN",
+      "year": 2016,
+      "gain_percent": 700,
+      "days_to_peak": 122
+    },
+    {
+      "ticker": "ASTH",
+      "year": 2016,
+      "gain_percent": 500,
+      "days_to_peak": 17
+    },
+    {
+      "ticker": "AREC",
+      "year": 2017,
+      "gain_percent": 3900,
+      "days_to_peak": 134
+    },
+    {
+      "ticker": "ATLX",
+      "year": 2017,
+      "gain_percent": 800,
+      "days_to_peak": 34
+    },
+    {
+      "ticker": "AVTX",
+      "year": 2017,
+      "gain_percent": 662,
+      "days_to_peak": 137
+    },
+    {
+      "ticker": "AXON",
+      "year": 2017,
+      "gain_percent": 528,
+      "days_to_peak": 32
+    },
+    {
+      "ticker": "AACG",
+      "year": 2018,
+      "gain_percent": 651,
+      "days_to_peak": 41
+    },
+    {
+      "ticker": "ABAT",
+      "year": 2018,
+      "gain_percent": 577,
+      "days_to_peak": 33
+    },
+    {
+      "ticker": "ABTC",
+      "year": 2018,
+      "gain_percent": 631,
+      "days_to_peak": 149
+    },
+    {
+      "ticker": "ABVC",
+      "year": 2018,
+      "gain_percent": 1340,
+      "days_to_peak": 8
+    },
+    {
+      "ticker": "ADIL",
+      "year": 2018,
+      "gain_percent": 643,
+      "days_to_peak": 41
+    },
+    {
+      "ticker": "AGMH",
+      "year": 2018,
+      "gain_percent": 568,
+      "days_to_peak": 113
+    },
+    {
+      "ticker": "ALBT",
+      "year": 2018,
+      "gain_percent": 612,
+      "days_to_peak": 175
+    },
+    {
+      "ticker": "ALT",
+      "year": 2018,
+      "gain_percent": 749,
+      "days_to_peak": 2
+    },
+    {
+      "ticker": "AMRN",
+      "year": 2018,
+      "gain_percent": 577,
+      "days_to_peak": 46
+    },
+    {
+      "ticker": "AMTX",
+      "year": 2018,
+      "gain_percent": 501,
+      "days_to_peak": 22
+    },
+    {
+      "ticker": "ARWR",
+      "year": 2018,
+      "gain_percent": 502,
+      "days_to_peak": 171
+    },
+    {
+      "ticker": "ATOS",
+      "year": 2018,
+      "gain_percent": 706,
+      "days_to_peak": 52
+    },
+    {
+      "ticker": "AWX",
+      "year": 2018,
+      "gain_percent": 910,
+      "days_to_peak": 110
+    },
+    {
+      "ticker": "AXON",
+      "year": 2018,
+      "gain_percent": 528,
+      "days_to_peak": 32
+    },
+    {
+      "ticker": "AXSM",
+      "year": 2018,
+      "gain_percent": 612,
+      "days_to_peak": 55
+    },
+    {
+      "ticker": "ABAT",
+      "year": 2019,
+      "gain_percent": 548,
+      "days_to_peak": 27
+    },
+    {
+      "ticker": "ABTC",
+      "year": 2019,
+      "gain_percent": 624,
+      "days_to_peak": 106
+    },
+    {
+      "ticker": "ABVC",
+      "year": 2019,
+      "gain_percent": 1340,
+      "days_to_peak": 8
+    },
+    {
+      "ticker": "AEHL",
+      "year": 2019,
+      "gain_percent": 556,
+      "days_to_peak": 42
+    },
+    {
+      "ticker": "AIHS",
+      "year": 2019,
+      "gain_percent": 515,
+      "days_to_peak": 18
+    },
+    {
+      "ticker": "AIM",
+      "year": 2019,
+      "gain_percent": 1126,
+      "days_to_peak": 100
+    },
+    {
+      "ticker": "ALT",
+      "year": 2019,
+      "gain_percent": 598,
+      "days_to_peak": 128
+    },
+    {
+      "ticker": "ANY",
+      "year": 2019,
+      "gain_percent": 552,
+      "days_to_peak": 54
+    },
+    {
+      "ticker": "APLT",
+      "year": 2019,
+      "gain_percent": 556,
+      "days_to_peak": 133
+    },
+    {
+      "ticker": "APT",
+      "year": 2019,
+      "gain_percent": 804,
+      "days_to_peak": 26
+    },
+    {
+      "ticker": "AR",
+      "year": 2019,
+      "gain_percent": 507,
+      "days_to_peak": 46
+    },
+    {
+      "ticker": "ARCT",
+      "year": 2019,
+      "gain_percent": 576,
+      "days_to_peak": 46
+    },
+    {
+      "ticker": "ASTC",
+      "year": 2019,
+      "gain_percent": 611,
+      "days_to_peak": 3
+    },
+    {
+      "ticker": "ATLX",
+      "year": 2019,
+      "gain_percent": 500,
+      "days_to_peak": 133
+    },
+    {
+      "ticker": "ATON",
+      "year": 2019,
+      "gain_percent": 12400,
+      "days_to_peak": 18
+    },
+    {
+      "ticker": "ATOS",
+      "year": 2019,
+      "gain_percent": 566,
+      "days_to_peak": 48
+    },
+    {
+      "ticker": "AVDL",
+      "year": 2019,
+      "gain_percent": 603,
+      "days_to_peak": 176
+    },
+    {
+      "ticker": "AXSM",
+      "year": 2019,
+      "gain_percent": 599,
+      "days_to_peak": 170
+    },
+    {
+      "ticker": "AYTU",
+      "year": 2019,
+      "gain_percent": 759,
+      "days_to_peak": 1
+    },
+    {
+      "ticker": "ACIC",
+      "year": 2022,
+      "gain_percent": 742,
+      "days_to_peak": 40
+    },
+    {
+      "ticker": "ACON",
+      "year": 2022,
+      "gain_percent": 508,
+      "days_to_peak": 80
+    },
+    {
+      "ticker": "ACONW",
+      "year": 2022,
+      "gain_percent": 796,
+      "days_to_peak": 7
+    },
+    {
+      "ticker": "AIMD",
+      "year": 2022,
+      "gain_percent": 682,
+      "days_to_peak": 36
+    },
+    {
+      "ticker": "AKBA",
+      "year": 2022,
+      "gain_percent": 552,
+      "days_to_peak": 119
+    },
+    {
+      "ticker": "AKRO",
+      "year": 2022,
+      "gain_percent": 542,
+      "days_to_peak": 144
+    },
+    {
+      "ticker": "ALVOW",
+      "year": 2022,
+      "gain_percent": 522,
+      "days_to_peak": 59
+    },
+    {
+      "ticker": "AMLX",
+      "year": 2022,
+      "gain_percent": 500,
+      "days_to_peak": 176
+    },
+    {
+      "ticker": "AMTD",
+      "year": 2022,
+      "gain_percent": 1165,
+      "days_to_peak": 15
+    },
+    {
+      "ticker": "APLD",
+      "year": 2022,
+      "gain_percent": 556,
+      "days_to_peak": 121
+    },
+    {
+      "ticker": "ARBK",
+      "year": 2022,
+      "gain_percent": 736,
+      "days_to_peak": 32
+    },
+    {
+      "ticker": "ARBKL",
+      "year": 2022,
+      "gain_percent": 637,
+      "days_to_peak": 15
+    },
+    {
+      "ticker": "ARDX",
+      "year": 2022,
+      "gain_percent": 595,
+      "days_to_peak": 170
+    },
+    {
+      "ticker": "AREBW",
+      "year": 2022,
+      "gain_percent": 600,
+      "days_to_peak": 7
+    },
+    {
+      "ticker": "ATLN",
+      "year": 2022,
+      "gain_percent": 838,
+      "days_to_peak": 29
+    },
+    {
+      "ticker": "ATLX",
+      "year": 2022,
+      "gain_percent": 560,
+      "days_to_peak": 60
+    },
+    {
+      "ticker": "ATXS",
+      "year": 2022,
+      "gain_percent": 528,
+      "days_to_peak": 131
+    },
+    {
+      "ticker": "AVDL",
+      "year": 2022,
+      "gain_percent": 515,
+      "days_to_peak": 48
+    },
+    {
+      "ticker": "BAOS",
+      "year": 2022,
+      "gain_percent": 633,
+      "days_to_peak": 16
+    },
+    {
+      "ticker": "BBAI",
+      "year": 2022,
+      "gain_percent": 689,
+      "days_to_peak": 30
+    },
+    {
+      "ticker": "AAOI",
+      "year": 2023,
+      "gain_percent": 586,
+      "days_to_peak": 147
+    },
+    {
+      "ticker": "ACONW",
+      "year": 2023,
+      "gain_percent": 942,
+      "days_to_peak": 93
+    },
+    {
+      "ticker": "ACXP",
+      "year": 2023,
+      "gain_percent": 589,
+      "days_to_peak": 7
+    },
+    {
+      "ticker": "ADCT",
+      "year": 2023,
+      "gain_percent": 588,
+      "days_to_peak": 53
+    },
+    {
+      "ticker": "ADSEW",
+      "year": 2023,
+      "gain_percent": 718,
+      "days_to_peak": 149
+    },
+    {
+      "ticker": "ADTX",
+      "year": 2023,
+      "gain_percent": 793,
+      "days_to_peak": 3
+    },
+    {
+      "ticker": "AENTW",
+      "year": 2023,
+      "gain_percent": 652,
+      "days_to_peak": 69
+    },
+    {
+      "ticker": "AEYE",
+      "year": 2023,
+      "gain_percent": 548,
+      "days_to_peak": 140
+    },
+    {
+      "ticker": "AHG",
+      "year": 2023,
+      "gain_percent": 599,
+      "days_to_peak": 51
+    },
+    {
+      "ticker": "AIMDW",
+      "year": 2023,
+      "gain_percent": 538,
+      "days_to_peak": 13
+    },
+    {
+      "ticker": "AISP",
+      "year": 2023,
+      "gain_percent": 634,
+      "days_to_peak": 49
+    },
+    {
+      "ticker": "AKA",
+      "year": 2023,
+      "gain_percent": 690,
+      "days_to_peak": 150
+    },
+    {
+      "ticker": "AKAN",
+      "year": 2023,
+      "gain_percent": 575,
+      "days_to_peak": 3
+    },
+    {
+      "ticker": "ALAR",
+      "year": 2023,
+      "gain_percent": 592,
+      "days_to_peak": 175
+    },
+    {
+      "ticker": "ALT",
+      "year": 2023,
+      "gain_percent": 568,
+      "days_to_peak": 87
+    },
+    {
+      "ticker": "ALTS",
+      "year": 2023,
+      "gain_percent": 812,
+      "days_to_peak": 86
+    },
+    {
+      "ticker": "ALVOW",
+      "year": 2023,
+      "gain_percent": 601,
+      "days_to_peak": 106
+    },
+    {
+      "ticker": "ANGHW",
+      "year": 2023,
+      "gain_percent": 816,
+      "days_to_peak": 6
+    },
+    {
+      "ticker": "ANY",
+      "year": 2023,
+      "gain_percent": 554,
+      "days_to_peak": 18
+    },
+    {
+      "ticker": "APLD",
+      "year": 2023,
+      "gain_percent": 549,
+      "days_to_peak": 116
+    },
+    {
+      "ticker": "APLT",
+      "year": 2023,
+      "gain_percent": 645,
+      "days_to_peak": 121
+    },
+    {
+      "ticker": "APM",
+      "year": 2023,
+      "gain_percent": 1158,
+      "days_to_peak": 18
+    },
+    {
+      "ticker": "AREBW",
+      "year": 2023,
+      "gain_percent": 1038,
+      "days_to_peak": 9
+    },
+    {
+      "ticker": "ARKOW",
+      "year": 2023,
+      "gain_percent": 539,
+      "days_to_peak": 20
+    },
+    {
+      "ticker": "ARQT",
+      "year": 2023,
+      "gain_percent": 530,
+      "days_to_peak": 68
+    },
+    {
+      "ticker": "ASNS",
+      "year": 2023,
+      "gain_percent": 955,
+      "days_to_peak": 3
+    },
+    {
+      "ticker": "ASPI",
+      "year": 2023,
+      "gain_percent": 621,
+      "days_to_peak": 163
+    },
+    {
+      "ticker": "ASTS",
+      "year": 2023,
+      "gain_percent": 515,
+      "days_to_peak": 53
+    },
+    {
+      "ticker": "ATGL",
+      "year": 2023,
+      "gain_percent": 644,
+      "days_to_peak": 11
+    },
+    {
+      "ticker": "ATLX",
+      "year": 2023,
+      "gain_percent": 560,
+      "days_to_peak": 60
+    },
+    {
+      "ticker": "ATRA",
+      "year": 2023,
+      "gain_percent": 588,
+      "days_to_peak": 56
+    },
+    {
+      "ticker": "AUUDW",
+      "year": 2023,
+      "gain_percent": 755,
+      "days_to_peak": 45
+    },
+    {
+      "ticker": "AVTX",
+      "year": 2023,
+      "gain_percent": 757,
+      "days_to_peak": 50
+    },
+    {
+      "ticker": "AXG",
+      "year": 2023,
+      "gain_percent": 1553,
+      "days_to_peak": 23
+    },
+    {
+      "ticker": "BAOS",
+      "year": 2023,
+      "gain_percent": 633,
+      "days_to_peak": 16
+    },
+    {
+      "ticker": "BBAI",
+      "year": 2023,
+      "gain_percent": 676,
+      "days_to_peak": 20
+    },
+    {
+      "ticker": "AAOI",
+      "year": 2024,
+      "gain_percent": 527,
+      "days_to_peak": 80
+    },
+    {
+      "ticker": "ABTC",
+      "year": 2024,
+      "gain_percent": 2070,
+      "days_to_peak": 23
+    },
+    {
+      "ticker": "ABTS",
+      "year": 2024,
+      "gain_percent": 527,
+      "days_to_peak": 23
+    },
+    {
+      "ticker": "ABVC",
+      "year": 2024,
+      "gain_percent": 520,
+      "days_to_peak": 92
+    },
+    {
+      "ticker": "ABVE",
+      "year": 2024,
+      "gain_percent": 833,
+      "days_to_peak": 42
+    },
+    {
+      "ticker": "ABVEW",
+      "year": 2024,
+      "gain_percent": 606,
+      "days_to_peak": 136
+    },
+    {
+      "ticker": "ACONW",
+      "year": 2024,
+      "gain_percent": 1123,
+      "days_to_peak": 18
+    },
+    {
+      "ticker": "AENT",
+      "year": 2024,
+      "gain_percent": 598,
+      "days_to_peak": 102
+    },
+    {
+      "ticker": "AENTW",
+      "year": 2024,
+      "gain_percent": 1221,
+      "days_to_peak": 101
+    },
+    {
+      "ticker": "AERTW",
+      "year": 2024,
+      "gain_percent": 550,
+      "days_to_peak": 44
+    },
+    {
+      "ticker": "AEVA",
+      "year": 2024,
+      "gain_percent": 646,
+      "days_to_peak": 172
+    },
+    {
+      "ticker": "AEYE",
+      "year": 2024,
+      "gain_percent": 537,
+      "days_to_peak": 136
+    },
+    {
+      "ticker": "AIFF",
+      "year": 2024,
+      "gain_percent": 602,
+      "days_to_peak": 34
+    },
+    {
+      "ticker": "AIIO",
+      "year": 2024,
+      "gain_percent": 828,
+      "days_to_peak": 20
+    },
+    {
+      "ticker": "AIM",
+      "year": 2024,
+      "gain_percent": 15632,
+      "days_to_peak": 1
+    },
+    {
+      "ticker": "AIMDW",
+      "year": 2024,
+      "gain_percent": 823,
+      "days_to_peak": 74
+    },
+    {
+      "ticker": "AIRE",
+      "year": 2024,
+      "gain_percent": 647,
+      "days_to_peak": 172
+    },
+    {
+      "ticker": "AISP",
+      "year": 2024,
+      "gain_percent": 634,
+      "days_to_peak": 49
+    },
+    {
+      "ticker": "AISPW",
+      "year": 2024,
+      "gain_percent": 1602,
+      "days_to_peak": 21
+    },
+    {
+      "ticker": "AKAN",
+      "year": 2024,
+      "gain_percent": 575,
+      "days_to_peak": 3
+    },
+    {
+      "ticker": "ALFUW",
+      "year": 2024,
+      "gain_percent": 573,
+      "days_to_peak": 135
+    },
+    {
+      "ticker": "ALGS",
+      "year": 2024,
+      "gain_percent": 524,
+      "days_to_peak": 62
+    },
+    {
+      "ticker": "ALMU",
+      "year": 2024,
+      "gain_percent": 614,
+      "days_to_peak": 143
+    },
+    {
+      "ticker": "ALTS",
+      "year": 2024,
+      "gain_percent": 526,
+      "days_to_peak": 166
+    },
+    {
+      "ticker": "ALZN",
+      "year": 2024,
+      "gain_percent": 668,
+      "days_to_peak": 2
+    },
+    {
+      "ticker": "AMODW",
+      "year": 2024,
+      "gain_percent": 601,
+      "days_to_peak": 2
+    },
+    {
+      "ticker": "AMPG",
+      "year": 2024,
+      "gain_percent": 644,
+      "days_to_peak": 55
+    },
+    {
+      "ticker": "AMPGW",
+      "year": 2024,
+      "gain_percent": 2396,
+      "days_to_peak": 5
+    },
+    {
+      "ticker": "ANSCW",
+      "year": 2024,
+      "gain_percent": 809,
+      "days_to_peak": 87
+    },
+    {
+      "ticker": "APLMW",
+      "year": 2024,
+      "gain_percent": 714,
+      "days_to_peak": 127
+    },
+    {
+      "ticker": "APM",
+      "year": 2024,
+      "gain_percent": 1272,
+      "days_to_peak": 29
+    },
+    {
+      "ticker": "APP",
+      "year": 2024,
+      "gain_percent": 602,
+      "days_to_peak": 127
+    },
+    {
+      "ticker": "APPS",
+      "year": 2024,
+      "gain_percent": 542,
+      "days_to_peak": 142
+    },
+    {
+      "ticker": "ARBEW",
+      "year": 2024,
+      "gain_percent": 664,
+      "days_to_peak": 141
+    },
+    {
+      "ticker": "AREB",
+      "year": 2024,
+      "gain_percent": 1371,
+      "days_to_peak": 3
+    },
+    {
+      "ticker": "AREBW",
+      "year": 2024,
+      "gain_percent": 833,
+      "days_to_peak": 172
+    },
+    {
+      "ticker": "AREN",
+      "year": 2024,
+      "gain_percent": 675,
+      "days_to_peak": 109
+    },
+    {
+      "ticker": "ARKOW",
+      "year": 2024,
+      "gain_percent": 1151,
+      "days_to_peak": 43
+    },
+    {
+      "ticker": "ARQQ",
+      "year": 2024,
+      "gain_percent": 758,
+      "days_to_peak": 39
+    },
+    {
+      "ticker": "ARQQW",
+      "year": 2024,
+      "gain_percent": 1173,
+      "days_to_peak": 44
+    },
+    {
+      "ticker": "ASNS",
+      "year": 2024,
+      "gain_percent": 955,
+      "days_to_peak": 3
+    },
+    {
+      "ticker": "ASST",
+      "year": 2024,
+      "gain_percent": 1447,
+      "days_to_peak": 24
+    },
+    {
+      "ticker": "ASTS",
+      "year": 2024,
+      "gain_percent": 733,
+      "days_to_peak": 62
+    },
+    {
+      "ticker": "ATCH",
+      "year": 2024,
+      "gain_percent": 514,
+      "days_to_peak": 3
+    },
+    {
+      "ticker": "ATGL",
+      "year": 2024,
+      "gain_percent": 929,
+      "days_to_peak": 94
+    },
+    {
+      "ticker": "ATMVR",
+      "year": 2024,
+      "gain_percent": 567,
+      "days_to_peak": 150
+    },
+    {
+      "ticker": "ATOM",
+      "year": 2024,
+      "gain_percent": 587,
+      "days_to_peak": 71
+    },
+    {
+      "ticker": "ATON",
+      "year": 2024,
+      "gain_percent": 965,
+      "days_to_peak": 24
+    },
+    {
+      "ticker": "AUROW",
+      "year": 2024,
+      "gain_percent": 794,
+      "days_to_peak": 110
+    },
+    {
+      "ticker": "AUUDW",
+      "year": 2024,
+      "gain_percent": 594,
+      "days_to_peak": 36
+    },
+    {
+      "ticker": "AVTX",
+      "year": 2024,
+      "gain_percent": 757,
+      "days_to_peak": 50
+    },
+    {
+      "ticker": "AXG",
+      "year": 2024,
+      "gain_percent": 1553,
+      "days_to_peak": 23
+    },
+    {
+      "ticker": "AZ",
+      "year": 2024,
+      "gain_percent": 547,
+      "days_to_peak": 94
+    },
+    {
+      "ticker": "AZTR",
+      "year": 2024,
+      "gain_percent": 641,
+      "days_to_peak": 1
+    },
+    {
+      "ticker": "BAERW",
+      "year": 2024,
+      "gain_percent": 867,
+      "days_to_peak": 81
+    },
+    {
+      "ticker": "BAOS",
+      "year": 2024,
+      "gain_percent": 781,
+      "days_to_peak": 7
+    },
+    {
+      "ticker": "BBAI",
+      "year": 2024,
+      "gain_percent": 605,
+      "days_to_peak": 161
+    }
+  ],
+  "metadata": {
+    "note": "Pattern analysis dataset - normal market conditions only"
+  }
+}
