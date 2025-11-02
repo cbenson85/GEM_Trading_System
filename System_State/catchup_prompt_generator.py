@@ -1,388 +1,354 @@
-#!/usr/bin/env python3
-"""
-GEM Trading System - Catch-Up Prompt Auto-Generator
-Maintains a comprehensive prompt for AI context continuity
-"""
-
-import json
-import os
-from datetime import datetime
-
-class CatchUpPromptGenerator:
-    def __init__(self):
-        self.template = """# GEM Trading System - AI Catch-Up Prompt
-**Last Updated**: {timestamp}
-**System Version**: {version}
-**Current Phase**: {current_phase}
+# GEM Trading System - AI Catch-Up Prompt
+**Last Updated**: 2025-11-02 21:00:00
+**System Version**: 5.1.0-SCANNER-APPROACH
+**Current Phase**: Phase 3: Data Collection - Running Scanner for Complete Dataset
 
 ---
 
-## 🎯 CRITICAL CONTEXT
+## 🚨 CRITICAL CONTEXT FOR AI
 
 ### What You're Walking Into
-{situation_summary}
+After extensive filter evolution and enrichment attempts, we discovered the ROOT CAUSE of all issues: **CLEAN.json doesn't have complete data** (no entry_date, entry_price, peak_date, peak_price). The original scanner DOES capture all this data, but it was stripped during the COVID filter process.
 
-### Immediate Priority
-{immediate_priority}
+### The Solution
+**Re-run the scanner for 2010-2024 (excluding COVID years)** to get complete data from the start. Then enrichment/filtering becomes trivial.
 
----
-
-## 📊 SYSTEM STATUS
-
-### Current State
-- **Portfolio**: {portfolio_status}
-- **Cash Available**: {cash_available}
-- **System Stage**: {system_stage}
-- **Last Completed Phase**: {last_phase}
-- **Next Phase**: {next_phase}
-
-### Data Verification Status
-{data_verification_status}
+### Current Status
+- User is testing 2022-2024 scanner run right now
+- If successful, will run 2010-2019 next
+- Both outputs are cumulative to CLEAN.json
+- After scans: add drawdown velocity → filter → done!
 
 ---
 
-## 🗂️ FILE STRUCTURE & LOCATIONS
+## 📊 COMPLETE HISTORY & CONTEXT
 
-**Repository**: https://github.com/cbenson85/GEM_Trading_System
+### Original Problem
+Started with 200 stocks in CLEAN.json that only had:
+```json
+{
+  "ticker": "ABVC",
+  "year": 2014,
+  "gain_percent": 900,
+  "days_to_peak": 28
+}
+```
 
-### Core System Files (VERIFIED)
-{verified_files}
+**Missing:** entry_date, entry_price, peak_date, peak_price
 
-### Data Files (Location & Status)
-{data_files}
+### What We Tried (And Why It Failed)
 
-### Unverified/Archived Content
-{unverified_content}
+**Attempt 1: Enrichment Script**
+- Tried to "find" the explosive windows using Polygon API
+- Failed because we were guessing where to look
+- Only enriched 109/200 stocks (54.5%)
+- 91 stocks failed with "Could not find explosive window"
 
-### 📂 Complete GitHub File Catalog
+**Why It Failed:**
+- Without entry_date, script had to search entire years
+- Searched for exact gain match (90% tolerance)
+- Many stocks had windows outside search range
+- Data source mismatches between original scan and enrichment
 
-**Key Files for AI to Read:**
+**Attempt 2: Widened Search**
+- Changed to accept ANY 500%+ window
+- Still only 109/200 enriched
+- Same 91 stocks still failing
 
-**System State:**
-- [CURRENT_CATCHUP_PROMPT.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/System_State/CURRENT_CATCHUP_PROMPT.md) - Latest state
-- [system_state.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/System_State/system_state.json) - Current data
+**Why It Failed:**
+- Fundamental issue: guessing where windows are
+- Some stocks delisted/changed symbols
+- Polygon data gaps for old stocks
+- No way to verify we found the SAME window as original scan
 
-**Core Protocols:**
-- [GEM_v5_Master_Screening_Protocol.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Current_System/GEM_v5_Master_Screening_Protocol.md) - 7-phase screening
-- [Trading_Rules_Complete.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Current_System/Trading_Rules_Complete.md) - Operations
-- [COVID_ERA_EXCLUSION_RULE.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/COVID_ERA_EXCLUSION_RULE.md) - Critical filter
+### Filter Evolution (All Failed Due to Missing Data)
 
-**Live Data:**
-- [explosive_stocks_catalog.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/explosive_stocks_catalog.json) - Scan results
-- [refinement_history.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/refinement_history.json) - Changes log
-
-**Active Scripts:**
-- [explosive_stock_scanner.py](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/explosive_stock_scanner.py) - Scanner
-- [filter_covid_era.py](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/filter_covid_era.py) - Data filter
-- [explosive_stock_scan_workflow.yml](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/.github/workflows/explosive_stock_scan_workflow.yml) - Automation
-
-**Full Catalog:**
-- [GITHUB_FILE_CATALOG.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/GITHUB_FILE_CATALOG.md) - Complete file list with all links
-
----
-
-## 🔬 BACKTESTING METHODOLOGY
-
-### Approach
-{backtesting_approach}
-
-### Current Progress
-{backtesting_progress}
-
-### Data Sources
-{data_sources}
+1. **V1.0**: 90% retention, 30 days → All failed
+2. **V2.0**: 80% retention, 21 days from peak → 17/200 (8.5%)
+3. **V3.0**: 120-day window, speed-adjusted → 0/200 (all failed - no enriched data)
+4. **V4.0**: Drawdown velocity + realistic thresholds → Ready but needs complete data
 
 ---
 
-## 📈 DISCOVERED PATTERNS
+## ✅ THE ACTUAL SOLUTION: RE-RUN SCANNER
 
-### Verified Correlations
-{verified_patterns}
+### Why This Works
 
-### Current Scoring Criteria
-{scoring_criteria}
+The **explosive_stock_scanner.py** already captures EVERYTHING:
+```python
+stock_data = {
+    'ticker': ticker,
+    'year_discovered': year,
+    'entry_date': best_window['entry_date'],      # ✅ Has it!
+    'entry_price': best_window['entry_price'],    # ✅ Has it!
+    'peak_date': best_window['peak_date'],        # ✅ Has it!
+    'peak_price': best_window['peak_price'],      # ✅ Has it!
+    'gain_percent': best_window['gain_percent'],  # ✅ Has it!
+    'days_to_peak': best_window['days_to_peak'],  # ✅ Has it!
+    'data_source': best_window['data_source']
+}
+```
 
-### Refinement History
-{refinement_history}
+**The data was there all along!** It just got stripped somewhere in the pipeline.
+
+### The Plan
+
+**Step 1: Run Scanner (IN PROGRESS)**
+- Test: 2022-2024 (user running now)
+- Full: 2010-2019 (after test succeeds)
+- Skip: 2020-2021 (COVID era)
+- Output: CLEAN.json with COMPLETE data
+
+**Step 2: Add Drawdown Velocity**
+- Run enrichment to add velocity analysis only
+- No window finding needed (already have dates/prices)
+- Just calculate max single-day drops
+
+**Step 3: Run Realistic Filter V4.0**
+- Test tradeability (35% trailing stop)
+- Test profitability (200%+ gain)
+- Expected: 90-100 tradeable stocks
+
+**Step 4: Begin Phase 3**
+- Pre-catalyst data collection
+- Pattern discovery
+- Build screening criteria
 
 ---
 
-## 🎯 DECISIONS MADE
+## 🎯 SCANNER DETAILS
 
-### Key Decisions
-{key_decisions}
+### File: explosive_stock_scanner.py
 
-### Rules Established
-{rules_established}
+**Location:** `/explosive_stock_scanner.py` (root)
+
+**How It Works:**
+1. Gets stock universe for each year from Polygon
+2. Fetches historical data (Polygon primary, Yahoo backup)
+3. Scans every possible 180-day window for 500%+ gains
+4. Captures best window with complete data
+5. Outputs to explosive_stocks_catalog.json
+6. filter_covid_era.py processes it → CLEAN.json
+
+**Environment Variables:**
+- `START_YEAR`: Starting year (e.g., 2010)
+- `END_YEAR`: Ending year (e.g., 2019)
+- `SCAN_MODE`: 'full' or 'test'
+
+**Current Test Run:**
+```bash
+START_YEAR=2022
+END_YEAR=2024
+SCAN_MODE=full
+```
+
+**Next Full Run:**
+```bash
+START_YEAR=2010
+END_YEAR=2019
+SCAN_MODE=full
+```
+
+### Output Format
+
+Scanner outputs to `explosive_stocks_catalog.json`:
+```json
+{
+  "scan_info": { ... },
+  "stocks": [
+    {
+      "ticker": "EXAMPLE",
+      "year_discovered": 2022,
+      "entry_date": "2022-01-15",
+      "entry_price": 10.50,
+      "peak_date": "2022-06-20",
+      "peak_price": 63.00,
+      "gain_percent": 500,
+      "days_to_peak": 156,
+      "data_source": "Polygon API"
+    }
+  ]
+}
+```
+
+Then `filter_covid_era.py` removes 2020-2021 stocks and outputs to CLEAN.json (cumulative).
 
 ---
 
-## 📝 WHAT NEEDS TO HAPPEN NEXT
+## 🔧 DRAWDOWN VELOCITY SYSTEM
 
-### Immediate Next Steps
-{next_steps}
+After scanner completes, we need to add drawdown velocity analysis:
 
-### Blockers/Questions
-{blockers}
+### Purpose
+Ensure we can actually EXIT positions (35% trailing stop must fill).
+
+### What It Tests
+- Max single-day drop during explosive window
+- Multi-day drawdown velocity
+- Tradeability classification
+
+### Classifications
+- **IDEAL**: 0% max drop → Plenty of time to exit
+- **TRADEABLE**: <25% max drop → 35% stop should fill
+- **RISKY**: 25-35% max drop → Might gap through
+- **UNTRADEABLE**: >35% max drop → Would gap past stop
+
+### Script
+`enrich_stock_data.py` - Modified to ONLY add drawdown analysis (not find windows)
+
+---
+
+## 📋 REALISTIC FILTER V4.0
+
+### File: filter_sustainability.py
+
+### Criteria
+1. **TRADEABLE**: Max single-day drop <35%
+2. **PROFITABLE**: Captured 200%+ gain
+3. **REALISTIC**: Within 120 days OR sustained growth
+
+### What Gets Filtered
+- ❌ Stocks with >35% single-day drops (can't exit)
+- ❌ Stocks with <200% gains (not profitable enough)
+
+### Expected Results
+- 90-100 stocks pass (45-50% of ~200)
+- Filters only obvious untradeable situations
+- Realistic criteria based on actual trading
+
+---
+
+## 🗂️ FILE STATUS
+
+### Core Scripts
+- `/explosive_stock_scanner.py` - ✅ READY (has all data fields)
+- `/filter_covid_era.py` - ✅ READY (makes output cumulative)
+- `/enrich_stock_data.py` - ✅ READY (adds drawdown velocity only)
+- `/filter_sustainability.py` - ✅ READY (V4.0 realistic filter)
+
+### Data Files
+- `/Verified_Backtest_Data/explosive_stocks_CLEAN.json` - PENDING (being rebuilt)
+- `/Verified_Backtest_Data/enrichment_log.json` - Will track drawdown additions
+- `/Verified_Backtest_Data/explosive_stocks_UNTRADEABLE.json` - Filter output
+
+### Workflows
+- `/.github/workflows/explosive_stock_scan_workflow.yml` - Scanner workflow
+- `/.github/workflows/enrich_stock_data_workflow.yml` - Enrichment workflow
+- `/.github/workflows/sustainability_filter_workflow.yml` - Filter workflow
+
+---
+
+## 📊 EXPECTED TIMELINE & RESULTS
+
+### Scanner Runs
+**Test (2022-2024):**
+- Time: ~30-45 minutes
+- Stocks: ~80-100 expected
+- Purpose: Verify data structure
+
+**Full (2010-2019):**
+- Time: 2-4 hours
+- Stocks: ~120-150 expected
+- Purpose: Complete pre-COVID dataset
+
+**Total After Both:**
+- ~200-250 stocks with COMPLETE data
+- All have entry_date, entry_price, peak_date, peak_price
+- Ready for enrichment/filtering
+
+### After Enrichment
+- Add drawdown velocity to all stocks (~15-20 min)
+- No stocks fail (already have all price data)
+- 100% enrichment success rate
+
+### After Filtering
+- 90-100 tradeable stocks (45-50%)
+- 100-110 filtered out (gaps/low gains)
+- Ready for Phase 3 analysis
+
+---
+
+## 🎯 KEY LEARNINGS
+
+### What Went Wrong
+1. ❌ CLEAN.json had incomplete data from the start
+2. ❌ Tried to "fix" with enrichment (impossible without entry dates)
+3. ❌ Multiple filter iterations failed due to missing data
+4. ❌ Spent hours on complex solutions to wrong problem
+
+### The Real Issue
+**Data was captured correctly by scanner but stripped during processing.**
+
+### The Fix
+**Re-run scanner with complete output pipeline.**
+
+### Why This Works
+- Scanner finds actual explosive windows (not guessing)
+- Captures complete data at source
+- No enrichment guesswork needed
+- Just add velocity analysis and filter
+
+---
+
+## 🚀 IMMEDIATE NEXT STEPS
+
+### Right Now (User Testing)
+1. ✅ User running 2022-2024 scanner
+2. ⏳ Wait for completion (~30-45 min)
+3. ⏳ Verify CLEAN.json has complete data fields
+4. ⏳ Check entry_date, entry_price, peak_date, peak_price
+
+### If Test Succeeds
+1. Run 2010-2019 scanner (2-4 hours)
+2. Both runs will cumulatively populate CLEAN.json
+3. Run enrichment (add drawdown velocity only)
+4. Run realistic filter V4.0
+5. Get 90-100 tradeable stocks
+6. Begin Phase 3 pre-catalyst analysis
+
+### If Test Fails
+1. Debug scanner output format
+2. Check filter_covid_era.py processing
+3. Ensure cumulative append works correctly
+4. Fix and re-run
+
+---
+
+## 📝 CRITICAL REMINDERS
+
+1. **SCANNER HAS THE DATA** - Don't try to enrich/guess windows
+2. **2010-2024 RANGE** - Excluding COVID 2020-2021
+3. **CUMULATIVE OUTPUT** - Each scan appends to CLEAN.json
+4. **35% TRAILING STOP** - Trading rule for exit-ability
+5. **DRAWDOWN VELOCITY** - Must be able to fill stop losses
+6. **NO VELOCITY = IDEAL** - Stable moves are best
+7. **REALISTIC THRESHOLDS** - 200%+ gain, <35% gap
+8. **FILE VERIFICATION** - Always check data structure after scans
+9. **PAIRED UPDATES** - Update catch-up + system_state.json together
 
 ---
 
 ## 🔗 IMPORTANT LINKS
 
-- **GitHub Repo**: https://github.com/cbenson85/GEM_Trading_System
-- **Polygon API**: Developer tier (key: pvv6DNmKAoxojCc0B5HOaji6I_k1egv0)
-- **Data Storage**: {data_storage_location}
+**Repository:** https://github.com/cbenson85/GEM_Trading_System
+
+**API:**
+- Polygon Developer tier (unlimited requests)
+- Key: pvv6DNmKAoxojCc0B5HOaji6I_k1egv0
+
+**Scanner Workflow:**
+https://github.com/cbenson85/GEM_Trading_System/actions
 
 ---
 
-## 💾 PROGRESS LOG
+## ⚠️ WHAT TO TELL NEW AI
 
-{progress_log}
-
----
-
-## ⚠️ CRITICAL REMINDERS
-
-1. **NO FABRICATION**: All data must be verified. If unsure, say so immediately.
-2. **FALSE MISS PRINCIPLE**: When backtesting, check discarded stocks for explosive growth
-3. **USER DOES COPY/PASTE ONLY**: All automation, no manual data entry for user
-4. **STORE EVERYTHING**: All backtest data, decisions, refinements must be saved
-5. **10-YEAR VALIDATION**: System must work consistently across 10 years before live use
-
----
-
-## 🚀 HOW TO CONTINUE
-
-1. Read this entire prompt
-2. Ask clarifying questions if anything is unclear
-3. Confirm you understand current state and next phase
-4. Wait for user approval before proceeding
-5. Update this prompt after each phase completion
+"The enrichment approach failed because CLEAN.json lacked entry dates. We're re-running the scanner (which captures everything) for 2010-2024. User is testing 2022-2024 now. If successful, run 2010-2019 next. Both outputs are cumulative to CLEAN.json. After scans complete: add drawdown velocity → run filter V4.0 → get tradeable stocks → begin Phase 3."
 
 ---
 
 **END OF CATCH-UP PROMPT**
-Generated by: GEM Catch-Up Prompt System v1.0
-"""
-        
-        self.state_file = "system_state.json"
-        self.load_state()
-    
-    def load_state(self):
-        """Load current system state"""
-        if os.path.exists(self.state_file):
-            with open(self.state_file, 'r') as f:
-                self.state = json.load(f)
-        else:
-            # Initialize default state
-            self.state = {
-                "version": "5.0.1-REBUILD",
-                "current_phase": "Phase 2: System Requirements & Data Infrastructure",
-                "situation_summary": "System being rebuilt from ground up. Previous model fabricated backtest data. Starting fresh with verified data only.",
-                "immediate_priority": "Build catch-up prompt system, then create data infrastructure for verified backtesting",
-                "portfolio_status": "CLEARED - Starting fresh",
-                "cash_available": "$10,000 (reset)",
-                "system_stage": "Pre-Development - Planning & Infrastructure",
-                "last_phase": "Phase 1: Discovery & Documentation Audit - COMPLETE",
-                "next_phase": "Phase 2: System Requirements & Data Infrastructure",
-                "data_verification_status": """
-- Current Prices: ✅ VERIFIED (Polygon API)
-- Volume Data: ✅ VERIFIED (Polygon API)
-- Float Data: ⚠️ PARTIAL (Polygon API - not all stocks)
-- Backtest Results: ❌ UNVERIFIED (marked for removal)
-- Catalyst Data: ❌ NOT YET IMPLEMENTED
-- Historical Analysis: ❌ NOT YET STARTED
-                """,
-                "verified_files": """
-- `/Current_System/GEM_v5_Master_Screening_Protocol.md` - Core screening rules
-- `/Current_System/Trading_Rules_Complete.md` - Trading operations guide
-- `/Polygon_Integration/daily_screener.py` - Working Polygon integration
-- `/Daily_Operations/CURRENT_UPDATE.md` - Daily update template
-                """,
-                "data_files": """
-- `/Verified_Backtest_Data/` - TO BE CREATED
-- `/Verified_Backtest_Data/explosive_stocks_catalog.json` - TO BE CREATED
-- `/Verified_Backtest_Data/pre_catalyst_analysis/` - TO BE CREATED
-- `/Verified_Backtest_Data/backtest_runs/` - TO BE CREATED
-                """,
-                "unverified_content": """
-- `/Backtest_Results/` - MARKED UNVERIFIED, kept as framework reference
-- `/Strategy_Evolution/` - MARKED UNVERIFIED, contains unproven claims
-- All Python backtest scripts - MARKED UNVERIFIED, frameworks only
-                """,
-                "backtesting_approach": """
-1. Find stocks with 500%+ gains in any 6-month window (last 10 years)
-2. Deep dive into 180 days PRE-CATALYST for each stock
-3. Analyze: price, volume, sentiment, leadership, news, patterns
-4. Identify correlations between explosive stocks
-5. Build screener based on correlations
-6. Backtest on random historical dates
-7. Apply FALSE MISS principle to discarded stocks
-8. Track picks AND discards with full performance data
-9. Refine until consistent 10-year performance
-10. Store ALL data for future refinement
-                """,
-                "backtesting_progress": "NOT STARTED - Building infrastructure first",
-                "data_sources": """
-- Price/Volume: Polygon API (Developer tier) + Yahoo Finance backup
-- News/Sentiment: Web scraping (Google, Yahoo Finance)
-- Insider Trading: Free sources (Finviz, OpenInsider, SEC Form 4)
-- SEC Filings: SEC EDGAR (free)
-- Float/Shares: Polygon API + manual verification
-                """,
-                "verified_patterns": "NONE YET - Will be discovered during analysis phase",
-                "scoring_criteria": "CURRENT v5.0.1 CRITERIA - Will be updated based on pattern discovery",
-                "refinement_history": [],
-                "key_decisions": [
-                    "Mark all previous backtest results as UNVERIFIED",
-                    "Clear all current portfolio positions - starting fresh",
-                    "Build from verified data only - no fabrication",
-                    "Use 500%+ in 6 months as explosive stock criteria",
-                    "Analyze 180 days pre-catalyst for pattern discovery",
-                    "Store all backtest data (picks AND discards) for refinement",
-                    "Apply false miss principle in all backtests",
-                    "User only does copy/paste - full automation required",
-                    "Free data sources only (no paid APIs except Polygon)"
-                ],
-                "rules_established": [
-                    "NEVER fabricate data - verify or say you can't",
-                    "FALSE MISS CHECK - Always check discarded stocks for explosive growth",
-                    "STORE EVERYTHING - All decisions, data, refinements must be saved",
-                    "COPY/PASTE ONLY - User should never manually enter data",
-                    "10-YEAR VALIDATION - System must prove consistency before live trading"
-                ],
-                "next_steps": [
-                    "1. Create catch-up prompt system (IN PROGRESS)",
-                    "2. Build data infrastructure folders and files",
-                    "3. Create explosive stock discovery script",
-                    "4. Run 10-year scan for 500%+ stocks",
-                    "5. Build pre-catalyst analysis framework",
-                    "6. Begin deep-dive analyses"
-                ],
-                "blockers": "None currently",
-                "data_storage_location": "/Verified_Backtest_Data/ (to be created in GitHub)",
-                "progress_log": [
-                    {
-                        "date": datetime.now().strftime("%Y-%m-%d %H:%M"),
-                        "phase": "Phase 1",
-                        "action": "Completed audit of existing system",
-                        "result": "Identified fabricated backtest data, cleared portfolio, established new methodology"
-                    },
-                    {
-                        "date": datetime.now().strftime("%Y-%m-%d %H:%M"),
-                        "phase": "Phase 2",
-                        "action": "Creating catch-up prompt system",
-                        "result": "IN PROGRESS"
-                    }
-                ]
-            }
-            self.save_state()
-    
-    def save_state(self):
-        """Save current state to file"""
-        with open(self.state_file, 'w') as f:
-            json.dump(self.state, f, indent=2)
-    
-    def generate_prompt(self):
-        """Generate the catch-up prompt"""
-        # Format progress log
-        progress_log_text = ""
-        for entry in self.state.get("progress_log", []):
-            progress_log_text += f"\n**{entry['date']}** - {entry['phase']}\n"
-            progress_log_text += f"- Action: {entry['action']}\n"
-            progress_log_text += f"- Result: {entry['result']}\n"
-        
-        # Format refinement history
-        refinement_text = ""
-        if self.state.get("refinement_history"):
-            for ref in self.state["refinement_history"]:
-                refinement_text += f"\n- **{ref['date']}**: {ref['change']} (Reason: {ref['reason']})\n"
-        else:
-            refinement_text = "No refinements yet - starting fresh"
-        
-        # Format key decisions
-        decisions_text = ""
-        for i, decision in enumerate(self.state.get("key_decisions", []), 1):
-            decisions_text += f"{i}. {decision}\n"
-        
-        # Format rules
-        rules_text = ""
-        for i, rule in enumerate(self.state.get("rules_established", []), 1):
-            rules_text += f"{i}. {rule}\n"
-        
-        # Format next steps
-        steps_text = ""
-        for step in self.state.get("next_steps", []):
-            steps_text += f"{step}\n"
-        
-        # Generate prompt
-        prompt = self.template.format(
-            timestamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            version=self.state.get("version", "Unknown"),
-            current_phase=self.state.get("current_phase", "Unknown"),
-            situation_summary=self.state.get("situation_summary", ""),
-            immediate_priority=self.state.get("immediate_priority", ""),
-            portfolio_status=self.state.get("portfolio_status", ""),
-            cash_available=self.state.get("cash_available", ""),
-            system_stage=self.state.get("system_stage", ""),
-            last_phase=self.state.get("last_phase", ""),
-            next_phase=self.state.get("next_phase", ""),
-            data_verification_status=self.state.get("data_verification_status", ""),
-            verified_files=self.state.get("verified_files", ""),
-            data_files=self.state.get("data_files", ""),
-            unverified_content=self.state.get("unverified_content", ""),
-            backtesting_approach=self.state.get("backtesting_approach", ""),
-            backtesting_progress=self.state.get("backtesting_progress", ""),
-            data_sources=self.state.get("data_sources", ""),
-            verified_patterns=self.state.get("verified_patterns", ""),
-            scoring_criteria=self.state.get("scoring_criteria", ""),
-            refinement_history=refinement_text,
-            key_decisions=decisions_text,
-            rules_established=rules_text,
-            next_steps=steps_text,
-            blockers=self.state.get("blockers", "None"),
-            data_storage_location=self.state.get("data_storage_location", ""),
-            progress_log=progress_log_text
-        )
-        
-        return prompt
-    
-    def update_progress(self, phase, action, result):
-        """Add entry to progress log"""
-        self.state["progress_log"].append({
-            "date": datetime.now().strftime("%Y-%m-%d %H:%M"),
-            "phase": phase,
-            "action": action,
-            "result": result
-        })
-        self.save_state()
-    
-    def update_current_phase(self, phase_name, immediate_priority):
-        """Update current phase"""
-        self.state["current_phase"] = phase_name
-        self.state["immediate_priority"] = immediate_priority
-        self.save_state()
-    
-    def add_refinement(self, change, reason):
-        """Add refinement to history"""
-        if "refinement_history" not in self.state:
-            self.state["refinement_history"] = []
-        self.state["refinement_history"].append({
-            "date": datetime.now().strftime("%Y-%m-%d"),
-            "change": change,
-            "reason": reason
-        })
-        self.save_state()
-
-if __name__ == "__main__":
-    generator = CatchUpPromptGenerator()
-    prompt = generator.generate_prompt()
-    
-    # Save to file
-    with open("CURRENT_CATCHUP_PROMPT.md", 'w') as f:
-        f.write(prompt)
-    
-    print("✅ Catch-up prompt generated!")
-    print(f"📄 Saved to: CURRENT_CATCHUP_PROMPT.md")
-    print(f"📊 State saved to: system_state.json")
-    print(f"\nPrompt length: {len(prompt)} characters")
+Generated: 2025-11-02 21:00:00
+System: v5.1.0-SCANNER-APPROACH
+Next: Wait for 2022-2024 test results, then run 2010-2019
+Key Insight: Scanner has the data - don't try to find windows retroactively
