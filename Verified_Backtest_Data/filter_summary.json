@@ -1,10 +1,10 @@
 {
-  "filter_applied": "2025-11-02 16:21:09",
-  "catalog_stocks_processed": 11,
+  "filter_applied": "2025-11-02 21:17:53",
+  "catalog_stocks_processed": 113,
   "clean_dataset": {
     "total": 200,
-    "new_additions": 11,
-    "duplicates_skipped": 0,
+    "new_additions": 0,
+    "duplicates_skipped": 113,
     "pre_covid_2014_2019": 87,
     "post_covid_2022_2024": 113
   },

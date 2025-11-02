@@ -1,26 +1,27 @@
 {
   "scan_info": {
-    "scan_date": "2025-11-01",
-    "scan_period_start": "2014-01-01",
-    "scan_period_end": "2024-12-31",
+    "scan_date": "2025-11-02 21:17:53",
+    "scan_period_start": "2022-01-01",
+    "scan_period_end": "2024-10-31",
     "criteria": "500%+ gain in any 180-day window",
     "data_sources": [
       "Polygon API",
       "Yahoo Finance"
     ],
-    "total_stocks_scanned": 11000,
-    "total_explosive_stocks_found": 244,
-    "data_errors": 5043,
-    "api_calls_made": 11066,
-    "scan_complete": true,
-    "scan_method": "GitHub Actions - Full 10-year historical scan"
+    "total_stocks_scanned": 3000,
+    "total_explosive_stocks_found": 113,
+    "data_errors": 700,
+    "api_calls_made": 3018,
+    "scan_complete": true
   },
   "filter_info": {
-    "filter_date": "2025-11-01",
+    "filter_date": "2025-11-02 21:17:53",
     "filter_applied": "COVID-era exclusion (2020-2021)",
-    "original_count": 239,
-    "clean_count": 200,
-    "excluded_count": 69
+    "original_catalog_count": 113,
+    "total_clean_count": 200,
+    "new_additions": 0,
+    "duplicates_skipped": 113,
+    "merge_mode": true
   },
   "stocks": [
     {
@@ -2861,6 +2862,7 @@
   ],
   "metadata": {
     "note": "Pattern analysis dataset - normal market conditions only",
-    "last_enrichment": "2025-11-02 19:56:47"
+    "last_updated": "2025-11-02 21:17:53",
+    "cumulative": true
   }
 }

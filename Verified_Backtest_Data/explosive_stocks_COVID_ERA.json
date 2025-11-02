@@ -1,16 +1,16 @@
 {
   "scan_info": {
-    "scan_date": "2025-11-02 16:21:09",
-    "scan_period_start": "2010-01-01",
-    "scan_period_end": "2012-10-31",
+    "scan_date": "2025-11-02 21:17:53",
+    "scan_period_start": "2022-01-01",
+    "scan_period_end": "2024-10-31",
     "criteria": "500%+ gain in any 180-day window",
     "data_sources": [
       "Polygon API",
       "Yahoo Finance"
     ],
     "total_stocks_scanned": 3000,
-    "total_explosive_stocks_found": 11,
-    "data_errors": 2169,
+    "total_explosive_stocks_found": 113,
+    "data_errors": 700,
     "api_calls_made": 3018,
     "scan_complete": true
   },
@@ -689,7 +689,7 @@
   ],
   "metadata": {
     "note": "Archive only - not used for pattern discovery",
-    "last_updated": "2025-11-02 16:21:09",
+    "last_updated": "2025-11-02 21:17:53",
     "cumulative": true
   }
 }
