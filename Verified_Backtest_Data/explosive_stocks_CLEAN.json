@@ -110,8 +110,17 @@
     {
       "ticker": "AG",
       "year": 2016,
-      "gain_percent": 525,
-      "days_to_peak": 117
+      "gain_percent": 662.95,
+      "days_to_peak": 142,
+      "entry_date": "2016-01-19",
+      "entry_price": 2.51,
+      "peak_date": "2016-08-10",
+      "peak_price": 19.15,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 12.31,
+      "test_date_30d": "2016-09-09"
     },
     {
       "ticker": "AMPY",
@@ -188,8 +197,17 @@
     {
       "ticker": "AGMH",
       "year": 2018,
-      "gain_percent": 568,
-      "days_to_peak": 113
+      "gain_percent": 725.41,
+      "days_to_peak": 115,
+      "entry_date": "2018-04-18",
+      "entry_price": 315,
+      "peak_date": "2018-10-01",
+      "peak_price": 2600.05,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 1535.78,
+      "test_date_30d": "2018-10-31"
     },
     {
       "ticker": "ALBT",
@@ -200,20 +218,47 @@
     {
       "ticker": "ALT",
       "year": 2018,
-      "gain_percent": 749,
-      "days_to_peak": 2
+      "gain_percent": 748.95,
+      "days_to_peak": 2,
+      "entry_date": "2018-09-18",
+      "entry_price": 4.27,
+      "peak_date": "2018-09-20",
+      "peak_price": 36.25,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 4.11,
+      "test_date_30d": "2018-10-20"
     },
     {
       "ticker": "AMRN",
       "year": 2018,
-      "gain_percent": 577,
-      "days_to_peak": 46
+      "gain_percent": 852.45,
+      "days_to_peak": 70,
+      "entry_date": "2018-07-30",
+      "entry_price": 49,
+      "peak_date": "2018-11-06",
+      "peak_price": 466.7,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 359.8,
+      "test_date_30d": "2018-12-06"
     },
     {
       "ticker": "AMTX",
       "year": 2018,
-      "gain_percent": 501,
-      "days_to_peak": 22
+      "gain_percent": 501.16,
+      "days_to_peak": 22,
+      "entry_date": "2018-02-13",
+      "entry_price": 0.519,
+      "peak_date": "2018-03-16",
+      "peak_price": 3.12,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 1.71,
+      "test_date_30d": "2018-04-15"
     },
     {
       "ticker": "ATOS",
@@ -224,14 +269,30 @@
     {
       "ticker": "AWX",
       "year": 2018,
-      "gain_percent": 910,
-      "days_to_peak": 110
+      "gain_percent": 952.08,
+      "days_to_peak": 163,
+      "entry_date": "2017-11-08",
+      "entry_price": 1.92,
+      "peak_date": "2018-07-30",
+      "peak_price": 20.2,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "AXON",
       "year": 2018,
-      "gain_percent": 528,
-      "days_to_peak": 32
+      "gain_percent": 527.62,
+      "days_to_peak": 32,
+      "entry_date": "2018-04-23",
+      "entry_price": 1.05,
+      "peak_date": "2018-06-07",
+      "peak_price": 6.59,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 2.64,
+      "test_date_30d": "2018-07-07"
     },
     {
       "ticker": "ABAT",
@@ -266,14 +327,32 @@
     {
       "ticker": "AIM",
       "year": 2019,
-      "gain_percent": 1126,
-      "days_to_peak": 100
+      "gain_percent": 1192.26,
+      "days_to_peak": 106,
+      "entry_date": "2019-10-04",
+      "entry_price": 0.5502,
+      "peak_date": "2020-03-09",
+      "peak_price": 7.11,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 2.55,
+      "test_date_30d": "2020-04-08"
     },
     {
       "ticker": "ALT",
       "year": 2019,
-      "gain_percent": 598,
-      "days_to_peak": 128
+      "gain_percent": 748.95,
+      "days_to_peak": 2,
+      "entry_date": "2018-09-18",
+      "entry_price": 4.27,
+      "peak_date": "2018-09-20",
+      "peak_price": 36.25,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 4.11,
+      "test_date_30d": "2018-10-20"
     },
     {
       "ticker": "ANY",
@@ -284,14 +363,30 @@
     {
       "ticker": "APLT",
       "year": 2019,
-      "gain_percent": 556,
-      "days_to_peak": 133
+      "gain_percent": 610.27,
+      "days_to_peak": 145,
+      "entry_date": "2019-07-08",
+      "entry_price": 8.08,
+      "peak_date": "2020-02-04",
+      "peak_price": 57.39,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 40.4,
+      "test_date_30d": "2020-03-05"
     },
     {
       "ticker": "APT",
       "year": 2019,
-      "gain_percent": 804,
-      "days_to_peak": 26
+      "gain_percent": 1137.8,
+      "days_to_peak": 171,
+      "entry_date": "2019-06-25",
+      "entry_price": 3.36,
+      "peak_date": "2020-02-28",
+      "peak_price": 41.59,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "AR",
@@ -302,8 +397,17 @@
     {
       "ticker": "ARCT",
       "year": 2019,
-      "gain_percent": 576,
-      "days_to_peak": 46
+      "gain_percent": 565.64,
+      "days_to_peak": 158,
+      "entry_date": "2019-10-02",
+      "entry_price": 9.46,
+      "peak_date": "2020-05-19",
+      "peak_price": 62.97,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 40.06,
+      "test_date_30d": "2020-06-18"
     },
     {
       "ticker": "ASTC",
@@ -326,8 +430,17 @@
     {
       "ticker": "ATOS",
       "year": 2019,
-      "gain_percent": 566,
-      "days_to_peak": 48
+      "gain_percent": 705.98,
+      "days_to_peak": 52,
+      "entry_date": "2018-12-27",
+      "entry_price": 0.9169,
+      "peak_date": "2019-03-14",
+      "peak_price": 7.39,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 2.78,
+      "test_date_30d": "2019-04-13"
     },
     {
       "ticker": "AYTU",
@@ -356,8 +469,17 @@
     {
       "ticker": "AIMD",
       "year": 2022,
-      "gain_percent": 682,
-      "days_to_peak": 36
+      "gain_percent": 1071.88,
+      "days_to_peak": 25,
+      "entry_date": "2022-06-29",
+      "entry_price": 38.4,
+      "peak_date": "2022-08-04",
+      "peak_price": 450,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 56,
+      "test_date_30d": "2022-09-03"
     },
     {
       "ticker": "AKBA",
@@ -374,14 +496,30 @@
     {
       "ticker": "AMTD",
       "year": 2022,
-      "gain_percent": 1165,
-      "days_to_peak": 15
+      "gain_percent": 1164.71,
+      "days_to_peak": 15,
+      "entry_date": "2022-07-12",
+      "entry_price": 6.12,
+      "peak_date": "2022-08-02",
+      "peak_price": 77.4,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 10.08,
+      "test_date_30d": "2022-09-01"
     },
     {
       "ticker": "APLD",
       "year": 2022,
-      "gain_percent": 556,
-      "days_to_peak": 121
+      "gain_percent": 649.68,
+      "days_to_peak": 177,
+      "entry_date": "2022-10-07",
+      "entry_price": 1.55,
+      "peak_date": "2023-06-23",
+      "peak_price": 11.62,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "ARBK",
@@ -416,8 +554,17 @@
     {
       "ticker": "AVDL",
       "year": 2022,
-      "gain_percent": 515,
-      "days_to_peak": 48
+      "gain_percent": 836.45,
+      "days_to_peak": 130,
+      "entry_date": "2022-05-26",
+      "entry_price": 1.07,
+      "peak_date": "2022-12-01",
+      "peak_price": 10.02,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 7,
+      "test_date_30d": "2022-12-31"
     },
     {
       "ticker": "BAOS",
@@ -434,26 +581,62 @@
     {
       "ticker": "ACONW",
       "year": 2023,
-      "gain_percent": 942,
-      "days_to_peak": 93
+      "gain_percent": 943.22,
+      "days_to_peak": 26,
+      "entry_date": "2023-04-18",
+      "entry_price": 0.0404,
+      "peak_date": "2023-06-08",
+      "peak_price": 0.4212,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 0.078,
+      "test_date_30d": "2023-07-08"
     },
     {
       "ticker": "ACXP",
       "year": 2023,
-      "gain_percent": 589,
-      "days_to_peak": 7
+      "gain_percent": 589.06,
+      "days_to_peak": 7,
+      "entry_date": "2023-10-03",
+      "entry_price": 25.6,
+      "peak_date": "2023-10-12",
+      "peak_price": 176.4,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 70,
+      "test_date_30d": "2023-11-11"
     },
     {
       "ticker": "ADCT",
       "year": 2023,
-      "gain_percent": 588,
-      "days_to_peak": 53
+      "gain_percent": 739.01,
+      "days_to_peak": 102,
+      "entry_date": "2023-09-22",
+      "entry_price": 0.7199,
+      "peak_date": "2024-02-20",
+      "peak_price": 6.04,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 4.61,
+      "test_date_30d": "2024-03-21"
     },
     {
       "ticker": "ADTX",
       "year": 2023,
-      "gain_percent": 793,
-      "days_to_peak": 3
+      "gain_percent": 793.44,
+      "days_to_peak": 3,
+      "entry_date": "2023-08-28",
+      "entry_price": 76200,
+      "peak_date": "2023-08-31",
+      "peak_price": 680800,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 119400,
+      "test_date_30d": "2023-09-30"
     },
     {
       "ticker": "AENTW",
@@ -470,8 +653,17 @@
     {
       "ticker": "AHG",
       "year": 2023,
-      "gain_percent": 599,
-      "days_to_peak": 51
+      "gain_percent": 1057.68,
+      "days_to_peak": 131,
+      "entry_date": "2023-07-27",
+      "entry_price": 0.2505,
+      "peak_date": "2024-02-02",
+      "peak_price": 2.9,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 1.3,
+      "test_date_30d": "2024-03-03"
     },
     {
       "ticker": "AIMDW",
@@ -488,8 +680,17 @@
     {
       "ticker": "AKA",
       "year": 2023,
-      "gain_percent": 690,
-      "days_to_peak": 150
+      "gain_percent": 771.52,
+      "days_to_peak": 151,
+      "entry_date": "2023-10-05",
+      "entry_price": 3.87,
+      "peak_date": "2024-05-13",
+      "peak_price": 33.7278,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 16.93,
+      "test_date_30d": "2024-06-12"
     },
     {
       "ticker": "AKAN",
@@ -500,8 +701,17 @@
     {
       "ticker": "ALT",
       "year": 2023,
-      "gain_percent": 568,
-      "days_to_peak": 87
+      "gain_percent": 518.33,
+      "days_to_peak": 127,
+      "entry_date": "2023-08-25",
+      "entry_price": 2.4,
+      "peak_date": "2024-02-28",
+      "peak_price": 14.84,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 10.23,
+      "test_date_30d": "2024-03-29"
     },
     {
       "ticker": "ALTS",
@@ -512,8 +722,17 @@
     {
       "ticker": "ALVOW",
       "year": 2023,
-      "gain_percent": 601,
-      "days_to_peak": 106
+      "gain_percent": 543.88,
+      "days_to_peak": 125,
+      "entry_date": "2023-05-25",
+      "entry_price": 0.98,
+      "peak_date": "2024-02-26",
+      "peak_price": 6.31,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 3.3,
+      "test_date_30d": "2024-03-27"
     },
     {
       "ticker": "ANGHW",
@@ -530,14 +749,32 @@
     {
       "ticker": "APLD",
       "year": 2023,
-      "gain_percent": 549,
-      "days_to_peak": 116
+      "gain_percent": 669.54,
+      "days_to_peak": 127,
+      "entry_date": "2022-12-19",
+      "entry_price": 1.51,
+      "peak_date": "2023-06-23",
+      "peak_price": 11.62,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 8.78,
+      "test_date_30d": "2023-07-23"
     },
     {
       "ticker": "APLT",
       "year": 2023,
-      "gain_percent": 645,
-      "days_to_peak": 121
+      "gain_percent": 645.24,
+      "days_to_peak": 121,
+      "entry_date": "2023-09-05",
+      "entry_price": 1.26,
+      "peak_date": "2024-02-28",
+      "peak_price": 9.39,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 6.33,
+      "test_date_30d": "2024-03-29"
     },
     {
       "ticker": "APM",
@@ -548,8 +785,17 @@
     {
       "ticker": "AREBW",
       "year": 2023,
-      "gain_percent": 1038,
-      "days_to_peak": 9
+      "gain_percent": 1191.0,
+      "days_to_peak": 133,
+      "entry_date": "2022-12-28",
+      "entry_price": 0.01,
+      "peak_date": "2023-09-07",
+      "peak_price": 0.1291,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 0.01,
+      "test_date_30d": "2023-10-07"
     },
     {
       "ticker": "ARKOW",
@@ -584,8 +830,17 @@
     {
       "ticker": "ATLX",
       "year": 2023,
-      "gain_percent": 560,
-      "days_to_peak": 60
+      "gain_percent": 559.82,
+      "days_to_peak": 60,
+      "entry_date": "2023-02-03",
+      "entry_price": 6.82,
+      "peak_date": "2023-05-02",
+      "peak_price": 45,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 21.85,
+      "test_date_30d": "2023-06-01"
     },
     {
       "ticker": "ATRA",
@@ -614,14 +869,32 @@
     {
       "ticker": "BAOS",
       "year": 2023,
-      "gain_percent": 633,
-      "days_to_peak": 16
+      "gain_percent": 651.61,
+      "days_to_peak": 6,
+      "entry_date": "2023-04-24",
+      "entry_price": 3.1,
+      "peak_date": "2023-05-02",
+      "peak_price": 23.3,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 5.99,
+      "test_date_30d": "2023-06-01"
     },
     {
       "ticker": "BBAI",
       "year": 2023,
-      "gain_percent": 676,
-      "days_to_peak": 20
+      "gain_percent": 969.85,
+      "days_to_peak": 25,
+      "entry_date": "2022-12-29",
+      "entry_price": 0.6328,
+      "peak_date": "2023-02-06",
+      "peak_price": 6.77,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 2.55,
+      "test_date_30d": "2023-03-08"
     },
     {
       "ticker": "ABTC",
@@ -656,20 +929,45 @@
     {
       "ticker": "ACONW",
       "year": 2024,
-      "gain_percent": 1123,
-      "days_to_peak": 18
+      "gain_percent": 1428.75,
+      "days_to_peak": 158,
+      "entry_date": "2024-02-21",
+      "entry_price": 0.016,
+      "peak_date": "2025-01-30",
+      "peak_price": 0.2446,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 0.102,
+      "test_date_30d": "2025-03-01"
     },
     {
       "ticker": "AENT",
       "year": 2024,
-      "gain_percent": 598,
-      "days_to_peak": 102
+      "gain_percent": 797.04,
+      "days_to_peak": 91,
+      "entry_date": "2024-08-27",
+      "entry_price": 1.29,
+      "peak_date": "2025-01-07",
+      "peak_price": 11.5718,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 5.495,
+      "test_date_30d": "2025-02-06"
     },
     {
       "ticker": "AENTW",
       "year": 2024,
-      "gain_percent": 1221,
-      "days_to_peak": 101
+      "gain_percent": 12398.33,
+      "days_to_peak": 177,
+      "entry_date": "2023-12-12",
+      "entry_price": 0.006,
+      "peak_date": "2024-12-30",
+      "peak_price": 0.7499,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "AERTW",
@@ -680,8 +978,15 @@
     {
       "ticker": "AEYE",
       "year": 2024,
-      "gain_percent": 537,
-      "days_to_peak": 136
+      "gain_percent": 632.5,
+      "days_to_peak": 167,
+      "entry_date": "2023-11-27",
+      "entry_price": 4,
+      "peak_date": "2024-07-29",
+      "peak_price": 29.3,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "AIFF",
@@ -710,26 +1015,60 @@
     {
       "ticker": "AIRE",
       "year": 2024,
-      "gain_percent": 647,
-      "days_to_peak": 172
+      "gain_percent": 646.59,
+      "days_to_peak": 172,
+      "entry_date": "2024-04-22",
+      "entry_price": 0.6014,
+      "peak_date": "2024-12-26",
+      "peak_price": 4.49,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "AISP",
       "year": 2024,
-      "gain_percent": 634,
-      "days_to_peak": 49
+      "gain_percent": 922.77,
+      "days_to_peak": 27,
+      "entry_date": "2024-02-08",
+      "entry_price": 1.4,
+      "peak_date": "2024-03-19",
+      "peak_price": 14.3188,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 7.61,
+      "test_date_30d": "2024-04-18"
     },
     {
       "ticker": "AISPW",
       "year": 2024,
-      "gain_percent": 1602,
-      "days_to_peak": 21
+      "gain_percent": 10328.57,
+      "days_to_peak": 31,
+      "entry_date": "2024-01-19",
+      "entry_price": 0.021,
+      "peak_date": "2024-03-19",
+      "peak_price": 2.19,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 0.5499,
+      "test_date_30d": "2024-04-18"
     },
     {
       "ticker": "AKAN",
       "year": 2024,
-      "gain_percent": 575,
-      "days_to_peak": 3
+      "gain_percent": 575.02,
+      "days_to_peak": 3,
+      "entry_date": "2024-05-14",
+      "entry_price": 22,
+      "peak_date": "2024-05-17",
+      "peak_price": 148.504,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 14.1876,
+      "test_date_30d": "2024-06-16"
     },
     {
       "ticker": "ALFUW",
@@ -740,26 +1079,58 @@
     {
       "ticker": "ALGS",
       "year": 2024,
-      "gain_percent": 524,
-      "days_to_peak": 62
+      "gain_percent": 539.34,
+      "days_to_peak": 61,
+      "entry_date": "2024-10-08",
+      "entry_price": 7.32,
+      "peak_date": "2025-01-06",
+      "peak_price": 46.8,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 25.32,
+      "test_date_30d": "2025-02-05"
     },
     {
       "ticker": "ALMU",
       "year": 2024,
-      "gain_percent": 614,
-      "days_to_peak": 143
+      "gain_percent": 652.92,
+      "days_to_peak": 175,
+      "entry_date": "2024-09-10",
+      "entry_price": 2.57,
+      "peak_date": "2025-06-03",
+      "peak_price": 19.35,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "ALTS",
       "year": 2024,
-      "gain_percent": 526,
-      "days_to_peak": 166
+      "gain_percent": 547.85,
+      "days_to_peak": 165,
+      "entry_date": "2024-10-08",
+      "entry_price": 1.69,
+      "peak_date": "2025-06-06",
+      "peak_price": 10.9487,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "ALZN",
       "year": 2024,
-      "gain_percent": 668,
-      "days_to_peak": 2
+      "gain_percent": 668.37,
+      "days_to_peak": 2,
+      "entry_date": "2024-08-15",
+      "entry_price": 17.64,
+      "peak_date": "2024-08-19",
+      "peak_price": 135.54,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 15.57,
+      "test_date_30d": "2024-09-18"
     },
     {
       "ticker": "AMODW",
@@ -770,8 +1141,17 @@
     {
       "ticker": "AMPG",
       "year": 2024,
-      "gain_percent": 644,
-      "days_to_peak": 55
+      "gain_percent": 858.27,
+      "days_to_peak": 84,
+      "entry_date": "2024-08-29",
+      "entry_price": 0.671,
+      "peak_date": "2024-12-30",
+      "peak_price": 6.43,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 1.87,
+      "test_date_30d": "2025-01-29"
     },
     {
       "ticker": "AMPGW",
@@ -794,14 +1174,32 @@
     {
       "ticker": "APM",
       "year": 2024,
-      "gain_percent": 1272,
-      "days_to_peak": 29
+      "gain_percent": 1158.27,
+      "days_to_peak": 18,
+      "entry_date": "2024-02-08",
+      "entry_price": 1.39,
+      "peak_date": "2024-03-06",
+      "peak_price": 17.49,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 8,
+      "test_date_30d": "2024-04-05"
     },
     {
       "ticker": "APP",
       "year": 2024,
-      "gain_percent": 602,
-      "days_to_peak": 127
+      "gain_percent": 682.17,
+      "days_to_peak": 132,
+      "entry_date": "2024-08-05",
+      "entry_price": 67.14,
+      "peak_date": "2025-02-13",
+      "peak_price": 525.15,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 306.85,
+      "test_date_30d": "2025-03-15"
     },
     {
       "ticker": "APPS",
@@ -812,8 +1210,17 @@
     {
       "ticker": "ARBEW",
       "year": 2024,
-      "gain_percent": 664,
-      "days_to_peak": 141
+      "gain_percent": 869.23,
+      "days_to_peak": 152,
+      "entry_date": "2024-03-19",
+      "entry_price": 0.13,
+      "peak_date": "2025-01-07",
+      "peak_price": 1.26,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 0.5692,
+      "test_date_30d": "2025-02-06"
     },
     {
       "ticker": "AREB",
@@ -824,38 +1231,90 @@
     {
       "ticker": "AREBW",
       "year": 2024,
-      "gain_percent": 833,
-      "days_to_peak": 172
+      "gain_percent": 1037.85,
+      "days_to_peak": 9,
+      "entry_date": "2023-08-23",
+      "entry_price": 0.0113,
+      "peak_date": "2023-09-07",
+      "peak_price": 0.1291,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 0.01,
+      "test_date_30d": "2023-10-07"
     },
     {
       "ticker": "AREN",
       "year": 2024,
-      "gain_percent": 675,
-      "days_to_peak": 109
+      "gain_percent": 1305.59,
+      "days_to_peak": 160,
+      "entry_date": "2024-09-26",
+      "entry_price": 0.715,
+      "peak_date": "2025-05-20",
+      "peak_price": 10.05,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "ARKOW",
       "year": 2024,
-      "gain_percent": 1151,
-      "days_to_peak": 43
+      "gain_percent": 1484.55,
+      "days_to_peak": 42,
+      "entry_date": "2024-05-03",
+      "entry_price": 0.0751,
+      "peak_date": "2024-08-16",
+      "peak_price": 1.19,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 0.35,
+      "test_date_30d": "2024-09-15"
     },
     {
       "ticker": "ARQQ",
       "year": 2024,
-      "gain_percent": 758,
-      "days_to_peak": 39
+      "gain_percent": 1292.88,
+      "days_to_peak": 57,
+      "entry_date": "2024-10-07",
+      "entry_price": 3.79,
+      "peak_date": "2024-12-27",
+      "peak_price": 52.79,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 25.52,
+      "test_date_30d": "2025-01-26"
     },
     {
       "ticker": "ARQQW",
       "year": 2024,
-      "gain_percent": 1173,
-      "days_to_peak": 44
+      "gain_percent": 8521.36,
+      "days_to_peak": 91,
+      "entry_date": "2024-08-05",
+      "entry_price": 0.0515,
+      "peak_date": "2024-12-27",
+      "peak_price": 4.44,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 2.9,
+      "test_date_30d": "2025-01-26"
     },
     {
       "ticker": "ASNS",
       "year": 2024,
-      "gain_percent": 955,
-      "days_to_peak": 3
+      "gain_percent": 955.05,
+      "days_to_peak": 3,
+      "entry_date": "2024-05-31",
+      "entry_price": 0.436,
+      "peak_date": "2024-06-05",
+      "peak_price": 4.6,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 1.6,
+      "test_date_30d": "2024-07-05"
     },
     {
       "ticker": "ASST",
@@ -866,8 +1325,17 @@
     {
       "ticker": "ASTS",
       "year": 2024,
-      "gain_percent": 733,
-      "days_to_peak": 62
+      "gain_percent": 1844.28,
+      "days_to_peak": 98,
+      "entry_date": "2024-04-02",
+      "entry_price": 2.01,
+      "peak_date": "2024-08-21",
+      "peak_price": 39.08,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 26.5,
+      "test_date_30d": "2024-09-20"
     },
     {
       "ticker": "ATCH",
@@ -878,8 +1346,17 @@
     {
       "ticker": "ATGL",
       "year": 2024,
-      "gain_percent": 929,
-      "days_to_peak": 94
+      "gain_percent": 4598.36,
+      "days_to_peak": 107,
+      "entry_date": "2024-09-13",
+      "entry_price": 1.22,
+      "peak_date": "2025-02-19",
+      "peak_price": 57.32,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 29.9,
+      "test_date_30d": "2025-03-21"
     },
     {
       "ticker": "ATMVR",
@@ -890,8 +1367,17 @@
     {
       "ticker": "ATOM",
       "year": 2024,
-      "gain_percent": 587,
-      "days_to_peak": 71
+      "gain_percent": 616.33,
+      "days_to_peak": 72,
+      "entry_date": "2024-09-23",
+      "entry_price": 2.45,
+      "peak_date": "2025-01-06",
+      "peak_price": 17.55,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 9.26,
+      "test_date_30d": "2025-02-05"
     },
     {
       "ticker": "ATON",
@@ -902,20 +1388,45 @@
     {
       "ticker": "AUROW",
       "year": 2024,
-      "gain_percent": 794,
-      "days_to_peak": 110
+      "gain_percent": 1895.54,
+      "days_to_peak": 163,
+      "entry_date": "2024-06-21",
+      "entry_price": 0.1501,
+      "peak_date": "2025-02-14",
+      "peak_price": 2.9953,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "AUUDW",
       "year": 2024,
-      "gain_percent": 594,
-      "days_to_peak": 36
+      "gain_percent": 1085.47,
+      "days_to_peak": 54,
+      "entry_date": "2023-11-22",
+      "entry_price": 0.0117,
+      "peak_date": "2024-04-08",
+      "peak_price": 0.1387,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 0.04,
+      "test_date_30d": "2024-05-08"
     },
     {
       "ticker": "AVTX",
       "year": 2024,
-      "gain_percent": 757,
-      "days_to_peak": 50
+      "gain_percent": 757.21,
+      "days_to_peak": 50,
+      "entry_date": "2024-01-17",
+      "entry_price": 4.02,
+      "peak_date": "2024-03-28",
+      "peak_price": 34.46,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 16.88,
+      "test_date_30d": "2024-04-27"
     },
     {
       "ticker": "AXG",
@@ -926,26 +1437,62 @@
     {
       "ticker": "AZTR",
       "year": 2024,
-      "gain_percent": 641,
-      "days_to_peak": 1
+      "gain_percent": 640.74,
+      "days_to_peak": 1,
+      "entry_date": "2024-07-22",
+      "entry_price": 10.7892,
+      "peak_date": "2024-07-23",
+      "peak_price": 79.92,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 4.9817,
+      "test_date_30d": "2024-08-22"
     },
     {
       "ticker": "BAERW",
       "year": 2024,
-      "gain_percent": 867,
-      "days_to_peak": 81
+      "gain_percent": 866.67,
+      "days_to_peak": 81,
+      "entry_date": "2024-09-03",
+      "entry_price": 0.03,
+      "peak_date": "2025-01-10",
+      "peak_price": 0.29,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 0.15,
+      "test_date_30d": "2025-02-09"
     },
     {
       "ticker": "BAOS",
       "year": 2024,
-      "gain_percent": 781,
-      "days_to_peak": 7
+      "gain_percent": 703.53,
+      "days_to_peak": 125,
+      "entry_date": "2024-06-21",
+      "entry_price": 1.7,
+      "peak_date": "2024-12-24",
+      "peak_price": 13.66,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 2.94,
+      "test_date_30d": "2025-01-23"
     },
     {
       "ticker": "BBAI",
       "year": 2024,
-      "gain_percent": 605,
-      "days_to_peak": 161
+      "gain_percent": 770.59,
+      "days_to_peak": 130,
+      "entry_date": "2024-08-07",
+      "entry_price": 1.19,
+      "peak_date": "2025-02-13",
+      "peak_price": 10.36,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 3.49,
+      "test_date_30d": "2025-03-15"
     },
     {
       "ticker": "ABUS",
@@ -1385,7 +1932,7 @@
     {
       "ticker": "AAOI",
       "year": 2016,
-      "gain_percent": 510,
+      "gain_percent": 510.22,
       "days_to_peak": 174,
       "sustained_gain_test": {
         "sustainable": false,
@@ -1412,13 +1959,20 @@
           "max_drawdown_observed": "83.6% from peak",
           "holding_period_tested": "217 days"
         }
-      }
+      },
+      "entry_date": "2016-06-27",
+      "entry_price": 9.2,
+      "peak_date": "2017-03-07",
+      "peak_price": 56.14,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "ARWR",
       "year": 2018,
-      "gain_percent": 502,
-      "days_to_peak": 171,
+      "gain_percent": 586.81,
+      "days_to_peak": 179,
       "sustained_gain_test": {
         "sustainable": false,
         "reason": "Only held 0.0% minimum (need 150%+)",
@@ -1444,13 +1998,20 @@
           "max_drawdown_observed": "85.4% from peak",
           "holding_period_tested": "222 days"
         }
-      }
+      },
+      "entry_date": "2017-12-19",
+      "entry_price": 3.26,
+      "peak_date": "2018-09-06",
+      "peak_price": 22.39,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "AXSM",
       "year": 2018,
-      "gain_percent": 612,
-      "days_to_peak": 55,
+      "gain_percent": 821.58,
+      "days_to_peak": 179,
       "sustained_gain_test": {
         "sustainable": false,
         "reason": "Only held -20.8% minimum (need 150%+)",
@@ -1476,13 +2037,20 @@
           "max_drawdown_observed": "91.4% from peak",
           "holding_period_tested": "220 days"
         }
-      }
+      },
+      "entry_date": "2018-08-27",
+      "entry_price": 2.525,
+      "peak_date": "2019-05-15",
+      "peak_price": 23.27,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "AVDL",
       "year": 2019,
-      "gain_percent": 603,
-      "days_to_peak": 176,
+      "gain_percent": 638.26,
+      "days_to_peak": 179,
       "sustained_gain_test": {
         "sustainable": false,
         "reason": "Only held 0.0% minimum (need 150%+)",
@@ -1508,13 +2076,20 @@
           "max_drawdown_observed": "86.5% from peak",
           "holding_period_tested": "220 days"
         }
-      }
+      },
+      "entry_date": "2019-05-03",
+      "entry_price": 1.15,
+      "peak_date": "2020-01-17",
+      "peak_price": 8.49,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "AXSM",
       "year": 2019,
-      "gain_percent": 599,
-      "days_to_peak": 170,
+      "gain_percent": 1334.78,
+      "days_to_peak": 146,
       "sustained_gain_test": {
         "sustainable": false,
         "reason": "Only held 0.0% minimum (need 150%+)",
@@ -1540,13 +2115,22 @@
           "max_drawdown_observed": "93.0% from peak",
           "holding_period_tested": "190 days"
         }
-      }
+      },
+      "entry_date": "2018-12-27",
+      "entry_price": 2,
+      "peak_date": "2019-07-29",
+      "peak_price": 28.6956,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 25.09,
+      "test_date_30d": "2019-08-28"
     },
     {
       "ticker": "AKRO",
       "year": 2022,
-      "gain_percent": 542,
-      "days_to_peak": 144,
+      "gain_percent": 586.0,
+      "days_to_peak": 148,
       "sustained_gain_test": {
         "sustainable": false,
         "reason": "Only held 0.0% minimum (need 150%+)",
@@ -1572,13 +2156,22 @@
           "max_drawdown_observed": "85.4% from peak",
           "holding_period_tested": "190 days"
         }
-      }
+      },
+      "entry_date": "2022-06-01",
+      "entry_price": 8,
+      "peak_date": "2023-01-03",
+      "peak_price": 54.88,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 47.71,
+      "test_date_30d": "2023-02-02"
     },
     {
       "ticker": "AMLX",
       "year": 2022,
-      "gain_percent": 500,
-      "days_to_peak": 176,
+      "gain_percent": 502.19,
+      "days_to_peak": 178,
       "sustained_gain_test": {
         "sustainable": false,
         "reason": "Only held 0.0% minimum (need 150%+)",
@@ -1604,13 +2197,20 @@
           "max_drawdown_observed": "83.4% from peak",
           "holding_period_tested": "220 days"
         }
-      }
+      },
+      "entry_date": "2022-05-11",
+      "entry_price": 6.85,
+      "peak_date": "2023-01-26",
+      "peak_price": 41.25,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "ARDX",
       "year": 2022,
-      "gain_percent": 595,
-      "days_to_peak": 170,
+      "gain_percent": 700.77,
+      "days_to_peak": 178,
       "sustained_gain_test": {
         "sustainable": false,
         "reason": "Only held 0.0% minimum (need 150%+)",
@@ -1636,13 +2236,20 @@
           "max_drawdown_observed": "87.5% from peak",
           "holding_period_tested": "222 days"
         }
-      }
+      },
+      "entry_date": "2022-06-16",
+      "entry_price": 0.5195,
+      "peak_date": "2023-03-06",
+      "peak_price": 4.16,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "ATXS",
       "year": 2022,
-      "gain_percent": 528,
-      "days_to_peak": 131,
+      "gain_percent": 561.79,
+      "days_to_peak": 140,
       "sustained_gain_test": {
         "sustainable": false,
         "reason": "Only held 0.0% minimum (need 150%+)",
@@ -1668,13 +2275,22 @@
           "max_drawdown_observed": "84.9% from peak",
           "holding_period_tested": "181 days"
         }
-      }
+      },
+      "entry_date": "2022-06-16",
+      "entry_price": 2.46,
+      "peak_date": "2023-01-06",
+      "peak_price": 16.28,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 14.81,
+      "test_date_30d": "2023-02-05"
     },
     {
       "ticker": "AAOI",
       "year": 2023,
-      "gain_percent": 586,
-      "days_to_peak": 147,
+      "gain_percent": 1368.29,
+      "days_to_peak": 151,
       "sustained_gain_test": {
         "sustainable": false,
         "reason": "Only held 0.0% minimum (need 150%+)",
@@ -1700,13 +2316,22 @@
           "max_drawdown_observed": "93.2% from peak",
           "holding_period_tested": "192 days"
         }
-      }
+      },
+      "entry_date": "2023-05-15",
+      "entry_price": 1.64,
+      "peak_date": "2023-12-19",
+      "peak_price": 24.08,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 16.62,
+      "test_date_30d": "2024-01-18"
     },
     {
       "ticker": "ADSEW",
       "year": 2023,
-      "gain_percent": 718,
-      "days_to_peak": 149,
+      "gain_percent": 1835.71,
+      "days_to_peak": 173,
       "sustained_gain_test": {
         "sustainable": false,
         "reason": "Only held 0.0% minimum (need 150%+)",
@@ -1732,13 +2357,20 @@
           "max_drawdown_observed": "94.8% from peak",
           "holding_period_tested": "207 days"
         }
-      }
+      },
+      "entry_date": "2023-05-10",
+      "entry_price": 0.14,
+      "peak_date": "2024-05-06",
+      "peak_price": 2.71,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "ALAR",
       "year": 2023,
-      "gain_percent": 592,
-      "days_to_peak": 175,
+      "gain_percent": 1319.43,
+      "days_to_peak": 176,
       "sustained_gain_test": {
         "sustainable": false,
         "reason": "Only held 0.0% minimum (need 150%+)",
@@ -1764,13 +2396,20 @@
           "max_drawdown_observed": "93.0% from peak",
           "holding_period_tested": "220 days"
         }
-      }
+      },
+      "entry_date": "2023-07-26",
+      "entry_price": 2.11,
+      "peak_date": "2024-04-08",
+      "peak_price": 29.95,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "ASPI",
       "year": 2023,
-      "gain_percent": 621,
-      "days_to_peak": 163,
+      "gain_percent": 966.67,
+      "days_to_peak": 178,
       "sustained_gain_test": {
         "sustainable": false,
         "reason": "Only held 0.0% minimum (need 150%+)",
@@ -1796,13 +2435,20 @@
           "max_drawdown_observed": "90.6% from peak",
           "holding_period_tested": "220 days"
         }
-      }
+      },
+      "entry_date": "2023-06-07",
+      "entry_price": 0.375,
+      "peak_date": "2024-02-22",
+      "peak_price": 4,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "AAOI",
       "year": 2024,
-      "gain_percent": 527,
-      "days_to_peak": 80,
+      "gain_percent": 547.74,
+      "days_to_peak": 83,
       "sustained_gain_test": {
         "sustainable": false,
         "reason": "Only held 0.0% minimum (need 200%+)",
@@ -1828,13 +2474,22 @@
           "max_drawdown_observed": "84.6% from peak",
           "holding_period_tested": "122 days"
         }
-      }
+      },
+      "entry_date": "2024-08-07",
+      "entry_price": 6.87,
+      "peak_date": "2024-12-04",
+      "peak_price": 44.5,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 37.9,
+      "test_date_30d": "2025-01-03"
     },
     {
       "ticker": "AEVA",
       "year": 2024,
-      "gain_percent": 646,
-      "days_to_peak": 172,
+      "gain_percent": 950.26,
+      "days_to_peak": 179,
       "sustained_gain_test": {
         "sustainable": false,
         "reason": "Only held -26.0% minimum (need 150%+)",
@@ -1860,13 +2515,20 @@
           "max_drawdown_observed": "93.0% from peak",
           "holding_period_tested": "221 days"
         }
-      }
+      },
+      "entry_date": "2024-10-08",
+      "entry_price": 3.5,
+      "peak_date": "2025-06-27",
+      "peak_price": 36.7591,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "AZ",
       "year": 2024,
-      "gain_percent": 547,
-      "days_to_peak": 94,
+      "gain_percent": 872.96,
+      "days_to_peak": 169,
       "sustained_gain_test": {
         "sustainable": false,
         "reason": "Only held 0.0% minimum (need 150%+)",
@@ -1892,7 +2554,14 @@
           "max_drawdown_observed": "89.7% from peak",
           "holding_period_tested": "213 days"
         }
-      }
+      },
+      "entry_date": "2024-06-20",
+      "entry_price": 0.8505,
+      "peak_date": "2025-02-24",
+      "peak_price": 8.275,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API"
     },
     {
       "ticker": "ANAB",
@@ -1937,6 +2606,7 @@
     }
   ],
   "metadata": {
-    "note": "Pattern analysis dataset - normal market conditions only"
+    "note": "Pattern analysis dataset - normal market conditions only",
+    "last_enrichment": "2025-11-02 19:33:52"
   }
 }

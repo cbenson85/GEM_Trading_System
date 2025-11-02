@@ -1,0 +1,466 @@
+{
+  "started": "2025-11-02 19:32:42",
+  "total_stocks": 200,
+  "enriched": 79,
+  "already_enriched": 30,
+  "failed": 91,
+  "skipped": 0,
+  "failures": [
+    {
+      "ticker": "ABVC",
+      "year": 2014,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AEMD",
+      "year": 2014,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AMTX",
+      "year": 2014,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ASTH",
+      "year": 2014,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ATON",
+      "year": 2014,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ATRA",
+      "year": 2014,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ABVC",
+      "year": 2015,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AEMD",
+      "year": 2015,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AMTX",
+      "year": 2015,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ASTH",
+      "year": 2015,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AYTU",
+      "year": 2015,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ABAT",
+      "year": 2016,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ACB",
+      "year": 2016,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ACFN",
+      "year": 2016,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AMPY",
+      "year": 2016,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AREN",
+      "year": 2016,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ASTH",
+      "year": 2016,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AREC",
+      "year": 2017,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ATLX",
+      "year": 2017,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AVTX",
+      "year": 2017,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AXON",
+      "year": 2017,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AACG",
+      "year": 2018,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ABAT",
+      "year": 2018,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ABTC",
+      "year": 2018,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ABVC",
+      "year": 2018,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ADIL",
+      "year": 2018,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ALBT",
+      "year": 2018,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ATOS",
+      "year": 2018,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ABAT",
+      "year": 2019,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ABTC",
+      "year": 2019,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ABVC",
+      "year": 2019,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AEHL",
+      "year": 2019,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AIHS",
+      "year": 2019,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ANY",
+      "year": 2019,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AR",
+      "year": 2019,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ASTC",
+      "year": 2019,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ATLX",
+      "year": 2019,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ATON",
+      "year": 2019,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AYTU",
+      "year": 2019,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ACIC",
+      "year": 2022,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ACON",
+      "year": 2022,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ACONW",
+      "year": 2022,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AKBA",
+      "year": 2022,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ALVOW",
+      "year": 2022,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ARBK",
+      "year": 2022,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ARBKL",
+      "year": 2022,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AREBW",
+      "year": 2022,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ATLN",
+      "year": 2022,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ATLX",
+      "year": 2022,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "BAOS",
+      "year": 2022,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "BBAI",
+      "year": 2022,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AENTW",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AEYE",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AIMDW",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AISP",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AKAN",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ALTS",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ANGHW",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ANY",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "APM",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ARKOW",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ARQT",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ASNS",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ASTS",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ATGL",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ATRA",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AUUDW",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AVTX",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AXG",
+      "year": 2023,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ABTC",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ABTS",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ABVC",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ABVE",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ABVEW",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AERTW",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AIFF",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AIIO",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AIM",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AIMDW",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ALFUW",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AMODW",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AMPGW",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ANSCW",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "APLMW",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "APPS",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AREB",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ASST",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ATCH",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ATMVR",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "ATON",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    },
+    {
+      "ticker": "AXG",
+      "year": 2024,
+      "reason": "Could not find explosive window in Polygon data"
+    }
+  ],
+  "completed": "2025-11-02 19:33:52"
+}
