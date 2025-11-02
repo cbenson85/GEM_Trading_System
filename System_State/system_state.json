@@ -1,315 +1,62 @@
 {
   "system_info": {
-    "version": "5.0.2-SUSTAINABILITY-FILTER",
-    "last_updated": "2025-11-02T18:45:00Z",
-    "current_phase": "Phase 3: Stock Discovery & Pre-Catalyst Analysis - SUSTAINABILITY TESTING",
-    "current_task": "Running sustainability filter V2.0 on 200 stocks",
-    "next_milestone": "Analyze filter results and begin pre-catalyst data collection"
+    "version": "5.0.3-SUSTAINED-GAIN-FILTER",
+    "last_updated": "2025-11-02T19:30:00Z",
+    "current_phase": "Phase 3: Stock Discovery & Pre-Catalyst Analysis",
+    "current_task": "Ready to run Sustained Gain Window Filter V3.0",
+    "next_milestone": "Run V3.0 filter, analyze results, proceed with pre-catalyst analysis"
   },
   "portfolio": {
     "status": "CLEARED",
     "cash_available": 10000,
-    "positions": [],
-    "note": "Starting fresh - no positions until system validates 10-year performance"
+    "positions": []
   },
   "data_status": {
     "explosive_stocks_total": 200,
-    "explosive_stocks_sustainable": null,
-    "explosive_stocks_unsustainable": null,
-    "covid_era_archived": 81,
-    "sustainability_filter_status": "RUNNING",
-    "sustainability_filter_started": "2025-11-02T18:45:00Z",
-    "sustainability_filter_criteria": {
-      "retention_threshold": 0.80,
-      "test_days_after_peak": 21,
-      "description": "Stock must hold ≥80% of peak gain 21 days after peak"
-    },
-    "data_sources": {
-      "polygon_api": {
-        "tier": "Developer",
-        "rate_limit": "unlimited",
-        "key_active": true,
-        "note": "Unlimited API requests - optimized for fast results"
-      },
-      "yahoo_finance": {
-        "status": "backup",
-        "note": "Fallback data source if Polygon unavailable"
-      }
-    }
+    "v2_sustainable": 17,
+    "v2_sustainability_rate": "8.5%",
+    "v3_expected_sustainable": "40-80",
+    "v3_expected_rate": "20-40%",
+    "covid_era_archived": 81
   },
-  "phase_status": {
-    "phase_1": {
-      "name": "Discovery & Documentation Audit",
+  "filter_evolution": {
+    "v1": {
+      "status": "FAILED",
+      "criteria": "90% retention, 30 days",
+      "result": "All 200 failed"
+    },
+    "v2": {
       "status": "COMPLETE",
-      "completion_date": "2025-11-01"
+      "criteria": "80% retention, 21 days from peak",
+      "result": "17/200 sustainable (8.5%)",
+      "issue": "Peak testing captures market corrections, not stock quality"
     },
-    "phase_2": {
-      "name": "System Requirements & Data Infrastructure",
-      "status": "COMPLETE",
-      "completion_date": "2025-11-02",
-      "achievements": [
-        "Multi-year explosive stock scan (200 stocks, 2010-2024)",
-        "COVID-era filter applied (200 clean, 81 archived)",
-        "File verification protocol established",
-        "Data backup system with merge logic",
-        "Pre-catalyst analysis framework created",
-        "Standard data format template created",
-        "GitHub Actions fully automated",
-        "All infrastructure verified"
-      ]
-    },
-    "phase_3": {
-      "name": "Stock Discovery & Pre-Catalyst Analysis",
-      "status": "IN_PROGRESS",
-      "started_date": "2025-11-02",
-      "current_step": "Running sustainability filter V2.0",
-      "completed_tasks": [
-        "Created sustainability filter V2.0 (21-day, 80% retention)",
-        "Optimized for Developer tier (unlimited API)",
-        "Started filter workflow"
-      ],
-      "pending_tasks": [
-        "Analyze sustainability results",
-        "Build data collection scripts for sustainable stocks",
-        "Collect 180-day pre-catalyst data",
-        "Build pattern scanning/correlation tools",
-        "Analyze patterns and extract screening criteria",
-        "Document all findings"
-      ]
+    "v3": {
+      "status": "READY",
+      "criteria": "Speed-adjusted minimum gain (FAST:250%, MED:200%, SLOW:150%)",
+      "method": "Sustained Gain Window (entry to peak+60 days)",
+      "improvement": "Tests sustained elevation, ignores market noise",
+      "expected_result": "40-80/200 sustainable (20-40%)"
     }
   },
-  "files": {
-    "core_system": {
-      "screening_protocol": "/Current_System/GEM_v5_Master_Screening_Protocol.md",
-      "trading_rules": "/Current_System/Trading_Rules_Complete.md",
-      "verification_protocol": "/FILE_VERIFICATION_PROTOCOL.md",
-      "covid_exclusion_rule": "/COVID_ERA_EXCLUSION_RULE.md"
-    },
-    "data_files": {
-      "explosive_stocks_catalog": {
-        "path": "/Verified_Backtest_Data/explosive_stocks_catalog.json",
-        "status": "VERIFIED",
-        "note": "Latest scan snapshot"
-      },
-      "explosive_stocks_clean": {
-        "path": "/Verified_Backtest_Data/explosive_stocks_CLEAN.json",
-        "status": "VERIFIED",
-        "count": 200,
-        "note": "Pre-sustainability filter - will be updated to sustainable stocks only"
-      },
-      "explosive_stocks_covid_era": {
-        "path": "/Verified_Backtest_Data/explosive_stocks_COVID_ERA.json",
-        "status": "VERIFIED",
-        "count": 81,
-        "note": "Archived COVID-era stocks (2020-2021)"
-      },
-      "explosive_stocks_unsustainable": {
-        "path": "/Verified_Backtest_Data/explosive_stocks_UNSUSTAINABLE.json",
-        "status": "CREATING",
-        "note": "Being created by sustainability filter - pump & dumps"
-      },
-      "sustainability_summary": {
-        "path": "/Verified_Backtest_Data/sustainability_summary.json",
-        "status": "CREATING",
-        "note": "Being created by sustainability filter - statistics"
-      },
-      "pre_catalyst_framework": {
-        "path": "/Verified_Backtest_Data/PRE_CATALYST_ANALYSIS_FRAMEWORK.md",
-        "status": "VERIFIED",
-        "note": "12 categories, 100+ data points"
-      },
-      "standard_data_format": {
-        "path": "/Verified_Backtest_Data/STANDARD_DATA_FORMAT.md",
-        "status": "VERIFIED",
-        "note": "Standardized template for all stock data"
-      },
-      "phase_3_implementation_plan": {
-        "path": "/Verified_Backtest_Data/PHASE_3_IMPLEMENTATION_PLAN.md",
-        "status": "VERIFIED",
-        "note": "Detailed Phase 3 roadmap"
-      }
-    },
-    "scripts": {
-      "explosive_stock_scanner": {
-        "path": "/explosive_stock_scanner.py",
-        "status": "VERIFIED",
-        "note": "Multi-year scanner with GitHub Actions"
-      },
-      "filter_covid_era": {
-        "path": "/filter_covid_era.py",
-        "status": "VERIFIED",
-        "note": "COVID filter with merge logic"
-      },
-      "filter_sustainability": {
-        "path": "/filter_sustainability.py",
-        "status": "RUNNING",
-        "version": "2.0",
-        "note": "Developer tier optimized - 5-15 min runtime"
-      }
-    },
-    "workflows": {
-      "explosive_stock_scan": {
-        "path": "/.github/workflows/explosive_stock_scan_workflow.yml",
-        "status": "VERIFIED",
-        "note": "Automated scanning and filtering"
-      },
-      "sustainability_filter": {
-        "path": "/.github/workflows/sustainability_filter_workflow.yml",
-        "status": "RUNNING",
-        "version": "2.0",
-        "note": "Developer tier optimized - currently executing"
-      }
-    }
-  },
-  "sustainability_filter": {
-    "version": "2.0",
-    "status": "RUNNING",
-    "started": "2025-11-02T18:45:00Z",
-    "expected_completion": "2025-11-02T19:00:00Z",
-    "criteria": {
-      "retention_threshold_percent": 80,
-      "test_days_after_peak": 21,
-      "method": "Polygon API - find actual catalyst windows"
-    },
-    "input": {
-      "file": "explosive_stocks_CLEAN.json",
-      "stock_count": 200,
-      "date_range": "2010-2024 (excluding 2020-2021)"
-    },
-    "expected_output": {
-      "sustainable_stocks": "60-120 (30-60% of total)",
-      "unsustainable_stocks": "80-140 (40-70% of total)",
-      "files_created": [
-        "explosive_stocks_CLEAN.json (updated)",
-        "explosive_stocks_UNSUSTAINABLE.json (new)",
-        "sustainability_summary.json (new)"
-      ]
-    },
-    "performance": {
-      "api_tier": "Developer",
-      "rate_limit": "unlimited",
-      "expected_runtime_minutes": "5-15",
-      "api_calls_per_stock": "2-3",
-      "total_api_calls": "400-600"
-    }
-  },
-  "decisions_log": [
-    {
-      "date": "2025-11-01",
-      "decision": "Mark all previous backtest results as UNVERIFIED",
-      "reason": "Previous model fabricated data"
-    },
-    {
-      "date": "2025-11-01",
-      "decision": "Clear portfolio and start fresh",
-      "reason": "System needs to validate 10-year performance before live trading"
-    },
-    {
-      "date": "2025-11-01",
-      "decision": "Exclude COVID-era (2020-2021) from pattern analysis",
-      "reason": "Abnormal market conditions would contaminate patterns"
-    },
-    {
-      "date": "2025-11-02",
-      "decision": "Expand historical coverage to 2010",
-      "reason": "More data = better pattern discovery"
-    },
-    {
-      "date": "2025-11-02",
-      "decision": "Test sustainability BEFORE pre-catalyst analysis",
-      "reason": "Don't waste weeks analyzing pump & dumps"
-    },
-    {
-      "date": "2025-11-02",
-      "decision": "Use 21-day, 80% retention as sustainability criteria",
-      "reason": "Realistic holding period, allows for natural pullback"
-    },
-    {
-      "date": "2025-11-02",
-      "decision": "Optimize for Developer tier (unlimited API)",
-      "reason": "Fast results (5-15 min vs hours), enables rapid iteration"
-    }
-  ],
-  "rules": [
-    "NO FABRICATION - Verify or say you can't",
-    "FALSE MISS CHECK - Always check discarded stocks for explosive growth",
-    "STORE EVERYTHING - All decisions, data, refinements must be saved",
-    "COPY/PASTE ONLY - User should never manually enter data",
-    "10-YEAR VALIDATION - System must prove consistency before live trading",
-    "FILE VERIFICATION - Every file must be verified using established protocol",
-    "DATA PRESERVATION - Filter scripts use merge logic (no data loss)",
-    "FULL AUTOMATION - Workflows handle everything without manual steps",
-    "SUSTAINABILITY FIRST - Test for tradeability before spending weeks on analysis",
-    "DEVELOPER TIER OPTIMIZED - Use unlimited API access for fast results"
-  ],
   "next_steps": {
     "immediate": [
-      {
-        "step": 1,
-        "action": "Wait for sustainability filter to complete",
-        "status": "IN_PROGRESS",
-        "estimated_completion": "2025-11-02T19:00:00Z"
-      },
-      {
-        "step": 2,
-        "action": "Analyze sustainability_summary.json results",
-        "status": "PENDING",
-        "depends_on": "Step 1"
-      },
-      {
-        "step": 3,
-        "action": "Verify CLEAN.json contains only sustainable stocks",
-        "status": "PENDING",
-        "depends_on": "Step 1"
-      },
-      {
-        "step": 4,
-        "action": "Review UNSUSTAINABLE.json for patterns",
-        "status": "PENDING",
-        "depends_on": "Step 1"
-      },
-      {
-        "step": 5,
-        "action": "Document sustainability findings and update catch-up prompt",
-        "status": "PENDING",
-        "depends_on": "Steps 2-4"
-      }
-    ],
-    "phase_3": [
-      "Build data collection scripts for sustainable stocks",
-      "Collect 180-day pre-catalyst data using Polygon API",
-      "Build pattern scanning and correlation tools",
-      "Analyze patterns across all sustainable stocks",
-      "Extract screening criteria from correlations",
-      "Document all discoveries and patterns",
-      "Update screening protocol with new criteria"
+      "Run Sustained Gain Window Filter V3.0",
+      "Analyze V3.0 results vs V2.0",
+      "Review position management insights",
+      "Proceed with pre-catalyst analysis"
     ]
-  },
-  "blockers": [],
-  "estimated_timeline": {
-    "sustainability_filter": "5-15 minutes (RUNNING NOW)",
-    "sustainability_analysis": "1 hour",
-    "data_collection_scripts": "3-5 days",
-    "full_dataset_collection": "1-2 weeks",
-    "pattern_analysis": "1-2 weeks",
-    "phase_3_total": "4-5 weeks"
   },
   "api_configuration": {
     "polygon": {
       "tier": "Developer",
-      "rate_limit": "unlimited (stay under 100 req/sec)",
-      "key_status": "active",
-      "endpoints_used": [
-        "/v2/aggs/ticker/{ticker}/range/1/day/{from}/{to}",
-        "/v2/snapshot/locale/us/markets/stocks/tickers"
-      ]
+      "rate_limit": "unlimited",
+      "runtime_expected": "10-20 minutes"
     }
   },
   "metadata": {
-    "generated_by": "GEM Catch-Up Prompt System v2.2",
+    "generated_by": "GEM Catch-Up Prompt System v2.3",
     "paired_file": "CURRENT_CATCHUP_PROMPT.md",
-    "last_sync": "2025-11-02T18:45:00Z",
-    "next_update_trigger": "After sustainability filter completes",
-    "format_version": "2.0"
+    "last_sync": "2025-11-02T19:30:00Z"
   }
 }
