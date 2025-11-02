@@ -1,8 +1,8 @@
 # GEM Trading System - GitHub File Catalog
 
 **Repository**: https://github.com/cbenson85/GEM_Trading_System
-**Last Updated**: 2025-11-02 17:30:00
-**Status**: Accurate reflection of current repository state
+**Last Updated**: 2025-11-02 17:00:00
+**Status**: Updated with Phase 3 sustainability filter files
 
 ---
 
@@ -13,16 +13,19 @@
 **Files:**
 - [README.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/README.md)
 - [explosive_stock_scanner.py](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/explosive_stock_scanner.py) ✅ Active
-- [filter_covid_era.py](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/filter_covid_era.py) ✅ Active (with merge logic)
+- [filter_covid_era.py](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/filter_covid_era.py) ✅ Active
 - [COVID_ERA_EXCLUSION_RULE.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/COVID_ERA_EXCLUSION_RULE.md) ✅ Active
-- [FILE_VERIFICATION_PROTOCOL.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/FILE_VERIFICATION_PROTOCOL.md) ✅ Active (mandatory workflow)
+- [FILE_VERIFICATION_PROTOCOL.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/FILE_VERIFICATION_PROTOCOL.md) ✅ Active
+- [GITHUB_FILE_CATALOG.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/GITHUB_FILE_CATALOG.md) ✅ This file
+- filter_sustainability.py ⏳ PENDING VERIFICATION
+- SUSTAINABILITY_FILTER_README.md ⏳ PENDING VERIFICATION
 
 ---
 
 ### **.github/workflows/**
 
 **Files:**
-- [explosive_stock_scan_workflow.yml](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/.github/workflows/explosive_stock_scan_workflow.yml) ✅ ACTIVE (includes filter step, full automation)
+- [explosive_stock_scan_workflow.yml](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/.github/workflows/explosive_stock_scan_workflow.yml) ✅ ACTIVE (Full automation)
 - [daily_gem_screening.yml](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/.github/workflows/daily_gem_screening.yml) ⚠️ DISABLED
 - [test_polygon_api_workflow.yml](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/.github/workflows/test_polygon_api_workflow.yml)
 
@@ -31,8 +34,8 @@
 ### **System_State/**
 
 **Files:**
-- [CURRENT_CATCHUP_PROMPT.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/System_State/CURRENT_CATCHUP_PROMPT.md) ✅ VERIFIED (2025-11-02) - Updated with Phase 2 complete, 200 stocks
-- [system_state.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/System_State/system_state.json) ✅ VERIFIED (2025-11-02) - Machine-readable state
+- [CURRENT_CATCHUP_PROMPT.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/System_State/CURRENT_CATCHUP_PROMPT.md) ✅ Main prompt
+- [system_state.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/System_State/system_state.json) ✅ State data
 - [catchup_prompt_generator.py](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/System_State/catchup_prompt_generator.py) ✅ Generator
 - [update_prompt.py](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/System_State/update_prompt.py)
 - [CATCHUP_SYSTEM_USAGE.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/System_State/CATCHUP_SYSTEM_USAGE.md)
@@ -56,20 +59,24 @@
 ### **Verified_Backtest_Data/**
 
 **Files (Currently Exist):**
-- [explosive_stocks_catalog.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/explosive_stocks_catalog.json) ✅ LIVE DATA (Latest: 2010-2012 scan, 11 stocks)
+- [explosive_stocks_catalog.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/explosive_stocks_catalog.json) ✅ LIVE DATA (Latest scan: 2010-2012, 11 stocks)
 - [explosive_stocks_CLEAN.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/explosive_stocks_CLEAN.json) ✅ VERIFIED (200 stocks, 2010-2024 excluding COVID)
-- [explosive_stocks_COVID_ERA.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/explosive_stocks_COVID_ERA.json) ✅ VERIFIED (81 stocks, 2020-2021 archived)
+- [explosive_stocks_COVID_ERA.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/explosive_stocks_COVID_ERA.json) ✅ VERIFIED (81 stocks archived)
 - [filter_summary.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/filter_summary.json) ✅ VERIFIED (Merge statistics)
 - [refinement_history.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/refinement_history.json) ✅ Active
-- [PRE_CATALYST_ANALYSIS_FRAMEWORK.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/PRE_CATALYST_ANALYSIS_FRAMEWORK.md) ✅ VERIFIED (2025-11-02) - v2.0, 12 categories, 100+ data points
-- [PHASE_3_IMPLEMENTATION_PLAN.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/PHASE_3_IMPLEMENTATION_PLAN.md) ⏳ PENDING VERIFICATION - Detailed Phase 3 execution plan
-- [STANDARD_DATA_FORMAT.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/STANDARD_DATA_FORMAT.md) ✅ VERIFIED (2025-11-02) - v1.0, JSON schema for all 200 stocks
+- [README.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/README.md) ✅ Data quality standards
+- [PRE_CATALYST_ANALYSIS_FRAMEWORK.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/PRE_CATALYST_ANALYSIS_FRAMEWORK.md) ✅ VERIFIED
+- [PHASE_3_IMPLEMENTATION_PLAN.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/PHASE_3_IMPLEMENTATION_PLAN.md) ✅ VERIFIED
+- [STANDARD_DATA_FORMAT.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/STANDARD_DATA_FORMAT.md) ✅ VERIFIED
 
-**Missing Files (To Be Created):**
-- README.md ❌ (need to create)
-- correlations_discovered.json ❌ (will be created in Phase 3)
-- pre_catalyst_analysis/ folder ❌ (need to create for Phase 3 data)
-- backtest_runs/ folder ❌ (need to create for Phase 4)
+**Will Be Created by Filter:**
+- explosive_stocks_SUSTAINABLE.json ❌ (Will be created by sustainability filter)
+- explosive_stocks_UNSUSTAINABLE.json ❌ (Will be created by sustainability filter)
+- sustainability_summary.json ❌ (Will be created by sustainability filter)
+
+**Folders:**
+- pre_catalyst_analysis/ ❌ (Phase 3 data collection - not started)
+- backtest_runs/ ❌ (Phase 4+ - not started)
 
 ---
 
@@ -97,6 +104,13 @@
 - [Live_Portfolio_Tracking.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Daily_Logs/Live_Portfolio_Tracking.md)
 - [master_trading_data.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Daily_Logs/master_trading_data.json)
 - [README.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Daily_Logs/README.md)
+
+---
+
+### **Archive_Unverified/** ✅ EXISTS
+
+**Files:**
+- [README.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Archive_Unverified/README.md) ✅ Archived data explanation
 
 ---
 
@@ -145,90 +159,76 @@
 
 ---
 
-## ❌ MISSING FOLDERS/FILES
-
-### **Archive_Unverified/** - DOES NOT EXIST YET
-- **Status**: Folder not created
-- **Action**: Need to create this folder and add README.md
-
-### **Verified_Backtest_Data/** - Missing Files:
-- README.md (need to upload)
-- correlations_discovered.json (will be created in Phase 3)
-- pre_catalyst_analysis/ folder (need to create)
-- backtest_runs/ folder (need to create)
-
----
-
 ## 🔑 KEY FILES FOR AI TO READ
 
 ### **Start Here (Critical):**
-1. [CURRENT_CATCHUP_PROMPT.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/System_State/CURRENT_CATCHUP_PROMPT.md) - Current state (Phase 2 complete, 200 stocks)
-2. [system_state.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/System_State/system_state.json) - Machine-readable state
-3. [FILE_VERIFICATION_PROTOCOL.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/FILE_VERIFICATION_PROTOCOL.md) - **MANDATORY** file creation workflow
+1. [CURRENT_CATCHUP_PROMPT.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/System_State/CURRENT_CATCHUP_PROMPT.md) - Current state
+2. [system_state.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/System_State/system_state.json) - State data (MUST update with prompt)
+3. [FILE_VERIFICATION_PROTOCOL.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/FILE_VERIFICATION_PROTOCOL.md) - File workflow
 4. [GEM_v5_Master_Screening_Protocol.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Current_System/GEM_v5_Master_Screening_Protocol.md) - Core rules
 5. [COVID_ERA_EXCLUSION_RULE.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/COVID_ERA_EXCLUSION_RULE.md) - Filter rule
 
-### **Phase 3 Framework:**
-1. [PRE_CATALYST_ANALYSIS_FRAMEWORK.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/PRE_CATALYST_ANALYSIS_FRAMEWORK.md) - v2.0, 12 categories, 100+ data points
-2. [PHASE_3_IMPLEMENTATION_PLAN.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/PHASE_3_IMPLEMENTATION_PLAN.md) - Detailed execution plan
-3. [STANDARD_DATA_FORMAT.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/STANDARD_DATA_FORMAT.md) - JSON schema for all stocks
-
 ### **Live Data:**
-1. [explosive_stocks_catalog.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/explosive_stocks_catalog.json) - Latest scan (2010-2012, 11 stocks)
-2. [explosive_stocks_CLEAN.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/explosive_stocks_CLEAN.json) - 200 stocks (2010-2024, excluding COVID)
-3. [explosive_stocks_COVID_ERA.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/explosive_stocks_COVID_ERA.json) - 81 archived stocks (2020-2021)
-4. [filter_summary.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/filter_summary.json) - Merge statistics
-5. [refinement_history.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/refinement_history.json) - System changes
+1. [explosive_stocks_catalog.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/explosive_stocks_catalog.json) - Latest scan (LIVE)
+2. [explosive_stocks_CLEAN.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/explosive_stocks_CLEAN.json) - 200 clean stocks
+3. [explosive_stocks_COVID_ERA.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/explosive_stocks_COVID_ERA.json) - 81 archived
+4. [refinement_history.json](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/refinement_history.json) - System changes
 
-### **Active Automation:**
+### **Phase 3 Framework:**
+1. [PRE_CATALYST_ANALYSIS_FRAMEWORK.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/PRE_CATALYST_ANALYSIS_FRAMEWORK.md) - Analysis methodology
+2. [PHASE_3_IMPLEMENTATION_PLAN.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/PHASE_3_IMPLEMENTATION_PLAN.md) - Execution plan
+3. [STANDARD_DATA_FORMAT.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/Verified_Backtest_Data/STANDARD_DATA_FORMAT.md) - Data schema
+
+### **Active Scripts:**
 1. [explosive_stock_scanner.py](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/explosive_stock_scanner.py) - Multi-year scanner
-2. [filter_covid_era.py](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/filter_covid_era.py) - Data filter (with merge logic)
-3. [explosive_stock_scan_workflow.yml](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/.github/workflows/explosive_stock_scan_workflow.yml) - GitHub Actions (full automation)
+2. [filter_covid_era.py](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/filter_covid_era.py) - COVID filter (merge logic)
+3. filter_sustainability.py ⏳ PENDING - 30-day hold test
+4. [explosive_stock_scan_workflow.yml](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/main/.github/workflows/explosive_stock_scan_workflow.yml) - GitHub Actions
 
 ---
 
-## 📝 FILES TO CREATE/UPLOAD
+## 📝 NEW FILES PENDING VERIFICATION
 
-### **Priority 1 (Need Now):**
-1. **Verified_Backtest_Data/README.md** - Data quality standards
-2. **Archive_Unverified/** folder with README.md
+### **Created 2025-11-02 17:00:00:**
+1. **filter_sustainability.py** ⏳ PENDING
+   - Location: Root directory
+   - Purpose: 30-day hold test (filter pump & dumps)
+   - Status: Created, awaiting upload and verification
+   - URL: https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/refs/heads/main/filter_sustainability.py
 
-### **Priority 2 (Will be created in Phase 3):**
-- Sustainability filter script (pre-filter for pump & dumps)
-- Data collection scripts (8 collectors)
-- Pattern scanning tools
-- Correlation matrix
+2. **SUSTAINABILITY_FILTER_README.md** ⏳ PENDING
+   - Location: Root directory  
+   - Purpose: Documentation for sustainability filter
+   - Status: Created, awaiting upload and verification
+   - URL: https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/refs/heads/main/SUSTAINABILITY_FILTER_README.md
 
 ---
 
 ## ✅ VERIFICATION CHECKLIST
 
-- ✅ Root files correct (includes FILE_VERIFICATION_PROTOCOL.md)
-- ✅ System_State files correct (CATCHUP_PROMPT + system_state updated 2025-11-02)
+- ✅ Root files correct (including FILE_VERIFICATION_PROTOCOL.md and GITHUB_FILE_CATALOG.md)
+- ✅ System_State files correct
 - ✅ Current_System files correct
-- ✅ Verified_Backtest_Data has 8 files (catalog, CLEAN, COVID, filter_summary, refinement, framework, implementation plan, standard format)
-- ❌ Archive_Unverified does NOT exist (need to create)
+- ✅ Verified_Backtest_Data has all Phase 2 files verified
+- ✅ Archive_Unverified exists with README
 - ✅ All old folders exist (Backtest_Results, Strategy_Evolution, Scripts)
+- ⏳ 2 new files pending verification (sustainability filter + README)
 
 ---
 
-## 📋 RECENT UPDATES (2025-11-02)
+## 🚨 CRITICAL REMINDERS
 
-**System State Files:**
-- ✅ CURRENT_CATCHUP_PROMPT.md - Updated with Phase 2 complete, 200 stocks, ready for Phase 3
-- ✅ system_state.json - Machine-readable state snapshot
-
-**Phase 3 Framework:**
-- ✅ PRE_CATALYST_ANALYSIS_FRAMEWORK.md - Comprehensive framework (v2.0)
-- ⏳ PHASE_3_IMPLEMENTATION_PLAN.md - Detailed execution plan (pending verification)
-- ✅ STANDARD_DATA_FORMAT.md - JSON schema for uniform data structure (v1.0)
-
-**Dataset:**
-- ✅ explosive_stocks_CLEAN.json - Expanded from 189 to 200 stocks (2010-2012 added)
-- ✅ filter_summary.json - Tracking merge statistics
+1. **ALWAYS UPDATE THIS CATALOG** when creating new files
+2. **PAIRED FILES**: When updating CURRENT_CATCHUP_PROMPT.md, ALSO update system_state.json
+3. **FILE VERIFICATION**: Follow protocol - create, post URL, user uploads, verify, update catalog
+4. **STATUS MARKERS**:
+   - ✅ VERIFIED - File uploaded and verified via web_fetch
+   - ⏳ PENDING - File created, awaiting upload/verification
+   - ❌ MISSING - File needed but not created yet
+   - ⚠️ UNVERIFIED - Old data, reference only
 
 ---
 
-**Last Updated**: 2025-11-02 17:30:00
+**Last Updated**: 2025-11-02 17:00:00
 **Repository**: https://github.com/cbenson85/GEM_Trading_System
-**Status**: CURRENT - Reflects all verified files as of Phase 2 completion
+**Status**: Phase 3 sustainability filter files created - pending verification
