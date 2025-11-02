@@ -1,37 +1,95 @@
-{
-  "scan_info": {
-    "scan_date": "2025-11-02 16:21:09",
-    "scan_period_start": "2010-01-01",
-    "scan_period_end": "2012-10-31",
-    "criteria": "500%+ gain in any 180-day window",
-    "data_sources": [
-      "Polygon API",
-      "Yahoo Finance"
-    ],
-    "total_stocks_scanned": 3000,
-    "total_explosive_stocks_found": 11,
-    "data_errors": 2169,
-    "api_calls_made": 3018,
-    "scan_complete": true
-  },
-  "filter_info": {
-    "filter_date": "2025-11-02 16:21:09",
-    "filter_applied": "COVID-era exclusion (2020-2021)",
-    "original_catalog_count": 11,
-    "total_clean_count": 200,
-    "new_additions": 11,
-    "duplicates_skipped": 0,
-    "merge_mode": true,
-    "sustainability_filter_date": "2025-11-02",
-    "sustainability_threshold": 0.9,
-    "original_count": 200,
-    "sustainable_count": 0,
-    "unsustainable_count": 200
-  },
-  "metadata": {
-    "note": "Pattern analysis dataset - normal market conditions only",
-    "last_updated": "2025-11-02 16:21:09",
-    "cumulative": true
-  },
-  "stocks": []
+#!/usr/bin/env python3
+"""
+Restore CLEAN.json from UNSUSTAINABLE.json
+Removes sustainability test results and restores original stock list
+"""
+import json
+from pathlib import Path
+
+print("="*70)
+print("🔄 RESTORING CLEAN.JSON FROM UNSUSTAINABLE.JSON")
+print("="*70)
+
+# File paths
+UNSUSTAINABLE_FILE = "Verified_Backtest_Data/explosive_stocks_UNSUSTAINABLE.json"
+CLEAN_FILE = "Verified_Backtest_Data/explosive_stocks_CLEAN.json"
+
+# Load unsustainable stocks (which has ALL 200 stocks)
+print(f"\n📂 Loading {UNSUSTAINABLE_FILE}...")
+if not Path(UNSUSTAINABLE_FILE).exists():
+    print(f"❌ ERROR: {UNSUSTAINABLE_FILE} not found!")
+    exit(1)
+
+with open(UNSUSTAINABLE_FILE, 'r') as f:
+    all_stocks_with_tests = json.load(f)
+
+print(f"✅ Loaded {len(all_stocks_with_tests)} stocks from UNSUSTAINABLE.json")
+
+# Remove sustainability test fields from each stock
+print(f"\n🧹 Cleaning stocks (removing test results)...")
+restored_stocks = []
+
+for stock in all_stocks_with_tests:
+    # Create a copy without the test fields
+    clean_stock = {k: v for k, v in stock.items() 
+                   if k not in ['sustainability_test', 'tested_date']}
+    restored_stocks.append(clean_stock)
+
+print(f"✅ Cleaned {len(restored_stocks)} stocks")
+
+# Create the restored CLEAN.json structure
+restored_clean = {
+    "scan_info": {
+        "scan_date": "2025-11-01",
+        "scan_period_start": "2014-01-01",
+        "scan_period_end": "2024-12-31",
+        "criteria": "500%+ gain in any 180-day window",
+        "data_sources": [
+            "Polygon API",
+            "Yahoo Finance"
+        ],
+        "total_stocks_scanned": 11000,
+        "total_explosive_stocks_found": 244,
+        "data_errors": 5043,
+        "api_calls_made": 11066,
+        "scan_complete": True,
+        "scan_method": "GitHub Actions - Full 10-year historical scan"
+    },
+    "filter_info": {
+        "filter_date": "2025-11-01",
+        "filter_applied": "COVID-era exclusion (2020-2021)",
+        "original_count": 239,
+        "clean_count": 200,
+        "excluded_count": 69,
+        "note": "Restored from UNSUSTAINABLE.json on 2025-11-02"
+    },
+    "stocks": restored_stocks,
+    "metadata": {
+        "note": "Pattern analysis dataset - normal market conditions only",
+        "restored": "2025-11-02",
+        "restored_from": "explosive_stocks_UNSUSTAINABLE.json"
+    }
 }
+
+# Save restored CLEAN.json
+print(f"\n💾 Saving restored CLEAN.json...")
+with open(CLEAN_FILE, 'w') as f:
+    json.dump(restored_clean, f, indent=2)
+
+print(f"✅ Saved {len(restored_stocks)} stocks to {CLEAN_FILE}")
+
+# Verify the restore
+print(f"\n✅ RESTORATION COMPLETE")
+print("="*70)
+print(f"📊 Summary:")
+print(f"   - Stocks restored: {len(restored_stocks)}")
+print(f"   - File location: {CLEAN_FILE}")
+print(f"   - Original UNSUSTAINABLE.json preserved")
+print("="*70)
+
+print(f"\n📋 Sample of restored stocks:")
+for i, stock in enumerate(restored_stocks[:3], 1):
+    print(f"{i}. {stock.get('ticker')} ({stock.get('year', stock.get('year_discovered'))}) - {stock.get('gain_percent')}% gain")
+
+print(f"\n✅ CLEAN.json has been restored!")
+print(f"📂 Next: Delete/archive UNSUSTAINABLE.json and sustainability_summary.json")
