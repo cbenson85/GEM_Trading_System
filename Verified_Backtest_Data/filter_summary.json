@@ -1,17 +1,17 @@
 {
-  "filter_applied": "2025-11-02 09:49:59",
-  "catalog_stocks_processed": 199,
+  "filter_applied": "2025-11-02 16:21:09",
+  "catalog_stocks_processed": 11,
   "clean_dataset": {
-    "total": 189,
-    "new_additions": 19,
-    "duplicates_skipped": 99,
-    "pre_covid_2014_2019": 76,
+    "total": 200,
+    "new_additions": 11,
+    "duplicates_skipped": 0,
+    "pre_covid_2014_2019": 87,
     "post_covid_2022_2024": 113
   },
   "covid_dataset": {
     "total": 81,
-    "new_additions": 12,
-    "duplicates_skipped": 69
+    "new_additions": 0,
+    "duplicates_skipped": 0
   },
   "ready_for_analysis": true,
   "merge_mode": true
