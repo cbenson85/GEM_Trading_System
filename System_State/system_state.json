@@ -1,10 +1,10 @@
 {
   "system_info": {
-    "version": "5.0.3-SUSTAINED-GAIN-FILTER",
-    "last_updated": "2025-11-02T19:30:00Z",
+    "version": "5.0.3-SUSTAINED-GAIN-FILTER-FINAL",
+    "last_updated": "2025-11-02T20:00:00Z",
     "current_phase": "Phase 3: Stock Discovery & Pre-Catalyst Analysis",
-    "current_task": "Ready to run Sustained Gain Window Filter V3.0",
-    "next_milestone": "Run V3.0 filter, analyze results, proceed with pre-catalyst analysis"
+    "current_task": "Ready to run Sustained Gain Window Filter V3.0 (120-day window)",
+    "next_milestone": "Run V3.0, analyze results, begin pre-catalyst data collection"
   },
   "portfolio": {
     "status": "CLEARED",
@@ -13,50 +13,102 @@
   },
   "data_status": {
     "explosive_stocks_total": 200,
+    "explosive_stocks_range": "2010-2024 (excluding COVID 2020-2021)",
     "v2_sustainable": 17,
     "v2_sustainability_rate": "8.5%",
     "v3_expected_sustainable": "40-80",
     "v3_expected_rate": "20-40%",
     "covid_era_archived": 81
   },
+  "filter_v3_final_specs": {
+    "trading_window": "120 days from entry",
+    "peak_determination": "Actual peak OR day 120 (whichever first)",
+    "test_period": "30 days after peak",
+    "max_total_days": 150,
+    "thresholds": {
+      "FAST": "250%+ minimum (<30 days to peak)",
+      "MEDIUM": "200%+ minimum (30-90 days to peak)",
+      "SLOW": "150%+ minimum (90-120 days to peak)"
+    },
+    "rationale": "Realistic trading horizon with clear selling windows",
+    "filters_out": "Pump & dumps (collapse before 30 days)"
+  },
+  "clean_json_architecture": {
+    "role": "Master stock list",
+    "filter_reads": "Ticker, year, gain%, days_to_peak",
+    "filter_uses": "Polygon API for ALL data (not enriched fields)",
+    "filter_updates": "Keeps only sustainable stocks",
+    "after_filtering": "CLEAN.json = sustainable master list",
+    "critical_note": "Filter DOES modify CLEAN.json (user corrected this multiple times)"
+  },
   "filter_evolution": {
     "v1": {
       "status": "FAILED",
       "criteria": "90% retention, 30 days",
-      "result": "All 200 failed"
+      "result": "All 200 failed",
+      "issue": "Wrong criteria, missing data"
     },
     "v2": {
       "status": "COMPLETE",
       "criteria": "80% retention, 21 days from peak",
       "result": "17/200 sustainable (8.5%)",
-      "issue": "Peak testing captures market corrections, not stock quality"
+      "issue": "Testing from peak captures market corrections, not stock quality"
     },
-    "v3": {
+    "v3_final": {
       "status": "READY",
-      "criteria": "Speed-adjusted minimum gain (FAST:250%, MED:200%, SLOW:150%)",
-      "method": "Sustained Gain Window (entry to peak+60 days)",
-      "improvement": "Tests sustained elevation, ignores market noise",
+      "criteria": "120-day window, 30-day selling window, speed-adjusted thresholds",
+      "improvement": [
+        "Realistic trading horizon (120 days)",
+        "Clear selling windows (30 days post-peak)",
+        "Speed-adjusted thresholds (fast = stricter)",
+        "Caps peak at day 120 if needed",
+        "Skips too-recent stocks gracefully"
+      ],
       "expected_result": "40-80/200 sustainable (20-40%)"
     }
   },
+  "key_learnings": [
+    "CLEAN.json is modified by filter (not preserved)",
+    "Filter uses Polygon API for all data (not enriched fields)",
+    "Testing from peak captures market noise, not stock quality",
+    "Need realistic trading windows (120 days max)",
+    "Fast movers need stricter tests (250%+ to prove sustainability)",
+    "Must have selling windows (30 days to exit positions)"
+  ],
   "next_steps": {
     "immediate": [
-      "Run Sustained Gain Window Filter V3.0",
-      "Analyze V3.0 results vs V2.0",
-      "Review position management insights",
-      "Proceed with pre-catalyst analysis"
+      "Upload filter_sustainability.py (V3.0 with 120-day window)",
+      "Upload sustainability_filter_workflow.yml (updated)",
+      "Run V3.0 filter workflow",
+      "Analyze results vs V2.0",
+      "Review position management insights"
+    ],
+    "after_filter": [
+      "Build data collection scripts",
+      "Collect 180-day pre-catalyst data",
+      "Pattern discovery",
+      "Correlation analysis",
+      "Build position management rules"
     ]
   },
   "api_configuration": {
     "polygon": {
       "tier": "Developer",
       "rate_limit": "unlimited",
-      "runtime_expected": "10-20 minutes"
+      "runtime_expected": "10-20 minutes for 200 stocks",
+      "key_active": true
     }
   },
+  "expected_outcomes": {
+    "sustainable_stocks": "40-80 (20-40%)",
+    "unsustainable_stocks": "120-160 (60-80%)",
+    "improvement_over_v2": "2-5x more sustainable stocks identified",
+    "reason": "Market corrections no longer disqualify good stocks"
+  },
   "metadata": {
-    "generated_by": "GEM Catch-Up Prompt System v2.3",
+    "generated_by": "GEM Catch-Up Prompt System v2.4",
     "paired_file": "CURRENT_CATCHUP_PROMPT.md",
-    "last_sync": "2025-11-02T19:30:00Z"
+    "last_sync": "2025-11-02T20:00:00Z",
+    "conversation_notes": "Finalized V3.0 with 120-day window after multiple architecture corrections"
   }
 }
