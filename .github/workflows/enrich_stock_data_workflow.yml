@@ -1,0 +1,107 @@
+name: Enrich Stock Data
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for enrichment'
+        required: false
+        default: 'Comprehensive data enrichment for all 200 stocks'
+
+jobs:
+  enrich-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+      
+      - name: Pre-Enrichment Status
+        run: |
+          echo "📊 PRE-ENRICHMENT STATUS"
+          echo "=================================="
+          echo ""
+          python -c "
+          import json
+          data = json.load(open('Verified_Backtest_Data/explosive_stocks_CLEAN.json'))
+          stocks = data.get('stocks', data) if isinstance(data, dict) else data
+          enriched = sum(1 for s in stocks if 'entry_date' in s and 'entry_price' in s)
+          print(f'Total stocks: {len(stocks)}')
+          print(f'Already enriched: {enriched}')
+          print(f'Need enrichment: {len(stocks) - enriched}')
+          "
+          echo ""
+          echo "⚡ Running comprehensive enrichment..."
+          echo "⏱️  Estimated time: 20-30 minutes"
+          echo ""
+      
+      - name: Run Data Enrichment
+        run: |
+          python enrich_stock_data.py
+        env:
+          PYTHONUNBUFFERED: 1
+      
+      - name: Post-Enrichment Status
+        run: |
+          echo ""
+          echo "=================================="
+          echo "📊 POST-ENRICHMENT STATUS"
+          echo "=================================="
+          echo ""
+          python -c "
+          import json
+          data = json.load(open('Verified_Backtest_Data/explosive_stocks_CLEAN.json'))
+          stocks = data.get('stocks', data) if isinstance(data, dict) else data
+          enriched = sum(1 for s in stocks if 'entry_date' in s and 'entry_price' in s)
+          print(f'Total stocks: {len(stocks)}')
+          print(f'Enriched stocks: {enriched}')
+          print(f'Enrichment rate: {enriched/len(stocks)*100:.1f}%')
+          "
+          echo ""
+          echo "📈 Enrichment Log:"
+          cat Verified_Backtest_Data/enrichment_log.json | python -m json.tool
+          echo ""
+      
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add Verified_Backtest_Data/explosive_stocks_CLEAN.json
+          git add Verified_Backtest_Data/enrichment_log.json
+          git diff --staged --quiet || git commit -m "📊 Data Enrichment: Added complete data for all stocks
+          
+          - Enriched stocks with entry dates, prices, peak data
+          - Used Polygon Developer API for data collection
+          - Created enrichment_log.json for tracking
+          - Prepared for sustainability filtering
+          
+          Reason: ${{ github.event.inputs.reason }}"
+          git push
+      
+      - name: Final Summary
+        if: always()
+        run: |
+          echo ""
+          echo "=================================="
+          echo "✅ ENRICHMENT COMPLETE"
+          echo "=================================="
+          echo ""
+          echo "Files Updated:"
+          echo "  - explosive_stocks_CLEAN.json (enriched with complete data)"
+          echo "  - enrichment_log.json (success/failure tracking)"
+          echo ""
+          echo "Next Steps:"
+          echo "  1. Review enrichment_log.json for any failures"
+          echo "  2. Run sustainability filter with enriched data"
+          echo "  3. Filter will now work properly with complete data"
+          echo ""
