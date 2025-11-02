@@ -373,6 +373,3 @@ if __name__ == "__main__":
         OUTPUT_UNSUSTAINABLE,
         SUMMARY_FILE
     )
-        OUTPUT_UNSUSTAINABLE,
-        SUMMARY_FILE
-    )
