@@ -210,7 +210,15 @@ def filter_sustainability(input_file, output_unsustainable, summary_file):
         return
     
     with open(input_file, 'r') as f:
-        all_stocks = json.load(f)
+        data = json.load(f)
+    
+    # Handle nested structure (stocks may be in a "stocks" key)
+    if isinstance(data, dict) and 'stocks' in data:
+        all_stocks = data['stocks']
+        file_metadata = {k: v for k, v in data.items() if k != 'stocks'}
+    else:
+        all_stocks = data
+        file_metadata = {}
     
     print(f"✅ Loaded {len(all_stocks)} stocks from {input_file}\n")
     print(f"🔄 This filter will automatically update {input_file}")
@@ -320,8 +328,22 @@ def filter_sustainability(input_file, output_unsustainable, summary_file):
     print("="*70 + "\n")
     
     # CRITICAL: Overwrite CLEAN.json with ONLY sustainable stocks
+    # Preserve the file structure if it had metadata
+    if file_metadata:
+        clean_output = file_metadata.copy()
+        clean_output['stocks'] = sustainable
+        # Update filter_info if it exists
+        if 'filter_info' in clean_output:
+            clean_output['filter_info']['sustainability_filter_date'] = datetime.now().strftime('%Y-%m-%d')
+            clean_output['filter_info']['sustainability_threshold'] = SUSTAINABILITY_THRESHOLD
+            clean_output['filter_info']['original_count'] = len(all_stocks)
+            clean_output['filter_info']['sustainable_count'] = len(sustainable)
+            clean_output['filter_info']['unsustainable_count'] = len(unsustainable)
+    else:
+        clean_output = sustainable
+    
     with open(input_file, 'w') as f:
-        json.dump(sustainable, f, indent=2)
+        json.dump(clean_output, f, indent=2)
     print(f"✅ Updated {input_file} with {len(sustainable)} SUSTAINABLE stocks (removed {len(unsustainable)} unsustainable)")
     
     with open(output_unsustainable, 'w') as f:
