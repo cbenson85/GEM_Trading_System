@@ -57,7 +57,7 @@ jobs:
           echo "Test Method: Track minimum gain from entry to peak+60 days"
           echo "Purpose: Identify stocks with sustained elevation (not just peak timing)"
           echo ""
-          python filter_sustained_gain_v3.py
+          python filter_sustainability.py
         env:
           PYTHONUNBUFFERED: 1
       
