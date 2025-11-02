@@ -30,11 +30,11 @@ from pathlib import Path
 POLYGON_API_KEY = "pvv6DNmKAoxojCc0B5HOaji6I_k1egv0"
 POLYGON_BASE_URL = "https://api.polygon.io/v2"
 
-# File paths
-INPUT_FILE = "explosive_stocks_CLEAN.json"
-OUTPUT_SUSTAINABLE = "explosive_stocks_SUSTAINABLE.json"
-OUTPUT_UNSUSTAINABLE = "explosive_stocks_UNSUSTAINABLE.json"
-SUMMARY_FILE = "sustainability_summary.json"
+# File paths - use Verified_Backtest_Data directory
+DATA_DIR = "Verified_Backtest_Data"
+INPUT_FILE = f"{DATA_DIR}/explosive_stocks_CLEAN.json"
+OUTPUT_UNSUSTAINABLE = f"{DATA_DIR}/explosive_stocks_UNSUSTAINABLE.json"
+SUMMARY_FILE = f"{DATA_DIR}/sustainability_summary.json"
 
 # Sustainability threshold (90% of peak gain must be retained after 30 days)
 SUSTAINABILITY_THRESHOLD = 0.90
@@ -190,10 +190,11 @@ def calculate_sustainability(stock, api_key):
     }
 
 
-def filter_sustainability(input_file, output_sustainable, output_unsustainable, summary_file):
+def filter_sustainability(input_file, output_unsustainable, summary_file):
     """
     Main filter function - test all stocks for sustainability
     Uses merge logic to preserve existing results
+    Automatically removes unsustainable stocks from CLEAN.json
     """
     print("\n" + "="*70)
     print("🔬 GEM SUSTAINABILITY FILTER")
@@ -212,6 +213,9 @@ def filter_sustainability(input_file, output_sustainable, output_unsustainable, 
         all_stocks = json.load(f)
     
     print(f"✅ Loaded {len(all_stocks)} stocks from {input_file}\n")
+    print(f"🔄 This filter will automatically update {input_file}")
+    print(f"   - SUSTAINABLE stocks stay in {input_file}")
+    print(f"   - UNSUSTAINABLE stocks moved to {output_unsustainable}\n")
     
     # Load existing results (merge logic)
     existing_sustainable = load_existing_file(output_sustainable)
@@ -315,19 +319,21 @@ def filter_sustainability(input_file, output_sustainable, output_unsustainable, 
     print("💾 SAVING RESULTS")
     print("="*70 + "\n")
     
-    with open(output_sustainable, 'w') as f:
+    # CRITICAL: Overwrite CLEAN.json with ONLY sustainable stocks
+    with open(input_file, 'w') as f:
         json.dump(sustainable, f, indent=2)
-    print(f"✅ Saved {len(sustainable)} sustainable stocks to {output_sustainable}")
+    print(f"✅ Updated {input_file} with {len(sustainable)} SUSTAINABLE stocks (removed {len(unsustainable)} unsustainable)")
     
     with open(output_unsustainable, 'w') as f:
         json.dump(unsustainable, f, indent=2)
-    print(f"✅ Saved {len(unsustainable)} unsustainable stocks to {output_unsustainable}")
+    print(f"✅ Saved {len(unsustainable)} UNSUSTAINABLE stocks to {output_unsustainable}")
     
     # Add metadata to summary
     stats['filter_date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     stats['sustainability_threshold'] = SUSTAINABILITY_THRESHOLD
     stats['input_file'] = input_file
     stats['sustainable_percentage'] = round((stats['sustainable_count'] / len(all_stocks)) * 100, 2)
+    stats['removed_from_clean'] = len(unsustainable)
     
     with open(summary_file, 'w') as f:
         json.dump(stats, f, indent=2)
@@ -343,9 +349,11 @@ def filter_sustainability(input_file, output_sustainable, output_unsustainable, 
     print(f"\n✅ SUSTAINABLE: {stats['sustainable_count']} ({stats['sustainable_percentage']}%)")
     print(f"   - New: {stats['new_sustainable']}")
     print(f"   - Avg Retention: {stats['avg_retention_sustainable']}%")
+    print(f"   - Kept in {input_file}")
     print(f"\n❌ UNSUSTAINABLE: {stats['unsustainable_count']}")
     print(f"   - New: {stats['new_unsustainable']}")
     print(f"   - Avg Retention: {stats['avg_retention_unsustainable']}%")
+    print(f"   - Moved to {output_unsustainable}")
     print(f"\n⏭️  SKIPPED:")
     print(f"   - Missing Data: {stats['skipped_missing_data']}")
     print(f"   - Too Recent: {stats['skipped_too_recent']}")
@@ -353,16 +361,18 @@ def filter_sustainability(input_file, output_sustainable, output_unsustainable, 
     print("="*70 + "\n")
     
     print(f"✅ Filter complete: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"📂 Results saved to:")
-    print(f"   - {output_sustainable}")
-    print(f"   - {output_unsustainable}")
-    print(f"   - {summary_file}\n")
+    print(f"📂 Results saved:")
+    print(f"   - {input_file} (UPDATED - sustainable stocks only)")
+    print(f"   - {output_unsustainable} (unsustainable stocks archived)")
+    print(f"   - {summary_file} (statistics)\n")
 
 
 if __name__ == "__main__":
     filter_sustainability(
         INPUT_FILE,
-        OUTPUT_SUSTAINABLE,
+        OUTPUT_UNSUSTAINABLE,
+        SUMMARY_FILE
+    )
         OUTPUT_UNSUSTAINABLE,
         SUMMARY_FILE
     )
