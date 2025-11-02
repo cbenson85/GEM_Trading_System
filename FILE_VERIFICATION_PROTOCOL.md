@@ -56,40 +56,47 @@ Now, AI must:
 
 ## 📋 MANDATORY VERIFICATION WORKFLOW
 
-### **When AI Creates a New File:**
+### **When AI Creates New File(s):**
 
-**Step 1: AI Creates File**
+**Step 1: AI Provides Files & Posts to Catalog**
 ```
-"I've created backup_system.py. Upload it to /Verified_Backtest_Data/"
-```
-
-**Step 2: AI Provides URL**
-```
-"To verify I can read it, please paste this URL back:
-https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/refs/heads/main/Verified_Backtest_Data/backup_system.py"
-```
-
-**Step 3: User Uploads & Pastes URL**
-```
-[User uploads file to GitHub]
-[User pastes]: https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/refs/heads/main/Verified_Backtest_Data/backup_system.py
+AI creates the file(s) with download links
+AI provides file information:
+  - File name
+  - Location/path
+  - Purpose
+  - Key contents (lines, functions, etc.)
+AI immediately updates GITHUB_FILE_CATALOG.md with ⚠️ PENDING VERIFICATION status
 ```
 
-**Step 4: AI Verifies**
+**Step 2: AI Constructs & Posts URLs**
 ```
-[AI uses web_fetch on URL]
-[AI reads file]
-"✅ VERIFIED: backup_system.py
-- 150 lines
-- Contains: BackupManager class, create_backup(), restore_backup()
-- Last modified: 2025-11-02"
+AI constructs raw GitHub URL(s):
+  https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/refs/heads/main/[FILE_PATH]
+
+AI posts URL(s) in chat in plain text format for easy copying
+AI says: "To verify, copy these URLs and paste them back after upload:"
 ```
 
-**Step 5: AI Updates Systems**
+**Step 3: User Uploads & Pastes URLs Back**
 ```
-[AI updates GITHUB_FILE_CATALOG.md]
-[AI updates CURRENT_CATCHUP_PROMPT.md]
-[AI marks file as ✅ VERIFIED]
+User downloads files from chat
+User uploads/updates files to GitHub in correct locations
+User copies the URL(s) AI provided
+User pastes URL(s) back in chat
+```
+
+**Step 4: AI Verifies Files**
+```
+AI uses web_fetch on each pasted URL
+AI reads and confirms file contents
+AI responds:
+  "✅ VERIFIED: [filename]
+   - [key details: lines, functions, data]
+   - Status: Accessible and ready to use"
+
+AI updates GITHUB_FILE_CATALOG.md with ✅ VERIFIED status
+AI updates CURRENT_CATCHUP_PROMPT.md if needed
 ```
 
 ---
@@ -133,15 +140,19 @@ AI **CAN**:
 
 For EVERY file created or updated:
 
-- [ ] AI constructs raw GitHub URL
-- [ ] AI posts URL and requests user to paste it back
-- [ ] User uploads file (if new)
-- [ ] User pastes URL back to AI
-- [ ] AI fetches URL using web_fetch
+- [ ] AI creates file(s) with download links
+- [ ] AI provides file information (location, purpose, contents)
+- [ ] AI updates GITHUB_FILE_CATALOG.md with ⚠️ PENDING status
+- [ ] AI constructs raw GitHub URL(s)
+- [ ] AI posts URL(s) in chat for user to copy
+- [ ] User downloads files
+- [ ] User uploads files to GitHub
+- [ ] User copies URL(s) from chat
+- [ ] User pastes URL(s) back in chat
+- [ ] AI fetches URL(s) using web_fetch
 - [ ] AI reads and confirms file contents
-- [ ] AI updates GITHUB_FILE_CATALOG.md
-- [ ] AI updates CURRENT_CATCHUP_PROMPT.md
-- [ ] AI marks file as ✅ VERIFIED
+- [ ] AI updates GITHUB_FILE_CATALOG.md with ✅ VERIFIED status
+- [ ] AI updates CURRENT_CATCHUP_PROMPT.md (if needed)
 
 **NO EXCEPTIONS.**
 
@@ -199,14 +210,25 @@ A file verification is **FAILED** when:
 
 **AI:**
 ```
-I've created explosive_stock_scanner.py. 
+I've created explosive_stock_scanner.py:
+- Location: Root directory
+- Purpose: Scans for 500%+ explosive stocks over 10 years
+- Lines: 450
+- Functions: ExplosiveStockScanner class, scan_year(), save_results()
+- Data sources: Polygon API + Yahoo Finance
 
-Upload it to the root directory, then paste this URL back:
+[Download link provided]
+
+Updated GITHUB_FILE_CATALOG.md with pending verification.
+
+To verify, copy this URL and paste it back after upload:
+
 https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/refs/heads/main/explosive_stock_scanner.py
 ```
 
 **User:**
 ```
+[uploads file to GitHub]
 https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/refs/heads/main/explosive_stock_scanner.py
 ```
 
@@ -218,21 +240,32 @@ https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/refs/heads/main/e
 - Data source: Polygon API + Yahoo Finance
 - Status: Ready to use
 
-Updating catalog and catch-up prompt...
+Updated GITHUB_FILE_CATALOG.md with verified status.
 ```
 
 ### **Example 2: Verifying Data File**
 
 **AI:**
 ```
-I've created explosive_stocks_CLEAN.json.
+I've created explosive_stocks_CLEAN.json:
+- Location: /Verified_Backtest_Data/
+- Purpose: Clean dataset for pattern analysis (excludes COVID-era)
+- Contains: 170 explosive stocks
+- Period: 2014-2019, 2022-2024
+- Top gainer: ABVC (+416,567%)
 
-Upload it to /Verified_Backtest_Data/, then paste this URL back:
+[Download link provided]
+
+Updated GITHUB_FILE_CATALOG.md with pending verification.
+
+To verify, copy this URL and paste it back after upload:
+
 https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/refs/heads/main/Verified_Backtest_Data/explosive_stocks_CLEAN.json
 ```
 
 **User:**
 ```
+[uploads file to GitHub]
 https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/refs/heads/main/Verified_Backtest_Data/explosive_stocks_CLEAN.json
 ```
 
@@ -244,7 +277,7 @@ https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/refs/heads/main/V
 - Top gainer: ABVC (+416,567%)
 - Status: Ready for analysis
 
-Updating catalog and catch-up prompt...
+Updated GITHUB_FILE_CATALOG.md with verified status.
 ```
 
 ---
@@ -304,6 +337,10 @@ No file is considered "uploaded" or "accessible" until:
 ---
 
 **END OF FILE VERIFICATION PROTOCOL**
+
+Status: ACTIVE and MANDATORY
+Last Updated: 2025-11-02
+Next Review: As needed
 
 Status: ACTIVE and MANDATORY
 Last Updated: 2025-11-02
