@@ -1,10 +1,10 @@
 {
   "system_info": {
     "version": "5.0.1-REBUILD",
-    "last_updated": "2025-11-02T17:00:00Z",
+    "last_updated": "2025-11-02T17:30:00Z",
     "current_phase": "Phase 3: Stock Discovery & Pre-Catalyst Analysis",
     "phase_status": "STARTING",
-    "system_status": "Phase 2 Complete - Ready for Phase 3"
+    "system_status": "Phase 2 Complete - Ready for Phase 3 Sustainability Filter"
   },
   "portfolio": {
     "cash_available": 10000,
@@ -35,7 +35,7 @@
         "2014_2019": 57,
         "2022_2024": 120
       },
-      "notes": "Format inconsistency exists - needs standardization"
+      "notes": "Format inconsistency exists - needs standardization. Next: Apply sustainability filter (30-day hold test)"
     },
     "explosive_stocks_covid_era": {
       "file": "/Verified_Backtest_Data/explosive_stocks_COVID_ERA.json",
@@ -71,6 +71,7 @@
         "File verification protocol established",
         "GitHub Actions workflow automated",
         "Pre-catalyst analysis framework created (12 categories, 100+ data points)",
+        "Standard data format template created",
         "All infrastructure verified and working"
       ]
     },
@@ -78,12 +79,14 @@
       "name": "Stock Discovery & Pre-Catalyst Analysis",
       "status": "STARTING",
       "start_date": "2025-11-02",
-      "current_step": "Create Standard Data Format Template",
+      "current_step": "Create Sustainability Filter (30-day hold test)",
       "planned_steps": [
+        "Create Sustainability Filter Script (filter pump & dumps)",
+        "Apply filter to 200 stocks (expect ~120-150 sustainable)",
         "Create Standard Data Format Template",
         "Build data enrichment script",
         "Build data collection scripts (8 collectors)",
-        "Collect 180-day pre-catalyst data (200 stocks)",
+        "Collect 180-day pre-catalyst data for sustainable stocks",
         "Build pattern scanning tools",
         "Analyze patterns and correlations",
         "Extract screening criteria"
@@ -95,7 +98,8 @@
     "file_verification_protocol": {
       "status": "ESTABLISHED",
       "file": "/FILE_VERIFICATION_PROTOCOL.md",
-      "description": "Mandatory workflow for file creation and verification"
+      "description": "Mandatory workflow for file creation and verification",
+      "critical_reminder": "AI MUST update GITHUB_FILE_CATALOG.md for EVERY file creation - NO EXCEPTIONS"
     },
     "data_backup_system": {
       "status": "FIXED",
@@ -125,6 +129,20 @@
       "status": "PENDING_VERIFICATION",
       "file": "/Verified_Backtest_Data/PHASE_3_IMPLEMENTATION_PLAN.md",
       "description": "Detailed plan for Phase 3 execution"
+    },
+    "standard_data_format": {
+      "status": "VERIFIED",
+      "file": "/Verified_Backtest_Data/STANDARD_DATA_FORMAT.md",
+      "version": "1.0",
+      "description": "JSON schema for uniform data structure across all stocks",
+      "date_created": "2025-11-02"
+    },
+    "github_file_catalog": {
+      "status": "VERIFIED",
+      "file": "/GITHUB_FILE_CATALOG.md",
+      "description": "Complete catalog of all repository files",
+      "last_updated": "2025-11-02T17:30:00Z",
+      "critical_note": "Must be updated for EVERY file creation"
     }
   },
   "scripts": {
@@ -143,6 +161,13 @@
         "Duplicate prevention (ticker+year key)"
       ],
       "date_updated": "2025-11-02"
+    },
+    "sustainability_filter": {
+      "file": "/filter_sustainability.py",
+      "status": "NOT_CREATED",
+      "purpose": "30-day hold test to filter pump & dumps",
+      "criteria": "Stock must hold ≥90% of peak gain 30 days after peak",
+      "next_action": "Create this filter next"
     },
     "data_collectors": {
       "status": "NOT_CREATED",
@@ -190,10 +215,13 @@
       "10-YEAR VALIDATION - Prove consistency before live",
       "FILE VERIFICATION - Mandatory protocol",
       "DATA PRESERVATION - Merge logic prevents loss",
-      "FULL AUTOMATION - No manual steps required"
+      "FULL AUTOMATION - No manual steps required",
+      "ALWAYS UPDATE FILE CATALOG - For every file creation",
+      "SUSTAINABILITY FILTER - 30-day hold test (90% retention)"
     ],
     "selection_criteria": {
       "explosive_threshold": "500%+ gain in 180 days",
+      "sustainability_threshold": "Hold ≥90% of peak gain for 30 days",
       "covid_exclusion": "2020-2021 excluded from pattern analysis",
       "historical_range": "2010-2024 (15 years)",
       "analysis_window": "180 days pre-catalyst"
@@ -202,7 +230,7 @@
   "patterns": {
     "discovered_patterns": [],
     "status": "NONE_YET",
-    "note": "Will be discovered during Phase 3 analysis"
+    "note": "Will be discovered during Phase 3 analysis after sustainability filter"
   },
   "refinement_history": [
     {
@@ -222,26 +250,32 @@
       "version": "1.2",
       "change": "Expanded historical coverage to 2010-2012",
       "reason": "Increased dataset size from 189 to 200 stocks"
+    },
+    {
+      "date": "2025-11-02",
+      "version": "1.3",
+      "change": "Added sustainability filter requirement",
+      "reason": "Filter out pump & dumps and untradeable fluke squeezes (30-day hold test)"
     }
   ],
   "next_steps": {
     "immediate": [
-      "Create Standard Data Format Template",
-      "User uploads and verifies catch-up prompt",
-      "User uploads and verifies system_state.json"
+      "Create Sustainability Filter Script (30-day hold test, 90% retention)",
+      "Apply filter to 200 stocks",
+      "Generate SUSTAINABLE.json and UNSUSTAINABLE.json datasets"
     ],
     "short_term": [
       "Build data enrichment script",
-      "Standardize existing 200 stocks",
+      "Standardize sustainable stocks to uniform format",
       "Build first data collector (price/volume)"
     ],
     "medium_term": [
       "Build remaining 7 data collectors",
-      "Collect 180-day pre-catalyst data for all 200 stocks",
+      "Collect 180-day pre-catalyst data for sustainable stocks",
       "Build pattern scanning tools"
     ],
     "long_term": [
-      "Analyze patterns across all stocks",
+      "Analyze patterns across all sustainable stocks",
       "Build correlation matrix",
       "Extract screening criteria",
       "Update GEM v5 screener based on findings"
@@ -264,6 +298,11 @@
         "blocker": "Manual filter runs required",
         "resolution": "GitHub Actions workflow automated",
         "date_resolved": "2025-11-02"
+      },
+      {
+        "blocker": "File catalog not being updated",
+        "resolution": "Added critical reminder to catch-up prompt",
+        "date_resolved": "2025-11-02"
       }
     ]
   },
@@ -273,14 +312,15 @@
     "sec_filings_completeness": 0,
     "insider_trading_completeness": 0,
     "float_ownership_completeness": 0,
-    "note": "Pre-catalyst data collection not started yet"
+    "note": "Pre-catalyst data collection not started yet - will begin after sustainability filter"
   },
   "metadata": {
     "repository": "https://github.com/cbenson85/GEM_Trading_System",
     "file_catalog": "https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/refs/heads/main/GITHUB_FILE_CATALOG.md",
     "catch_up_prompt": "https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/refs/heads/main/System_State/CURRENT_CATCHUP_PROMPT.md",
     "system_state": "https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/refs/heads/main/System_State/system_state.json",
-    "generation_date": "2025-11-02T17:00:00Z",
-    "generated_by": "GEM Catch-Up Prompt System v2.1"
+    "generation_date": "2025-11-02T17:30:00Z",
+    "generated_by": "GEM Catch-Up Prompt System v2.1",
+    "critical_note": "This file must ALWAYS be updated when CURRENT_CATCHUP_PROMPT.md is updated"
   }
 }
