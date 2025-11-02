@@ -5,9 +5,9 @@
 
 ---
 
-## 🚨 CRITICAL REMINDER FOR AI - READ THIS FIRST
+## 🚨 CRITICAL REMINDERS FOR AI - READ THIS FIRST
 
-**FILE CATALOG MUST BE UPDATED FOR EVERY FILE CREATION - NO EXCEPTIONS!**
+### 1. FILE CATALOG MUST BE UPDATED FOR EVERY FILE CREATION - NO EXCEPTIONS!
 
 When AI creates ANY file:
 1. ✅ Create file with download link
@@ -21,6 +21,22 @@ When AI creates ANY file:
 **This is MANDATORY. Not optional. Not negotiable. ALWAYS.**
 
 See [FILE_VERIFICATION_PROTOCOL.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/refs/heads/main/FILE_VERIFICATION_PROTOCOL.md) for complete workflow.
+
+### 2. CATCH-UP PROMPT + SYSTEM_STATE.JSON ARE PAIRED FILES - UPDATE BOTH!
+
+**When CURRENT_CATCHUP_PROMPT.md is updated, system_state.json MUST be updated too!**
+
+These files work together:
+- **CURRENT_CATCHUP_PROMPT.md** = Human-readable narrative
+- **system_state.json** = Machine-readable structured data
+
+They must ALWAYS have:
+- ✅ Matching timestamps
+- ✅ Matching current phase/status
+- ✅ Matching next steps
+- ✅ Same key information
+
+**Never update one without the other!**
 
 ---
 
