@@ -1,7 +1,7 @@
 # GEM Trading System - AI Catch-Up Prompt
-**Last Updated**: 2025-11-02 17:30:00
-**System Version**: 5.0.1-REBUILD
-**Current Phase**: Phase 3: Stock Discovery & Pre-Catalyst Analysis - STARTING
+**Last Updated**: 2025-11-02 18:45:00
+**System Version**: 5.0.2-SUSTAINABILITY-FILTER
+**Current Phase**: Phase 3: Stock Discovery & Pre-Catalyst Analysis - SUSTAINABILITY TESTING
 
 ---
 
@@ -43,10 +43,10 @@ They must ALWAYS have:
 ## 🎯 CRITICAL CONTEXT
 
 ### What You're Walking Into
-System rebuilt from ground up after previous model fabricated backtest data. All infrastructure now complete and verified. Pre-catalyst analysis framework created. Ready to begin collecting 180-day pre-catalyst data for 200 explosive stocks.
+System has completed Phase 2 infrastructure. Sustainability filter V2.0 has been developed and optimized for Polygon Developer tier (unlimited API). Filter is about to run to test all 200 stocks for 21-day, 80% retention sustainability.
 
 ### Immediate Priority
-Create Standard Data Format Template, then begin systematic data collection for all 200 stocks
+Sustainability filter workflow is running RIGHT NOW. After completion, analyze results and proceed with pre-catalyst data collection for sustainable stocks only.
 
 ---
 
@@ -55,20 +55,22 @@ Create Standard Data Format Template, then begin systematic data collection for 
 ### Current State
 - **Portfolio**: CLEARED - Starting fresh
 - **Cash Available**: $10,000 (reset)
-- **System Stage**: Phase 3 Ready - Data Collection Beginning
+- **System Stage**: Phase 3 - Sustainability Filter Running
 - **Last Completed Phase**: Phase 2: System Requirements & Data Infrastructure - COMPLETE ✅
-- **Next Phase**: Phase 3: Stock Discovery & Pre-Catalyst Analysis
+- **Current Task**: Running sustainability filter V2.0 on 200 stocks
+- **Next Phase**: Pre-catalyst analysis on sustainable stocks only
 
 ### Data Verification Status
 
 - Current Prices: ✅ VERIFIED (Polygon API)
 - Volume Data: ✅ VERIFIED (Polygon API)
 - Float Data: ⚠️ PARTIAL (Polygon API - not all stocks)
-- Explosive Stock Catalog: ✅ VERIFIED (200 stocks, expanded to 2010-2024)
+- Explosive Stock Catalog: ✅ VERIFIED (200 stocks, 2010-2024 excluding COVID)
 - Backtest Infrastructure: ✅ COMPLETE
 - Data Backup System: ✅ FIXED (merge logic implemented)
 - Pre-Catalyst Framework: ✅ CREATED & VERIFIED
-- Historical Analysis: ⏳ STARTING (Phase 3)
+- Sustainability Filter: ⏳ RUNNING NOW (V2.0 with Developer tier optimization)
+- Historical Analysis: ⏳ PENDING (starts after sustainability results)
 
 ---
 
@@ -85,22 +87,27 @@ Create Standard Data Format Template, then begin systematic data collection for 
 
 ### Data Files (VERIFIED - Location & Status)
 
-- `/Verified_Backtest_Data/explosive_stocks_catalog.json` - ✅ Latest scan results (11 stocks from 2010-2012)
-- `/Verified_Backtest_Data/explosive_stocks_CLEAN.json` - ✅ **200 clean stocks** (2010-2019, 2022-2024)
+- `/Verified_Backtest_Data/explosive_stocks_catalog.json` - ✅ Latest scan results
+- `/Verified_Backtest_Data/explosive_stocks_CLEAN.json` - ✅ **200 stocks** (pre-sustainability filter)
 - `/Verified_Backtest_Data/explosive_stocks_COVID_ERA.json` - ✅ 81 COVID-era stocks (archived)
+- `/Verified_Backtest_Data/explosive_stocks_UNSUSTAINABLE.json` - ⏳ BEING CREATED (sustainability filter output)
+- `/Verified_Backtest_Data/sustainability_summary.json` - ⏳ BEING CREATED (filter statistics)
 - `/Verified_Backtest_Data/refinement_history.json` - ✅ System evolution log
 - `/Verified_Backtest_Data/README.md` - ✅ Data quality standards
-- `/Verified_Backtest_Data/filter_summary.json` - ✅ CREATED (tracks merge statistics)
-- `/Verified_Backtest_Data/PRE_CATALYST_ANALYSIS_FRAMEWORK.md` - ✅ VERIFIED (comprehensive framework)
-- `/Verified_Backtest_Data/PHASE_3_IMPLEMENTATION_PLAN.md` - ⏳ PENDING VERIFICATION (uploaded but not verified yet)
+- `/Verified_Backtest_Data/filter_summary.json` - ✅ Merge statistics
+- `/Verified_Backtest_Data/PRE_CATALYST_ANALYSIS_FRAMEWORK.md` - ✅ VERIFIED
+- `/Verified_Backtest_Data/STANDARD_DATA_FORMAT.md` - ✅ VERIFIED
+- `/Verified_Backtest_Data/PHASE_3_IMPLEMENTATION_PLAN.md` - ✅ VERIFIED
 - `/Verified_Backtest_Data/pre_catalyst_analysis/` - ❌ TO BE CREATED (Phase 3 data)
 - `/Verified_Backtest_Data/backtest_runs/` - ❌ TO BE CREATED (Phase 4+)
 
 ### Active Scripts (VERIFIED)
 
 - `/explosive_stock_scanner.py` - ✅ Multi-year scanner (GitHub Actions)
-- `/filter_covid_era.py` - ✅ COVID filter WITH MERGE LOGIC (updated 2025-11-02)
-- `/.github/workflows/explosive_stock_scan_workflow.yml` - ✅ FIXED (includes filter step, commits all files)
+- `/filter_covid_era.py` - ✅ COVID filter WITH MERGE LOGIC
+- `/filter_sustainability.py` - ✅ V2.0 (Developer tier optimized) - **RUNNING NOW**
+- `/.github/workflows/explosive_stock_scan_workflow.yml` - ✅ Automated scanning
+- `/.github/workflows/sustainability_filter_workflow.yml` - ✅ V2.0 (Developer tier) - **RUNNING NOW**
 
 ### Archived Content (DO NOT USE FOR DECISIONS)
 
@@ -124,15 +131,16 @@ Create Standard Data Format Template, then begin systematic data collection for 
 ### Approach
 
 1. ✅ Find stocks with 500%+ gains in any 6-month window (2010-2024) - COMPLETE
-2. ⏳ Deep dive into 180 days PRE-CATALYST for each stock - Phase 3 STARTING
-3. ❌ Analyze: price, volume, sentiment, leadership, news, patterns - Phase 3
-4. ❌ Identify correlations between explosive stocks - Phase 3
-5. ❌ Build screener based on correlations - Phase 3+
-6. ❌ Backtest on random historical dates - Phase 4+
-7. ❌ Apply FALSE MISS principle to discarded stocks - Phase 4+
-8. ❌ Track picks AND discards with full performance data - Phase 4+
-9. ❌ Refine until consistent 10-year performance - Phase 4+
-10. ✅ Store ALL data for future refinement - Infrastructure ready
+2. ⏳ Test for sustainability (80% retention, 21 days after peak) - **RUNNING NOW**
+3. ⏳ Deep dive into 180 days PRE-CATALYST for sustainable stocks - Phase 3
+4. ❌ Analyze: price, volume, sentiment, leadership, news, patterns - Phase 3
+5. ❌ Identify correlations between explosive stocks - Phase 3
+6. ❌ Build screener based on correlations - Phase 3+
+7. ❌ Backtest on random historical dates - Phase 4+
+8. ❌ Apply FALSE MISS principle to discarded stocks - Phase 4+
+9. ❌ Track picks AND discards with full performance data - Phase 4+
+10. ❌ Refine until consistent 10-year performance - Phase 4+
+11. ✅ Store ALL data for future refinement - Infrastructure ready
 
 ### Current Progress
 
@@ -145,19 +153,20 @@ Create Standard Data Format Template, then begin systematic data collection for 
 - ✅ All infrastructure verified and working
 - ✅ Pre-catalyst analysis framework created (12 categories, 100+ data points)
 - ✅ GitHub Actions workflow fixed (full automation, no manual steps)
+- ✅ Standard data format template created
 
-**Phase 3**: Stock Discovery & Pre-Catalyst Analysis - ⏳ STARTING NOW
-- ⏳ Create Standard Data Format Template (NEXT IMMEDIATE STEP)
-- ❌ Build data collection scripts (price, volume, news, SEC, insider, etc.)
-- ❌ Enrich existing 200 stocks with standard format
-- ❌ Deep-dive 180-day pre-catalyst analysis
-- ❌ Pattern discovery across all stocks
-- ❌ Correlation matrix building
-- ❌ Screener criteria extraction
+**Phase 3**: Stock Discovery & Pre-Catalyst Analysis - ⏳ IN PROGRESS
+- ⏳ **Sustainability filter V2.0 RUNNING NOW** (80% retention, 21 days)
+- ❌ Analyze sustainability results
+- ❌ Build data collection scripts for sustainable stocks
+- ❌ Collect 180-day pre-catalyst data for sustainable stocks
+- ❌ Build pattern scanning/correlation tools
+- ❌ Analyze patterns and extract screening criteria
+- ❌ Document all discoveries
 
 ### Data Sources
 
-- Price/Volume: Polygon API (Developer tier) + Yahoo Finance backup
+- Price/Volume: Polygon API (Developer tier - UNLIMITED requests)
 - News/Sentiment: Web scraping (Google, Yahoo Finance)
 - Insider Trading: Free sources (Finviz, OpenInsider, SEC Form 4)
 - SEC Filings: SEC EDGAR (free)
@@ -165,19 +174,59 @@ Create Standard Data Format Template, then begin systematic data collection for 
 
 ---
 
+## 🔬 SUSTAINABILITY FILTER V2.0
+
+### Filter Criteria (FINALIZED)
+- **Test Window**: 21 days after peak (not 30)
+- **Retention Threshold**: 80% of peak gain (not 90%)
+- **Test Method**: Use Polygon API to find actual catalyst windows
+
+### How It Works
+1. **Read CLEAN.json** (200 stocks to test)
+2. **For each stock:**
+   - Use Polygon API to scan stock's year for explosive window
+   - Find 180-day window with 500%+ gain
+   - Get catalyst start date (entry date)
+   - Get peak price (highest in window)
+   - Get test price (21 days after peak)
+   - Calculate: `retention = (test_price - entry_price) / (peak_price - entry_price)`
+3. **Filter results:**
+   - Sustainable (≥80%): Stay in CLEAN.json
+   - Unsustainable (<80%): Move to UNSUSTAINABLE.json
+
+### Performance (Developer Tier)
+- **API Access**: Unlimited requests (Developer tier)
+- **Rate Limiting**: Minimal (0.1s delay between stocks)
+- **Expected Runtime**: 5-15 minutes for 200 stocks ⚡
+- **Not 2-4 hours. Not 8-13 hours. MINUTES!**
+
+### Expected Results
+- **Sustainable stocks**: ~60-120 (30-60% of original 200)
+- **Unsustainable stocks**: ~80-140 (pump & dumps, untradeable flukes)
+- All data preserved in respective files
+- Detailed statistics in sustainability_summary.json
+
+### Files Created by Filter
+1. **explosive_stocks_CLEAN.json** - MODIFIED (sustainable stocks only)
+2. **explosive_stocks_UNSUSTAINABLE.json** - CREATED (pump & dumps)
+3. **sustainability_summary.json** - CREATED (statistics)
+
+---
+
 ## 📈 DISCOVERED PATTERNS
 
 ### Verified Correlations
-NONE YET - Will be discovered during Phase 3 analysis
+NONE YET - Will be discovered during Phase 3 analysis of SUSTAINABLE stocks only
 
 ### Current Scoring Criteria
-CURRENT v5.0.1 CRITERIA - Will be updated based on Phase 3 pattern discovery
+CURRENT v5.0.2 CRITERIA - Will be updated based on Phase 3 pattern discovery from sustainable stocks
 
 ### Refinement History
-3 refinements logged:
+4 refinements logged:
 1. System reset (2025-11-01) - Cleared unverified data
 2. COVID-era exclusion rule (2025-11-01) - Exclude 2020-2021 from patterns
 3. Expanded historical coverage (2025-11-02) - Added 2010-2012 data (11 stocks)
+4. Sustainability filter V2.0 (2025-11-02) - 21-day, 80% retention test
 
 ---
 
@@ -198,6 +247,9 @@ CURRENT v5.0.1 CRITERIA - Will be updated based on Phase 3 pattern discovery
 12. ✅ Fix GitHub Actions workflow for full automation (no manual filter runs)
 13. ✅ Expand historical coverage back to 2010 for more data
 14. ✅ Create comprehensive pre-catalyst analysis framework (12 categories)
+15. ✅ Test sustainability BEFORE pre-catalyst analysis (filter out pump & dumps)
+16. ✅ Use 21-day, 80% retention as sustainability criteria
+17. ✅ Only analyze sustainable stocks for pattern discovery
 
 ### Rules Established
 1. **NO FABRICATION** - Verify or say you can't
@@ -208,39 +260,43 @@ CURRENT v5.0.1 CRITERIA - Will be updated based on Phase 3 pattern discovery
 6. **FILE VERIFICATION** - Every file must be verified using the established protocol
 7. **DATA PRESERVATION** - Filter script uses merge logic (no data loss on subsequent scans)
 8. **FULL AUTOMATION** - Workflow handles scanning, filtering, and committing without manual steps
+9. **SUSTAINABILITY FIRST** - Test for tradeability before spending weeks on analysis
+10. **DEVELOPER TIER OPTIMIZED** - Use unlimited API access for fast results
 
 ---
 
 ## 📝 WHAT NEEDS TO HAPPEN NEXT
 
-### Phase 3 Tasks (READY TO BEGIN)
+### Immediate Next Steps (After Filter Completes)
 
-**Immediate Next Step:**
-1. ⏳ Create Standard Data Format Template (defines structure for all 200 stocks)
+**Step 1: Analyze Sustainability Results** ⏳ WAITING FOR FILTER
+1. Check sustainability_summary.json statistics
+2. Verify CLEAN.json contains only sustainable stocks
+3. Review UNSUSTAINABLE.json for patterns
+4. Document sustainability rate and findings
 
-**After Template Approved:**
-2. Build data enrichment script (standardize existing CLEAN.json to new format)
-3. Build data collection scripts:
+**Step 2: Begin Pre-Catalyst Analysis** (After Step 1)
+1. Build data collection scripts for sustainable stocks:
    - Price/volume collector (Polygon API)
    - SEC filings collector (EDGAR)
    - Insider trading collector (Form 4, OpenInsider)
    - News/sentiment collector (web scraping)
    - Float/ownership collector (Polygon + Finviz)
    - Financial metrics collector (Polygon + SEC)
-4. Collect 180-day pre-catalyst data for all 200 stocks
-5. Build pattern scanning/correlation tools
-6. Analyze patterns and extract screening criteria
-7. Document all findings
+2. Collect 180-day pre-catalyst data for sustainable stocks
+3. Build pattern scanning/correlation tools
+4. Analyze patterns and extract screening criteria
+5. Document all findings
 
 ### Blockers/Questions
-NONE - Ready to create standard format template
+NONE - Filter is running, waiting for completion
 
 ---
 
 ## 🔗 IMPORTANT LINKS
 
 - **GitHub Repo**: https://github.com/cbenson85/GEM_Trading_System
-- **Polygon API**: Developer tier (key: pvv6DNmKAoxojCc0B5HOaji6I_k1egv0)
+- **Polygon API**: Developer tier (UNLIMITED requests, key: pvv6DNmKAoxojCc0B5HOaji6I_k1egv0)
 - **Data Storage**: /Verified_Backtest_Data/ (active and verified)
 - **File Catalog**: [GITHUB_FILE_CATALOG.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/refs/heads/main/GITHUB_FILE_CATALOG.md)
 
@@ -287,64 +343,6 @@ AI was creating files without verifying it could read them back from GitHub. Thi
 
 ---
 
-## 🔄 DATA BACKUP SYSTEM (FIXED 2025-11-02)
-
-### **The Problem:**
-Original filter script OVERWROTE CLEAN.json and COVID.json files on each run, causing data loss when incremental scans ran.
-
-### **The Solution:**
-Updated `filter_covid_era.py` with **MERGE LOGIC**:
-
-**How It Works:**
-1. Filter loads existing CLEAN.json and COVID.json (if they exist)
-2. Filter reads new stocks from catalog.json
-3. Filter merges new stocks (checks for ticker+year duplicates)
-4. Filter saves updated cumulative files
-
-**Result:**
-- ✅ No data loss on subsequent scans
-- ✅ No duplicates (ticker+year key)
-- ✅ Accumulates findings over time
-- ✅ catalog.json remains "latest scan snapshot"
-
-**Example:**
-```
-Scan 1 (2014-2024): catalog.json (244 stocks)
-→ Filter: CLEAN.json (170) + COVID.json (69)
-
-Scan 2 (2013): catalog.json (199 stocks)
-→ Filter: Loads existing 170, adds 19 new = 189 total
-
-Scan 3 (2010-2012): catalog.json (11 stocks)
-→ Filter: Loads existing 189, adds 11 new = 200 total
-
-No data loss! ✅
-```
-
----
-
-## 🔧 GITHUB ACTIONS AUTOMATION (FIXED 2025-11-02)
-
-### **The Problem:**
-Workflow was missing the filter step, so user had to manually run `filter_covid_era.py` and push files locally after each scan.
-
-### **The Solution:**
-Updated `explosive_stock_scan_workflow.yml` to include:
-
-**New Steps Added:**
-1. Run COVID-era filter automatically after scan
-2. Verify filter results (show merge statistics)
-3. Commit ALL 4 files (catalog.json, CLEAN.json, COVID_ERA.json, filter_summary.json)
-4. Push everything to GitHub
-
-**Result:**
-- ✅ Full automation - no manual steps needed
-- ✅ All files committed and pushed automatically
-- ✅ Merge statistics visible in GitHub Actions logs
-- ✅ User can trigger scan and walk away
-
----
-
 ## 💾 PROGRESS LOG
 
 **2025-11-01 02:09** - Phase 1 Complete
@@ -387,6 +385,30 @@ Updated `explosive_stock_scan_workflow.yml` to include:
 - Action: All infrastructure verified and working
 - Result: Ready to begin Phase 3 data collection
 
+**2025-11-02 17:30** - Standard Data Format Created
+- Action: Created standardized template for all stock data
+- Result: Ready for data enrichment and collection
+
+**2025-11-02 18:00** - Sustainability Filter V1.0 Failed
+- Action: Ran initial sustainability filter (90% retention, 30 days)
+- Result: All 200 stocks failed due to incomplete data and wrong criteria
+
+**2025-11-02 18:15** - CLEAN.json Restored
+- Action: Restored 200 stocks from backup after filter emptied file
+- Result: All data recovered, no loss
+
+**2025-11-02 18:30** - Sustainability Filter V2.0 Created
+- Action: Rebuilt filter with correct criteria (80% retention, 21 days)
+- Result: Filter uses Polygon API to find actual catalyst windows
+
+**2025-11-02 18:40** - Developer Tier Optimization
+- Action: Discovered user has Polygon Developer tier (unlimited API)
+- Result: Removed rate limiting, optimized for 5-15 minute runtime
+
+**2025-11-02 18:45** - Sustainability Filter V2.0 Running
+- Action: Started workflow to test all 200 stocks
+- Result: **RUNNING NOW** - Expected completion in 5-15 minutes
+
 ---
 
 ## ⚠️ CRITICAL REMINDERS
@@ -399,99 +421,78 @@ Updated `explosive_stock_scan_workflow.yml` to include:
 6. **FILE VERIFICATION**: Every file must be verified using the protocol above
 7. **DATA PRESERVATION**: Filter uses merge logic - existing data is never lost
 8. **FULL AUTOMATION**: Workflow handles everything - user just triggers and monitors
+9. **SUSTAINABILITY FIRST**: Don't waste weeks analyzing pump & dumps
+10. **DEVELOPER TIER**: Use unlimited API access for fast, efficient results
 
 ---
 
 ## 🚀 HOW TO CONTINUE
 
 1. Read this entire prompt
-2. Ask clarifying questions if anything is unclear
-3. Confirm you understand current state and next phase
-4. Wait for user approval before proceeding with template creation
-5. Update this prompt after each major milestone
-6. **VERIFY FILES**: Follow verification protocol for any new files
+2. **WAIT for sustainability filter to complete** (should be done already or very soon)
+3. Analyze sustainability results (summary.json, CLEAN.json, UNSUSTAINABLE.json)
+4. Document findings and update this prompt
+5. Proceed with pre-catalyst data collection for sustainable stocks ONLY
+6. Update this prompt after each major milestone
+7. **VERIFY FILES**: Follow verification protocol for any new files
 
 ---
 
-## 📊 READY FOR PHASE 3
+## 📊 SUSTAINABILITY FILTER STATUS
+
+**Current Status**: ⏳ RUNNING (started ~2025-11-02 18:45)
+
+**What's Happening:**
+- Testing all 200 stocks from CLEAN.json
+- Finding actual catalyst windows using Polygon API
+- Calculating 21-day retention rates
+- Filtering sustainable vs unsustainable stocks
+
+**Expected Output:**
+- **CLEAN.json**: ~60-120 sustainable stocks (tradeable)
+- **UNSUSTAINABLE.json**: ~80-140 pump & dumps (archived)
+- **sustainability_summary.json**: Detailed statistics
+
+**Expected Completion**: Within 15 minutes of start time
+
+**Next Action**: Verify results, analyze findings, proceed with Phase 3
+
+---
+
+## 🎯 PHASE 3 READINESS
 
 **What We Have:**
-- ✅ **200 clean explosive stocks** (2010-2019, 2022-2024) - expanded dataset!
-- ✅ 81 COVID-era stocks archived (2020-2021)
+- ✅ 200 explosive stocks identified (2010-2024, excluding COVID)
+- ⏳ Sustainability filter running (will produce ~60-120 tradeable stocks)
 - ✅ Complete data infrastructure
 - ✅ File verification system working
 - ✅ Data backup system working (merge logic)
-- ✅ GitHub Actions fully automated (no manual steps)
+- ✅ GitHub Actions fully automated
 - ✅ All tools and scripts verified
-- ✅ Comprehensive pre-catalyst analysis framework (12 categories, 100+ data points)
-- ✅ Phase 3 implementation plan created
+- ✅ Comprehensive pre-catalyst analysis framework (12 categories)
+- ✅ Standard data format template
+- ✅ Phase 3 implementation plan
+- ✅ Polygon Developer tier (unlimited API access)
 
-**What We Need to Do:**
-- ⏳ **Create Standard Data Format Template** (NEXT IMMEDIATE STEP)
-- ❌ Build data enrichment script (standardize existing 200 stocks)
-- ❌ Build data collection scripts (8 collectors for different data types)
-- ❌ Collect 180-day pre-catalyst data for all 200 stocks
+**What We Need to Do (After Filter):**
+- ⏳ Analyze sustainability results
+- ❌ Build data collection scripts for sustainable stocks
+- ❌ Collect 180-day pre-catalyst data for sustainable stocks
 - ❌ Build pattern scanning/correlation tools
 - ❌ Analyze patterns and extract screening criteria
 - ❌ Document all discoveries
 
 **Estimated Time for Phase 3:**
-- Template creation: 1-2 hours
-- Data enrichment: 1-2 days
-- Collection script development: 1 week
-- Full dataset collection: 2-3 weeks (API rate limits)
+- Sustainability analysis: 1 hour
+- Data collection script development: 3-5 days
+- Full dataset collection: 1-2 weeks (with Developer tier speed)
 - Pattern analysis: 1-2 weeks
-- **Total: 6-8 weeks of systematic work**
-
----
-
-## 📋 DATASET NOTES
-
-### Current CLEAN.json Structure (Inconsistent)
-The 200 stocks in CLEAN.json have **TWO different formats**:
-
-**Old Format** (most 2014-2024 stocks):
-```json
-{
-  "ticker": "ABVC",
-  "year": 2014,
-  "gain_percent": 900,
-  "days_to_peak": 28
-}
-```
-
-**New Format** (2010-2013 stocks, some others):
-```json
-{
-  "ticker": "ABUS",
-  "year_discovered": 2013,
-  "catalyst_date": "2014-03-10",
-  "entry_price": 4.8,
-  "peak_price": 30.75,
-  "gain_percent": 540.6,
-  "days_to_peak": 171,
-  "entry_date": "2013-07-03",
-  "sector": "Unknown",
-  "verified": true,
-  "data_source": "Yahoo Finance",
-  "all_explosive_windows": 35,
-  "covid_era": false
-}
-```
-
-**Action Required**: Standardize all 200 stocks to unified format before pre-catalyst data collection
-
-### Notable Stocks:
-- **ABVC**: Appears in 9 different years (2010-2015, 2018-2019, 2024) with extreme gains
-  - 2011: 5,328% gain
-  - 2015: 416,567% gain (most extreme ever)
-- **ASTH**: Appears in 6 years with strong gains
-  - 2013: 3,129% gain
-- Dataset spans **15 years** (2010-2024, excluding 2020-2021)
+- **Total: 4-5 weeks of systematic work**
 
 ---
 
 **END OF CATCH-UP PROMPT**
-Generated by: GEM Catch-Up Prompt System v2.1 (with Phase 3 readiness)
-Last Updated: 2025-11-02 17:00:00
-System Status: Phase 2 Complete - Phase 3 Starting (Template Creation Next)
+Generated by: GEM Catch-Up Prompt System v2.2 (with Sustainability Filter V2.0)
+Last Updated: 2025-11-02 18:45:00
+System Status: Phase 3 In Progress - Sustainability Filter Running
+Next Milestone: Analyze filter results and begin pre-catalyst data collection
