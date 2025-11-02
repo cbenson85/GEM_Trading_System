@@ -1,18 +1,10 @@
 {
-  "total_tested": 200,
-  "sustainable_count": 0,
-  "unsustainable_count": 200,
-  "skipped_already_tested": 0,
-  "skipped_missing_data": 0,
-  "skipped_too_recent": 0,
-  "skipped_no_price": 28,
-  "new_sustainable": 0,
-  "new_unsustainable": 200,
-  "avg_retention_sustainable": 0,
-  "avg_retention_unsustainable": 62.98,
-  "filter_date": "2025-11-02 17:43:46",
-  "sustainability_threshold": 0.9,
-  "input_file": "Verified_Backtest_Data/explosive_stocks_CLEAN.json",
-  "sustainable_percentage": 0.0,
-  "removed_from_clean": 200
+  "total_stocks": 200,
+  "tested": 200,
+  "sustainable": 17,
+  "unsustainable": 183,
+  "skipped": 0,
+  "errors": 0,
+  "filter_date": "2025-11-02 18:31:46",
+  "criteria": "80.0% retention 21 days after peak"
 }
