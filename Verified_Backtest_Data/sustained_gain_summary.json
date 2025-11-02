@@ -1,0 +1,32 @@
+{
+  "total_stocks": 17,
+  "tested": 17,
+  "sustainable": 0,
+  "unsustainable": 17,
+  "by_speed": {
+    "FAST": {
+      "total": 0,
+      "sustainable": 0,
+      "sustainability_rate": "0%"
+    },
+    "MEDIUM": {
+      "total": 1,
+      "sustainable": 0,
+      "sustainability_rate": "0.0%"
+    },
+    "SLOW": {
+      "total": 16,
+      "sustainable": 0,
+      "sustainability_rate": "0.0%"
+    }
+  },
+  "errors": 0,
+  "filter_date": "2025-11-02 19:01:20",
+  "filter_version": "3.0",
+  "test_method": "Sustained Gain Window",
+  "criteria": {
+    "FAST": "250%+ sustained (<30 days to peak)",
+    "MEDIUM": "200%+ sustained (30-90 days to peak)",
+    "SLOW": "150%+ sustained (90+ days to peak)"
+  }
+}
