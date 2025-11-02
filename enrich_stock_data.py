@@ -92,6 +92,78 @@ def get_daily_prices(ticker, start_date, end_date, api_key):
         return []
 
 
+def analyze_drawdown_velocity(prices):
+    """
+    Analyze how fast stock drops during the explosive window
+    Returns: dict with drawdown metrics
+    """
+    if len(prices) < 2:
+        return None
+    
+    # Find all significant drops
+    max_single_day_drop = 0
+    max_single_day_drop_date = None
+    
+    # Find largest multi-day drawdowns
+    drawdowns = []
+    
+    for i in range(1, len(prices)):
+        # Single day drop
+        prev_close = prices[i-1]['close']
+        curr_close = prices[i]['close']
+        daily_drop_pct = ((prev_close - curr_close) / prev_close) * 100
+        
+        if daily_drop_pct > max_single_day_drop:
+            max_single_day_drop = daily_drop_pct
+            max_single_day_drop_date = prices[i]['date']
+        
+        # Look for drawdowns >20% over multiple days
+        if i >= 10:  # Need at least 10 days of history
+            window = prices[i-10:i+1]
+            high = max(d['high'] for d in window)
+            low = min(d['low'] for d in window)
+            drawdown_pct = ((high - low) / high) * 100
+            
+            if drawdown_pct > 20:
+                # Find how many days it took
+                high_idx = next(j for j, d in enumerate(window) if d['high'] == high)
+                low_idx = next(j for j, d in enumerate(window) if d['low'] == low)
+                days = abs(low_idx - high_idx)
+                
+                if days > 0:
+                    velocity = drawdown_pct / days
+                    drawdowns.append({
+                        'drawdown_pct': round(drawdown_pct, 2),
+                        'days': days,
+                        'velocity_per_day': round(velocity, 2)
+                    })
+    
+    # Classify tradeability based on 35% trailing stop loss
+    # We need to exit if stock drops 35% from peak
+    # Problem: If it drops >35% in ONE day, our stop won't fill
+    
+    if max_single_day_drop > 35:
+        tradeable = "UNTRADEABLE"
+        reason = f"Single-day drop of {max_single_day_drop:.1f}% - would gap past 35% stop loss"
+    elif max_single_day_drop > 25:
+        tradeable = "RISKY"
+        reason = f"Single-day drop of {max_single_day_drop:.1f}% - might gap through stop"
+    elif max_single_day_drop == 0:
+        tradeable = "IDEAL"
+        reason = "No significant drops - plenty of time to exit at any point"
+    else:
+        tradeable = "TRADEABLE"
+        reason = f"Max drop {max_single_day_drop:.1f}% - 35% trailing stop should fill"
+    
+    return {
+        'max_single_day_drop_pct': round(max_single_day_drop, 2),
+        'max_drop_date': max_single_day_drop_date,
+        'significant_drawdowns': drawdowns[:3] if drawdowns else [],  # Top 3
+        'tradeable_classification': tradeable,
+        'tradeable_reason': reason
+    }
+
+
 def find_explosive_window(ticker, year, target_gain_pct, api_key):
     """
     Find the 180-day window with the explosive gain
@@ -164,6 +236,15 @@ def find_explosive_window(ticker, year, target_gain_pct, api_key):
         print(f"     Gain:  {best_window['gain_percent']}% in {best_window['days_to_peak']} days")
         if best_window['test_price']:
             print(f"     Test:  {best_window['test_date']} @ ${best_window['test_price']}")
+        
+        # Analyze drawdown velocity for tradeability
+        print(f"  📊 Analyzing drawdown velocity...")
+        drawdown_analysis = analyze_drawdown_velocity(prices)
+        if drawdown_analysis:
+            best_window['drawdown_analysis'] = drawdown_analysis
+            print(f"     Max single-day drop: {drawdown_analysis['max_single_day_drop_pct']:.1f}%")
+            print(f"     Tradeable: {drawdown_analysis['tradeable_classification']}")
+            print(f"     {drawdown_analysis['tradeable_reason']}")
     
     return best_window
 
@@ -220,6 +301,10 @@ def enrich_stock(stock, api_key):
     if window_data['test_price']:
         enriched_stock['test_price_30d'] = window_data['test_price']
         enriched_stock['test_date_30d'] = window_data['test_date']
+    
+    # Add drawdown analysis
+    if 'drawdown_analysis' in window_data:
+        enriched_stock['drawdown_analysis'] = window_data['drawdown_analysis']
     
     enrichment_log['enriched'] += 1
     return enriched_stock
