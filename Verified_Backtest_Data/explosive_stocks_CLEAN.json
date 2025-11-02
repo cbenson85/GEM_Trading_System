@@ -779,8 +779,40 @@
     {
       "ticker": "APM",
       "year": 2023,
-      "gain_percent": 1158,
-      "days_to_peak": 18
+      "gain_percent": 893.75,
+      "days_to_peak": 129,
+      "entry_date": "2023-08-24",
+      "entry_price": 1.76,
+      "peak_date": "2024-03-06",
+      "peak_price": 17.49,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 8,
+      "test_date_30d": "2024-04-05",
+      "drawdown_analysis": {
+        "max_single_day_drop_pct": 31.96,
+        "max_drop_date": "2023-05-08",
+        "significant_drawdowns": [
+          {
+            "drawdown_pct": 21.79,
+            "days": 7,
+            "velocity_per_day": 3.11
+          },
+          {
+            "drawdown_pct": 21.79,
+            "days": 7,
+            "velocity_per_day": 3.11
+          },
+          {
+            "drawdown_pct": 21.79,
+            "days": 7,
+            "velocity_per_day": 3.11
+          }
+        ],
+        "tradeable_classification": "RISKY",
+        "tradeable_reason": "Single-day drop of 32.0% - might gap through stop"
+      }
     },
     {
       "ticker": "AREBW",
@@ -923,8 +955,40 @@
     {
       "ticker": "ABVEW",
       "year": 2024,
-      "gain_percent": 606,
-      "days_to_peak": 136
+      "gain_percent": 500.67,
+      "days_to_peak": 153,
+      "entry_date": "2024-09-18",
+      "entry_price": 0.015,
+      "peak_date": "2025-05-05",
+      "peak_price": 0.0901,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 0.0401,
+      "test_date_30d": "2025-06-04",
+      "drawdown_analysis": {
+        "max_single_day_drop_pct": 41.34,
+        "max_drop_date": "2024-07-09",
+        "significant_drawdowns": [
+          {
+            "drawdown_pct": 75.93,
+            "days": 9,
+            "velocity_per_day": 8.44
+          },
+          {
+            "drawdown_pct": 75.93,
+            "days": 9,
+            "velocity_per_day": 8.44
+          },
+          {
+            "drawdown_pct": 69.7,
+            "days": 8,
+            "velocity_per_day": 8.71
+          }
+        ],
+        "tradeable_classification": "UNTRADEABLE",
+        "tradeable_reason": "Single-day drop of 41.3% - would gap past 35% stop loss"
+      }
     },
     {
       "ticker": "ACONW",
@@ -991,8 +1055,40 @@
     {
       "ticker": "AIFF",
       "year": 2024,
-      "gain_percent": 602,
-      "days_to_peak": 34
+      "gain_percent": 501.4,
+      "days_to_peak": 90,
+      "entry_date": "2024-10-03",
+      "entry_price": 2.86,
+      "peak_date": "2025-02-13",
+      "peak_price": 17.2,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 5.23,
+      "test_date_30d": "2025-03-15",
+      "drawdown_analysis": {
+        "max_single_day_drop_pct": 41.72,
+        "max_drop_date": "2025-02-14",
+        "significant_drawdowns": [
+          {
+            "drawdown_pct": 52.22,
+            "days": 9,
+            "velocity_per_day": 5.8
+          },
+          {
+            "drawdown_pct": 51.76,
+            "days": 7,
+            "velocity_per_day": 7.39
+          },
+          {
+            "drawdown_pct": 59.53,
+            "days": 8,
+            "velocity_per_day": 7.44
+          }
+        ],
+        "tradeable_classification": "UNTRADEABLE",
+        "tradeable_reason": "Single-day drop of 41.7% - would gap past 35% stop loss"
+      }
     },
     {
       "ticker": "AIIO",
@@ -1003,14 +1099,76 @@
     {
       "ticker": "AIM",
       "year": 2024,
-      "gain_percent": 15632,
-      "days_to_peak": 1
+      "gain_percent": 4200.12,
+      "days_to_peak": 172,
+      "entry_date": "2024-07-30",
+      "entry_price": 0.3472,
+      "peak_date": "2025-06-17",
+      "peak_price": 14.93,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "drawdown_analysis": {
+        "max_single_day_drop_pct": 20.88,
+        "max_drop_date": "2025-02-05",
+        "significant_drawdowns": [
+          {
+            "drawdown_pct": 23.61,
+            "days": 2,
+            "velocity_per_day": 11.81
+          },
+          {
+            "drawdown_pct": 21.43,
+            "days": 1,
+            "velocity_per_day": 21.43
+          },
+          {
+            "drawdown_pct": 23.61,
+            "days": 10,
+            "velocity_per_day": 2.36
+          }
+        ],
+        "tradeable_classification": "TRADEABLE",
+        "tradeable_reason": "Max drop 20.9% - 35% trailing stop should fill"
+      }
     },
     {
       "ticker": "AIMDW",
       "year": 2024,
-      "gain_percent": 823,
-      "days_to_peak": 74
+      "gain_percent": 538.5,
+      "days_to_peak": 13,
+      "entry_date": "2023-09-01",
+      "entry_price": 0.1,
+      "peak_date": "2023-10-09",
+      "peak_price": 0.6385,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 0.35,
+      "test_date_30d": "2023-11-08",
+      "drawdown_analysis": {
+        "max_single_day_drop_pct": 60.08,
+        "max_drop_date": "2024-03-11",
+        "significant_drawdowns": [
+          {
+            "drawdown_pct": 56.54,
+            "days": 8,
+            "velocity_per_day": 7.07
+          },
+          {
+            "drawdown_pct": 56.54,
+            "days": 8,
+            "velocity_per_day": 7.07
+          },
+          {
+            "drawdown_pct": 56.54,
+            "days": 8,
+            "velocity_per_day": 7.07
+          }
+        ],
+        "tradeable_classification": "UNTRADEABLE",
+        "tradeable_reason": "Single-day drop of 60.1% - would gap past 35% stop loss"
+      }
     },
     {
       "ticker": "AIRE",
@@ -1156,14 +1314,78 @@
     {
       "ticker": "AMPGW",
       "year": 2024,
-      "gain_percent": 2396,
-      "days_to_peak": 5
+      "gain_percent": 1380.0,
+      "days_to_peak": 104,
+      "entry_date": "2023-11-30",
+      "entry_price": 0.1,
+      "peak_date": "2024-12-27",
+      "peak_price": 1.48,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 0.665,
+      "test_date_30d": "2025-01-26",
+      "drawdown_analysis": {
+        "max_single_day_drop_pct": 64.93,
+        "max_drop_date": "2023-08-24",
+        "significant_drawdowns": [
+          {
+            "drawdown_pct": 64.7,
+            "days": 9,
+            "velocity_per_day": 7.19
+          },
+          {
+            "drawdown_pct": 64.7,
+            "days": 9,
+            "velocity_per_day": 7.19
+          },
+          {
+            "drawdown_pct": 87.82,
+            "days": 3,
+            "velocity_per_day": 29.27
+          }
+        ],
+        "tradeable_classification": "UNTRADEABLE",
+        "tradeable_reason": "Single-day drop of 64.9% - would gap past 35% stop loss"
+      }
     },
     {
       "ticker": "ANSCW",
       "year": 2024,
-      "gain_percent": 809,
-      "days_to_peak": 87
+      "gain_percent": 525.0,
+      "days_to_peak": 152,
+      "entry_date": "2024-01-16",
+      "entry_price": 0.16,
+      "peak_date": "2025-02-11",
+      "peak_price": 1,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 0.34,
+      "test_date_30d": "2025-03-13",
+      "drawdown_analysis": {
+        "max_single_day_drop_pct": 41.82,
+        "max_drop_date": "2024-11-22",
+        "significant_drawdowns": [
+          {
+            "drawdown_pct": 31.82,
+            "days": 1,
+            "velocity_per_day": 31.82
+          },
+          {
+            "drawdown_pct": 20.0,
+            "days": 9,
+            "velocity_per_day": 2.22
+          },
+          {
+            "drawdown_pct": 20.0,
+            "days": 9,
+            "velocity_per_day": 2.22
+          }
+        ],
+        "tradeable_classification": "UNTRADEABLE",
+        "tradeable_reason": "Single-day drop of 41.8% - would gap past 35% stop loss"
+      }
     },
     {
       "ticker": "APLMW",
@@ -1319,8 +1541,40 @@
     {
       "ticker": "ASST",
       "year": 2024,
-      "gain_percent": 1447,
-      "days_to_peak": 24
+      "gain_percent": 1098.21,
+      "days_to_peak": 156,
+      "entry_date": "2024-10-07",
+      "entry_price": 1.12,
+      "peak_date": "2025-05-22",
+      "peak_price": 13.42,
+      "enriched": true,
+      "enrichment_date": "2025-11-02",
+      "data_source": "Polygon API",
+      "test_price_30d": 4.96,
+      "test_date_30d": "2025-06-21",
+      "drawdown_analysis": {
+        "max_single_day_drop_pct": 29.94,
+        "max_drop_date": "2025-01-30",
+        "significant_drawdowns": [
+          {
+            "drawdown_pct": 37.88,
+            "days": 9,
+            "velocity_per_day": 4.21
+          },
+          {
+            "drawdown_pct": 37.88,
+            "days": 9,
+            "velocity_per_day": 4.21
+          },
+          {
+            "drawdown_pct": 36.46,
+            "days": 10,
+            "velocity_per_day": 3.65
+          }
+        ],
+        "tradeable_classification": "RISKY",
+        "tradeable_reason": "Single-day drop of 29.9% - might gap through stop"
+      }
     },
     {
       "ticker": "ASTS",
@@ -2607,6 +2861,6 @@
   ],
   "metadata": {
     "note": "Pattern analysis dataset - normal market conditions only",
-    "last_enrichment": "2025-11-02 19:53:17"
+    "last_enrichment": "2025-11-02 19:56:47"
   }
 }

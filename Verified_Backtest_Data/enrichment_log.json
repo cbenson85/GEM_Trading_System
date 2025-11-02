@@ -1,9 +1,9 @@
 {
-  "started": "2025-11-02 19:52:44",
+  "started": "2025-11-02 19:56:07",
   "total_stocks": 200,
-  "enriched": 0,
+  "enriched": 8,
   "already_enriched": 109,
-  "failed": 91,
+  "failed": 83,
   "skipped": 0,
   "failures": [
     {
@@ -302,11 +302,6 @@
       "reason": "Could not find explosive window in Polygon data"
     },
     {
-      "ticker": "APM",
-      "year": 2023,
-      "reason": "Could not find explosive window in Polygon data"
-    },
-    {
       "ticker": "ARKOW",
       "year": 2023,
       "reason": "Could not find explosive window in Polygon data"
@@ -372,32 +367,12 @@
       "reason": "Could not find explosive window in Polygon data"
     },
     {
-      "ticker": "ABVEW",
-      "year": 2024,
-      "reason": "Could not find explosive window in Polygon data"
-    },
-    {
       "ticker": "AERTW",
       "year": 2024,
       "reason": "Could not find explosive window in Polygon data"
     },
     {
-      "ticker": "AIFF",
-      "year": 2024,
-      "reason": "Could not find explosive window in Polygon data"
-    },
-    {
       "ticker": "AIIO",
-      "year": 2024,
-      "reason": "Could not find explosive window in Polygon data"
-    },
-    {
-      "ticker": "AIM",
-      "year": 2024,
-      "reason": "Could not find explosive window in Polygon data"
-    },
-    {
-      "ticker": "AIMDW",
       "year": 2024,
       "reason": "Could not find explosive window in Polygon data"
     },
@@ -408,16 +383,6 @@
     },
     {
       "ticker": "AMODW",
-      "year": 2024,
-      "reason": "Could not find explosive window in Polygon data"
-    },
-    {
-      "ticker": "AMPGW",
-      "year": 2024,
-      "reason": "Could not find explosive window in Polygon data"
-    },
-    {
-      "ticker": "ANSCW",
       "year": 2024,
       "reason": "Could not find explosive window in Polygon data"
     },
@@ -433,11 +398,6 @@
     },
     {
       "ticker": "AREB",
-      "year": 2024,
-      "reason": "Could not find explosive window in Polygon data"
-    },
-    {
-      "ticker": "ASST",
       "year": 2024,
       "reason": "Could not find explosive window in Polygon data"
     },
@@ -462,5 +422,5 @@
       "reason": "Could not find explosive window in Polygon data"
     }
   ],
-  "completed": "2025-11-02 19:53:17"
+  "completed": "2025-11-02 19:56:47"
 }
