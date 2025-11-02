@@ -218,29 +218,29 @@ def filter_sustainability(input_file, output_unsustainable, summary_file):
     print(f"   - UNSUSTAINABLE stocks moved to {output_unsustainable}\n")
     
     # Load existing results (merge logic)
-    existing_sustainable = load_existing_file(output_sustainable)
+    # Note: Sustainable stocks are in input_file (CLEAN.json)
+    # On first run, all_stocks ARE the sustainable candidates
+    # On subsequent runs, we need to merge with existing unsustainable
     existing_unsustainable = load_existing_file(output_unsustainable)
     
     print(f"📊 Existing Results:")
-    print(f"   - Sustainable: {len(existing_sustainable)} stocks")
-    print(f"   - Unsustainable: {len(existing_unsustainable)} stocks\n")
+    print(f"   - Sustainable candidates: {len(all_stocks)} stocks (in CLEAN.json)")
+    print(f"   - Already unsustainable: {len(existing_unsustainable)} stocks\n")
     
     # Create lookup sets for existing stocks (ticker + year key)
-    existing_sustainable_keys = {
-        f"{s['ticker']}_{s.get('year_discovered', s.get('year'))}" 
-        for s in existing_sustainable
-    }
     existing_unsustainable_keys = {
         f"{s['ticker']}_{s.get('year_discovered', s.get('year'))}" 
         for s in existing_unsustainable
     }
     
     # Results
-    sustainable = list(existing_sustainable)
+    # Sustainable list starts empty - we'll build it as we test
+    # Unsustainable list starts with existing unsustainable stocks
+    sustainable = []
     unsustainable = list(existing_unsustainable)
     stats = {
         'total_tested': 0,
-        'sustainable_count': len(existing_sustainable),
+        'sustainable_count': 0,
         'unsustainable_count': len(existing_unsustainable),
         'skipped_already_tested': 0,
         'skipped_missing_data': 0,
@@ -263,9 +263,9 @@ def filter_sustainability(input_file, output_unsustainable, summary_file):
         
         print(f"\n[{i}/{len(all_stocks)}] Processing {ticker} ({year})")
         
-        # Skip if already tested
-        if stock_key in existing_sustainable_keys or stock_key in existing_unsustainable_keys:
-            print(f"  ⏭️  Already tested - skipping")
+        # Skip if already tested as unsustainable
+        if stock_key in existing_unsustainable_keys:
+            print(f"  ⏭️  Already tested as unsustainable - skipping")
             stats['skipped_already_tested'] += 1
             continue
         
