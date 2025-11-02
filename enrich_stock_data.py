@@ -201,8 +201,8 @@ def find_explosive_window(ticker, year, target_gain_pct, api_key):
         
         gain_pct = ((peak_price - entry_price) / entry_price) * 100
         
-        # Look for window close to target (allow 10% variance)
-        if gain_pct >= target_gain_pct * 0.9:
+        # Accept ANY window with 500%+ gain (not just matching target)
+        if gain_pct >= 500:
             if gain_pct > max_gain:
                 max_gain = gain_pct
                 
