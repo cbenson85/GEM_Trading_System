@@ -1,7 +1,26 @@
 # GEM Trading System - AI Catch-Up Prompt
-**Last Updated**: 2025-11-02 17:00:00
+**Last Updated**: 2025-11-02 17:30:00
 **System Version**: 5.0.1-REBUILD
 **Current Phase**: Phase 3: Stock Discovery & Pre-Catalyst Analysis - STARTING
+
+---
+
+## 🚨 CRITICAL REMINDER FOR AI - READ THIS FIRST
+
+**FILE CATALOG MUST BE UPDATED FOR EVERY FILE CREATION - NO EXCEPTIONS!**
+
+When AI creates ANY file:
+1. ✅ Create file with download link
+2. ✅ **IMMEDIATELY UPDATE GITHUB_FILE_CATALOG.md with ⏳ PENDING status**
+3. ✅ Post GitHub URL for user to copy
+4. ✅ Wait for user to upload and paste back
+5. ✅ Verify file via web_fetch
+6. ✅ **UPDATE GITHUB_FILE_CATALOG.md with ✅ VERIFIED status**
+7. ✅ Update CURRENT_CATCHUP_PROMPT.md if major milestone
+
+**This is MANDATORY. Not optional. Not negotiable. ALWAYS.**
+
+See [FILE_VERIFICATION_PROTOCOL.md](https://raw.githubusercontent.com/cbenson85/GEM_Trading_System/refs/heads/main/FILE_VERIFICATION_PROTOCOL.md) for complete workflow.
 
 ---
 
