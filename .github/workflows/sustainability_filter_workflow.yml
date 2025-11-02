@@ -1,20 +1,16 @@
-name: Sustainability Filter Workflow (V2.0)
+name: Sustained Gain Filter V3.0
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:
     inputs:
       reason:
         description: 'Reason for running filter'
         required: false
-        default: 'Manual sustainability filter run'
-      batch_size:
-        description: 'Number of stocks to process (default: all 200)'
-        required: false
-        default: '200'
+        default: 'Test sustained gain window methodology'
 
 jobs:
-  filter-sustainability:
+  filter-sustained-gain:
     runs-on: ubuntu-latest
-    timeout-minutes: 60  # 1 hour max (plenty for 5-15 min runtime)
+    timeout-minutes: 60
     
     steps:
       - name: Checkout repository
@@ -43,21 +39,25 @@ jobs:
           print(f'  Total: {len(stocks)} stocks')
           "
           echo ""
-          echo "⚡ ESTIMATED RUNTIME: 5-15 minutes for 200 stocks (Developer tier)"
-          echo "🔬 CRITERIA: 80% retention 21 days after peak"
+          echo "⚡ METHODOLOGY: Sustained Gain Window Test"
+          echo "🔬 CRITERIA:"
+          echo "   - FAST gains (<30d to peak): 250%+ sustained minimum"
+          echo "   - MEDIUM gains (30-90d): 200%+ sustained minimum"
+          echo "   - SLOW gains (90+d): 150%+ sustained minimum"
+          echo ""
+          echo "⏱️  ESTIMATED RUNTIME: 10-20 minutes (Developer tier)"
           echo ""
       
-      - name: Run Sustainability Filter V2.0
+      - name: Run Sustained Gain Filter V3.0
         run: |
-          echo "🔬 Starting Sustainability Filter V2.0..."
+          echo "🔬 Starting Sustained Gain Filter V3.0..."
           echo "Input: Verified_Backtest_Data/explosive_stocks_CLEAN.json"
           echo "Output: Verified_Backtest_Data/explosive_stocks_UNSUSTAINABLE.json"
-          echo "Criteria: 80% retention 21 days after peak"
           echo ""
-          echo "⚡ Developer Tier: Unlimited API requests!"
-          echo "⏱️  Expected completion: 5-15 minutes"
+          echo "Test Method: Track minimum gain from entry to peak+60 days"
+          echo "Purpose: Identify stocks with sustained elevation (not just peak timing)"
           echo ""
-          python filter_sustainability.py
+          python filter_sustained_gain_v3.py
         env:
           PYTHONUNBUFFERED: 1
       
@@ -81,41 +81,96 @@ jobs:
           import json
           try:
               data = json.load(open('Verified_Backtest_Data/explosive_stocks_UNSUSTAINABLE.json'))
-              print(f'  Total: {len(data)} stocks')
+              count = len(data) if isinstance(data, list) else len(data.get('stocks', []))
+              print(f'  Total: {count} stocks')
           except FileNotFoundError:
               print('  File not created (no unsustainable stocks found)')
           "
           echo ""
           echo "📈 Summary Statistics:"
-          cat Verified_Backtest_Data/sustainability_summary.json | python -m json.tool
+          cat Verified_Backtest_Data/sustained_gain_summary.json | python -m json.tool
           echo ""
       
-      - name: Calculate Sustainability Rate
+      - name: Analyze Sustainability Rates
         run: |
           echo "=================================="
-          echo "📊 SUSTAINABILITY ANALYSIS"
+          echo "📊 SUSTAINABILITY ANALYSIS BY SPEED"
           echo "=================================="
           python -c "
           import json
           
-          # Load summary
-          summary = json.load(open('Verified_Backtest_Data/sustainability_summary.json'))
+          summary = json.load(open('Verified_Backtest_Data/sustained_gain_summary.json'))
           
           total = summary.get('total_stocks', 0)
           sustainable = summary.get('sustainable', 0)
           unsustainable = summary.get('unsustainable', 0)
           
           if total > 0:
-              sust_rate = (sustainable / total) * 100
-              unsust_rate = (unsustainable / total) * 100
-              
-              print(f'Total Tested: {total}')
-              print(f'Sustainable: {sustainable} ({sust_rate:.1f}%)')
-              print(f'Unsustainable: {unsustainable} ({unsust_rate:.1f}%)')
               print(f'')
-              print(f'Criteria: {summary.get(\"criteria\", \"Unknown\")}')
+              print(f'Overall Results:')
+              print(f'  Total: {total}')
+              print(f'  Sustainable: {sustainable} ({sustainable/total*100:.1f}%)')
+              print(f'  Unsustainable: {unsustainable} ({unsustainable/total*100:.1f}%)')
+              print(f'')
+              print(f'By Speed Category:')
+              
+              by_speed = summary.get('by_speed', {})
+              for speed in ['FAST', 'MEDIUM', 'SLOW']:
+                  if speed in by_speed:
+                      data = by_speed[speed]
+                      speed_total = data.get('total', 0)
+                      speed_sust = data.get('sustainable', 0)
+                      rate = data.get('sustainability_rate', '0%')
+                      print(f'  {speed:8} : {speed_sust}/{speed_total} sustainable ({rate})')
+              
+              print(f'')
+              print(f'Filter Version: {summary.get(\"filter_version\", \"unknown\")}')
+              print(f'Test Method: {summary.get(\"test_method\", \"unknown\")}')
           else:
               print('No stocks tested')
+          "
+          echo ""
+      
+      - name: Extract Position Management Insights
+        run: |
+          echo "=================================="
+          echo "💡 POSITION MANAGEMENT INSIGHTS"
+          echo "=================================="
+          echo ""
+          echo "Analyzing sustainable stocks for trading patterns..."
+          python -c "
+          import json
+          
+          data = json.load(open('Verified_Backtest_Data/explosive_stocks_CLEAN.json'))
+          stocks = data.get('stocks', data) if isinstance(data, dict) else data
+          
+          if len(stocks) > 0:
+              print(f'Sample insights from {len(stocks)} sustainable stocks:')
+              print(f'')
+              
+              # Analyze first few sustainable stocks
+              for i, stock in enumerate(stocks[:3]):
+                  test = stock.get('sustained_gain_test', {})
+                  ticker = stock.get('ticker', 'UNKNOWN')
+                  
+                  if test:
+                      print(f'{i+1}. {ticker}:')
+                      print(f'   Speed: {test.get(\"speed_category\", \"unknown\")}')
+                      print(f'   Min gain held: {test.get(\"min_gain_pct\", 0):.1f}%')
+                      print(f'   Max drawdown: {test.get(\"drawdown_from_peak_pct\", 0):.1f}% from peak')
+                      
+                      pos_mgmt = test.get('position_management', {})
+                      if pos_mgmt:
+                          print(f'   Stop loss ref: {pos_mgmt.get(\"stop_loss_reference\", \"unknown\")}')
+                      print(f'')
+              
+              print(f'These insights will be used for:')
+              print(f'  • Setting stop losses (based on min gain levels)')
+              print(f'  • Position sizing (based on speed category risk)')
+              print(f'  • Exit timing (based on typical drawdown patterns)')
+              print(f'  • Scaling strategies (50% at X%, hold rest for Y days)')
+          else:
+              print('No sustainable stocks found')
           "
           echo ""
       
@@ -125,16 +180,16 @@ jobs:
           git config --local user.name "GitHub Action"
           git add Verified_Backtest_Data/explosive_stocks_CLEAN.json
           git add Verified_Backtest_Data/explosive_stocks_UNSUSTAINABLE.json
-          git add Verified_Backtest_Data/sustainability_summary.json
-          git diff --staged --quiet || git commit -m "🔬 Sustainability filter V2.0: Update CLEAN.json and UNSUSTAINABLE.json
+          git add Verified_Backtest_Data/sustained_gain_summary.json
+          git diff --staged --quiet || git commit -m "🔬 Sustained Gain Filter V3.0: Test results
           
-          - Tested stocks for 21-day hold sustainability (80% retention threshold)
-          - Removed unsustainable stocks from CLEAN.json
-          - Archived unsustainable stocks to UNSUSTAINABLE.json
-          - Generated summary statistics
+          - Tested stocks for sustained minimum gain over extended period
+          - Speed-adjusted thresholds (FAST: 250%+, MEDIUM: 200%+, SLOW: 150%+)
+          - Filters out pump & dumps while keeping stocks that hold through corrections
+          - Updated CLEAN.json with sustainable stocks only
+          - Generated position management insights
           
-          Filter Version: 2.0
-          Criteria: 80% retention 21 days after peak
+          Filter Method: Sustained Gain Window (entry → peak+60 days)
           Reason: ${{ github.event.inputs.reason }}"
           git push
       
@@ -147,12 +202,19 @@ jobs:
           echo "=================================="
           echo ""
           echo "Files Updated:"
-          echo "  - explosive_stocks_CLEAN.json"
-          echo "  - explosive_stocks_UNSUSTAINABLE.json"
-          echo "  - sustainability_summary.json"
+          echo "  - explosive_stocks_CLEAN.json (sustainable stocks)"
+          echo "  - explosive_stocks_UNSUSTAINABLE.json (pump & dumps)"
+          echo "  - sustained_gain_summary.json (statistics + insights)"
+          echo ""
+          echo "Key Improvements Over V2.0:"
+          echo "  • Tests sustained gain, not just peak retention"
+          echo "  • Speed-adjusted thresholds (fast gains need stricter test)"
+          echo "  • Market corrections don't disqualify good stocks"
+          echo "  • Position management insights for later use"
           echo ""
           echo "Next Steps:"
-          echo "  1. Review sustainability_summary.json"
-          echo "  2. Verify CLEAN.json contains only sustainable stocks"
-          echo "  3. Proceed with Phase 3 pre-catalyst analysis"
+          echo "  1. Review sustained_gain_summary.json"
+          echo "  2. Analyze sustainable stock characteristics"
+          echo "  3. Begin Phase 3 pre-catalyst analysis"
+          echo "  4. Use insights to build position management rules"
           echo ""
