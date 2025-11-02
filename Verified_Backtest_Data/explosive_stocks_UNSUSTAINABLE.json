@@ -1,0 +1,3047 @@
+[
+  {
+    "ticker": "ABVC",
+    "year": 2014,
+    "gain_percent": 900,
+    "days_to_peak": 28,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AEMD",
+    "year": 2014,
+    "gain_percent": 620,
+    "days_to_peak": 47,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AMTX",
+    "year": 2014,
+    "gain_percent": 515,
+    "days_to_peak": 113,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ASTH",
+    "year": 2014,
+    "gain_percent": 1011,
+    "days_to_peak": 1,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ATON",
+    "year": 2014,
+    "gain_percent": 1462,
+    "days_to_peak": 1,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ATRA",
+    "year": 2014,
+    "gain_percent": 502,
+    "days_to_peak": 128,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ABVC",
+    "year": 2015,
+    "gain_percent": 416567,
+    "days_to_peak": 24,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AEMD",
+    "year": 2015,
+    "gain_percent": 620,
+    "days_to_peak": 47,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AMTX",
+    "year": 2015,
+    "gain_percent": 515,
+    "days_to_peak": 113,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ASTH",
+    "year": 2015,
+    "gain_percent": 1011,
+    "days_to_peak": 1,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AYTU",
+    "year": 2015,
+    "gain_percent": 1150,
+    "days_to_peak": 46,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ABAT",
+    "year": 2016,
+    "gain_percent": 500,
+    "days_to_peak": 8,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ACB",
+    "year": 2016,
+    "gain_percent": 795,
+    "days_to_peak": 86,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ACFN",
+    "year": 2016,
+    "gain_percent": 512,
+    "days_to_peak": 69,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AG",
+    "year": 2016,
+    "gain_percent": 525,
+    "days_to_peak": 117,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 57.2% of gain (need 80.0%)",
+      "test_date": "2016-08-31",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2016-01-19",
+      "entry_price": 2.51,
+      "peak_date": "2016-08-10",
+      "peak_price": 19.15,
+      "test_price": 12.02,
+      "retention_percent": 57.15,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AMPY",
+    "year": 2016,
+    "gain_percent": 49900,
+    "days_to_peak": 10,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AREN",
+    "year": 2016,
+    "gain_percent": 700,
+    "days_to_peak": 122,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ASTH",
+    "year": 2016,
+    "gain_percent": 500,
+    "days_to_peak": 17,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AREC",
+    "year": 2017,
+    "gain_percent": 3900,
+    "days_to_peak": 134,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ATLX",
+    "year": 2017,
+    "gain_percent": 800,
+    "days_to_peak": 34,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AVTX",
+    "year": 2017,
+    "gain_percent": 662,
+    "days_to_peak": 137,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AXON",
+    "year": 2017,
+    "gain_percent": 528,
+    "days_to_peak": 32,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AACG",
+    "year": 2018,
+    "gain_percent": 651,
+    "days_to_peak": 41,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ABAT",
+    "year": 2018,
+    "gain_percent": 577,
+    "days_to_peak": 33,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ABTC",
+    "year": 2018,
+    "gain_percent": 631,
+    "days_to_peak": 149,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ABVC",
+    "year": 2018,
+    "gain_percent": 1340,
+    "days_to_peak": 8,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ADIL",
+    "year": 2018,
+    "gain_percent": 643,
+    "days_to_peak": 41,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AGMH",
+    "year": 2018,
+    "gain_percent": 568,
+    "days_to_peak": 113,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 65.0% of gain (need 80.0%)",
+      "test_date": "2018-10-22",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2018-04-18",
+      "entry_price": 315,
+      "peak_date": "2018-10-01",
+      "peak_price": 2600.05,
+      "test_price": 1800,
+      "retention_percent": 64.99,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ALBT",
+    "year": 2018,
+    "gain_percent": 612,
+    "days_to_peak": 175,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ALT",
+    "year": 2018,
+    "gain_percent": 749,
+    "days_to_peak": 2,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained -0.3% of gain (need 80.0%)",
+      "test_date": "2018-10-11",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2018-09-18",
+      "entry_price": 4.27,
+      "peak_date": "2018-09-20",
+      "peak_price": 36.25,
+      "test_price": 4.17,
+      "retention_percent": -0.31,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AMRN",
+    "year": 2018,
+    "gain_percent": 577,
+    "days_to_peak": 46,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 68.9% of gain (need 80.0%)",
+      "test_date": "2018-11-27",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2018-07-30",
+      "entry_price": 49,
+      "peak_date": "2018-11-06",
+      "peak_price": 466.7,
+      "test_price": 336.6,
+      "retention_percent": 68.85,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AMTX",
+    "year": 2018,
+    "gain_percent": 501,
+    "days_to_peak": 22,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 35.8% of gain (need 80.0%)",
+      "test_date": "2018-04-06",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2018-02-13",
+      "entry_price": 0.519,
+      "peak_date": "2018-03-16",
+      "peak_price": 3.12,
+      "test_price": 1.45,
+      "retention_percent": 35.79,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ATOS",
+    "year": 2018,
+    "gain_percent": 706,
+    "days_to_peak": 52,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AWX",
+    "year": 2018,
+    "gain_percent": 910,
+    "days_to_peak": 110,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 10.4% of gain (need 80.0%)",
+      "test_date": "2018-08-20",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2017-11-08",
+      "entry_price": 1.92,
+      "peak_date": "2018-07-30",
+      "peak_price": 20.2,
+      "test_price": 3.83,
+      "retention_percent": 10.45,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AXON",
+    "year": 2018,
+    "gain_percent": 528,
+    "days_to_peak": 32,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 21.7% of gain (need 80.0%)",
+      "test_date": "2018-06-28",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2018-04-23",
+      "entry_price": 1.05,
+      "peak_date": "2018-06-07",
+      "peak_price": 6.59,
+      "test_price": 2.25,
+      "retention_percent": 21.66,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ABAT",
+    "year": 2019,
+    "gain_percent": 548,
+    "days_to_peak": 27,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ABTC",
+    "year": 2019,
+    "gain_percent": 624,
+    "days_to_peak": 106,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ABVC",
+    "year": 2019,
+    "gain_percent": 1340,
+    "days_to_peak": 8,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AEHL",
+    "year": 2019,
+    "gain_percent": 556,
+    "days_to_peak": 42,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AIHS",
+    "year": 2019,
+    "gain_percent": 515,
+    "days_to_peak": 18,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AIM",
+    "year": 2019,
+    "gain_percent": 1126,
+    "days_to_peak": 100,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 32.2% of gain (need 80.0%)",
+      "test_date": "2020-03-30",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2019-10-04",
+      "entry_price": 0.5502,
+      "peak_date": "2020-03-09",
+      "peak_price": 7.11,
+      "test_price": 2.66,
+      "retention_percent": 32.16,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ALT",
+    "year": 2019,
+    "gain_percent": 598,
+    "days_to_peak": 128,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained -0.3% of gain (need 80.0%)",
+      "test_date": "2018-10-11",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2018-09-18",
+      "entry_price": 4.27,
+      "peak_date": "2018-09-20",
+      "peak_price": 36.25,
+      "test_price": 4.17,
+      "retention_percent": -0.31,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ANY",
+    "year": 2019,
+    "gain_percent": 552,
+    "days_to_peak": 54,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "APLT",
+    "year": 2019,
+    "gain_percent": 556,
+    "days_to_peak": 133,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 66.7% of gain (need 80.0%)",
+      "test_date": "2020-02-25",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2019-07-08",
+      "entry_price": 8.08,
+      "peak_date": "2020-02-04",
+      "peak_price": 57.39,
+      "test_price": 40.98,
+      "retention_percent": 66.72,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "APT",
+    "year": 2019,
+    "gain_percent": 804,
+    "days_to_peak": 26,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 19.1% of gain (need 80.0%)",
+      "test_date": "2020-03-20",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2019-06-25",
+      "entry_price": 3.36,
+      "peak_date": "2020-02-28",
+      "peak_price": 41.59,
+      "test_price": 10.67,
+      "retention_percent": 19.12,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AR",
+    "year": 2019,
+    "gain_percent": 507,
+    "days_to_peak": 46,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ARCT",
+    "year": 2019,
+    "gain_percent": 576,
+    "days_to_peak": 46,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 37.8% of gain (need 80.0%)",
+      "test_date": "2020-06-09",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2019-10-02",
+      "entry_price": 9.46,
+      "peak_date": "2020-05-19",
+      "peak_price": 62.97,
+      "test_price": 29.7,
+      "retention_percent": 37.82,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ASTC",
+    "year": 2019,
+    "gain_percent": 611,
+    "days_to_peak": 3,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ATLX",
+    "year": 2019,
+    "gain_percent": 500,
+    "days_to_peak": 133,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ATON",
+    "year": 2019,
+    "gain_percent": 12400,
+    "days_to_peak": 18,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ATOS",
+    "year": 2019,
+    "gain_percent": 566,
+    "days_to_peak": 48,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 33.6% of gain (need 80.0%)",
+      "test_date": "2019-04-04",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2018-12-27",
+      "entry_price": 0.9169,
+      "peak_date": "2019-03-14",
+      "peak_price": 7.39,
+      "test_price": 3.09,
+      "retention_percent": 33.57,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AYTU",
+    "year": 2019,
+    "gain_percent": 759,
+    "days_to_peak": 1,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ACIC",
+    "year": 2022,
+    "gain_percent": 742,
+    "days_to_peak": 40,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ACON",
+    "year": 2022,
+    "gain_percent": 508,
+    "days_to_peak": 80,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ACONW",
+    "year": 2022,
+    "gain_percent": 796,
+    "days_to_peak": 7,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AIMD",
+    "year": 2022,
+    "gain_percent": 682,
+    "days_to_peak": 36,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 4.8% of gain (need 80.0%)",
+      "test_date": "2022-08-25",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2022-06-29",
+      "entry_price": 38.4,
+      "peak_date": "2022-08-04",
+      "peak_price": 450,
+      "test_price": 58.125,
+      "retention_percent": 4.79,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AKBA",
+    "year": 2022,
+    "gain_percent": 552,
+    "days_to_peak": 119,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ALVOW",
+    "year": 2022,
+    "gain_percent": 522,
+    "days_to_peak": 59,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AMTD",
+    "year": 2022,
+    "gain_percent": 1165,
+    "days_to_peak": 15,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 8.4% of gain (need 80.0%)",
+      "test_date": "2022-08-23",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2022-07-12",
+      "entry_price": 6.12,
+      "peak_date": "2022-08-02",
+      "peak_price": 77.4,
+      "test_price": 12.12,
+      "retention_percent": 8.42,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "APLD",
+    "year": 2022,
+    "gain_percent": 556,
+    "days_to_peak": 121,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 58.8% of gain (need 80.0%)",
+      "test_date": "2023-07-14",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2022-10-07",
+      "entry_price": 1.55,
+      "peak_date": "2023-06-23",
+      "peak_price": 11.62,
+      "test_price": 7.47,
+      "retention_percent": 58.79,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ARBK",
+    "year": 2022,
+    "gain_percent": 736,
+    "days_to_peak": 32,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ARBKL",
+    "year": 2022,
+    "gain_percent": 637,
+    "days_to_peak": 15,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AREBW",
+    "year": 2022,
+    "gain_percent": 600,
+    "days_to_peak": 7,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ATLN",
+    "year": 2022,
+    "gain_percent": 838,
+    "days_to_peak": 29,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ATLX",
+    "year": 2022,
+    "gain_percent": 560,
+    "days_to_peak": 60,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AVDL",
+    "year": 2022,
+    "gain_percent": 515,
+    "days_to_peak": 48,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 68.6% of gain (need 80.0%)",
+      "test_date": "2022-12-22",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2022-05-26",
+      "entry_price": 1.07,
+      "peak_date": "2022-12-01",
+      "peak_price": 10.02,
+      "test_price": 7.21,
+      "retention_percent": 68.6,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "BAOS",
+    "year": 2022,
+    "gain_percent": 633,
+    "days_to_peak": 16,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "BBAI",
+    "year": 2022,
+    "gain_percent": 689,
+    "days_to_peak": 30,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ACONW",
+    "year": 2023,
+    "gain_percent": 942,
+    "days_to_peak": 93,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 5.4% of gain (need 80.0%)",
+      "test_date": "2023-06-29",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2023-04-18",
+      "entry_price": 0.040375,
+      "peak_date": "2023-06-08",
+      "peak_price": 0.4212,
+      "test_price": 0.0611,
+      "retention_percent": 5.44,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ACXP",
+    "year": 2023,
+    "gain_percent": 589,
+    "days_to_peak": 7,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 33.4% of gain (need 80.0%)",
+      "test_date": "2023-11-02",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2023-10-03",
+      "entry_price": 25.6,
+      "peak_date": "2023-10-12",
+      "peak_price": 176.4,
+      "test_price": 76,
+      "retention_percent": 33.42,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ADCT",
+    "year": 2023,
+    "gain_percent": 588,
+    "days_to_peak": 53,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 70.1% of gain (need 80.0%)",
+      "test_date": "2024-03-12",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2023-09-22",
+      "entry_price": 0.7199,
+      "peak_date": "2024-02-20",
+      "peak_price": 6.04,
+      "test_price": 4.45,
+      "retention_percent": 70.11,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ADTX",
+    "year": 2023,
+    "gain_percent": 793,
+    "days_to_peak": 3,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 17.2% of gain (need 80.0%)",
+      "test_date": "2023-09-21",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2023-08-28",
+      "entry_price": 76200,
+      "peak_date": "2023-08-31",
+      "peak_price": 680800,
+      "test_price": 179900,
+      "retention_percent": 17.15,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AENTW",
+    "year": 2023,
+    "gain_percent": 652,
+    "days_to_peak": 69,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AEYE",
+    "year": 2023,
+    "gain_percent": 548,
+    "days_to_peak": 140,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AHG",
+    "year": 2023,
+    "gain_percent": 599,
+    "days_to_peak": 51,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 40.0% of gain (need 80.0%)",
+      "test_date": "2024-02-23",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2023-07-27",
+      "entry_price": 0.2505,
+      "peak_date": "2024-02-02",
+      "peak_price": 2.9,
+      "test_price": 1.31,
+      "retention_percent": 39.99,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AIMDW",
+    "year": 2023,
+    "gain_percent": 538,
+    "days_to_peak": 13,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AISP",
+    "year": 2023,
+    "gain_percent": 634,
+    "days_to_peak": 49,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AKA",
+    "year": 2023,
+    "gain_percent": 690,
+    "days_to_peak": 150,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 44.4% of gain (need 80.0%)",
+      "test_date": "2024-06-03",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2023-10-05",
+      "entry_price": 3.87,
+      "peak_date": "2024-05-13",
+      "peak_price": 33.7278,
+      "test_price": 17.14,
+      "retention_percent": 44.44,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AKAN",
+    "year": 2023,
+    "gain_percent": 575,
+    "days_to_peak": 3,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ALT",
+    "year": 2023,
+    "gain_percent": 568,
+    "days_to_peak": 87,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 55.8% of gain (need 80.0%)",
+      "test_date": "2024-03-20",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2023-08-25",
+      "entry_price": 2.4,
+      "peak_date": "2024-02-28",
+      "peak_price": 14.84,
+      "test_price": 9.34,
+      "retention_percent": 55.79,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ALTS",
+    "year": 2023,
+    "gain_percent": 812,
+    "days_to_peak": 86,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ALVOW",
+    "year": 2023,
+    "gain_percent": 601,
+    "days_to_peak": 106,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 59.5% of gain (need 80.0%)",
+      "test_date": "2024-03-18",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2023-05-25",
+      "entry_price": 0.98,
+      "peak_date": "2024-02-26",
+      "peak_price": 6.31,
+      "test_price": 4.15,
+      "retention_percent": 59.47,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ANGHW",
+    "year": 2023,
+    "gain_percent": 816,
+    "days_to_peak": 6,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ANY",
+    "year": 2023,
+    "gain_percent": 554,
+    "days_to_peak": 18,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "APLD",
+    "year": 2023,
+    "gain_percent": 549,
+    "days_to_peak": 116,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 59.0% of gain (need 80.0%)",
+      "test_date": "2023-07-14",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2022-12-19",
+      "entry_price": 1.51,
+      "peak_date": "2023-06-23",
+      "peak_price": 11.62,
+      "test_price": 7.47,
+      "retention_percent": 58.95,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "APLT",
+    "year": 2023,
+    "gain_percent": 645,
+    "days_to_peak": 121,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 69.4% of gain (need 80.0%)",
+      "test_date": "2024-03-20",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2023-09-05",
+      "entry_price": 1.26,
+      "peak_date": "2024-02-28",
+      "peak_price": 9.39,
+      "test_price": 6.9,
+      "retention_percent": 69.37,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "APM",
+    "year": 2023,
+    "gain_percent": 1158,
+    "days_to_peak": 18,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AREBW",
+    "year": 2023,
+    "gain_percent": 1038,
+    "days_to_peak": 9,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 4.2% of gain (need 80.0%)",
+      "test_date": "2023-09-28",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2022-12-28",
+      "entry_price": 0.01,
+      "peak_date": "2023-09-07",
+      "peak_price": 0.1291,
+      "test_price": 0.015,
+      "retention_percent": 4.2,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ARKOW",
+    "year": 2023,
+    "gain_percent": 539,
+    "days_to_peak": 20,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ARQT",
+    "year": 2023,
+    "gain_percent": 530,
+    "days_to_peak": 68,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ASNS",
+    "year": 2023,
+    "gain_percent": 955,
+    "days_to_peak": 3,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ASTS",
+    "year": 2023,
+    "gain_percent": 515,
+    "days_to_peak": 53,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ATGL",
+    "year": 2023,
+    "gain_percent": 644,
+    "days_to_peak": 11,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ATLX",
+    "year": 2023,
+    "gain_percent": 560,
+    "days_to_peak": 60,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 41.1% of gain (need 80.0%)",
+      "test_date": "2023-05-23",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2023-02-03",
+      "entry_price": 6.82,
+      "peak_date": "2023-05-02",
+      "peak_price": 45,
+      "test_price": 22.5,
+      "retention_percent": 41.07,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ATRA",
+    "year": 2023,
+    "gain_percent": 588,
+    "days_to_peak": 56,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AUUDW",
+    "year": 2023,
+    "gain_percent": 755,
+    "days_to_peak": 45,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AVTX",
+    "year": 2023,
+    "gain_percent": 757,
+    "days_to_peak": 50,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AXG",
+    "year": 2023,
+    "gain_percent": 1553,
+    "days_to_peak": 23,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "BAOS",
+    "year": 2023,
+    "gain_percent": 633,
+    "days_to_peak": 16,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 19.2% of gain (need 80.0%)",
+      "test_date": "2023-05-23",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2023-04-24",
+      "entry_price": 3.1,
+      "peak_date": "2023-05-02",
+      "peak_price": 23.3,
+      "test_price": 6.98,
+      "retention_percent": 19.21,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "BBAI",
+    "year": 2023,
+    "gain_percent": 676,
+    "days_to_peak": 20,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 40.9% of gain (need 80.0%)",
+      "test_date": "2023-02-27",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2022-12-29",
+      "entry_price": 0.6328,
+      "peak_date": "2023-02-06",
+      "peak_price": 6.77,
+      "test_price": 3.14,
+      "retention_percent": 40.85,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ABTC",
+    "year": 2024,
+    "gain_percent": 2070,
+    "days_to_peak": 23,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ABTS",
+    "year": 2024,
+    "gain_percent": 527,
+    "days_to_peak": 23,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ABVC",
+    "year": 2024,
+    "gain_percent": 520,
+    "days_to_peak": 92,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ABVE",
+    "year": 2024,
+    "gain_percent": 833,
+    "days_to_peak": 42,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ABVEW",
+    "year": 2024,
+    "gain_percent": 606,
+    "days_to_peak": 136,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ACONW",
+    "year": 2024,
+    "gain_percent": 1123,
+    "days_to_peak": 18,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 20.2% of gain (need 80.0%)",
+      "test_date": "2025-02-20",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-02-21",
+      "entry_price": 0.016,
+      "peak_date": "2025-01-30",
+      "peak_price": 0.2446,
+      "test_price": 0.0622,
+      "retention_percent": 20.21,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AENT",
+    "year": 2024,
+    "gain_percent": 598,
+    "days_to_peak": 102,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 47.8% of gain (need 80.0%)",
+      "test_date": "2025-01-28",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-08-27",
+      "entry_price": 1.29,
+      "peak_date": "2025-01-07",
+      "peak_price": 11.5718,
+      "test_price": 6.2,
+      "retention_percent": 47.75,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AENTW",
+    "year": 2024,
+    "gain_percent": 1221,
+    "days_to_peak": 101,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 31.5% of gain (need 80.0%)",
+      "test_date": "2025-01-20",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2023-12-12",
+      "entry_price": 0.006,
+      "peak_date": "2024-12-30",
+      "peak_price": 0.7499,
+      "test_price": 0.24,
+      "retention_percent": 31.46,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AERTW",
+    "year": 2024,
+    "gain_percent": 550,
+    "days_to_peak": 44,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AEYE",
+    "year": 2024,
+    "gain_percent": 537,
+    "days_to_peak": 136,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 76.7% of gain (need 80.0%)",
+      "test_date": "2024-08-19",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2023-11-27",
+      "entry_price": 4,
+      "peak_date": "2024-07-29",
+      "peak_price": 29.3,
+      "test_price": 23.4,
+      "retention_percent": 76.68,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AIFF",
+    "year": 2024,
+    "gain_percent": 602,
+    "days_to_peak": 34,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AIIO",
+    "year": 2024,
+    "gain_percent": 828,
+    "days_to_peak": 20,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AIM",
+    "year": 2024,
+    "gain_percent": 15632,
+    "days_to_peak": 1,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AIMDW",
+    "year": 2024,
+    "gain_percent": 823,
+    "days_to_peak": 74,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AIRE",
+    "year": 2024,
+    "gain_percent": 647,
+    "days_to_peak": 172,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 27.7% of gain (need 80.0%)",
+      "test_date": "2025-01-16",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-04-22",
+      "entry_price": 0.6014,
+      "peak_date": "2024-12-26",
+      "peak_price": 4.49,
+      "test_price": 1.68,
+      "retention_percent": 27.74,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AISP",
+    "year": 2024,
+    "gain_percent": 634,
+    "days_to_peak": 49,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 52.8% of gain (need 80.0%)",
+      "test_date": "2024-04-09",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-02-08",
+      "entry_price": 1.4,
+      "peak_date": "2024-03-19",
+      "peak_price": 14.3188,
+      "test_price": 8.22,
+      "retention_percent": 52.79,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AISPW",
+    "year": 2024,
+    "gain_percent": 1602,
+    "days_to_peak": 21,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 29.1% of gain (need 80.0%)",
+      "test_date": "2024-04-09",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-01-19",
+      "entry_price": 0.021,
+      "peak_date": "2024-03-19",
+      "peak_price": 2.19,
+      "test_price": 0.6514,
+      "retention_percent": 29.06,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AKAN",
+    "year": 2024,
+    "gain_percent": 575,
+    "days_to_peak": 3,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained -6.4% of gain (need 80.0%)",
+      "test_date": "2024-06-07",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-05-14",
+      "entry_price": 22,
+      "peak_date": "2024-05-17",
+      "peak_price": 148.504,
+      "test_price": 13.875,
+      "retention_percent": -6.42,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ALFUW",
+    "year": 2024,
+    "gain_percent": 573,
+    "days_to_peak": 135,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ALGS",
+    "year": 2024,
+    "gain_percent": 524,
+    "days_to_peak": 62,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 46.5% of gain (need 80.0%)",
+      "test_date": "2025-01-27",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-10-08",
+      "entry_price": 7.32,
+      "peak_date": "2025-01-06",
+      "peak_price": 46.8,
+      "test_price": 25.67,
+      "retention_percent": 46.48,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ALMU",
+    "year": 2024,
+    "gain_percent": 614,
+    "days_to_peak": 143,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 68.1% of gain (need 80.0%)",
+      "test_date": "2025-06-24",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-09-10",
+      "entry_price": 2.57,
+      "peak_date": "2025-06-03",
+      "peak_price": 19.35,
+      "test_price": 13.99,
+      "retention_percent": 68.06,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ALTS",
+    "year": 2024,
+    "gain_percent": 526,
+    "days_to_peak": 166,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 69.6% of gain (need 80.0%)",
+      "test_date": "2025-06-27",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-10-08",
+      "entry_price": 1.69,
+      "peak_date": "2025-06-06",
+      "peak_price": 10.9487,
+      "test_price": 8.13,
+      "retention_percent": 69.56,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ALZN",
+    "year": 2024,
+    "gain_percent": 668,
+    "days_to_peak": 2,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 1.0% of gain (need 80.0%)",
+      "test_date": "2024-09-09",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-08-15",
+      "entry_price": 17.64,
+      "peak_date": "2024-08-19",
+      "peak_price": 135.54,
+      "test_price": 18.81,
+      "retention_percent": 0.99,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AMODW",
+    "year": 2024,
+    "gain_percent": 601,
+    "days_to_peak": 2,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AMPG",
+    "year": 2024,
+    "gain_percent": 644,
+    "days_to_peak": 55,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 26.0% of gain (need 80.0%)",
+      "test_date": "2025-01-20",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-08-29",
+      "entry_price": 0.671,
+      "peak_date": "2024-12-30",
+      "peak_price": 6.43,
+      "test_price": 2.17,
+      "retention_percent": 26.03,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AMPGW",
+    "year": 2024,
+    "gain_percent": 2396,
+    "days_to_peak": 5,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ANSCW",
+    "year": 2024,
+    "gain_percent": 809,
+    "days_to_peak": 87,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "APLMW",
+    "year": 2024,
+    "gain_percent": 714,
+    "days_to_peak": 127,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "APM",
+    "year": 2024,
+    "gain_percent": 1272,
+    "days_to_peak": 29,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 45.4% of gain (need 80.0%)",
+      "test_date": "2024-03-27",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-02-08",
+      "entry_price": 1.39,
+      "peak_date": "2024-03-06",
+      "peak_price": 17.49,
+      "test_price": 8.7,
+      "retention_percent": 45.4,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "APP",
+    "year": 2024,
+    "gain_percent": 602,
+    "days_to_peak": 127,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 42.0% of gain (need 80.0%)",
+      "test_date": "2025-03-06",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-08-05",
+      "entry_price": 67.14,
+      "peak_date": "2025-02-13",
+      "peak_price": 525.15,
+      "test_price": 259.63,
+      "retention_percent": 42.03,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "APPS",
+    "year": 2024,
+    "gain_percent": 542,
+    "days_to_peak": 142,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ARBEW",
+    "year": 2024,
+    "gain_percent": 664,
+    "days_to_peak": 141,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 33.6% of gain (need 80.0%)",
+      "test_date": "2025-01-28",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-03-19",
+      "entry_price": 0.13,
+      "peak_date": "2025-01-07",
+      "peak_price": 1.26,
+      "test_price": 0.5101,
+      "retention_percent": 33.64,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AREB",
+    "year": 2024,
+    "gain_percent": 1371,
+    "days_to_peak": 3,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AREBW",
+    "year": 2024,
+    "gain_percent": 833,
+    "days_to_peak": 172,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 3.1% of gain (need 80.0%)",
+      "test_date": "2023-09-28",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2023-08-23",
+      "entry_price": 0.011346,
+      "peak_date": "2023-09-07",
+      "peak_price": 0.1291,
+      "test_price": 0.015,
+      "retention_percent": 3.1,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AREN",
+    "year": 2024,
+    "gain_percent": 675,
+    "days_to_peak": 109,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 45.4% of gain (need 80.0%)",
+      "test_date": "2025-06-10",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-09-26",
+      "entry_price": 0.715,
+      "peak_date": "2025-05-20",
+      "peak_price": 10.05,
+      "test_price": 4.95,
+      "retention_percent": 45.37,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ARKOW",
+    "year": 2024,
+    "gain_percent": 1151,
+    "days_to_peak": 43,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 24.7% of gain (need 80.0%)",
+      "test_date": "2024-09-06",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-05-03",
+      "entry_price": 0.0751,
+      "peak_date": "2024-08-16",
+      "peak_price": 1.19,
+      "test_price": 0.35,
+      "retention_percent": 24.66,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ARQQ",
+    "year": 2024,
+    "gain_percent": 758,
+    "days_to_peak": 39,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 46.9% of gain (need 80.0%)",
+      "test_date": "2025-01-17",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-10-07",
+      "entry_price": 3.79,
+      "peak_date": "2024-12-27",
+      "peak_price": 52.79,
+      "test_price": 26.77,
+      "retention_percent": 46.9,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ARQQW",
+    "year": 2024,
+    "gain_percent": 1173,
+    "days_to_peak": 44,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 63.8% of gain (need 80.0%)",
+      "test_date": "2025-01-17",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-08-05",
+      "entry_price": 0.0515,
+      "peak_date": "2024-12-27",
+      "peak_price": 4.44,
+      "test_price": 2.8499,
+      "retention_percent": 63.77,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ASNS",
+    "year": 2024,
+    "gain_percent": 955,
+    "days_to_peak": 3,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 24.4% of gain (need 80.0%)",
+      "test_date": "2024-06-26",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-05-31",
+      "entry_price": 0.436,
+      "peak_date": "2024-06-05",
+      "peak_price": 4.6,
+      "test_price": 1.45,
+      "retention_percent": 24.35,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ASST",
+    "year": 2024,
+    "gain_percent": 1447,
+    "days_to_peak": 24,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ASTS",
+    "year": 2024,
+    "gain_percent": 733,
+    "days_to_peak": 62,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 69.8% of gain (need 80.0%)",
+      "test_date": "2024-09-11",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-04-02",
+      "entry_price": 2.01,
+      "peak_date": "2024-08-21",
+      "peak_price": 39.08,
+      "test_price": 27.9,
+      "retention_percent": 69.84,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ATCH",
+    "year": 2024,
+    "gain_percent": 514,
+    "days_to_peak": 3,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ATGL",
+    "year": 2024,
+    "gain_percent": 929,
+    "days_to_peak": 94,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 42.0% of gain (need 80.0%)",
+      "test_date": "2025-03-12",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-09-13",
+      "entry_price": 1.22,
+      "peak_date": "2025-02-19",
+      "peak_price": 57.32,
+      "test_price": 24.8,
+      "retention_percent": 42.03,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ATMVR",
+    "year": 2024,
+    "gain_percent": 567,
+    "days_to_peak": 150,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "ATOM",
+    "year": 2024,
+    "gain_percent": 587,
+    "days_to_peak": 71,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 41.5% of gain (need 80.0%)",
+      "test_date": "2025-01-27",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-09-23",
+      "entry_price": 2.45,
+      "peak_date": "2025-01-06",
+      "peak_price": 17.55,
+      "test_price": 8.72,
+      "retention_percent": 41.52,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ATON",
+    "year": 2024,
+    "gain_percent": 965,
+    "days_to_peak": 24,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AUROW",
+    "year": 2024,
+    "gain_percent": 794,
+    "days_to_peak": 110,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 48.9% of gain (need 80.0%)",
+      "test_date": "2025-03-07",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-06-21",
+      "entry_price": 0.1501,
+      "peak_date": "2025-02-14",
+      "peak_price": 2.9953,
+      "test_price": 1.54,
+      "retention_percent": 48.85,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AUUDW",
+    "year": 2024,
+    "gain_percent": 594,
+    "days_to_peak": 36,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 22.8% of gain (need 80.0%)",
+      "test_date": "2024-04-29",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2023-11-22",
+      "entry_price": 0.0117,
+      "peak_date": "2024-04-08",
+      "peak_price": 0.1387,
+      "test_price": 0.0406,
+      "retention_percent": 22.76,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AVTX",
+    "year": 2024,
+    "gain_percent": 757,
+    "days_to_peak": 50,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 26.2% of gain (need 80.0%)",
+      "test_date": "2024-04-18",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-01-17",
+      "entry_price": 4.02,
+      "peak_date": "2024-03-28",
+      "peak_price": 34.46,
+      "test_price": 12.01,
+      "retention_percent": 26.25,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "AXG",
+    "year": 2024,
+    "gain_percent": 1553,
+    "days_to_peak": 23,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not find explosive window in Polygon data",
+      "test_date": "2025-11-02",
+      "criteria": "80.0% retention 21 days after peak"
+    }
+  },
+  {
+    "ticker": "AZTR",
+    "year": 2024,
+    "gain_percent": 641,
+    "days_to_peak": 1,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained -8.9% of gain (need 80.0%)",
+      "test_date": "2024-08-13",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-07-22",
+      "entry_price": 10.7892,
+      "peak_date": "2024-07-23",
+      "peak_price": 79.92,
+      "test_price": 4.662,
+      "retention_percent": -8.86,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "BAERW",
+    "year": 2024,
+    "gain_percent": 867,
+    "days_to_peak": 81,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 39.7% of gain (need 80.0%)",
+      "test_date": "2025-01-31",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-09-03",
+      "entry_price": 0.03,
+      "peak_date": "2025-01-10",
+      "peak_price": 0.29,
+      "test_price": 0.133251,
+      "retention_percent": 39.71,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "BAOS",
+    "year": 2024,
+    "gain_percent": 781,
+    "days_to_peak": 7,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 9.6% of gain (need 80.0%)",
+      "test_date": "2025-01-14",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-06-21",
+      "entry_price": 1.7,
+      "peak_date": "2024-12-24",
+      "peak_price": 13.66,
+      "test_price": 2.85,
+      "retention_percent": 9.62,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "BBAI",
+    "year": 2024,
+    "gain_percent": 605,
+    "days_to_peak": 161,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 32.8% of gain (need 80.0%)",
+      "test_date": "2025-03-06",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2024-08-07",
+      "entry_price": 1.19,
+      "peak_date": "2025-02-13",
+      "peak_price": 10.36,
+      "test_price": 4.2,
+      "retention_percent": 32.82,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ABUS",
+    "year_discovered": 2013,
+    "catalyst_date": "2014-03-10",
+    "entry_price": 4.8,
+    "peak_price": 30.75,
+    "gain_percent": 540.6,
+    "days_to_peak": 171,
+    "entry_date": "2013-07-03",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 35,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2013-07-03",
+      "entry_price": 4.8,
+      "peak_date": "2014-03-10",
+      "peak_price": 30.75,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ABVC",
+    "year_discovered": 2013,
+    "catalyst_date": "2013-12-09",
+    "entry_price": 286.62,
+    "peak_price": 5732.48,
+    "gain_percent": 1900.0,
+    "days_to_peak": 2,
+    "entry_date": "2013-12-05",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 14,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2013-12-05",
+      "entry_price": 286.62,
+      "peak_date": "2013-12-09",
+      "peak_price": 5732.48,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ALM",
+    "year_discovered": 2013,
+    "catalyst_date": "2013-06-26",
+    "entry_price": 0.22,
+    "peak_price": 2.22,
+    "gain_percent": 895.1,
+    "days_to_peak": 1,
+    "entry_date": "2013-06-25",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 7,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2013-06-25",
+      "entry_price": 0.22,
+      "peak_date": "2013-06-26",
+      "peak_price": 2.22,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ALTO",
+    "year_discovered": 2013,
+    "catalyst_date": "2014-03-21",
+    "entry_price": 2.72,
+    "peak_price": 17.93,
+    "gain_percent": 559.2,
+    "days_to_peak": 87,
+    "entry_date": "2013-11-13",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 8,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2013-11-13",
+      "entry_price": 2.72,
+      "peak_date": "2014-03-21",
+      "peak_price": 17.93,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "AMTX",
+    "year_discovered": 2013,
+    "catalyst_date": "2014-06-23",
+    "entry_price": 0.46,
+    "peak_price": 2.8,
+    "gain_percent": 515.4,
+    "days_to_peak": 113,
+    "entry_date": "2014-01-09",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 3,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2014-01-09",
+      "entry_price": 0.46,
+      "peak_date": "2014-06-23",
+      "peak_price": 2.8,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ANIP",
+    "year_discovered": 2013,
+    "catalyst_date": "2014-03-05",
+    "entry_price": 5.82,
+    "peak_price": 38.21,
+    "gain_percent": 556.5,
+    "days_to_peak": 165,
+    "entry_date": "2013-07-09",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 18,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2013-07-09",
+      "entry_price": 5.82,
+      "peak_date": "2014-03-05",
+      "peak_price": 38.21,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ANY",
+    "year_discovered": 2013,
+    "catalyst_date": "2014-02-12",
+    "entry_price": 1628.2,
+    "peak_price": 10060.4,
+    "gain_percent": 517.9,
+    "days_to_peak": 125,
+    "entry_date": "2013-08-14",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 8,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2013-08-14",
+      "entry_price": 1628.2,
+      "peak_date": "2014-02-12",
+      "peak_price": 10060.4,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ARMP",
+    "year_discovered": 2013,
+    "catalyst_date": "2013-07-24",
+    "entry_price": 700.0,
+    "peak_price": 4970.0,
+    "gain_percent": 610.0,
+    "days_to_peak": 76,
+    "entry_date": "2013-04-05",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 13,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2013-04-05",
+      "entry_price": 700.0,
+      "peak_date": "2013-07-24",
+      "peak_price": 4970.0,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ARWR",
+    "year_discovered": 2013,
+    "catalyst_date": "2014-03-05",
+    "entry_price": 3.86,
+    "peak_price": 27.24,
+    "gain_percent": 605.7,
+    "days_to_peak": 136,
+    "entry_date": "2013-08-19",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 100,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2013-08-19",
+      "entry_price": 3.86,
+      "peak_date": "2014-03-05",
+      "peak_price": 27.24,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ASTC",
+    "year_discovered": 2013,
+    "catalyst_date": "2014-05-29",
+    "entry_price": 102.0,
+    "peak_price": 688.5,
+    "gain_percent": 575.0,
+    "days_to_peak": 157,
+    "entry_date": "2013-10-11",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 24,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2013-10-11",
+      "entry_price": 102.0,
+      "peak_date": "2014-05-29",
+      "peak_price": 688.5,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ASTH",
+    "year_discovered": 2013,
+    "catalyst_date": "2013-11-07",
+    "entry_price": 3.1,
+    "peak_price": 100.1,
+    "gain_percent": 3129.0,
+    "days_to_peak": 71,
+    "entry_date": "2013-07-30",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 179,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2013-07-30",
+      "entry_price": 3.1,
+      "peak_date": "2013-11-07",
+      "peak_price": 100.1,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ATHE",
+    "year_discovered": 2013,
+    "catalyst_date": "2014-01-30",
+    "entry_price": 131.4,
+    "peak_price": 797.4,
+    "gain_percent": 506.8,
+    "days_to_peak": 154,
+    "entry_date": "2013-06-20",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 3,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2013-06-20",
+      "entry_price": 131.4,
+      "peak_date": "2014-01-30",
+      "peak_price": 797.4,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ACFN",
+    "year_discovered": 2015,
+    "catalyst_date": "2016-04-21",
+    "entry_price": 1.28,
+    "peak_price": 7.84,
+    "gain_percent": 512.5,
+    "days_to_peak": 69,
+    "entry_date": "2016-01-12",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 2,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2016-01-12",
+      "entry_price": 1.28,
+      "peak_date": "2016-04-21",
+      "peak_price": 7.84,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "AEYE",
+    "year_discovered": 2015,
+    "catalyst_date": "2016-02-22",
+    "entry_price": 0.75,
+    "peak_price": 4.5,
+    "gain_percent": 500.0,
+    "days_to_peak": 75,
+    "entry_date": "2015-11-02",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 10,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2015-11-02",
+      "entry_price": 0.75,
+      "peak_date": "2016-02-22",
+      "peak_price": 4.5,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ABAT",
+    "year_discovered": 2017,
+    "catalyst_date": "2018-05-11",
+    "entry_price": 0.93,
+    "peak_price": 6.3,
+    "gain_percent": 577.4,
+    "days_to_peak": 33,
+    "entry_date": "2018-03-26",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 13,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2018-03-26",
+      "entry_price": 0.93,
+      "peak_date": "2018-05-11",
+      "peak_price": 6.3,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ACB",
+    "year_discovered": 2017,
+    "catalyst_date": "2018-01-03",
+    "entry_price": 183.76,
+    "peak_price": 1368.95,
+    "gain_percent": 645.0,
+    "days_to_peak": 145,
+    "entry_date": "2017-06-07",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 82,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2017-06-07",
+      "entry_price": 183.76,
+      "peak_date": "2018-01-03",
+      "peak_price": 1368.95,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "AMTX",
+    "year_discovered": 2017,
+    "catalyst_date": "2018-03-16",
+    "entry_price": 0.52,
+    "peak_price": 3.12,
+    "gain_percent": 501.2,
+    "days_to_peak": 22,
+    "entry_date": "2018-02-13",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Polygon API",
+    "all_explosive_windows": 4,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Only retained 35.8% of gain (need 80.0%)",
+      "test_date": "2018-04-06",
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2018-02-13",
+      "entry_price": 0.52,
+      "peak_date": "2018-03-16",
+      "peak_price": 3.12,
+      "test_price": 1.45,
+      "retention_percent": 35.77,
+      "threshold_percent": 80.0
+    }
+  },
+  {
+    "ticker": "ANIX",
+    "year_discovered": 2017,
+    "catalyst_date": "2017-09-25",
+    "entry_price": 0.6,
+    "peak_price": 4.3,
+    "gain_percent": 616.7,
+    "days_to_peak": 28,
+    "entry_date": "2017-08-15",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 80,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2017-08-15",
+      "entry_price": 0.6,
+      "peak_date": "2017-09-25",
+      "peak_price": 4.3,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ABVC",
+    "year_discovered": 2010,
+    "catalyst_date": "2011-01-03",
+    "entry_price": 15764.33,
+    "peak_price": 128980.89,
+    "gain_percent": 718.2,
+    "days_to_peak": 22,
+    "entry_date": "2010-12-01",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 7,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2010-12-01",
+      "entry_price": 15764.33,
+      "peak_date": "2011-01-03",
+      "peak_price": 128980.89,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "AG",
+    "year_discovered": 2010,
+    "catalyst_date": "2011-04-05",
+    "entry_price": 3.91,
+    "peak_price": 25.46,
+    "gain_percent": 551.3,
+    "days_to_peak": 176,
+    "entry_date": "2010-07-26",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 28,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2010-07-26",
+      "entry_price": 3.91,
+      "peak_date": "2011-04-05",
+      "peak_price": 25.46,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "AGQ",
+    "year_discovered": 2010,
+    "catalyst_date": "2011-04-25",
+    "entry_price": 114.08,
+    "peak_price": 725.28,
+    "gain_percent": 535.8,
+    "days_to_peak": 177,
+    "entry_date": "2010-08-11",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 13,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2010-08-11",
+      "entry_price": 114.08,
+      "peak_date": "2011-04-25",
+      "peak_price": 725.28,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "AMRN",
+    "year_discovered": 2010,
+    "catalyst_date": "2011-04-18",
+    "entry_price": 47.0,
+    "peak_price": 348.8,
+    "gain_percent": 642.1,
+    "days_to_peak": 176,
+    "entry_date": "2010-08-06",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 65,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2010-08-06",
+      "entry_price": 47.0,
+      "peak_date": "2011-04-18",
+      "peak_price": 348.8,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ABVC",
+    "year_discovered": 2011,
+    "catalyst_date": "2011-07-20",
+    "entry_price": 10031.85,
+    "peak_price": 544586.0,
+    "gain_percent": 5328.6,
+    "days_to_peak": 104,
+    "entry_date": "2011-02-18",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 150,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2011-02-18",
+      "entry_price": 10031.85,
+      "peak_date": "2011-07-20",
+      "peak_price": 544586.0,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ALTO",
+    "year_discovered": 2011,
+    "catalyst_date": "2011-11-16",
+    "entry_price": 4.05,
+    "peak_price": 27.75,
+    "gain_percent": 585.2,
+    "days_to_peak": 32,
+    "entry_date": "2011-10-03",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 15,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2011-10-03",
+      "entry_price": 4.05,
+      "peak_date": "2011-11-16",
+      "peak_price": 27.75,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "AMTX",
+    "year_discovered": 2011,
+    "catalyst_date": "2011-08-04",
+    "entry_price": 0.28,
+    "peak_price": 2.53,
+    "gain_percent": 818.2,
+    "days_to_peak": 110,
+    "entry_date": "2011-02-28",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 78,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2011-02-28",
+      "entry_price": 0.28,
+      "peak_date": "2011-08-04",
+      "peak_price": 2.53,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ABVC",
+    "year_discovered": 2012,
+    "catalyst_date": "2012-12-12",
+    "entry_price": 2292.99,
+    "peak_price": 40127.39,
+    "gain_percent": 1650.0,
+    "days_to_peak": 20,
+    "entry_date": "2012-11-13",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 91,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2012-11-13",
+      "entry_price": 2292.99,
+      "peak_date": "2012-12-12",
+      "peak_price": 40127.39,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ACAD",
+    "year_discovered": 2012,
+    "catalyst_date": "2013-04-11",
+    "entry_price": 1.5,
+    "peak_price": 13.92,
+    "gain_percent": 828.0,
+    "days_to_peak": 167,
+    "entry_date": "2012-08-08",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 87,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2012-08-08",
+      "entry_price": 1.5,
+      "peak_date": "2013-04-11",
+      "peak_price": 13.92,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ASTH",
+    "year_discovered": 2012,
+    "catalyst_date": "2012-12-05",
+    "entry_price": 1.2,
+    "peak_price": 13.8,
+    "gain_percent": 1050.0,
+    "days_to_peak": 136,
+    "entry_date": "2012-05-21",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 86,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2012-05-21",
+      "entry_price": 1.2,
+      "peak_date": "2012-12-05",
+      "peak_price": 13.8,
+      "test_price": null
+    }
+  },
+  {
+    "ticker": "ATON",
+    "year_discovered": 2012,
+    "catalyst_date": "2013-04-09",
+    "entry_price": 86.0,
+    "peak_price": 640.0,
+    "gain_percent": 644.2,
+    "days_to_peak": 140,
+    "entry_date": "2012-09-13",
+    "sector": "Unknown",
+    "verified": true,
+    "data_source": "Yahoo Finance",
+    "all_explosive_windows": 121,
+    "covid_era": false,
+    "sustainability_test": {
+      "sustainable": false,
+      "reason": "Could not fetch price 21 days after peak",
+      "test_date": null,
+      "criteria": "80.0% retention 21 days after peak",
+      "entry_date": "2012-09-13",
+      "entry_price": 86.0,
+      "peak_date": "2013-04-09",
+      "peak_price": 640.0,
+      "test_price": null
+    }
+  }
+]
