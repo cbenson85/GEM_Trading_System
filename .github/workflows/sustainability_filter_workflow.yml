@@ -1,5 +1,4 @@
-name: Sustainability Filter Workflow
-
+name: Sustainability Filter Workflow (V2.0)
 on:
   workflow_dispatch:  # Manual trigger
     inputs:
@@ -7,10 +6,15 @@ on:
         description: 'Reason for running filter'
         required: false
         default: 'Manual sustainability filter run'
+      batch_size:
+        description: 'Number of stocks to process (default: all 200)'
+        required: false
+        default: '200'
 
 jobs:
   filter-sustainability:
     runs-on: ubuntu-latest
+    timeout-minutes: 900  # 15 hours max (safety limit)
     
     steps:
       - name: Checkout repository
@@ -26,11 +30,32 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
       
-      - name: Run Sustainability Filter
+      - name: Pre-Filter Status Check
         run: |
-          echo "🔬 Starting Sustainability Filter..."
+          echo "📊 PRE-FILTER STATUS"
+          echo "=================================="
+          echo ""
+          echo "Current CLEAN.json stocks:"
+          python -c "
+          import json
+          data = json.load(open('Verified_Backtest_Data/explosive_stocks_CLEAN.json'))
+          stocks = data.get('stocks', data) if isinstance(data, dict) else data
+          print(f'  Total: {len(stocks)} stocks')
+          "
+          echo ""
+          echo "⏱️  ESTIMATED RUNTIME: 8-13 hours for 200 stocks"
+          echo "🔬 CRITERIA: 80% retention 21 days after peak"
+          echo ""
+      
+      - name: Run Sustainability Filter V2.0
+        run: |
+          echo "🔬 Starting Sustainability Filter V2.0..."
           echo "Input: Verified_Backtest_Data/explosive_stocks_CLEAN.json"
           echo "Output: Verified_Backtest_Data/explosive_stocks_UNSUSTAINABLE.json"
+          echo "Criteria: 80% retention 21 days after peak"
+          echo ""
+          echo "⚠️  This will take 8-13 hours due to API rate limits"
+          echo "⚠️  Progress will be logged every 5 stocks"
           echo ""
           python filter_sustainability.py
         env:
@@ -38,16 +63,61 @@ jobs:
       
       - name: Verify Filter Results
         run: |
-          echo "📊 Filter Results:"
           echo ""
-          echo "✅ CLEAN.json (Sustainable Stocks Only):"
-          python -c "import json; data = json.load(open('Verified_Backtest_Data/explosive_stocks_CLEAN.json')); print(f'  Total: {len(data)} stocks')"
+          echo "=================================="
+          echo "📊 FILTER RESULTS"
+          echo "=================================="
+          echo ""
+          echo "✅ CLEAN.json (Sustainable Stocks):"
+          python -c "
+          import json
+          data = json.load(open('Verified_Backtest_Data/explosive_stocks_CLEAN.json'))
+          stocks = data.get('stocks', data) if isinstance(data, dict) else data
+          print(f'  Total: {len(stocks)} stocks')
+          "
           echo ""
           echo "❌ UNSUSTAINABLE.json (Pump & Dumps):"
-          python -c "import json; data = json.load(open('Verified_Backtest_Data/explosive_stocks_UNSUSTAINABLE.json')); print(f'  Total: {len(data)} stocks')"
+          python -c "
+          import json
+          try:
+              data = json.load(open('Verified_Backtest_Data/explosive_stocks_UNSUSTAINABLE.json'))
+              print(f'  Total: {len(data)} stocks')
+          except FileNotFoundError:
+              print('  File not created (no unsustainable stocks found)')
+          "
           echo ""
           echo "📈 Summary Statistics:"
-          cat Verified_Backtest_Data/sustainability_summary.json
+          cat Verified_Backtest_Data/sustainability_summary.json | python -m json.tool
+          echo ""
+      
+      - name: Calculate Sustainability Rate
+        run: |
+          echo "=================================="
+          echo "📊 SUSTAINABILITY ANALYSIS"
+          echo "=================================="
+          python -c "
+          import json
+          
+          # Load summary
+          summary = json.load(open('Verified_Backtest_Data/sustainability_summary.json'))
+          
+          total = summary.get('total_stocks', 0)
+          sustainable = summary.get('sustainable', 0)
+          unsustainable = summary.get('unsustainable', 0)
+          
+          if total > 0:
+              sust_rate = (sustainable / total) * 100
+              unsust_rate = (unsustainable / total) * 100
+              
+              print(f'Total Tested: {total}')
+              print(f'Sustainable: {sustainable} ({sust_rate:.1f}%)')
+              print(f'Unsustainable: {unsustainable} ({unsust_rate:.1f}%)')
+              print(f'')
+              print(f'Criteria: {summary.get(\"criteria\", \"Unknown\")}')
+          else:
+              print('No stocks tested')
+          "
+          echo ""
       
       - name: Commit and Push Changes
         run: |
@@ -56,12 +126,33 @@ jobs:
           git add Verified_Backtest_Data/explosive_stocks_CLEAN.json
           git add Verified_Backtest_Data/explosive_stocks_UNSUSTAINABLE.json
           git add Verified_Backtest_Data/sustainability_summary.json
-          git diff --staged --quiet || git commit -m "🔬 Sustainability filter: Update CLEAN.json and UNSUSTAINABLE.json
+          git diff --staged --quiet || git commit -m "🔬 Sustainability filter V2.0: Update CLEAN.json and UNSUSTAINABLE.json
           
-          - Tested stocks for 30-day hold sustainability
+          - Tested stocks for 21-day hold sustainability (80% retention threshold)
           - Removed unsustainable stocks from CLEAN.json
           - Archived unsustainable stocks to UNSUSTAINABLE.json
           - Generated summary statistics
           
+          Filter Version: 2.0
+          Criteria: 80% retention 21 days after peak
           Reason: ${{ github.event.inputs.reason }}"
           git push
+      
+      - name: Final Summary
+        if: always()
+        run: |
+          echo ""
+          echo "=================================="
+          echo "✅ WORKFLOW COMPLETE"
+          echo "=================================="
+          echo ""
+          echo "Files Updated:"
+          echo "  - explosive_stocks_CLEAN.json"
+          echo "  - explosive_stocks_UNSUSTAINABLE.json"
+          echo "  - sustainability_summary.json"
+          echo ""
+          echo "Next Steps:"
+          echo "  1. Review sustainability_summary.json"
+          echo "  2. Verify CLEAN.json contains only sustainable stocks"
+          echo "  3. Proceed with Phase 3 pre-catalyst analysis"
+          echo ""
