@@ -19,8 +19,9 @@
     "reason": "COVID-era market anomalies - unprecedented conditions",
     "total_covid_count": 81,
     "new_additions": 0,
+    "records_updated": 0,
     "duplicates_skipped": 0,
-    "merge_mode": true
+    "merge_mode": "smart_update"
   },
   "stocks": [
     {
@@ -689,7 +690,7 @@
   ],
   "metadata": {
     "note": "Archive only - not used for pattern discovery",
-    "last_updated": "2025-11-02 21:17:53",
+    "last_updated": "2025-11-02 15:37:25",
     "cumulative": true
   }
 }

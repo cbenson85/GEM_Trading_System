@@ -15,13 +15,14 @@
     "scan_complete": true
   },
   "filter_info": {
-    "filter_date": "2025-11-02 21:17:53",
+    "filter_date": "2025-11-02 15:37:25",
     "filter_applied": "COVID-era exclusion (2020-2021)",
     "original_catalog_count": 113,
     "total_clean_count": 200,
     "new_additions": 0,
-    "duplicates_skipped": 113,
-    "merge_mode": true
+    "records_updated": 44,
+    "duplicates_skipped": 69,
+    "merge_mode": "smart_update"
   },
   "stocks": [
     {
@@ -451,21 +452,48 @@
     },
     {
       "ticker": "ACIC",
-      "year": 2022,
-      "gain_percent": 742,
-      "days_to_peak": 40
+      "year_discovered": 2022,
+      "catalyst_date": "2023-02-01",
+      "entry_price": 0.32,
+      "peak_price": 2.68,
+      "gain_percent": 742.4,
+      "days_to_peak": 40,
+      "entry_date": "2022-12-02",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Yahoo Finance",
+      "all_explosive_windows": 89,
+      "covid_era": false
     },
     {
       "ticker": "ACON",
-      "year": 2022,
-      "gain_percent": 508,
-      "days_to_peak": 80
+      "year_discovered": 2022,
+      "catalyst_date": "2023-04-24",
+      "entry_price": 56455.27,
+      "peak_price": 342986.4,
+      "gain_percent": 507.5,
+      "days_to_peak": 80,
+      "entry_date": "2022-12-27",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 1,
+      "covid_era": false
     },
     {
       "ticker": "ACONW",
-      "year": 2022,
-      "gain_percent": 796,
-      "days_to_peak": 7
+      "year_discovered": 2022,
+      "catalyst_date": "2023-06-08",
+      "entry_price": 0.05,
+      "peak_price": 0.42,
+      "gain_percent": 796.2,
+      "days_to_peak": 7,
+      "entry_date": "2023-05-26",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 16,
+      "covid_era": false
     },
     {
       "ticker": "AIMD",
@@ -484,15 +512,33 @@
     },
     {
       "ticker": "AKBA",
-      "year": 2022,
-      "gain_percent": 552,
-      "days_to_peak": 119
+      "year_discovered": 2022,
+      "catalyst_date": "2023-05-22",
+      "entry_price": 0.25,
+      "peak_price": 1.63,
+      "gain_percent": 552.0,
+      "days_to_peak": 119,
+      "entry_date": "2022-11-29",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 25,
+      "covid_era": false
     },
     {
       "ticker": "ALVOW",
-      "year": 2022,
-      "gain_percent": 522,
-      "days_to_peak": 59
+      "year_discovered": 2022,
+      "catalyst_date": "2023-02-27",
+      "entry_price": 0.5,
+      "peak_price": 3.11,
+      "gain_percent": 522.1,
+      "days_to_peak": 59,
+      "entry_date": "2022-11-16",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 1,
+      "covid_era": false
     },
     {
       "ticker": "AMTD",
@@ -524,33 +570,78 @@
     },
     {
       "ticker": "ARBK",
-      "year": 2022,
-      "gain_percent": 736,
-      "days_to_peak": 32
+      "year_discovered": 2022,
+      "catalyst_date": "2023-02-06",
+      "entry_price": 0.38,
+      "peak_price": 3.2,
+      "gain_percent": 735.5,
+      "days_to_peak": 32,
+      "entry_date": "2022-12-16",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 8,
+      "covid_era": false
     },
     {
       "ticker": "ARBKL",
-      "year": 2022,
-      "gain_percent": 637,
-      "days_to_peak": 15
+      "year_discovered": 2022,
+      "catalyst_date": "2023-01-17",
+      "entry_price": 0.73,
+      "peak_price": 5.38,
+      "gain_percent": 636.7,
+      "days_to_peak": 15,
+      "entry_date": "2022-12-21",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 12,
+      "covid_era": false
     },
     {
       "ticker": "AREBW",
-      "year": 2022,
-      "gain_percent": 600,
-      "days_to_peak": 7
+      "year_discovered": 2022,
+      "catalyst_date": "2023-01-11",
+      "entry_price": 0.01,
+      "peak_price": 0.07,
+      "gain_percent": 600.0,
+      "days_to_peak": 7,
+      "entry_date": "2022-12-28",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 2,
+      "covid_era": false
     },
     {
       "ticker": "ATLN",
-      "year": 2022,
-      "gain_percent": 838,
-      "days_to_peak": 29
+      "year_discovered": 2022,
+      "catalyst_date": "2023-02-07",
+      "entry_price": 10.24,
+      "peak_price": 96.0,
+      "gain_percent": 837.5,
+      "days_to_peak": 29,
+      "entry_date": "2022-12-23",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Yahoo Finance",
+      "all_explosive_windows": 25,
+      "covid_era": false
     },
     {
       "ticker": "ATLX",
-      "year": 2022,
-      "gain_percent": 560,
-      "days_to_peak": 60
+      "year_discovered": 2022,
+      "catalyst_date": "2023-05-02",
+      "entry_price": 6.82,
+      "peak_price": 45,
+      "gain_percent": 559.8,
+      "days_to_peak": 60,
+      "entry_date": "2023-02-03",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 21,
+      "covid_era": false
     },
     {
       "ticker": "AVDL",
@@ -569,15 +660,33 @@
     },
     {
       "ticker": "BAOS",
-      "year": 2022,
-      "gain_percent": 633,
-      "days_to_peak": 16
+      "year_discovered": 2022,
+      "catalyst_date": "2023-05-02",
+      "entry_price": 3.18,
+      "peak_price": 23.3,
+      "gain_percent": 632.7,
+      "days_to_peak": 16,
+      "entry_date": "2023-04-10",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 25,
+      "covid_era": false
     },
     {
       "ticker": "BBAI",
-      "year": 2022,
-      "gain_percent": 689,
-      "days_to_peak": 30
+      "year_discovered": 2022,
+      "catalyst_date": "2023-02-03",
+      "entry_price": 0.75,
+      "peak_price": 5.9,
+      "gain_percent": 689.2,
+      "days_to_peak": 30,
+      "entry_date": "2022-12-20",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 46,
+      "covid_era": false
     },
     {
       "ticker": "ACONW",
@@ -641,15 +750,33 @@
     },
     {
       "ticker": "AENTW",
-      "year": 2023,
-      "gain_percent": 652,
-      "days_to_peak": 69
+      "year_discovered": 2023,
+      "catalyst_date": "2024-05-31",
+      "entry_price": 0.01,
+      "peak_price": 0.08,
+      "gain_percent": 651.9,
+      "days_to_peak": 69,
+      "entry_date": "2023-12-05",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 29,
+      "covid_era": false
     },
     {
       "ticker": "AEYE",
-      "year": 2023,
-      "gain_percent": 548,
-      "days_to_peak": 140
+      "year_discovered": 2023,
+      "catalyst_date": "2024-05-20",
+      "entry_price": 3.95,
+      "peak_price": 25.59,
+      "gain_percent": 547.8,
+      "days_to_peak": 140,
+      "entry_date": "2023-10-27",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 29,
+      "covid_era": false
     },
     {
       "ticker": "AHG",
@@ -668,15 +795,33 @@
     },
     {
       "ticker": "AIMDW",
-      "year": 2023,
-      "gain_percent": 538,
-      "days_to_peak": 13
+      "year_discovered": 2023,
+      "catalyst_date": "2023-10-09",
+      "entry_price": 0.1,
+      "peak_price": 0.64,
+      "gain_percent": 538.5,
+      "days_to_peak": 13,
+      "entry_date": "2023-09-01",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 3,
+      "covid_era": false
     },
     {
       "ticker": "AISP",
-      "year": 2023,
-      "gain_percent": 634,
-      "days_to_peak": 49
+      "year_discovered": 2023,
+      "catalyst_date": "2024-03-18",
+      "entry_price": 1.89,
+      "peak_price": 13.87,
+      "gain_percent": 633.9,
+      "days_to_peak": 49,
+      "entry_date": "2024-01-05",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 45,
+      "covid_era": false
     },
     {
       "ticker": "AKA",
@@ -695,9 +840,18 @@
     },
     {
       "ticker": "AKAN",
-      "year": 2023,
-      "gain_percent": 575,
-      "days_to_peak": 3
+      "year_discovered": 2023,
+      "catalyst_date": "2024-05-17",
+      "entry_price": 22,
+      "peak_price": 148.5,
+      "gain_percent": 575.0,
+      "days_to_peak": 3,
+      "entry_date": "2024-05-14",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 17,
+      "covid_era": false
     },
     {
       "ticker": "ALT",
@@ -716,9 +870,18 @@
     },
     {
       "ticker": "ALTS",
-      "year": 2023,
-      "gain_percent": 812,
-      "days_to_peak": 86
+      "year_discovered": 2023,
+      "catalyst_date": "2024-03-05",
+      "entry_price": 0.32,
+      "peak_price": 2.92,
+      "gain_percent": 812.5,
+      "days_to_peak": 86,
+      "entry_date": "2023-10-30",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Yahoo Finance",
+      "all_explosive_windows": 129,
+      "covid_era": false
     },
     {
       "ticker": "ALVOW",
@@ -737,15 +900,33 @@
     },
     {
       "ticker": "ANGHW",
-      "year": 2023,
-      "gain_percent": 816,
-      "days_to_peak": 6
+      "year_discovered": 2023,
+      "catalyst_date": "2023-11-22",
+      "entry_price": 0.01,
+      "peak_price": 0.11,
+      "gain_percent": 815.8,
+      "days_to_peak": 6,
+      "entry_date": "2023-11-02",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 13,
+      "covid_era": false
     },
     {
       "ticker": "ANY",
-      "year": 2023,
-      "gain_percent": 554,
-      "days_to_peak": 18
+      "year_discovered": 2023,
+      "catalyst_date": "2023-12-27",
+      "entry_price": 0.62,
+      "peak_price": 4.09,
+      "gain_percent": 554.4,
+      "days_to_peak": 18,
+      "entry_date": "2023-11-30",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 1,
+      "covid_era": false
     },
     {
       "ticker": "APLD",
@@ -832,33 +1013,78 @@
     },
     {
       "ticker": "ARKOW",
-      "year": 2023,
-      "gain_percent": 539,
-      "days_to_peak": 20
+      "year_discovered": 2023,
+      "catalyst_date": "2024-06-12",
+      "entry_price": 0.08,
+      "peak_price": 0.48,
+      "gain_percent": 539.1,
+      "days_to_peak": 20,
+      "entry_date": "2024-05-03",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 1,
+      "covid_era": false
     },
     {
       "ticker": "ARQT",
-      "year": 2023,
-      "gain_percent": 530,
-      "days_to_peak": 68
+      "year_discovered": 2023,
+      "catalyst_date": "2024-03-01",
+      "entry_price": 1.89,
+      "peak_price": 11.91,
+      "gain_percent": 530.2,
+      "days_to_peak": 68,
+      "entry_date": "2023-11-21",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 21,
+      "covid_era": false
     },
     {
       "ticker": "ASNS",
-      "year": 2023,
-      "gain_percent": 955,
-      "days_to_peak": 3
+      "year_discovered": 2023,
+      "catalyst_date": "2024-06-05",
+      "entry_price": 0.44,
+      "peak_price": 4.6,
+      "gain_percent": 955.0,
+      "days_to_peak": 3,
+      "entry_date": "2024-05-31",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 30,
+      "covid_era": false
     },
     {
       "ticker": "ASTS",
-      "year": 2023,
-      "gain_percent": 515,
-      "days_to_peak": 53
+      "year_discovered": 2023,
+      "catalyst_date": "2024-06-17",
+      "entry_price": 2.01,
+      "peak_price": 12.37,
+      "gain_percent": 515.4,
+      "days_to_peak": 53,
+      "entry_date": "2024-04-02",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 3,
+      "covid_era": false
     },
     {
       "ticker": "ATGL",
-      "year": 2023,
-      "gain_percent": 644,
-      "days_to_peak": 11
+      "year_discovered": 2023,
+      "catalyst_date": "2023-11-16",
+      "entry_price": 4.24,
+      "peak_price": 31.57,
+      "gain_percent": 644.2,
+      "days_to_peak": 11,
+      "entry_date": "2023-11-01",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 3,
+      "covid_era": false
     },
     {
       "ticker": "ATLX",
@@ -877,27 +1103,63 @@
     },
     {
       "ticker": "ATRA",
-      "year": 2023,
-      "gain_percent": 588,
-      "days_to_peak": 56
+      "year_discovered": 2023,
+      "catalyst_date": "2024-02-02",
+      "entry_price": 5.75,
+      "peak_price": 39.5,
+      "gain_percent": 587.6,
+      "days_to_peak": 56,
+      "entry_date": "2023-11-10",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 3,
+      "covid_era": false
     },
     {
       "ticker": "AUUDW",
-      "year": 2023,
-      "gain_percent": 755,
-      "days_to_peak": 45
+      "year_discovered": 2023,
+      "catalyst_date": "2024-03-19",
+      "entry_price": 0.01,
+      "peak_price": 0.1,
+      "gain_percent": 754.7,
+      "days_to_peak": 45,
+      "entry_date": "2023-11-22",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 24,
+      "covid_era": false
     },
     {
       "ticker": "AVTX",
-      "year": 2023,
-      "gain_percent": 757,
-      "days_to_peak": 50
+      "year_discovered": 2023,
+      "catalyst_date": "2024-03-28",
+      "entry_price": 4.02,
+      "peak_price": 34.46,
+      "gain_percent": 757.2,
+      "days_to_peak": 50,
+      "entry_date": "2024-01-17",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 51,
+      "covid_era": false
     },
     {
       "ticker": "AXG",
-      "year": 2023,
-      "gain_percent": 1553,
-      "days_to_peak": 23
+      "year_discovered": 2023,
+      "catalyst_date": "2024-03-06",
+      "entry_price": 3.99,
+      "peak_price": 65.94,
+      "gain_percent": 1552.6,
+      "days_to_peak": 23,
+      "entry_date": "2024-02-01",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Yahoo Finance",
+      "all_explosive_windows": 134,
+      "covid_era": false
     },
     {
       "ticker": "BAOS",
@@ -931,27 +1193,63 @@
     },
     {
       "ticker": "ABTC",
-      "year": 2024,
-      "gain_percent": 2070,
-      "days_to_peak": 23
+      "year_discovered": 2024,
+      "catalyst_date": "2025-05-12",
+      "entry_price": 0.68,
+      "peak_price": 14.65,
+      "gain_percent": 2070.4,
+      "days_to_peak": 23,
+      "entry_date": "2025-04-08",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Yahoo Finance",
+      "all_explosive_windows": 102,
+      "covid_era": false
     },
     {
       "ticker": "ABTS",
-      "year": 2024,
-      "gain_percent": 527,
-      "days_to_peak": 23
+      "year_discovered": 2024,
+      "catalyst_date": "2025-05-09",
+      "entry_price": 1.5,
+      "peak_price": 9.4,
+      "gain_percent": 526.6,
+      "days_to_peak": 23,
+      "entry_date": "2025-04-07",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 1,
+      "covid_era": false
     },
     {
       "ticker": "ABVC",
-      "year": 2024,
-      "gain_percent": 520,
-      "days_to_peak": 92
+      "year_discovered": 2024,
+      "catalyst_date": "2025-06-27",
+      "entry_price": 0.42,
+      "peak_price": 2.6,
+      "gain_percent": 520.5,
+      "days_to_peak": 92,
+      "entry_date": "2025-02-13",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 4,
+      "covid_era": false
     },
     {
       "ticker": "ABVE",
-      "year": 2024,
-      "gain_percent": 833,
-      "days_to_peak": 42
+      "year_discovered": 2024,
+      "catalyst_date": "2025-05-01",
+      "entry_price": 0.31,
+      "peak_price": 2.92,
+      "gain_percent": 832.9,
+      "days_to_peak": 42,
+      "entry_date": "2025-03-03",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 48,
+      "covid_era": false
     },
     {
       "ticker": "ABVEW",
@@ -1036,9 +1334,18 @@
     },
     {
       "ticker": "AERTW",
-      "year": 2024,
-      "gain_percent": 550,
-      "days_to_peak": 44
+      "year_discovered": 2024,
+      "catalyst_date": "2024-12-30",
+      "entry_price": 0.02,
+      "peak_price": 0.1,
+      "gain_percent": 549.7,
+      "days_to_peak": 44,
+      "entry_date": "2024-06-17",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 4,
+      "covid_era": false
     },
     {
       "ticker": "AEYE",
@@ -1093,9 +1400,18 @@
     },
     {
       "ticker": "AIIO",
-      "year": 2024,
-      "gain_percent": 828,
-      "days_to_peak": 20
+      "year_discovered": 2024,
+      "catalyst_date": "2025-05-19",
+      "entry_price": 0.38,
+      "peak_price": 3.48,
+      "gain_percent": 828.0,
+      "days_to_peak": 20,
+      "entry_date": "2025-04-21",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Yahoo Finance",
+      "all_explosive_windows": 49,
+      "covid_era": false
     },
     {
       "ticker": "AIM",
@@ -1231,9 +1547,18 @@
     },
     {
       "ticker": "ALFUW",
-      "year": 2024,
-      "gain_percent": 573,
-      "days_to_peak": 135
+      "year_discovered": 2024,
+      "catalyst_date": "2025-05-13",
+      "entry_price": 0.08,
+      "peak_price": 0.54,
+      "gain_percent": 573.3,
+      "days_to_peak": 135,
+      "entry_date": "2024-08-29",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 10,
+      "covid_era": false
     },
     {
       "ticker": "ALGS",
@@ -1293,9 +1618,18 @@
     },
     {
       "ticker": "AMODW",
-      "year": 2024,
-      "gain_percent": 601,
-      "days_to_peak": 2
+      "year_discovered": 2024,
+      "catalyst_date": "2024-12-20",
+      "entry_price": 0.03,
+      "peak_price": 0.23,
+      "gain_percent": 601.2,
+      "days_to_peak": 2,
+      "entry_date": "2024-12-18",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 1,
+      "covid_era": false
     },
     {
       "ticker": "AMPG",
@@ -1390,9 +1724,18 @@
     },
     {
       "ticker": "APLMW",
-      "year": 2024,
-      "gain_percent": 714,
-      "days_to_peak": 127
+      "year_discovered": 2024,
+      "catalyst_date": "2025-06-24",
+      "entry_price": 0.01,
+      "peak_price": 0.05,
+      "gain_percent": 713.8,
+      "days_to_peak": 127,
+      "entry_date": "2024-11-13",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 5,
+      "covid_era": false
     },
     {
       "ticker": "APM",
@@ -1426,9 +1769,18 @@
     },
     {
       "ticker": "APPS",
-      "year": 2024,
-      "gain_percent": 542,
-      "days_to_peak": 142
+      "year_discovered": 2024,
+      "catalyst_date": "2025-06-17",
+      "entry_price": 1.21,
+      "peak_price": 7.76,
+      "gain_percent": 541.7,
+      "days_to_peak": 142,
+      "entry_date": "2024-11-19",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 2,
+      "covid_era": false
     },
     {
       "ticker": "ARBEW",
@@ -1447,9 +1799,18 @@
     },
     {
       "ticker": "AREB",
-      "year": 2024,
-      "gain_percent": 1371,
-      "days_to_peak": 3
+      "year_discovered": 2024,
+      "catalyst_date": "2025-04-04",
+      "entry_price": 28.4,
+      "peak_price": 417.8,
+      "gain_percent": 1371.1,
+      "days_to_peak": 3,
+      "entry_date": "2025-04-01",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 7,
+      "covid_era": false
     },
     {
       "ticker": "AREBW",
@@ -1594,9 +1955,18 @@
     },
     {
       "ticker": "ATCH",
-      "year": 2024,
-      "gain_percent": 514,
-      "days_to_peak": 3
+      "year_discovered": 2024,
+      "catalyst_date": "2025-02-24",
+      "entry_price": 2.15,
+      "peak_price": 13.19,
+      "gain_percent": 513.5,
+      "days_to_peak": 3,
+      "entry_date": "2025-02-19",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 2,
+      "covid_era": false
     },
     {
       "ticker": "ATGL",
@@ -1615,9 +1985,18 @@
     },
     {
       "ticker": "ATMVR",
-      "year": 2024,
-      "gain_percent": 567,
-      "days_to_peak": 150
+      "year_discovered": 2024,
+      "catalyst_date": "2025-05-22",
+      "entry_price": 0.06,
+      "peak_price": 0.4,
+      "gain_percent": 566.7,
+      "days_to_peak": 150,
+      "entry_date": "2024-08-01",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Polygon API",
+      "all_explosive_windows": 1,
+      "covid_era": false
     },
     {
       "ticker": "ATOM",
@@ -1636,9 +2015,18 @@
     },
     {
       "ticker": "ATON",
-      "year": 2024,
-      "gain_percent": 965,
-      "days_to_peak": 24
+      "year_discovered": 2024,
+      "catalyst_date": "2024-09-18",
+      "entry_price": 2.16,
+      "peak_price": 23.01,
+      "gain_percent": 965.3,
+      "days_to_peak": 24,
+      "entry_date": "2024-08-14",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Yahoo Finance",
+      "all_explosive_windows": 40,
+      "covid_era": false
     },
     {
       "ticker": "AUROW",
@@ -1685,9 +2073,18 @@
     },
     {
       "ticker": "AXG",
-      "year": 2024,
-      "gain_percent": 1553,
-      "days_to_peak": 23
+      "year_discovered": 2024,
+      "catalyst_date": "2024-03-06",
+      "entry_price": 3.99,
+      "peak_price": 65.94,
+      "gain_percent": 1552.6,
+      "days_to_peak": 23,
+      "entry_date": "2024-02-01",
+      "sector": "Unknown",
+      "verified": true,
+      "data_source": "Yahoo Finance",
+      "all_explosive_windows": 54,
+      "covid_era": false
     },
     {
       "ticker": "AZTR",
@@ -2862,7 +3259,7 @@
   ],
   "metadata": {
     "note": "Pattern analysis dataset - normal market conditions only",
-    "last_updated": "2025-11-02 21:17:53",
+    "last_updated": "2025-11-02 15:37:25",
     "cumulative": true
   }
 }
