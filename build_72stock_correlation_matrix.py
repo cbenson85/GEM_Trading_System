@@ -16,13 +16,13 @@ def load_all_analyses(data_dir='Verified_Backtest_Data'):
     pattern = 'phase3b_'
     
     if not os.path.exists(data_dir):
-        print(f"❌ Directory not found: {data_dir}")
+        print(f"[ERROR] Directory not found: {data_dir}")
         return []
     
     files = [f for f in os.listdir(data_dir) if f.startswith(pattern) and f.endswith('_analysis.json')]
-    files = [f for f in files if 'summary' not in f.lower()]  # Exclude summary files
+    files = [f for f in files if 'summary' not in f.lower()]
     
-    print(f"📂 Found {len(files)} analysis files")
+    print(f"[INFO] Found {len(files)} analysis files")
     print()
     
     for filename in sorted(files):
@@ -35,7 +35,7 @@ def load_all_analyses(data_dir='Verified_Backtest_Data'):
                     'data': data
                 })
         except Exception as e:
-            print(f"⚠️  Error loading {filename}: {e}")
+            print(f"[WARNING] Error loading {filename}: {e}")
     
     return analyses
 
@@ -54,7 +54,7 @@ def extract_patterns(analyses):
         },
         'rsi_oversold': {
             'oversold_count': 0,
-            'near_oversold_count': 0,  # 30-35 range
+            'near_oversold_count': 0,
             'normal_count': 0,
             'details': []
         },
@@ -149,7 +149,7 @@ def calculate_correlations(stats):
     correlations = {
         'volume_spikes': {
             'frequency': stats['volume_spikes']['with_spikes'] / total if total > 0 else 0,
-            'correlation_score': 0.0,  # Will calculate based on success rate
+            'correlation_score': 0.0,
             'predictive_power': 'HIGH' if (stats['volume_spikes']['with_spikes'] / total) > 0.7 else 'MEDIUM',
             'sample_size': stats['volume_spikes']['with_spikes']
         },
@@ -162,7 +162,7 @@ def calculate_correlations(stats):
         },
         'volume_plus_oversold': {
             'note': 'Combination pattern - needs cross-reference analysis',
-            'estimated_frequency': 0.0  # Needs detailed analysis
+            'estimated_frequency': 0.0
         },
         'patterns_detected': {
             'frequency': stats['patterns_detected']['stocks_with_patterns'] / total if total > 0 else 0,
@@ -171,20 +171,17 @@ def calculate_correlations(stats):
         }
     }
     
-    # Calculate correlation scores based on frequency
-    # High frequency = higher correlation (appears in more explosive stocks)
+    # Calculate correlation scores
     for pattern_name, pattern_data in correlations.items():
         if 'frequency' in pattern_data:
             freq = pattern_data['frequency']
-            # Simple correlation: frequency itself is the correlation
-            # (Higher frequency in explosive stocks = stronger correlation)
             pattern_data['correlation_score'] = round(freq, 3)
     
     return correlations
 
 
 def generate_screening_criteria(stats, correlations):
-    """Generate preliminary screening criteria based on findings"""
+    """Generate preliminary screening criteria"""
     
     criteria = {
         'note': f'Based on {stats["total_analyzed"]} explosive stocks - PRELIMINARY',
@@ -194,7 +191,6 @@ def generate_screening_criteria(stats, correlations):
         'combination_signals': []
     }
     
-    # Primary signals (>60% frequency)
     if correlations['volume_spikes']['frequency'] > 0.6:
         criteria['primary_signals'].append({
             'signal': 'Volume Spike >3x',
@@ -203,7 +199,6 @@ def generate_screening_criteria(stats, correlations):
             'lead_time': '4-25 days before entry'
         })
     
-    # Secondary signals (30-60% frequency)
     if 0.3 < correlations['rsi_oversold']['frequency'] <= 0.6:
         criteria['secondary_signals'].append({
             'signal': 'RSI Oversold <30',
@@ -212,7 +207,6 @@ def generate_screening_criteria(stats, correlations):
             'note': 'Rare but strong signal'
         })
     
-    # Combination signals
     criteria['combination_signals'].append({
         'signal': 'Volume Spike + RSI <35',
         'note': 'Strongest conviction - both signals present',
@@ -223,7 +217,7 @@ def generate_screening_criteria(stats, correlations):
 
 
 def build_comprehensive_matrix(data_dir='Verified_Backtest_Data'):
-    """Main function to build correlation matrix"""
+    """Main function"""
     
     print("=" * 70)
     print("BUILDING COMPREHENSIVE CORRELATION MATRIX")
@@ -231,35 +225,30 @@ def build_comprehensive_matrix(data_dir='Verified_Backtest_Data'):
     print("=" * 70)
     print()
     
-    # Load all analyses
     analyses = load_all_analyses(data_dir)
     
     if not analyses:
-        print("❌ No analysis files found")
+        print("[ERROR] No analysis files found")
         return None
     
-    print(f"✅ Loaded {len(analyses)} analysis files")
+    print(f"[SUCCESS] Loaded {len(analyses)} analysis files")
     print()
     
-    # Extract patterns
-    print("📊 Extracting patterns and statistics...")
+    print("[INFO] Extracting patterns and statistics...")
     stats = extract_patterns(analyses)
-    print(f"✅ Statistics extracted")
+    print("[SUCCESS] Statistics extracted")
     print()
     
-    # Calculate correlations
-    print("🔗 Calculating pattern correlations...")
+    print("[INFO] Calculating pattern correlations...")
     correlations = calculate_correlations(stats)
-    print(f"✅ Correlations calculated")
+    print("[SUCCESS] Correlations calculated")
     print()
     
-    # Generate screening criteria
-    print("🎯 Generating screening criteria...")
+    print("[INFO] Generating screening criteria...")
     criteria = generate_screening_criteria(stats, correlations)
-    print(f"✅ Criteria generated")
+    print("[SUCCESS] Criteria generated")
     print()
     
-    # Build final matrix
     matrix = {
         'metadata': {
             'generated': datetime.now().isoformat(),
@@ -283,7 +272,7 @@ def build_comprehensive_matrix(data_dir='Verified_Backtest_Data'):
                 'without_spikes': stats['volume_spikes']['without_spikes'],
                 'frequency_pct': (stats['volume_spikes']['with_spikes'] / stats['total_analyzed'] * 100) if stats['total_analyzed'] > 0 else 0,
                 'spike_distribution': dict(stats['volume_spikes']['spike_counts']),
-                'top_examples': sorted(stats['volume_spikes']['details'], key=lambda x: x['gain_percent'], reverse=True)[:10]
+                'top_examples': sorted(stats['volume_spikes']['details'], key=lambda x: x.get('gain_percent', 0), reverse=True)[:10]
             },
             'rsi_oversold': {
                 'oversold_count': stats['rsi_oversold']['oversold_count'],
@@ -327,11 +316,9 @@ def build_comprehensive_matrix(data_dir='Verified_Backtest_Data'):
 
 
 if __name__ == "__main__":
-    # Build matrix
     matrix = build_comprehensive_matrix()
     
     if matrix:
-        # Save to file
         output_file = 'Verified_Backtest_Data/phase3b_correlation_matrix_72STOCKS.json'
         os.makedirs(os.path.dirname(output_file), exist_ok=True)
         
@@ -339,13 +326,13 @@ if __name__ == "__main__":
             json.dump(matrix, f, indent=2)
         
         print("=" * 70)
-        print("✅ CORRELATION MATRIX COMPLETE")
+        print("[SUCCESS] CORRELATION MATRIX COMPLETE")
         print("=" * 70)
-        print(f"📁 Saved to: {output_file}")
+        print(f"[INFO] Saved to: {output_file}")
         print()
         print("KEY FINDINGS:")
-        print(f"  • Total stocks analyzed: {matrix['statistics']['total_stocks']}")
-        print(f"  • Volume spike frequency: {matrix['pattern_frequencies']['volume_spikes']['frequency_pct']:.1f}%")
-        print(f"  • RSI oversold frequency: {matrix['pattern_frequencies']['rsi_oversold']['frequency_pct']:.1f}%")
-        print(f"  • Top signal: {matrix['key_insights']['most_common_signal']}")
+        print(f"  * Total stocks analyzed: {matrix['statistics']['total_stocks']}")
+        print(f"  * Volume spike frequency: {matrix['pattern_frequencies']['volume_spikes']['frequency_pct']:.1f}%")
+        print(f"  * RSI oversold frequency: {matrix['pattern_frequencies']['rsi_oversold']['frequency_pct']:.1f}%")
+        print(f"  * Top signal: {matrix['key_insights']['most_common_signal']}")
         print()
