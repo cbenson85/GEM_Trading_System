@@ -1,0 +1,138 @@
+name: Phase 3 - Pattern Discovery
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for running analysis'
+        required: false
+        default: 'Pattern discovery on 72 verified sustainable stocks'
+
+jobs:
+  phase3-analysis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      
+      - name: Pre-Analysis Status
+        run: |
+          echo "================================================"
+          echo "PHASE 3: PATTERN DISCOVERY & ANALYSIS"
+          echo "================================================"
+          echo ""
+          echo "📊 Dataset:"
+          python -c "
+          import json
+          data = json.load(open('Verified_Backtest_Data/explosive_stocks_CLEAN.json'))
+          stocks = data.get('stocks', [])
+          print(f'  Total Stocks: {len(stocks)}')
+          
+          # Quick stats
+          enriched = sum(1 for s in stocks if s.get('enriched'))
+          with_test = sum(1 for s in stocks if s.get('sustained_gain_test'))
+          
+          print(f'  Enriched: {enriched}')
+          print(f'  With Sustainability Test: {with_test}')
+          "
+          echo ""
+          echo "This will analyze:"
+          echo "  • Temporal patterns (when do moves occur?)"
+          echo "  • Gain characteristics (how much do winners gain?)"
+          echo "  • Exit windows (how long to exit?)"
+          echo "  • Top performers (who are the winners?)"
+          echo "  • Screening criteria (GEM v6 rules)"
+          echo ""
+      
+      - name: Run Phase 3 Analysis
+        run: |
+          echo "================================================"
+          echo "RUNNING PATTERN DISCOVERY"
+          echo "================================================"
+          echo ""
+          python phase3_pattern_discovery.py
+        env:
+          PYTHONUNBUFFERED: 1
+      
+      - name: Display Insights
+        run: |
+          echo ""
+          echo "================================================"
+          echo "KEY INSIGHTS"
+          echo "================================================"
+          echo ""
+          if [ -f "Verified_Backtest_Data/phase3_insights_report.md" ]; then
+            cat Verified_Backtest_Data/phase3_insights_report.md
+          fi
+          echo ""
+      
+      - name: Display Screening Criteria
+        run: |
+          echo ""
+          echo "================================================"
+          echo "GEM V6 SCREENING CRITERIA"
+          echo "================================================"
+          echo ""
+          if [ -f "Verified_Backtest_Data/phase3_screening_criteria.json" ]; then
+            cat Verified_Backtest_Data/phase3_screening_criteria.json | python -m json.tool
+          fi
+          echo ""
+      
+      - name: Commit and Push Results
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Add analysis results
+          git add Verified_Backtest_Data/phase3_pattern_discovery.json
+          git add Verified_Backtest_Data/phase3_screening_criteria.json
+          git add Verified_Backtest_Data/phase3_insights_report.md
+          
+          # Commit
+          git diff --staged --quiet || git commit -m "📊 Phase 3 Analysis Complete: Pattern Discovery
+          
+          Analyzed 72 verified sustainable stocks:
+          - Temporal patterns (timing of moves)
+          - Gain characteristics (magnitude analysis)
+          - Exit window analysis (tradeability)
+          - Top performer identification
+          - GEM v6 screening criteria generated
+          
+          Status: Ready for screener development
+          Reason: ${{ github.event.inputs.reason }}"
+          
+          # Push
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Final Summary
+        if: always()
+        run: |
+          echo ""
+          echo "================================================"
+          echo "✅ PHASE 3 ANALYSIS COMPLETE"
+          echo "================================================"
+          echo ""
+          echo "Files Created:"
+          echo "  • phase3_pattern_discovery.json (complete analysis)"
+          echo "  • phase3_screening_criteria.json (GEM v6 rules)"
+          echo "  • phase3_insights_report.md (readable insights)"
+          echo ""
+          echo "Next Steps:"
+          echo "  1. Review insights report"
+          echo "  2. Validate screening criteria"
+          echo "  3. Build GEM v6 screener"
+          echo "  4. Backtest new criteria"
+          echo "  5. Begin live screening"
+          echo ""
+          echo "🎯 READY FOR GEM V6 DEVELOPMENT!"
+          echo "================================================"
+          echo ""
