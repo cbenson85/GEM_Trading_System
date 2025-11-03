@@ -1,0 +1,25 @@
+{
+  "ticker": "ADCT",
+  "analysis_window": {
+    "start_date": "2023-06-24",
+    "end_date": "2023-09-22",
+    "days": 90,
+    "data_points": 63
+  },
+  "returns": {
+    "ticker_return_pct": -64.0,
+    "spy_return_pct": -0.24,
+    "qqq_return_pct": 0.06,
+    "relative_strength_spy": -63.77,
+    "relative_strength_qqq": -64.07
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2023,
+  "gain_percent": 739.01
+}

@@ -1,0 +1,25 @@
+{
+  "ticker": "AXSM",
+  "analysis_window": {
+    "start_date": "2018-05-29",
+    "end_date": "2018-08-27",
+    "days": 90,
+    "data_points": 64
+  },
+  "returns": {
+    "ticker_return_pct": -24.63,
+    "spy_return_pct": 7.72,
+    "qqq_return_pct": 9.1,
+    "relative_strength_spy": -32.34,
+    "relative_strength_qqq": -33.72
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2018,
+  "gain_percent": 821.58
+}

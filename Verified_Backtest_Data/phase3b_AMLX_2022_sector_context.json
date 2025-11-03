@@ -1,0 +1,25 @@
+{
+  "ticker": "AMLX",
+  "analysis_window": {
+    "start_date": "2022-02-10",
+    "end_date": "2022-05-11",
+    "days": 90,
+    "data_points": 62
+  },
+  "returns": {
+    "ticker_return_pct": -65.75,
+    "spy_return_pct": -12.59,
+    "qqq_return_pct": -18.58,
+    "relative_strength_spy": -53.16,
+    "relative_strength_qqq": -47.17
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2022,
+  "gain_percent": 502.19
+}

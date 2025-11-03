@@ -1,0 +1,25 @@
+{
+  "ticker": "AIM",
+  "analysis_window": {
+    "start_date": "2024-05-01",
+    "end_date": "2024-07-30",
+    "days": 90,
+    "data_points": 62
+  },
+  "returns": {
+    "ticker_return_pct": -10.97,
+    "spy_return_pct": 8.32,
+    "qqq_return_pct": 8.54,
+    "relative_strength_spy": -19.3,
+    "relative_strength_qqq": -19.52
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2024,
+  "gain_percent": 4200.12
+}

@@ -1,0 +1,25 @@
+{
+  "ticker": "APLT",
+  "analysis_window": {
+    "start_date": "2023-06-07",
+    "end_date": "2023-09-05",
+    "days": 90,
+    "data_points": 62
+  },
+  "returns": {
+    "ticker_return_pct": -13.1,
+    "spy_return_pct": 5.32,
+    "qqq_return_pct": 8.39,
+    "relative_strength_spy": -18.42,
+    "relative_strength_qqq": -21.49
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2023,
+  "gain_percent": 645.24
+}

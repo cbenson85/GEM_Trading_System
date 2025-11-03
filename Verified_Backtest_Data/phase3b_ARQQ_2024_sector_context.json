@@ -1,0 +1,25 @@
+{
+  "ticker": "ARQQ",
+  "analysis_window": {
+    "start_date": "2024-07-09",
+    "end_date": "2024-10-07",
+    "days": 90,
+    "data_points": 64
+  },
+  "returns": {
+    "ticker_return_pct": -56.31,
+    "spy_return_pct": 2.16,
+    "qqq_return_pct": -3.15,
+    "relative_strength_spy": -58.47,
+    "relative_strength_qqq": -53.16
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2024,
+  "gain_percent": 1292.88
+}

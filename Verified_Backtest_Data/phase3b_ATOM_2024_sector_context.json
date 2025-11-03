@@ -1,0 +1,25 @@
+{
+  "ticker": "ATOM",
+  "analysis_window": {
+    "start_date": "2024-06-25",
+    "end_date": "2024-09-23",
+    "days": 90,
+    "data_points": 63
+  },
+  "returns": {
+    "ticker_return_pct": -37.5,
+    "spy_return_pct": 4.56,
+    "qqq_return_pct": 0.76,
+    "relative_strength_spy": -42.06,
+    "relative_strength_qqq": -38.26
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2024,
+  "gain_percent": 616.33
+}

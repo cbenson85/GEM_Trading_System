@@ -1,0 +1,23 @@
+{
+  "ticker": "ARDX",
+  "analysis_window": {
+    "start_date": "2022-03-18",
+    "end_date": "2022-06-16",
+    "days": 90
+  },
+  "news_volume": {
+    "baseline_count": 0,
+    "recent_count": 0,
+    "acceleration_ratio": 0,
+    "baseline_period": "90-30 days before",
+    "recent_period": "30-0 days before"
+  },
+  "patterns_detected": {
+    "news_acceleration_3x": false,
+    "news_acceleration_5x": false,
+    "pattern_score": 0
+  },
+  "data_quality": "low_coverage",
+  "year": 2022,
+  "gain_percent": 700.77
+}

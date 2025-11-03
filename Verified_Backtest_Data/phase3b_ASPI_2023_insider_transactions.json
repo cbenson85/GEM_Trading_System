@@ -1,0 +1,19 @@
+{
+  "ticker": "ASPI",
+  "analysis_window": {
+    "start_date": "2023-03-09",
+    "end_date": "2023-06-07",
+    "days": 90
+  },
+  "insider_activity": {
+    "total_form4_filings": 0,
+    "filings": []
+  },
+  "patterns_detected": {
+    "insider_cluster_3plus": false,
+    "pattern_score": 0
+  },
+  "data_quality": "no_activity",
+  "year": 2023,
+  "gain_percent": 966.67
+}

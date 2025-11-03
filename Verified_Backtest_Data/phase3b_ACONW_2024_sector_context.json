@@ -1,0 +1,25 @@
+{
+  "ticker": "ACONW",
+  "analysis_window": {
+    "start_date": "2023-11-23",
+    "end_date": "2024-02-21",
+    "days": 90,
+    "data_points": 44
+  },
+  "returns": {
+    "ticker_return_pct": -50.77,
+    "spy_return_pct": 9.2,
+    "qqq_return_pct": 9.27,
+    "relative_strength_spy": -59.97,
+    "relative_strength_qqq": -60.04
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "acceptable",
+  "year": 2024,
+  "gain_percent": 1428.75
+}

@@ -1,0 +1,25 @@
+{
+  "ticker": "APT",
+  "analysis_window": {
+    "start_date": "2019-03-27",
+    "end_date": "2019-06-25",
+    "days": 90,
+    "data_points": 63
+  },
+  "returns": {
+    "ticker_return_pct": -8.2,
+    "spy_return_pct": 3.97,
+    "qqq_return_pct": 3.95,
+    "relative_strength_spy": -12.17,
+    "relative_strength_qqq": -12.15
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2019,
+  "gain_percent": 1137.8
+}

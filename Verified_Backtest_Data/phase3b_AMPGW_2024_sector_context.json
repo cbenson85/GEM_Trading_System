@@ -1,0 +1,25 @@
+{
+  "ticker": "AMPGW",
+  "analysis_window": {
+    "start_date": "2023-09-01",
+    "end_date": "2023-11-30",
+    "days": 90,
+    "data_points": 21
+  },
+  "returns": {
+    "ticker_return_pct": -67.0,
+    "spy_return_pct": 1.15,
+    "qqq_return_pct": 2.98,
+    "relative_strength_spy": -68.15,
+    "relative_strength_qqq": -69.97
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "poor",
+  "year": 2024,
+  "gain_percent": 1380.0
+}

@@ -1,0 +1,25 @@
+{
+  "ticker": "ALVOW",
+  "analysis_window": {
+    "start_date": "2023-02-24",
+    "end_date": "2023-05-25",
+    "days": 90,
+    "data_points": 56
+  },
+  "returns": {
+    "ticker_return_pct": -58.21,
+    "spy_return_pct": 4.61,
+    "qqq_return_pct": 16.4,
+    "relative_strength_spy": -62.82,
+    "relative_strength_qqq": -74.61
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "acceptable",
+  "year": 2023,
+  "gain_percent": 543.88
+}

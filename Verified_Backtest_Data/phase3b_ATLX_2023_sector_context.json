@@ -1,0 +1,25 @@
+{
+  "ticker": "ATLX",
+  "analysis_window": {
+    "start_date": "2022-11-05",
+    "end_date": "2023-02-03",
+    "days": 90,
+    "data_points": 48
+  },
+  "returns": {
+    "ticker_return_pct": -59.76,
+    "spy_return_pct": 8.53,
+    "qqq_return_pct": 14.42,
+    "relative_strength_spy": -68.29,
+    "relative_strength_qqq": -74.19
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "acceptable",
+  "year": 2023,
+  "gain_percent": 559.82
+}

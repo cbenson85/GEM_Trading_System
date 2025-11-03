@@ -1,0 +1,25 @@
+{
+  "ticker": "AMPG",
+  "analysis_window": {
+    "start_date": "2024-05-31",
+    "end_date": "2024-08-29",
+    "days": 90,
+    "data_points": 63
+  },
+  "returns": {
+    "ticker_return_pct": -41.65,
+    "spy_return_pct": 5.87,
+    "qqq_return_pct": 4.43,
+    "relative_strength_spy": -47.53,
+    "relative_strength_qqq": -46.08
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2024,
+  "gain_percent": 858.27
+}

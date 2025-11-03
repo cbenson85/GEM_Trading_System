@@ -1,0 +1,25 @@
+{
+  "ticker": "AUUDW",
+  "analysis_window": {
+    "start_date": "2023-08-24",
+    "end_date": "2023-11-22",
+    "days": 90,
+    "data_points": 45
+  },
+  "returns": {
+    "ticker_return_pct": -71.18,
+    "spy_return_pct": 4.15,
+    "qqq_return_pct": 7.98,
+    "relative_strength_spy": -75.33,
+    "relative_strength_qqq": -79.17
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "acceptable",
+  "year": 2024,
+  "gain_percent": 1085.47
+}

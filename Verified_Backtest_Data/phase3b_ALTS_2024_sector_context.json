@@ -1,0 +1,25 @@
+{
+  "ticker": "ALTS",
+  "analysis_window": {
+    "start_date": "2024-07-10",
+    "end_date": "2024-10-08",
+    "days": 90,
+    "data_points": 61
+  },
+  "returns": {
+    "ticker_return_pct": -18.75,
+    "spy_return_pct": 2.11,
+    "qqq_return_pct": -2.72,
+    "relative_strength_spy": -20.86,
+    "relative_strength_qqq": -16.03
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2024,
+  "gain_percent": 547.85
+}

@@ -1,0 +1,19 @@
+{
+  "ticker": "ARCT",
+  "analysis_window": {
+    "start_date": "2019-07-04",
+    "end_date": "2019-10-02",
+    "days": 90
+  },
+  "insider_activity": {
+    "total_form4_filings": 0,
+    "filings": []
+  },
+  "patterns_detected": {
+    "insider_cluster_3plus": false,
+    "pattern_score": 0
+  },
+  "data_quality": "no_activity",
+  "year": 2019,
+  "gain_percent": 565.64
+}

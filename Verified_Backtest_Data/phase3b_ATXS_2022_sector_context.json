@@ -1,0 +1,25 @@
+{
+  "ticker": "ATXS",
+  "analysis_window": {
+    "start_date": "2022-03-18",
+    "end_date": "2022-06-16",
+    "days": 90,
+    "data_points": 63
+  },
+  "returns": {
+    "ticker_return_pct": -65.25,
+    "spy_return_pct": -17.52,
+    "qqq_return_pct": -22.79,
+    "relative_strength_spy": -47.74,
+    "relative_strength_qqq": -42.47
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2022,
+  "gain_percent": 561.79
+}

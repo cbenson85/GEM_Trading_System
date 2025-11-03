@@ -1,0 +1,25 @@
+{
+  "ticker": "AISPW",
+  "analysis_window": {
+    "start_date": "2023-10-21",
+    "end_date": "2024-01-19",
+    "days": 90,
+    "data_points": 16
+  },
+  "returns": {
+    "ticker_return_pct": -69.91,
+    "spy_return_pct": 14.74,
+    "qqq_return_pct": 18.42,
+    "relative_strength_spy": -84.65,
+    "relative_strength_qqq": -88.33
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "poor",
+  "year": 2024,
+  "gain_percent": 10328.57
+}

@@ -1,0 +1,25 @@
+{
+  "ticker": "AHG",
+  "analysis_window": {
+    "start_date": "2023-04-28",
+    "end_date": "2023-07-27",
+    "days": 90,
+    "data_points": 62
+  },
+  "returns": {
+    "ticker_return_pct": -34.06,
+    "spy_return_pct": 8.79,
+    "qqq_return_pct": 16.76,
+    "relative_strength_spy": -42.85,
+    "relative_strength_qqq": -50.82
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2023,
+  "gain_percent": 1057.68
+}

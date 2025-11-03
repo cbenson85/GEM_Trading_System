@@ -1,0 +1,25 @@
+{
+  "ticker": "AENTW",
+  "analysis_window": {
+    "start_date": "2023-09-13",
+    "end_date": "2023-12-12",
+    "days": 90,
+    "data_points": 27
+  },
+  "returns": {
+    "ticker_return_pct": -80.0,
+    "spy_return_pct": 3.94,
+    "qqq_return_pct": 6.54,
+    "relative_strength_spy": -83.94,
+    "relative_strength_qqq": -86.54
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "poor",
+  "year": 2024,
+  "gain_percent": 12398.33
+}

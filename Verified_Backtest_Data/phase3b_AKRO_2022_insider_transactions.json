@@ -1,0 +1,19 @@
+{
+  "ticker": "AKRO",
+  "analysis_window": {
+    "start_date": "2022-03-03",
+    "end_date": "2022-06-01",
+    "days": 90
+  },
+  "insider_activity": {
+    "total_form4_filings": 0,
+    "filings": []
+  },
+  "patterns_detected": {
+    "insider_cluster_3plus": false,
+    "pattern_score": 0
+  },
+  "data_quality": "no_activity",
+  "year": 2022,
+  "gain_percent": 586.0
+}

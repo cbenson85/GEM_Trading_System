@@ -1,0 +1,25 @@
+{
+  "ticker": "AIM",
+  "analysis_window": {
+    "start_date": "2019-07-06",
+    "end_date": "2019-10-04",
+    "days": 90,
+    "data_points": 24
+  },
+  "returns": {
+    "ticker_return_pct": -70.58,
+    "spy_return_pct": -0.83,
+    "qqq_return_pct": -0.47,
+    "relative_strength_spy": -69.74,
+    "relative_strength_qqq": -70.1
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "poor",
+  "year": 2019,
+  "gain_percent": 1192.26
+}

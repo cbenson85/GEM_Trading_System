@@ -1,0 +1,25 @@
+{
+  "ticker": "ATOS",
+  "analysis_window": {
+    "start_date": "2018-09-28",
+    "end_date": "2018-12-27",
+    "days": 90,
+    "data_points": 62
+  },
+  "returns": {
+    "ticker_return_pct": -47.61,
+    "spy_return_pct": -14.67,
+    "qqq_return_pct": -17.62,
+    "relative_strength_spy": -32.94,
+    "relative_strength_qqq": -29.98
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2019,
+  "gain_percent": 705.98
+}

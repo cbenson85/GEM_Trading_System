@@ -1,0 +1,25 @@
+{
+  "ticker": "ARKOW",
+  "analysis_window": {
+    "start_date": "2024-02-03",
+    "end_date": "2024-05-03",
+    "days": 90,
+    "data_points": 55
+  },
+  "returns": {
+    "ticker_return_pct": -91.31,
+    "spy_return_pct": 3.8,
+    "qqq_return_pct": 1.64,
+    "relative_strength_spy": -95.11,
+    "relative_strength_qqq": -92.95
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "acceptable",
+  "year": 2024,
+  "gain_percent": 1484.55
+}

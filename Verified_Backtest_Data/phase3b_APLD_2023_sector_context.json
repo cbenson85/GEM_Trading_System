@@ -1,0 +1,25 @@
+{
+  "ticker": "APLD",
+  "analysis_window": {
+    "start_date": "2022-09-20",
+    "end_date": "2022-12-19",
+    "days": 90,
+    "data_points": 64
+  },
+  "returns": {
+    "ticker_return_pct": -26.7,
+    "spy_return_pct": -1.06,
+    "qqq_return_pct": -6.57,
+    "relative_strength_spy": -25.64,
+    "relative_strength_qqq": -20.13
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2023,
+  "gain_percent": 669.54
+}

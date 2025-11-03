@@ -1,0 +1,25 @@
+{
+  "ticker": "ARWR",
+  "analysis_window": {
+    "start_date": "2017-09-20",
+    "end_date": "2017-12-19",
+    "days": 90,
+    "data_points": 64
+  },
+  "returns": {
+    "ticker_return_pct": -7.39,
+    "spy_return_pct": 6.84,
+    "qqq_return_pct": 8.5,
+    "relative_strength_spy": -14.23,
+    "relative_strength_qqq": -15.88
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2018,
+  "gain_percent": 586.81
+}

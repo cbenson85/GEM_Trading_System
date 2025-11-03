@@ -1,0 +1,19 @@
+{
+  "ticker": "ALTS",
+  "analysis_window": {
+    "start_date": "2024-07-10",
+    "end_date": "2024-10-08",
+    "days": 90
+  },
+  "insider_activity": {
+    "total_form4_filings": 0,
+    "filings": []
+  },
+  "patterns_detected": {
+    "insider_cluster_3plus": false,
+    "pattern_score": 0
+  },
+  "data_quality": "no_activity",
+  "year": 2024,
+  "gain_percent": 547.85
+}

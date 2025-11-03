@@ -1,0 +1,25 @@
+{
+  "ticker": "AIMD",
+  "analysis_window": {
+    "start_date": "2022-03-31",
+    "end_date": "2022-06-29",
+    "days": 90,
+    "data_points": 50
+  },
+  "returns": {
+    "ticker_return_pct": -80.68,
+    "spy_return_pct": -15.79,
+    "qqq_return_pct": -21.72,
+    "relative_strength_spy": -64.89,
+    "relative_strength_qqq": -58.96
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "acceptable",
+  "year": 2022,
+  "gain_percent": 1071.88
+}

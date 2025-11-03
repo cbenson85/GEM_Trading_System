@@ -1,0 +1,25 @@
+{
+  "ticker": "AAOI",
+  "analysis_window": {
+    "start_date": "2024-05-09",
+    "end_date": "2024-08-07",
+    "days": 90,
+    "data_points": 62
+  },
+  "returns": {
+    "ticker_return_pct": -34.82,
+    "spy_return_pct": -0.29,
+    "qqq_return_pct": -1.42,
+    "relative_strength_spy": -34.53,
+    "relative_strength_qqq": -33.4
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2024,
+  "gain_percent": 547.74
+}

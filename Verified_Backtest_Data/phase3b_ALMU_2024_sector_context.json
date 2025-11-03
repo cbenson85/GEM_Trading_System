@@ -1,0 +1,25 @@
+{
+  "ticker": "ALMU",
+  "analysis_window": {
+    "start_date": "2024-06-12",
+    "end_date": "2024-09-10",
+    "days": 90,
+    "data_points": 54
+  },
+  "returns": {
+    "ticker_return_pct": -26.57,
+    "spy_return_pct": 1.37,
+    "qqq_return_pct": -3.27,
+    "relative_strength_spy": -27.94,
+    "relative_strength_qqq": -23.3
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "acceptable",
+  "year": 2024,
+  "gain_percent": 652.92
+}

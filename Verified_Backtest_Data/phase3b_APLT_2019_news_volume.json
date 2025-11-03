@@ -1,0 +1,23 @@
+{
+  "ticker": "APLT",
+  "analysis_window": {
+    "start_date": "2019-04-09",
+    "end_date": "2019-07-08",
+    "days": 90
+  },
+  "news_volume": {
+    "baseline_count": 13,
+    "recent_count": 13,
+    "acceleration_ratio": 1.0,
+    "baseline_period": "90-30 days before",
+    "recent_period": "30-0 days before"
+  },
+  "patterns_detected": {
+    "news_acceleration_3x": false,
+    "news_acceleration_5x": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2019,
+  "gain_percent": 610.27
+}

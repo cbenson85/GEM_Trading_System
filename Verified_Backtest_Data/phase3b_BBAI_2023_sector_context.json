@@ -1,0 +1,25 @@
+{
+  "ticker": "BBAI",
+  "analysis_window": {
+    "start_date": "2022-09-30",
+    "end_date": "2022-12-29",
+    "days": 90,
+    "data_points": 63
+  },
+  "returns": {
+    "ticker_return_pct": -59.69,
+    "spy_return_pct": 7.35,
+    "qqq_return_pct": -0.31,
+    "relative_strength_spy": -67.05,
+    "relative_strength_qqq": -59.39
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2023,
+  "gain_percent": 969.85
+}

@@ -1,0 +1,25 @@
+{
+  "ticker": "ALT",
+  "analysis_window": {
+    "start_date": "2023-05-27",
+    "end_date": "2023-08-25",
+    "days": 90,
+    "data_points": 62
+  },
+  "returns": {
+    "ticker_return_pct": -40.0,
+    "spy_return_pct": 4.71,
+    "qqq_return_pct": 4.01,
+    "relative_strength_spy": -44.71,
+    "relative_strength_qqq": -44.01
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2023,
+  "gain_percent": 518.33
+}

@@ -1,0 +1,25 @@
+{
+  "ticker": "ACXP",
+  "analysis_window": {
+    "start_date": "2023-07-05",
+    "end_date": "2023-10-03",
+    "days": 90,
+    "data_points": 64
+  },
+  "returns": {
+    "ticker_return_pct": -49.61,
+    "spy_return_pct": -4.86,
+    "qqq_return_pct": -4.15,
+    "relative_strength_spy": -44.75,
+    "relative_strength_qqq": -45.46
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2023,
+  "gain_percent": 589.06
+}

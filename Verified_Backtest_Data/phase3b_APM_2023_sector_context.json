@@ -1,0 +1,25 @@
+{
+  "ticker": "APM",
+  "analysis_window": {
+    "start_date": "2023-05-26",
+    "end_date": "2023-08-24",
+    "days": 90,
+    "data_points": 62
+  },
+  "returns": {
+    "ticker_return_pct": -44.65,
+    "spy_return_pct": 4.02,
+    "qqq_return_pct": 3.68,
+    "relative_strength_spy": -48.67,
+    "relative_strength_qqq": -48.33
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "good",
+  "year": 2023,
+  "gain_percent": 893.75
+}

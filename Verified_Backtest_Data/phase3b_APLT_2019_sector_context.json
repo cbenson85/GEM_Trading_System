@@ -1,0 +1,25 @@
+{
+  "ticker": "APLT",
+  "analysis_window": {
+    "start_date": "2019-04-09",
+    "end_date": "2019-07-08",
+    "days": 90,
+    "data_points": 38
+  },
+  "returns": {
+    "ticker_return_pct": -14.04,
+    "spy_return_pct": 3.31,
+    "qqq_return_pct": 2.83,
+    "relative_strength_spy": -17.35,
+    "relative_strength_qqq": -16.88
+  },
+  "patterns_detected": {
+    "outperforming_spy": false,
+    "outperforming_qqq": false,
+    "outperforming_both": false,
+    "pattern_score": 0
+  },
+  "data_quality": "acceptable",
+  "year": 2019,
+  "gain_percent": 610.27
+}
