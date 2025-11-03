@@ -1,0 +1,105 @@
+name: Build 72-Stock Correlation Matrix
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Analysis mode'
+        required: false
+        default: '72stocks'
+        type: choice
+        options:
+          - 72stocks
+
+jobs:
+  build-correlation-matrix:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install --break-system-packages requests polygon-api-client
+    
+    - name: Verify analysis files exist
+      run: |
+        echo "Checking for Phase 3B analysis files..."
+        ls -la Verified_Backtest_Data/phase3b_*_analysis.json | wc -l
+        echo "Files found!"
+    
+    - name: Build 72-Stock Correlation Matrix
+      run: |
+        echo "Building comprehensive correlation matrix from all 72 stocks..."
+        python build_72stock_correlation_matrix.py
+    
+    - name: Verify output
+      run: |
+        if [ -f "Verified_Backtest_Data/phase3b_correlation_matrix_72STOCKS.json" ]; then
+          echo "✅ Correlation matrix generated successfully!"
+          echo "File size: $(wc -c < Verified_Backtest_Data/phase3b_correlation_matrix_72STOCKS.json) bytes"
+        else
+          echo "❌ Correlation matrix file not found!"
+          exit 1
+        fi
+    
+    - name: Display key findings
+      run: |
+        echo "📊 Extracting key findings..."
+        python -c "
+import json
+with open('Verified_Backtest_Data/phase3b_correlation_matrix_72STOCKS.json', 'r') as f:
+    data = json.load(f)
+print('=' * 70)
+print('72-STOCK CORRELATION MATRIX - KEY FINDINGS')
+print('=' * 70)
+print(f\"Stocks Analyzed: {data['statistics']['total_stocks']}\")
+print(f\"Volume Spike Frequency: {data['pattern_frequencies']['volume_spikes']['frequency_pct']:.1f}%\")
+print(f\"RSI Oversold Frequency: {data['pattern_frequencies']['rsi_oversold']['frequency_pct']:.1f}%\")
+print(f\"Most Common Signal: {data['key_insights']['most_common_signal']}\")
+print(f\"Confidence Level: {data['metadata']['confidence_level']}\")
+print('=' * 70)
+        "
+    
+    - name: Commit correlation matrix
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add Verified_Backtest_Data/phase3b_correlation_matrix_72STOCKS.json
+        git diff --staged --quiet || git commit -m "📊 72-Stock Correlation Matrix - Phase 3B Complete"
+    
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main
+    
+    - name: Create summary
+      run: |
+        echo "# 🎯 Phase 3B: 72-Stock Correlation Matrix Complete" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "## Key Findings" >> $GITHUB_STEP_SUMMARY
+        python -c "
+import json
+with open('Verified_Backtest_Data/phase3b_correlation_matrix_72STOCKS.json', 'r') as f:
+    data = json.load(f)
+print(f\"- **Total Stocks**: {data['statistics']['total_stocks']}\")
+print(f\"- **Volume Spike Frequency**: {data['pattern_frequencies']['volume_spikes']['frequency_pct']:.1f}%\")
+print(f\"- **RSI Oversold Frequency**: {data['pattern_frequencies']['rsi_oversold']['frequency_pct']:.1f}%\")
+print(f\"- **Top Signal**: {data['key_insights']['most_common_signal']}\")
+print(f\"- **Confidence**: {data['metadata']['confidence_level']}\")
+        " >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "## Next Steps" >> $GITHUB_STEP_SUMMARY
+        echo "1. Review correlation matrix: \`phase3b_correlation_matrix_72STOCKS.json\`" >> $GITHUB_STEP_SUMMARY
+        echo "2. Build final Phase 3B report" >> $GITHUB_STEP_SUMMARY
+        echo "3. Proceed to Phase 4: Backtesting" >> $GITHUB_STEP_SUMMARY
