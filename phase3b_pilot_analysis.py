@@ -1,19 +1,59 @@
 """
-Phase 3B Pilot Analysis
-Runs automated analysis on 2 sample stocks: AENTW and ASNS
-Fully automated - loads stock data, runs analysis, saves results
+Phase 3B Analysis - Pilot or Full
+Runs automated 90-day pre-catalyst analysis on sample or all sustainable stocks
 """
 
 import os
+import sys
 import json
 from polygon_data_collector import PolygonDataCollector
 
 
-def load_phase3a_samples():
-    """Load the 8 sample stocks from Phase 3A"""
+def load_sustainable_stocks():
+    """
+    Load all 72 sustainable stocks from explosive_stocks_CLEAN.json
     
-    # These are the 8 stocks selected in Phase 3A
-    # Located in: Verified_Backtest_Data/phase3_sample_selection.json
+    Returns:
+        List of stock dictionaries with required fields
+    """
+    clean_file = 'Verified_Backtest_Data/explosive_stocks_CLEAN.json'
+    
+    if not os.path.exists(clean_file):
+        print(f"❌ Error: {clean_file} not found")
+        return []
+    
+    with open(clean_file, 'r') as f:
+        data = json.load(f)
+    
+    stocks = data.get('stocks', [])
+    print(f"📊 Loaded {len(stocks)} sustainable stocks from CLEAN.json")
+    
+    # Convert to analysis format
+    analysis_stocks = []
+    for stock in stocks:
+        # Calculate days_to_peak from dates
+        entry_date = stock.get('entry_date', '')
+        catalyst_date = stock.get('catalyst_date', '')
+        
+        # Estimate days (rough calculation for now)
+        days_to_peak = stock.get('days_to_peak', 90)  # Use existing or default
+        
+        analysis_stocks.append({
+            'ticker': stock.get('ticker'),
+            'company_name': stock.get('ticker', 'Unknown'),  # Use ticker as fallback
+            'year': stock.get('year_discovered'),
+            'gain_percent': stock.get('gain_percent'),
+            'days_to_peak': days_to_peak,
+            'entry_date': entry_date,
+            'peak_date': catalyst_date,  # Using catalyst_date as peak
+            'role': 'Sustainable explosive stock'
+        })
+    
+    return analysis_stocks
+
+
+def load_phase3a_sample():
+    """Load the 8 sample stocks from Phase 3A (pilot mode)"""
     
     samples = [
         {
@@ -101,17 +141,19 @@ def load_phase3a_samples():
     return samples
 
 
-def run_pilot_analysis(output_dir: str = 'Verified_Backtest_Data'):
+def run_analysis(stocks, output_dir='Verified_Backtest_Data', mode='pilot'):
     """
-    Run Phase 3B pilot analysis on first 2 stocks
+    Run Phase 3B analysis on provided stocks
     
     Args:
-        output_dir: Directory to save analysis results
+        stocks: List of stock dictionaries
+        output_dir: Directory to save results
+        mode: 'pilot' or 'full'
     """
     
     print("=" * 70)
-    print("PHASE 3B PILOT ANALYSIS")
-    print("Analyzing: AENTW + ASNS")
+    print(f"PHASE 3B ANALYSIS - {mode.upper()} MODE")
+    print(f"Analyzing: {len(stocks)} stocks")
     print("Framework: 90-day pre-catalyst window")
     print("=" * 70)
     print()
@@ -126,127 +168,7 @@ def run_pilot_analysis(output_dir: str = 'Verified_Backtest_Data'):
     # Initialize collector
     collector = PolygonDataCollector(api_key)
     
-    # Load all samples
-    all_samples = load_phase3a_samples()
-    
-    # Select pilot stocks (first 2)
-    pilot_stocks = all_samples[:2]
-    
-    print(f"📊 Loaded {len(pilot_stocks)} stocks for pilot analysis")
-    print()
-    
-    # Create output directory if needed
-    os.makedirs(output_dir, exist_ok=True)
-    
-    # Analyze each stock
-    results = []
-    
-    for i, stock in enumerate(pilot_stocks, 1):
-        print(f"\n{'='*70}")
-        print(f"STOCK {i}/2: {stock['ticker']}")
-        print(f"{'='*70}")
-        
-        try:
-            # Run comprehensive analysis
-            analysis = collector.analyze_stock_comprehensive(
-                ticker=stock['ticker'],
-                company_name=stock['company_name'],
-                entry_date=stock['entry_date'],
-                peak_date=stock['peak_date'],
-                gain_percent=stock['gain_percent'],
-                days_to_peak=stock['days_to_peak']
-            )
-            
-            # Add role to analysis
-            analysis['stock_info']['role'] = stock['role']
-            
-            # Save individual analysis
-            filename = f"phase3b_{stock['ticker']}_{stock['year']}_analysis.json"
-            filepath = os.path.join(output_dir, filename)
-            
-            with open(filepath, 'w') as f:
-                json.dump(analysis, f, indent=2)
-            
-            print(f"✅ Saved: {filepath}")
-            
-            results.append({
-                'ticker': stock['ticker'],
-                'status': 'success',
-                'file': filename,
-                'summary': analysis.get('summary', {})
-            })
-            
-        except Exception as e:
-            print(f"❌ Error analyzing {stock['ticker']}: {e}")
-            results.append({
-                'ticker': stock['ticker'],
-                'status': 'error',
-                'error': str(e)
-            })
-    
-    # Create pilot summary
-    pilot_summary = {
-        'metadata': {
-            'analysis_date': collector._generate_summary({}, {}, 0, 0),  # Just to get timestamp
-            'phase': '3B_PILOT',
-            'stocks_analyzed': len(pilot_stocks),
-            'framework': '90-day pre-catalyst window'
-        },
-        'stocks': results,
-        'success_count': sum(1 for r in results if r['status'] == 'success'),
-        'error_count': sum(1 for r in results if r['status'] == 'error')
-    }
-    
-    # Save pilot summary
-    summary_file = os.path.join(output_dir, 'phase3b_pilot_summary.json')
-    with open(summary_file, 'w') as f:
-        json.dump(pilot_summary, f, indent=2)
-    
-    print(f"\n{'='*70}")
-    print("PILOT ANALYSIS COMPLETE")
-    print(f"{'='*70}")
-    print(f"✅ Successful: {pilot_summary['success_count']}/{len(pilot_stocks)}")
-    print(f"❌ Errors: {pilot_summary['error_count']}/{len(pilot_stocks)}")
-    print(f"📁 Summary: {summary_file}")
-    print()
-    
-    # Print next steps
-    print("NEXT STEPS:")
-    print("1. Review analysis files in Verified_Backtest_Data/")
-    print("2. Validate patterns detected")
-    print("3. Run searches for catalyst discovery")
-    print("4. If validated, proceed to remaining 6 stocks")
-    print()
-
-
-def run_full_analysis(output_dir: str = 'Verified_Backtest_Data'):
-    """
-    Run Phase 3B analysis on all 8 stocks
-    
-    Args:
-        output_dir: Directory to save analysis results
-    """
-    
-    print("=" * 70)
-    print("PHASE 3B FULL ANALYSIS")
-    print("Analyzing: All 8 sample stocks")
-    print("Framework: 90-day pre-catalyst window")
-    print("=" * 70)
-    print()
-    
-    # Get API key
-    api_key = os.environ.get('POLYGON_API_KEY')
-    if not api_key:
-        print("❌ Error: POLYGON_API_KEY environment variable not set")
-        return
-    
-    # Initialize collector
-    collector = PolygonDataCollector(api_key)
-    
-    # Load all samples
-    all_samples = load_phase3a_samples()
-    
-    print(f"📊 Loaded {len(all_samples)} stocks for analysis")
+    print(f"📊 Processing {len(stocks)} stocks...")
     print()
     
     # Create output directory
@@ -255,16 +177,16 @@ def run_full_analysis(output_dir: str = 'Verified_Backtest_Data'):
     # Analyze each stock
     results = []
     
-    for i, stock in enumerate(all_samples, 1):
+    for i, stock in enumerate(stocks, 1):
         print(f"\n{'='*70}")
-        print(f"STOCK {i}/{len(all_samples)}: {stock['ticker']}")
+        print(f"STOCK {i}/{len(stocks)}: {stock['ticker']}")
         print(f"{'='*70}")
         
         try:
             # Run comprehensive analysis
             analysis = collector.analyze_stock_comprehensive(
                 ticker=stock['ticker'],
-                company_name=stock['company_name'],
+                company_name=stock.get('company_name', stock['ticker']),
                 entry_date=stock['entry_date'],
                 peak_date=stock['peak_date'],
                 gain_percent=stock['gain_percent'],
@@ -272,7 +194,7 @@ def run_full_analysis(output_dir: str = 'Verified_Backtest_Data'):
             )
             
             # Add role to analysis
-            analysis['stock_info']['role'] = stock['role']
+            analysis['stock_info']['role'] = stock.get('role', 'Sustainable stock')
             
             # Save individual analysis
             filename = f"phase3b_{stock['ticker']}_{stock['year']}_analysis.json"
@@ -298,11 +220,11 @@ def run_full_analysis(output_dir: str = 'Verified_Backtest_Data'):
                 'error': str(e)
             })
     
-    # Create full summary
-    full_summary = {
+    # Create summary
+    summary = {
         'metadata': {
-            'phase': '3B_FULL',
-            'stocks_analyzed': len(all_samples),
+            'phase': f'3B_{mode.upper()}',
+            'stocks_analyzed': len(stocks),
             'framework': '90-day pre-catalyst window'
         },
         'stocks': results,
@@ -311,37 +233,47 @@ def run_full_analysis(output_dir: str = 'Verified_Backtest_Data'):
     }
     
     # Save summary
-    summary_file = os.path.join(output_dir, 'phase3b_full_analysis_summary.json')
+    summary_filename = f'phase3b_{mode}_analysis_summary.json'
+    summary_file = os.path.join(output_dir, summary_filename)
     with open(summary_file, 'w') as f:
-        json.dump(full_summary, f, indent=2)
+        json.dump(summary, f, indent=2)
     
     print(f"\n{'='*70}")
-    print("FULL ANALYSIS COMPLETE")
+    print(f"{mode.upper()} ANALYSIS COMPLETE")
     print(f"{'='*70}")
-    print(f"✅ Successful: {full_summary['success_count']}/{len(all_samples)}")
-    print(f"❌ Errors: {full_summary['error_count']}/{len(all_samples)}")
+    print(f"✅ Successful: {summary['success_count']}/{len(stocks)}")
+    print(f"❌ Errors: {summary['error_count']}/{len(stocks)}")
     print(f"📁 Summary: {summary_file}")
     print()
     
     # Print next steps
-    print("NEXT STEPS:")
-    print("1. Review all 8 analysis files")
-    print("2. Run catalyst searches")
-    print("3. Build correlation matrix")
-    print("4. Identify top patterns")
-    print("5. Proceed to Phase 4: Backtesting")
-    print()
+    if mode == 'pilot':
+        print("NEXT STEPS:")
+        print("1. Review analysis files in Verified_Backtest_Data/")
+        print("2. Validate patterns detected")
+        print("3. If validated, run full analysis on all 72 stocks")
+        print()
+    else:
+        print("NEXT STEPS:")
+        print("1. Review all analysis files")
+        print("2. Build correlation matrix with statistical significance")
+        print("3. Document top patterns")
+        print("4. Proceed to Phase 4: Backtesting")
+        print()
 
 
 if __name__ == "__main__":
-    import sys
-    
     # Check command line argument
     mode = sys.argv[1] if len(sys.argv) > 1 else 'pilot'
     
     if mode == 'full':
-        print("Running FULL analysis (all 8 stocks)...")
-        run_full_analysis()
+        print("Loading all 72 sustainable stocks from CLEAN.json...")
+        stocks = load_sustainable_stocks()
+        if not stocks:
+            print("❌ Failed to load stocks. Exiting.")
+            sys.exit(1)
+        run_analysis(stocks, mode='full')
     else:
-        print("Running PILOT analysis (2 stocks)...")
-        run_pilot_analysis()
+        print("Running PILOT analysis (8 sample stocks)...")
+        stocks = load_phase3a_sample()
+        run_analysis(stocks, mode='pilot')
