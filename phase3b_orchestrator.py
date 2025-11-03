@@ -29,8 +29,14 @@ class Phase3BOrchestrator:
             {
                 'name': 'News Volume',
                 'script': 'news_volume_counter.py',
-                'description': 'News article acceleration',
-                'estimated_time_mins': 120
+                'description': 'News article acceleration (Yahoo Finance + Google News)',
+                'estimated_time_mins': 90
+            },
+            {
+                'name': 'Google Trends',
+                'script': 'google_trends_analyzer.py',
+                'description': 'Search volume spike detection',
+                'estimated_time_mins': 90
             }
         ]
         
