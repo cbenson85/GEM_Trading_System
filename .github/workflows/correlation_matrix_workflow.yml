@@ -1,0 +1,61 @@
+name: Build Correlation Matrix
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-matrix:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Verify analysis files
+      run: |
+        echo "Checking Phase 3B analysis files..."
+        ls Verified_Backtest_Data/phase3b_*_analysis.json | wc -l
+    
+    - name: Build correlation matrix
+      run: |
+        python build_72stock_correlation_matrix.py
+    
+    - name: Verify output
+      run: |
+        if [ -f "Verified_Backtest_Data/phase3b_correlation_matrix_72STOCKS.json" ]; then
+          echo "SUCCESS: Correlation matrix generated"
+          ls -lh Verified_Backtest_Data/phase3b_correlation_matrix_72STOCKS.json
+        else
+          echo "ERROR: Matrix file not found"
+          exit 1
+        fi
+    
+    - name: Display results
+      run: |
+        python -c "
+import json
+with open('Verified_Backtest_Data/phase3b_correlation_matrix_72STOCKS.json', 'r') as f:
+    data = json.load(f)
+print('RESULTS:')
+print(f\"Stocks: {data['statistics']['total_stocks']}\")
+print(f\"Volume Spikes: {data['pattern_frequencies']['volume_spikes']['frequency_pct']:.1f}%\")
+print(f\"RSI Oversold: {data['pattern_frequencies']['rsi_oversold']['frequency_pct']:.1f}%\")
+        "
+    
+    - name: Commit results
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add Verified_Backtest_Data/phase3b_correlation_matrix_72STOCKS.json
+        git diff --staged --quiet || git commit -m "Add 72-stock correlation matrix"
+    
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main
