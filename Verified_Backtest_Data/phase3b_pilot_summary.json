@@ -1,0 +1,20 @@
+{
+  "pilot_date": "2025-11-03T01:07:43.754735",
+  "stocks_analyzed": 2,
+  "successful": 2,
+  "failed": 0,
+  "results": [
+    {
+      "ticker": "AENTW",
+      "year": 2024,
+      "status": "success",
+      "file": "Verified_Backtest_Data/phase3b_AENTW_2024_analysis.json"
+    },
+    {
+      "ticker": "ASNS",
+      "year": 2024,
+      "status": "success",
+      "file": "Verified_Backtest_Data/phase3b_ASNS_2024_analysis.json"
+    }
+  ]
+}
