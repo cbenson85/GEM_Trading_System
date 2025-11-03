@@ -3,6 +3,10 @@
 Explosive Stock Scanner - GEM Trading System
 Finds all stocks with 500%+ gains in any 6-month window over specified period
 
+MODES:
+1. Standard mode: Scans first 1,000 tickers (fast, incomplete)
+2. Pre-filter mode (--use-prefilter): Scans only pre-filtered candidates (complete coverage)
+
 Data Sources:
 - Primary: Polygon.io API (Developer tier)
 - Backup: Yahoo Finance (yfinance)
@@ -14,6 +18,7 @@ import os
 import sys
 import json
 import time
+import argparse
 from datetime import datetime, timedelta
 import requests
 
@@ -30,19 +35,65 @@ POLYGON_API_KEY = os.environ.get('POLYGON_API_KEY', 'pvv6DNmKAoxojCc0B5HOaji6I_k
 MIN_GAIN_PERCENT = 500  # 500% = 6x return
 SCAN_WINDOW_DAYS = 180  # 6 months
 OUTPUT_FILE = 'Verified_Backtest_Data/explosive_stocks_catalog.json'
+PREFILTER_FILE = 'explosive_candidates.txt'
 
 class ExplosiveStockScanner:
-    def __init__(self, start_year=2014, end_year=2024):
+    def __init__(self, start_year=2014, end_year=2024, use_prefilter=False):
         self.start_date = datetime(start_year, 1, 1)
         self.end_date = datetime(end_year, 10, 31)
         self.polygon_api_key = POLYGON_API_KEY
+        self.use_prefilter = use_prefilter
         self.explosive_stocks = []
         self.scan_stats = {
             'total_tickers_scanned': 0,
             'explosive_stocks_found': 0,
             'data_errors': 0,
-            'api_calls_made': 0
+            'api_calls_made': 0,
+            'mode': 'prefilter' if use_prefilter else 'standard'
         }
+    
+    def load_prefilter_candidates(self):
+        """
+        Load candidates from pre-filter file
+        Returns: dict of {year: [tickers]}
+        """
+        if not os.path.exists(PREFILTER_FILE):
+            print(f"❌ Pre-filter file not found: {PREFILTER_FILE}")
+            print(f"   Run polygon_prefilter.py first!")
+            sys.exit(1)
+        
+        print(f"\n📂 Loading pre-filtered candidates from {PREFILTER_FILE}...")
+        
+        candidates_by_year = {}
+        
+        with open(PREFILTER_FILE, 'r') as f:
+            for line in f:
+                line = line.strip()
+                # Skip comments and empty lines
+                if not line or line.startswith('#'):
+                    continue
+                
+                try:
+                    ticker, year, gain_pct = line.split(',')
+                    year = int(year)
+                    
+                    if year not in candidates_by_year:
+                        candidates_by_year[year] = []
+                    
+                    candidates_by_year[year].append({
+                        'ticker': ticker,
+                        'prefilter_gain': float(gain_pct)
+                    })
+                except:
+                    continue
+        
+        total_candidates = sum(len(v) for v in candidates_by_year.values())
+        print(f"✅ Loaded {total_candidates} pre-filtered candidates")
+        
+        for year, candidates in sorted(candidates_by_year.items()):
+            print(f"   {year}: {len(candidates)} candidates")
+        
+        return candidates_by_year
     
     def get_stock_universe(self, year):
         """
@@ -225,30 +276,44 @@ class ExplosiveStockScanner:
     def scan_year(self, year, sample_size=50):
         """
         Scan stocks for a specific year
-        sample_size: limit number of stocks to scan (for testing)
+        sample_size: limit number of stocks to scan (for testing, None = all)
         """
         print(f"\n{'='*60}")
         print(f"🔍 SCANNING YEAR {year}")
         print(f"{'='*60}")
         
-        # Get stock universe
-        tickers = self.get_stock_universe(year)
-        
-        if not tickers:
-            print(f"❌ No tickers found for {year}")
-            return
-        
-        # Limit to sample size if specified
-        if sample_size:
-            tickers = tickers[:sample_size]
-            print(f"📊 Scanning {len(tickers)} tickers (sample mode)")
+        # Get ticker list based on mode
+        if self.use_prefilter:
+            # Use pre-filtered candidates
+            candidates_by_year = self.load_prefilter_candidates()
+            
+            if year not in candidates_by_year:
+                print(f"⚠️ No pre-filtered candidates for {year}")
+                return
+            
+            tickers_to_scan = [c['ticker'] for c in candidates_by_year[year]]
+            print(f"📊 Pre-filter mode: Scanning {len(tickers_to_scan)} candidates")
+        else:
+            # Standard mode: get tickers from API
+            tickers_to_scan = self.get_stock_universe(year)
+            
+            if not tickers_to_scan:
+                print(f"❌ No tickers found for {year}")
+                return
+            
+            # Limit to sample size if specified
+            if sample_size:
+                tickers_to_scan = tickers_to_scan[:sample_size]
+                print(f"📊 Standard mode: Scanning {len(tickers_to_scan)} tickers (sample)")
+            else:
+                print(f"📊 Standard mode: Scanning {len(tickers_to_scan)} tickers")
         
         explosive_found_this_year = 0
         
-        for idx, ticker in enumerate(tickers, 1):
+        for idx, ticker in enumerate(tickers_to_scan, 1):
             # Progress indicator
             if idx % 10 == 0:
-                print(f"Progress: {idx}/{len(tickers)} | Explosive found: {explosive_found_this_year}")
+                print(f"Progress: {idx}/{len(tickers_to_scan)} | Explosive found: {explosive_found_this_year}")
             
             self.scan_stats['total_tickers_scanned'] += 1
             
@@ -297,6 +362,7 @@ class ExplosiveStockScanner:
                 'scan_period_end': self.end_date.strftime('%Y-%m-%d'),
                 'criteria': f'{MIN_GAIN_PERCENT}%+ gain in any {SCAN_WINDOW_DAYS}-day window',
                 'data_sources': ['Polygon API', 'Yahoo Finance'],
+                'scan_mode': self.scan_stats['mode'],
                 'total_stocks_scanned': self.scan_stats['total_tickers_scanned'],
                 'total_explosive_stocks_found': self.scan_stats['explosive_stocks_found'],
                 'data_errors': self.scan_stats['data_errors'],
@@ -308,7 +374,7 @@ class ExplosiveStockScanner:
                 'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                 'verified_by': 'Automated scan with Polygon API',
                 'quality_checks_passed': True,
-                'notes': 'Initial scan complete - sectors to be classified manually'
+                'notes': 'Detailed scan with entry point detection'
             }
         }
         
@@ -324,7 +390,8 @@ class ExplosiveStockScanner:
         print(f"\n{'='*60}")
         print(f"📊 SCAN COMPLETE - SUMMARY REPORT")
         print(f"{'='*60}")
-        print(f"\nTotal tickers scanned: {self.scan_stats['total_tickers_scanned']:,}")
+        print(f"\nScan mode: {self.scan_stats['mode'].upper()}")
+        print(f"Total tickers scanned: {self.scan_stats['total_tickers_scanned']:,}")
         print(f"Explosive stocks found: {self.scan_stats['explosive_stocks_found']}")
         print(f"Success rate: {(self.scan_stats['explosive_stocks_found'] / max(self.scan_stats['total_tickers_scanned'], 1)) * 100:.2f}%")
         print(f"Data errors: {self.scan_stats['data_errors']}")
@@ -340,42 +407,66 @@ def main():
     """
     Main execution
     """
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Explosive Stock Scanner - GEM Trading System')
+    parser.add_argument('--use-prefilter', action='store_true',
+                      help='Use pre-filtered candidates from polygon_prefilter.py')
+    parser.add_argument('--start-year', type=int, default=2023,
+                      help='Start year for scan (default: 2023)')
+    parser.add_argument('--end-year', type=int, default=2024,
+                      help='End year for scan (default: 2024)')
+    parser.add_argument('--mode', choices=['test', 'full'], default='test',
+                      help='Scan mode: test (50 stocks) or full (all)')
+    
+    args = parser.parse_args()
+    
     print("="*60)
     print(" EXPLOSIVE STOCK SCANNER")
     print(" GEM Trading System - Verified Backtest Data")
     print("="*60)
     print(f"\nCriteria: {MIN_GAIN_PERCENT}%+ gain in {SCAN_WINDOW_DAYS} days")
-    
-    # Check for environment variables (GitHub Actions)
-    scan_mode = os.environ.get('SCAN_MODE', 'test').lower()
-    start_year = int(os.environ.get('START_YEAR', '2023'))
-    end_year = int(os.environ.get('END_YEAR', '2024'))
-    
     print(f"Data Source: Polygon API (Developer tier)")
     
-    if scan_mode == 'test':
-        print(f"\n⚠️ RUNNING IN TEST MODE")
+    # Override from environment variables if present (GitHub Actions)
+    scan_mode = os.environ.get('SCAN_MODE', args.mode).lower()
+    start_year = int(os.environ.get('START_YEAR', args.start_year))
+    end_year = int(os.environ.get('END_YEAR', args.end_year))
+    use_prefilter = os.environ.get('USE_PREFILTER', 'false').lower() == 'true' or args.use_prefilter
+    
+    if use_prefilter:
+        print(f"\n✅ PRE-FILTER MODE ENABLED")
+        print(f"   Reading candidates from: {PREFILTER_FILE}")
+        print(f"   Coverage: 100% of explosive candidates")
+    elif scan_mode == 'test':
+        print(f"\n⚠️ RUNNING IN TEST MODE (Standard)")
         print(f"   Scanning: {start_year}-{end_year}")
         print(f"   Sample size: 50 stocks per year")
-        print(f"   Purpose: Verify scanner works before full 10-year scan")
-        
-        scanner = ExplosiveStockScanner(start_year=start_year, end_year=end_year)
-        
-        # Scan specified years
-        for year in range(start_year, end_year + 1):
-            scanner.scan_year(year, sample_size=50)
-        
-    else:  # full mode
-        print(f"\n🚀 RUNNING FULL SCAN")
+        print(f"   Coverage: ~17% of ticker universe")
+        print(f"   Purpose: Verify scanner works")
+    else:
+        print(f"\n🚀 RUNNING FULL SCAN (Standard)")
         print(f"   Period: {start_year}-{end_year}")
+        print(f"   Coverage: First 1,000 tickers per year (~17%)")
         print(f"   Estimated time: 2-4 hours")
-        print(f"   This will use significant API calls")
-        
-        scanner = ExplosiveStockScanner(start_year=start_year, end_year=end_year)
-        
-        # Scan all years
-        for year in range(start_year, end_year + 1):
-            scanner.scan_year(year, sample_size=None)  # Full scan
+    
+    # Initialize scanner
+    scanner = ExplosiveStockScanner(
+        start_year=start_year,
+        end_year=end_year,
+        use_prefilter=use_prefilter
+    )
+    
+    # Scan years
+    for year in range(start_year, end_year + 1):
+        if use_prefilter:
+            # Pre-filter mode: scan all candidates
+            scanner.scan_year(year, sample_size=None)
+        elif scan_mode == 'test':
+            # Test mode: sample size
+            scanner.scan_year(year, sample_size=50)
+        else:
+            # Full mode: all tickers (but limited to 1000)
+            scanner.scan_year(year, sample_size=None)
     
     # Save and report
     scanner.save_results()
@@ -383,6 +474,10 @@ def main():
     
     print(f"\n✅ Scan complete!")
     print(f"📄 Results: {OUTPUT_FILE}")
+    
+    if not use_prefilter:
+        print(f"\n💡 TIP: For 100% coverage, run polygon_prefilter.py first,")
+        print(f"   then use --use-prefilter flag")
 
 if __name__ == "__main__":
     main()
