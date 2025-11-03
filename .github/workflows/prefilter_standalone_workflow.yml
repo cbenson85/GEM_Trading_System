@@ -78,14 +78,14 @@ jobs:
           if [ -f prefilter_stats.json ]; then
             echo ""
             echo "📈 SCAN STATISTICS:"
-            python -c "
-import json
-with open('prefilter_stats.json', 'r') as f:
-    stats = json.load(f)
-    print(f\"Tickers scanned: {stats['total_tickers_scanned']:,}\")
-    print(f\"Candidates found: {stats['candidates_found']:,}\")
-    print(f\"Hit rate: {(stats['candidates_found'] / max(stats['total_tickers_scanned'], 1) * 100):.2f}%\")
-    print(f\"API calls: {stats['api_calls_made']:,}\")
-    print(f\"Errors: {stats['errors']:,}\")
-"
+            python3 << 'EOF'
+          import json
+          with open('prefilter_stats.json', 'r') as f:
+              stats = json.load(f)
+              print(f"Tickers scanned: {stats['total_tickers_scanned']:,}")
+              print(f"Candidates found: {stats['candidates_found']:,}")
+              print(f"Hit rate: {(stats['candidates_found'] / max(stats['total_tickers_scanned'], 1) * 100):.2f}%")
+              print(f"API calls: {stats['api_calls_made']:,}")
+              print(f"Errors: {stats['errors']:,}")
+          EOF
           fi
