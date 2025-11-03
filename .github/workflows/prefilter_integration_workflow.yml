@@ -28,10 +28,10 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
       
@@ -49,7 +49,7 @@ jobs:
           python polygon_prefilter.py
       
       - name: Upload pre-filter results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: prefilter-results
           path: |
@@ -75,10 +75,10 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
       
@@ -88,7 +88,7 @@ jobs:
       
       - name: Download pre-filter results (if available)
         if: ${{ github.event.inputs.run_prefilter == 'true' }}
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: prefilter-results
       
@@ -112,7 +112,7 @@ jobs:
           fi
       
       - name: Upload scan results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: scan-results
           path: |
@@ -141,15 +141,15 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
       
       - name: Download scan results
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: scan-results
           path: Verified_Backtest_Data/
@@ -160,7 +160,7 @@ jobs:
           python filter_covid_era.py
       
       - name: Upload filtered results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: filtered-results
           path: |
