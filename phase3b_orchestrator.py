@@ -24,13 +24,13 @@ class Phase3BOrchestrator:
                 'name': 'Insider Transactions',
                 'script': 'insider_transactions_scraper.py',
                 'description': 'Form 4 insider buying clusters',
-                'estimated_time_mins': 60
+                'estimated_time_mins': 90
             },
             {
                 'name': 'News Volume',
                 'script': 'news_volume_counter.py',
                 'description': 'News article acceleration',
-                'estimated_time_mins': 60
+                'estimated_time_mins': 120
             }
         ]
         
