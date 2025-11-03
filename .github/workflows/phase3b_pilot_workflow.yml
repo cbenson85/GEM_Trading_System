@@ -1,0 +1,84 @@
+name: Phase 3B Pilot Analysis
+
+on:
+  workflow_dispatch:
+    inputs:
+      pilot_stocks:
+        description: 'Run pilot on default stocks (AENTW + ASNS)'
+        type: choice
+        options:
+          - 'yes'
+          - 'custom'
+        default: 'yes'
+  
+permissions:
+  contents: write
+
+jobs:
+  pilot_analysis:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        echo "Installing Python packages..."
+        pip install requests --break-system-packages
+        pip list | grep requests
+        
+    - name: Verify files exist
+      run: |
+        echo "Checking required files..."
+        ls -la polygon_data_collector.py
+        ls -la phase3b_pilot_analysis.py
+        ls -la Verified_Backtest_Data/phase3_sample_selection.json
+        ls -la Verified_Backtest_Data/explosive_stocks_CLEAN.json
+        echo "✅ All required files present"
+        
+    - name: Run Phase 3B Pilot Analysis
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "================================================"
+        echo "PHASE 3B PILOT ANALYSIS"
+        echo "================================================"
+        echo "Date: $(date)"
+        echo "Framework: 90-day pre-catalyst analysis"
+        echo "Default stocks: AENTW (2024) + ASNS (2024)"
+        echo "================================================"
+        echo ""
+        python phase3b_pilot_analysis.py
+        echo ""
+        echo "================================================"
+        echo "PILOT COMPLETE"
+        echo "================================================"
+        
+    - name: Show results
+      run: |
+        echo "Generated files:"
+        ls -lh Verified_Backtest_Data/phase3b_*.json 2>/dev/null || echo "No analysis files generated"
+        echo ""
+        if [ -f "Verified_Backtest_Data/phase3b_pilot_summary.json" ]; then
+          echo "Pilot Summary:"
+          cat Verified_Backtest_Data/phase3b_pilot_summary.json
+        fi
+        
+    - name: Commit and push results
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add Verified_Backtest_Data/phase3b_*.json
+        if git diff --staged --quiet; then
+          echo "No new files to commit"
+        else
+          git commit -m "Phase 3B Pilot: Analyzed AENTW + ASNS with 90-day framework"
+          git push
+          echo "✅ Results pushed to repository"
+        fi
