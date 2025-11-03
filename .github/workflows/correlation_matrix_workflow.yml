@@ -16,46 +16,71 @@ jobs:
       with:
         python-version: '3.11'
     
-    - name: Verify analysis files
+    - name: Check repository structure
       run: |
-        echo "Checking Phase 3B analysis files..."
-        ls Verified_Backtest_Data/phase3b_*_analysis.json | wc -l
+        echo "=== Repository Structure ==="
+        ls -la
+        echo ""
+        echo "=== Checking for Verified_Backtest_Data directory ==="
+        if [ -d "Verified_Backtest_Data" ]; then
+          echo "Directory exists"
+          echo "Contents:"
+          ls -la Verified_Backtest_Data/ || echo "Cannot list directory contents"
+          echo ""
+          echo "=== Checking for Phase 3B analysis files ==="
+          ls Verified_Backtest_Data/phase3b_*_analysis.json 2>/dev/null | wc -l || echo "0"
+        else
+          echo "ERROR: Verified_Backtest_Data directory does not exist"
+          echo "Creating directory..."
+          mkdir -p Verified_Backtest_Data
+        fi
     
     - name: Build correlation matrix
       run: |
+        echo "Running correlation matrix builder..."
         python build_72stock_correlation_matrix.py
+      continue-on-error: false
     
     - name: Verify output
       run: |
         if [ -f "Verified_Backtest_Data/phase3b_correlation_matrix_72STOCKS.json" ]; then
-          echo "SUCCESS: Correlation matrix generated"
+          echo "✓ SUCCESS: Correlation matrix generated"
           ls -lh Verified_Backtest_Data/phase3b_correlation_matrix_72STOCKS.json
         else
-          echo "ERROR: Matrix file not found"
+          echo "✗ ERROR: Matrix file not found"
+          echo "Checking if directory exists..."
+          ls -la Verified_Backtest_Data/ || echo "Directory doesn't exist"
           exit 1
         fi
     
     - name: Display results
+      if: success()
       run: |
         python -c "
 import json
 with open('Verified_Backtest_Data/phase3b_correlation_matrix_72STOCKS.json', 'r') as f:
     data = json.load(f)
-print('RESULTS:')
-print(f\"Stocks: {data['statistics']['total_stocks']}\")
+print('=' * 60)
+print('CORRELATION MATRIX RESULTS')
+print('=' * 60)
+print(f\"Stocks Analyzed: {data['statistics']['total_stocks']}\")
 print(f\"Volume Spikes: {data['pattern_frequencies']['volume_spikes']['frequency_pct']:.1f}%\")
 print(f\"RSI Oversold: {data['pattern_frequencies']['rsi_oversold']['frequency_pct']:.1f}%\")
+print('=' * 60)
         "
     
     - name: Commit results
+      if: success()
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         git add Verified_Backtest_Data/phase3b_correlation_matrix_72STOCKS.json
-        git diff --staged --quiet || git commit -m "Add 72-stock correlation matrix"
+        git diff --staged --quiet || git commit -m "Add 72-stock correlation matrix [automated]"
+      continue-on-error: true
     
     - name: Push changes
+      if: success()
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: main
+        branch: ${{ github.ref_name }}
