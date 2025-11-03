@@ -1,0 +1,255 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:39",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "ALGS",
+    "company_name": "ALGS",
+    "entry_date": "2024-10-08",
+    "peak_date": "2025-01-06",
+    "gain_percent": 539.34,
+    "days_to_peak": 61,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "ALGS",
+    "entry_date": "2024-10-08",
+    "days_analyzed": 63,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 7.5,
+      "high": 19.43,
+      "low": 7.5,
+      "price_range_pct": 159.06666666666666,
+      "dates": [
+        "2024-07-10",
+        "2024-07-11",
+        "2024-07-12",
+        "2024-07-15",
+        "2024-07-16",
+        "2024-07-17",
+        "2024-07-18",
+        "2024-07-19",
+        "2024-07-22",
+        "2024-07-23",
+        "2024-07-24",
+        "2024-07-25",
+        "2024-07-26",
+        "2024-07-29",
+        "2024-07-30",
+        "2024-07-31",
+        "2024-08-01",
+        "2024-08-02",
+        "2024-08-05",
+        "2024-08-06",
+        "2024-08-07",
+        "2024-08-08",
+        "2024-08-09",
+        "2024-08-12",
+        "2024-08-13",
+        "2024-08-14",
+        "2024-08-15",
+        "2024-08-16",
+        "2024-08-19",
+        "2024-08-20",
+        "2024-08-21",
+        "2024-08-22",
+        "2024-08-23",
+        "2024-08-26",
+        "2024-08-27",
+        "2024-08-28",
+        "2024-08-29",
+        "2024-08-30",
+        "2024-09-03",
+        "2024-09-04",
+        "2024-09-05",
+        "2024-09-06",
+        "2024-09-09",
+        "2024-09-10",
+        "2024-09-11",
+        "2024-09-12",
+        "2024-09-13",
+        "2024-09-16",
+        "2024-09-17",
+        "2024-09-18",
+        "2024-09-19",
+        "2024-09-20",
+        "2024-09-23",
+        "2024-09-24",
+        "2024-09-25",
+        "2024-09-26",
+        "2024-09-27",
+        "2024-09-30",
+        "2024-10-01",
+        "2024-10-02",
+        "2024-10-03",
+        "2024-10-04",
+        "2024-10-07"
+      ],
+      "closes": [
+        12.745,
+        12.785,
+        12.9975,
+        12.7475,
+        13.145,
+        12.8825,
+        12.325,
+        12.5925,
+        13.9875,
+        13.75,
+        13.475,
+        13.5,
+        13.4975,
+        13.25,
+        13,
+        13,
+        13.25,
+        12.125,
+        11.495,
+        11.175,
+        13.6275,
+        13.6275,
+        13.75,
+        13.55,
+        13.475,
+        12.325,
+        12.0025,
+        13.1275,
+        14.25,
+        14.48,
+        13.75,
+        13.84,
+        13.83,
+        13.36,
+        13.1,
+        13.05,
+        13.16,
+        12.68,
+        11.97,
+        11.74,
+        11.94,
+        12.51,
+        19.43,
+        13.79,
+        13.8,
+        14.03,
+        14.8,
+        14.22,
+        14.39,
+        14.16,
+        10.18,
+        9.14,
+        8.1,
+        8.15,
+        8.22,
+        8.02,
+        8.04,
+        8.66,
+        8.62,
+        8.59,
+        8.19,
+        8.16,
+        7.5
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 103319,
+      "entry_day_volume": 49359,
+      "entry_day_vs_avg": 0.48,
+      "volume_spikes_3x": 2,
+      "top_volume_spikes": [
+        {
+          "date": "2024-09-19",
+          "volume": 875500,
+          "ratio": 8.47,
+          "days_before_entry": 12
+        },
+        {
+          "date": "2024-09-09",
+          "volume": 489873,
+          "ratio": 4.74,
+          "days_before_entry": 20
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 9.04,
+        "30_day": 37.74,
+        "oversold": true
+      },
+      "moving_averages": {
+        "sma_20": 10.438,
+        "sma_50": 12.0926,
+        "sma_90": null,
+        "price_vs_sma20_pct": -28.15,
+        "price_vs_sma50_pct": -37.98
+      },
+      "macd": {
+        "macd_line": -1.4163,
+        "bullish": false,
+        "ema_12": 8.897,
+        "ema_26": 10.3133
+      },
+      "bollinger_bands": {
+        "middle": 10.438,
+        "upper": 16.0231,
+        "lower": 4.8529,
+        "bandwidth_pct": 107.02,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "ALGS",
+    "company_name": "ALGS",
+    "entry_date": "2024-10-08",
+    "search_window": {
+      "start": "2024-07-10",
+      "end": "2024-10-08",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"ALGS\" OR \"ALGS\" after:2024-07-10 before:2024-10-08",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"ALGS\" OR \"ALGS\" (catalyst OR announcement OR approval OR contract OR earnings) after:2024-07-10 before:2024-10-08",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"ALGS\" OR \"ALGS\" (insider OR \"Form 4\" OR \"insider buying\") after:2024-07-10 before:2024-10-08",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 63,
+    "patterns_found": 0,
+    "volume_spikes_detected": 2,
+    "rsi_oversold": true,
+    "gain_category": "moderate",
+    "speed_category": "medium",
+    "searches_generated": 3,
+    "key_signals": [
+      "RSI Oversold (<30)",
+      "2 Volume Spikes (3x+)"
+    ]
+  }
+}

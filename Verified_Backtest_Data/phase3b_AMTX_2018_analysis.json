@@ -1,0 +1,242 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:14",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "AMTX",
+    "company_name": "AMTX",
+    "entry_date": "2018-02-13",
+    "peak_date": "2018-03-16",
+    "gain_percent": 501.16,
+    "days_to_peak": 22,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "AMTX",
+    "entry_date": "2018-02-13",
+    "days_analyzed": 60,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 0.54,
+      "high": 0.79,
+      "low": 0.54,
+      "price_range_pct": 46.29629629629629,
+      "dates": [
+        "2017-11-15",
+        "2017-11-16",
+        "2017-11-17",
+        "2017-11-20",
+        "2017-11-21",
+        "2017-11-22",
+        "2017-11-24",
+        "2017-11-27",
+        "2017-11-28",
+        "2017-11-29",
+        "2017-11-30",
+        "2017-12-01",
+        "2017-12-04",
+        "2017-12-05",
+        "2017-12-06",
+        "2017-12-07",
+        "2017-12-08",
+        "2017-12-11",
+        "2017-12-12",
+        "2017-12-13",
+        "2017-12-14",
+        "2017-12-15",
+        "2017-12-18",
+        "2017-12-19",
+        "2017-12-20",
+        "2017-12-21",
+        "2017-12-22",
+        "2017-12-26",
+        "2017-12-27",
+        "2017-12-28",
+        "2017-12-29",
+        "2018-01-02",
+        "2018-01-03",
+        "2018-01-04",
+        "2018-01-05",
+        "2018-01-08",
+        "2018-01-09",
+        "2018-01-10",
+        "2018-01-11",
+        "2018-01-12",
+        "2018-01-16",
+        "2018-01-17",
+        "2018-01-18",
+        "2018-01-19",
+        "2018-01-22",
+        "2018-01-23",
+        "2018-01-24",
+        "2018-01-25",
+        "2018-01-26",
+        "2018-01-29",
+        "2018-01-30",
+        "2018-01-31",
+        "2018-02-01",
+        "2018-02-02",
+        "2018-02-05",
+        "2018-02-06",
+        "2018-02-07",
+        "2018-02-08",
+        "2018-02-09",
+        "2018-02-12"
+      ],
+      "closes": [
+        0.69,
+        0.67,
+        0.7,
+        0.7,
+        0.6984,
+        0.7101,
+        0.705,
+        0.7,
+        0.7002,
+        0.67,
+        0.66,
+        0.75,
+        0.685,
+        0.72,
+        0.6801,
+        0.6899,
+        0.7,
+        0.7075,
+        0.67,
+        0.7,
+        0.69,
+        0.68,
+        0.665,
+        0.6979,
+        0.665,
+        0.6152,
+        0.61,
+        0.59,
+        0.55,
+        0.55,
+        0.55,
+        0.58,
+        0.5655,
+        0.59,
+        0.6051,
+        0.6694,
+        0.68,
+        0.68,
+        0.79,
+        0.7797,
+        0.72,
+        0.7001,
+        0.705,
+        0.64,
+        0.6397,
+        0.62,
+        0.6197,
+        0.6299,
+        0.681,
+        0.71,
+        0.679,
+        0.6899,
+        0.6997,
+        0.66,
+        0.59,
+        0.59,
+        0.56,
+        0.5599,
+        0.5699,
+        0.54
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 40881,
+      "entry_day_volume": 25875,
+      "entry_day_vs_avg": 0.63,
+      "volume_spikes_3x": 1,
+      "top_volume_spikes": [
+        {
+          "date": "2017-12-29",
+          "volume": 182623,
+          "ratio": 4.47,
+          "days_before_entry": 29
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 37.58,
+        "30_day": 49.35,
+        "oversold": false
+      },
+      "moving_averages": {
+        "sma_20": 0.6402,
+        "sma_50": 0.6514,
+        "sma_90": null,
+        "price_vs_sma20_pct": -15.65,
+        "price_vs_sma50_pct": -17.1
+      },
+      "macd": {
+        "macd_line": -0.0265,
+        "bullish": false,
+        "ema_12": 0.6042,
+        "ema_26": 0.6307
+      },
+      "bollinger_bands": {
+        "middle": 0.6402,
+        "upper": 0.7519,
+        "lower": 0.5284,
+        "bandwidth_pct": 34.91,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "AMTX",
+    "company_name": "AMTX",
+    "entry_date": "2018-02-13",
+    "search_window": {
+      "start": "2017-11-15",
+      "end": "2018-02-13",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"AMTX\" OR \"AMTX\" after:2017-11-15 before:2018-02-13",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"AMTX\" OR \"AMTX\" (catalyst OR announcement OR approval OR contract OR earnings) after:2017-11-15 before:2018-02-13",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"AMTX\" OR \"AMTX\" (insider OR \"Form 4\" OR \"insider buying\") after:2017-11-15 before:2018-02-13",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 60,
+    "patterns_found": 0,
+    "volume_spikes_detected": 1,
+    "rsi_oversold": false,
+    "gain_category": "moderate",
+    "speed_category": "fast",
+    "searches_generated": 3,
+    "key_signals": [
+      "1 Volume Spikes (3x+)"
+    ]
+  }
+}

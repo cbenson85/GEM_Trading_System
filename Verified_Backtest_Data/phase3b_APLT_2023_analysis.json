@@ -1,0 +1,251 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:27",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "APLT",
+    "company_name": "APLT",
+    "entry_date": "2023-09-05",
+    "peak_date": "2024-02-28",
+    "gain_percent": 645.24,
+    "days_to_peak": 121,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "APLT",
+    "entry_date": "2023-09-05",
+    "days_analyzed": 61,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 1.31,
+      "high": 1.92,
+      "low": 1.28,
+      "price_range_pct": 49.999999999999986,
+      "dates": [
+        "2023-06-07",
+        "2023-06-08",
+        "2023-06-09",
+        "2023-06-12",
+        "2023-06-13",
+        "2023-06-14",
+        "2023-06-15",
+        "2023-06-16",
+        "2023-06-20",
+        "2023-06-21",
+        "2023-06-22",
+        "2023-06-23",
+        "2023-06-26",
+        "2023-06-27",
+        "2023-06-28",
+        "2023-06-29",
+        "2023-06-30",
+        "2023-07-03",
+        "2023-07-05",
+        "2023-07-06",
+        "2023-07-07",
+        "2023-07-10",
+        "2023-07-11",
+        "2023-07-12",
+        "2023-07-13",
+        "2023-07-14",
+        "2023-07-17",
+        "2023-07-18",
+        "2023-07-19",
+        "2023-07-20",
+        "2023-07-21",
+        "2023-07-24",
+        "2023-07-25",
+        "2023-07-26",
+        "2023-07-27",
+        "2023-07-28",
+        "2023-07-31",
+        "2023-08-01",
+        "2023-08-02",
+        "2023-08-03",
+        "2023-08-04",
+        "2023-08-07",
+        "2023-08-08",
+        "2023-08-09",
+        "2023-08-10",
+        "2023-08-11",
+        "2023-08-14",
+        "2023-08-15",
+        "2023-08-16",
+        "2023-08-17",
+        "2023-08-18",
+        "2023-08-21",
+        "2023-08-22",
+        "2023-08-23",
+        "2023-08-24",
+        "2023-08-25",
+        "2023-08-28",
+        "2023-08-29",
+        "2023-08-30",
+        "2023-08-31",
+        "2023-09-01"
+      ],
+      "closes": [
+        1.45,
+        1.47,
+        1.47,
+        1.41,
+        1.45,
+        1.43,
+        1.43,
+        1.51,
+        1.47,
+        1.41,
+        1.45,
+        1.42,
+        1.34,
+        1.29,
+        1.35,
+        1.31,
+        1.28,
+        1.28,
+        1.36,
+        1.29,
+        1.36,
+        1.39,
+        1.41,
+        1.41,
+        1.38,
+        1.38,
+        1.405,
+        1.36,
+        1.46,
+        1.37,
+        1.43,
+        1.41,
+        1.5,
+        1.52,
+        1.5,
+        1.49,
+        1.78,
+        1.71,
+        1.92,
+        1.81,
+        1.78,
+        1.62,
+        1.54,
+        1.56,
+        1.57,
+        1.51,
+        1.42,
+        1.34,
+        1.28,
+        1.4,
+        1.43,
+        1.36,
+        1.33,
+        1.46,
+        1.37,
+        1.39,
+        1.38,
+        1.42,
+        1.34,
+        1.33,
+        1.31
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 312969,
+      "entry_day_volume": 50741,
+      "entry_day_vs_avg": 0.16,
+      "volume_spikes_3x": 2,
+      "top_volume_spikes": [
+        {
+          "date": "2023-08-02",
+          "volume": 1926874.0,
+          "ratio": 6.16,
+          "days_before_entry": 22
+        },
+        {
+          "date": "2023-07-31",
+          "volume": 1381004.0,
+          "ratio": 4.41,
+          "days_before_entry": 24
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 43.04,
+        "30_day": 47.12,
+        "oversold": false
+      },
+      "moving_averages": {
+        "sma_20": 1.418,
+        "sma_50": 1.4411,
+        "sma_90": null,
+        "price_vs_sma20_pct": -7.62,
+        "price_vs_sma50_pct": -9.1
+      },
+      "macd": {
+        "macd_line": -0.0441,
+        "bullish": false,
+        "ema_12": 1.3805,
+        "ema_26": 1.4246
+      },
+      "bollinger_bands": {
+        "middle": 1.418,
+        "upper": 1.6056,
+        "lower": 1.2304,
+        "bandwidth_pct": 26.46,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": true,
+      "count": 1
+    }
+  },
+  "catalyst_research": {
+    "ticker": "APLT",
+    "company_name": "APLT",
+    "entry_date": "2023-09-05",
+    "search_window": {
+      "start": "2023-06-07",
+      "end": "2023-09-05",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"APLT\" OR \"APLT\" after:2023-06-07 before:2023-09-05",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"APLT\" OR \"APLT\" (catalyst OR announcement OR approval OR contract OR earnings) after:2023-06-07 before:2023-09-05",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"APLT\" OR \"APLT\" (insider OR \"Form 4\" OR \"insider buying\") after:2023-06-07 before:2023-09-05",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 61,
+    "patterns_found": 1,
+    "volume_spikes_detected": 2,
+    "rsi_oversold": false,
+    "gain_category": "moderate",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "2 Volume Spikes (3x+)",
+      "1 Patterns Detected"
+    ]
+  }
+}

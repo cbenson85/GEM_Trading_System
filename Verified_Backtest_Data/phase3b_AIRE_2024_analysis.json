@@ -1,0 +1,247 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:37",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "AIRE",
+    "company_name": "AIRE",
+    "entry_date": "2024-04-22",
+    "peak_date": "2024-12-26",
+    "gain_percent": 646.59,
+    "days_to_peak": 172,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "AIRE",
+    "entry_date": "2024-04-22",
+    "days_analyzed": 62,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 0.705,
+      "high": 1.96,
+      "low": 0.705,
+      "price_range_pct": 178.01418439716312,
+      "dates": [
+        "2024-01-23",
+        "2024-01-24",
+        "2024-01-25",
+        "2024-01-26",
+        "2024-01-29",
+        "2024-01-30",
+        "2024-01-31",
+        "2024-02-01",
+        "2024-02-02",
+        "2024-02-05",
+        "2024-02-06",
+        "2024-02-07",
+        "2024-02-08",
+        "2024-02-09",
+        "2024-02-12",
+        "2024-02-13",
+        "2024-02-14",
+        "2024-02-15",
+        "2024-02-16",
+        "2024-02-20",
+        "2024-02-21",
+        "2024-02-22",
+        "2024-02-23",
+        "2024-02-26",
+        "2024-02-27",
+        "2024-02-28",
+        "2024-02-29",
+        "2024-03-01",
+        "2024-03-04",
+        "2024-03-05",
+        "2024-03-06",
+        "2024-03-07",
+        "2024-03-08",
+        "2024-03-11",
+        "2024-03-12",
+        "2024-03-13",
+        "2024-03-14",
+        "2024-03-15",
+        "2024-03-18",
+        "2024-03-19",
+        "2024-03-20",
+        "2024-03-21",
+        "2024-03-22",
+        "2024-03-25",
+        "2024-03-26",
+        "2024-03-27",
+        "2024-03-28",
+        "2024-04-01",
+        "2024-04-02",
+        "2024-04-03",
+        "2024-04-04",
+        "2024-04-05",
+        "2024-04-08",
+        "2024-04-09",
+        "2024-04-10",
+        "2024-04-11",
+        "2024-04-12",
+        "2024-04-15",
+        "2024-04-16",
+        "2024-04-17",
+        "2024-04-18",
+        "2024-04-19"
+      ],
+      "closes": [
+        1.25,
+        1.46,
+        1.39,
+        1.33,
+        1.36,
+        1.26,
+        1.28,
+        1.23,
+        1.26,
+        1.16,
+        1.18,
+        1.24,
+        1.37,
+        1.34,
+        1.27,
+        1.26,
+        1.32,
+        1.3,
+        1.38,
+        1.3,
+        1.31,
+        1.25,
+        1.5,
+        1.96,
+        1.9,
+        1.72,
+        1.7,
+        1.5,
+        1.21,
+        1.24,
+        1.26,
+        1.25,
+        1.69,
+        1.79,
+        1.6,
+        1.34,
+        1.36,
+        1.38,
+        1.37,
+        1.3,
+        1.3,
+        1.25,
+        1.24,
+        1.235,
+        1.19,
+        1.16,
+        1.22,
+        1.18,
+        1.16,
+        1.14,
+        1.13,
+        1.135,
+        1.21,
+        1.17,
+        1.15,
+        1.21,
+        1.07,
+        0.852,
+        0.7513,
+        0.7316,
+        0.7148,
+        0.705
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 1393254,
+      "entry_day_volume": 185625,
+      "entry_day_vs_avg": 0.13,
+      "volume_spikes_3x": 1,
+      "top_volume_spikes": [
+        {
+          "date": "2024-03-08",
+          "volume": 29635155.0,
+          "ratio": 21.27,
+          "days_before_entry": 29
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 18.54,
+        "30_day": 37.05,
+        "oversold": true
+      },
+      "moving_averages": {
+        "sma_20": 1.0677,
+        "sma_50": 1.2815,
+        "sma_90": null,
+        "price_vs_sma20_pct": -33.97,
+        "price_vs_sma50_pct": -44.99
+      },
+      "macd": {
+        "macd_line": -0.1491,
+        "bullish": false,
+        "ema_12": 0.9292,
+        "ema_26": 1.0783
+      },
+      "bollinger_bands": {
+        "middle": 1.0677,
+        "upper": 1.4452,
+        "lower": 0.6902,
+        "bandwidth_pct": 70.71,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "AIRE",
+    "company_name": "AIRE",
+    "entry_date": "2024-04-22",
+    "search_window": {
+      "start": "2024-01-23",
+      "end": "2024-04-22",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"AIRE\" OR \"AIRE\" after:2024-01-23 before:2024-04-22",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"AIRE\" OR \"AIRE\" (catalyst OR announcement OR approval OR contract OR earnings) after:2024-01-23 before:2024-04-22",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"AIRE\" OR \"AIRE\" (insider OR \"Form 4\" OR \"insider buying\") after:2024-01-23 before:2024-04-22",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 62,
+    "patterns_found": 0,
+    "volume_spikes_detected": 1,
+    "rsi_oversold": true,
+    "gain_category": "moderate",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "RSI Oversold (<30)",
+      "1 Volume Spikes (3x+)"
+    ]
+  }
+}

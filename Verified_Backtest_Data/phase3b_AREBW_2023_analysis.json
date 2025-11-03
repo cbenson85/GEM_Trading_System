@@ -1,0 +1,216 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:29",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "AREBW",
+    "company_name": "AREBW",
+    "entry_date": "2022-12-28",
+    "peak_date": "2023-09-07",
+    "gain_percent": 1191.0,
+    "days_to_peak": 133,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "AREBW",
+    "entry_date": "2022-12-28",
+    "days_analyzed": 44,
+    "data_quality": "acceptable",
+    "price_data": {
+      "entry_price": 0.0175,
+      "high": 0.099,
+      "low": 0.0175,
+      "price_range_pct": 465.71428571428567,
+      "dates": [
+        "2022-09-30",
+        "2022-10-05",
+        "2022-10-06",
+        "2022-10-07",
+        "2022-10-10",
+        "2022-10-12",
+        "2022-10-17",
+        "2022-10-18",
+        "2022-10-19",
+        "2022-10-20",
+        "2022-10-21",
+        "2022-10-24",
+        "2022-10-25",
+        "2022-10-26",
+        "2022-10-28",
+        "2022-11-02",
+        "2022-11-03",
+        "2022-11-04",
+        "2022-11-07",
+        "2022-11-08",
+        "2022-11-11",
+        "2022-11-14",
+        "2022-11-15",
+        "2022-11-16",
+        "2022-11-17",
+        "2022-11-23",
+        "2022-11-28",
+        "2022-11-29",
+        "2022-11-30",
+        "2022-12-01",
+        "2022-12-05",
+        "2022-12-06",
+        "2022-12-07",
+        "2022-12-08",
+        "2022-12-09",
+        "2022-12-12",
+        "2022-12-13",
+        "2022-12-14",
+        "2022-12-15",
+        "2022-12-16",
+        "2022-12-21",
+        "2022-12-22",
+        "2022-12-23",
+        "2022-12-27"
+      ],
+      "closes": [
+        0.06,
+        0.089,
+        0.099,
+        0.095,
+        0.098,
+        0.0601,
+        0.0645,
+        0.048926,
+        0.0489,
+        0.05,
+        0.0523,
+        0.0646,
+        0.06,
+        0.0619,
+        0.062,
+        0.0619,
+        0.065,
+        0.065,
+        0.0856,
+        0.0824,
+        0.0523,
+        0.0523,
+        0.051101,
+        0.051201,
+        0.0726,
+        0.05,
+        0.05,
+        0.0489,
+        0.0455,
+        0.0351,
+        0.05,
+        0.069899,
+        0.0501,
+        0.04,
+        0.04,
+        0.03,
+        0.0356,
+        0.06,
+        0.059,
+        0.029,
+        0.018,
+        0.0577,
+        0.0299,
+        0.0175
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 8985,
+      "entry_day_volume": 10712,
+      "entry_day_vs_avg": 1.19,
+      "volume_spikes_3x": 2,
+      "top_volume_spikes": [
+        {
+          "date": "2022-12-23",
+          "volume": 77141,
+          "ratio": 8.58,
+          "days_before_entry": 1
+        },
+        {
+          "date": "2022-12-08",
+          "volume": 43694,
+          "ratio": 4.86,
+          "days_before_entry": 10
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 46.12,
+        "30_day": 43.55,
+        "oversold": false
+      },
+      "moving_averages": {
+        "sma_20": 0.0444,
+        "sma_50": null,
+        "sma_90": null,
+        "price_vs_sma20_pct": -60.62,
+        "price_vs_sma50_pct": null
+      },
+      "macd": {
+        "macd_line": -0.0081,
+        "bullish": false,
+        "ema_12": 0.0383,
+        "ema_26": 0.0464
+      },
+      "bollinger_bands": {
+        "middle": 0.0444,
+        "upper": 0.0745,
+        "lower": 0.0144,
+        "bandwidth_pct": 135.09,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "AREBW",
+    "company_name": "AREBW",
+    "entry_date": "2022-12-28",
+    "search_window": {
+      "start": "2022-09-29",
+      "end": "2022-12-28",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"AREBW\" OR \"AREBW\" after:2022-09-29 before:2022-12-28",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"AREBW\" OR \"AREBW\" (catalyst OR announcement OR approval OR contract OR earnings) after:2022-09-29 before:2022-12-28",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"AREBW\" OR \"AREBW\" (insider OR \"Form 4\" OR \"insider buying\") after:2022-09-29 before:2022-12-28",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "acceptable",
+    "days_analyzed": 44,
+    "patterns_found": 0,
+    "volume_spikes_detected": 2,
+    "rsi_oversold": false,
+    "gain_category": "high",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "2 Volume Spikes (3x+)"
+    ]
+  }
+}

@@ -1,0 +1,185 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:37",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "AISP",
+    "company_name": "AISP",
+    "entry_date": "2024-02-08",
+    "peak_date": "2024-03-19",
+    "gain_percent": 922.77,
+    "days_to_peak": 27,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "AISP",
+    "entry_date": "2024-02-08",
+    "days_analyzed": 31,
+    "data_quality": "partial",
+    "price_data": {
+      "entry_price": 1.4621,
+      "high": 4.25,
+      "low": 1.45,
+      "price_range_pct": 193.10344827586206,
+      "dates": [
+        "2023-12-22",
+        "2023-12-26",
+        "2023-12-27",
+        "2023-12-28",
+        "2023-12-29",
+        "2024-01-02",
+        "2024-01-03",
+        "2024-01-04",
+        "2024-01-05",
+        "2024-01-08",
+        "2024-01-09",
+        "2024-01-10",
+        "2024-01-11",
+        "2024-01-12",
+        "2024-01-16",
+        "2024-01-17",
+        "2024-01-18",
+        "2024-01-19",
+        "2024-01-22",
+        "2024-01-23",
+        "2024-01-24",
+        "2024-01-25",
+        "2024-01-26",
+        "2024-01-29",
+        "2024-01-30",
+        "2024-01-31",
+        "2024-02-01",
+        "2024-02-02",
+        "2024-02-05",
+        "2024-02-06",
+        "2024-02-07"
+      ],
+      "closes": [
+        4.25,
+        3.48,
+        2.58,
+        1.94,
+        1.7,
+        1.6,
+        2.22,
+        2.11,
+        1.89,
+        1.81,
+        1.65,
+        1.6,
+        1.55,
+        1.73,
+        1.62,
+        1.54,
+        1.45,
+        1.5,
+        1.58,
+        1.53,
+        1.58,
+        1.5399,
+        1.52,
+        1.5,
+        1.58,
+        1.51,
+        1.53,
+        1.5,
+        1.45,
+        1.47,
+        1.4621
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 990115,
+      "entry_day_volume": 100139,
+      "entry_day_vs_avg": 0.1,
+      "volume_spikes_3x": 1,
+      "top_volume_spikes": [
+        {
+          "date": "2024-01-03",
+          "volume": 18414963.0,
+          "ratio": 18.6,
+          "days_before_entry": 24
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 51.03,
+        "30_day": 22.05,
+        "oversold": false
+      },
+      "moving_averages": {
+        "sma_20": 1.5371,
+        "sma_50": null,
+        "sma_90": null,
+        "price_vs_sma20_pct": -4.88,
+        "price_vs_sma50_pct": null
+      },
+      "macd": {
+        "macd_line": -0.2104,
+        "bullish": false,
+        "ema_12": 1.5335,
+        "ema_26": 1.7438
+      },
+      "bollinger_bands": {
+        "middle": 1.5371,
+        "upper": 1.6669,
+        "lower": 1.4073,
+        "bandwidth_pct": 16.89,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": true,
+      "price_consolidation": true,
+      "count": 2
+    }
+  },
+  "catalyst_research": {
+    "ticker": "AISP",
+    "company_name": "AISP",
+    "entry_date": "2024-02-08",
+    "search_window": {
+      "start": "2023-11-10",
+      "end": "2024-02-08",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"AISP\" OR \"AISP\" after:2023-11-10 before:2024-02-08",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"AISP\" OR \"AISP\" (catalyst OR announcement OR approval OR contract OR earnings) after:2023-11-10 before:2024-02-08",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"AISP\" OR \"AISP\" (insider OR \"Form 4\" OR \"insider buying\") after:2023-11-10 before:2024-02-08",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "partial",
+    "days_analyzed": 31,
+    "patterns_found": 2,
+    "volume_spikes_detected": 1,
+    "rsi_oversold": false,
+    "gain_category": "moderate",
+    "speed_category": "fast",
+    "searches_generated": 3,
+    "key_signals": [
+      "1 Volume Spikes (3x+)",
+      "2 Patterns Detected"
+    ]
+  }
+}

@@ -1,0 +1,246 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:18",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "ARCT",
+    "company_name": "ARCT",
+    "entry_date": "2019-10-02",
+    "peak_date": "2020-05-19",
+    "gain_percent": 565.64,
+    "days_to_peak": 158,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "ARCT",
+    "entry_date": "2019-10-02",
+    "days_analyzed": 62,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 9.5,
+      "high": 14.5,
+      "low": 8.8,
+      "price_range_pct": 64.77272727272727,
+      "dates": [
+        "2019-07-05",
+        "2019-07-08",
+        "2019-07-09",
+        "2019-07-10",
+        "2019-07-11",
+        "2019-07-12",
+        "2019-07-15",
+        "2019-07-16",
+        "2019-07-17",
+        "2019-07-18",
+        "2019-07-19",
+        "2019-07-22",
+        "2019-07-23",
+        "2019-07-24",
+        "2019-07-25",
+        "2019-07-26",
+        "2019-07-29",
+        "2019-07-30",
+        "2019-07-31",
+        "2019-08-01",
+        "2019-08-02",
+        "2019-08-05",
+        "2019-08-06",
+        "2019-08-07",
+        "2019-08-08",
+        "2019-08-09",
+        "2019-08-12",
+        "2019-08-13",
+        "2019-08-14",
+        "2019-08-15",
+        "2019-08-16",
+        "2019-08-19",
+        "2019-08-20",
+        "2019-08-21",
+        "2019-08-22",
+        "2019-08-23",
+        "2019-08-26",
+        "2019-08-27",
+        "2019-08-28",
+        "2019-08-29",
+        "2019-08-30",
+        "2019-09-03",
+        "2019-09-04",
+        "2019-09-05",
+        "2019-09-06",
+        "2019-09-09",
+        "2019-09-10",
+        "2019-09-11",
+        "2019-09-12",
+        "2019-09-13",
+        "2019-09-16",
+        "2019-09-17",
+        "2019-09-18",
+        "2019-09-19",
+        "2019-09-20",
+        "2019-09-23",
+        "2019-09-24",
+        "2019-09-25",
+        "2019-09-26",
+        "2019-09-27",
+        "2019-09-30",
+        "2019-10-01"
+      ],
+      "closes": [
+        9.54,
+        9.27,
+        8.93,
+        9.59,
+        8.99,
+        9.05,
+        8.935,
+        9.16,
+        9.1,
+        9.49,
+        10.77,
+        11.62,
+        11.49,
+        11.8,
+        11.35,
+        11.56,
+        12.47,
+        14.03,
+        13.61,
+        11.58,
+        11.28,
+        10.97,
+        10.54,
+        10.16,
+        10.085,
+        10.46,
+        9.96,
+        10.03,
+        9.1,
+        8.8,
+        10.56,
+        11.07,
+        10.57,
+        10.31,
+        10.9,
+        10.9,
+        10.86,
+        10.92,
+        11.17,
+        11.16,
+        11.23,
+        11.39,
+        11.12,
+        10.98,
+        10.63,
+        10.3,
+        10.98,
+        11.24,
+        10.62,
+        10.61,
+        10.82,
+        10.92,
+        11.66,
+        12.3,
+        13.22,
+        14.5,
+        13.48,
+        12.94,
+        11.67,
+        10.42,
+        10.27,
+        9.5
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 105429,
+      "entry_day_volume": 128202,
+      "entry_day_vs_avg": 1.22,
+      "volume_spikes_3x": 1,
+      "top_volume_spikes": [
+        {
+          "date": "2019-09-20",
+          "volume": 513665,
+          "ratio": 4.87,
+          "days_before_entry": 7
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 40.86,
+        "30_day": 44.18,
+        "oversold": false
+      },
+      "moving_averages": {
+        "sma_20": 11.409,
+        "sma_50": 11.1699,
+        "sma_90": null,
+        "price_vs_sma20_pct": -16.73,
+        "price_vs_sma50_pct": -14.95
+      },
+      "macd": {
+        "macd_line": 0.0394,
+        "bullish": true,
+        "ema_12": 11.3394,
+        "ema_26": 11.3001
+      },
+      "bollinger_bands": {
+        "middle": 11.409,
+        "upper": 13.8778,
+        "lower": 8.9402,
+        "bandwidth_pct": 43.28,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "ARCT",
+    "company_name": "ARCT",
+    "entry_date": "2019-10-02",
+    "search_window": {
+      "start": "2019-07-04",
+      "end": "2019-10-02",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"ARCT\" OR \"ARCT\" after:2019-07-04 before:2019-10-02",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"ARCT\" OR \"ARCT\" (catalyst OR announcement OR approval OR contract OR earnings) after:2019-07-04 before:2019-10-02",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"ARCT\" OR \"ARCT\" (insider OR \"Form 4\" OR \"insider buying\") after:2019-07-04 before:2019-10-02",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 62,
+    "patterns_found": 0,
+    "volume_spikes_detected": 1,
+    "rsi_oversold": false,
+    "gain_category": "moderate",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "1 Volume Spikes (3x+)"
+    ]
+  }
+}

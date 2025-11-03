@@ -1,0 +1,247 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:23",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "ADCT",
+    "company_name": "ADCT",
+    "entry_date": "2023-09-22",
+    "peak_date": "2024-02-20",
+    "gain_percent": 739.01,
+    "days_to_peak": 102,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "ADCT",
+    "entry_date": "2023-09-22",
+    "days_analyzed": 62,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 0.729,
+      "high": 2.37,
+      "low": 0.729,
+      "price_range_pct": 225.10288065843622,
+      "dates": [
+        "2023-06-26",
+        "2023-06-27",
+        "2023-06-28",
+        "2023-06-29",
+        "2023-06-30",
+        "2023-07-03",
+        "2023-07-05",
+        "2023-07-06",
+        "2023-07-07",
+        "2023-07-10",
+        "2023-07-11",
+        "2023-07-12",
+        "2023-07-13",
+        "2023-07-14",
+        "2023-07-17",
+        "2023-07-18",
+        "2023-07-19",
+        "2023-07-20",
+        "2023-07-21",
+        "2023-07-24",
+        "2023-07-25",
+        "2023-07-26",
+        "2023-07-27",
+        "2023-07-28",
+        "2023-07-31",
+        "2023-08-01",
+        "2023-08-02",
+        "2023-08-03",
+        "2023-08-04",
+        "2023-08-07",
+        "2023-08-08",
+        "2023-08-09",
+        "2023-08-10",
+        "2023-08-11",
+        "2023-08-14",
+        "2023-08-15",
+        "2023-08-16",
+        "2023-08-17",
+        "2023-08-18",
+        "2023-08-21",
+        "2023-08-22",
+        "2023-08-23",
+        "2023-08-24",
+        "2023-08-25",
+        "2023-08-28",
+        "2023-08-29",
+        "2023-08-30",
+        "2023-08-31",
+        "2023-09-01",
+        "2023-09-05",
+        "2023-09-06",
+        "2023-09-07",
+        "2023-09-08",
+        "2023-09-11",
+        "2023-09-12",
+        "2023-09-13",
+        "2023-09-14",
+        "2023-09-15",
+        "2023-09-18",
+        "2023-09-19",
+        "2023-09-20",
+        "2023-09-21"
+      ],
+      "closes": [
+        2,
+        2.01,
+        2.03,
+        2.16,
+        2.15,
+        2.15,
+        2.14,
+        2.11,
+        2.25,
+        2.37,
+        1.85,
+        1.51,
+        1.55,
+        1.51,
+        1.57,
+        1.5,
+        1.5,
+        1.5,
+        1.42,
+        1.31,
+        1.29,
+        1.26,
+        1.24,
+        1.28,
+        1.48,
+        1.51,
+        1.49,
+        1.49,
+        1.47,
+        1.43,
+        1.6,
+        1.5,
+        1.61,
+        1.66,
+        1.58,
+        1.6,
+        1.45,
+        1.39,
+        1.37,
+        1.37,
+        1.33,
+        1.35,
+        1.38,
+        1.29,
+        1.25,
+        1.17,
+        1.2,
+        1.2,
+        1.22,
+        1.13,
+        1.08,
+        1.09,
+        1.07,
+        1.04,
+        0.955,
+        0.9247,
+        0.873,
+        0.82,
+        0.7755,
+        0.8,
+        0.768,
+        0.729
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 280593,
+      "entry_day_volume": 250644,
+      "entry_day_vs_avg": 0.89,
+      "volume_spikes_3x": 1,
+      "top_volume_spikes": [
+        {
+          "date": "2023-09-13",
+          "volume": 846142,
+          "ratio": 3.02,
+          "days_before_entry": 6
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 9.4,
+        "30_day": 22.46,
+        "oversold": true
+      },
+      "moving_averages": {
+        "sma_20": 1.0383,
+        "sma_50": 1.2875,
+        "sma_90": null,
+        "price_vs_sma20_pct": -29.79,
+        "price_vs_sma50_pct": -43.38
+      },
+      "macd": {
+        "macd_line": -0.1804,
+        "bullish": false,
+        "ema_12": 0.9007,
+        "ema_26": 1.0811
+      },
+      "bollinger_bands": {
+        "middle": 1.0383,
+        "upper": 1.4206,
+        "lower": 0.6559,
+        "bandwidth_pct": 73.64,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "ADCT",
+    "company_name": "ADCT",
+    "entry_date": "2023-09-22",
+    "search_window": {
+      "start": "2023-06-24",
+      "end": "2023-09-22",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"ADCT\" OR \"ADCT\" after:2023-06-24 before:2023-09-22",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"ADCT\" OR \"ADCT\" (catalyst OR announcement OR approval OR contract OR earnings) after:2023-06-24 before:2023-09-22",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"ADCT\" OR \"ADCT\" (insider OR \"Form 4\" OR \"insider buying\") after:2023-06-24 before:2023-09-22",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 62,
+    "patterns_found": 0,
+    "volume_spikes_detected": 1,
+    "rsi_oversold": true,
+    "gain_category": "moderate",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "RSI Oversold (<30)",
+      "1 Volume Spikes (3x+)"
+    ]
+  }
+}

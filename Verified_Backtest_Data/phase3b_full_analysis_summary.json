@@ -1,10 +1,507 @@
 {
   "metadata": {
     "phase": "3B_FULL",
-    "stocks_analyzed": 8,
+    "stocks_analyzed": 72,
     "framework": "90-day pre-catalyst window"
   },
   "stocks": [
+    {
+      "ticker": "AG",
+      "status": "success",
+      "file": "phase3b_AG_2016_analysis.json",
+      "summary": {
+        "data_quality": "acceptable",
+        "days_analyzed": 48,
+        "patterns_found": 0,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": true,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)"
+        ]
+      }
+    },
+    {
+      "ticker": "AGMH",
+      "status": "success",
+      "file": "phase3b_AGMH_2018_analysis.json",
+      "summary": {
+        "data_quality": "unknown",
+        "days_analyzed": 0,
+        "patterns_found": 0,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": []
+      }
+    },
+    {
+      "ticker": "AMRN",
+      "status": "success",
+      "file": "phase3b_AMRN_2018_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 2,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "medium",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "AMTX",
+      "status": "success",
+      "file": "phase3b_AMTX_2018_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 60,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "fast",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "AIM",
+      "status": "success",
+      "file": "phase3b_AIM_2019_analysis.json",
+      "summary": {
+        "data_quality": "partial",
+        "days_analyzed": 23,
+        "patterns_found": 0,
+        "volume_spikes_detected": 3,
+        "rsi_oversold": false,
+        "gain_category": "high",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "3 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "APLT",
+      "status": "success",
+      "file": "phase3b_APLT_2019_analysis.json",
+      "summary": {
+        "data_quality": "partial",
+        "days_analyzed": 37,
+        "patterns_found": 1,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Volume Spikes (3x+)",
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "APT",
+      "status": "success",
+      "file": "phase3b_APT_2019_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 2,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "high",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)",
+          "2 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "ARCT",
+      "status": "success",
+      "file": "phase3b_ARCT_2019_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "ATOS",
+      "status": "success",
+      "file": "phase3b_ATOS_2019_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 61,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": true,
+        "gain_category": "moderate",
+        "speed_category": "medium",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "AIMD",
+      "status": "success",
+      "file": "phase3b_AIMD_2022_analysis.json",
+      "summary": {
+        "data_quality": "acceptable",
+        "days_analyzed": 49,
+        "patterns_found": 0,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": false,
+        "gain_category": "high",
+        "speed_category": "fast",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "APLD",
+      "status": "success",
+      "file": "phase3b_APLD_2022_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 63,
+        "patterns_found": 1,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": true,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "AVDL",
+      "status": "success",
+      "file": "phase3b_AVDL_2022_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 63,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "ACXP",
+      "status": "success",
+      "file": "phase3b_ACXP_2023_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 63,
+        "patterns_found": 1,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "ultra_fast",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)",
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "ADCT",
+      "status": "success",
+      "file": "phase3b_ADCT_2023_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": true,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "AHG",
+      "status": "success",
+      "file": "phase3b_AHG_2023_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 61,
+        "patterns_found": 1,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": true,
+        "gain_category": "high",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "2 Volume Spikes (3x+)",
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "AKA",
+      "status": "success",
+      "file": "phase3b_AKA_2023_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 63,
+        "patterns_found": 1,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Volume Spikes (3x+)",
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "ALT",
+      "status": "success",
+      "file": "phase3b_ALT_2023_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 61,
+        "patterns_found": 0,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": true,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)"
+        ]
+      }
+    },
+    {
+      "ticker": "ALVOW",
+      "status": "success",
+      "file": "phase3b_ALVOW_2023_analysis.json",
+      "summary": {
+        "data_quality": "acceptable",
+        "days_analyzed": 55,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "APLD",
+      "status": "success",
+      "file": "phase3b_APLD_2023_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 63,
+        "patterns_found": 1,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": true,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "1 Volume Spikes (3x+)",
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "APLT",
+      "status": "success",
+      "file": "phase3b_APLT_2023_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 61,
+        "patterns_found": 1,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Volume Spikes (3x+)",
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "APM",
+      "status": "success",
+      "file": "phase3b_APM_2023_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 61,
+        "patterns_found": 2,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)",
+          "2 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "AREBW",
+      "status": "success",
+      "file": "phase3b_AREBW_2023_analysis.json",
+      "summary": {
+        "data_quality": "acceptable",
+        "days_analyzed": 44,
+        "patterns_found": 0,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": false,
+        "gain_category": "high",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "ATLX",
+      "status": "success",
+      "file": "phase3b_ATLX_2023_analysis.json",
+      "summary": {
+        "data_quality": "acceptable",
+        "days_analyzed": 47,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "medium",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "BBAI",
+      "status": "success",
+      "file": "phase3b_BBAI_2023_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": true,
+        "gain_category": "moderate",
+        "speed_category": "fast",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "ABVEW",
+      "status": "success",
+      "file": "phase3b_ABVEW_2024_analysis.json",
+      "summary": {
+        "data_quality": "acceptable",
+        "days_analyzed": 55,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "ACONW",
+      "status": "success",
+      "file": "phase3b_ACONW_2024_analysis.json",
+      "summary": {
+        "data_quality": "acceptable",
+        "days_analyzed": 43,
+        "patterns_found": 1,
+        "volume_spikes_detected": 3,
+        "rsi_oversold": false,
+        "gain_category": "high",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "3 Volume Spikes (3x+)",
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "AENT",
+      "status": "success",
+      "file": "phase3b_AENT_2024_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 0,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": []
+      }
+    },
     {
       "ticker": "AENTW",
       "status": "success",
@@ -20,6 +517,338 @@
         "searches_generated": 3,
         "key_signals": [
           "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "AEYE",
+      "status": "success",
+      "file": "phase3b_AEYE_2024_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 1,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "AIM",
+      "status": "success",
+      "file": "phase3b_AIM_2024_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 61,
+        "patterns_found": 1,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "very_high",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)",
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "AIMDW",
+      "status": "success",
+      "file": "phase3b_AIMDW_2024_analysis.json",
+      "summary": {
+        "data_quality": "partial",
+        "days_analyzed": 28,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "fast",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "AIRE",
+      "status": "success",
+      "file": "phase3b_AIRE_2024_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": true,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "AISP",
+      "status": "success",
+      "file": "phase3b_AISP_2024_analysis.json",
+      "summary": {
+        "data_quality": "partial",
+        "days_analyzed": 31,
+        "patterns_found": 2,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "fast",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)",
+          "2 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "AISPW",
+      "status": "success",
+      "file": "phase3b_AISPW_2024_analysis.json",
+      "summary": {
+        "data_quality": "unknown",
+        "days_analyzed": 0,
+        "patterns_found": 0,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": false,
+        "gain_category": "extreme",
+        "speed_category": "medium",
+        "searches_generated": 3,
+        "key_signals": []
+      }
+    },
+    {
+      "ticker": "ALGS",
+      "status": "success",
+      "file": "phase3b_ALGS_2024_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 63,
+        "patterns_found": 0,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": true,
+        "gain_category": "moderate",
+        "speed_category": "medium",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "2 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "ALMU",
+      "status": "success",
+      "file": "phase3b_ALMU_2024_analysis.json",
+      "summary": {
+        "data_quality": "acceptable",
+        "days_analyzed": 53,
+        "patterns_found": 2,
+        "volume_spikes_detected": 4,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "4 Volume Spikes (3x+)",
+          "2 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "ALTS",
+      "status": "success",
+      "file": "phase3b_ALTS_2024_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 60,
+        "patterns_found": 1,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": true,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "AMPG",
+      "status": "success",
+      "file": "phase3b_AMPG_2024_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 0,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": true,
+        "gain_category": "moderate",
+        "speed_category": "medium",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "2 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "AMPGW",
+      "status": "success",
+      "file": "phase3b_AMPGW_2024_analysis.json",
+      "summary": {
+        "data_quality": "partial",
+        "days_analyzed": 20,
+        "patterns_found": 0,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": false,
+        "gain_category": "high",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "APM",
+      "status": "success",
+      "file": "phase3b_APM_2024_analysis.json",
+      "summary": {
+        "data_quality": "acceptable",
+        "days_analyzed": 57,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "high",
+        "speed_category": "fast",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "APP",
+      "status": "success",
+      "file": "phase3b_APP_2024_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 61,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": true,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "ARBEW",
+      "status": "success",
+      "file": "phase3b_ARBEW_2024_analysis.json",
+      "summary": {
+        "data_quality": "acceptable",
+        "days_analyzed": 51,
+        "patterns_found": 0,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "AREN",
+      "status": "success",
+      "file": "phase3b_AREN_2024_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 1,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "high",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)",
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "ARKOW",
+      "status": "success",
+      "file": "phase3b_ARKOW_2024_analysis.json",
+      "summary": {
+        "data_quality": "acceptable",
+        "days_analyzed": 54,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": true,
+        "gain_category": "high",
+        "speed_category": "medium",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "ARQQ",
+      "status": "success",
+      "file": "phase3b_ARQQ_2024_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 63,
+        "patterns_found": 0,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": false,
+        "gain_category": "high",
+        "speed_category": "medium",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "ARQQW",
+      "status": "success",
+      "file": "phase3b_ARQQW_2024_analysis.json",
+      "summary": {
+        "data_quality": "acceptable",
+        "days_analyzed": 48,
+        "patterns_found": 0,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": false,
+        "gain_category": "extreme",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Volume Spikes (3x+)"
         ]
       }
     },
@@ -43,28 +872,86 @@
       }
     },
     {
-      "ticker": "ABVEW",
+      "ticker": "ASST",
       "status": "success",
-      "file": "phase3b_ABVEW_2024_analysis.json",
+      "file": "phase3b_ASST_2024_analysis.json",
       "summary": {
-        "data_quality": "unknown",
-        "days_analyzed": 0,
+        "data_quality": "good",
+        "days_analyzed": 63,
         "patterns_found": 0,
-        "volume_spikes_detected": 0,
-        "rsi_oversold": false,
-        "gain_category": "moderate",
+        "volume_spikes_detected": 4,
+        "rsi_oversold": true,
+        "gain_category": "high",
         "speed_category": "slow",
         "searches_generated": 3,
-        "key_signals": []
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "4 Volume Spikes (3x+)"
+        ]
       }
     },
     {
-      "ticker": "ACONW",
+      "ticker": "ASTS",
       "status": "success",
-      "file": "phase3b_ACONW_2024_analysis.json",
+      "file": "phase3b_ASTS_2024_analysis.json",
       "summary": {
-        "data_quality": "partial",
-        "days_analyzed": 36,
+        "data_quality": "good",
+        "days_analyzed": 61,
+        "patterns_found": 2,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": false,
+        "gain_category": "high",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "ATGL",
+      "status": "success",
+      "file": "phase3b_ATGL_2024_analysis.json",
+      "summary": {
+        "data_quality": "acceptable",
+        "days_analyzed": 59,
+        "patterns_found": 0,
+        "volume_spikes_detected": 3,
+        "rsi_oversold": true,
+        "gain_category": "very_high",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "3 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "ATOM",
+      "status": "success",
+      "file": "phase3b_ATOM_2024_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 1,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "medium",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "AUROW",
+      "status": "success",
+      "file": "phase3b_AUROW_2024_analysis.json",
+      "summary": {
+        "data_quality": "acceptable",
+        "days_analyzed": 59,
         "patterns_found": 0,
         "volume_spikes_detected": 1,
         "rsi_oversold": false,
@@ -77,31 +964,68 @@
       }
     },
     {
-      "ticker": "ARWR",
+      "ticker": "AUUDW",
       "status": "success",
-      "file": "phase3b_ARWR_2018_analysis.json",
+      "file": "phase3b_AUUDW_2024_analysis.json",
+      "summary": {
+        "data_quality": "acceptable",
+        "days_analyzed": 44,
+        "patterns_found": 0,
+        "volume_spikes_detected": 3,
+        "rsi_oversold": false,
+        "gain_category": "high",
+        "speed_category": "medium",
+        "searches_generated": 3,
+        "key_signals": [
+          "3 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "AVTX",
+      "status": "success",
+      "file": "phase3b_AVTX_2024_analysis.json",
       "summary": {
         "data_quality": "good",
         "days_analyzed": 60,
-        "patterns_found": 1,
-        "volume_spikes_detected": 1,
-        "rsi_oversold": false,
+        "patterns_found": 0,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": true,
         "gain_category": "moderate",
-        "speed_category": "slow",
+        "speed_category": "medium",
         "searches_generated": 3,
         "key_signals": [
-          "1 Volume Spikes (3x+)",
+          "RSI Oversold (<30)",
+          "2 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "BAERW",
+      "status": "success",
+      "file": "phase3b_BAERW_2024_analysis.json",
+      "summary": {
+        "data_quality": "partial",
+        "days_analyzed": 28,
+        "patterns_found": 1,
+        "volume_spikes_detected": 3,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "medium",
+        "searches_generated": 3,
+        "key_signals": [
+          "3 Volume Spikes (3x+)",
           "1 Patterns Detected"
         ]
       }
     },
     {
-      "ticker": "AG",
+      "ticker": "BBAI",
       "status": "success",
-      "file": "phase3b_AG_2016_analysis.json",
+      "file": "phase3b_BBAI_2024_analysis.json",
       "summary": {
-        "data_quality": "acceptable",
-        "days_analyzed": 50,
+        "data_quality": "good",
+        "days_analyzed": 61,
         "patterns_found": 0,
         "volume_spikes_detected": 0,
         "rsi_oversold": true,
@@ -114,17 +1038,162 @@
       }
     },
     {
-      "ticker": "AIMD",
+      "ticker": "AAOI",
       "status": "success",
-      "file": "phase3b_AIMD_2022_analysis.json",
+      "file": "phase3b_AAOI_2016_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 63,
+        "patterns_found": 2,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": true,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "2 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "ARWR",
+      "status": "success",
+      "file": "phase3b_ARWR_2018_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 63,
+        "patterns_found": 1,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": true,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "1 Volume Spikes (3x+)",
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "AXSM",
+      "status": "success",
+      "file": "phase3b_AXSM_2018_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 63,
+        "patterns_found": 2,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "AVDL",
+      "status": "success",
+      "file": "phase3b_AVDL_2019_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 0,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": []
+      }
+    },
+    {
+      "ticker": "AXSM",
+      "status": "success",
+      "file": "phase3b_AXSM_2019_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 61,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": true,
+        "gain_category": "high",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "AKRO",
+      "status": "success",
+      "file": "phase3b_AKRO_2022_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 1,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "AMLX",
+      "status": "success",
+      "file": "phase3b_AMLX_2022_analysis.json",
       "summary": {
         "data_quality": "good",
         "days_analyzed": 61,
         "patterns_found": 0,
         "volume_spikes_detected": 2,
+        "rsi_oversold": true,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "2 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "ARDX",
+      "status": "success",
+      "file": "phase3b_ARDX_2022_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 0,
+        "volume_spikes_detected": 0,
         "rsi_oversold": false,
-        "gain_category": "high",
-        "speed_category": "fast",
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": []
+      }
+    },
+    {
+      "ticker": "ATXS",
+      "status": "success",
+      "file": "phase3b_ATXS_2022_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 0,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
         "searches_generated": 3,
         "key_signals": [
           "2 Volume Spikes (3x+)"
@@ -132,24 +1201,138 @@
       }
     },
     {
-      "ticker": "ACXP",
+      "ticker": "AAOI",
       "status": "success",
-      "file": "phase3b_ACXP_2023_analysis.json",
+      "file": "phase3b_AAOI_2023_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 1,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": false,
+        "gain_category": "high",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Volume Spikes (3x+)",
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "ADSEW",
+      "status": "success",
+      "file": "phase3b_ADSEW_2023_analysis.json",
+      "summary": {
+        "data_quality": "acceptable",
+        "days_analyzed": 40,
+        "patterns_found": 0,
+        "volume_spikes_detected": 3,
+        "rsi_oversold": true,
+        "gain_category": "high",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "3 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "ALAR",
+      "status": "success",
+      "file": "phase3b_ALAR_2023_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 61,
+        "patterns_found": 2,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": true,
+        "gain_category": "high",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)",
+          "1 Volume Spikes (3x+)",
+          "2 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "ASPI",
+      "status": "success",
+      "file": "phase3b_ASPI_2023_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 0,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "AAOI",
+      "status": "success",
+      "file": "phase3b_AAOI_2024_analysis.json",
       "summary": {
         "data_quality": "good",
         "days_analyzed": 61,
         "patterns_found": 0,
         "volume_spikes_detected": 1,
-        "rsi_oversold": false,
+        "rsi_oversold": true,
         "gain_category": "moderate",
-        "speed_category": "ultra_fast",
+        "speed_category": "medium",
         "searches_generated": 3,
         "key_signals": [
+          "RSI Oversold (<30)",
           "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "AEVA",
+      "status": "success",
+      "file": "phase3b_AEVA_2024_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 63,
+        "patterns_found": 1,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "AZ",
+      "status": "success",
+      "file": "phase3b_AZ_2024_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 61,
+        "patterns_found": 1,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Volume Spikes (3x+)",
+          "1 Patterns Detected"
         ]
       }
     }
   ],
-  "success_count": 8,
+  "success_count": 72,
   "error_count": 0
 }

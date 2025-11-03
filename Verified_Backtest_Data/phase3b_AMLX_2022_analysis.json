@@ -1,0 +1,251 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:18:01",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "AMLX",
+    "company_name": "AMLX",
+    "entry_date": "2022-05-11",
+    "peak_date": "2023-01-26",
+    "gain_percent": 502.19,
+    "days_to_peak": 178,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "AMLX",
+    "entry_date": "2022-05-11",
+    "days_analyzed": 61,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 7.71,
+      "high": 32.9,
+      "low": 7.08,
+      "price_range_pct": 364.68926553672316,
+      "dates": [
+        "2022-02-10",
+        "2022-02-11",
+        "2022-02-14",
+        "2022-02-15",
+        "2022-02-16",
+        "2022-02-17",
+        "2022-02-18",
+        "2022-02-22",
+        "2022-02-23",
+        "2022-02-24",
+        "2022-02-25",
+        "2022-02-28",
+        "2022-03-01",
+        "2022-03-02",
+        "2022-03-03",
+        "2022-03-04",
+        "2022-03-07",
+        "2022-03-08",
+        "2022-03-09",
+        "2022-03-10",
+        "2022-03-11",
+        "2022-03-14",
+        "2022-03-15",
+        "2022-03-16",
+        "2022-03-17",
+        "2022-03-18",
+        "2022-03-21",
+        "2022-03-22",
+        "2022-03-23",
+        "2022-03-24",
+        "2022-03-25",
+        "2022-03-28",
+        "2022-03-29",
+        "2022-03-31",
+        "2022-04-01",
+        "2022-04-04",
+        "2022-04-05",
+        "2022-04-06",
+        "2022-04-07",
+        "2022-04-08",
+        "2022-04-11",
+        "2022-04-12",
+        "2022-04-13",
+        "2022-04-14",
+        "2022-04-18",
+        "2022-04-19",
+        "2022-04-20",
+        "2022-04-21",
+        "2022-04-22",
+        "2022-04-25",
+        "2022-04-26",
+        "2022-04-27",
+        "2022-04-28",
+        "2022-04-29",
+        "2022-05-02",
+        "2022-05-03",
+        "2022-05-04",
+        "2022-05-05",
+        "2022-05-06",
+        "2022-05-09",
+        "2022-05-10"
+      ],
+      "closes": [
+        20,
+        19.25,
+        20.17,
+        20.5,
+        21.82,
+        23.03,
+        26.49,
+        29.98,
+        28.95,
+        30.06,
+        30.98,
+        32.9,
+        28.04,
+        29.54,
+        25.99,
+        27.39,
+        26.45,
+        27,
+        27.82,
+        27.81,
+        26.01,
+        24.85,
+        23.24,
+        22.93,
+        22.88,
+        22.75,
+        22.22,
+        20.47,
+        20.38,
+        21.71,
+        25,
+        16.01,
+        14.93,
+        12.85,
+        12.88,
+        13.9,
+        13.23,
+        13.76,
+        14.21,
+        13.65,
+        12.58,
+        11.81,
+        12.01,
+        11.81,
+        10.57,
+        10.8,
+        10.89,
+        9.93,
+        9.97,
+        10.51,
+        10.13,
+        9.57,
+        9.5,
+        9,
+        9.13,
+        9.79,
+        10.12,
+        9.28,
+        7.65,
+        7.08,
+        7.71
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 1053425,
+      "entry_day_volume": 375685,
+      "entry_day_vs_avg": 0.36,
+      "volume_spikes_3x": 2,
+      "top_volume_spikes": [
+        {
+          "date": "2022-03-28",
+          "volume": 15203623.0,
+          "ratio": 14.43,
+          "days_before_entry": 29
+        },
+        {
+          "date": "2022-03-31",
+          "volume": 3968751.0,
+          "ratio": 3.77,
+          "days_before_entry": 27
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 29.72,
+        "30_day": 18.04,
+        "oversold": true
+      },
+      "moving_averages": {
+        "sma_20": 9.863,
+        "sma_50": 16.8128,
+        "sma_90": null,
+        "price_vs_sma20_pct": -21.83,
+        "price_vs_sma50_pct": -54.14
+      },
+      "macd": {
+        "macd_line": -2.2731,
+        "bullish": false,
+        "ema_12": 9.0836,
+        "ema_26": 11.3567
+      },
+      "bollinger_bands": {
+        "middle": 9.863,
+        "upper": 12.4829,
+        "lower": 7.2431,
+        "bandwidth_pct": 53.13,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "AMLX",
+    "company_name": "AMLX",
+    "entry_date": "2022-05-11",
+    "search_window": {
+      "start": "2022-02-10",
+      "end": "2022-05-11",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"AMLX\" OR \"AMLX\" after:2022-02-10 before:2022-05-11",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"AMLX\" OR \"AMLX\" (catalyst OR announcement OR approval OR contract OR earnings) after:2022-02-10 before:2022-05-11",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"AMLX\" OR \"AMLX\" (insider OR \"Form 4\" OR \"insider buying\") after:2022-02-10 before:2022-05-11",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 61,
+    "patterns_found": 0,
+    "volume_spikes_detected": 2,
+    "rsi_oversold": true,
+    "gain_category": "moderate",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "RSI Oversold (<30)",
+      "2 Volume Spikes (3x+)"
+    ]
+  }
+}

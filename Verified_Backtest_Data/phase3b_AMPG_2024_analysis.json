@@ -1,0 +1,253 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:41",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "AMPG",
+    "company_name": "AMPG",
+    "entry_date": "2024-08-29",
+    "peak_date": "2024-12-30",
+    "gain_percent": 858.27,
+    "days_to_peak": 84,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "AMPG",
+    "entry_date": "2024-08-29",
+    "days_analyzed": 62,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 0.86,
+      "high": 1.2,
+      "low": 0.82145,
+      "price_range_pct": 46.08314565706981,
+      "dates": [
+        "2024-05-31",
+        "2024-06-03",
+        "2024-06-04",
+        "2024-06-05",
+        "2024-06-06",
+        "2024-06-07",
+        "2024-06-10",
+        "2024-06-11",
+        "2024-06-12",
+        "2024-06-13",
+        "2024-06-14",
+        "2024-06-17",
+        "2024-06-18",
+        "2024-06-20",
+        "2024-06-21",
+        "2024-06-24",
+        "2024-06-25",
+        "2024-06-26",
+        "2024-06-27",
+        "2024-06-28",
+        "2024-07-01",
+        "2024-07-02",
+        "2024-07-03",
+        "2024-07-05",
+        "2024-07-08",
+        "2024-07-09",
+        "2024-07-10",
+        "2024-07-11",
+        "2024-07-12",
+        "2024-07-15",
+        "2024-07-16",
+        "2024-07-17",
+        "2024-07-18",
+        "2024-07-19",
+        "2024-07-22",
+        "2024-07-23",
+        "2024-07-24",
+        "2024-07-25",
+        "2024-07-26",
+        "2024-07-29",
+        "2024-07-30",
+        "2024-07-31",
+        "2024-08-01",
+        "2024-08-02",
+        "2024-08-05",
+        "2024-08-06",
+        "2024-08-07",
+        "2024-08-08",
+        "2024-08-09",
+        "2024-08-12",
+        "2024-08-13",
+        "2024-08-14",
+        "2024-08-15",
+        "2024-08-16",
+        "2024-08-19",
+        "2024-08-20",
+        "2024-08-21",
+        "2024-08-22",
+        "2024-08-23",
+        "2024-08-26",
+        "2024-08-27",
+        "2024-08-28"
+      ],
+      "closes": [
+        1.15,
+        1.18,
+        1.19,
+        1.2,
+        1.2,
+        1.2,
+        1.12,
+        1.12,
+        1.12,
+        1.095,
+        1.1,
+        1.055,
+        1.07,
+        1.07,
+        1.02,
+        1.05,
+        1.0507,
+        1.05,
+        1.05,
+        1.05,
+        1.0511,
+        1.05,
+        1.05,
+        1.06,
+        1.05,
+        1.04,
+        1.095,
+        1.09,
+        1.1,
+        1.0895,
+        1.1008,
+        1.19,
+        1.16,
+        1.11,
+        1.17,
+        1.19,
+        1.195,
+        1.175,
+        1.17,
+        1.13,
+        1.15,
+        1.17,
+        1.1236,
+        1.03,
+        0.9904,
+        0.9852,
+        0.9802,
+        0.9925,
+        1.01,
+        1.02,
+        1.02,
+        1.01,
+        0.985,
+        0.986,
+        0.8762,
+        0.8601,
+        0.82145,
+        0.83,
+        0.836,
+        0.85,
+        0.8752,
+        0.86
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 31423,
+      "entry_day_volume": 16735,
+      "entry_day_vs_avg": 0.53,
+      "volume_spikes_3x": 2,
+      "top_volume_spikes": [
+        {
+          "date": "2024-08-20",
+          "volume": 117108,
+          "ratio": 3.73,
+          "days_before_entry": 6
+        },
+        {
+          "date": "2024-08-19",
+          "volume": 99869,
+          "ratio": 3.18,
+          "days_before_entry": 7
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 27.69,
+        "30_day": 28.55,
+        "oversold": true
+      },
+      "moving_averages": {
+        "sma_20": 0.9471,
+        "sma_50": 1.0388,
+        "sma_90": null,
+        "price_vs_sma20_pct": -9.2,
+        "price_vs_sma50_pct": -17.21
+      },
+      "macd": {
+        "macd_line": -0.0655,
+        "bullish": false,
+        "ema_12": 0.8973,
+        "ema_26": 0.9628
+      },
+      "bollinger_bands": {
+        "middle": 0.9471,
+        "upper": 1.116,
+        "lower": 0.7782,
+        "bandwidth_pct": 35.67,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "AMPG",
+    "company_name": "AMPG",
+    "entry_date": "2024-08-29",
+    "search_window": {
+      "start": "2024-05-31",
+      "end": "2024-08-29",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"AMPG\" OR \"AMPG\" after:2024-05-31 before:2024-08-29",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"AMPG\" OR \"AMPG\" (catalyst OR announcement OR approval OR contract OR earnings) after:2024-05-31 before:2024-08-29",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"AMPG\" OR \"AMPG\" (insider OR \"Form 4\" OR \"insider buying\") after:2024-05-31 before:2024-08-29",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 62,
+    "patterns_found": 0,
+    "volume_spikes_detected": 2,
+    "rsi_oversold": true,
+    "gain_category": "moderate",
+    "speed_category": "medium",
+    "searches_generated": 3,
+    "key_signals": [
+      "RSI Oversold (<30)",
+      "2 Volume Spikes (3x+)"
+    ]
+  }
+}

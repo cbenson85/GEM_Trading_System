@@ -1,0 +1,248 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:21",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "AVDL",
+    "company_name": "AVDL",
+    "entry_date": "2022-05-26",
+    "peak_date": "2022-12-01",
+    "gain_percent": 836.45,
+    "days_to_peak": 130,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "AVDL",
+    "entry_date": "2022-05-26",
+    "days_analyzed": 63,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 3.38,
+      "high": 8.06,
+      "low": 3.38,
+      "price_range_pct": 138.46153846153848,
+      "dates": [
+        "2022-02-25",
+        "2022-02-28",
+        "2022-03-01",
+        "2022-03-02",
+        "2022-03-03",
+        "2022-03-04",
+        "2022-03-07",
+        "2022-03-08",
+        "2022-03-09",
+        "2022-03-10",
+        "2022-03-11",
+        "2022-03-14",
+        "2022-03-15",
+        "2022-03-16",
+        "2022-03-17",
+        "2022-03-18",
+        "2022-03-21",
+        "2022-03-22",
+        "2022-03-23",
+        "2022-03-24",
+        "2022-03-25",
+        "2022-03-28",
+        "2022-03-29",
+        "2022-03-30",
+        "2022-03-31",
+        "2022-04-01",
+        "2022-04-04",
+        "2022-04-05",
+        "2022-04-06",
+        "2022-04-07",
+        "2022-04-08",
+        "2022-04-11",
+        "2022-04-12",
+        "2022-04-13",
+        "2022-04-14",
+        "2022-04-18",
+        "2022-04-19",
+        "2022-04-20",
+        "2022-04-21",
+        "2022-04-22",
+        "2022-04-25",
+        "2022-04-26",
+        "2022-04-27",
+        "2022-04-28",
+        "2022-04-29",
+        "2022-05-02",
+        "2022-05-03",
+        "2022-05-04",
+        "2022-05-05",
+        "2022-05-06",
+        "2022-05-09",
+        "2022-05-10",
+        "2022-05-11",
+        "2022-05-12",
+        "2022-05-13",
+        "2022-05-16",
+        "2022-05-17",
+        "2022-05-18",
+        "2022-05-19",
+        "2022-05-20",
+        "2022-05-23",
+        "2022-05-24",
+        "2022-05-25"
+      ],
+      "closes": [
+        7.91,
+        8.06,
+        7.84,
+        7.85,
+        7.62,
+        7.49,
+        7.54,
+        7.67,
+        7.94,
+        7.11,
+        7.22,
+        6.59,
+        6.89,
+        7.03,
+        7.32,
+        7.36,
+        7.02,
+        6.91,
+        7.3,
+        7.33,
+        6.98,
+        6.77,
+        6.99,
+        7.02,
+        6.83,
+        6.95,
+        6.68,
+        6.69,
+        6.7,
+        6.66,
+        6.76,
+        6.72,
+        6.77,
+        6.93,
+        6.78,
+        6.63,
+        6.63,
+        6.71,
+        6.56,
+        6.58,
+        4.21,
+        5.3,
+        5.1,
+        5.03,
+        5,
+        5.02,
+        4.66,
+        4.69,
+        4.45,
+        4.18,
+        3.93,
+        3.97,
+        3.68,
+        3.545,
+        3.8,
+        4.07,
+        4.33,
+        4.12,
+        4.05,
+        3.84,
+        3.68,
+        3.68,
+        3.38
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 875161,
+      "entry_day_volume": 750437,
+      "entry_day_vs_avg": 0.86,
+      "volume_spikes_3x": 1,
+      "top_volume_spikes": [
+        {
+          "date": "2022-04-26",
+          "volume": 12763086.0,
+          "ratio": 14.58,
+          "days_before_entry": 21
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 30.33,
+        "30_day": 28.38,
+        "oversold": false
+      },
+      "moving_averages": {
+        "sma_20": 4.1553,
+        "sma_50": 5.6665,
+        "sma_90": null,
+        "price_vs_sma20_pct": -18.66,
+        "price_vs_sma50_pct": -40.35
+      },
+      "macd": {
+        "macd_line": -0.5949,
+        "bullish": false,
+        "ema_12": 3.9314,
+        "ema_26": 4.5263
+      },
+      "bollinger_bands": {
+        "middle": 4.1553,
+        "upper": 5.1418,
+        "lower": 3.1687,
+        "bandwidth_pct": 47.49,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "AVDL",
+    "company_name": "AVDL",
+    "entry_date": "2022-05-26",
+    "search_window": {
+      "start": "2022-02-25",
+      "end": "2022-05-26",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"AVDL\" OR \"AVDL\" after:2022-02-25 before:2022-05-26",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"AVDL\" OR \"AVDL\" (catalyst OR announcement OR approval OR contract OR earnings) after:2022-02-25 before:2022-05-26",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"AVDL\" OR \"AVDL\" (insider OR \"Form 4\" OR \"insider buying\") after:2022-02-25 before:2022-05-26",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 63,
+    "patterns_found": 0,
+    "volume_spikes_detected": 1,
+    "rsi_oversold": false,
+    "gain_category": "moderate",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "1 Volume Spikes (3x+)"
+    ]
+  }
+}

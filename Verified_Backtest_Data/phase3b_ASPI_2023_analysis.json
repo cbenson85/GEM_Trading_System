@@ -1,0 +1,252 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:18:06",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "ASPI",
+    "company_name": "ASPI",
+    "entry_date": "2023-06-07",
+    "peak_date": "2024-02-22",
+    "gain_percent": 966.67,
+    "days_to_peak": 178,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "ASPI",
+    "entry_date": "2023-06-07",
+    "days_analyzed": 62,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 0.4,
+      "high": 1.78,
+      "low": 0.32,
+      "price_range_pct": 456.25,
+      "dates": [
+        "2023-03-09",
+        "2023-03-10",
+        "2023-03-13",
+        "2023-03-14",
+        "2023-03-15",
+        "2023-03-16",
+        "2023-03-17",
+        "2023-03-20",
+        "2023-03-21",
+        "2023-03-22",
+        "2023-03-23",
+        "2023-03-24",
+        "2023-03-27",
+        "2023-03-28",
+        "2023-03-29",
+        "2023-03-30",
+        "2023-03-31",
+        "2023-04-03",
+        "2023-04-04",
+        "2023-04-05",
+        "2023-04-06",
+        "2023-04-10",
+        "2023-04-11",
+        "2023-04-12",
+        "2023-04-13",
+        "2023-04-14",
+        "2023-04-17",
+        "2023-04-18",
+        "2023-04-19",
+        "2023-04-20",
+        "2023-04-21",
+        "2023-04-24",
+        "2023-04-25",
+        "2023-04-26",
+        "2023-04-27",
+        "2023-04-28",
+        "2023-05-01",
+        "2023-05-02",
+        "2023-05-03",
+        "2023-05-04",
+        "2023-05-05",
+        "2023-05-08",
+        "2023-05-09",
+        "2023-05-10",
+        "2023-05-11",
+        "2023-05-12",
+        "2023-05-15",
+        "2023-05-16",
+        "2023-05-17",
+        "2023-05-18",
+        "2023-05-19",
+        "2023-05-22",
+        "2023-05-23",
+        "2023-05-24",
+        "2023-05-25",
+        "2023-05-26",
+        "2023-05-30",
+        "2023-05-31",
+        "2023-06-01",
+        "2023-06-02",
+        "2023-06-05",
+        "2023-06-06"
+      ],
+      "closes": [
+        1.63,
+        1.78,
+        1.77,
+        1.58,
+        1.32,
+        1.34,
+        1.32,
+        1.2,
+        1.125,
+        0.9374,
+        0.86,
+        0.79,
+        0.85,
+        0.87,
+        0.93,
+        0.89,
+        0.8538,
+        0.9958,
+        0.94,
+        0.87,
+        0.8001,
+        0.8,
+        0.8555,
+        0.7878,
+        0.76585,
+        0.7978,
+        0.8171,
+        0.79,
+        0.78,
+        0.8,
+        0.7608,
+        0.65,
+        0.68,
+        0.673,
+        0.6421,
+        0.635,
+        0.617899,
+        0.5724,
+        0.6514,
+        0.59,
+        0.55,
+        0.57,
+        0.52,
+        0.52,
+        0.442,
+        0.48,
+        0.4381,
+        0.45,
+        0.32,
+        0.3311,
+        0.337,
+        0.3775,
+        0.375,
+        0.3674,
+        0.3312,
+        0.33,
+        0.35,
+        0.3216,
+        0.3325,
+        0.3628,
+        0.3802,
+        0.4
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 732009,
+      "entry_day_volume": 160413,
+      "entry_day_vs_avg": 0.22,
+      "volume_spikes_3x": 2,
+      "top_volume_spikes": [
+        {
+          "date": "2023-05-16",
+          "volume": 7320908.0,
+          "ratio": 10.0,
+          "days_before_entry": 14
+        },
+        {
+          "date": "2023-05-17",
+          "volume": 6013160.0,
+          "ratio": 8.21,
+          "days_before_entry": 13
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 43.09,
+        "30_day": 36.41,
+        "oversold": false
+      },
+      "moving_averages": {
+        "sma_20": 0.3883,
+        "sma_50": 0.6111,
+        "sma_90": null,
+        "price_vs_sma20_pct": 3.01,
+        "price_vs_sma50_pct": -34.54
+      },
+      "macd": {
+        "macd_line": -0.0824,
+        "bullish": false,
+        "ema_12": 0.3757,
+        "ema_26": 0.4581
+      },
+      "bollinger_bands": {
+        "middle": 0.3883,
+        "upper": 0.5149,
+        "lower": 0.2617,
+        "bandwidth_pct": 65.19,
+        "price_position": "upper"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "ASPI",
+    "company_name": "ASPI",
+    "entry_date": "2023-06-07",
+    "search_window": {
+      "start": "2023-03-09",
+      "end": "2023-06-07",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"ASPI\" OR \"ASPI\" after:2023-03-09 before:2023-06-07",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"ASPI\" OR \"ASPI\" (catalyst OR announcement OR approval OR contract OR earnings) after:2023-03-09 before:2023-06-07",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"ASPI\" OR \"ASPI\" (insider OR \"Form 4\" OR \"insider buying\") after:2023-03-09 before:2023-06-07",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 62,
+    "patterns_found": 0,
+    "volume_spikes_detected": 2,
+    "rsi_oversold": false,
+    "gain_category": "moderate",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "2 Volume Spikes (3x+)"
+    ]
+  }
+}

@@ -1,0 +1,252 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:23",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "AHG",
+    "company_name": "AHG",
+    "entry_date": "2023-07-27",
+    "peak_date": "2024-02-02",
+    "gain_percent": 1057.68,
+    "days_to_peak": 131,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "AHG",
+    "entry_date": "2023-07-27",
+    "days_analyzed": 61,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 0.285,
+      "high": 0.3937,
+      "low": 0.285,
+      "price_range_pct": 38.14035087719299,
+      "dates": [
+        "2023-04-28",
+        "2023-05-01",
+        "2023-05-02",
+        "2023-05-03",
+        "2023-05-04",
+        "2023-05-05",
+        "2023-05-08",
+        "2023-05-09",
+        "2023-05-10",
+        "2023-05-11",
+        "2023-05-12",
+        "2023-05-15",
+        "2023-05-16",
+        "2023-05-17",
+        "2023-05-18",
+        "2023-05-19",
+        "2023-05-22",
+        "2023-05-23",
+        "2023-05-24",
+        "2023-05-25",
+        "2023-05-26",
+        "2023-05-30",
+        "2023-05-31",
+        "2023-06-01",
+        "2023-06-02",
+        "2023-06-05",
+        "2023-06-06",
+        "2023-06-07",
+        "2023-06-08",
+        "2023-06-09",
+        "2023-06-12",
+        "2023-06-13",
+        "2023-06-14",
+        "2023-06-15",
+        "2023-06-16",
+        "2023-06-20",
+        "2023-06-21",
+        "2023-06-22",
+        "2023-06-23",
+        "2023-06-26",
+        "2023-06-27",
+        "2023-06-28",
+        "2023-06-29",
+        "2023-06-30",
+        "2023-07-03",
+        "2023-07-05",
+        "2023-07-06",
+        "2023-07-07",
+        "2023-07-10",
+        "2023-07-11",
+        "2023-07-12",
+        "2023-07-13",
+        "2023-07-14",
+        "2023-07-17",
+        "2023-07-18",
+        "2023-07-19",
+        "2023-07-20",
+        "2023-07-21",
+        "2023-07-24",
+        "2023-07-25",
+        "2023-07-26"
+      ],
+      "closes": [
+        0.3799,
+        0.3937,
+        0.31,
+        0.32,
+        0.3001,
+        0.3599,
+        0.3131,
+        0.325001,
+        0.32,
+        0.3428,
+        0.3549,
+        0.3301,
+        0.3549,
+        0.3549,
+        0.3385,
+        0.32,
+        0.35,
+        0.37,
+        0.3601,
+        0.34,
+        0.3599,
+        0.32,
+        0.34,
+        0.335,
+        0.32,
+        0.322,
+        0.35,
+        0.3398,
+        0.3203,
+        0.345,
+        0.3465,
+        0.33,
+        0.3206,
+        0.3401,
+        0.34,
+        0.3205,
+        0.317,
+        0.32,
+        0.315,
+        0.3329,
+        0.315,
+        0.33,
+        0.35,
+        0.35,
+        0.3255,
+        0.3599,
+        0.34,
+        0.34,
+        0.33,
+        0.3393,
+        0.3426,
+        0.326,
+        0.33,
+        0.330001,
+        0.34,
+        0.34,
+        0.33,
+        0.33,
+        0.323751,
+        0.307,
+        0.285
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 26357,
+      "entry_day_volume": 29667,
+      "entry_day_vs_avg": 1.13,
+      "volume_spikes_3x": 2,
+      "top_volume_spikes": [
+        {
+          "date": "2023-06-29",
+          "volume": 178055,
+          "ratio": 6.76,
+          "days_before_entry": 18
+        },
+        {
+          "date": "2023-06-20",
+          "volume": 134694,
+          "ratio": 5.11,
+          "days_before_entry": 25
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 24.58,
+        "30_day": 40.8,
+        "oversold": true
+      },
+      "moving_averages": {
+        "sma_20": 0.3325,
+        "sma_50": 0.3343,
+        "sma_90": null,
+        "price_vs_sma20_pct": -14.27,
+        "price_vs_sma50_pct": -14.76
+      },
+      "macd": {
+        "macd_line": -0.0065,
+        "bullish": false,
+        "ema_12": 0.3219,
+        "ema_26": 0.3285
+      },
+      "bollinger_bands": {
+        "middle": 0.3325,
+        "upper": 0.3636,
+        "lower": 0.3013,
+        "bandwidth_pct": 18.73,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": true,
+      "price_consolidation": false,
+      "count": 1
+    }
+  },
+  "catalyst_research": {
+    "ticker": "AHG",
+    "company_name": "AHG",
+    "entry_date": "2023-07-27",
+    "search_window": {
+      "start": "2023-04-28",
+      "end": "2023-07-27",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"AHG\" OR \"AHG\" after:2023-04-28 before:2023-07-27",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"AHG\" OR \"AHG\" (catalyst OR announcement OR approval OR contract OR earnings) after:2023-04-28 before:2023-07-27",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"AHG\" OR \"AHG\" (insider OR \"Form 4\" OR \"insider buying\") after:2023-04-28 before:2023-07-27",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 61,
+    "patterns_found": 1,
+    "volume_spikes_detected": 2,
+    "rsi_oversold": true,
+    "gain_category": "high",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "RSI Oversold (<30)",
+      "2 Volume Spikes (3x+)",
+      "1 Patterns Detected"
+    ]
+  }
+}

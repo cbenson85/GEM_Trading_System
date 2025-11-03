@@ -1,17 +1,17 @@
 {
   "metadata": {
-    "analysis_date": "2025-11-03 03:12:45",
+    "analysis_date": "2025-11-03 05:17:49",
     "analysis_type": "comprehensive_90day",
     "analyst": "automated"
   },
   "stock_info": {
     "ticker": "ASNS",
-    "company_name": "Actelis Networks Inc",
+    "company_name": "ASNS",
     "entry_date": "2024-05-31",
-    "peak_date": "2024-06-03",
+    "peak_date": "2024-06-05",
     "gain_percent": 955.05,
     "days_to_peak": 3,
-    "role": "Ultra-fast explosion pattern"
+    "role": "Sustainable explosive stock"
   },
   "price_volume_data": {
     "ticker": "ASNS",
@@ -209,7 +209,7 @@
   },
   "catalyst_research": {
     "ticker": "ASNS",
-    "company_name": "Actelis Networks Inc",
+    "company_name": "ASNS",
     "entry_date": "2024-05-31",
     "search_window": {
       "start": "2024-03-02",
@@ -218,17 +218,17 @@
     },
     "searches_generated": [
       {
-        "query": "\"Actelis Networks Inc\" OR \"ASNS\" after:2024-03-02 before:2024-05-31",
+        "query": "\"ASNS\" OR \"ASNS\" after:2024-03-02 before:2024-05-31",
         "purpose": "90-day pre-window news",
         "type": "general"
       },
       {
-        "query": "\"Actelis Networks Inc\" OR \"ASNS\" (catalyst OR announcement OR approval OR contract OR earnings) after:2024-03-02 before:2024-05-31",
+        "query": "\"ASNS\" OR \"ASNS\" (catalyst OR announcement OR approval OR contract OR earnings) after:2024-03-02 before:2024-05-31",
         "purpose": "Catalyst keywords",
         "type": "catalyst"
       },
       {
-        "query": "\"Actelis Networks Inc\" OR \"ASNS\" (insider OR \"Form 4\" OR \"insider buying\") after:2024-03-02 before:2024-05-31",
+        "query": "\"ASNS\" OR \"ASNS\" (insider OR \"Form 4\" OR \"insider buying\") after:2024-03-02 before:2024-05-31",
         "purpose": "Insider activity",
         "type": "insider"
       }

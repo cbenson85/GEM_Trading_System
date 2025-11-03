@@ -1,0 +1,253 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:18:03",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "AAOI",
+    "company_name": "AAOI",
+    "entry_date": "2023-05-15",
+    "peak_date": "2023-12-19",
+    "gain_percent": 1368.29,
+    "days_to_peak": 151,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "AAOI",
+    "entry_date": "2023-05-15",
+    "days_analyzed": 62,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 1.69,
+      "high": 3.04,
+      "low": 1.665,
+      "price_range_pct": 82.58258258258257,
+      "dates": [
+        "2023-02-14",
+        "2023-02-15",
+        "2023-02-16",
+        "2023-02-17",
+        "2023-02-21",
+        "2023-02-22",
+        "2023-02-23",
+        "2023-02-24",
+        "2023-02-27",
+        "2023-02-28",
+        "2023-03-01",
+        "2023-03-02",
+        "2023-03-03",
+        "2023-03-06",
+        "2023-03-07",
+        "2023-03-08",
+        "2023-03-09",
+        "2023-03-10",
+        "2023-03-13",
+        "2023-03-14",
+        "2023-03-15",
+        "2023-03-16",
+        "2023-03-17",
+        "2023-03-20",
+        "2023-03-21",
+        "2023-03-22",
+        "2023-03-23",
+        "2023-03-24",
+        "2023-03-27",
+        "2023-03-28",
+        "2023-03-29",
+        "2023-03-30",
+        "2023-03-31",
+        "2023-04-03",
+        "2023-04-04",
+        "2023-04-05",
+        "2023-04-06",
+        "2023-04-10",
+        "2023-04-11",
+        "2023-04-12",
+        "2023-04-13",
+        "2023-04-14",
+        "2023-04-17",
+        "2023-04-18",
+        "2023-04-19",
+        "2023-04-20",
+        "2023-04-21",
+        "2023-04-24",
+        "2023-04-25",
+        "2023-04-26",
+        "2023-04-27",
+        "2023-04-28",
+        "2023-05-01",
+        "2023-05-02",
+        "2023-05-03",
+        "2023-05-04",
+        "2023-05-05",
+        "2023-05-08",
+        "2023-05-09",
+        "2023-05-10",
+        "2023-05-11",
+        "2023-05-12"
+      ],
+      "closes": [
+        2.7,
+        2.83,
+        2.95,
+        2.8,
+        2.72,
+        2.82,
+        3.04,
+        2.61,
+        2.59,
+        2.81,
+        2.73,
+        2.69,
+        2.73,
+        2.78,
+        2.75,
+        2.82,
+        2.81,
+        2.66,
+        2.67,
+        2.66,
+        2.44,
+        2.48,
+        2.36,
+        2.4,
+        2.43,
+        2.37,
+        2.46,
+        2.41,
+        1.72,
+        1.82,
+        1.83,
+        1.93,
+        2.21,
+        2.29,
+        2.21,
+        2.11,
+        2.14,
+        2.22,
+        2.28,
+        2.3,
+        2.23,
+        2.12,
+        2.19,
+        2.2,
+        2.19,
+        2.12,
+        2.14,
+        2.15,
+        2.01,
+        2.06,
+        1.95,
+        1.94,
+        1.82,
+        1.85,
+        1.79,
+        1.87,
+        1.665,
+        1.77,
+        1.8,
+        1.85,
+        1.71,
+        1.69
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 177243,
+      "entry_day_volume": 88001,
+      "entry_day_vs_avg": 0.5,
+      "volume_spikes_3x": 2,
+      "top_volume_spikes": [
+        {
+          "date": "2023-05-04",
+          "volume": 627189,
+          "ratio": 3.54,
+          "days_before_entry": 6
+        },
+        {
+          "date": "2023-05-05",
+          "volume": 567812,
+          "ratio": 3.2,
+          "days_before_entry": 5
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 30.0,
+        "30_day": 44.67,
+        "oversold": false
+      },
+      "moving_averages": {
+        "sma_20": 1.9383,
+        "sma_50": 2.1881,
+        "sma_90": null,
+        "price_vs_sma20_pct": -12.81,
+        "price_vs_sma50_pct": -22.76
+      },
+      "macd": {
+        "macd_line": -0.1396,
+        "bullish": false,
+        "ema_12": 1.8247,
+        "ema_26": 1.9642
+      },
+      "bollinger_bands": {
+        "middle": 1.9383,
+        "upper": 2.2921,
+        "lower": 1.5844,
+        "bandwidth_pct": 36.51,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": true,
+      "count": 1
+    }
+  },
+  "catalyst_research": {
+    "ticker": "AAOI",
+    "company_name": "AAOI",
+    "entry_date": "2023-05-15",
+    "search_window": {
+      "start": "2023-02-14",
+      "end": "2023-05-15",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"AAOI\" OR \"AAOI\" after:2023-02-14 before:2023-05-15",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"AAOI\" OR \"AAOI\" (catalyst OR announcement OR approval OR contract OR earnings) after:2023-02-14 before:2023-05-15",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"AAOI\" OR \"AAOI\" (insider OR \"Form 4\" OR \"insider buying\") after:2023-02-14 before:2023-05-15",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 62,
+    "patterns_found": 1,
+    "volume_spikes_detected": 2,
+    "rsi_oversold": false,
+    "gain_category": "high",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "2 Volume Spikes (3x+)",
+      "1 Patterns Detected"
+    ]
+  }
+}

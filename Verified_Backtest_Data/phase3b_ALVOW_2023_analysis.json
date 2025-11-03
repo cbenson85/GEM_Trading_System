@@ -1,0 +1,232 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:26",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "ALVOW",
+    "company_name": "ALVOW",
+    "entry_date": "2023-05-25",
+    "peak_date": "2024-02-26",
+    "gain_percent": 543.88,
+    "days_to_peak": 125,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "ALVOW",
+    "entry_date": "2023-05-25",
+    "days_analyzed": 55,
+    "data_quality": "acceptable",
+    "price_data": {
+      "entry_price": 1.03,
+      "high": 2.85,
+      "low": 1.03,
+      "price_range_pct": 176.6990291262136,
+      "dates": [
+        "2023-02-24",
+        "2023-02-27",
+        "2023-03-01",
+        "2023-03-02",
+        "2023-03-03",
+        "2023-03-06",
+        "2023-03-07",
+        "2023-03-08",
+        "2023-03-09",
+        "2023-03-10",
+        "2023-03-13",
+        "2023-03-14",
+        "2023-03-15",
+        "2023-03-16",
+        "2023-03-17",
+        "2023-03-20",
+        "2023-03-21",
+        "2023-03-22",
+        "2023-03-23",
+        "2023-03-24",
+        "2023-03-27",
+        "2023-03-28",
+        "2023-03-29",
+        "2023-03-30",
+        "2023-03-31",
+        "2023-04-03",
+        "2023-04-05",
+        "2023-04-06",
+        "2023-04-10",
+        "2023-04-11",
+        "2023-04-12",
+        "2023-04-13",
+        "2023-04-14",
+        "2023-04-17",
+        "2023-04-18",
+        "2023-04-19",
+        "2023-04-21",
+        "2023-04-24",
+        "2023-04-26",
+        "2023-04-27",
+        "2023-04-28",
+        "2023-05-02",
+        "2023-05-03",
+        "2023-05-08",
+        "2023-05-09",
+        "2023-05-11",
+        "2023-05-12",
+        "2023-05-15",
+        "2023-05-16",
+        "2023-05-17",
+        "2023-05-18",
+        "2023-05-19",
+        "2023-05-22",
+        "2023-05-23",
+        "2023-05-24"
+      ],
+      "closes": [
+        2.345,
+        2.44,
+        2.5,
+        2.4,
+        2.5,
+        2.75,
+        2.85,
+        2.66,
+        2.17,
+        2.44,
+        2.48,
+        2.53,
+        2.3,
+        2.27,
+        2.28,
+        2.31,
+        2.36,
+        2.5,
+        2.4,
+        2.39,
+        2.39,
+        2.34,
+        2.21,
+        2.25,
+        2.37,
+        2.36,
+        2.335,
+        2.53,
+        2.5001,
+        2.57,
+        2.73,
+        2.58,
+        1.7,
+        1.4,
+        1.45,
+        1.5,
+        1.48,
+        1.31,
+        1.5,
+        1.47,
+        1.5,
+        1.24,
+        1.32,
+        1.2,
+        1.36,
+        1.1999,
+        1.27,
+        1.38,
+        1.16,
+        1.2,
+        1.15,
+        1.42,
+        1.07,
+        1.06,
+        1.03
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 23135,
+      "entry_day_volume": 3265,
+      "entry_day_vs_avg": 0.14,
+      "volume_spikes_3x": 1,
+      "top_volume_spikes": [
+        {
+          "date": "2023-04-14",
+          "volume": 150142,
+          "ratio": 6.49,
+          "days_before_entry": 22
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 37.83,
+        "30_day": 34.38,
+        "oversold": false
+      },
+      "moving_averages": {
+        "sma_20": 1.291,
+        "sma_50": 1.9245,
+        "sma_90": null,
+        "price_vs_sma20_pct": -20.22,
+        "price_vs_sma50_pct": -46.48
+      },
+      "macd": {
+        "macd_line": -0.2381,
+        "bullish": false,
+        "ema_12": 1.2228,
+        "ema_26": 1.4608
+      },
+      "bollinger_bands": {
+        "middle": 1.291,
+        "upper": 1.5958,
+        "lower": 0.9862,
+        "bandwidth_pct": 47.22,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "ALVOW",
+    "company_name": "ALVOW",
+    "entry_date": "2023-05-25",
+    "search_window": {
+      "start": "2023-02-24",
+      "end": "2023-05-25",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"ALVOW\" OR \"ALVOW\" after:2023-02-24 before:2023-05-25",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"ALVOW\" OR \"ALVOW\" (catalyst OR announcement OR approval OR contract OR earnings) after:2023-02-24 before:2023-05-25",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"ALVOW\" OR \"ALVOW\" (insider OR \"Form 4\" OR \"insider buying\") after:2023-02-24 before:2023-05-25",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "acceptable",
+    "days_analyzed": 55,
+    "patterns_found": 0,
+    "volume_spikes_detected": 1,
+    "rsi_oversold": false,
+    "gain_category": "moderate",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "1 Volume Spikes (3x+)"
+    ]
+  }
+}

@@ -1,0 +1,247 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:45",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "AREN",
+    "company_name": "AREN",
+    "entry_date": "2024-09-26",
+    "peak_date": "2025-05-20",
+    "gain_percent": 1305.59,
+    "days_to_peak": 160,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "AREN",
+    "entry_date": "2024-09-26",
+    "days_analyzed": 62,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 0.8097,
+      "high": 1,
+      "low": 0.77,
+      "price_range_pct": 29.87012987012987,
+      "dates": [
+        "2024-06-28",
+        "2024-07-01",
+        "2024-07-02",
+        "2024-07-03",
+        "2024-07-05",
+        "2024-07-08",
+        "2024-07-09",
+        "2024-07-10",
+        "2024-07-11",
+        "2024-07-12",
+        "2024-07-15",
+        "2024-07-16",
+        "2024-07-17",
+        "2024-07-18",
+        "2024-07-19",
+        "2024-07-22",
+        "2024-07-23",
+        "2024-07-24",
+        "2024-07-25",
+        "2024-07-26",
+        "2024-07-29",
+        "2024-07-30",
+        "2024-07-31",
+        "2024-08-01",
+        "2024-08-02",
+        "2024-08-05",
+        "2024-08-06",
+        "2024-08-07",
+        "2024-08-08",
+        "2024-08-09",
+        "2024-08-12",
+        "2024-08-13",
+        "2024-08-14",
+        "2024-08-15",
+        "2024-08-16",
+        "2024-08-19",
+        "2024-08-20",
+        "2024-08-21",
+        "2024-08-22",
+        "2024-08-23",
+        "2024-08-26",
+        "2024-08-27",
+        "2024-08-28",
+        "2024-08-29",
+        "2024-08-30",
+        "2024-09-03",
+        "2024-09-04",
+        "2024-09-05",
+        "2024-09-06",
+        "2024-09-09",
+        "2024-09-10",
+        "2024-09-11",
+        "2024-09-12",
+        "2024-09-13",
+        "2024-09-16",
+        "2024-09-17",
+        "2024-09-18",
+        "2024-09-19",
+        "2024-09-20",
+        "2024-09-23",
+        "2024-09-24",
+        "2024-09-25"
+      ],
+      "closes": [
+        0.77,
+        0.815,
+        0.81,
+        0.8057,
+        0.81,
+        0.81,
+        0.77,
+        0.7901,
+        0.86,
+        0.89,
+        0.851,
+        0.92,
+        0.93,
+        0.91,
+        0.91,
+        0.915,
+        0.915,
+        0.9255,
+        0.9299,
+        0.93,
+        0.919,
+        0.93,
+        0.9299,
+        0.915,
+        0.92,
+        0.86,
+        0.8627,
+        0.85,
+        0.921,
+        0.801,
+        0.8011,
+        0.78,
+        0.835,
+        0.8785,
+        0.7708,
+        0.8425,
+        0.879,
+        0.93,
+        0.92,
+        1,
+        0.9999,
+        0.9298,
+        0.85,
+        0.892,
+        0.95,
+        0.9071,
+        0.89,
+        0.923,
+        0.9393,
+        0.86,
+        0.9,
+        0.9,
+        0.89,
+        0.9,
+        0.882,
+        0.8589,
+        0.8,
+        0.876,
+        0.8058,
+        0.811,
+        0.7868,
+        0.8097
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 14301,
+      "entry_day_volume": 6087,
+      "entry_day_vs_avg": 0.43,
+      "volume_spikes_3x": 1,
+      "top_volume_spikes": [
+        {
+          "date": "2024-09-20",
+          "volume": 84569,
+          "ratio": 5.91,
+          "days_before_entry": 3
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 37.52,
+        "30_day": 51.19,
+        "oversold": false
+      },
+      "moving_averages": {
+        "sma_20": 0.8716,
+        "sma_50": 0.8854,
+        "sma_90": null,
+        "price_vs_sma20_pct": -7.1,
+        "price_vs_sma50_pct": -8.55
+      },
+      "macd": {
+        "macd_line": -0.0211,
+        "bullish": false,
+        "ema_12": 0.8413,
+        "ema_26": 0.8624
+      },
+      "bollinger_bands": {
+        "middle": 0.8716,
+        "upper": 0.9645,
+        "lower": 0.7786,
+        "bandwidth_pct": 21.33,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": true,
+      "count": 1
+    }
+  },
+  "catalyst_research": {
+    "ticker": "AREN",
+    "company_name": "AREN",
+    "entry_date": "2024-09-26",
+    "search_window": {
+      "start": "2024-06-28",
+      "end": "2024-09-26",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"AREN\" OR \"AREN\" after:2024-06-28 before:2024-09-26",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"AREN\" OR \"AREN\" (catalyst OR announcement OR approval OR contract OR earnings) after:2024-06-28 before:2024-09-26",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"AREN\" OR \"AREN\" (insider OR \"Form 4\" OR \"insider buying\") after:2024-06-28 before:2024-09-26",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 62,
+    "patterns_found": 1,
+    "volume_spikes_detected": 1,
+    "rsi_oversold": false,
+    "gain_category": "high",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "1 Volume Spikes (3x+)",
+      "1 Patterns Detected"
+    ]
+  }
+}

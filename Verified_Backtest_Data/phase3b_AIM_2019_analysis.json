@@ -1,0 +1,156 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:15",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "AIM",
+    "company_name": "AIM",
+    "entry_date": "2019-10-04",
+    "peak_date": "2020-03-09",
+    "gain_percent": 1192.26,
+    "days_to_peak": 106,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "AIM",
+    "entry_date": "2019-10-04",
+    "days_analyzed": 23,
+    "data_quality": "partial",
+    "price_data": {
+      "entry_price": 0.603,
+      "high": 2.2,
+      "low": 0.603,
+      "price_range_pct": 264.8424543946932,
+      "dates": [
+        "2019-09-03",
+        "2019-09-04",
+        "2019-09-05",
+        "2019-09-06",
+        "2019-09-09",
+        "2019-09-10",
+        "2019-09-11",
+        "2019-09-12",
+        "2019-09-13",
+        "2019-09-16",
+        "2019-09-17",
+        "2019-09-18",
+        "2019-09-19",
+        "2019-09-20",
+        "2019-09-23",
+        "2019-09-24",
+        "2019-09-25",
+        "2019-09-26",
+        "2019-09-27",
+        "2019-09-30",
+        "2019-10-01",
+        "2019-10-02",
+        "2019-10-03"
+      ],
+      "closes": [
+        1.8699,
+        1.8436,
+        1.88,
+        1.96,
+        2.01,
+        1.975,
+        1.9,
+        1.94,
+        1.87,
+        1.84,
+        1.7698,
+        1.6553,
+        2.2,
+        1.85,
+        1.72,
+        1.47,
+        0.8325,
+        0.705,
+        0.743,
+        0.762,
+        0.71,
+        0.6253,
+        0.603
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 1125685,
+      "entry_day_volume": 267696,
+      "entry_day_vs_avg": 0.24,
+      "volume_spikes_3x": 3,
+      "top_volume_spikes": [
+        {
+          "date": "2019-09-10",
+          "volume": 8966116.0,
+          "ratio": 7.97,
+          "days_before_entry": 17
+        },
+        {
+          "date": "2019-09-13",
+          "volume": 8759141.0,
+          "ratio": 7.78,
+          "days_before_entry": 14
+        },
+        {
+          "date": "2019-09-16",
+          "volume": 3446147.0,
+          "ratio": 3.06,
+          "days_before_entry": 13
+        }
+      ]
+    },
+    "technical_indicators": {
+      "error": "Insufficient data for technicals"
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "AIM",
+    "company_name": "AIM",
+    "entry_date": "2019-10-04",
+    "search_window": {
+      "start": "2019-07-06",
+      "end": "2019-10-04",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"AIM\" OR \"AIM\" after:2019-07-06 before:2019-10-04",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"AIM\" OR \"AIM\" (catalyst OR announcement OR approval OR contract OR earnings) after:2019-07-06 before:2019-10-04",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"AIM\" OR \"AIM\" (insider OR \"Form 4\" OR \"insider buying\") after:2019-07-06 before:2019-10-04",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "partial",
+    "days_analyzed": 23,
+    "patterns_found": 0,
+    "volume_spikes_detected": 3,
+    "rsi_oversold": false,
+    "gain_category": "high",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "3 Volume Spikes (3x+)"
+    ]
+  }
+}

@@ -1,30 +1,29 @@
 {
   "metadata": {
-    "analysis_date": "2025-11-03 03:12:48",
+    "analysis_date": "2025-11-03 05:17:12",
     "analysis_type": "comprehensive_90day",
     "analyst": "automated"
   },
   "stock_info": {
     "ticker": "AG",
-    "company_name": "First Majestic Silver Corp",
-    "entry_date": "2016-01-20",
-    "peak_date": "2016-06-10",
+    "company_name": "AG",
+    "entry_date": "2016-01-19",
+    "peak_date": "2016-08-10",
     "gain_percent": 662.95,
     "days_to_peak": 142,
-    "role": "Historical diversity"
+    "role": "Sustainable explosive stock"
   },
   "price_volume_data": {
     "ticker": "AG",
-    "entry_date": "2016-01-20",
-    "days_analyzed": 50,
+    "entry_date": "2016-01-19",
+    "days_analyzed": 48,
     "data_quality": "acceptable",
     "price_data": {
-      "entry_price": 2.51,
+      "entry_price": 2.73,
       "high": 3.63,
-      "low": 2.51,
-      "price_range_pct": 44.62151394422312,
+      "low": 2.73,
+      "price_range_pct": 32.967032967032964,
       "dates": [
-        "2015-11-05",
         "2015-11-06",
         "2015-11-09",
         "2015-11-10",
@@ -72,11 +71,9 @@
         "2016-01-12",
         "2016-01-13",
         "2016-01-14",
-        "2016-01-15",
-        "2016-01-19"
+        "2016-01-15"
       ],
       "closes": [
-        3.12,
         2.97,
         3.04,
         2.9,
@@ -124,41 +121,40 @@
         2.8,
         2.81,
         2.75,
-        2.73,
-        2.51
+        2.73
       ]
     },
     "volume_analysis": {
-      "avg_volume_30day": 1534506,
-      "entry_day_volume": 2566368.0,
-      "entry_day_vs_avg": 1.67,
+      "avg_volume_30day": 1480474,
+      "entry_day_volume": 1266543.0,
+      "entry_day_vs_avg": 0.86,
       "volume_spikes_3x": 0,
       "top_volume_spikes": []
     },
     "technical_indicators": {
       "rsi": {
-        "14_day": 18.18,
-        "30_day": 37.43,
+        "14_day": 17.39,
+        "30_day": 41.19,
         "oversold": true
       },
       "moving_averages": {
-        "sma_20": 3.1585,
-        "sma_50": 3.1776,
+        "sma_20": 3.1855,
+        "sma_50": null,
         "sma_90": null,
-        "price_vs_sma20_pct": -20.53,
-        "price_vs_sma50_pct": -21.01
+        "price_vs_sma20_pct": -14.3,
+        "price_vs_sma50_pct": null
       },
       "macd": {
-        "macd_line": -0.1424,
+        "macd_line": -0.1099,
         "bullish": false,
-        "ema_12": 2.9395,
-        "ema_26": 3.0819
+        "ema_12": 3.0176,
+        "ema_26": 3.1275
       },
       "bollinger_bands": {
-        "middle": 3.1585,
-        "upper": 3.7378,
-        "lower": 2.5792,
-        "bandwidth_pct": 36.68,
+        "middle": 3.1855,
+        "upper": 3.6864,
+        "lower": 2.6846,
+        "bandwidth_pct": 31.45,
         "price_position": "lower"
       }
     },
@@ -172,26 +168,26 @@
   },
   "catalyst_research": {
     "ticker": "AG",
-    "company_name": "First Majestic Silver Corp",
-    "entry_date": "2016-01-20",
+    "company_name": "AG",
+    "entry_date": "2016-01-19",
     "search_window": {
-      "start": "2015-10-22",
-      "end": "2016-01-20",
+      "start": "2015-10-21",
+      "end": "2016-01-19",
       "days": 90
     },
     "searches_generated": [
       {
-        "query": "\"First Majestic Silver Corp\" OR \"AG\" after:2015-10-22 before:2016-01-20",
+        "query": "\"AG\" OR \"AG\" after:2015-10-21 before:2016-01-19",
         "purpose": "90-day pre-window news",
         "type": "general"
       },
       {
-        "query": "\"First Majestic Silver Corp\" OR \"AG\" (catalyst OR announcement OR approval OR contract OR earnings) after:2015-10-22 before:2016-01-20",
+        "query": "\"AG\" OR \"AG\" (catalyst OR announcement OR approval OR contract OR earnings) after:2015-10-21 before:2016-01-19",
         "purpose": "Catalyst keywords",
         "type": "catalyst"
       },
       {
-        "query": "\"First Majestic Silver Corp\" OR \"AG\" (insider OR \"Form 4\" OR \"insider buying\") after:2015-10-22 before:2016-01-20",
+        "query": "\"AG\" OR \"AG\" (insider OR \"Form 4\" OR \"insider buying\") after:2015-10-21 before:2016-01-19",
         "purpose": "Insider activity",
         "type": "insider"
       }
@@ -201,7 +197,7 @@
   },
   "summary": {
     "data_quality": "acceptable",
-    "days_analyzed": 50,
+    "days_analyzed": 48,
     "patterns_found": 0,
     "volume_spikes_detected": 0,
     "rsi_oversold": true,

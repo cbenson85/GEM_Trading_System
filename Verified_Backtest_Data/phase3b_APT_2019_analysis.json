@@ -1,0 +1,247 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:17",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "APT",
+    "company_name": "APT",
+    "entry_date": "2019-06-25",
+    "peak_date": "2020-02-28",
+    "gain_percent": 1137.8,
+    "days_to_peak": 171,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "APT",
+    "entry_date": "2019-06-25",
+    "days_analyzed": 62,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 3.45,
+      "high": 3.78,
+      "low": 3.42,
+      "price_range_pct": 10.526315789473681,
+      "dates": [
+        "2019-03-27",
+        "2019-03-28",
+        "2019-03-29",
+        "2019-04-01",
+        "2019-04-02",
+        "2019-04-03",
+        "2019-04-04",
+        "2019-04-05",
+        "2019-04-08",
+        "2019-04-09",
+        "2019-04-10",
+        "2019-04-11",
+        "2019-04-12",
+        "2019-04-15",
+        "2019-04-16",
+        "2019-04-17",
+        "2019-04-18",
+        "2019-04-22",
+        "2019-04-23",
+        "2019-04-24",
+        "2019-04-25",
+        "2019-04-26",
+        "2019-04-29",
+        "2019-04-30",
+        "2019-05-01",
+        "2019-05-02",
+        "2019-05-03",
+        "2019-05-06",
+        "2019-05-07",
+        "2019-05-08",
+        "2019-05-09",
+        "2019-05-10",
+        "2019-05-13",
+        "2019-05-14",
+        "2019-05-15",
+        "2019-05-16",
+        "2019-05-17",
+        "2019-05-20",
+        "2019-05-21",
+        "2019-05-22",
+        "2019-05-23",
+        "2019-05-24",
+        "2019-05-28",
+        "2019-05-29",
+        "2019-05-30",
+        "2019-05-31",
+        "2019-06-03",
+        "2019-06-04",
+        "2019-06-05",
+        "2019-06-06",
+        "2019-06-07",
+        "2019-06-10",
+        "2019-06-11",
+        "2019-06-12",
+        "2019-06-13",
+        "2019-06-14",
+        "2019-06-17",
+        "2019-06-18",
+        "2019-06-19",
+        "2019-06-20",
+        "2019-06-21",
+        "2019-06-24"
+      ],
+      "closes": [
+        3.66,
+        3.67,
+        3.6,
+        3.6,
+        3.6,
+        3.55,
+        3.6,
+        3.58,
+        3.6,
+        3.55,
+        3.55,
+        3.56,
+        3.62,
+        3.6,
+        3.59,
+        3.56,
+        3.59,
+        3.62,
+        3.62,
+        3.56,
+        3.56,
+        3.55,
+        3.57,
+        3.55,
+        3.53,
+        3.55,
+        3.6087,
+        3.54,
+        3.78,
+        3.75,
+        3.67,
+        3.67,
+        3.64,
+        3.6,
+        3.6799,
+        3.68,
+        3.64,
+        3.55,
+        3.57,
+        3.7,
+        3.66,
+        3.6,
+        3.59,
+        3.58,
+        3.61,
+        3.58,
+        3.68,
+        3.65,
+        3.58,
+        3.59,
+        3.62,
+        3.59,
+        3.6,
+        3.59,
+        3.6,
+        3.57,
+        3.53,
+        3.54,
+        3.51,
+        3.42,
+        3.54,
+        3.45
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 17408,
+      "entry_day_volume": 53856,
+      "entry_day_vs_avg": 3.09,
+      "volume_spikes_3x": 1,
+      "top_volume_spikes": [
+        {
+          "date": "2019-06-24",
+          "volume": 53856,
+          "ratio": 3.09,
+          "days_before_entry": 0
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 32.76,
+        "30_day": 41.67,
+        "oversold": false
+      },
+      "moving_averages": {
+        "sma_20": 3.571,
+        "sma_50": 3.5966,
+        "sma_90": null,
+        "price_vs_sma20_pct": -3.39,
+        "price_vs_sma50_pct": -4.08
+      },
+      "macd": {
+        "macd_line": -0.035,
+        "bullish": false,
+        "ema_12": 3.5316,
+        "ema_26": 3.5666
+      },
+      "bollinger_bands": {
+        "middle": 3.571,
+        "upper": 3.6895,
+        "lower": 3.4525,
+        "bandwidth_pct": 6.64,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": true,
+      "price_consolidation": true,
+      "count": 2
+    }
+  },
+  "catalyst_research": {
+    "ticker": "APT",
+    "company_name": "APT",
+    "entry_date": "2019-06-25",
+    "search_window": {
+      "start": "2019-03-27",
+      "end": "2019-06-25",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"APT\" OR \"APT\" after:2019-03-27 before:2019-06-25",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"APT\" OR \"APT\" (catalyst OR announcement OR approval OR contract OR earnings) after:2019-03-27 before:2019-06-25",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"APT\" OR \"APT\" (insider OR \"Form 4\" OR \"insider buying\") after:2019-03-27 before:2019-06-25",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 62,
+    "patterns_found": 2,
+    "volume_spikes_detected": 1,
+    "rsi_oversold": false,
+    "gain_category": "high",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "1 Volume Spikes (3x+)",
+      "2 Patterns Detected"
+    ]
+  }
+}

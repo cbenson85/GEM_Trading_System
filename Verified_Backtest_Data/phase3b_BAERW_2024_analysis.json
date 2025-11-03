@@ -1,0 +1,167 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:55",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "BAERW",
+    "company_name": "BAERW",
+    "entry_date": "2024-09-03",
+    "peak_date": "2025-01-10",
+    "gain_percent": 866.67,
+    "days_to_peak": 81,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "BAERW",
+    "entry_date": "2024-09-03",
+    "days_analyzed": 28,
+    "data_quality": "partial",
+    "price_data": {
+      "entry_price": 0.03795,
+      "high": 0.1449,
+      "low": 0.03795,
+      "price_range_pct": 281.8181818181818,
+      "dates": [
+        "2024-06-10",
+        "2024-06-11",
+        "2024-06-12",
+        "2024-06-13",
+        "2024-06-18",
+        "2024-06-20",
+        "2024-06-24",
+        "2024-06-27",
+        "2024-06-28",
+        "2024-07-02",
+        "2024-07-08",
+        "2024-07-09",
+        "2024-07-11",
+        "2024-07-12",
+        "2024-07-15",
+        "2024-07-17",
+        "2024-07-18",
+        "2024-07-22",
+        "2024-07-23",
+        "2024-07-24",
+        "2024-08-01",
+        "2024-08-07",
+        "2024-08-08",
+        "2024-08-12",
+        "2024-08-20",
+        "2024-08-21",
+        "2024-08-26",
+        "2024-08-30"
+      ],
+      "closes": [
+        0.1299,
+        0.13,
+        0.14,
+        0.1449,
+        0.14,
+        0.1402,
+        0.133301,
+        0.1201,
+        0.13,
+        0.13625,
+        0.1202,
+        0.1125,
+        0.11,
+        0.1099,
+        0.11,
+        0.11,
+        0.11,
+        0.11,
+        0.11,
+        0.1012,
+        0.1005,
+        0.0757,
+        0.0727,
+        0.0715,
+        0.0716,
+        0.08,
+        0.0716,
+        0.03795
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 13223,
+      "entry_day_volume": 219587,
+      "entry_day_vs_avg": 16.61,
+      "volume_spikes_3x": 3,
+      "top_volume_spikes": [
+        {
+          "date": "2024-08-21",
+          "volume": 219587,
+          "ratio": 16.61,
+          "days_before_entry": 2
+        },
+        {
+          "date": "2024-07-02",
+          "volume": 56873,
+          "ratio": 4.3,
+          "days_before_entry": 18
+        },
+        {
+          "date": "2024-07-09",
+          "volume": 56343,
+          "ratio": 4.26,
+          "days_before_entry": 16
+        }
+      ]
+    },
+    "technical_indicators": {
+      "error": "Insufficient data for technicals"
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": true,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 1
+    }
+  },
+  "catalyst_research": {
+    "ticker": "BAERW",
+    "company_name": "BAERW",
+    "entry_date": "2024-09-03",
+    "search_window": {
+      "start": "2024-06-05",
+      "end": "2024-09-03",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"BAERW\" OR \"BAERW\" after:2024-06-05 before:2024-09-03",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"BAERW\" OR \"BAERW\" (catalyst OR announcement OR approval OR contract OR earnings) after:2024-06-05 before:2024-09-03",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"BAERW\" OR \"BAERW\" (insider OR \"Form 4\" OR \"insider buying\") after:2024-06-05 before:2024-09-03",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "partial",
+    "days_analyzed": 28,
+    "patterns_found": 1,
+    "volume_spikes_detected": 3,
+    "rsi_oversold": false,
+    "gain_category": "moderate",
+    "speed_category": "medium",
+    "searches_generated": 3,
+    "key_signals": [
+      "3 Volume Spikes (3x+)",
+      "1 Patterns Detected"
+    ]
+  }
+}

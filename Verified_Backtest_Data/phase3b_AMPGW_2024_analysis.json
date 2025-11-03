@@ -1,0 +1,144 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:42",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "AMPGW",
+    "company_name": "AMPGW",
+    "entry_date": "2023-11-30",
+    "peak_date": "2024-12-27",
+    "gain_percent": 1380.0,
+    "days_to_peak": 104,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "AMPGW",
+    "entry_date": "2023-11-30",
+    "days_analyzed": 20,
+    "data_quality": "partial",
+    "price_data": {
+      "entry_price": 0.13,
+      "high": 0.31,
+      "low": 0.1032,
+      "price_range_pct": 200.3875968992248,
+      "dates": [
+        "2023-09-08",
+        "2023-09-15",
+        "2023-09-19",
+        "2023-09-20",
+        "2023-09-25",
+        "2023-09-28",
+        "2023-09-29",
+        "2023-10-02",
+        "2023-10-04",
+        "2023-10-05",
+        "2023-10-06",
+        "2023-10-25",
+        "2023-10-30",
+        "2023-10-31",
+        "2023-11-14",
+        "2023-11-20",
+        "2023-11-21",
+        "2023-11-22",
+        "2023-11-24",
+        "2023-11-29"
+      ],
+      "closes": [
+        0.303,
+        0.3029,
+        0.242,
+        0.31,
+        0.1712,
+        0.23,
+        0.2447,
+        0.22,
+        0.21,
+        0.2,
+        0.2,
+        0.1827,
+        0.1748,
+        0.2355,
+        0.15,
+        0.2389,
+        0.1032,
+        0.2,
+        0.18,
+        0.13
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 1590,
+      "entry_day_volume": 104,
+      "entry_day_vs_avg": 0.07,
+      "volume_spikes_3x": 2,
+      "top_volume_spikes": [
+        {
+          "date": "2023-09-15",
+          "volume": 6100,
+          "ratio": 3.84,
+          "days_before_entry": 18
+        },
+        {
+          "date": "2023-09-29",
+          "volume": 5208,
+          "ratio": 3.27,
+          "days_before_entry": 13
+        }
+      ]
+    },
+    "technical_indicators": {
+      "error": "Insufficient data for technicals"
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "AMPGW",
+    "company_name": "AMPGW",
+    "entry_date": "2023-11-30",
+    "search_window": {
+      "start": "2023-09-01",
+      "end": "2023-11-30",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"AMPGW\" OR \"AMPGW\" after:2023-09-01 before:2023-11-30",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"AMPGW\" OR \"AMPGW\" (catalyst OR announcement OR approval OR contract OR earnings) after:2023-09-01 before:2023-11-30",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"AMPGW\" OR \"AMPGW\" (insider OR \"Form 4\" OR \"insider buying\") after:2023-09-01 before:2023-11-30",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "partial",
+    "days_analyzed": 20,
+    "patterns_found": 0,
+    "volume_spikes_detected": 2,
+    "rsi_oversold": false,
+    "gain_category": "high",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "2 Volume Spikes (3x+)"
+    ]
+  }
+}

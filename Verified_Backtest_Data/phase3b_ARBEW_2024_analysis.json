@@ -1,0 +1,230 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:45",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "ARBEW",
+    "company_name": "ARBEW",
+    "entry_date": "2024-03-19",
+    "peak_date": "2025-01-07",
+    "gain_percent": 869.23,
+    "days_to_peak": 152,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "ARBEW",
+    "entry_date": "2024-03-19",
+    "days_analyzed": 51,
+    "data_quality": "acceptable",
+    "price_data": {
+      "entry_price": 0.1499,
+      "high": 0.22,
+      "low": 0.137968,
+      "price_range_pct": 59.45726545285862,
+      "dates": [
+        "2023-12-20",
+        "2023-12-21",
+        "2023-12-22",
+        "2023-12-26",
+        "2023-12-27",
+        "2023-12-28",
+        "2023-12-29",
+        "2024-01-02",
+        "2024-01-03",
+        "2024-01-04",
+        "2024-01-05",
+        "2024-01-09",
+        "2024-01-11",
+        "2024-01-17",
+        "2024-01-18",
+        "2024-01-22",
+        "2024-01-23",
+        "2024-01-24",
+        "2024-01-25",
+        "2024-01-26",
+        "2024-01-30",
+        "2024-01-31",
+        "2024-02-02",
+        "2024-02-05",
+        "2024-02-06",
+        "2024-02-07",
+        "2024-02-08",
+        "2024-02-09",
+        "2024-02-12",
+        "2024-02-13",
+        "2024-02-14",
+        "2024-02-15",
+        "2024-02-16",
+        "2024-02-20",
+        "2024-02-21",
+        "2024-02-22",
+        "2024-02-23",
+        "2024-02-26",
+        "2024-02-27",
+        "2024-02-28",
+        "2024-02-29",
+        "2024-03-01",
+        "2024-03-04",
+        "2024-03-05",
+        "2024-03-06",
+        "2024-03-07",
+        "2024-03-08",
+        "2024-03-11",
+        "2024-03-12",
+        "2024-03-15",
+        "2024-03-18"
+      ],
+      "closes": [
+        0.17,
+        0.17,
+        0.1859,
+        0.1859,
+        0.185,
+        0.171,
+        0.174899,
+        0.1902,
+        0.2,
+        0.2,
+        0.22,
+        0.22,
+        0.2175,
+        0.2125,
+        0.2175,
+        0.202501,
+        0.2025,
+        0.2025,
+        0.2025,
+        0.15,
+        0.1945,
+        0.17,
+        0.21,
+        0.2,
+        0.21,
+        0.21,
+        0.21,
+        0.208,
+        0.2147,
+        0.20735,
+        0.16,
+        0.142,
+        0.1399,
+        0.137968,
+        0.14,
+        0.14,
+        0.145,
+        0.140967,
+        0.155,
+        0.145,
+        0.1631,
+        0.19,
+        0.1725,
+        0.17,
+        0.19,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.1499
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 15169,
+      "entry_day_volume": 4333,
+      "entry_day_vs_avg": 0.29,
+      "volume_spikes_3x": 2,
+      "top_volume_spikes": [
+        {
+          "date": "2024-02-15",
+          "volume": 92242,
+          "ratio": 6.08,
+          "days_before_entry": 19
+        },
+        {
+          "date": "2024-02-28",
+          "volume": 50961,
+          "ratio": 3.36,
+          "days_before_entry": 11
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 51.6,
+        "30_day": 43.25,
+        "oversold": false
+      },
+      "moving_averages": {
+        "sma_20": 0.1536,
+        "sma_50": 0.1795,
+        "sma_90": null,
+        "price_vs_sma20_pct": -2.39,
+        "price_vs_sma50_pct": -16.5
+      },
+      "macd": {
+        "macd_line": -0.0073,
+        "bullish": false,
+        "ema_12": 0.1568,
+        "ema_26": 0.1641
+      },
+      "bollinger_bands": {
+        "middle": 0.1536,
+        "upper": 0.1842,
+        "lower": 0.1229,
+        "bandwidth_pct": 39.89,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "ARBEW",
+    "company_name": "ARBEW",
+    "entry_date": "2024-03-19",
+    "search_window": {
+      "start": "2023-12-20",
+      "end": "2024-03-19",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"ARBEW\" OR \"ARBEW\" after:2023-12-20 before:2024-03-19",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"ARBEW\" OR \"ARBEW\" (catalyst OR announcement OR approval OR contract OR earnings) after:2023-12-20 before:2024-03-19",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"ARBEW\" OR \"ARBEW\" (insider OR \"Form 4\" OR \"insider buying\") after:2023-12-20 before:2024-03-19",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "acceptable",
+    "days_analyzed": 51,
+    "patterns_found": 0,
+    "volume_spikes_detected": 2,
+    "rsi_oversold": false,
+    "gain_category": "moderate",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "2 Volume Spikes (3x+)"
+    ]
+  }
+}

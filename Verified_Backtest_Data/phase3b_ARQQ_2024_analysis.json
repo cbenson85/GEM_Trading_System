@@ -1,0 +1,254 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:47",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "ARQQ",
+    "company_name": "ARQQ",
+    "entry_date": "2024-10-07",
+    "peak_date": "2024-12-27",
+    "gain_percent": 1292.88,
+    "days_to_peak": 57,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "ARQQ",
+    "entry_date": "2024-10-07",
+    "days_analyzed": 63,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 4.31,
+      "high": 10.515,
+      "low": 4.31,
+      "price_range_pct": 143.96751740139214,
+      "dates": [
+        "2024-07-09",
+        "2024-07-10",
+        "2024-07-11",
+        "2024-07-12",
+        "2024-07-15",
+        "2024-07-16",
+        "2024-07-17",
+        "2024-07-18",
+        "2024-07-19",
+        "2024-07-22",
+        "2024-07-23",
+        "2024-07-24",
+        "2024-07-25",
+        "2024-07-26",
+        "2024-07-29",
+        "2024-07-30",
+        "2024-07-31",
+        "2024-08-01",
+        "2024-08-02",
+        "2024-08-05",
+        "2024-08-06",
+        "2024-08-07",
+        "2024-08-08",
+        "2024-08-09",
+        "2024-08-12",
+        "2024-08-13",
+        "2024-08-14",
+        "2024-08-15",
+        "2024-08-16",
+        "2024-08-19",
+        "2024-08-20",
+        "2024-08-21",
+        "2024-08-22",
+        "2024-08-23",
+        "2024-08-26",
+        "2024-08-27",
+        "2024-08-28",
+        "2024-08-29",
+        "2024-08-30",
+        "2024-09-03",
+        "2024-09-04",
+        "2024-09-05",
+        "2024-09-06",
+        "2024-09-09",
+        "2024-09-10",
+        "2024-09-11",
+        "2024-09-12",
+        "2024-09-13",
+        "2024-09-16",
+        "2024-09-17",
+        "2024-09-18",
+        "2024-09-19",
+        "2024-09-20",
+        "2024-09-23",
+        "2024-09-24",
+        "2024-09-25",
+        "2024-09-26",
+        "2024-09-27",
+        "2024-09-30",
+        "2024-10-01",
+        "2024-10-02",
+        "2024-10-03",
+        "2024-10-04"
+      ],
+      "closes": [
+        8.675,
+        8.87,
+        8.0925,
+        9.025,
+        10.1125,
+        10.515,
+        9.5525,
+        8.81,
+        9.6925,
+        9.365,
+        9.505,
+        9.105,
+        9.215,
+        9.75,
+        9.3225,
+        9.0775,
+        9.0325,
+        8.55,
+        8.105,
+        7.75,
+        8,
+        7.705,
+        7.8,
+        7.9975,
+        7.6075,
+        7.7,
+        7.625,
+        7.665,
+        8.075,
+        9,
+        8.8,
+        8.525,
+        8.965,
+        9.375,
+        9.435,
+        8.74,
+        7.75,
+        7.8125,
+        8,
+        7.6025,
+        7.59,
+        7.5025,
+        7.175,
+        7.0075,
+        7.11,
+        7.56,
+        7.3725,
+        7.3,
+        7.1575,
+        7.4275,
+        7.25,
+        6.2525,
+        5.94,
+        5.5,
+        6.2525,
+        4.46,
+        5.6,
+        5.02,
+        5.7,
+        4.79,
+        4.53,
+        4.47,
+        4.31
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 76634,
+      "entry_day_volume": 49707,
+      "entry_day_vs_avg": 0.65,
+      "volume_spikes_3x": 2,
+      "top_volume_spikes": [
+        {
+          "date": "2024-09-26",
+          "volume": 520256,
+          "ratio": 6.79,
+          "days_before_entry": 6
+        },
+        {
+          "date": "2024-09-25",
+          "volume": 438625,
+          "ratio": 5.72,
+          "days_before_entry": 7
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 33.31,
+        "30_day": 31.94,
+        "oversold": false
+      },
+      "moving_averages": {
+        "sma_20": 6.0505,
+        "sma_50": 7.3809,
+        "sma_90": null,
+        "price_vs_sma20_pct": -28.77,
+        "price_vs_sma50_pct": -41.61
+      },
+      "macd": {
+        "macd_line": -0.9005,
+        "bullish": false,
+        "ema_12": 5.2743,
+        "ema_26": 6.1748
+      },
+      "bollinger_bands": {
+        "middle": 6.0505,
+        "upper": 8.3277,
+        "lower": 3.7733,
+        "bandwidth_pct": 75.27,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "ARQQ",
+    "company_name": "ARQQ",
+    "entry_date": "2024-10-07",
+    "search_window": {
+      "start": "2024-07-09",
+      "end": "2024-10-07",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"ARQQ\" OR \"ARQQ\" after:2024-07-09 before:2024-10-07",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"ARQQ\" OR \"ARQQ\" (catalyst OR announcement OR approval OR contract OR earnings) after:2024-07-09 before:2024-10-07",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"ARQQ\" OR \"ARQQ\" (insider OR \"Form 4\" OR \"insider buying\") after:2024-07-09 before:2024-10-07",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 63,
+    "patterns_found": 0,
+    "volume_spikes_detected": 2,
+    "rsi_oversold": false,
+    "gain_category": "high",
+    "speed_category": "medium",
+    "searches_generated": 3,
+    "key_signals": [
+      "2 Volume Spikes (3x+)"
+    ]
+  }
+}

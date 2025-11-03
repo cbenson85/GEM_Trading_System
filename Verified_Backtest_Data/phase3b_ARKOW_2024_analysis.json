@@ -1,0 +1,231 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:46",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "ARKOW",
+    "company_name": "ARKOW",
+    "entry_date": "2024-05-03",
+    "peak_date": "2024-08-16",
+    "gain_percent": 1484.55,
+    "days_to_peak": 42,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "ARKOW",
+    "entry_date": "2024-05-03",
+    "days_analyzed": 54,
+    "data_quality": "acceptable",
+    "price_data": {
+      "entry_price": 0.0951,
+      "high": 1,
+      "low": 0.0951,
+      "price_range_pct": 951.5247108307045,
+      "dates": [
+        "2024-02-05",
+        "2024-02-06",
+        "2024-02-07",
+        "2024-02-09",
+        "2024-02-13",
+        "2024-02-14",
+        "2024-02-15",
+        "2024-02-16",
+        "2024-02-20",
+        "2024-02-22",
+        "2024-02-23",
+        "2024-02-26",
+        "2024-02-27",
+        "2024-02-28",
+        "2024-02-29",
+        "2024-03-01",
+        "2024-03-05",
+        "2024-03-07",
+        "2024-03-08",
+        "2024-03-11",
+        "2024-03-12",
+        "2024-03-13",
+        "2024-03-14",
+        "2024-03-15",
+        "2024-03-18",
+        "2024-03-19",
+        "2024-03-20",
+        "2024-03-21",
+        "2024-03-22",
+        "2024-03-25",
+        "2024-03-26",
+        "2024-03-27",
+        "2024-03-28",
+        "2024-04-01",
+        "2024-04-02",
+        "2024-04-03",
+        "2024-04-04",
+        "2024-04-05",
+        "2024-04-08",
+        "2024-04-09",
+        "2024-04-10",
+        "2024-04-11",
+        "2024-04-12",
+        "2024-04-15",
+        "2024-04-16",
+        "2024-04-22",
+        "2024-04-23",
+        "2024-04-24",
+        "2024-04-25",
+        "2024-04-26",
+        "2024-04-29",
+        "2024-04-30",
+        "2024-05-01",
+        "2024-05-02"
+      ],
+      "closes": [
+        0.864,
+        0.886605,
+        0.8869,
+        0.94,
+        1,
+        0.9499,
+        0.9332,
+        0.92,
+        0.92,
+        0.8834,
+        0.886,
+        0.9837,
+        0.91,
+        0.6301,
+        0.5986,
+        0.6,
+        0.594949,
+        0.6875,
+        0.62,
+        0.6501,
+        0.4875,
+        0.5349,
+        0.47,
+        0.47,
+        0.5029,
+        0.4516,
+        0.4955,
+        0.55,
+        0.51,
+        0.4587,
+        0.44,
+        0.3955,
+        0.4962,
+        0.4,
+        0.4125,
+        0.3275,
+        0.356,
+        0.3489,
+        0.302,
+        0.35,
+        0.3025,
+        0.3073,
+        0.26,
+        0.235,
+        0.2271,
+        0.19,
+        0.1475,
+        0.137626,
+        0.16,
+        0.1845,
+        0.21,
+        0.165,
+        0.0976,
+        0.0951
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 21304,
+      "entry_day_volume": 3700,
+      "entry_day_vs_avg": 0.17,
+      "volume_spikes_3x": 1,
+      "top_volume_spikes": [
+        {
+          "date": "2024-04-03",
+          "volume": 304480,
+          "ratio": 14.29,
+          "days_before_entry": 18
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 18.86,
+        "30_day": 34.0,
+        "oversold": true
+      },
+      "moving_averages": {
+        "sma_20": 0.2408,
+        "sma_50": 0.4849,
+        "sma_90": null,
+        "price_vs_sma20_pct": -60.51,
+        "price_vs_sma50_pct": -80.39
+      },
+      "macd": {
+        "macd_line": -0.1086,
+        "bullish": false,
+        "ema_12": 0.1836,
+        "ema_26": 0.2922
+      },
+      "bollinger_bands": {
+        "middle": 0.2408,
+        "upper": 0.4233,
+        "lower": 0.0583,
+        "bandwidth_pct": 151.56,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "ARKOW",
+    "company_name": "ARKOW",
+    "entry_date": "2024-05-03",
+    "search_window": {
+      "start": "2024-02-03",
+      "end": "2024-05-03",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"ARKOW\" OR \"ARKOW\" after:2024-02-03 before:2024-05-03",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"ARKOW\" OR \"ARKOW\" (catalyst OR announcement OR approval OR contract OR earnings) after:2024-02-03 before:2024-05-03",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"ARKOW\" OR \"ARKOW\" (insider OR \"Form 4\" OR \"insider buying\") after:2024-02-03 before:2024-05-03",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "acceptable",
+    "days_analyzed": 54,
+    "patterns_found": 0,
+    "volume_spikes_detected": 1,
+    "rsi_oversold": true,
+    "gain_category": "high",
+    "speed_category": "medium",
+    "searches_generated": 3,
+    "key_signals": [
+      "RSI Oversold (<30)",
+      "1 Volume Spikes (3x+)"
+    ]
+  }
+}

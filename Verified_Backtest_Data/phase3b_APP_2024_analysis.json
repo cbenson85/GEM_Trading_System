@@ -1,0 +1,245 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:44",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "APP",
+    "company_name": "APP",
+    "entry_date": "2024-08-05",
+    "peak_date": "2025-02-13",
+    "gain_percent": 682.17,
+    "days_to_peak": 132,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "APP",
+    "entry_date": "2024-08-05",
+    "days_analyzed": 61,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 68.72,
+      "high": 87.93,
+      "low": 68.72,
+      "price_range_pct": 27.954016298020967,
+      "dates": [
+        "2024-05-07",
+        "2024-05-08",
+        "2024-05-09",
+        "2024-05-10",
+        "2024-05-13",
+        "2024-05-14",
+        "2024-05-15",
+        "2024-05-16",
+        "2024-05-17",
+        "2024-05-20",
+        "2024-05-21",
+        "2024-05-22",
+        "2024-05-23",
+        "2024-05-24",
+        "2024-05-28",
+        "2024-05-29",
+        "2024-05-30",
+        "2024-05-31",
+        "2024-06-03",
+        "2024-06-04",
+        "2024-06-05",
+        "2024-06-06",
+        "2024-06-07",
+        "2024-06-10",
+        "2024-06-11",
+        "2024-06-12",
+        "2024-06-13",
+        "2024-06-14",
+        "2024-06-17",
+        "2024-06-18",
+        "2024-06-20",
+        "2024-06-21",
+        "2024-06-24",
+        "2024-06-25",
+        "2024-06-26",
+        "2024-06-27",
+        "2024-06-28",
+        "2024-07-01",
+        "2024-07-02",
+        "2024-07-03",
+        "2024-07-05",
+        "2024-07-08",
+        "2024-07-09",
+        "2024-07-10",
+        "2024-07-11",
+        "2024-07-12",
+        "2024-07-15",
+        "2024-07-16",
+        "2024-07-17",
+        "2024-07-18",
+        "2024-07-19",
+        "2024-07-22",
+        "2024-07-23",
+        "2024-07-24",
+        "2024-07-25",
+        "2024-07-26",
+        "2024-07-29",
+        "2024-07-30",
+        "2024-07-31",
+        "2024-08-01",
+        "2024-08-02"
+      ],
+      "closes": [
+        77.09,
+        74,
+        84.69,
+        86.43,
+        86.37,
+        83.44,
+        84.06,
+        83.23,
+        82.49,
+        84.57,
+        84,
+        80,
+        79.26,
+        82.15,
+        83.23,
+        83.89,
+        82.5,
+        81.48,
+        82.7,
+        81.64,
+        83.67,
+        83.23,
+        81.91,
+        80.38,
+        77.35,
+        76.54,
+        75.65,
+        77.52,
+        78.46,
+        80.84,
+        77.18,
+        78.58,
+        78.05,
+        81.21,
+        80.48,
+        83.12,
+        83.22,
+        84.82,
+        83.68,
+        86.96,
+        86.8,
+        85.18,
+        84.71,
+        84.36,
+        82.01,
+        84.86,
+        87.93,
+        86.53,
+        80.19,
+        80.93,
+        81.8,
+        83.24,
+        83.81,
+        78.68,
+        76.17,
+        77.53,
+        76.85,
+        74.83,
+        77.1,
+        75.09,
+        68.72
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 3233767,
+      "entry_day_volume": 4367960.0,
+      "entry_day_vs_avg": 1.35,
+      "volume_spikes_3x": 1,
+      "top_volume_spikes": [
+        {
+          "date": "2024-06-28",
+          "volume": 10782601.0,
+          "ratio": 3.33,
+          "days_before_entry": 24
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 21.51,
+        "30_day": 42.85,
+        "oversold": true
+      },
+      "moving_averages": {
+        "sma_20": 80.526,
+        "sma_50": 80.9404,
+        "sma_90": null,
+        "price_vs_sma20_pct": -14.66,
+        "price_vs_sma50_pct": -15.1
+      },
+      "macd": {
+        "macd_line": -2.417,
+        "bullish": false,
+        "ema_12": 77.0072,
+        "ema_26": 79.4242
+      },
+      "bollinger_bands": {
+        "middle": 80.526,
+        "upper": 89.9468,
+        "lower": 71.1052,
+        "bandwidth_pct": 23.4,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "APP",
+    "company_name": "APP",
+    "entry_date": "2024-08-05",
+    "search_window": {
+      "start": "2024-05-07",
+      "end": "2024-08-05",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"APP\" OR \"APP\" after:2024-05-07 before:2024-08-05",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"APP\" OR \"APP\" (catalyst OR announcement OR approval OR contract OR earnings) after:2024-05-07 before:2024-08-05",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"APP\" OR \"APP\" (insider OR \"Form 4\" OR \"insider buying\") after:2024-05-07 before:2024-08-05",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 61,
+    "patterns_found": 0,
+    "volume_spikes_detected": 1,
+    "rsi_oversold": true,
+    "gain_category": "moderate",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "RSI Oversold (<30)",
+      "1 Volume Spikes (3x+)"
+    ]
+  }
+}

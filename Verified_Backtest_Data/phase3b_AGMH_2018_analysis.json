@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:13",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "AGMH",
+    "company_name": "AGMH",
+    "entry_date": "2018-04-18",
+    "peak_date": "2018-10-01",
+    "gain_percent": 725.41,
+    "days_to_peak": 115,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "error": "Insufficient data",
+    "ticker": "AGMH",
+    "days_available": 0
+  },
+  "catalyst_research": {
+    "ticker": "AGMH",
+    "company_name": "AGMH",
+    "entry_date": "2018-04-18",
+    "search_window": {
+      "start": "2018-01-18",
+      "end": "2018-04-18",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"AGMH\" OR \"AGMH\" after:2018-01-18 before:2018-04-18",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"AGMH\" OR \"AGMH\" (catalyst OR announcement OR approval OR contract OR earnings) after:2018-01-18 before:2018-04-18",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"AGMH\" OR \"AGMH\" (insider OR \"Form 4\" OR \"insider buying\") after:2018-01-18 before:2018-04-18",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "unknown",
+    "days_analyzed": 0,
+    "patterns_found": 0,
+    "volume_spikes_detected": 0,
+    "rsi_oversold": false,
+    "gain_category": "moderate",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": []
+  }
+}

@@ -1,0 +1,236 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:17:43",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "APM",
+    "company_name": "APM",
+    "entry_date": "2024-02-08",
+    "peak_date": "2024-03-06",
+    "gain_percent": 1158.27,
+    "days_to_peak": 18,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "APM",
+    "entry_date": "2024-02-08",
+    "days_analyzed": 57,
+    "data_quality": "acceptable",
+    "price_data": {
+      "entry_price": 1.4,
+      "high": 2.55,
+      "low": 1.4,
+      "price_range_pct": 82.14285714285714,
+      "dates": [
+        "2023-11-10",
+        "2023-11-15",
+        "2023-11-16",
+        "2023-11-17",
+        "2023-11-20",
+        "2023-11-21",
+        "2023-11-22",
+        "2023-11-24",
+        "2023-11-27",
+        "2023-11-28",
+        "2023-11-29",
+        "2023-11-30",
+        "2023-12-01",
+        "2023-12-04",
+        "2023-12-05",
+        "2023-12-06",
+        "2023-12-07",
+        "2023-12-08",
+        "2023-12-11",
+        "2023-12-12",
+        "2023-12-13",
+        "2023-12-14",
+        "2023-12-15",
+        "2023-12-18",
+        "2023-12-19",
+        "2023-12-20",
+        "2023-12-21",
+        "2023-12-22",
+        "2023-12-26",
+        "2023-12-27",
+        "2023-12-28",
+        "2023-12-29",
+        "2024-01-02",
+        "2024-01-03",
+        "2024-01-04",
+        "2024-01-05",
+        "2024-01-08",
+        "2024-01-09",
+        "2024-01-10",
+        "2024-01-11",
+        "2024-01-12",
+        "2024-01-16",
+        "2024-01-17",
+        "2024-01-18",
+        "2024-01-19",
+        "2024-01-22",
+        "2024-01-23",
+        "2024-01-25",
+        "2024-01-26",
+        "2024-01-29",
+        "2024-01-30",
+        "2024-01-31",
+        "2024-02-01",
+        "2024-02-02",
+        "2024-02-05",
+        "2024-02-06",
+        "2024-02-07"
+      ],
+      "closes": [
+        1.58,
+        1.54,
+        1.55,
+        1.68,
+        1.49,
+        1.615,
+        1.6,
+        1.6298,
+        1.63,
+        1.54,
+        1.655,
+        1.69,
+        1.68,
+        1.7201,
+        1.86,
+        1.9,
+        1.96,
+        2.02,
+        2.25,
+        2.07,
+        2.1301,
+        2.11,
+        1.9802,
+        2.05,
+        2.04,
+        2.01,
+        2.19,
+        2.1,
+        2.33,
+        2.55,
+        2.49,
+        2.4486,
+        2.19,
+        2.09,
+        2.4641,
+        2.23,
+        2.22,
+        2.22,
+        2.11,
+        2.025,
+        1.98,
+        1.79,
+        1.78,
+        1.78,
+        1.7,
+        1.74,
+        1.6901,
+        1.5,
+        1.8,
+        1.6823,
+        1.57,
+        1.68,
+        1.5,
+        1.53,
+        1.56,
+        1.44,
+        1.4
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 7077,
+      "entry_day_volume": 2862,
+      "entry_day_vs_avg": 0.4,
+      "volume_spikes_3x": 1,
+      "top_volume_spikes": [
+        {
+          "date": "2023-12-27",
+          "volume": 50070,
+          "ratio": 7.07,
+          "days_before_entry": 27
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 36.43,
+        "30_day": 38.58,
+        "oversold": false
+      },
+      "moving_averages": {
+        "sma_20": 1.7239,
+        "sma_50": 1.9141,
+        "sma_90": null,
+        "price_vs_sma20_pct": -18.79,
+        "price_vs_sma50_pct": -26.86
+      },
+      "macd": {
+        "macd_line": -0.1417,
+        "bullish": false,
+        "ema_12": 1.5966,
+        "ema_26": 1.7383
+      },
+      "bollinger_bands": {
+        "middle": 1.7239,
+        "upper": 2.1592,
+        "lower": 1.2886,
+        "bandwidth_pct": 50.5,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "APM",
+    "company_name": "APM",
+    "entry_date": "2024-02-08",
+    "search_window": {
+      "start": "2023-11-10",
+      "end": "2024-02-08",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"APM\" OR \"APM\" after:2023-11-10 before:2024-02-08",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"APM\" OR \"APM\" (catalyst OR announcement OR approval OR contract OR earnings) after:2023-11-10 before:2024-02-08",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"APM\" OR \"APM\" (insider OR \"Form 4\" OR \"insider buying\") after:2023-11-10 before:2024-02-08",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "acceptable",
+    "days_analyzed": 57,
+    "patterns_found": 0,
+    "volume_spikes_detected": 1,
+    "rsi_oversold": false,
+    "gain_category": "high",
+    "speed_category": "fast",
+    "searches_generated": 3,
+    "key_signals": [
+      "1 Volume Spikes (3x+)"
+    ]
+  }
+}

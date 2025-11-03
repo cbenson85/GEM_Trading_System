@@ -1,0 +1,246 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 05:18:05",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "ALAR",
+    "company_name": "ALAR",
+    "entry_date": "2023-07-26",
+    "peak_date": "2024-04-08",
+    "gain_percent": 1319.43,
+    "days_to_peak": 176,
+    "role": "Sustainable explosive stock"
+  },
+  "price_volume_data": {
+    "ticker": "ALAR",
+    "entry_date": "2023-07-26",
+    "days_analyzed": 61,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 2.18,
+      "high": 3.28,
+      "low": 1.92,
+      "price_range_pct": 70.83333333333333,
+      "dates": [
+        "2023-04-27",
+        "2023-04-28",
+        "2023-05-01",
+        "2023-05-02",
+        "2023-05-03",
+        "2023-05-04",
+        "2023-05-05",
+        "2023-05-08",
+        "2023-05-09",
+        "2023-05-10",
+        "2023-05-11",
+        "2023-05-12",
+        "2023-05-15",
+        "2023-05-16",
+        "2023-05-17",
+        "2023-05-18",
+        "2023-05-19",
+        "2023-05-22",
+        "2023-05-23",
+        "2023-05-24",
+        "2023-05-25",
+        "2023-05-26",
+        "2023-05-30",
+        "2023-05-31",
+        "2023-06-01",
+        "2023-06-02",
+        "2023-06-05",
+        "2023-06-06",
+        "2023-06-07",
+        "2023-06-08",
+        "2023-06-09",
+        "2023-06-12",
+        "2023-06-13",
+        "2023-06-14",
+        "2023-06-15",
+        "2023-06-16",
+        "2023-06-20",
+        "2023-06-21",
+        "2023-06-22",
+        "2023-06-23",
+        "2023-06-26",
+        "2023-06-27",
+        "2023-06-28",
+        "2023-06-29",
+        "2023-06-30",
+        "2023-07-03",
+        "2023-07-05",
+        "2023-07-06",
+        "2023-07-07",
+        "2023-07-10",
+        "2023-07-11",
+        "2023-07-12",
+        "2023-07-13",
+        "2023-07-14",
+        "2023-07-17",
+        "2023-07-18",
+        "2023-07-19",
+        "2023-07-20",
+        "2023-07-21",
+        "2023-07-24",
+        "2023-07-25"
+      ],
+      "closes": [
+        1.92,
+        1.95,
+        1.9746,
+        2.0631,
+        2,
+        1.95,
+        2.03,
+        1.93,
+        1.93,
+        1.9861,
+        1.95,
+        1.985,
+        2.045,
+        2.01,
+        1.94,
+        1.95,
+        1.99,
+        1.9778,
+        2.04,
+        2.07,
+        2.16,
+        3.15,
+        3.28,
+        3,
+        2.7236,
+        2.55,
+        2.49,
+        2.35,
+        2.3725,
+        2.35,
+        2.36,
+        2.3799,
+        2.38,
+        2.14,
+        2.42,
+        2.31,
+        2.3,
+        2.31,
+        2.27,
+        2.36,
+        2.435,
+        2.37,
+        2.32,
+        2.44,
+        2.41,
+        2.4601,
+        2.45,
+        2.41,
+        2.34,
+        2.4,
+        2.4,
+        2.4878,
+        2.4609,
+        2.42,
+        2.32,
+        2.3501,
+        2.34,
+        2.255,
+        2.24,
+        2.2027,
+        2.18
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 22821,
+      "entry_day_volume": 9293,
+      "entry_day_vs_avg": 0.41,
+      "volume_spikes_3x": 1,
+      "top_volume_spikes": [
+        {
+          "date": "2023-07-06",
+          "volume": 81529,
+          "ratio": 3.57,
+          "days_before_entry": 13
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 28.43,
+        "30_day": 45.07,
+        "oversold": true
+      },
+      "moving_averages": {
+        "sma_20": 2.3628,
+        "sma_50": 2.3471,
+        "sma_90": null,
+        "price_vs_sma20_pct": -7.74,
+        "price_vs_sma50_pct": -7.12
+      },
+      "macd": {
+        "macd_line": -0.0235,
+        "bullish": false,
+        "ema_12": 2.3018,
+        "ema_26": 2.3253
+      },
+      "bollinger_bands": {
+        "middle": 2.3628,
+        "upper": 2.5357,
+        "lower": 2.1899,
+        "bandwidth_pct": 14.63,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": true,
+      "price_consolidation": true,
+      "count": 2
+    }
+  },
+  "catalyst_research": {
+    "ticker": "ALAR",
+    "company_name": "ALAR",
+    "entry_date": "2023-07-26",
+    "search_window": {
+      "start": "2023-04-27",
+      "end": "2023-07-26",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"ALAR\" OR \"ALAR\" after:2023-04-27 before:2023-07-26",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"ALAR\" OR \"ALAR\" (catalyst OR announcement OR approval OR contract OR earnings) after:2023-04-27 before:2023-07-26",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"ALAR\" OR \"ALAR\" (insider OR \"Form 4\" OR \"insider buying\") after:2023-04-27 before:2023-07-26",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 61,
+    "patterns_found": 2,
+    "volume_spikes_detected": 1,
+    "rsi_oversold": true,
+    "gain_category": "high",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "RSI Oversold (<30)",
+      "1 Volume Spikes (3x+)",
+      "2 Patterns Detected"
+    ]
+  }
+}
