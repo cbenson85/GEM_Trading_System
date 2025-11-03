@@ -1,20 +1,59 @@
 {
-  "pilot_date": "2025-11-03T01:07:43.754735",
-  "stocks_analyzed": 2,
-  "successful": 2,
-  "failed": 0,
-  "results": [
+  "metadata": {
+    "analysis_date": {
+      "data_quality": "unknown",
+      "days_analyzed": 0,
+      "patterns_found": 0,
+      "volume_spikes_detected": 0,
+      "rsi_oversold": false,
+      "gain_category": "baseline",
+      "speed_category": "ultra_fast",
+      "searches_generated": 0,
+      "key_signals": []
+    },
+    "phase": "3B_PILOT",
+    "stocks_analyzed": 2,
+    "framework": "90-day pre-catalyst window"
+  },
+  "stocks": [
     {
       "ticker": "AENTW",
-      "year": 2024,
       "status": "success",
-      "file": "Verified_Backtest_Data/phase3b_AENTW_2024_analysis.json"
+      "file": "phase3b_AENTW_2024_analysis.json",
+      "summary": {
+        "data_quality": "partial",
+        "days_analyzed": 26,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "extreme",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)"
+        ]
+      }
     },
     {
       "ticker": "ASNS",
-      "year": 2024,
       "status": "success",
-      "file": "Verified_Backtest_Data/phase3b_ASNS_2024_analysis.json"
+      "file": "phase3b_ASNS_2024_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 1,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "ultra_fast",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Volume Spikes (3x+)",
+          "1 Patterns Detected"
+        ]
+      }
     }
-  ]
+  ],
+  "success_count": 2,
+  "error_count": 0
 }

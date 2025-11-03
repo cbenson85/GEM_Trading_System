@@ -1,845 +1,253 @@
 {
   "metadata": {
+    "analysis_date": "2025-11-03 03:03:27",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
     "ticker": "ASNS",
-    "year": 2024,
+    "company_name": "Actelis Networks Inc",
     "entry_date": "2024-05-31",
+    "peak_date": "2024-06-03",
     "gain_percent": 955.05,
     "days_to_peak": 3,
-    "role": "Test rapid explosion patterns",
-    "analysis_date": "2025-11-03T01:07:43.753416"
+    "role": "Ultra-fast explosion pattern"
   },
-  "price_volume": {
-    "daily_data": [
-      {
-        "date": "2024-02-01",
-        "open": 1.17,
-        "high": 1.21,
-        "low": 1.1218,
-        "close": 1.13,
-        "volume": 45290,
-        "vwap": 1.1636
-      },
-      {
-        "date": "2024-02-02",
-        "open": 1.15,
-        "high": 1.18,
-        "low": 1.15,
-        "close": 1.15,
-        "volume": 2764,
-        "vwap": 1.1648
-      },
-      {
-        "date": "2024-02-05",
-        "open": 1.14,
-        "high": 1.17,
-        "low": 1.14,
-        "close": 1.17,
-        "volume": 3796,
-        "vwap": 1.148
-      },
-      {
-        "date": "2024-02-06",
-        "open": 1.1604,
-        "high": 1.1604,
-        "low": 1.12,
-        "close": 1.1342,
-        "volume": 13604,
-        "vwap": 1.1417
-      },
-      {
-        "date": "2024-02-07",
-        "open": 1.13,
-        "high": 1.17,
-        "low": 1.122,
-        "close": 1.13,
-        "volume": 7966,
-        "vwap": 1.1389
-      },
-      {
-        "date": "2024-02-08",
-        "open": 1.14,
-        "high": 1.15,
-        "low": 1.12,
-        "close": 1.15,
-        "volume": 7440,
-        "vwap": 1.1346
-      },
-      {
-        "date": "2024-02-09",
-        "open": 1.143,
-        "high": 1.19,
-        "low": 1.14,
-        "close": 1.19,
-        "volume": 11835,
-        "vwap": 1.1778
-      },
-      {
-        "date": "2024-02-12",
-        "open": 1.19,
-        "high": 1.19,
-        "low": 1.17,
-        "close": 1.17,
-        "volume": 8364,
-        "vwap": 1.1795
-      },
-      {
-        "date": "2024-02-13",
-        "open": 1.14,
-        "high": 1.14,
-        "low": 1.13,
-        "close": 1.14,
-        "volume": 1343,
-        "vwap": 1.1413
-      },
-      {
-        "date": "2024-02-14",
-        "open": 1.19,
-        "high": 1.2,
-        "low": 1.08,
-        "close": 1.1797,
-        "volume": 47694,
-        "vwap": 1.1523
-      },
-      {
-        "date": "2024-02-15",
-        "open": 1.13,
-        "high": 1.15,
-        "low": 1.08,
-        "close": 1.117,
-        "volume": 28057,
-        "vwap": 1.1154
-      },
-      {
-        "date": "2024-02-16",
-        "open": 1.14,
-        "high": 1.19,
-        "low": 1.09,
-        "close": 1.12,
-        "volume": 16061,
-        "vwap": 1.1266
-      },
-      {
-        "date": "2024-02-20",
-        "open": 1.1,
-        "high": 1.1726,
-        "low": 1.1,
-        "close": 1.12,
-        "volume": 3501,
-        "vwap": 1.129
-      },
-      {
-        "date": "2024-02-21",
-        "open": 1.15,
-        "high": 1.15,
-        "low": 1.1,
-        "close": 1.125,
-        "volume": 6734,
-        "vwap": 1.1243
-      },
-      {
-        "date": "2024-02-22",
-        "open": 1.12,
-        "high": 1.1385,
-        "low": 1.1,
-        "close": 1.1,
-        "volume": 3451,
-        "vwap": 1.1287
-      },
-      {
-        "date": "2024-02-23",
-        "open": 1.18,
-        "high": 1.18,
-        "low": 1.13,
-        "close": 1.18,
-        "volume": 2263,
-        "vwap": 1.1657
-      },
-      {
-        "date": "2024-02-26",
-        "open": 1.18,
-        "high": 1.18,
-        "low": 1.1488,
-        "close": 1.18,
-        "volume": 14229,
-        "vwap": 1.1763
-      },
-      {
-        "date": "2024-02-27",
-        "open": 1.21,
-        "high": 1.21,
-        "low": 1.103,
-        "close": 1.1594,
-        "volume": 11636,
-        "vwap": 1.1583
-      },
-      {
-        "date": "2024-02-28",
-        "open": 1.17,
-        "high": 1.19,
-        "low": 1.1,
-        "close": 1.15,
-        "volume": 13312,
-        "vwap": 1.16
-      },
-      {
-        "date": "2024-02-29",
-        "open": 1.13,
-        "high": 1.15,
-        "low": 1.08,
-        "close": 1.09,
-        "volume": 46383,
-        "vwap": 1.125
-      },
-      {
-        "date": "2024-03-01",
-        "open": 1.11,
-        "high": 1.1442,
-        "low": 1.1,
-        "close": 1.1,
-        "volume": 16493,
-        "vwap": 1.1152
-      },
-      {
-        "date": "2024-03-04",
-        "open": 1.1151,
-        "high": 1.1151,
-        "low": 1,
-        "close": 1.07,
-        "volume": 33560,
-        "vwap": 1.0758
-      },
-      {
-        "date": "2024-03-05",
-        "open": 1.07,
-        "high": 1.09,
-        "low": 1.05,
-        "close": 1.08,
-        "volume": 8841,
-        "vwap": 1.0701
-      },
-      {
-        "date": "2024-03-06",
-        "open": 1.055,
-        "high": 1.11,
-        "low": 1.03,
-        "close": 1.0602,
-        "volume": 34947,
-        "vwap": 1.0618
-      },
-      {
-        "date": "2024-03-07",
-        "open": 1.08,
-        "high": 1.1,
-        "low": 1.0701,
-        "close": 1.0701,
-        "volume": 4843,
-        "vwap": 1.0917
-      },
-      {
-        "date": "2024-03-08",
-        "open": 1.1,
-        "high": 1.13,
-        "low": 1.09,
-        "close": 1.1,
-        "volume": 5692,
-        "vwap": 1.1028
-      },
-      {
-        "date": "2024-03-11",
-        "open": 1.16,
-        "high": 1.16,
-        "low": 1.1,
-        "close": 1.14,
-        "volume": 8964,
-        "vwap": 1.1347
-      },
-      {
-        "date": "2024-03-12",
-        "open": 1.0671,
-        "high": 1.116,
-        "low": 1.06,
-        "close": 1.09,
-        "volume": 14834,
-        "vwap": 1.0895
-      },
-      {
-        "date": "2024-03-13",
-        "open": 1.104,
-        "high": 1.11,
-        "low": 1.04,
-        "close": 1.04,
-        "volume": 18729,
-        "vwap": 1.081
-      },
-      {
-        "date": "2024-03-14",
-        "open": 1.1199,
-        "high": 1.1199,
-        "low": 1.03,
-        "close": 1.0891,
-        "volume": 7188,
-        "vwap": 1.0735
-      },
-      {
-        "date": "2024-03-15",
-        "open": 1.09,
-        "high": 1.09,
-        "low": 1.03,
-        "close": 1.03,
-        "volume": 5834,
-        "vwap": 1.0447
-      },
-      {
-        "date": "2024-03-18",
-        "open": 1.02,
-        "high": 1.11,
-        "low": 0.967,
-        "close": 0.99,
-        "volume": 13812,
-        "vwap": 1.0144
-      },
-      {
-        "date": "2024-03-19",
-        "open": 0.99,
-        "high": 1.04,
-        "low": 0.96,
-        "close": 1,
-        "volume": 2022,
-        "vwap": 1.0065
-      },
-      {
-        "date": "2024-03-20",
-        "open": 1.01,
-        "high": 1.06,
-        "low": 1.01,
-        "close": 1.0501,
-        "volume": 7492,
-        "vwap": 1.0382
-      },
-      {
-        "date": "2024-03-21",
-        "open": 1.02,
-        "high": 1.05,
-        "low": 1.02,
-        "close": 1.035,
-        "volume": 5871,
-        "vwap": 1.0319
-      },
-      {
-        "date": "2024-03-22",
-        "open": 1.05,
-        "high": 1.06,
-        "low": 1.03,
-        "close": 1.06,
-        "volume": 1031,
-        "vwap": 1.0478
-      },
-      {
-        "date": "2024-03-25",
-        "open": 1.04,
-        "high": 1.045,
-        "low": 1.03,
-        "close": 1.03,
-        "volume": 7563,
-        "vwap": 1.0845
-      },
-      {
-        "date": "2024-03-26",
-        "open": 1.0301,
-        "high": 1.12,
-        "low": 1.02,
-        "close": 1.03,
-        "volume": 8876,
-        "vwap": 1.047
-      },
-      {
-        "date": "2024-03-27",
-        "open": 1.01,
-        "high": 1.0311,
-        "low": 0.9513,
-        "close": 1.0311,
-        "volume": 4764,
-        "vwap": 1.0061
-      },
-      {
-        "date": "2024-03-28",
-        "open": 1.05,
-        "high": 1.05,
-        "low": 1.03,
-        "close": 1.03,
-        "volume": 2709,
-        "vwap": 1.0354
-      },
-      {
-        "date": "2024-04-01",
-        "open": 1.1055,
-        "high": 1.12,
-        "low": 1.03,
-        "close": 1.03,
-        "volume": 10040,
-        "vwap": 1.108
-      },
-      {
-        "date": "2024-04-02",
-        "open": 1.04,
-        "high": 1.05,
-        "low": 0.9836,
-        "close": 0.9836,
-        "volume": 12376,
-        "vwap": 1.0141
-      },
-      {
-        "date": "2024-04-03",
-        "open": 1,
-        "high": 1.05,
-        "low": 0.9672,
-        "close": 0.9702,
-        "volume": 59683,
-        "vwap": 1.0034
-      },
-      {
-        "date": "2024-04-04",
-        "open": 1,
-        "high": 1.04,
-        "low": 0.984949,
-        "close": 1.02,
-        "volume": 14384,
-        "vwap": 1.014
-      },
-      {
-        "date": "2024-04-05",
-        "open": 1.001,
-        "high": 1.02,
-        "low": 0.9147,
-        "close": 1,
-        "volume": 9934,
-        "vwap": 0.9886
-      },
-      {
-        "date": "2024-04-08",
-        "open": 0.9999,
-        "high": 1,
-        "low": 0.91,
-        "close": 0.91,
-        "volume": 24057,
-        "vwap": 0.9509
-      },
-      {
-        "date": "2024-04-09",
-        "open": 0.98,
-        "high": 0.98,
-        "low": 0.91,
-        "close": 0.92,
-        "volume": 7078,
-        "vwap": 0.9299
-      },
-      {
-        "date": "2024-04-10",
-        "open": 0.930101,
-        "high": 0.955,
-        "low": 0.91,
-        "close": 0.91,
-        "volume": 6217,
-        "vwap": 0.9273
-      },
-      {
-        "date": "2024-04-11",
-        "open": 0.92,
-        "high": 0.92,
-        "low": 0.88,
-        "close": 0.89,
-        "volume": 14350,
-        "vwap": 0.9046
-      },
-      {
-        "date": "2024-04-12",
-        "open": 0.9,
-        "high": 0.945,
-        "low": 0.8299,
-        "close": 0.8571,
-        "volume": 20529,
-        "vwap": 0.8606
-      },
-      {
-        "date": "2024-04-15",
-        "open": 0.835,
-        "high": 0.86,
-        "low": 0.6604,
-        "close": 0.726,
-        "volume": 42062,
-        "vwap": 0.7704
-      },
-      {
-        "date": "2024-04-16",
-        "open": 0.7,
-        "high": 0.75,
-        "low": 0.620001,
-        "close": 0.6791,
-        "volume": 17775,
-        "vwap": 0.6942
-      },
-      {
-        "date": "2024-04-17",
-        "open": 0.675,
-        "high": 0.68,
-        "low": 0.6519,
-        "close": 0.6712,
-        "volume": 23346,
-        "vwap": 0.6752
-      },
-      {
-        "date": "2024-04-18",
-        "open": 0.6702,
-        "high": 0.7,
-        "low": 0.6702,
-        "close": 0.6801,
-        "volume": 3641,
-        "vwap": 0.6892
-      },
-      {
-        "date": "2024-04-19",
-        "open": 0.7102,
-        "high": 0.83,
-        "low": 0.7102,
-        "close": 0.803699,
-        "volume": 18407,
-        "vwap": 0.76
-      },
-      {
-        "date": "2024-04-22",
-        "open": 0.761,
-        "high": 0.8293,
-        "low": 0.7152,
-        "close": 0.7302,
-        "volume": 7517,
-        "vwap": 0.7389
-      },
-      {
-        "date": "2024-04-23",
-        "open": 0.74,
-        "high": 0.8299,
-        "low": 0.74,
-        "close": 0.7754,
-        "volume": 2446,
-        "vwap": 0.7718
-      },
-      {
-        "date": "2024-04-24",
-        "open": 0.72,
-        "high": 0.7998,
-        "low": 0.72,
-        "close": 0.796,
-        "volume": 2463,
-        "vwap": 0.7494
-      },
-      {
-        "date": "2024-04-25",
-        "open": 0.741,
-        "high": 0.75,
-        "low": 0.74,
-        "close": 0.75,
-        "volume": 1878,
-        "vwap": 0.7453
-      },
-      {
-        "date": "2024-04-26",
-        "open": 0.751,
-        "high": 0.79,
-        "low": 0.74,
-        "close": 0.78,
-        "volume": 9605,
-        "vwap": 0.7691
-      },
-      {
-        "date": "2024-04-29",
-        "open": 0.751,
-        "high": 0.77,
-        "low": 0.75,
-        "close": 0.75,
-        "volume": 4579,
-        "vwap": 0.7519
-      },
-      {
-        "date": "2024-04-30",
-        "open": 0.75,
-        "high": 0.7799,
-        "low": 0.69,
-        "close": 0.7799,
-        "volume": 4190,
-        "vwap": 0.7292
-      },
-      {
-        "date": "2024-05-01",
-        "open": 0.76,
-        "high": 0.7899,
-        "low": 0.7101,
-        "close": 0.7899,
-        "volume": 1380,
-        "vwap": 0.7543
-      },
-      {
-        "date": "2024-05-02",
-        "open": 0.7855,
-        "high": 0.8295,
-        "low": 0.56,
-        "close": 0.6,
-        "volume": 3851287.0,
-        "vwap": 0.9272
-      },
-      {
-        "date": "2024-05-03",
-        "open": 0.58,
-        "high": 0.68,
-        "low": 0.57,
-        "close": 0.629,
-        "volume": 215320,
-        "vwap": 0.6137
-      },
-      {
-        "date": "2024-05-06",
-        "open": 0.67,
-        "high": 0.6703,
-        "low": 0.5855,
-        "close": 0.6121,
-        "volume": 217318,
-        "vwap": 0.6462
-      },
-      {
-        "date": "2024-05-07",
-        "open": 0.5937,
-        "high": 0.6273,
-        "low": 0.58,
-        "close": 0.5959,
-        "volume": 39198,
-        "vwap": 0.5941
-      },
-      {
-        "date": "2024-05-08",
-        "open": 0.585,
-        "high": 0.6239,
-        "low": 0.577499,
-        "close": 0.58,
-        "volume": 72113,
-        "vwap": 0.5903
-      },
-      {
-        "date": "2024-05-09",
-        "open": 0.5878,
-        "high": 0.628,
-        "low": 0.53,
-        "close": 0.57,
-        "volume": 99354,
-        "vwap": 0.5823
-      },
-      {
-        "date": "2024-05-10",
-        "open": 0.598,
-        "high": 0.6,
-        "low": 0.534999,
-        "close": 0.5625,
-        "volume": 115710,
-        "vwap": 0.5609
-      },
-      {
-        "date": "2024-05-13",
-        "open": 0.5456,
-        "high": 0.5803,
-        "low": 0.4546,
-        "close": 0.539899,
-        "volume": 119252,
-        "vwap": 0.5427
-      },
-      {
-        "date": "2024-05-14",
-        "open": 0.4996,
-        "high": 0.5671,
-        "low": 0.4996,
-        "close": 0.551,
-        "volume": 75573,
-        "vwap": 0.5131
-      },
-      {
-        "date": "2024-05-15",
-        "open": 0.5193,
-        "high": 0.55045,
-        "low": 0.5009,
-        "close": 0.5462,
-        "volume": 63890,
-        "vwap": 0.5303
-      },
-      {
-        "date": "2024-05-16",
-        "open": 0.54,
-        "high": 0.57,
-        "low": 0.511,
-        "close": 0.511,
-        "volume": 18294,
-        "vwap": 0.5339
-      },
-      {
-        "date": "2024-05-17",
-        "open": 0.530803,
-        "high": 0.54,
-        "low": 0.5,
-        "close": 0.521,
-        "volume": 25903,
-        "vwap": 0.5149
-      },
-      {
-        "date": "2024-05-20",
-        "open": 0.5,
-        "high": 0.5588,
-        "low": 0.5,
-        "close": 0.5134,
-        "volume": 14335,
-        "vwap": 0.5193
-      },
-      {
-        "date": "2024-05-21",
-        "open": 0.53,
-        "high": 0.5751,
-        "low": 0.51,
-        "close": 0.53,
-        "volume": 48780,
-        "vwap": 0.5471
-      },
-      {
-        "date": "2024-05-22",
-        "open": 0.5202,
-        "high": 0.5466,
-        "low": 0.52,
-        "close": 0.52,
-        "volume": 11503,
-        "vwap": 0.5317
-      },
-      {
-        "date": "2024-05-23",
-        "open": 0.72,
-        "high": 0.7889,
-        "low": 0.5325,
-        "close": 0.5452,
-        "volume": 13233142.0,
-        "vwap": 0.7402
-      },
-      {
-        "date": "2024-05-24",
-        "open": 0.5258,
-        "high": 0.545,
-        "low": 0.3598,
-        "close": 0.545,
-        "volume": 942474,
-        "vwap": 0.4804
-      },
-      {
-        "date": "2024-05-28",
-        "open": 0.4999,
-        "high": 0.54,
-        "low": 0.441,
-        "close": 0.4876,
-        "volume": 176812,
-        "vwap": 0.4823
-      },
-      {
-        "date": "2024-05-29",
-        "open": 0.4336,
-        "high": 0.495,
-        "low": 0.4186,
-        "close": 0.4797,
-        "volume": 201759,
-        "vwap": 0.4552
-      },
-      {
-        "date": "2024-05-30",
-        "open": 0.47,
-        "high": 0.484451,
-        "low": 0.4303,
-        "close": 0.484451,
-        "volume": 82439,
-        "vwap": 0.4569
-      },
-      {
-        "date": "2024-05-31",
-        "open": 0.4505,
-        "high": 0.4823,
-        "low": 0.436,
-        "close": 0.436,
-        "volume": 46793,
-        "vwap": 0.4602
+  "price_volume_data": {
+    "ticker": "ASNS",
+    "entry_date": "2024-05-31",
+    "days_analyzed": 62,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 0.484451,
+      "high": 1.14,
+      "low": 0.4797,
+      "price_range_pct": 137.64853033145715,
+      "dates": [
+        "2024-03-04",
+        "2024-03-05",
+        "2024-03-06",
+        "2024-03-07",
+        "2024-03-08",
+        "2024-03-11",
+        "2024-03-12",
+        "2024-03-13",
+        "2024-03-14",
+        "2024-03-15",
+        "2024-03-18",
+        "2024-03-19",
+        "2024-03-20",
+        "2024-03-21",
+        "2024-03-22",
+        "2024-03-25",
+        "2024-03-26",
+        "2024-03-27",
+        "2024-03-28",
+        "2024-04-01",
+        "2024-04-02",
+        "2024-04-03",
+        "2024-04-04",
+        "2024-04-05",
+        "2024-04-08",
+        "2024-04-09",
+        "2024-04-10",
+        "2024-04-11",
+        "2024-04-12",
+        "2024-04-15",
+        "2024-04-16",
+        "2024-04-17",
+        "2024-04-18",
+        "2024-04-19",
+        "2024-04-22",
+        "2024-04-23",
+        "2024-04-24",
+        "2024-04-25",
+        "2024-04-26",
+        "2024-04-29",
+        "2024-04-30",
+        "2024-05-01",
+        "2024-05-02",
+        "2024-05-03",
+        "2024-05-06",
+        "2024-05-07",
+        "2024-05-08",
+        "2024-05-09",
+        "2024-05-10",
+        "2024-05-13",
+        "2024-05-14",
+        "2024-05-15",
+        "2024-05-16",
+        "2024-05-17",
+        "2024-05-20",
+        "2024-05-21",
+        "2024-05-22",
+        "2024-05-23",
+        "2024-05-24",
+        "2024-05-28",
+        "2024-05-29",
+        "2024-05-30"
+      ],
+      "closes": [
+        1.07,
+        1.08,
+        1.0602,
+        1.0701,
+        1.1,
+        1.14,
+        1.09,
+        1.04,
+        1.0891,
+        1.03,
+        0.99,
+        1,
+        1.0501,
+        1.035,
+        1.06,
+        1.03,
+        1.03,
+        1.0311,
+        1.03,
+        1.03,
+        0.9836,
+        0.9702,
+        1.02,
+        1,
+        0.91,
+        0.92,
+        0.91,
+        0.89,
+        0.8571,
+        0.726,
+        0.6791,
+        0.6712,
+        0.6801,
+        0.803699,
+        0.7302,
+        0.7754,
+        0.796,
+        0.75,
+        0.78,
+        0.75,
+        0.7799,
+        0.7899,
+        0.6,
+        0.629,
+        0.6121,
+        0.5959,
+        0.58,
+        0.57,
+        0.5625,
+        0.539899,
+        0.551,
+        0.5462,
+        0.511,
+        0.521,
+        0.5134,
+        0.53,
+        0.52,
+        0.5452,
+        0.545,
+        0.4876,
+        0.4797,
+        0.484451
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 656018,
+      "entry_day_volume": 82439,
+      "entry_day_vs_avg": 0.13,
+      "volume_spikes_3x": 2,
+      "top_volume_spikes": [
+        {
+          "date": "2024-05-23",
+          "volume": 13233142.0,
+          "ratio": 20.17,
+          "days_before_entry": 4
+        },
+        {
+          "date": "2024-05-02",
+          "volume": 3851287.0,
+          "ratio": 5.87,
+          "days_before_entry": 19
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 30.63,
+        "30_day": 39.81,
+        "oversold": false
+      },
+      "moving_averages": {
+        "sma_20": 0.5462,
+        "sma_50": 0.7479,
+        "sma_90": null,
+        "price_vs_sma20_pct": -11.3,
+        "price_vs_sma50_pct": -35.22
+      },
+      "macd": {
+        "macd_line": -0.0719,
+        "bullish": false,
+        "ema_12": 0.5265,
+        "ema_26": 0.5984
+      },
+      "bollinger_bands": {
+        "middle": 0.5462,
+        "upper": 0.6289,
+        "lower": 0.4635,
+        "bandwidth_pct": 30.27,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": true,
+      "count": 1
+    }
+  },
+  "catalyst_research": {
+    "ticker": "ASNS",
+    "company_name": "Actelis Networks Inc",
+    "entry_date": "2024-05-31",
+    "search_window": {
+      "start": "2024-03-02",
+      "end": "2024-05-31",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"Actelis Networks Inc\" OR \"ASNS\" after:2024-03-02 before:2024-05-31",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"Actelis Networks Inc\" OR \"ASNS\" (catalyst OR announcement OR approval OR contract OR earnings) after:2024-03-02 before:2024-05-31",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"Actelis Networks Inc\" OR \"ASNS\" (insider OR \"Form 4\" OR \"insider buying\") after:2024-03-02 before:2024-05-31",
+        "purpose": "Insider activity",
+        "type": "insider"
       }
     ],
-    "consolidation_periods": []
-  },
-  "technical_indicators": {
-    "rsi_14": 25.84,
-    "rsi_30": 37.23,
-    "macd": {
-      "macd_line": -0.0736,
-      "signal_line": -0.0736,
-      "histogram": 0.0
-    },
-    "moving_averages": {
-      "sma_20": 0.54,
-      "sma_50": 0.74,
-      "sma_90": null
-    },
-    "bollinger_bands": {
-      "middle": 0.54,
-      "upper": 0.63,
-      "lower": 0.45,
-      "bandwidth": 34.1
-    },
-    "volume_sma_30": 657457.13
-  },
-  "volume_analysis": {
-    "avg_volume_30d": 657457,
-    "avg_volume_90d": 244035,
-    "current_vs_30d_avg": 0.07,
-    "volume_spikes_3x": 2,
-    "spikes_detail": [
-      {
-        "date": "2024-05-02",
-        "volume": 3851287.0,
-        "vs_avg": 5.86,
-        "price_change_pct": -23.62
-      },
-      {
-        "date": "2024-05-23",
-        "volume": 13233142.0,
-        "vs_avg": 20.13,
-        "price_change_pct": -24.28
-      }
-    ]
-  },
-  "patterns_detected": [
-    {
-      "pattern": "RSI Oversold + MACD Bullish",
-      "confidence": "medium",
-      "description": "Oversold with momentum turning positive",
-      "detected_date": "2024-05-31"
-    }
-  ],
-  "float_ownership": {
-    "note": "Manual collection required - SEC Form 4, 13F",
-    "insider_transactions": [],
-    "institutional_changes": [],
-    "short_interest": {}
-  },
-  "catalyst_intelligence": {
-    "note": "Manual research required",
-    "catalyst_type": "TBD",
-    "catalyst_date": "TBD",
-    "predictability": "TBD"
-  },
-  "news_sentiment": {
-    "note": "Manual collection required",
-    "article_counts": {},
-    "sentiment_scores": {},
-    "social_mentions": {}
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
   },
   "summary": {
-    "days_analyzed": 84,
-    "patterns_found": 1,
     "data_quality": "good",
-    "actionability": "TBD - pending manual data"
+    "days_analyzed": 62,
+    "patterns_found": 1,
+    "volume_spikes_detected": 2,
+    "rsi_oversold": false,
+    "gain_category": "moderate",
+    "speed_category": "ultra_fast",
+    "searches_generated": 3,
+    "key_signals": [
+      "2 Volume Spikes (3x+)",
+      "1 Patterns Detected"
+    ]
   }
 }

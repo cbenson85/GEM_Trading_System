@@ -1,424 +1,150 @@
 {
   "metadata": {
+    "analysis_date": "2025-11-03 03:03:26",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
     "ticker": "AENTW",
-    "year": 2024,
+    "company_name": "Alliance Entertainment Holding Corporation Warrant",
     "entry_date": "2023-12-12",
+    "peak_date": "2024-06-07",
     "gain_percent": 12398.33,
     "days_to_peak": 177,
-    "role": "Test framework limits",
-    "analysis_date": "2025-11-03T01:07:43.038539"
+    "role": "Extreme outlier - test framework limits"
   },
-  "price_volume": {
-    "daily_data": [
+  "price_volume_data": {
+    "ticker": "AENTW",
+    "entry_date": "2023-12-12",
+    "days_analyzed": 26,
+    "data_quality": "partial",
+    "price_data": {
+      "entry_price": 0.0063,
+      "high": 0.03,
+      "low": 0.0062,
+      "price_range_pct": 383.87096774193543,
+      "dates": [
+        "2023-09-15",
+        "2023-09-18",
+        "2023-09-20",
+        "2023-09-21",
+        "2023-09-22",
+        "2023-09-25",
+        "2023-09-28",
+        "2023-09-29",
+        "2023-10-04",
+        "2023-10-05",
+        "2023-10-09",
+        "2023-10-11",
+        "2023-10-16",
+        "2023-10-25",
+        "2023-10-27",
+        "2023-11-01",
+        "2023-11-02",
+        "2023-11-06",
+        "2023-11-09",
+        "2023-11-15",
+        "2023-11-20",
+        "2023-11-24",
+        "2023-11-27",
+        "2023-12-04",
+        "2023-12-05",
+        "2023-12-11"
+      ],
+      "closes": [
+        0.03,
+        0.029,
+        0.025,
+        0.0199,
+        0.0154,
+        0.019,
+        0.0176,
+        0.019,
+        0.0191,
+        0.0157,
+        0.015,
+        0.011,
+        0.0111,
+        0.018,
+        0.0123,
+        0.0129,
+        0.0131,
+        0.0135,
+        0.0145,
+        0.013,
+        0.0111,
+        0.01,
+        0.0119,
+        0.0062,
+        0.0106,
+        0.0063
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 10506,
+      "entry_day_volume": 999,
+      "entry_day_vs_avg": 0.1,
+      "volume_spikes_3x": 1,
+      "top_volume_spikes": [
+        {
+          "date": "2023-09-20",
+          "volume": 141438,
+          "ratio": 13.46,
+          "days_before_entry": 23
+        }
+      ]
+    },
+    "technical_indicators": {
+      "error": "Insufficient data for technicals"
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "AENTW",
+    "company_name": "Alliance Entertainment Holding Corporation Warrant",
+    "entry_date": "2023-12-12",
+    "search_window": {
+      "start": "2023-09-13",
+      "end": "2023-12-12",
+      "days": 90
+    },
+    "searches_generated": [
       {
-        "date": "2023-08-14",
-        "open": 0.0356,
-        "high": 0.0356,
-        "low": 0.0356,
-        "close": 0.0356,
-        "volume": 100,
-        "vwap": 0.0356
+        "query": "\"Alliance Entertainment Holding Corporation Warrant\" OR \"AENTW\" after:2023-09-13 before:2023-12-12",
+        "purpose": "90-day pre-window news",
+        "type": "general"
       },
       {
-        "date": "2023-08-15",
-        "open": 0.035701,
-        "high": 0.037899,
-        "low": 0.03445,
-        "close": 0.037899,
-        "volume": 8953,
-        "vwap": 0.0354
+        "query": "\"Alliance Entertainment Holding Corporation Warrant\" OR \"AENTW\" (catalyst OR announcement OR approval OR contract OR earnings) after:2023-09-13 before:2023-12-12",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
       },
       {
-        "date": "2023-08-16",
-        "open": 0.0376,
-        "high": 0.038,
-        "low": 0.0376,
-        "close": 0.038,
-        "volume": 1000,
-        "vwap": 0.0379
-      },
-      {
-        "date": "2023-08-17",
-        "open": 0.0386,
-        "high": 0.0386,
-        "low": 0.0386,
-        "close": 0.0386,
-        "volume": 100,
-        "vwap": 0.0386
-      },
-      {
-        "date": "2023-08-21",
-        "open": 0.0301,
-        "high": 0.034549,
-        "low": 0.0301,
-        "close": 0.034549,
-        "volume": 400,
-        "vwap": 0.0312
-      },
-      {
-        "date": "2023-08-22",
-        "open": 0.039,
-        "high": 0.039,
-        "low": 0.039,
-        "close": 0.039,
-        "volume": 100,
-        "vwap": 0.039
-      },
-      {
-        "date": "2023-08-23",
-        "open": 0.0386,
-        "high": 0.0386,
-        "low": 0.0386,
-        "close": 0.0386,
-        "volume": 100,
-        "vwap": 0.0386
-      },
-      {
-        "date": "2023-08-24",
-        "open": 0.034549,
-        "high": 0.034549,
-        "low": 0.034549,
-        "close": 0.034549,
-        "volume": 100,
-        "vwap": 0.0346
-      },
-      {
-        "date": "2023-08-25",
-        "open": 0.0346,
-        "high": 0.0346,
-        "low": 0.03,
-        "close": 0.03,
-        "volume": 10900,
-        "vwap": 0.0301
-      },
-      {
-        "date": "2023-08-28",
-        "open": 0.0305,
-        "high": 0.0305,
-        "low": 0.0305,
-        "close": 0.0305,
-        "volume": 100,
-        "vwap": 0.0305
-      },
-      {
-        "date": "2023-09-06",
-        "open": 0.0267,
-        "high": 0.0267,
-        "low": 0.02,
-        "close": 0.02,
-        "volume": 7500,
-        "vwap": 0.0225
-      },
-      {
-        "date": "2023-09-15",
-        "open": 0.0294,
-        "high": 0.030101,
-        "low": 0.0294,
-        "close": 0.03,
-        "volume": 4450,
-        "vwap": 0.0298
-      },
-      {
-        "date": "2023-09-18",
-        "open": 0.0206,
-        "high": 0.029,
-        "low": 0.0206,
-        "close": 0.029,
-        "volume": 2100,
-        "vwap": 0.021
-      },
-      {
-        "date": "2023-09-20",
-        "open": 0.025,
-        "high": 0.025,
-        "low": 0.025,
-        "close": 0.025,
-        "volume": 200,
-        "vwap": 0.0243
-      },
-      {
-        "date": "2023-09-21",
-        "open": 0.0218,
-        "high": 0.0218,
-        "low": 0.0181,
-        "close": 0.0199,
-        "volume": 9500,
-        "vwap": 0.0192
-      },
-      {
-        "date": "2023-09-22",
-        "open": 0.0155,
-        "high": 0.0155,
-        "low": 0.0154,
-        "close": 0.0154,
-        "volume": 3300,
-        "vwap": 0.0155
-      },
-      {
-        "date": "2023-09-25",
-        "open": 0.0154,
-        "high": 0.019,
-        "low": 0.0154,
-        "close": 0.019,
-        "volume": 6800,
-        "vwap": 0.0183
-      },
-      {
-        "date": "2023-09-28",
-        "open": 0.0189,
-        "high": 0.05,
-        "low": 0.015,
-        "close": 0.0176,
-        "volume": 141438,
-        "vwap": 0.0353
-      },
-      {
-        "date": "2023-09-29",
-        "open": 0.0198,
-        "high": 0.0198,
-        "low": 0.019,
-        "close": 0.019,
-        "volume": 300,
-        "vwap": 0.0184
-      },
-      {
-        "date": "2023-10-04",
-        "open": 0.019,
-        "high": 0.0191,
-        "low": 0.019,
-        "close": 0.0191,
-        "volume": 2000,
-        "vwap": 0.0191
-      },
-      {
-        "date": "2023-10-05",
-        "open": 0.0175,
-        "high": 0.0176,
-        "low": 0.0156,
-        "close": 0.0157,
-        "volume": 1103,
-        "vwap": 0.0163
-      },
-      {
-        "date": "2023-10-09",
-        "open": 0.015201,
-        "high": 0.01755,
-        "low": 0.015,
-        "close": 0.015,
-        "volume": 4352,
-        "vwap": 0.0162
-      },
-      {
-        "date": "2023-10-11",
-        "open": 0.0171,
-        "high": 0.0171,
-        "low": 0.011,
-        "close": 0.011,
-        "volume": 2355,
-        "vwap": 0.012
-      },
-      {
-        "date": "2023-10-16",
-        "open": 0.0113,
-        "high": 0.0113,
-        "low": 0.01,
-        "close": 0.0111,
-        "volume": 26055,
-        "vwap": 0.0107
-      },
-      {
-        "date": "2023-10-25",
-        "open": 0.0122,
-        "high": 0.018,
-        "low": 0.0122,
-        "close": 0.018,
-        "volume": 200,
-        "vwap": 0.0151
-      },
-      {
-        "date": "2023-10-27",
-        "open": 0.0123,
-        "high": 0.0123,
-        "low": 0.0123,
-        "close": 0.0123,
-        "volume": 708,
-        "vwap": 0.0123
-      },
-      {
-        "date": "2023-11-01",
-        "open": 0.0129,
-        "high": 0.0129,
-        "low": 0.0129,
-        "close": 0.0129,
-        "volume": 578,
-        "vwap": 0.0129
-      },
-      {
-        "date": "2023-11-02",
-        "open": 0.0131,
-        "high": 0.016551,
-        "low": 0.0131,
-        "close": 0.0131,
-        "volume": 2400,
-        "vwap": 0.0138
-      },
-      {
-        "date": "2023-11-06",
-        "open": 0.0135,
-        "high": 0.0135,
-        "low": 0.01,
-        "close": 0.0135,
-        "volume": 11462,
-        "vwap": 0.0124
-      },
-      {
-        "date": "2023-11-09",
-        "open": 0.0145,
-        "high": 0.0145,
-        "low": 0.0145,
-        "close": 0.0145,
-        "volume": 501,
-        "vwap": 0.0145
-      },
-      {
-        "date": "2023-11-15",
-        "open": 0.013,
-        "high": 0.0131,
-        "low": 0.013,
-        "close": 0.013,
-        "volume": 2491,
-        "vwap": 0.013
-      },
-      {
-        "date": "2023-11-20",
-        "open": 0.013,
-        "high": 0.013,
-        "low": 0.011,
-        "close": 0.0111,
-        "volume": 9130,
-        "vwap": 0.0117
-      },
-      {
-        "date": "2023-11-24",
-        "open": 0.0112,
-        "high": 0.0112,
-        "low": 0.01,
-        "close": 0.01,
-        "volume": 21800,
-        "vwap": 0.0102
-      },
-      {
-        "date": "2023-11-27",
-        "open": 0.01195,
-        "high": 0.01195,
-        "low": 0.0119,
-        "close": 0.0119,
-        "volume": 1040,
-        "vwap": 0.0119
-      },
-      {
-        "date": "2023-12-04",
-        "open": 0.0109,
-        "high": 0.0109,
-        "low": 0.0062,
-        "close": 0.0062,
-        "volume": 11409,
-        "vwap": 0.0063
-      },
-      {
-        "date": "2023-12-05",
-        "open": 0.0062,
-        "high": 0.0106,
-        "low": 0.0062,
-        "close": 0.0106,
-        "volume": 6509,
-        "vwap": 0.0096
-      },
-      {
-        "date": "2023-12-11",
-        "open": 0.0064,
-        "high": 0.0064,
-        "low": 0.0063,
-        "close": 0.0063,
-        "volume": 999,
-        "vwap": 0.0063
-      },
-      {
-        "date": "2023-12-12",
-        "open": 0.0063,
-        "high": 0.0063,
-        "low": 0.006,
-        "close": 0.006,
-        "volume": 86014,
-        "vwap": 0.006
+        "query": "\"Alliance Entertainment Holding Corporation Warrant\" OR \"AENTW\" (insider OR \"Form 4\" OR \"insider buying\") after:2023-09-13 before:2023-12-12",
+        "purpose": "Insider activity",
+        "type": "insider"
       }
     ],
-    "consolidation_periods": []
-  },
-  "technical_indicators": {
-    "rsi_14": 42.9,
-    "rsi_30": 34.27,
-    "macd": {
-      "macd_line": -0.0057,
-      "signal_line": -0.0057,
-      "histogram": 0.0
-    },
-    "moving_averages": {
-      "sma_20": 0.01,
-      "sma_50": null,
-      "sma_90": null
-    },
-    "bollinger_bands": {
-      "middle": 0.01,
-      "upper": 0.02,
-      "lower": 0.01,
-      "bandwidth": 118.54
-    },
-    "volume_sma_30": 12589.8
-  },
-  "volume_analysis": {
-    "avg_volume_30d": 12589,
-    "avg_volume_90d": 10224,
-    "current_vs_30d_avg": 6.83,
-    "volume_spikes_3x": 2,
-    "spikes_detail": [
-      {
-        "date": "2023-09-28",
-        "volume": 141438,
-        "vs_avg": 11.23,
-        "price_change_pct": -6.88
-      },
-      {
-        "date": "2023-12-12",
-        "volume": 86014,
-        "vs_avg": 6.83,
-        "price_change_pct": -4.76
-      }
-    ]
-  },
-  "patterns_detected": [],
-  "float_ownership": {
-    "note": "Manual collection required - SEC Form 4, 13F",
-    "insider_transactions": [],
-    "institutional_changes": [],
-    "short_interest": {}
-  },
-  "catalyst_intelligence": {
-    "note": "Manual research required",
-    "catalyst_type": "TBD",
-    "catalyst_date": "TBD",
-    "predictability": "TBD"
-  },
-  "news_sentiment": {
-    "note": "Manual collection required",
-    "article_counts": {},
-    "sentiment_scores": {},
-    "social_mentions": {}
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
   },
   "summary": {
-    "days_analyzed": 38,
-    "patterns_found": 0,
     "data_quality": "partial",
-    "actionability": "TBD - pending manual data"
+    "days_analyzed": 26,
+    "patterns_found": 0,
+    "volume_spikes_detected": 1,
+    "rsi_oversold": false,
+    "gain_category": "extreme",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": [
+      "1 Volume Spikes (3x+)"
+    ]
   }
 }
