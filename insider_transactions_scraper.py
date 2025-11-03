@@ -23,12 +23,17 @@ class InsiderTransactionsScraper:
     def get_cik_from_ticker(self, ticker):
         """
         Convert ticker to CIK number using SEC API
+        Handles warrant symbols by stripping 'W' suffix
         """
+        # Strip warrant suffix if present
+        base_ticker = ticker.rstrip('W') if ticker.endswith('W') and len(ticker) > 2 else ticker
+        
         try:
-            url = f"https://www.sec.gov/cgi-bin/browse-edgar"
+            # Try base ticker first
+            url = "https://www.sec.gov/cgi-bin/browse-edgar"
             params = {
                 'action': 'getcompany',
-                'company': ticker,
+                'company': base_ticker,
                 'type': '',
                 'dateb': '',
                 'owner': 'exclude',
@@ -36,23 +41,48 @@ class InsiderTransactionsScraper:
                 'output': 'atom'
             }
             
+            time.sleep(0.5)  # Rate limit
             response = requests.get(url, params=params, headers=self.headers, timeout=30)
             
             if response.status_code != 200:
+                print(f"  SEC API returned status {response.status_code}")
                 return None
             
             # Parse CIK from response
             soup = BeautifulSoup(response.text, 'xml')
+            
+            # Try multiple parsing methods
+            # Method 1: Look for CIK in company-info
             company_info = soup.find('company-info')
-            
             if company_info:
-                cik = company_info.get_text().strip().split('\n')[0]
-                return cik.strip()
+                text = company_info.get_text().strip()
+                lines = text.split('\n')
+                for line in lines:
+                    if 'CIK' in line or line.isdigit():
+                        cik = ''.join(filter(str.isdigit, line))
+                        if cik:
+                            print(f"  Found CIK: {cik} for {base_ticker}")
+                            return cik.zfill(10)  # Pad to 10 digits
             
+            # Method 2: Look in feed entries
+            entries = soup.find_all('entry')
+            if entries:
+                # Found company, parse CIK from filing URL
+                for entry in entries[:1]:
+                    link = entry.find('link')
+                    if link and 'href' in link.attrs:
+                        href = link['href']
+                        # CIK is in URL like: /cgi-bin/browse-edgar?action=getcompany&CIK=0001234567
+                        if 'CIK=' in href:
+                            cik = href.split('CIK=')[1].split('&')[0]
+                            print(f"  Found CIK from filing: {cik} for {base_ticker}")
+                            return cik
+            
+            print(f"  Could not find CIK for {base_ticker}")
             return None
             
         except Exception as e:
-            print(f"  ERROR getting CIK: {e}")
+            print(f"  ERROR getting CIK for {base_ticker}: {e}")
             return None
     
     def scrape_form4_filings(self, ticker, entry_date):
@@ -120,7 +150,13 @@ class InsiderTransactionsScraper:
         
         start_date = entry_date - timedelta(days=90)
         
+        # Check if this is a warrant symbol
+        is_warrant = ticker.endswith('W') and len(ticker) > 2
+        base_ticker = ticker.rstrip('W') if is_warrant else ticker
+        
         print(f"\n📋 Analyzing Insider Transactions: {ticker}")
+        if is_warrant:
+            print(f"  Warrant detected - searching parent company: {base_ticker}")
         print(f"  Window: {start_date.date()} to {entry_date.date()}")
         
         # Scrape Form 4 filings
@@ -225,8 +261,8 @@ def analyze_multiple_stocks(stocks_file, output_dir='Verified_Backtest_Data'):
             
             results.append(result)
             
-            # Rate limiting - SEC requires 10 requests per second max
-            time.sleep(3)
+            # Rate limiting - SEC requires 10 requests per second max, be conservative
+            time.sleep(5)  # 5 seconds between stocks
             
         except Exception as e:
             print(f"  ❌ ERROR: {e}")
