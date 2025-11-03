@@ -39,7 +39,6 @@ jobs:
       run: |
         echo "Running correlation matrix builder..."
         python build_72stock_correlation_matrix.py
-      continue-on-error: false
     
     - name: Verify output
       run: |
@@ -56,18 +55,18 @@ jobs:
     - name: Display results
       if: success()
       run: |
-        python -c "
-import json
-with open('Verified_Backtest_Data/phase3b_correlation_matrix_72STOCKS.json', 'r') as f:
-    data = json.load(f)
-print('=' * 60)
-print('CORRELATION MATRIX RESULTS')
-print('=' * 60)
-print(f\"Stocks Analyzed: {data['statistics']['total_stocks']}\")
-print(f\"Volume Spikes: {data['pattern_frequencies']['volume_spikes']['frequency_pct']:.1f}%\")
-print(f\"RSI Oversold: {data['pattern_frequencies']['rsi_oversold']['frequency_pct']:.1f}%\")
-print('=' * 60)
-        "
+        python << 'EOF'
+        import json
+        with open('Verified_Backtest_Data/phase3b_correlation_matrix_72STOCKS.json', 'r') as f:
+            data = json.load(f)
+        print('=' * 60)
+        print('CORRELATION MATRIX RESULTS')
+        print('=' * 60)
+        print(f"Stocks Analyzed: {data['statistics']['total_stocks']}")
+        print(f"Volume Spikes: {data['pattern_frequencies']['volume_spikes']['frequency_pct']:.1f}%")
+        print(f"RSI Oversold: {data['pattern_frequencies']['rsi_oversold']['frequency_pct']:.1f}%")
+        print('=' * 60)
+        EOF
     
     - name: Commit results
       if: success()
