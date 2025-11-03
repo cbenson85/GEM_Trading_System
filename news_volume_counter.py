@@ -35,14 +35,34 @@ class NewsVolumeCounter:
             all_results = []
             
             for query in queries:
-                self.googlenews.clear()
-                self.googlenews.search(query)
-                results = self.googlenews.results()
-                
-                if results:
-                    all_results.extend(results)
-                
-                time.sleep(1)  # Rate limit
+                try:
+                    self.googlenews.clear()
+                    self.googlenews.search(query)
+                    results = self.googlenews.results()
+                    
+                    if results:
+                        all_results.extend(results)
+                    
+                    # Longer delay to avoid rate limits
+                    time.sleep(12)  # 12 seconds between queries
+                    
+                except Exception as e:
+                    if "429" in str(e) or "Too Many Requests" in str(e):
+                        print(f"  Rate limit hit, waiting 60 seconds...")
+                        time.sleep(60)
+                        # Retry once
+                        try:
+                            self.googlenews.clear()
+                            self.googlenews.search(query)
+                            results = self.googlenews.results()
+                            if results:
+                                all_results.extend(results)
+                            time.sleep(12)
+                        except:
+                            print(f"  Retry failed, skipping query: {query}")
+                    else:
+                        print(f"  ERROR on query '{query}': {e}")
+                    continue
             
             # Remove duplicates by title
             unique_results = []
@@ -173,8 +193,8 @@ def analyze_multiple_stocks(stocks_file, output_dir='Verified_Backtest_Data'):
             
             results.append(result)
             
-            # Rate limiting
-            time.sleep(3)
+            # Longer rate limiting - Google News is aggressive
+            time.sleep(20)  # 20 seconds between stocks
             
         except Exception as e:
             print(f"  ❌ ERROR: {e}")
