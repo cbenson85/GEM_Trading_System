@@ -31,21 +31,27 @@ def load_sustainable_stocks():
     # Convert to analysis format
     analysis_stocks = []
     for stock in stocks:
-        # Calculate days_to_peak from dates
+        # Get fields from CLEAN.json structure
+        ticker = stock.get('ticker')
         entry_date = stock.get('entry_date', '')
-        catalyst_date = stock.get('catalyst_date', '')
+        peak_date = stock.get('peak_date', '')
+        year = stock.get('year')
+        gain_percent = stock.get('gain_percent')
+        days_to_peak = stock.get('days_to_peak')
         
-        # Estimate days (rough calculation for now)
-        days_to_peak = stock.get('days_to_peak', 90)  # Use existing or default
+        # Skip if missing critical fields
+        if not all([ticker, entry_date, peak_date, year, gain_percent, days_to_peak]):
+            print(f"⚠️  Skipping {ticker}: Missing required fields")
+            continue
         
         analysis_stocks.append({
-            'ticker': stock.get('ticker'),
-            'company_name': stock.get('ticker', 'Unknown'),  # Use ticker as fallback
-            'year': stock.get('year_discovered'),
-            'gain_percent': stock.get('gain_percent'),
+            'ticker': ticker,
+            'company_name': ticker,  # Use ticker as company name
+            'year': year,
+            'gain_percent': gain_percent,
             'days_to_peak': days_to_peak,
             'entry_date': entry_date,
-            'peak_date': catalyst_date,  # Using catalyst_date as peak
+            'peak_date': peak_date,
             'role': 'Sustainable explosive stock'
         })
     
