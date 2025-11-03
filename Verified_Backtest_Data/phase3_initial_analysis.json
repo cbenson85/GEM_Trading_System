@@ -1,0 +1,154 @@
+{
+  "generated": "2025-11-03T00:35:13.147353",
+  "total_stocks_analyzed": 72,
+  "analysis": {
+    "temporal": {
+      "year_distribution": {
+        "2016": 2,
+        "2018": 5,
+        "2019": 7,
+        "2022": 7,
+        "2023": 16,
+        "2024": 35
+      },
+      "speed_distribution": {
+        "fast": 8,
+        "medium": 13,
+        "slow": 51
+      },
+      "average_days_to_peak": 117.7
+    },
+    "gains": {
+      "distribution": {
+        "500-1000%": 48,
+        "1000-2000%": 19,
+        "2000-5000%": 2,
+        "5000%+": 3
+      },
+      "average_gain_percent": 1374.1,
+      "median_gain_percent": 836.5,
+      "average_exit_window_days": 30.0,
+      "stocks_with_exit_data": 45
+    },
+    "exit_windows": {
+      "distribution": {
+        "quick": 45,
+        "standard": 0,
+        "extended": 0,
+        "very_extended": 0
+      },
+      "tradeable_classifications": {
+        "RISKY": 0,
+        "TRADEABLE": 45,
+        "COMFORTABLE": 0,
+        "EXTENDED": 0,
+        "NO_DATA": 27
+      }
+    },
+    "data_quality": {
+      "total_stocks": 72,
+      "enriched_count": 72,
+      "enriched_percentage": 100.0,
+      "drawdown_count": 6,
+      "test_price_count": 51,
+      "exit_window_count": 45,
+      "exit_window_percentage": 62.5,
+      "data_sources": {
+        "Polygon API": 72
+      }
+    },
+    "top_performers": {
+      "top_gainers": [
+        {
+          "ticker": "AENTW",
+          "year": 2024,
+          "gain_percent": 12398.33,
+          "days": 177
+        },
+        {
+          "ticker": "AISPW",
+          "year": 2024,
+          "gain_percent": 10328.57,
+          "days": 31
+        },
+        {
+          "ticker": "ARQQW",
+          "year": 2024,
+          "gain_percent": 8521.36,
+          "days": 91
+        },
+        {
+          "ticker": "ATGL",
+          "year": 2024,
+          "gain_percent": 4598.36,
+          "days": 107
+        },
+        {
+          "ticker": "AIM",
+          "year": 2024,
+          "gain_percent": 4200.12,
+          "days": 172
+        }
+      ],
+      "longest_windows": [
+        {
+          "ticker": "AG",
+          "year": 2016,
+          "days_above_200": 30
+        },
+        {
+          "ticker": "AGMH",
+          "year": 2018,
+          "days_above_200": 30
+        },
+        {
+          "ticker": "AMRN",
+          "year": 2018,
+          "days_above_200": 30
+        },
+        {
+          "ticker": "AMTX",
+          "year": 2018,
+          "days_above_200": 30
+        },
+        {
+          "ticker": "AIM",
+          "year": 2019,
+          "days_above_200": 30
+        }
+      ],
+      "fastest_movers": [
+        {
+          "ticker": "ASNS",
+          "year": 2024,
+          "gain_percent": 955.05,
+          "days": 3
+        },
+        {
+          "ticker": "ACXP",
+          "year": 2023,
+          "gain_percent": 589.06,
+          "days": 7
+        },
+        {
+          "ticker": "AIMDW",
+          "year": 2024,
+          "gain_percent": 538.5,
+          "days": 13
+        },
+        {
+          "ticker": "APM",
+          "year": 2024,
+          "gain_percent": 1158.27,
+          "days": 18
+        },
+        {
+          "ticker": "AMTX",
+          "year": 2018,
+          "gain_percent": 501.16,
+          "days": 22
+        }
+      ]
+    }
+  }
+}

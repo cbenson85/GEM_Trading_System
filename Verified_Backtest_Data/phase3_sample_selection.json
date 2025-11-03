@@ -1,0 +1,87 @@
+{
+  "generated": "2025-11-03T00:35:13.147601",
+  "sample_size": 8,
+  "selection_criteria": "Maximum diversity across years, gains, speeds, and data quality",
+  "stocks": [
+    {
+      "ticker": "AENTW",
+      "year": 2024,
+      "reason": "Extreme gainer - 12398% in 177 days",
+      "role": "Test framework limits",
+      "gain_percent": 12398.33,
+      "days_to_peak": 177,
+      "days_above_200": 0,
+      "enriched": true
+    },
+    {
+      "ticker": "ABVEW",
+      "year": 2024,
+      "reason": "Recent stock - 501% in 153 days",
+      "role": "Recent with full data",
+      "gain_percent": 500.67,
+      "days_to_peak": 153,
+      "days_above_200": 0,
+      "enriched": true
+    },
+    {
+      "ticker": "ACONW",
+      "year": 2024,
+      "reason": "Recent stock - 1429% in 158 days",
+      "role": "Recent with full data",
+      "gain_percent": 1428.75,
+      "days_to_peak": 158,
+      "days_above_200": 30,
+      "enriched": true
+    },
+    {
+      "ticker": "ASNS",
+      "year": 2024,
+      "reason": "Ultra-fast - 955% in 3 days",
+      "role": "Test rapid explosion patterns",
+      "gain_percent": 955.05,
+      "days_to_peak": 3,
+      "days_above_200": 30,
+      "enriched": true
+    },
+    {
+      "ticker": "ARWR",
+      "year": 2018,
+      "reason": "Slow builder - 587% in 179 days",
+      "role": "Test slow accumulation patterns",
+      "gain_percent": 586.81,
+      "days_to_peak": 179,
+      "days_above_200": 0,
+      "enriched": true
+    },
+    {
+      "ticker": "AG",
+      "year": 2016,
+      "reason": "Longest exit window - 30 days",
+      "role": "Test extended tradeable period",
+      "gain_percent": 662.95,
+      "days_to_peak": 142,
+      "days_above_200": 30,
+      "enriched": true
+    },
+    {
+      "ticker": "AIMD",
+      "year": 2022,
+      "reason": "Historical diversity - 1072% in 25 days",
+      "role": "Represent 2022 winners",
+      "gain_percent": 1071.88,
+      "days_to_peak": 25,
+      "days_above_200": 0,
+      "enriched": true
+    },
+    {
+      "ticker": "ACXP",
+      "year": 2023,
+      "reason": "Historical diversity - 589% in 7 days",
+      "role": "Represent 2023 winners",
+      "gain_percent": 589.06,
+      "days_to_peak": 7,
+      "days_above_200": 0,
+      "enriched": true
+    }
+  ]
+}
