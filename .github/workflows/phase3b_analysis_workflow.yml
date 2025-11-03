@@ -1,0 +1,103 @@
+name: Phase 3B Analysis - 90-Day Pre-Catalyst
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Analysis mode'
+        required: true
+        default: 'pilot'
+        type: choice
+        options:
+          - pilot
+          - full
+
+permissions:
+  contents: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests
+    
+    - name: Create output directory
+      run: |
+        mkdir -p Verified_Backtest_Data
+    
+    - name: Run Phase 3B Analysis
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        if [ "${{ github.event.inputs.mode }}" = "full" ]; then
+          echo "🚀 Running FULL analysis (all 8 stocks)..."
+          python phase3b_pilot_analysis.py full
+        else
+          echo "🎯 Running PILOT analysis (2 stocks: AENTW + ASNS)..."
+          python phase3b_pilot_analysis.py
+        fi
+    
+    - name: Check results
+      run: |
+        echo "📊 Analysis complete! Checking outputs..."
+        ls -lh Verified_Backtest_Data/phase3b_*.json
+        
+        if [ "${{ github.event.inputs.mode }}" = "pilot" ]; then
+          echo "✅ Pilot files:"
+          ls -1 Verified_Backtest_Data/phase3b_*_2024_analysis.json | head -2
+        else
+          echo "✅ Full analysis files:"
+          ls -1 Verified_Backtest_Data/phase3b_*_analysis.json
+        fi
+    
+    - name: Display summary
+      run: |
+        if [ -f "Verified_Backtest_Data/phase3b_pilot_summary.json" ]; then
+          echo "📋 Analysis Summary:"
+          cat Verified_Backtest_Data/phase3b_pilot_summary.json | jq '.stocks[] | {ticker: .ticker, status: .status, signals: .summary.key_signals}'
+        fi
+    
+    - name: Commit results
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "Phase 3B Analysis Bot"
+        git add Verified_Backtest_Data/phase3b_*.json
+        git diff --staged --quiet || git commit -m "🤖 Phase 3B Analysis: ${{ github.event.inputs.mode }} mode - $(date +'%Y-%m-%d %H:%M')"
+        git pull origin main --rebase --autostash
+    
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+        force: false
+    
+    - name: Generate summary
+      run: |
+        echo "## 🎯 Phase 3B Analysis Complete" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Mode:** ${{ github.event.inputs.mode }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        if [ -f "Verified_Backtest_Data/phase3b_pilot_summary.json" ]; then
+          SUCCESS=$(jq '.success_count' Verified_Backtest_Data/phase3b_pilot_summary.json)
+          TOTAL=$(jq '.stocks | length' Verified_Backtest_Data/phase3b_pilot_summary.json)
+          echo "**Results:** ✅ $SUCCESS/$TOTAL stocks analyzed successfully" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Stocks Analyzed:" >> $GITHUB_STEP_SUMMARY
+          jq -r '.stocks[] | "- **\(.ticker)**: \(.status)"' Verified_Backtest_Data/phase3b_pilot_summary.json >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "📁 All analysis files committed to Verified_Backtest_Data/" >> $GITHUB_STEP_SUMMARY
