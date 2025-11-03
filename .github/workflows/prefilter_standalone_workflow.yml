@@ -1,0 +1,91 @@
+name: Phase 0 - Pre-Filter Only (Quick Scan)
+
+on:
+  workflow_dispatch:
+    inputs:
+      start_year:
+        description: 'Start year for pre-filter scan'
+        required: true
+        default: '2016'
+      end_year:
+        description: 'End year for pre-filter scan'
+        required: true
+        default: '2024'
+
+jobs:
+  prefilter:
+    name: Quick Pre-Filter - Find 500%+ Candidates
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          pip install requests
+      
+      - name: Run Pre-Filter
+        env:
+          POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+          START_YEAR: ${{ github.event.inputs.start_year }}
+          END_YEAR: ${{ github.event.inputs.end_year }}
+        run: |
+          echo "🔍 Pre-Filter: Quick scan ALL tickers for 500%+ candidates"
+          echo "Period: $START_YEAR - $END_YEAR"
+          echo "Strategy: High/Low price analysis only"
+          echo ""
+          python polygon_prefilter.py
+      
+      - name: Upload results
+        uses: actions/upload-artifact@v3
+        with:
+          name: prefilter-candidates-${{ github.event.inputs.start_year }}-${{ github.event.inputs.end_year }}
+          path: |
+            explosive_candidates.txt
+            prefilter_stats.json
+          retention-days: 30
+      
+      - name: Display summary
+        run: |
+          echo "="
+          echo "📊 PRE-FILTER SUMMARY"
+          echo "="
+          echo ""
+          if [ -f explosive_candidates.txt ]; then
+            TOTAL_CANDIDATES=$(grep -v '^#' explosive_candidates.txt | wc -l)
+            echo "✅ Total candidates found: $TOTAL_CANDIDATES"
+            echo ""
+            echo "📊 By year:"
+            grep -v '^#' explosive_candidates.txt | cut -d',' -f2 | sort | uniq -c
+            echo ""
+            echo "🚀 Top 20 highest gain candidates:"
+            grep -v '^#' explosive_candidates.txt | sort -t',' -k3 -rn | head -20
+            echo ""
+            echo "📄 Full results saved to artifact: explosive_candidates.txt"
+            echo "📄 Next step: Run 'Complete Explosive Stock Scan with Pre-Filter' workflow"
+          else
+            echo "❌ No candidates file generated"
+          fi
+      
+      - name: Display statistics
+        run: |
+          if [ -f prefilter_stats.json ]; then
+            echo ""
+            echo "📈 SCAN STATISTICS:"
+            python -c "
+import json
+with open('prefilter_stats.json', 'r') as f:
+    stats = json.load(f)
+    print(f\"Tickers scanned: {stats['total_tickers_scanned']:,}\")
+    print(f\"Candidates found: {stats['candidates_found']:,}\")
+    print(f\"Hit rate: {(stats['candidates_found'] / max(stats['total_tickers_scanned'], 1) * 100):.2f}%\")
+    print(f\"API calls: {stats['api_calls_made']:,}\")
+    print(f\"Errors: {stats['errors']:,}\")
+"
+          fi
