@@ -24,6 +24,15 @@ class Phase3Analyzer:
             self.stocks = data.get('stocks', [])
         print(f"✅ Loaded {len(self.stocks)} verified sustainable stocks")
         
+        # Debug: Check data structure
+        if self.stocks:
+            sample = self.stocks[0]
+            print(f"📊 Sample stock keys: {list(sample.keys())[:10]}...")
+            if 'sustainability_test' in sample:
+                print(f"   Sustainability test present: {list(sample['sustainability_test'].keys())}")
+            else:
+                print(f"   ⚠️  No 'sustainability_test' key found - will use alternative data")
+        
     def analyze_temporal_patterns(self):
         """Analyze when explosions occurred and their speed"""
         print("\n🔍 ANALYZING TEMPORAL PATTERNS...")
@@ -61,6 +70,44 @@ class Phase3Analyzer:
             'average_days_to_peak': round(avg_days, 1)
         }
         
+    def get_exit_window(self, stock):
+        """Get exit window from various possible data structures"""
+        # Try sustainability_test first
+        if 'sustainability_test' in stock:
+            days = stock['sustainability_test'].get('days_above_threshold', 0)
+            if days > 0:
+                return days
+        
+        # Try sustained_gain_test (alternative key)
+        if 'sustained_gain_test' in stock:
+            days = stock['sustained_gain_test'].get('days_above_threshold', 0)
+            if days > 0:
+                return days
+        
+        # Try test_summary
+        if 'test_summary' in stock:
+            days = stock['test_summary'].get('days_above_200_pct', 0)
+            if days > 0:
+                return days
+        
+        # Calculate from daily_gains if available
+        if 'daily_gains' in stock:
+            threshold = 200.0
+            days_above = sum(1 for gain in stock['daily_gains'] if gain >= threshold)
+            return days_above
+        
+        # Estimate from peak retention if available
+        if 'test_price_30d' in stock and 'peak_price' in stock and 'entry_price' in stock:
+            test_price = stock['test_price_30d']
+            peak_price = stock['peak_price']
+            entry_price = stock['entry_price']
+            
+            test_gain = ((test_price - entry_price) / entry_price) * 100
+            if test_gain >= 200:
+                return 30  # At least 30 days if test price still above 200%
+        
+        return 0
+        
     def analyze_gain_characteristics(self):
         """Analyze gain magnitudes and sustainability"""
         print("\n🔍 ANALYZING GAIN CHARACTERISTICS...")
@@ -89,8 +136,9 @@ class Phase3Analyzer:
             else:
                 gain_ranges['5000%+'] += 1
             
-            if 'sustainability_test' in stock:
-                days_above = stock['sustainability_test'].get('days_above_threshold', 0)
+            # Get exit window using flexible method
+            days_above = self.get_exit_window(stock)
+            if days_above > 0:
                 exit_windows.append(days_above)
         
         avg_gain = sum(gains) / len(gains) if gains else 0
@@ -102,13 +150,14 @@ class Phase3Analyzer:
             print(f"    {range_name}: {count} stocks")
         print(f"  Average Gain: {avg_gain:.1f}%")
         print(f"  Median Gain: {median_gain:.1f}%")
-        print(f"  Average Exit Window: {avg_exit:.1f} days")
+        print(f"  Average Exit Window: {avg_exit:.1f} days ({len(exit_windows)} stocks with data)")
         
         self.analysis_results['gains'] = {
             'distribution': gain_ranges,
             'average_gain_percent': round(avg_gain, 1),
             'median_gain_percent': round(median_gain, 1),
-            'average_exit_window_days': round(avg_exit, 1)
+            'average_exit_window_days': round(avg_exit, 1),
+            'stocks_with_exit_data': len(exit_windows)
         }
         
     def analyze_exit_windows(self):
@@ -128,13 +177,15 @@ class Phase3Analyzer:
             'TRADEABLE': 0,    # 21-49 days
             'COMFORTABLE': 0,  # 50-99 days
             'EXTENDED': 0,     # 100+ days
-            'UNTRADEABLE': 0   # Data missing
+            'NO_DATA': 0       # No exit window data
         }
         
         for stock in self.stocks:
-            if 'sustainability_test' in stock:
-                days_above = stock['sustainability_test'].get('days_above_threshold', 0)
-                
+            days_above = self.get_exit_window(stock)
+            
+            if days_above == 0:
+                tradeable_classifications['NO_DATA'] += 1
+            else:
                 if days_above < 50:
                     window_categories['quick'] += 1
                 elif days_above < 100:
@@ -152,8 +203,6 @@ class Phase3Analyzer:
                     tradeable_classifications['COMFORTABLE'] += 1
                 else:
                     tradeable_classifications['EXTENDED'] += 1
-            else:
-                tradeable_classifications['UNTRADEABLE'] += 1
         
         print(f"  Exit Window Distribution:")
         for cat, count in window_categories.items():
@@ -176,6 +225,7 @@ class Phase3Analyzer:
         enriched_count = 0
         drawdown_count = 0
         test_price_count = 0
+        exit_window_count = 0
         data_sources = {}
         
         for stock in self.stocks:
@@ -188,14 +238,19 @@ class Phase3Analyzer:
             if 'test_price_30d' in stock:
                 test_price_count += 1
             
+            if self.get_exit_window(stock) > 0:
+                exit_window_count += 1
+            
             source = stock.get('data_source', 'unknown')
             data_sources[source] = data_sources.get(source, 0) + 1
         
         enriched_pct = (enriched_count / len(self.stocks) * 100) if self.stocks else 0
+        exit_pct = (exit_window_count / len(self.stocks) * 100) if self.stocks else 0
         
         print(f"  Enriched Stocks: {enriched_count}/{len(self.stocks)} ({enriched_pct:.1f}%)")
         print(f"  With Drawdown Analysis: {drawdown_count}")
         print(f"  With 30-Day Test Price: {test_price_count}")
+        print(f"  With Exit Window Data: {exit_window_count}/{len(self.stocks)} ({exit_pct:.1f}%)")
         print(f"  Data Sources:")
         for source, count in data_sources.items():
             print(f"    {source}: {count} stocks")
@@ -206,6 +261,8 @@ class Phase3Analyzer:
             'enriched_percentage': round(enriched_pct, 1),
             'drawdown_count': drawdown_count,
             'test_price_count': test_price_count,
+            'exit_window_count': exit_window_count,
+            'exit_window_percentage': round(exit_pct, 1),
             'data_sources': data_sources
         }
         
@@ -224,17 +281,19 @@ class Phase3Analyzer:
             days = stock.get('days_to_peak', 0)
             print(f"    {i}. {ticker} ({year}): {gain:.0f}% in {days} days")
         
-        # Longest exit windows
-        stocks_with_windows = [s for s in self.stocks if 'sustainability_test' in s]
-        by_window = sorted(stocks_with_windows, 
-                          key=lambda x: x['sustainability_test'].get('days_above_threshold', 0), 
-                          reverse=True)[:5]
-        print(f"  Longest Exit Windows:")
-        for i, stock in enumerate(by_window, 1):
-            ticker = stock.get('ticker', 'N/A')
-            year = stock.get('year', 'N/A')
-            days = stock['sustainability_test'].get('days_above_threshold', 0)
-            print(f"    {i}. {ticker} ({year}): {days} days above 200%")
+        # Longest exit windows (only if data exists)
+        stocks_with_windows = [(s, self.get_exit_window(s)) for s in self.stocks]
+        stocks_with_windows = [(s, d) for s, d in stocks_with_windows if d > 0]
+        
+        if stocks_with_windows:
+            by_window = sorted(stocks_with_windows, key=lambda x: x[1], reverse=True)[:5]
+            print(f"  Longest Exit Windows:")
+            for i, (stock, days) in enumerate(by_window, 1):
+                ticker = stock.get('ticker', 'N/A')
+                year = stock.get('year', 'N/A')
+                print(f"    {i}. {ticker} ({year}): {days} days above 200%")
+        else:
+            print(f"  Longest Exit Windows: No data available")
         
         # Fastest movers
         by_speed = sorted(self.stocks, key=lambda x: x.get('days_to_peak', 999))[:5]
@@ -251,8 +310,8 @@ class Phase3Analyzer:
                            'gain_percent': s.get('gain_percent'), 'days': s.get('days_to_peak')} 
                           for s in by_gain],
             'longest_windows': [{'ticker': s.get('ticker'), 'year': s.get('year'),
-                               'days_above_200': s['sustainability_test'].get('days_above_threshold')}
-                              for s in by_window],
+                               'days_above_200': d}
+                              for s, d in (by_window if stocks_with_windows else [])],
             'fastest_movers': [{'ticker': s.get('ticker'), 'year': s.get('year'),
                               'gain_percent': s.get('gain_percent'), 'days': s.get('days_to_peak')}
                              for s in by_speed]
@@ -264,6 +323,7 @@ class Phase3Analyzer:
         print("-" * 80)
         
         selected = []
+        selected_stocks = set()
         
         # 1. Extreme gainer (test framework limits)
         extreme = max(self.stocks, key=lambda x: x.get('gain_percent', 0))
@@ -274,34 +334,41 @@ class Phase3Analyzer:
             'role': 'Test framework limits',
             'stock_data': extreme
         })
+        selected_stocks.add(extreme.get('ticker'))
         
         # 2-3. Recent stocks (2024) with full data
-        recent_2024 = [s for s in self.stocks if s.get('year') == 2024 and s.get('enriched')]
-        if len(recent_2024) >= 2:
-            for stock in recent_2024[:2]:
-                selected.append({
-                    'ticker': stock.get('ticker'),
-                    'year': stock.get('year'),
-                    'reason': f"Recent stock - {stock.get('gain_percent', 0):.0f}% in {stock.get('days_to_peak', 0)} days",
-                    'role': 'Recent with full data',
-                    'stock_data': stock
-                })
+        recent_2024 = [s for s in self.stocks 
+                       if s.get('year') == 2024 
+                       and s.get('enriched')
+                       and s.get('ticker') not in selected_stocks]
+        for stock in recent_2024[:2]:
+            selected.append({
+                'ticker': stock.get('ticker'),
+                'year': stock.get('year'),
+                'reason': f"Recent stock - {stock.get('gain_percent', 0):.0f}% in {stock.get('days_to_peak', 0)} days",
+                'role': 'Recent with full data',
+                'stock_data': stock
+            })
+            selected_stocks.add(stock.get('ticker'))
         
         # 4. Ultra-fast mover (test rapid explosion patterns)
-        fast = min(self.stocks, key=lambda x: x.get('days_to_peak', 999))
-        if fast not in [s['stock_data'] for s in selected]:
-            selected.append({
-                'ticker': fast.get('ticker'),
-                'year': fast.get('year'),
-                'reason': f"Ultra-fast - {fast.get('gain_percent', 0):.0f}% in {fast.get('days_to_peak', 0)} days",
-                'role': 'Test rapid explosion patterns',
-                'stock_data': fast
-            })
+        fast = min([s for s in self.stocks if s.get('ticker') not in selected_stocks], 
+                   key=lambda x: x.get('days_to_peak', 999))
+        selected.append({
+            'ticker': fast.get('ticker'),
+            'year': fast.get('year'),
+            'reason': f"Ultra-fast - {fast.get('gain_percent', 0):.0f}% in {fast.get('days_to_peak', 0)} days",
+            'role': 'Test rapid explosion patterns',
+            'stock_data': fast
+        })
+        selected_stocks.add(fast.get('ticker'))
         
         # 5. Slow builder (test slow accumulation patterns)
-        slow = max([s for s in self.stocks if s.get('days_to_peak', 0) > 90], 
-                   key=lambda x: x.get('days_to_peak', 0))
-        if slow not in [s['stock_data'] for s in selected]:
+        slow_candidates = [s for s in self.stocks 
+                          if s.get('days_to_peak', 0) > 90 
+                          and s.get('ticker') not in selected_stocks]
+        if slow_candidates:
+            slow = max(slow_candidates, key=lambda x: x.get('days_to_peak', 0))
             selected.append({
                 'ticker': slow.get('ticker'),
                 'year': slow.get('year'),
@@ -309,31 +376,56 @@ class Phase3Analyzer:
                 'role': 'Test slow accumulation patterns',
                 'stock_data': slow
             })
+            selected_stocks.add(slow.get('ticker'))
         
-        # 6. Longest exit window (test extended tradeable period)
-        stocks_with_windows = [s for s in self.stocks if 'sustainability_test' in s]
-        longest = max(stocks_with_windows, 
-                     key=lambda x: x['sustainability_test'].get('days_above_threshold', 0))
-        if longest not in [s['stock_data'] for s in selected]:
+        # 6. Longest exit window (if data available)
+        stocks_with_windows = [(s, self.get_exit_window(s)) for s in self.stocks 
+                              if s.get('ticker') not in selected_stocks]
+        stocks_with_windows = [(s, d) for s, d in stocks_with_windows if d > 0]
+        
+        if stocks_with_windows:
+            longest_stock, longest_days = max(stocks_with_windows, key=lambda x: x[1])
             selected.append({
-                'ticker': longest.get('ticker'),
-                'year': longest.get('year'),
-                'reason': f"Longest exit window - {longest['sustainability_test'].get('days_above_threshold', 0)} days",
+                'ticker': longest_stock.get('ticker'),
+                'year': longest_stock.get('year'),
+                'reason': f"Longest exit window - {longest_days} days",
                 'role': 'Test extended tradeable period',
-                'stock_data': longest
+                'stock_data': longest_stock
             })
+            selected_stocks.add(longest_stock.get('ticker'))
         
         # 7-8. Historical diversity (different years)
-        historical = [s for s in self.stocks if s.get('year') in [2022, 2023] 
-                     and s not in [sel['stock_data'] for sel in selected]]
-        for stock in historical[:2]:
+        for target_year in [2022, 2023, 2018, 2019]:
+            if len(selected) >= 8:
+                break
+            historical = [s for s in self.stocks 
+                         if s.get('year') == target_year 
+                         and s.get('ticker') not in selected_stocks]
+            if historical:
+                stock = historical[0]
+                selected.append({
+                    'ticker': stock.get('ticker'),
+                    'year': stock.get('year'),
+                    'reason': f"Historical diversity - {stock.get('gain_percent', 0):.0f}% in {stock.get('days_to_peak', 0)} days",
+                    'role': f"Represent {stock.get('year')} winners",
+                    'stock_data': stock
+                })
+                selected_stocks.add(stock.get('ticker'))
+        
+        # Fill remaining slots with diverse stocks if needed
+        while len(selected) < 8:
+            remaining = [s for s in self.stocks if s.get('ticker') not in selected_stocks]
+            if not remaining:
+                break
+            stock = remaining[0]
             selected.append({
                 'ticker': stock.get('ticker'),
                 'year': stock.get('year'),
-                'reason': f"Historical diversity - {stock.get('gain_percent', 0):.0f}% in {stock.get('days_to_peak', 0)} days",
-                'role': f"Represent {stock.get('year')} winners",
+                'reason': f"Diversity selection - {stock.get('gain_percent', 0):.0f}% in {stock.get('days_to_peak', 0)} days",
+                'role': 'Additional diversity',
                 'stock_data': stock
             })
+            selected_stocks.add(stock.get('ticker'))
         
         print(f"  Selected {len(selected)} stocks for deep dive:")
         for i, selection in enumerate(selected, 1):
@@ -371,7 +463,7 @@ class Phase3Analyzer:
                 'role': s['role'],
                 'gain_percent': s['stock_data'].get('gain_percent'),
                 'days_to_peak': s['stock_data'].get('days_to_peak'),
-                'days_above_200': s['stock_data'].get('sustainability_test', {}).get('days_above_threshold'),
+                'days_above_200': self.get_exit_window(s['stock_data']),
                 'enriched': s['stock_data'].get('enriched', False)
             } for s in self.sample_selection]
         }
@@ -413,7 +505,8 @@ class Phase3Analyzer:
             f.write("### Gain Characteristics\n\n")
             f.write(f"- **Average gain**: {gains.get('average_gain_percent', 0):.1f}%\n")
             f.write(f"- **Median gain**: {gains.get('median_gain_percent', 0):.1f}%\n")
-            f.write(f"- **Average exit window**: {gains.get('average_exit_window_days', 0):.1f} days\n\n")
+            f.write(f"- **Average exit window**: {gains.get('average_exit_window_days', 0):.1f} days\n")
+            f.write(f"- **Stocks with exit data**: {gains.get('stocks_with_exit_data', 0)}\n\n")
             
             # Exit window insights
             exits = self.analysis_results.get('exit_windows', {})
@@ -422,7 +515,8 @@ class Phase3Analyzer:
             f.write(f"- **Risky** (<21 days): {trade.get('RISKY', 0)} stocks\n")
             f.write(f"- **Tradeable** (21-49 days): {trade.get('TRADEABLE', 0)} stocks\n")
             f.write(f"- **Comfortable** (50-99 days): {trade.get('COMFORTABLE', 0)} stocks\n")
-            f.write(f"- **Extended** (100+ days): {trade.get('EXTENDED', 0)} stocks\n\n")
+            f.write(f"- **Extended** (100+ days): {trade.get('EXTENDED', 0)} stocks\n")
+            f.write(f"- **No Data**: {trade.get('NO_DATA', 0)} stocks\n\n")
             
             # Top performers
             f.write("### Top Performers\n\n")
@@ -431,9 +525,10 @@ class Phase3Analyzer:
             for stock in tops.get('top_gainers', [])[:5]:
                 f.write(f"- {stock['ticker']} ({stock['year']}): {stock['gain_percent']:.0f}% in {stock['days']} days\n")
             
-            f.write("\n**Longest Exit Windows**:\n")
-            for stock in tops.get('longest_windows', [])[:5]:
-                f.write(f"- {stock['ticker']} ({stock['year']}): {stock['days_above_200']} days above 200%\n")
+            if tops.get('longest_windows'):
+                f.write("\n**Longest Exit Windows**:\n")
+                for stock in tops.get('longest_windows', [])[:5]:
+                    f.write(f"- {stock['ticker']} ({stock['year']}): {stock['days_above_200']} days above 200%\n")
             
             f.write("\n## Sample Selection for Phase 3B\n\n")
             f.write(f"Selected {len(self.sample_selection)} diverse stocks for comprehensive analysis:\n\n")
@@ -453,6 +548,15 @@ class Phase3Analyzer:
             f.write(f"- Sample selection: {len(self.sample_selection)} stocks\n")
             f.write("- Preliminary insights generated\n\n")
             
+            data_quality = self.analysis_results.get('data_quality', {})
+            exit_pct = data_quality.get('exit_window_percentage', 0)
+            
+            if exit_pct < 50:
+                f.write("## ⚠️ Data Quality Note\n\n")
+                f.write(f"Only {exit_pct:.1f}% of stocks have exit window data. ")
+                f.write("This suggests the sustainability test data may be missing or structured differently. ")
+                f.write("Phase 3B will need to recalculate exit windows from raw price data.\n\n")
+            
             f.write("## Phase 3B: Comprehensive Pre-Catalyst Analysis\n\n")
             f.write("### Immediate Actions\n\n")
             f.write("1. **Review Sample Selection**\n")
@@ -464,7 +568,8 @@ class Phase3Analyzer:
             f.write("   - Polygon API integration (OHLC, volume, technicals)\n")
             f.write("   - SEC filing scraper (Form 4, 13F)\n")
             f.write("   - Social sentiment collector (Reddit, Twitter)\n")
-            f.write("   - Options data aggregator\n\n")
+            f.write("   - Options data aggregator\n")
+            f.write("   - Exit window calculator (from raw price data)\n\n")
             
             f.write("3. **Begin Deep Dive Analysis**\n")
             f.write("   - Start with 2-3 sample stocks\n")
@@ -511,9 +616,6 @@ class Phase3Analyzer:
         self.analyze_data_quality()
         self.identify_top_performers()
         self.select_deep_dive_sample()
-        
-        # Note: Screening criteria generation is postponed to Phase 3B
-        # After deep dive analysis, we'll have correlation data to build criteria
         
         self.save_results()
         
