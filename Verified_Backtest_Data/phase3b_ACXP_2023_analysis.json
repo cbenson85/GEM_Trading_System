@@ -1,0 +1,244 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 03:12:50",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "ACXP",
+    "company_name": "Acurx Pharmaceuticals Inc",
+    "entry_date": "2023-08-14",
+    "peak_date": "2023-08-21",
+    "gain_percent": 589.06,
+    "days_to_peak": 7,
+    "role": "Fast mover pattern"
+  },
+  "price_volume_data": {
+    "ticker": "ACXP",
+    "entry_date": "2023-08-14",
+    "days_analyzed": 61,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 36.46,
+      "high": 62.8,
+      "low": 35.2,
+      "price_range_pct": 78.40909090909088,
+      "dates": [
+        "2023-05-16",
+        "2023-05-17",
+        "2023-05-18",
+        "2023-05-19",
+        "2023-05-22",
+        "2023-05-23",
+        "2023-05-24",
+        "2023-05-25",
+        "2023-05-26",
+        "2023-05-30",
+        "2023-05-31",
+        "2023-06-01",
+        "2023-06-02",
+        "2023-06-05",
+        "2023-06-06",
+        "2023-06-07",
+        "2023-06-08",
+        "2023-06-09",
+        "2023-06-12",
+        "2023-06-13",
+        "2023-06-14",
+        "2023-06-15",
+        "2023-06-16",
+        "2023-06-20",
+        "2023-06-21",
+        "2023-06-22",
+        "2023-06-23",
+        "2023-06-26",
+        "2023-06-27",
+        "2023-06-28",
+        "2023-06-29",
+        "2023-06-30",
+        "2023-07-03",
+        "2023-07-05",
+        "2023-07-06",
+        "2023-07-07",
+        "2023-07-10",
+        "2023-07-11",
+        "2023-07-12",
+        "2023-07-13",
+        "2023-07-14",
+        "2023-07-17",
+        "2023-07-18",
+        "2023-07-19",
+        "2023-07-20",
+        "2023-07-21",
+        "2023-07-24",
+        "2023-07-25",
+        "2023-07-26",
+        "2023-07-27",
+        "2023-07-28",
+        "2023-07-31",
+        "2023-08-01",
+        "2023-08-02",
+        "2023-08-03",
+        "2023-08-04",
+        "2023-08-07",
+        "2023-08-08",
+        "2023-08-09",
+        "2023-08-10",
+        "2023-08-11"
+      ],
+      "closes": [
+        62.8,
+        62.8,
+        60.2,
+        60.6,
+        60,
+        59.6,
+        59.6,
+        59,
+        58,
+        57.4,
+        62,
+        59,
+        58.4,
+        58,
+        58,
+        59.798,
+        56.4,
+        56.2,
+        57.8,
+        57.4,
+        55.8,
+        55,
+        55.6,
+        53.8,
+        54.4,
+        51.6,
+        51.4,
+        49.4,
+        51,
+        51.2,
+        54,
+        53,
+        51,
+        50.8,
+        48.4,
+        48.2,
+        47.4,
+        48,
+        45.6,
+        45.8,
+        42.8,
+        42.5,
+        44,
+        43.2,
+        45,
+        43,
+        41,
+        38.8,
+        38.2,
+        35.2,
+        38.4,
+        40.6,
+        39.6,
+        39.8,
+        42.2,
+        40.8,
+        38,
+        36.6,
+        35.4,
+        36.2,
+        36.46
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 1774,
+      "entry_day_volume": 1934.2,
+      "entry_day_vs_avg": 1.09,
+      "volume_spikes_3x": 1,
+      "top_volume_spikes": [
+        {
+          "date": "2023-07-31",
+          "volume": 6712.55,
+          "ratio": 3.78,
+          "days_before_entry": 9
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 39.98,
+        "30_day": 30.0,
+        "oversold": false
+      },
+      "moving_averages": {
+        "sma_20": 39.748,
+        "sma_50": 47.6032,
+        "sma_90": null,
+        "price_vs_sma20_pct": -8.27,
+        "price_vs_sma50_pct": -23.41
+      },
+      "macd": {
+        "macd_line": -3.1624,
+        "bullish": false,
+        "ema_12": 38.3962,
+        "ema_26": 41.5585
+      },
+      "bollinger_bands": {
+        "middle": 39.748,
+        "upper": 45.514,
+        "lower": 33.982,
+        "bandwidth_pct": 29.01,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "ACXP",
+    "company_name": "Acurx Pharmaceuticals Inc",
+    "entry_date": "2023-08-14",
+    "search_window": {
+      "start": "2023-05-16",
+      "end": "2023-08-14",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"Acurx Pharmaceuticals Inc\" OR \"ACXP\" after:2023-05-16 before:2023-08-14",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"Acurx Pharmaceuticals Inc\" OR \"ACXP\" (catalyst OR announcement OR approval OR contract OR earnings) after:2023-05-16 before:2023-08-14",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"Acurx Pharmaceuticals Inc\" OR \"ACXP\" (insider OR \"Form 4\" OR \"insider buying\") after:2023-05-16 before:2023-08-14",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 61,
+    "patterns_found": 0,
+    "volume_spikes_detected": 1,
+    "rsi_oversold": false,
+    "gain_category": "moderate",
+    "speed_category": "ultra_fast",
+    "searches_generated": 3,
+    "key_signals": [
+      "1 Volume Spikes (3x+)"
+    ]
+  }
+}

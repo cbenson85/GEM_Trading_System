@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "phase": "3B_FULL",
+    "stocks_analyzed": 8,
+    "framework": "90-day pre-catalyst window"
+  },
+  "stocks": [
+    {
+      "ticker": "AENTW",
+      "status": "success",
+      "file": "phase3b_AENTW_2024_analysis.json",
+      "summary": {
+        "data_quality": "partial",
+        "days_analyzed": 26,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "extreme",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "ASNS",
+      "status": "success",
+      "file": "phase3b_ASNS_2024_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 62,
+        "patterns_found": 1,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "ultra_fast",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Volume Spikes (3x+)",
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "ABVEW",
+      "status": "success",
+      "file": "phase3b_ABVEW_2024_analysis.json",
+      "summary": {
+        "data_quality": "unknown",
+        "days_analyzed": 0,
+        "patterns_found": 0,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": []
+      }
+    },
+    {
+      "ticker": "ACONW",
+      "status": "success",
+      "file": "phase3b_ACONW_2024_analysis.json",
+      "summary": {
+        "data_quality": "partial",
+        "days_analyzed": 36,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "high",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "ARWR",
+      "status": "success",
+      "file": "phase3b_ARWR_2018_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 60,
+        "patterns_found": 1,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)",
+          "1 Patterns Detected"
+        ]
+      }
+    },
+    {
+      "ticker": "AG",
+      "status": "success",
+      "file": "phase3b_AG_2016_analysis.json",
+      "summary": {
+        "data_quality": "acceptable",
+        "days_analyzed": 50,
+        "patterns_found": 0,
+        "volume_spikes_detected": 0,
+        "rsi_oversold": true,
+        "gain_category": "moderate",
+        "speed_category": "slow",
+        "searches_generated": 3,
+        "key_signals": [
+          "RSI Oversold (<30)"
+        ]
+      }
+    },
+    {
+      "ticker": "AIMD",
+      "status": "success",
+      "file": "phase3b_AIMD_2022_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 61,
+        "patterns_found": 0,
+        "volume_spikes_detected": 2,
+        "rsi_oversold": false,
+        "gain_category": "high",
+        "speed_category": "fast",
+        "searches_generated": 3,
+        "key_signals": [
+          "2 Volume Spikes (3x+)"
+        ]
+      }
+    },
+    {
+      "ticker": "ACXP",
+      "status": "success",
+      "file": "phase3b_ACXP_2023_analysis.json",
+      "summary": {
+        "data_quality": "good",
+        "days_analyzed": 61,
+        "patterns_found": 0,
+        "volume_spikes_detected": 1,
+        "rsi_oversold": false,
+        "gain_category": "moderate",
+        "speed_category": "ultra_fast",
+        "searches_generated": 3,
+        "key_signals": [
+          "1 Volume Spikes (3x+)"
+        ]
+      }
+    }
+  ],
+  "success_count": 8,
+  "error_count": 0
+}

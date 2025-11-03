@@ -1,0 +1,250 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 03:12:49",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "AIMD",
+    "company_name": "Ainos Inc",
+    "entry_date": "2022-09-15",
+    "peak_date": "2022-10-10",
+    "gain_percent": 1071.88,
+    "days_to_peak": 25,
+    "role": "Post-COVID era winner"
+  },
+  "price_volume_data": {
+    "ticker": "AIMD",
+    "entry_date": "2022-09-15",
+    "days_analyzed": 61,
+    "data_quality": "good",
+    "price_data": {
+      "entry_price": 47.5,
+      "high": 423.75,
+      "low": 38.4,
+      "price_range_pct": 1003.5156250000002,
+      "dates": [
+        "2022-06-17",
+        "2022-06-21",
+        "2022-06-22",
+        "2022-06-23",
+        "2022-06-24",
+        "2022-06-27",
+        "2022-06-28",
+        "2022-06-29",
+        "2022-06-30",
+        "2022-07-01",
+        "2022-07-05",
+        "2022-07-06",
+        "2022-07-07",
+        "2022-07-08",
+        "2022-07-11",
+        "2022-07-12",
+        "2022-07-13",
+        "2022-07-14",
+        "2022-07-15",
+        "2022-07-18",
+        "2022-07-19",
+        "2022-07-20",
+        "2022-07-21",
+        "2022-07-22",
+        "2022-07-25",
+        "2022-07-26",
+        "2022-07-27",
+        "2022-07-28",
+        "2022-07-29",
+        "2022-08-01",
+        "2022-08-02",
+        "2022-08-03",
+        "2022-08-04",
+        "2022-08-05",
+        "2022-08-08",
+        "2022-08-09",
+        "2022-08-10",
+        "2022-08-11",
+        "2022-08-12",
+        "2022-08-15",
+        "2022-08-16",
+        "2022-08-17",
+        "2022-08-18",
+        "2022-08-19",
+        "2022-08-22",
+        "2022-08-23",
+        "2022-08-24",
+        "2022-08-25",
+        "2022-08-26",
+        "2022-08-29",
+        "2022-08-30",
+        "2022-08-31",
+        "2022-09-01",
+        "2022-09-02",
+        "2022-09-06",
+        "2022-09-07",
+        "2022-09-08",
+        "2022-09-09",
+        "2022-09-12",
+        "2022-09-13",
+        "2022-09-14"
+      ],
+      "closes": [
+        127.5,
+        77.2125,
+        104.625,
+        108.375,
+        108.75,
+        108.75,
+        108.375,
+        38.4,
+        108.5625,
+        108.525,
+        216.75,
+        127.5,
+        168.7125,
+        150,
+        150,
+        152.625,
+        168.675,
+        262.4625,
+        262.5,
+        277.5,
+        247.5,
+        258.75,
+        258.75,
+        258.75,
+        270,
+        281.25,
+        277.5,
+        273.75,
+        300,
+        300,
+        262.2375,
+        292.485,
+        423.75,
+        262.5,
+        270,
+        91.5,
+        81,
+        68.75,
+        69.25,
+        62.5,
+        63,
+        60.75,
+        61.25,
+        58.25,
+        60.2175,
+        60.75,
+        59.5,
+        58.125,
+        51.875,
+        53.6,
+        50.88,
+        49.995,
+        44.5,
+        46.25,
+        56,
+        54.25,
+        50,
+        51.75,
+        50.5,
+        49.25,
+        47.5
+      ]
+    },
+    "volume_analysis": {
+      "avg_volume_30day": 3929,
+      "entry_day_volume": 706.88,
+      "entry_day_vs_avg": 0.18,
+      "volume_spikes_3x": 2,
+      "top_volume_spikes": [
+        {
+          "date": "2022-08-09",
+          "volume": 32958.48,
+          "ratio": 8.39,
+          "days_before_entry": 25
+        },
+        {
+          "date": "2022-08-11",
+          "volume": 13806.92,
+          "ratio": 3.51,
+          "days_before_entry": 23
+        }
+      ]
+    },
+    "technical_indicators": {
+      "rsi": {
+        "14_day": 35.7,
+        "30_day": 31.82,
+        "oversold": false
+      },
+      "moving_averages": {
+        "sma_20": 53.7596,
+        "sma_50": 149.3678,
+        "sma_90": null,
+        "price_vs_sma20_pct": -11.64,
+        "price_vs_sma50_pct": -68.2
+      },
+      "macd": {
+        "macd_line": -24.0865,
+        "bullish": false,
+        "ema_12": 54.3602,
+        "ema_26": 78.4468
+      },
+      "bollinger_bands": {
+        "middle": 53.7596,
+        "upper": 64.0501,
+        "lower": 43.4692,
+        "bandwidth_pct": 38.28,
+        "price_position": "lower"
+      }
+    },
+    "patterns_detected": {
+      "rsi_oversold_macd_bullish": false,
+      "volume_breakout": false,
+      "bollinger_squeeze": false,
+      "price_consolidation": false,
+      "count": 0
+    }
+  },
+  "catalyst_research": {
+    "ticker": "AIMD",
+    "company_name": "Ainos Inc",
+    "entry_date": "2022-09-15",
+    "search_window": {
+      "start": "2022-06-17",
+      "end": "2022-09-15",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"Ainos Inc\" OR \"AIMD\" after:2022-06-17 before:2022-09-15",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"Ainos Inc\" OR \"AIMD\" (catalyst OR announcement OR approval OR contract OR earnings) after:2022-06-17 before:2022-09-15",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"Ainos Inc\" OR \"AIMD\" (insider OR \"Form 4\" OR \"insider buying\") after:2022-06-17 before:2022-09-15",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "good",
+    "days_analyzed": 61,
+    "patterns_found": 0,
+    "volume_spikes_detected": 2,
+    "rsi_oversold": false,
+    "gain_category": "high",
+    "speed_category": "fast",
+    "searches_generated": 3,
+    "key_signals": [
+      "2 Volume Spikes (3x+)"
+    ]
+  }
+}

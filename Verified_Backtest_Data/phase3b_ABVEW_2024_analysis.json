@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "analysis_date": "2025-11-03 03:12:45",
+    "analysis_type": "comprehensive_90day",
+    "analyst": "automated"
+  },
+  "stock_info": {
+    "ticker": "ABVEW",
+    "company_name": "Above Food Ingredients Inc Warrant",
+    "entry_date": "2024-01-29",
+    "peak_date": "2024-07-01",
+    "gain_percent": 500.67,
+    "days_to_peak": 153,
+    "role": "Baseline moderate gainer"
+  },
+  "price_volume_data": {
+    "error": "No data available",
+    "ticker": "ABVEW"
+  },
+  "catalyst_research": {
+    "ticker": "ABVEW",
+    "company_name": "Above Food Ingredients Inc Warrant",
+    "entry_date": "2024-01-29",
+    "search_window": {
+      "start": "2023-10-31",
+      "end": "2024-01-29",
+      "days": 90
+    },
+    "searches_generated": [
+      {
+        "query": "\"Above Food Ingredients Inc Warrant\" OR \"ABVEW\" after:2023-10-31 before:2024-01-29",
+        "purpose": "90-day pre-window news",
+        "type": "general"
+      },
+      {
+        "query": "\"Above Food Ingredients Inc Warrant\" OR \"ABVEW\" (catalyst OR announcement OR approval OR contract OR earnings) after:2023-10-31 before:2024-01-29",
+        "purpose": "Catalyst keywords",
+        "type": "catalyst"
+      },
+      {
+        "query": "\"Above Food Ingredients Inc Warrant\" OR \"ABVEW\" (insider OR \"Form 4\" OR \"insider buying\") after:2023-10-31 before:2024-01-29",
+        "purpose": "Insider activity",
+        "type": "insider"
+      }
+    ],
+    "search_count": 3,
+    "note": "Search queries generated - integrate with web_search tool for automated execution"
+  },
+  "summary": {
+    "data_quality": "unknown",
+    "days_analyzed": 0,
+    "patterns_found": 0,
+    "volume_spikes_detected": 0,
+    "rsi_oversold": false,
+    "gain_category": "moderate",
+    "speed_category": "slow",
+    "searches_generated": 3,
+    "key_signals": []
+  }
+}
