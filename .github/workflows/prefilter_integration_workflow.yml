@@ -1,30 +1,21 @@
-name: Complete Explosive Stock Scan with Pre-Filter
+name: Phase 0 - Pre-Filter Only (Quick Scan)
 
 on:
   workflow_dispatch:
     inputs:
       start_year:
-        description: 'Start year for scan'
+        description: 'Start year for pre-filter scan'
         required: true
         default: '2016'
       end_year:
-        description: 'End year for scan'
+        description: 'End year for pre-filter scan'
         required: true
         default: '2024'
-      run_prefilter:
-        description: 'Run pre-filter (Phase 0)?'
-        required: true
-        default: 'true'
-        type: choice
-        options:
-          - 'true'
-          - 'false'
 
 jobs:
-  phase0_prefilter:
-    name: Phase 0 - Pre-Filter (Quick Scan ALL Tickers)
+  prefilter:
+    name: Quick Pre-Filter - Find 500%+ Candidates
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.run_prefilter == 'true' }}
     
     steps:
       - name: Checkout repository
@@ -39,170 +30,62 @@ jobs:
         run: |
           pip install requests
       
-      - name: Run Phase 0 - Pre-Filter
+      - name: Run Pre-Filter
         env:
           POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
           START_YEAR: ${{ github.event.inputs.start_year }}
           END_YEAR: ${{ github.event.inputs.end_year }}
         run: |
-          echo "🔍 Phase 0: Pre-filtering ALL tickers for explosive candidates..."
+          echo "🔍 Pre-Filter: Quick scan ALL tickers for 500%+ candidates"
+          echo "Period: $START_YEAR - $END_YEAR"
+          echo "Strategy: High/Low price analysis only"
+          echo ""
           python polygon_prefilter.py
       
-      - name: Upload pre-filter results
+      - name: Upload results
         uses: actions/upload-artifact@v3
         with:
-          name: prefilter-results
+          name: prefilter-candidates-${{ github.event.inputs.start_year }}-${{ github.event.inputs.end_year }}
           path: |
             explosive_candidates.txt
             prefilter_stats.json
-          retention-days: 7
+          retention-days: 30
       
-      - name: Display pre-filter summary
+      - name: Display summary
         run: |
-          echo "📊 Pre-filter results:"
+          echo "="
+          echo "📊 PRE-FILTER SUMMARY"
+          echo "="
+          echo ""
           if [ -f explosive_candidates.txt ]; then
-            echo "Total candidates found: $(grep -v '^#' explosive_candidates.txt | wc -l)"
+            TOTAL_CANDIDATES=$(grep -v '^#' explosive_candidates.txt | wc -l)
+            echo "✅ Total candidates found: $TOTAL_CANDIDATES"
             echo ""
-            echo "Sample of candidates:"
-            grep -v '^#' explosive_candidates.txt | head -20
-          fi
-
-  phase1_detailed_scan:
-    name: Phase 1 - Detailed Analysis (Pre-Filtered Candidates)
-    runs-on: ubuntu-latest
-    needs: phase0_prefilter
-    if: ${{ always() && (needs.phase0_prefilter.result == 'success' || github.event.inputs.run_prefilter == 'false') }}
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-      
-      - name: Install dependencies
-        run: |
-          pip install requests yfinance
-      
-      - name: Download pre-filter results (if available)
-        if: ${{ github.event.inputs.run_prefilter == 'true' }}
-        uses: actions/download-artifact@v3
-        with:
-          name: prefilter-results
-      
-      - name: Create Verified_Backtest_Data directory
-        run: |
-          mkdir -p Verified_Backtest_Data
-      
-      - name: Run Phase 1 - Detailed Scan
-        env:
-          POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
-          START_YEAR: ${{ github.event.inputs.start_year }}
-          END_YEAR: ${{ github.event.inputs.end_year }}
-          USE_PREFILTER: ${{ github.event.inputs.run_prefilter }}
-        run: |
-          if [ "$USE_PREFILTER" == "true" ]; then
-            echo "🔍 Phase 1: Detailed analysis on pre-filtered candidates..."
-            python explosive_stock_scanner.py --use-prefilter
+            echo "📊 By year:"
+            grep -v '^#' explosive_candidates.txt | cut -d',' -f2 | sort | uniq -c
+            echo ""
+            echo "🚀 Top 20 highest gain candidates:"
+            grep -v '^#' explosive_candidates.txt | sort -t',' -k3 -rn | head -20
+            echo ""
+            echo "📄 Full results saved to artifact: explosive_candidates.txt"
+            echo "📄 Next step: Run 'Complete Explosive Stock Scan with Pre-Filter' workflow"
           else
-            echo "🔍 Phase 1: Standard scan (first 1000 tickers)..."
-            python explosive_stock_scanner.py --mode full
+            echo "❌ No candidates file generated"
           fi
       
-      - name: Upload scan results
-        uses: actions/upload-artifact@v3
-        with:
-          name: scan-results
-          path: |
-            Verified_Backtest_Data/explosive_stocks_catalog.json
-          retention-days: 30
-      
-      - name: Display scan summary
+      - name: Display statistics
         run: |
-          echo "📊 Scan results:"
-          if [ -f Verified_Backtest_Data/explosive_stocks_catalog.json ]; then
-            python -c "
-import json
-with open('Verified_Backtest_Data/explosive_stocks_catalog.json', 'r') as f:
-    data = json.load(f)
-    print(f\"Total explosive stocks found: {len(data.get('stocks', []))}\")
-    print(f\"API calls made: {data['scan_info']['api_calls_made']}\")
-    print(f\"Scan mode: {data['scan_info']['scan_mode']}\")
-"
-          fi
-
-  phase2_covid_filter:
-    name: Phase 2 - COVID Era Filter
-    runs-on: ubuntu-latest
-    needs: phase1_detailed_scan
-    if: ${{ always() && needs.phase1_detailed_scan.result == 'success' }}
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-      
-      - name: Download scan results
-        uses: actions/download-artifact@v3
-        with:
-          name: scan-results
-          path: Verified_Backtest_Data/
-      
-      - name: Run Phase 2 - COVID Filter
-        run: |
-          echo "🔍 Phase 2: Filtering COVID-era stocks..."
-          python filter_covid_era.py
-      
-      - name: Upload filtered results
-        uses: actions/upload-artifact@v3
-        with:
-          name: filtered-results
-          path: |
-            Verified_Backtest_Data/explosive_stocks_CLEAN.json
-            Verified_Backtest_Data/explosive_stocks_COVID_ERA.json
-            Verified_Backtest_Data/filter_summary.json
-          retention-days: 30
-      
-      - name: Display filter summary
-        run: |
-          echo "📊 COVID filter results:"
-          if [ -f Verified_Backtest_Data/filter_summary.json ]; then
-            python -c "
-import json
-with open('Verified_Backtest_Data/filter_summary.json', 'r') as f:
-    data = json.load(f)
-    print(f\"Clean stocks (non-COVID): {data['clean_stocks']}\")
-    print(f\"COVID-era stocks (excluded): {data['covid_era_stocks']}\")
-    print(f\"Split date: {data['split_date']}\")
-"
-          fi
-
-  summary:
-    name: Pipeline Summary
-    runs-on: ubuntu-latest
-    needs: [phase0_prefilter, phase1_detailed_scan, phase2_covid_filter]
-    if: always()
-    
-    steps:
-      - name: Display pipeline summary
-        run: |
-          echo "="
-          echo "📊 COMPLETE PIPELINE SUMMARY"
-          echo "="
-          echo ""
-          echo "Phase 0 (Pre-Filter): ${{ needs.phase0_prefilter.result }}"
-          echo "Phase 1 (Detailed Scan): ${{ needs.phase1_detailed_scan.result }}"
-          echo "Phase 2 (COVID Filter): ${{ needs.phase2_covid_filter.result }}"
-          echo ""
-          if [ "${{ needs.phase2_covid_filter.result }}" == "success" ]; then
-            echo "✅ Pipeline completed successfully!"
-            echo "📄 Results available in artifacts"
-          else
-            echo "⚠️ Pipeline completed with issues - check individual phases"
+          if [ -f prefilter_stats.json ]; then
+            echo ""
+            echo "📈 SCAN STATISTICS:"
+            python3 << 'EOF'
+          import json
+          with open('prefilter_stats.json', 'r') as f:
+              stats = json.load(f)
+              print(f"Tickers scanned: {stats['total_tickers_scanned']:,}")
+              print(f"Candidates found: {stats['candidates_found']:,}")
+              print(f"Hit rate: {(stats['candidates_found'] / max(stats['total_tickers_scanned'], 1) * 100):.2f}%")
+              print(f"API calls: {stats['api_calls_made']:,}")
+              print(f"Errors: {stats['errors']:,}")
+          EOF
           fi
