@@ -15,7 +15,7 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -34,7 +34,7 @@ jobs:
           python phase3b_orchestrator.py ${{ github.event.inputs.stocks_file || 'Verified_Backtest_Data/explosive_stocks_CLEAN.json' }}
       
       - name: Upload all results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: phase3b-full-results
           path: |
