@@ -1,743 +1,531 @@
 #!/usr/bin/env python3
 """
-GEM Trading System - Phase 3: Pre-Catalyst Analysis & Pattern Discovery
-Version: 2.0 - COMPREHENSIVE FRAMEWORK
-Created: 2025-11-02
-
-PURPOSE:
-Comprehensive analysis of 72 verified sustainable stocks to discover what patterns,
-signals, and characteristics were observable 180 days BEFORE explosive moves.
-
-METHODOLOGY:
-Based on PRE_CATALYST_ANALYSIS_FRAMEWORK.md v2.0
-- Cast wide net: Gather ALL observable data
-- Find correlations: Statistical analysis across stocks
-- Identify patterns: What predicts explosions?
-- Build criteria: GEM v6 screening rules
-
-PHASE 3A: Initial Pattern Discovery (This Script)
-- Basic temporal, gain, and characteristic analysis
-- Identify top performers and common traits
-- Statistical analysis of 72 stocks
-- Generate preliminary insights
-
-PHASE 3B: Deep Pre-Catalyst Analysis (Future)
-- Comprehensive 180-day lookback per stock
-- 12 data categories, 100+ metrics
-- Sample 8 stocks first, then scale to all 72
-- Build correlation matrix and predictive model
-
-INPUT: explosive_stocks_CLEAN.json (72 verified sustainable stocks)
-OUTPUT:
-  - phase3_initial_analysis.json (statistical patterns)
-  - phase3_sample_selection.json (8 stocks for deep dive)
-  - phase3_insights_report.md (readable insights)
-  - phase3_next_steps.md (roadmap for Phase 3B)
+Phase 3A: Initial Pattern Discovery & Analysis
+Analyzes 72 verified sustainable stocks to identify patterns and select deep dive sample
 """
 
 import json
-from datetime import datetime, timedelta
+import os
+from datetime import datetime
 from pathlib import Path
-from collections import defaultdict, Counter
-import statistics
-
-# File paths
-DATA_DIR = "Verified_Backtest_Data"
-INPUT_FILE = f"{DATA_DIR}/explosive_stocks_CLEAN.json"
-OUTPUT_PATTERNS = f"{DATA_DIR}/phase3_pattern_discovery.json"
-OUTPUT_CRITERIA = f"{DATA_DIR}/phase3_screening_criteria.json"
-OUTPUT_REPORT = f"{DATA_DIR}/phase3_insights_report.md"
-
+from typing import Dict, List, Any
 
 class Phase3Analyzer:
-    """Phase 3: Pattern Discovery and Analysis"""
-    
-    def __init__(self):
+    def __init__(self, clean_data_path: str):
+        self.clean_data_path = clean_data_path
         self.stocks = []
-        self.patterns = {}
-        self.insights = []
+        self.analysis_results = {}
+        self.sample_selection = []
         
-    def load_stocks(self):
+    def load_data(self):
         """Load verified sustainable stocks"""
-        print("\n" + "="*80)
-        print("PHASE 3: PATTERN DISCOVERY & ANALYSIS")
-        print("="*80)
-        print(f"📅 Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-        
-        with open(INPUT_FILE, 'r') as f:
+        with open(self.clean_data_path, 'r') as f:
             data = json.load(f)
+            self.stocks = data.get('stocks', [])
+        print(f"✅ Loaded {len(self.stocks)} verified sustainable stocks")
         
-        self.stocks = data.get('stocks', [])
-        print(f"✅ Loaded {len(self.stocks)} verified sustainable stocks\n")
-    
     def analyze_temporal_patterns(self):
-        """Analyze when explosive moves occur"""
-        print("🔍 ANALYZING TEMPORAL PATTERNS...")
+        """Analyze when explosions occurred and their speed"""
+        print("\n🔍 ANALYZING TEMPORAL PATTERNS...")
         print("-" * 80)
         
-        patterns = {
-            'by_year': defaultdict(int),
-            'by_month': defaultdict(int),
-            'days_to_peak': {
-                'fast': [],  # <30 days
-                'medium': [],  # 30-90 days
-                'slow': []  # 90+ days
-            },
-            'peak_months': defaultdict(int)
-        }
+        years = {}
+        speed_categories = {'fast': 0, 'medium': 0, 'slow': 0}
+        total_days = 0
         
         for stock in self.stocks:
-            # Year distribution
-            year = stock.get('year', stock.get('year_discovered', 'unknown'))
-            patterns['by_year'][str(year)] += 1
+            year = stock.get('year', 'unknown')
+            years[year] = years.get(year, 0) + 1
             
-            # Days to peak
-            days = stock.get('days_to_peak', 0)
-            if days < 30:
-                patterns['days_to_peak']['fast'].append(days)
-            elif days < 90:
-                patterns['days_to_peak']['medium'].append(days)
+            days_to_peak = stock.get('days_to_peak', 0)
+            total_days += days_to_peak
+            
+            if days_to_peak < 30:
+                speed_categories['fast'] += 1
+            elif days_to_peak < 90:
+                speed_categories['medium'] += 1
             else:
-                patterns['days_to_peak']['slow'].append(days)
-            
-            # Peak month
-            peak_date = stock.get('peak_date', '')
-            if peak_date:
-                try:
-                    month = datetime.strptime(peak_date, '%Y-%m-%d').strftime('%B')
-                    patterns['peak_months'][month] += 1
-                except:
-                    pass
+                speed_categories['slow'] += 1
         
-        # Calculate stats
-        all_days = []
-        for category in patterns['days_to_peak'].values():
-            all_days.extend(category)
+        avg_days = total_days / len(self.stocks) if self.stocks else 0
         
-        if all_days:
-            patterns['days_to_peak_stats'] = {
-                'min': min(all_days),
-                'max': max(all_days),
-                'mean': round(statistics.mean(all_days), 1),
-                'median': round(statistics.median(all_days), 1)
-            }
+        print(f"  Years Covered: {len(years)} years")
+        print(f"  Fast Movers (<30d): {speed_categories['fast']}")
+        print(f"  Medium Movers (30-90d): {speed_categories['medium']}")
+        print(f"  Slow Movers (90+d): {speed_categories['slow']}")
+        print(f"  Average Days to Peak: {avg_days:.1f}")
         
-        print(f"  Years Covered: {len(patterns['by_year'])} years")
-        print(f"  Fast Movers (<30d): {len(patterns['days_to_peak']['fast'])}")
-        print(f"  Medium Movers (30-90d): {len(patterns['days_to_peak']['medium'])}")
-        print(f"  Slow Movers (90+d): {len(patterns['days_to_peak']['slow'])}")
-        if all_days:
-            print(f"  Average Days to Peak: {patterns['days_to_peak_stats']['mean']}")
-        print()
-        
-        self.patterns['temporal'] = patterns
-        return patterns
-    
-    def analyze_gain_characteristics(self):
-        """Analyze gain patterns and magnitudes"""
-        print("🔍 ANALYZING GAIN CHARACTERISTICS...")
-        print("-" * 80)
-        
-        patterns = {
-            'gain_ranges': {
-                '500-1000%': [],
-                '1000-2000%': [],
-                '2000-5000%': [],
-                '5000%+': []
-            },
-            'max_gains': [],
-            'sustained_test': {
-                'days_above_200': [],
-                'max_gain_observed': []
-            }
+        self.analysis_results['temporal'] = {
+            'year_distribution': years,
+            'speed_distribution': speed_categories,
+            'average_days_to_peak': round(avg_days, 1)
         }
         
+    def analyze_gain_characteristics(self):
+        """Analyze gain magnitudes and sustainability"""
+        print("\n🔍 ANALYZING GAIN CHARACTERISTICS...")
+        print("-" * 80)
+        
+        gain_ranges = {
+            '500-1000%': 0,
+            '1000-2000%': 0,
+            '2000-5000%': 0,
+            '5000%+': 0
+        }
+        
+        gains = []
+        exit_windows = []
+        
         for stock in self.stocks:
-            # Peak gain
             gain = stock.get('gain_percent', 0)
-            patterns['max_gains'].append(gain)
+            gains.append(gain)
             
             if gain < 1000:
-                patterns['gain_ranges']['500-1000%'].append(gain)
+                gain_ranges['500-1000%'] += 1
             elif gain < 2000:
-                patterns['gain_ranges']['1000-2000%'].append(gain)
+                gain_ranges['1000-2000%'] += 1
             elif gain < 5000:
-                patterns['gain_ranges']['2000-5000%'].append(gain)
+                gain_ranges['2000-5000%'] += 1
             else:
-                patterns['gain_ranges']['5000%+'].append(gain)
+                gain_ranges['5000%+'] += 1
             
-            # Sustained gain test data
-            test = stock.get('sustained_gain_test', {})
-            if test:
-                days_above = test.get('total_days_above_threshold', 0)
-                max_gain = test.get('max_gain_observed', 0)
-                
-                if days_above:
-                    patterns['sustained_test']['days_above_200'].append(days_above)
-                if max_gain:
-                    patterns['sustained_test']['max_gain_observed'].append(max_gain)
+            if 'sustainability_test' in stock:
+                days_above = stock['sustainability_test'].get('days_above_threshold', 0)
+                exit_windows.append(days_above)
         
-        # Calculate stats
-        if patterns['max_gains']:
-            patterns['gain_stats'] = {
-                'min': round(min(patterns['max_gains']), 1),
-                'max': round(max(patterns['max_gains']), 1),
-                'mean': round(statistics.mean(patterns['max_gains']), 1),
-                'median': round(statistics.median(patterns['max_gains']), 1)
-            }
-        
-        if patterns['sustained_test']['days_above_200']:
-            patterns['exit_window_stats'] = {
-                'min': min(patterns['sustained_test']['days_above_200']),
-                'max': max(patterns['sustained_test']['days_above_200']),
-                'mean': round(statistics.mean(patterns['sustained_test']['days_above_200']), 1),
-                'median': round(statistics.median(patterns['sustained_test']['days_above_200']), 1)
-            }
+        avg_gain = sum(gains) / len(gains) if gains else 0
+        median_gain = sorted(gains)[len(gains)//2] if gains else 0
+        avg_exit = sum(exit_windows) / len(exit_windows) if exit_windows else 0
         
         print(f"  Gain Ranges:")
-        for range_name, stocks in patterns['gain_ranges'].items():
-            print(f"    {range_name}: {len(stocks)} stocks")
-        if 'gain_stats' in patterns:
-            print(f"  Average Gain: {patterns['gain_stats']['mean']}%")
-            print(f"  Median Gain: {patterns['gain_stats']['median']}%")
-        if 'exit_window_stats' in patterns:
-            print(f"  Average Exit Window: {patterns['exit_window_stats']['mean']} days")
-        print()
+        for range_name, count in gain_ranges.items():
+            print(f"    {range_name}: {count} stocks")
+        print(f"  Average Gain: {avg_gain:.1f}%")
+        print(f"  Median Gain: {median_gain:.1f}%")
+        print(f"  Average Exit Window: {avg_exit:.1f} days")
         
-        self.patterns['gains'] = patterns
-        return patterns
-    
+        self.analysis_results['gains'] = {
+            'distribution': gain_ranges,
+            'average_gain_percent': round(avg_gain, 1),
+            'median_gain_percent': round(median_gain, 1),
+            'average_exit_window_days': round(avg_exit, 1)
+        }
+        
     def analyze_exit_windows(self):
-        """Analyze exit window characteristics"""
-        print("🔍 ANALYZING EXIT WINDOWS...")
+        """Analyze tradeability based on exit window duration"""
+        print("\n🔍 ANALYZING EXIT WINDOWS...")
         print("-" * 80)
         
-        patterns = {
-            'exit_window_categories': {
-                'quick': [],  # 14-30 days
-                'standard': [],  # 31-60 days
-                'extended': [],  # 61-100 days
-                'very_extended': []  # 100+ days
-            },
-            'tradeable_classifications': defaultdict(int)
+        window_categories = {
+            'quick': 0,      # 14-50 days
+            'standard': 0,   # 50-100 days
+            'extended': 0,   # 100-150 days
+            'very_extended': 0  # 150+ days
+        }
+        
+        tradeable_classifications = {
+            'RISKY': 0,        # <21 days
+            'TRADEABLE': 0,    # 21-49 days
+            'COMFORTABLE': 0,  # 50-99 days
+            'EXTENDED': 0,     # 100+ days
+            'UNTRADEABLE': 0   # Data missing
         }
         
         for stock in self.stocks:
-            test = stock.get('sustained_gain_test', {})
-            days_above = test.get('total_days_above_threshold', 0)
-            
-            if days_above:
-                if days_above <= 30:
-                    patterns['exit_window_categories']['quick'].append(days_above)
-                elif days_above <= 60:
-                    patterns['exit_window_categories']['standard'].append(days_above)
-                elif days_above <= 100:
-                    patterns['exit_window_categories']['extended'].append(days_above)
+            if 'sustainability_test' in stock:
+                days_above = stock['sustainability_test'].get('days_above_threshold', 0)
+                
+                if days_above < 50:
+                    window_categories['quick'] += 1
+                elif days_above < 100:
+                    window_categories['standard'] += 1
+                elif days_above < 150:
+                    window_categories['extended'] += 1
                 else:
-                    patterns['exit_window_categories']['very_extended'].append(days_above)
-            
-            # Drawdown classification (if available)
-            drawdown = stock.get('drawdown_analysis', {})
-            if drawdown:
-                classification = drawdown.get('tradeable_classification', 'UNKNOWN')
-                patterns['tradeable_classifications'][classification] += 1
+                    window_categories['very_extended'] += 1
+                
+                if days_above < 21:
+                    tradeable_classifications['RISKY'] += 1
+                elif days_above < 50:
+                    tradeable_classifications['TRADEABLE'] += 1
+                elif days_above < 100:
+                    tradeable_classifications['COMFORTABLE'] += 1
+                else:
+                    tradeable_classifications['EXTENDED'] += 1
+            else:
+                tradeable_classifications['UNTRADEABLE'] += 1
         
         print(f"  Exit Window Distribution:")
-        for category, days_list in patterns['exit_window_categories'].items():
-            print(f"    {category.replace('_', ' ').title()}: {len(days_list)} stocks")
+        for cat, count in window_categories.items():
+            print(f"    {cat.capitalize()}: {count} stocks")
         
-        if patterns['tradeable_classifications']:
-            print(f"\n  Tradeable Classifications:")
-            for classification, count in patterns['tradeable_classifications'].items():
-                print(f"    {classification}: {count} stocks")
-        print()
+        print(f"  Tradeable Classifications:")
+        for classification, count in tradeable_classifications.items():
+            print(f"    {classification}: {count} stocks")
         
-        self.patterns['exit_windows'] = patterns
-        return patterns
-    
-    def analyze_enrichment_quality(self):
-        """Analyze data quality and enrichment"""
-        print("🔍 ANALYZING DATA QUALITY...")
+        self.analysis_results['exit_windows'] = {
+            'distribution': window_categories,
+            'tradeable_classifications': tradeable_classifications
+        }
+        
+    def analyze_data_quality(self):
+        """Assess data completeness and quality"""
+        print("\n🔍 ANALYZING DATA QUALITY...")
         print("-" * 80)
         
-        patterns = {
-            'enriched_count': 0,
-            'with_drawdown': 0,
-            'with_test_price': 0,
-            'data_sources': defaultdict(int)
-        }
+        enriched_count = 0
+        drawdown_count = 0
+        test_price_count = 0
+        data_sources = {}
         
         for stock in self.stocks:
             if stock.get('enriched'):
-                patterns['enriched_count'] += 1
+                enriched_count += 1
             
-            if stock.get('drawdown_analysis'):
-                patterns['with_drawdown'] += 1
+            if 'drawdown_analysis' in stock:
+                drawdown_count += 1
             
-            if stock.get('test_price_30d'):
-                patterns['with_test_price'] += 1
+            if 'test_price_30d' in stock:
+                test_price_count += 1
             
             source = stock.get('data_source', 'unknown')
-            patterns['data_sources'][source] += 1
+            data_sources[source] = data_sources.get(source, 0) + 1
         
-        print(f"  Enriched Stocks: {patterns['enriched_count']}/{len(self.stocks)} ({patterns['enriched_count']/len(self.stocks)*100:.1f}%)")
-        print(f"  With Drawdown Analysis: {patterns['with_drawdown']}")
-        print(f"  With 30-Day Test Price: {patterns['with_test_price']}")
-        print(f"\n  Data Sources:")
-        for source, count in patterns['data_sources'].items():
+        enriched_pct = (enriched_count / len(self.stocks) * 100) if self.stocks else 0
+        
+        print(f"  Enriched Stocks: {enriched_count}/{len(self.stocks)} ({enriched_pct:.1f}%)")
+        print(f"  With Drawdown Analysis: {drawdown_count}")
+        print(f"  With 30-Day Test Price: {test_price_count}")
+        print(f"  Data Sources:")
+        for source, count in data_sources.items():
             print(f"    {source}: {count} stocks")
-        print()
         
-        self.patterns['data_quality'] = patterns
-        return patterns
-    
-    def identify_top_performers(self):
-        """Identify top performing stocks"""
-        print("🔍 IDENTIFYING TOP PERFORMERS...")
-        print("-" * 80)
-        
-        # Sort by various metrics
-        by_gain = sorted(self.stocks, key=lambda x: x.get('gain_percent', 0), reverse=True)[:10]
-        
-        by_exit_window = sorted(
-            [s for s in self.stocks if s.get('sustained_gain_test', {}).get('total_days_above_threshold')],
-            key=lambda x: x['sustained_gain_test']['total_days_above_threshold'],
-            reverse=True
-        )[:10]
-        
-        by_speed = sorted(self.stocks, key=lambda x: x.get('days_to_peak', 999))[:10]
-        
-        patterns = {
-            'top_by_gain': [
-                {
-                    'ticker': s.get('ticker'),
-                    'year': s.get('year', s.get('year_discovered')),
-                    'gain_percent': s.get('gain_percent'),
-                    'days_to_peak': s.get('days_to_peak')
-                }
-                for s in by_gain
-            ],
-            'top_by_exit_window': [
-                {
-                    'ticker': s.get('ticker'),
-                    'year': s.get('year', s.get('year_discovered')),
-                    'days_above_200': s['sustained_gain_test']['total_days_above_threshold'],
-                    'gain_percent': s.get('gain_percent')
-                }
-                for s in by_exit_window
-            ],
-            'top_by_speed': [
-                {
-                    'ticker': s.get('ticker'),
-                    'year': s.get('year', s.get('year_discovered')),
-                    'days_to_peak': s.get('days_to_peak'),
-                    'gain_percent': s.get('gain_percent')
-                }
-                for s in by_speed
-            ]
+        self.analysis_results['data_quality'] = {
+            'total_stocks': len(self.stocks),
+            'enriched_count': enriched_count,
+            'enriched_percentage': round(enriched_pct, 1),
+            'drawdown_count': drawdown_count,
+            'test_price_count': test_price_count,
+            'data_sources': data_sources
         }
         
+    def identify_top_performers(self):
+        """Identify standout stocks for analysis"""
+        print("\n🔍 IDENTIFYING TOP PERFORMERS...")
+        print("-" * 80)
+        
+        # Top gainers
+        by_gain = sorted(self.stocks, key=lambda x: x.get('gain_percent', 0), reverse=True)[:5]
         print(f"  Top Gainers:")
-        for i, stock in enumerate(patterns['top_by_gain'][:5], 1):
-            print(f"    {i}. {stock['ticker']} ({stock['year']}): {stock['gain_percent']:.0f}% in {stock['days_to_peak']} days")
+        for i, stock in enumerate(by_gain, 1):
+            ticker = stock.get('ticker', 'N/A')
+            year = stock.get('year', 'N/A')
+            gain = stock.get('gain_percent', 0)
+            days = stock.get('days_to_peak', 0)
+            print(f"    {i}. {ticker} ({year}): {gain:.0f}% in {days} days")
         
-        print(f"\n  Longest Exit Windows:")
-        for i, stock in enumerate(patterns['top_by_exit_window'][:5], 1):
-            print(f"    {i}. {stock['ticker']} ({stock['year']}): {stock['days_above_200']} days above 200%")
+        # Longest exit windows
+        stocks_with_windows = [s for s in self.stocks if 'sustainability_test' in s]
+        by_window = sorted(stocks_with_windows, 
+                          key=lambda x: x['sustainability_test'].get('days_above_threshold', 0), 
+                          reverse=True)[:5]
+        print(f"  Longest Exit Windows:")
+        for i, stock in enumerate(by_window, 1):
+            ticker = stock.get('ticker', 'N/A')
+            year = stock.get('year', 'N/A')
+            days = stock['sustainability_test'].get('days_above_threshold', 0)
+            print(f"    {i}. {ticker} ({year}): {days} days above 200%")
         
-        print(f"\n  Fastest Movers:")
-        for i, stock in enumerate(patterns['top_by_speed'][:5], 1):
-            print(f"    {i}. {stock['ticker']} ({stock['year']}): {stock['gain_percent']:.0f}% in {stock['days_to_peak']} days")
-        print()
+        # Fastest movers
+        by_speed = sorted(self.stocks, key=lambda x: x.get('days_to_peak', 999))[:5]
+        print(f"  Fastest Movers:")
+        for i, stock in enumerate(by_speed, 1):
+            ticker = stock.get('ticker', 'N/A')
+            year = stock.get('year', 'N/A')
+            gain = stock.get('gain_percent', 0)
+            days = stock.get('days_to_peak', 0)
+            print(f"    {i}. {ticker} ({year}): {gain:.0f}% in {days} days")
         
-        self.patterns['top_performers'] = patterns
-        return patterns
-    
-    
+        self.analysis_results['top_performers'] = {
+            'top_gainers': [{'ticker': s.get('ticker'), 'year': s.get('year'), 
+                           'gain_percent': s.get('gain_percent'), 'days': s.get('days_to_peak')} 
+                          for s in by_gain],
+            'longest_windows': [{'ticker': s.get('ticker'), 'year': s.get('year'),
+                               'days_above_200': s['sustainability_test'].get('days_above_threshold')}
+                              for s in by_window],
+            'fastest_movers': [{'ticker': s.get('ticker'), 'year': s.get('year'),
+                              'gain_percent': s.get('gain_percent'), 'days': s.get('days_to_peak')}
+                             for s in by_speed]
+        }
+        
     def select_deep_dive_sample(self):
         """Select 8 diverse stocks for comprehensive Phase 3B analysis"""
-        print("🔍 SELECTING DEEP DIVE SAMPLE...")
+        print("\n🔍 SELECTING DEEP DIVE SAMPLE...")
         print("-" * 80)
         
-        # Selection criteria for maximum diversity
-        selection = {
-            "methodology": "Maximum diversity across all dimensions",
-            "criteria": [
-                "Variety of years (2016-2024)",
-                "Variety of gains (500% to 10,000%+)",
-                "Variety of speeds (1 day to 180 days)",
-                "Mix of enriched vs basic data",
-                "Recent stocks (full data available)"
-            ],
-            "sample_stocks": []
-        }
-        
-        # Sort stocks by different metrics
-        by_gain = sorted(self.stocks, key=lambda x: x.get('gain_percent', 0), reverse=True)
-        by_speed_fast = sorted(self.stocks, key=lambda x: x.get('days_to_peak', 999))
-        by_speed_slow = sorted(self.stocks, key=lambda x: x.get('days_to_peak', 0), reverse=True)
-        by_exit_window = sorted(
-            [s for s in self.stocks if s.get('sustained_gain_test', {}).get('total_days_above_threshold')],
-            key=lambda x: x['sustained_gain_test']['total_days_above_threshold'],
-            reverse=True
-        )
-        
-        # Get year distribution
-        recent_2024 = [s for s in self.stocks if s.get('year', s.get('year_discovered')) == 2024]
-        year_2022_2023 = [s for s in self.stocks if s.get('year', s.get('year_discovered')) in [2022, 2023]]
-        year_2016_2019 = [s for s in self.stocks if s.get('year', s.get('year_discovered')) in [2016, 2018, 2019]]
-        
-        # Select diverse sample
-        sample = []
+        selected = []
         
         # 1. Extreme gainer (test framework limits)
-        if by_gain[0]['gain_percent'] > 5000:
-            sample.append({
-                "ticker": by_gain[0]['ticker'],
-                "year": by_gain[0].get('year', by_gain[0].get('year_discovered')),
-                "reason": f"Extreme gainer - {by_gain[0]['gain_percent']:.0f}% in {by_gain[0]['days_to_peak']} days",
-                "role": "Test framework limits",
-                "entry_date": by_gain[0].get('entry_date'),
-                "entry_price": by_gain[0].get('entry_price'),
-                "peak_date": by_gain[0].get('peak_date'),
-                "gain_percent": by_gain[0]['gain_percent'],
-                "days_to_peak": by_gain[0]['days_to_peak']
+        extreme = max(self.stocks, key=lambda x: x.get('gain_percent', 0))
+        selected.append({
+            'ticker': extreme.get('ticker'),
+            'year': extreme.get('year'),
+            'reason': f"Extreme gainer - {extreme.get('gain_percent', 0):.0f}% in {extreme.get('days_to_peak', 0)} days",
+            'role': 'Test framework limits',
+            'stock_data': extreme
+        })
+        
+        # 2-3. Recent stocks (2024) with full data
+        recent_2024 = [s for s in self.stocks if s.get('year') == 2024 and s.get('enriched')]
+        if len(recent_2024) >= 2:
+            for stock in recent_2024[:2]:
+                selected.append({
+                    'ticker': stock.get('ticker'),
+                    'year': stock.get('year'),
+                    'reason': f"Recent stock - {stock.get('gain_percent', 0):.0f}% in {stock.get('days_to_peak', 0)} days",
+                    'role': 'Recent with full data',
+                    'stock_data': stock
+                })
+        
+        # 4. Ultra-fast mover (test rapid explosion patterns)
+        fast = min(self.stocks, key=lambda x: x.get('days_to_peak', 999))
+        if fast not in [s['stock_data'] for s in selected]:
+            selected.append({
+                'ticker': fast.get('ticker'),
+                'year': fast.get('year'),
+                'reason': f"Ultra-fast - {fast.get('gain_percent', 0):.0f}% in {fast.get('days_to_peak', 0)} days",
+                'role': 'Test rapid explosion patterns',
+                'stock_data': fast
             })
         
-        # 2-3. Recent moderate gainers (full data available)
-        for stock in recent_2024[:2]:
-            if stock['ticker'] not in [s['ticker'] for s in sample]:
-                sample.append({
-                    "ticker": stock['ticker'],
-                    "year": stock.get('year', stock.get('year_discovered')),
-                    "reason": f"Recent stock - {stock['gain_percent']:.0f}% in {stock['days_to_peak']} days",
-                    "role": "Recent with full data",
-                    "entry_date": stock.get('entry_date'),
-                    "entry_price": stock.get('entry_price'),
-                    "peak_date": stock.get('peak_date'),
-                    "gain_percent": stock['gain_percent'],
-                    "days_to_peak": stock['days_to_peak']
-                })
+        # 5. Slow builder (test slow accumulation patterns)
+        slow = max([s for s in self.stocks if s.get('days_to_peak', 0) > 90], 
+                   key=lambda x: x.get('days_to_peak', 0))
+        if slow not in [s['stock_data'] for s in selected]:
+            selected.append({
+                'ticker': slow.get('ticker'),
+                'year': slow.get('year'),
+                'reason': f"Slow builder - {slow.get('gain_percent', 0):.0f}% in {slow.get('days_to_peak', 0)} days",
+                'role': 'Test slow accumulation patterns',
+                'stock_data': slow
+            })
         
-        # 4. Ultra-fast mover (<10 days)
-        for stock in by_speed_fast:
-            if stock['days_to_peak'] < 10 and stock['ticker'] not in [s['ticker'] for s in sample]:
-                sample.append({
-                    "ticker": stock['ticker'],
-                    "year": stock.get('year', stock.get('year_discovered')),
-                    "reason": f"Ultra-fast - {stock['gain_percent']:.0f}% in {stock['days_to_peak']} days",
-                    "role": "Test rapid explosion patterns",
-                    "entry_date": stock.get('entry_date'),
-                    "entry_price": stock.get('entry_price'),
-                    "peak_date": stock.get('peak_date'),
-                    "gain_percent": stock['gain_percent'],
-                    "days_to_peak": stock['days_to_peak']
-                })
-                break
+        # 6. Longest exit window (test extended tradeable period)
+        stocks_with_windows = [s for s in self.stocks if 'sustainability_test' in s]
+        longest = max(stocks_with_windows, 
+                     key=lambda x: x['sustainability_test'].get('days_above_threshold', 0))
+        if longest not in [s['stock_data'] for s in selected]:
+            selected.append({
+                'ticker': longest.get('ticker'),
+                'year': longest.get('year'),
+                'reason': f"Longest exit window - {longest['sustainability_test'].get('days_above_threshold', 0)} days",
+                'role': 'Test extended tradeable period',
+                'stock_data': longest
+            })
         
-        # 5. Slow builder (150+ days)
-        for stock in by_speed_slow:
-            if stock['days_to_peak'] > 150 and stock['ticker'] not in [s['ticker'] for s in sample]:
-                sample.append({
-                    "ticker": stock['ticker'],
-                    "year": stock.get('year', stock.get('year_discovered')),
-                    "reason": f"Slow builder - {stock['gain_percent']:.0f}% in {stock['days_to_peak']} days",
-                    "role": "Test slow accumulation patterns",
-                    "entry_date": stock.get('entry_date'),
-                    "entry_price": stock.get('entry_price'),
-                    "peak_date": stock.get('peak_date'),
-                    "gain_percent": stock['gain_percent'],
-                    "days_to_peak": stock['days_to_peak']
-                })
-                break
+        # 7-8. Historical diversity (different years)
+        historical = [s for s in self.stocks if s.get('year') in [2022, 2023] 
+                     and s not in [sel['stock_data'] for sel in selected]]
+        for stock in historical[:2]:
+            selected.append({
+                'ticker': stock.get('ticker'),
+                'year': stock.get('year'),
+                'reason': f"Historical diversity - {stock.get('gain_percent', 0):.0f}% in {stock.get('days_to_peak', 0)} days",
+                'role': f"Represent {stock.get('year')} winners",
+                'stock_data': stock
+            })
         
-        # 6. Longest exit window
-        if by_exit_window:
-            stock = by_exit_window[0]
-            if stock['ticker'] not in [s['ticker'] for s in sample]:
-                sample.append({
-                    "ticker": stock['ticker'],
-                    "year": stock.get('year', stock.get('year_discovered')),
-                    "reason": f"Longest exit window - {stock['sustained_gain_test']['total_days_above_threshold']} days",
-                    "role": "Test extended tradeable period",
-                    "entry_date": stock.get('entry_date'),
-                    "entry_price": stock.get('entry_price'),
-                    "peak_date": stock.get('peak_date'),
-                    "gain_percent": stock['gain_percent'],
-                    "days_to_peak": stock['days_to_peak'],
-                    "exit_window_days": stock['sustained_gain_test']['total_days_above_threshold']
-                })
+        print(f"  Selected {len(selected)} stocks for deep dive:")
+        for i, selection in enumerate(selected, 1):
+            print(f"  {i}. {selection['ticker']} ({selection['year']})")
+            print(f"     {selection['reason']}")
+            print(f"     Role: {selection['role']}")
         
-        # 7-8. Fill remaining with diverse years
-        for year_group in [year_2022_2023, year_2016_2019]:
-            for stock in year_group:
-                if len(sample) >= 8:
-                    break
-                if stock['ticker'] not in [s['ticker'] for s in sample]:
-                    sample.append({
-                        "ticker": stock['ticker'],
-                        "year": stock.get('year', stock.get('year_discovered')),
-                        "reason": f"Historical diversity - {stock['gain_percent']:.0f}% in {stock['days_to_peak']} days",
-                        "role": f"Represent {stock.get('year', stock.get('year_discovered'))} winners",
-                        "entry_date": stock.get('entry_date'),
-                        "entry_price": stock.get('entry_price'),
-                        "peak_date": stock.get('peak_date'),
-                        "gain_percent": stock['gain_percent'],
-                        "days_to_peak": stock['days_to_peak']
-                    })
+        self.sample_selection = selected
+        return selected
         
-        selection['sample_stocks'] = sample[:8]
-        selection['sample_count'] = len(sample[:8])
+    def save_results(self):
+        """Save all analysis results"""
+        output_dir = Path('Verified_Backtest_Data')
         
-        print(f"  Selected {len(sample[:8])} stocks for deep dive:\n")
-        for i, stock in enumerate(sample[:8], 1):
-            print(f"  {i}. {stock['ticker']} ({stock['year']})")
-            print(f"     {stock['reason']}")
-            print(f"     Role: {stock['role']}\n")
+        # Save full analysis
+        analysis_path = output_dir / 'phase3_initial_analysis.json'
+        with open(analysis_path, 'w') as f:
+            json.dump({
+                'generated': datetime.now().isoformat(),
+                'total_stocks_analyzed': len(self.stocks),
+                'analysis': self.analysis_results
+            }, f, indent=2)
+        print(f"\n✅ Saved analysis: {analysis_path}")
         
-        self.patterns['sample_selection'] = selection
-        return selection
-        """Generate GEM v6 screening criteria from patterns"""
-        print("🎯 GENERATING SCREENING CRITERIA...")
-        print("-" * 80)
-        
-        temporal = self.patterns.get('temporal', {})
-        gains = self.patterns.get('gains', {})
-        exit_windows = self.patterns.get('exit_windows', {})
-        
-        criteria = {
-            "version": "6.0",
-            "generated_date": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            "based_on_stocks": len(self.stocks),
-            "criteria": {}
+        # Save sample selection
+        sample_path = output_dir / 'phase3_sample_selection.json'
+        sample_data = {
+            'generated': datetime.now().isoformat(),
+            'sample_size': len(self.sample_selection),
+            'selection_criteria': 'Maximum diversity across years, gains, speeds, and data quality',
+            'stocks': [{
+                'ticker': s['ticker'],
+                'year': s['year'],
+                'reason': s['reason'],
+                'role': s['role'],
+                'gain_percent': s['stock_data'].get('gain_percent'),
+                'days_to_peak': s['stock_data'].get('days_to_peak'),
+                'days_above_200': s['stock_data'].get('sustainability_test', {}).get('days_above_threshold'),
+                'enriched': s['stock_data'].get('enriched', False)
+            } for s in self.sample_selection]
         }
+        with open(sample_path, 'w') as f:
+            json.dump(sample_data, f, indent=2)
+        print(f"✅ Saved sample selection: {sample_path}")
         
-        # Temporal criteria
-        if temporal.get('days_to_peak_stats'):
-            criteria['criteria']['days_to_peak'] = {
-                "typical_range": f"0-{temporal['days_to_peak_stats']['mean']*2:.0f} days",
-                "fast_threshold": 30,
-                "medium_threshold": 90,
-                "note": f"Average winner peaks in {temporal['days_to_peak_stats']['mean']} days"
-            }
+        # Generate insights report
+        insights_path = output_dir / 'phase3_insights_report.md'
+        self.generate_insights_report(insights_path)
+        print(f"✅ Saved insights report: {insights_path}")
         
-        # Gain criteria
-        if gains.get('gain_stats'):
-            criteria['criteria']['minimum_gain'] = {
-                "target": "500%+",
-                "typical": f"{gains['gain_stats']['median']:.0f}%",
-                "note": "Median gain among winners"
-            }
+        # Generate next steps
+        next_steps_path = output_dir / 'phase3_next_steps.md'
+        self.generate_next_steps(next_steps_path)
+        print(f"✅ Saved next steps: {next_steps_path}")
         
-        # Exit window criteria
-        if gains.get('exit_window_stats'):
-            criteria['criteria']['exit_window'] = {
-                "minimum_days": 14,
-                "typical": f"{gains['exit_window_stats']['median']:.0f} days",
-                "ideal": "60+ days",
-                "note": "Days above 200% gain threshold"
-            }
-        
-        # Risk management
-        criteria['criteria']['risk_management'] = {
-            "trailing_stop": "35%",
-            "max_single_day_drop": "35%",
-            "preferred": "TRADEABLE or IDEAL classification",
-            "avoid": "UNTRADEABLE (>35% gaps)"
-        }
-        
-        # Year patterns
-        if temporal.get('by_year'):
-            years = sorted(temporal['by_year'].items(), key=lambda x: int(x[0]) if x[0] != 'unknown' else 0)
-            recent_years = [year for year, count in years[-3:] if year != 'unknown']
-            criteria['criteria']['temporal_focus'] = {
-                "recent_hot_years": recent_years,
-                "note": "Years with most winners in dataset"
-            }
-        
-        print("  Generated screening criteria for GEM v6")
-        print(f"  Based on {len(self.stocks)} verified sustainable stocks")
-        print()
-        
-        return criteria
-    
-    def generate_insights(self):
-        """Generate human-readable insights"""
-        print("📝 GENERATING INSIGHTS REPORT...")
-        print("-" * 80)
-        
-        temporal = self.patterns.get('temporal', {})
-        gains = self.patterns.get('gains', {})
-        exit_windows = self.patterns.get('exit_windows', {})
-        top_performers = self.patterns.get('top_performers', {})
-        
-        insights = []
-        
-        # Key findings
-        insights.append("# Phase 3: Pattern Discovery Insights\n")
-        insights.append(f"**Analysis Date:** {datetime.now().strftime('%Y-%m-%d')}")
-        insights.append(f"**Stocks Analyzed:** {len(self.stocks)} verified sustainable winners\n")
-        insights.append("---\n")
-        
-        insights.append("## 🎯 Key Findings\n")
-        
-        # Temporal insights
-        if temporal.get('days_to_peak_stats'):
-            stats = temporal['days_to_peak_stats']
-            insights.append("### Timing Patterns")
-            insights.append(f"- **Average Time to Peak:** {stats['mean']} days")
-            insights.append(f"- **Median Time to Peak:** {stats['median']} days")
-            insights.append(f"- **Range:** {stats['min']}-{stats['max']} days")
+    def generate_insights_report(self, path):
+        """Generate human-readable insights report"""
+        with open(path, 'w') as f:
+            f.write("# Phase 3A: Initial Pattern Discovery - Insights Report\n\n")
+            f.write(f"**Generated**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f.write(f"**Stocks Analyzed**: {len(self.stocks)}\n\n")
             
-            fast = len(temporal['days_to_peak']['fast'])
-            medium = len(temporal['days_to_peak']['medium'])
-            slow = len(temporal['days_to_peak']['slow'])
-            total = fast + medium + slow
+            f.write("## Key Findings\n\n")
             
-            if total > 0:
-                insights.append(f"- **Fast Movers (<30d):** {fast} ({fast/total*100:.0f}%)")
-                insights.append(f"- **Medium Movers (30-90d):** {medium} ({medium/total*100:.0f}%)")
-                insights.append(f"- **Slow Movers (90+d):** {slow} ({slow/total*100:.0f}%)\n")
-        
-        # Gain insights
-        if gains.get('gain_stats'):
-            stats = gains['gain_stats']
-            insights.append("### Gain Characteristics")
-            insights.append(f"- **Average Gain:** {stats['mean']}%")
-            insights.append(f"- **Median Gain:** {stats['median']}%")
-            insights.append(f"- **Range:** {stats['min']}%-{stats['max']}%")
+            # Temporal insights
+            temp = self.analysis_results.get('temporal', {})
+            f.write("### Temporal Patterns\n\n")
+            f.write(f"- **Average time to peak**: {temp.get('average_days_to_peak', 0):.1f} days\n")
+            speed = temp.get('speed_distribution', {})
+            f.write(f"- **Speed distribution**:\n")
+            f.write(f"  - Fast (<30 days): {speed.get('fast', 0)} stocks\n")
+            f.write(f"  - Medium (30-90 days): {speed.get('medium', 0)} stocks\n")
+            f.write(f"  - Slow (90+ days): {speed.get('slow', 0)} stocks\n\n")
             
-            for range_name, stocks_list in gains['gain_ranges'].items():
-                if stocks_list:
-                    insights.append(f"- **{range_name}:** {len(stocks_list)} stocks")
-            insights.append("")
-        
-        # Exit window insights
-        if gains.get('exit_window_stats'):
-            stats = gains['exit_window_stats']
-            insights.append("### Exit Windows")
-            insights.append(f"- **Average Days Above 200%:** {stats['mean']} days")
-            insights.append(f"- **Median Days Above 200%:** {stats['median']} days")
-            insights.append(f"- **Range:** {stats['min']}-{stats['max']} days\n")
-        
-        # Top performers
-        if top_performers:
-            insights.append("## 🏆 Top Performers\n")
+            # Gain insights
+            gains = self.analysis_results.get('gains', {})
+            f.write("### Gain Characteristics\n\n")
+            f.write(f"- **Average gain**: {gains.get('average_gain_percent', 0):.1f}%\n")
+            f.write(f"- **Median gain**: {gains.get('median_gain_percent', 0):.1f}%\n")
+            f.write(f"- **Average exit window**: {gains.get('average_exit_window_days', 0):.1f} days\n\n")
             
-            insights.append("### Highest Gains")
-            for i, stock in enumerate(top_performers.get('top_by_gain', [])[:5], 1):
-                insights.append(f"{i}. **{stock['ticker']}** ({stock['year']}): {stock['gain_percent']:.0f}% in {stock['days_to_peak']} days")
-            insights.append("")
+            # Exit window insights
+            exits = self.analysis_results.get('exit_windows', {})
+            f.write("### Exit Window Analysis\n\n")
+            trade = exits.get('tradeable_classifications', {})
+            f.write(f"- **Risky** (<21 days): {trade.get('RISKY', 0)} stocks\n")
+            f.write(f"- **Tradeable** (21-49 days): {trade.get('TRADEABLE', 0)} stocks\n")
+            f.write(f"- **Comfortable** (50-99 days): {trade.get('COMFORTABLE', 0)} stocks\n")
+            f.write(f"- **Extended** (100+ days): {trade.get('EXTENDED', 0)} stocks\n\n")
             
-            insights.append("### Longest Exit Windows")
-            for i, stock in enumerate(top_performers.get('top_by_exit_window', [])[:5], 1):
-                insights.append(f"{i}. **{stock['ticker']}** ({stock['year']}): {stock['days_above_200']} days above 200%")
-            insights.append("")
+            # Top performers
+            f.write("### Top Performers\n\n")
+            tops = self.analysis_results.get('top_performers', {})
+            f.write("**Top 5 Gainers**:\n")
+            for stock in tops.get('top_gainers', [])[:5]:
+                f.write(f"- {stock['ticker']} ({stock['year']}): {stock['gain_percent']:.0f}% in {stock['days']} days\n")
             
-            insights.append("### Fastest Movers")
-            for i, stock in enumerate(top_performers.get('top_by_speed', [])[:5], 1):
-                insights.append(f"{i}. **{stock['ticker']}** ({stock['year']}): {stock['gain_percent']:.0f}% in {stock['days_to_peak']} days")
-            insights.append("")
-        
-        # Year distribution
-        if temporal.get('by_year'):
-            insights.append("## 📅 Year Distribution\n")
-            years = sorted(temporal['by_year'].items(), key=lambda x: int(x[0]) if x[0] != 'unknown' else 0, reverse=True)
-            for year, count in years:
-                if year != 'unknown':
-                    insights.append(f"- **{year}:** {count} stocks")
-            insights.append("")
-        
-        # Actionable insights
-        insights.append("## 💡 Actionable Insights for GEM v6\n")
-        
-        if gains.get('gain_stats'):
-            insights.append(f"1. **Target gains of {gains['gain_stats']['median']:.0f}%+** based on median winner performance")
-        
-        if gains.get('exit_window_stats'):
-            insights.append(f"2. **Plan for {gains['exit_window_stats']['median']:.0f}-day exit windows** on average")
-        
-        if temporal.get('days_to_peak_stats'):
-            insights.append(f"3. **Expect peak within {temporal['days_to_peak_stats']['mean']:.0f} days** on average")
-        
-        insights.append("4. **Use 35% trailing stop loss** to protect gains")
-        insights.append("5. **Avoid stocks with >35% single-day gaps** (untradeable)")
-        
-        insights_text = "\n".join(insights)
-        
-        print("  Generated comprehensive insights report")
-        print()
-        
-        return insights_text
-    
+            f.write("\n**Longest Exit Windows**:\n")
+            for stock in tops.get('longest_windows', [])[:5]:
+                f.write(f"- {stock['ticker']} ({stock['year']}): {stock['days_above_200']} days above 200%\n")
+            
+            f.write("\n## Sample Selection for Phase 3B\n\n")
+            f.write(f"Selected {len(self.sample_selection)} diverse stocks for comprehensive analysis:\n\n")
+            for i, stock in enumerate(self.sample_selection, 1):
+                f.write(f"{i}. **{stock['ticker']}** ({stock['year']})\n")
+                f.write(f"   - {stock['reason']}\n")
+                f.write(f"   - Role: {stock['role']}\n\n")
+                
+    def generate_next_steps(self, path):
+        """Generate next steps roadmap"""
+        with open(path, 'w') as f:
+            f.write("# Phase 3: Next Steps Roadmap\n\n")
+            f.write(f"**Generated**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+            
+            f.write("## Phase 3A Complete ✅\n\n")
+            f.write(f"- Statistical analysis: {len(self.stocks)} stocks\n")
+            f.write(f"- Sample selection: {len(self.sample_selection)} stocks\n")
+            f.write("- Preliminary insights generated\n\n")
+            
+            f.write("## Phase 3B: Comprehensive Pre-Catalyst Analysis\n\n")
+            f.write("### Immediate Actions\n\n")
+            f.write("1. **Review Sample Selection**\n")
+            f.write("   - Verify 8 stocks cover desired diversity\n")
+            f.write("   - Confirm data availability for each\n")
+            f.write("   - Adjust selection if needed\n\n")
+            
+            f.write("2. **Build Data Collection Tools**\n")
+            f.write("   - Polygon API integration (OHLC, volume, technicals)\n")
+            f.write("   - SEC filing scraper (Form 4, 13F)\n")
+            f.write("   - Social sentiment collector (Reddit, Twitter)\n")
+            f.write("   - Options data aggregator\n\n")
+            
+            f.write("3. **Begin Deep Dive Analysis**\n")
+            f.write("   - Start with 2-3 sample stocks\n")
+            f.write("   - Validate comprehensive framework\n")
+            f.write("   - Collect 180-day pre-catalyst data\n")
+            f.write("   - Generate individual analysis files\n\n")
+            
+            f.write("4. **Iterate and Refine**\n")
+            f.write("   - Refine methodology based on findings\n")
+            f.write("   - Complete remaining 5-6 stocks\n")
+            f.write("   - Build correlation matrix\n\n")
+            
+            f.write("5. **Generate Deliverables**\n")
+            f.write("   - 8 comprehensive JSON files\n")
+            f.write("   - Pattern library documentation\n")
+            f.write("   - Preliminary screening criteria\n")
+            f.write("   - Correlation analysis report\n\n")
+            
+            f.write("### Timeline Estimate\n\n")
+            f.write("- Sample analysis (8 stocks): 12-19 hours\n")
+            f.write("- Framework refinement: 4-6 hours\n")
+            f.write("- Correlation analysis: 6-8 hours\n")
+            f.write("- Documentation: 4-6 hours\n")
+            f.write("- **Total**: 4-6 weeks\n\n")
+            
+            f.write("### Key Framework Reference\n\n")
+            f.write("See `PRE_CATALYST_ANALYSIS_FRAMEWORK.md` for:\n")
+            f.write("- 12 data categories\n")
+            f.write("- 100+ metrics per stock\n")
+            f.write("- Analysis methodology\n")
+            f.write("- Expected outcomes\n")
+            
     def run_analysis(self):
-        """Run complete Phase 3A analysis"""
-        self.load_stocks()
+        """Execute complete Phase 3A analysis"""
+        print("=" * 80)
+        print("PHASE 3: PATTERN DISCOVERY & ANALYSIS")
+        print("=" * 80)
+        print(f"📅 Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         
-        # Run Phase 3A analyses
+        self.load_data()
         self.analyze_temporal_patterns()
         self.analyze_gain_characteristics()
         self.analyze_exit_windows()
-        self.analyze_enrichment_quality()
+        self.analyze_data_quality()
         self.identify_top_performers()
         self.select_deep_dive_sample()
         
-        # Generate outputs
-        criteria = self.generate_screening_criteria()
-        insights = self.generate_insights()
-        next_steps = self.generate_phase3b_roadmap()
+        # Note: Screening criteria generation is postponed to Phase 3B
+        # After deep dive analysis, we'll have correlation data to build criteria
         
-        # Save results
-        self.save_results(criteria, insights, next_steps)
-        self.print_summary()
-    
-    def save_results(self, criteria, insights):
-        """Save analysis results"""
-        print("💾 SAVING RESULTS...")
-        print("-" * 80)
+        self.save_results()
         
-        # Save pattern discovery
-        with open(OUTPUT_PATTERNS, 'w') as f:
-            json.dump({
-                'analysis_date': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                'stocks_analyzed': len(self.stocks),
-                'patterns': self.patterns
-            }, f, indent=2)
-        print(f"  ✅ Saved pattern discovery → {OUTPUT_PATTERNS}")
-        
-        # Save screening criteria
-        with open(OUTPUT_CRITERIA, 'w') as f:
-            json.dump(criteria, f, indent=2)
-        print(f"  ✅ Saved screening criteria → {OUTPUT_CRITERIA}")
-        
-        # Save insights report
-        with open(OUTPUT_REPORT, 'w') as f:
-            f.write(insights)
-        print(f"  ✅ Saved insights report → {OUTPUT_REPORT}")
-        print()
-    
-    def print_summary(self):
-        """Print analysis summary"""
-        print("="*80)
-        print("PHASE 3 ANALYSIS COMPLETE")
-        print("="*80)
-        print(f"📊 Analyzed {len(self.stocks)} verified sustainable stocks")
-        print(f"📝 Generated insights and screening criteria")
-        print(f"🎯 Ready for GEM v6 screener development")
-        print()
-        print("Output Files:")
-        print(f"  • {OUTPUT_PATTERNS} - Complete pattern analysis")
-        print(f"  • {OUTPUT_CRITERIA} - GEM v6 screening criteria")
-        print(f"  • {OUTPUT_REPORT} - Human-readable insights")
-        print()
-        print("="*80)
-
+        print("\n" + "=" * 80)
+        print("✅ PHASE 3A COMPLETE")
+        print("=" * 80)
+        print(f"📅 Completed: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        print("\n📋 Next: Review sample selection and begin Phase 3B deep dive")
 
 def main():
-    """Run Phase 3 analysis"""
-    analyzer = Phase3Analyzer()
+    analyzer = Phase3Analyzer('Verified_Backtest_Data/explosive_stocks_CLEAN.json')
     analyzer.run_analysis()
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
