@@ -1,19 +1,19 @@
 {
-  "run_date": "2025-11-03T07:38:55.092414",
+  "run_date": "2025-11-03T16:50:48.620592",
   "stocks_file": "Verified_Backtest_Data/explosive_stocks_CLEAN.json",
   "stock_count": 72,
-  "scripts_run": 3,
-  "successful": 3,
+  "scripts_run": 4,
+  "successful": 4,
   "failed": 0,
-  "total_duration_minutes": 21.61,
+  "total_duration_minutes": 109.41,
   "results": [
     {
       "script": "Sector Context Analysis",
       "file": "sector_context_analyzer.py",
       "status": "SUCCESS",
-      "duration_minutes": 3.9,
-      "start_time": "2025-11-03T07:17:18.666208",
-      "end_time": "2025-11-03T07:21:12.581299",
+      "duration_minutes": 4.21,
+      "start_time": "2025-11-03T15:01:23.917394",
+      "end_time": "2025-11-03T15:05:36.629630",
       "stdout": "5-09 to 2024-08-07\n  Fetching AAOI data...\n  AAOI return: -34.82%\n  Fetching SPY data...\n  SPY return: -0.29%\n  Fetching QQQ data...\n  QQQ return: -1.42%\n  \u274c Underperforming market\n[71/72] AEVA (2024)\n\n\ud83d\udcca Analyzing AEVA\n  Window: 2024-07-10 to 2024-10-08\n  Fetching AEVA data...\n  AEVA return: 34.10%\n  Fetching SPY data...\n  SPY return: 2.11%\n  Fetching QQQ data...\n  QQQ return: -2.72%\n  \u2705 PATTERN: Outperforming BOTH SPY and QQQ!\n[72/72] AZ (2024)\n\n\ud83d\udcca Analyzing AZ\n  Window: 2024-03-22 to 2024-06-20\n  Fetching AZ data...\n  AZ return: -45.10%\n  Fetching SPY data...\n  SPY return: 4.95%\n  Fetching QQQ data...\n  QQQ return: 7.86%\n  \u274c Underperforming market\n\n============================================================\nANALYSIS COMPLETE\n============================================================\nSuccessful: 71/72\nErrors: 1/72\n\nErrors:\n  - AGMH (2018): unsupported format string passed to NoneType.__format__\n\n\ud83d\udcca PATTERN FREQUENCY:\n  Outperforming BOTH: 3/71 (4.2%)\n  Outperforming ANY: 3/71 (4.2%)\n",
       "stderr": ""
     },
@@ -21,20 +21,30 @@
       "script": "Insider Transactions",
       "file": "insider_transactions_scraper.py",
       "status": "SUCCESS",
-      "duration_minutes": 3.82,
-      "start_time": "2025-11-03T07:21:12.581344",
-      "end_time": "2025-11-03T07:25:01.877200",
-      "stdout": "ng Form 4 filings...\n  Found 0 Form 4 filings\n  \u274c No insider buying cluster\n[69/72] ASPI (2023)\n\n\ud83d\udccb Analyzing Insider Transactions: ASPI\n  Window: 2023-03-09 to 2023-06-07\n  Fetching Form 4 filings...\n  Found 0 Form 4 filings\n  \u274c No insider buying cluster\n[70/72] AAOI (2024)\n\n\ud83d\udccb Analyzing Insider Transactions: AAOI\n  Window: 2024-05-09 to 2024-08-07\n  Fetching Form 4 filings...\n[71/72] AEVA (2024)\n\n\ud83d\udccb Analyzing Insider Transactions: AEVA\n  Window: 2024-07-10 to 2024-10-08\n  Fetching Form 4 filings...\n  Found 0 Form 4 filings\n  \u274c No insider buying cluster\n[72/72] AZ (2024)\n\n\ud83d\udccb Analyzing Insider Transactions: AZ\n  Window: 2024-03-22 to 2024-06-20\n  Fetching Form 4 filings...\n  Found 0 Form 4 filings\n  \u274c No insider buying cluster\n\n============================================================\nANALYSIS COMPLETE\n============================================================\nSuccessful: 72/72\nErrors: 0/72\n\n\ud83d\udcca PATTERN FREQUENCY:\n  Insider Clusters (3+): 0/72 (0.0%)\n  Any Insider Activity: 0/72 (0.0%)\n",
+      "duration_minutes": 52.45,
+      "start_time": "2025-11-03T15:05:36.629688",
+      "end_time": "2025-11-03T15:58:03.847441",
+      "stdout": "ing Yahoo Finance news...\n  Yahoo: 0 articles\n  Fetching Google News...\nHTTP Error 429: Too Many Requests\n  Google: 0 articles\n  Recent total: 0 articles\n  \u274c No significant news acceleration (0.0x)\n[72/72] AZ (2024)\n\n\ud83d\udcf0 Analyzing News Volume: AZ\n  Full Window: 2024-03-22 to 2024-06-20\n  Counting baseline news (days 90-30)...\n  Fetching Yahoo Finance news...\n  Yahoo: 0 articles\n  Fetching Google News...\nHTTP Error 429: Too Many Requests\n  Google: 0 articles\n  Baseline total: 0 articles\n  Counting recent news (days 30-0)...\n  Fetching Yahoo Finance news...\n  Yahoo: 0 articles\n  Fetching Google News...\nHTTP Error 429: Too Many Requests\n  Google: 0 articles\n  Recent total: 0 articles\n  \u274c No significant news acceleration (0.0x)\n\n============================================================\nANALYSIS COMPLETE\n============================================================\nSuccessful: 72/72\nErrors: 0/72\n\n\ud83d\udcca PATTERN FREQUENCY:\n  News Acceleration 3x+: 0/72 (0.0%)\n  News Acceleration 5x+: 0/72 (0.0%)\n",
       "stderr": ""
     },
     {
       "script": "News Volume",
       "file": "news_volume_counter.py",
       "status": "SUCCESS",
-      "duration_minutes": 13.89,
-      "start_time": "2025-11-03T07:25:01.877239",
-      "end_time": "2025-11-03T07:38:55.092265",
-      "stdout": "ny Requests\nHTTP Error 429: Too Many Requests\n  Baseline: 0 articles\n  Counting recent news (days 30-0)...\nHTTP Error 429: Too Many Requests\nHTTP Error 429: Too Many Requests\nHTTP Error 429: Too Many Requests\n  Recent: 0 articles\n  \u274c No significant news acceleration (0.0x)\n[72/72] AZ (2024)\n\n\ud83d\udcf0 Analyzing News Volume: AZ\n  Full Window: 2024-03-22 to 2024-06-20\n  Counting baseline news (days 90-30)...\nHTTP Error 429: Too Many Requests\nHTTP Error 429: Too Many Requests\nHTTP Error 429: Too Many Requests\n  Baseline: 0 articles\n  Counting recent news (days 30-0)...\nHTTP Error 429: Too Many Requests\nHTTP Error 429: Too Many Requests\nHTTP Error 429: Too Many Requests\n  Recent: 0 articles\n  \u274c No significant news acceleration (0.0x)\n\n============================================================\nANALYSIS COMPLETE\n============================================================\nSuccessful: 72/72\nErrors: 0/72\n\n\ud83d\udcca PATTERN FREQUENCY:\n  News Acceleration 3x+: 0/72 (0.0%)\n  News Acceleration 5x+: 0/72 (0.0%)\n",
+      "duration_minutes": 52.75,
+      "start_time": "2025-11-03T15:58:03.847482",
+      "end_time": "2025-11-03T16:50:48.595600",
+      "stdout": "ing Yahoo Finance news...\n  Yahoo: 0 articles\n  Fetching Google News...\nHTTP Error 429: Too Many Requests\n  Google: 0 articles\n  Recent total: 0 articles\n  \u274c No significant news acceleration (0.0x)\n[72/72] AZ (2024)\n\n\ud83d\udcf0 Analyzing News Volume: AZ\n  Full Window: 2024-03-22 to 2024-06-20\n  Counting baseline news (days 90-30)...\n  Fetching Yahoo Finance news...\n  Yahoo: 0 articles\n  Fetching Google News...\nHTTP Error 429: Too Many Requests\n  Google: 0 articles\n  Baseline total: 0 articles\n  Counting recent news (days 30-0)...\n  Fetching Yahoo Finance news...\n  Yahoo: 0 articles\n  Fetching Google News...\nHTTP Error 429: Too Many Requests\n  Google: 0 articles\n  Recent total: 0 articles\n  \u274c No significant news acceleration (0.0x)\n\n============================================================\nANALYSIS COMPLETE\n============================================================\nSuccessful: 72/72\nErrors: 0/72\n\n\ud83d\udcca PATTERN FREQUENCY:\n  News Acceleration 3x+: 0/72 (0.0%)\n  News Acceleration 5x+: 0/72 (0.0%)\n",
+      "stderr": ""
+    },
+    {
+      "script": "Google Trends",
+      "file": "google_trends_analyzer.py",
+      "status": "SUCCESS",
+      "duration_minutes": 0.0,
+      "start_time": "2025-11-03T16:50:48.595660",
+      "end_time": "2025-11-03T16:50:48.620420",
+      "stdout": "WARNING: pytrends not installed. Run: pip install pytrends\nAnalyzing all stocks from Verified_Backtest_Data/explosive_stocks_CLEAN.json...\nERROR: pytrends not installed\n",
       "stderr": ""
     }
   ]

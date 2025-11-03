@@ -6,18 +6,22 @@
     "days": 90
   },
   "news_volume": {
-    "baseline_count": 27,
-    "recent_count": 27,
-    "acceleration_ratio": 1.0,
+    "baseline_count": 0,
+    "recent_count": 0,
+    "acceleration_ratio": 0,
     "baseline_period": "90-30 days before",
-    "recent_period": "30-0 days before"
+    "recent_period": "30-0 days before",
+    "sources_used": [
+      "yahoo_finance",
+      "google_news"
+    ]
   },
   "patterns_detected": {
     "news_acceleration_3x": false,
     "news_acceleration_5x": false,
     "pattern_score": 0
   },
-  "data_quality": "good",
+  "data_quality": "low_coverage",
   "year": 2023,
   "gain_percent": 1057.68
 }
