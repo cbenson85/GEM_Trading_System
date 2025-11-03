@@ -1,0 +1,360 @@
+{
+  "metadata": {
+    "generated": "2025-11-03T05:53:45.995873",
+    "phase": "3B_FULL_72_STOCKS",
+    "framework": "90-day pre-catalyst window",
+    "stocks_analyzed": 72,
+    "confidence_level": "MEDIUM",
+    "note": "Based on 72 sustainable explosive stocks from 2016-2024"
+  },
+  "statistics": {
+    "total_stocks": 72,
+    "data_quality_breakdown": {
+      "good": 47,
+      "acceptable": 16,
+      "partial": 7,
+      "unknown": 2
+    },
+    "speed_distribution": {
+      "slow": 51,
+      "medium": 13,
+      "ultra_fast": 2,
+      "fast": 6
+    },
+    "gain_distribution": {
+      "moderate": 48,
+      "high": 19,
+      "extreme": 3,
+      "very_high": 2
+    },
+    "year_distribution": {
+      "2016": 2,
+      "2023": 18,
+      "2024": 30,
+      "2018": 6,
+      "2022": 10,
+      "2019": 5,
+      "2017": 1
+    },
+    "avg_days_analyzed": 54.236111111111114
+  },
+  "pattern_frequencies": {
+    "volume_spikes": {
+      "with_spikes": 54,
+      "without_spikes": 18,
+      "frequency_pct": 75.0,
+      "spike_distribution": {
+        "2": 19,
+        "1": 27,
+        "3": 6,
+        "4": 2
+      },
+      "top_examples": [
+        {
+          "ticker": "AENTW",
+          "year": "2023",
+          "spikes": 1,
+          "gain_percent": 12398.33
+        },
+        {
+          "ticker": "ARQQW",
+          "year": "2024",
+          "spikes": 2,
+          "gain_percent": 8521.36
+        },
+        {
+          "ticker": "ATGL",
+          "year": "2024",
+          "spikes": 3,
+          "gain_percent": 4598.36
+        },
+        {
+          "ticker": "AIM",
+          "year": "2024",
+          "spikes": 1,
+          "gain_percent": 4200.12
+        },
+        {
+          "ticker": "AUROW",
+          "year": "2024",
+          "spikes": 1,
+          "gain_percent": 1895.54
+        },
+        {
+          "ticker": "ADSEW",
+          "year": "2023",
+          "spikes": 3,
+          "gain_percent": 1835.71
+        },
+        {
+          "ticker": "ARKOW",
+          "year": "2024",
+          "spikes": 1,
+          "gain_percent": 1484.55
+        },
+        {
+          "ticker": "ACONW",
+          "year": "2024",
+          "spikes": 3,
+          "gain_percent": 1428.75
+        },
+        {
+          "ticker": "AMPGW",
+          "year": "2023",
+          "spikes": 2,
+          "gain_percent": 1380.0
+        },
+        {
+          "ticker": "AAOI",
+          "year": "2023",
+          "spikes": 2,
+          "gain_percent": 1368.29
+        }
+      ]
+    },
+    "rsi_oversold": {
+      "oversold_count": 25,
+      "near_oversold_count": 13,
+      "frequency_pct": 34.72222222222222,
+      "examples": [
+        {
+          "ticker": "AAOI",
+          "year": "2016",
+          "rsi_14": 27.98,
+          "gain_percent": 510.22
+        },
+        {
+          "ticker": "AAOI",
+          "year": "2024",
+          "rsi_14": 26.15,
+          "gain_percent": 547.74
+        },
+        {
+          "ticker": "ADCT",
+          "year": "2023",
+          "rsi_14": 9.4,
+          "gain_percent": 739.01
+        },
+        {
+          "ticker": "ADSEW",
+          "year": "2023",
+          "rsi_14": 26.1,
+          "gain_percent": 1835.71
+        },
+        {
+          "ticker": "AG",
+          "year": "2016",
+          "rsi_14": 17.39,
+          "gain_percent": 662.95
+        },
+        {
+          "ticker": "AHG",
+          "year": "2023",
+          "rsi_14": 24.58,
+          "gain_percent": 1057.68
+        },
+        {
+          "ticker": "AIRE",
+          "year": "2024",
+          "rsi_14": 18.54,
+          "gain_percent": 646.59
+        },
+        {
+          "ticker": "ALAR",
+          "year": "2023",
+          "rsi_14": 28.43,
+          "gain_percent": 1319.43
+        },
+        {
+          "ticker": "ALGS",
+          "year": "2024",
+          "rsi_14": 9.04,
+          "gain_percent": 539.34
+        },
+        {
+          "ticker": "ALTS",
+          "year": "2024",
+          "rsi_14": 20.31,
+          "gain_percent": 547.85
+        },
+        {
+          "ticker": "ALT",
+          "year": "2023",
+          "rsi_14": 12.09,
+          "gain_percent": 518.33
+        },
+        {
+          "ticker": "AMLX",
+          "year": "2022",
+          "rsi_14": 29.72,
+          "gain_percent": 502.19
+        },
+        {
+          "ticker": "AMPG",
+          "year": "2024",
+          "rsi_14": 27.69,
+          "gain_percent": 858.27
+        },
+        {
+          "ticker": "APLD",
+          "year": "2022",
+          "rsi_14": 25.69,
+          "gain_percent": 649.68
+        },
+        {
+          "ticker": "APLD",
+          "year": "2022",
+          "rsi_14": 26.51,
+          "gain_percent": 669.54
+        },
+        {
+          "ticker": "APP",
+          "year": "2024",
+          "rsi_14": 21.51,
+          "gain_percent": 682.17
+        },
+        {
+          "ticker": "ARKOW",
+          "year": "2024",
+          "rsi_14": 18.86,
+          "gain_percent": 1484.55
+        },
+        {
+          "ticker": "ARWR",
+          "year": "2017",
+          "rsi_14": 29.88,
+          "gain_percent": 586.81
+        },
+        {
+          "ticker": "ASST",
+          "year": "2024",
+          "rsi_14": 21.18,
+          "gain_percent": 1098.21
+        },
+        {
+          "ticker": "ATGL",
+          "year": "2024",
+          "rsi_14": 21.15,
+          "gain_percent": 4598.36
+        },
+        {
+          "ticker": "ATOS",
+          "year": "2018",
+          "rsi_14": 18.16,
+          "gain_percent": 705.98
+        },
+        {
+          "ticker": "AVTX",
+          "year": "2024",
+          "rsi_14": 8.1,
+          "gain_percent": 757.21
+        },
+        {
+          "ticker": "AXSM",
+          "year": "2018",
+          "rsi_14": 23.5,
+          "gain_percent": 1334.78
+        },
+        {
+          "ticker": "BBAI",
+          "year": "2022",
+          "rsi_14": 22.31,
+          "gain_percent": 969.85
+        },
+        {
+          "ticker": "BBAI",
+          "year": "2024",
+          "rsi_14": 25.4,
+          "gain_percent": 770.59
+        }
+      ]
+    },
+    "patterns_detected": {
+      "with_patterns": 29,
+      "without_patterns": 43,
+      "pattern_types": {
+        "bollinger_squeeze": 11,
+        "price_consolidation": 22,
+        "volume_breakout": 5
+      }
+    }
+  },
+  "correlations": {
+    "volume_spikes": {
+      "frequency": 0.75,
+      "correlation_score": 0.75,
+      "predictive_power": "HIGH",
+      "sample_size": 54
+    },
+    "rsi_oversold": {
+      "frequency": 0.3472222222222222,
+      "near_oversold_frequency": 0.18055555555555555,
+      "correlation_score": 0.347,
+      "predictive_power": "MEDIUM",
+      "sample_size": 25
+    },
+    "volume_plus_oversold": {
+      "note": "Combination pattern - needs cross-reference analysis",
+      "estimated_frequency": 0.0
+    },
+    "patterns_detected": {
+      "frequency": 0.4027777777777778,
+      "pattern_breakdown": {
+        "bollinger_squeeze": 11,
+        "price_consolidation": 22,
+        "volume_breakout": 5
+      },
+      "sample_size": 29,
+      "correlation_score": 0.403
+    }
+  },
+  "screening_criteria": {
+    "note": "Based on 72 explosive stocks - PRELIMINARY",
+    "confidence": "MEDIUM",
+    "primary_signals": [
+      {
+        "signal": "Volume Spike >3x",
+        "frequency": "75.0%",
+        "threshold": "3x average volume",
+        "lead_time": "4-25 days before entry"
+      }
+    ],
+    "secondary_signals": [
+      {
+        "signal": "RSI Oversold <30",
+        "frequency": "34.7%",
+        "threshold": "RSI 14-day < 30",
+        "note": "Rare but strong signal"
+      }
+    ],
+    "combination_signals": [
+      {
+        "signal": "Volume Spike + RSI <35",
+        "note": "Strongest conviction - both signals present",
+        "recommendation": "Priority screening target"
+      }
+    ]
+  },
+  "top_signals_ranked": [
+    {
+      "rank": 1,
+      "signal": "Volume Spike >3x",
+      "frequency": 0.75,
+      "correlation": 0.75,
+      "predictive_power": "HIGH"
+    },
+    {
+      "rank": 2,
+      "signal": "RSI Oversold <30",
+      "frequency": 0.3472222222222222,
+      "correlation": 0.347,
+      "predictive_power": "MEDIUM"
+    }
+  ],
+  "key_insights": {
+    "most_common_signal": "Volume Spike",
+    "strongest_correlation": "Volume Spike",
+    "recommended_screening_approach": "Multi-signal: Volume + Technical indicators",
+    "confidence_assessment": "MEDIUM - 72 stocks provides good preliminary patterns"
+  }
+}
