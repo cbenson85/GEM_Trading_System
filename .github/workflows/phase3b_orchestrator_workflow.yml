@@ -1,0 +1,70 @@
+name: Phase 3B - Full Orchestrator
+
+on:
+  workflow_dispatch:
+    inputs:
+      stocks_file:
+        description: 'Stocks file to analyze'
+        required: false
+        default: 'Verified_Backtest_Data/explosive_stocks_CLEAN.json'
+
+jobs:
+  phase3b-full-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240  # 4 hour timeout
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install polygon-api-client requests beautifulsoup4 lxml GoogleNews
+
+      - name: Run Phase 3B Orchestrator
+        env:
+          POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+        run: |
+          python phase3b_orchestrator.py ${{ github.event.inputs.stocks_file || 'Verified_Backtest_Data/explosive_stocks_CLEAN.json' }}
+      
+      - name: Upload all results
+        uses: actions/upload-artifact@v3
+        with:
+          name: phase3b-full-results
+          path: |
+            Verified_Backtest_Data/phase3b_*.json
+            Verified_Backtest_Data/phase3b_orchestrator_results.json
+          
+      - name: Commit all results
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add Verified_Backtest_Data/phase3b_*.json
+          git commit -m "Phase 3B: Complete automation run - all 72 stocks" || echo "No changes to commit"
+          git push || echo "No changes to push"
+      
+      - name: Create summary
+        if: always()
+        run: |
+          echo "## Phase 3B Orchestrator Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f Verified_Backtest_Data/phase3b_orchestrator_results.json ]; then
+            python -c "
+          import json
+          with open('Verified_Backtest_Data/phase3b_orchestrator_results.json') as f:
+              data = json.load(f)
+          print(f'**Stocks Analyzed:** {data[\"stock_count\"]}')
+          print(f'**Scripts Run:** {data[\"scripts_run\"]}')
+          print(f'**Successful:** {data[\"successful\"]}')
+          print(f'**Failed:** {data[\"failed\"]}')
+          print(f'**Duration:** {data[\"total_duration_minutes\"]:.1f} minutes')
+            " >> $GITHUB_STEP_SUMMARY
+          else
+            echo "No results file generated" >> $GITHUB_STEP_SUMMARY
+          fi

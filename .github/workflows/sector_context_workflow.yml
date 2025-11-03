@@ -1,0 +1,44 @@
+name: Phase 3B - Sector Context Analysis
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday
+
+jobs:
+  sector-context-analysis:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install polygon-api-client
+
+      - name: Run Sector Context Analysis
+        env:
+          POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+        run: |
+          python sector_context_analyzer.py Verified_Backtest_Data/explosive_stocks_CLEAN.json
+      
+      - name: Upload results
+        uses: actions/upload-artifact@v3
+        with:
+          name: sector-context-results
+          path: Verified_Backtest_Data/phase3b_*_sector_context.json
+          
+      - name: Commit results
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add Verified_Backtest_Data/phase3b_*_sector_context.json
+          git commit -m "Phase 3B: Sector context analysis results" || echo "No changes to commit"
+          git push || echo "No changes to push"
