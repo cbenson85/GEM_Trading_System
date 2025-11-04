@@ -1,0 +1,165 @@
+name: Complete Explosive Stock Scan (All Tickers)
+
+on:
+  workflow_dispatch:
+    inputs:
+      start_year:
+        description: 'Start year for scan'
+        required: true
+        default: '2016'
+      end_year:
+        description: 'End year for scan'
+        required: true
+        default: '2024'
+      test_mode:
+        description: 'Test mode (2023-2024 only)?'
+        required: true
+        default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+jobs:
+  explosive_scan:
+    name: Scan All Tickers for Explosive Gains
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          pip install requests yfinance
+      
+      - name: Create output directory
+        run: |
+          mkdir -p Verified_Backtest_Data
+      
+      - name: Run Complete Scan
+        env:
+          POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+          START_YEAR: ${{ github.event.inputs.start_year }}
+          END_YEAR: ${{ github.event.inputs.end_year }}
+        run: |
+          if [ "${{ github.event.inputs.test_mode }}" == "true" ]; then
+            echo "🔍 TEST MODE: Scanning 2023-2024 only"
+            python explosive_stock_scanner.py --test
+          else
+            echo "🔍 FULL SCAN: All tickers ${{ github.event.inputs.start_year }}-${{ github.event.inputs.end_year }}"
+            python explosive_stock_scanner.py --start-year $START_YEAR --end-year $END_YEAR
+          fi
+      
+      - name: Upload scan results
+        uses: actions/upload-artifact@v4
+        with:
+          name: explosive-stocks-scan-results
+          path: |
+            Verified_Backtest_Data/explosive_stocks_catalog.json
+          retention-days: 30
+      
+      - name: Display scan summary
+        run: |
+          echo "📊 Scan results:"
+          if [ -f Verified_Backtest_Data/explosive_stocks_catalog.json ]; then
+            python3 << 'EOF'
+          import json
+          with open('Verified_Backtest_Data/explosive_stocks_catalog.json', 'r') as f:
+              data = json.load(f)
+              stocks = data.get('stocks', [])
+              info = data.get('scan_info', {})
+              print(f"Total explosive stocks found: {len(stocks)}")
+              print(f"Tickers scanned: {info.get('total_stocks_scanned', 0):,}")
+              print(f"API calls made: {info.get('api_calls_made', 0):,}")
+              print(f"Coverage: {info.get('coverage', 'Unknown')}")
+              if stocks:
+                  print(f"\nTop 10 by gain:")
+                  sorted_stocks = sorted(stocks, key=lambda x: x.get('gain_percent', 0), reverse=True)[:10]
+                  for i, stock in enumerate(sorted_stocks, 1):
+                      print(f"  {i}. {stock['ticker']}: {stock['gain_percent']:.0f}% ({stock['year_discovered']})")
+          EOF
+          fi
+
+  covid_filter:
+    name: COVID Era Filter
+    runs-on: ubuntu-latest
+    needs: explosive_scan
+    if: ${{ always() && needs.explosive_scan.result == 'success' }}
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      
+      - name: Download scan results
+        uses: actions/download-artifact@v4
+        with:
+          name: explosive-stocks-scan-results
+          path: Verified_Backtest_Data/
+      
+      - name: Run COVID Filter
+        run: |
+          echo "🔍 Filtering COVID-era stocks..."
+          python filter_covid_era.py
+      
+      - name: Upload filtered results
+        uses: actions/upload-artifact@v4
+        with:
+          name: filtered-results
+          path: |
+            Verified_Backtest_Data/explosive_stocks_CLEAN.json
+            Verified_Backtest_Data/explosive_stocks_COVID_ERA.json
+            Verified_Backtest_Data/filter_summary.json
+          retention-days: 30
+      
+      - name: Display filter summary
+        run: |
+          echo "📊 COVID filter results:"
+          if [ -f Verified_Backtest_Data/filter_summary.json ]; then
+            python3 << 'EOF'
+          import json
+          with open('Verified_Backtest_Data/filter_summary.json', 'r') as f:
+              data = json.load(f)
+              print(f"Clean stocks (non-COVID): {data.get('clean_stocks', 0)}")
+              print(f"COVID-era stocks (excluded): {data.get('covid_era_stocks', 0)}")
+              print(f"Split date: {data.get('split_date', 'Unknown')}")
+          EOF
+          fi
+
+  summary:
+    name: Pipeline Summary
+    runs-on: ubuntu-latest
+    needs: [explosive_scan, covid_filter]
+    if: always()
+    
+    steps:
+      - name: Display pipeline summary
+        run: |
+          echo "="
+          echo "📊 COMPLETE PIPELINE SUMMARY"
+          echo "="
+          echo ""
+          echo "Explosive Stock Scan: ${{ needs.explosive_scan.result }}"
+          echo "COVID Filter: ${{ needs.covid_filter.result }}"
+          echo ""
+          if [ "${{ needs.covid_filter.result }}" == "success" ]; then
+            echo "✅ Pipeline completed successfully!"
+            echo "📄 Results available in artifacts"
+            echo ""
+            echo "Next steps:"
+            echo "1. Download filtered-results artifact"
+            echo "2. Run filter_sustainability.py locally"
+            echo "3. Proceed to Phase 4 pattern analysis"
+          else
+            echo "⚠️ Pipeline completed with issues - check individual jobs"
+          fi
