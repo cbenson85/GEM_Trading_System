@@ -1,0 +1,27 @@
+{
+  "scan_info": {
+    "scan_date": "2025-11-06 15:17:11",
+    "scan_period_start": "2010-01-01",
+    "scan_period_end": "2024-12-31",
+    "criteria": "500%+ gain in any 120-day window",
+    "data_sources": [
+      "Polygon API",
+      "Yahoo Finance"
+    ],
+    "coverage": "Complete - all active US stock tickers (COVID years excluded)",
+    "covid_years_excluded": "2020-2021",
+    "total_stocks_scanned": 154271,
+    "total_explosive_stocks_found": 0,
+    "data_errors": 85542,
+    "api_calls_made": 154418,
+    "scan_complete": true,
+    "merged_from_scans": 7,
+    "merged_locally": true
+  },
+  "stocks": [],
+  "metadata": {
+    "last_updated": "2025-11-06 15:17:11",
+    "filter_criteria": "Stocks that did not maintain 200%+ gain for 14+ days",
+    "notes": "Simplified filter - full filter requires historical price data"
+  }
+}
