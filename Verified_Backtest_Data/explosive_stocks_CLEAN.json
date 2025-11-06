@@ -18,6 +18,12 @@
     "merged_from_scans": 7,
     "merged_locally": true
   },
+  "metadata": {
+    "last_updated": "2025-11-06 15:17:11",
+    "verified_by": "Local merge from 7 downloaded scan artifacts",
+    "quality_checks_passed": true,
+    "notes": "COVID years (2020-2021) excluded from scan. Merged locally after GitHub Actions timeout issue."
+  },
   "stocks": [
     {
       "ticker": "ABVC",
@@ -20375,11 +20381,5 @@
       "data_source": "Polygon API",
       "all_explosive_windows": 1
     }
-  ],
-  "metadata": {
-    "last_updated": "2025-11-06 15:17:11",
-    "verified_by": "Local merge from 7 downloaded scan artifacts",
-    "quality_checks_passed": true,
-    "notes": "COVID years (2020-2021) excluded from scan. Merged locally after GitHub Actions timeout issue."
-  }
+  ]
 }
