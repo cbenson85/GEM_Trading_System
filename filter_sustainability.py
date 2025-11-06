@@ -1,370 +1,254 @@
 #!/usr/bin/env python3
 """
-GEM Trading System - Realistic Sustainability Filter
-Version: 4.0
-Created: 2025-11-02
-
-PURPOSE:
-Filter stocks based on exit window tradeability using "Total Days Above 200%" method.
-
-KEY CHANGES FROM V3.0:
-- Don't test sustained consecutive days (too strict)
-- Count TOTAL days (not consecutive) above 200% gain
-- Focus: "Did stock give me at least 14 days to exit with 200%+ profit?"
-- Handles normal volatility and multiple run-ups
-
-CRITERIA:
-1. TRADEABLE: Stock was above 200% gain for at least 14 total days
-2. NOT PUMP-AND-DUMP: Brief spikes that crash immediately are filtered out
-3. EXIT WINDOW: Had sufficient time to notice and exit with profit
-
-METHOD:
-- Load daily price data from entry to peak + 60 days
-- Calculate gain % from entry each day
-- Count total days above 200% threshold (not consecutive)
-- PASS if >= 14 days above 200%
-- FAIL if < 14 days (pump-and-dump)
-
-INPUT: explosive_stocks_CLEAN.json (with enriched data)
-OUTPUT:
-  - explosive_stocks_CLEAN.json (sustainable winners only)
-  - explosive_stocks_UNSUSTAINABLE.json (pump & dumps filtered out)
-  - sustained_gain_summary.json (statistics)
+Sustainability Filter V4.0 - Total Days Above 200%
+Tests if stocks provided sufficient exit window (14+ days above 200% gain)
 """
 
 import json
-import requests
 import os
+import sys
+import requests
 from datetime import datetime, timedelta
-from typing import Dict, List, Optional
-from pathlib import Path
-import time
+from typing import Dict, List, Tuple
 
 # Configuration
 POLYGON_API_KEY = os.environ.get('POLYGON_API_KEY', 'pvv6DNmKAoxojCc0B5HOaji6I_k1egv0')
-DATA_DIR = "Verified_Backtest_Data"
-INPUT_FILE = f"{DATA_DIR}/explosive_stocks_CLEAN.json"
-OUTPUT_UNSUSTAINABLE = f"{DATA_DIR}/explosive_stocks_UNSUSTAINABLE.json"
-SUMMARY_FILE = f"{DATA_DIR}/sustained_gain_summary.json"
+MIN_DAYS_ABOVE_200 = 14  # Minimum days above 200% to be sustainable
+THRESHOLD_GAIN_PERCENT = 200  # 200% gain = 3x entry price
+DATA_DIR = 'Verified_Backtest_Data'
 
-# Filter thresholds
-GAIN_THRESHOLD_PCT = 200.0  # 200% gain = 3x from entry
-MIN_DAYS_ABOVE_THRESHOLD = 14  # Need at least 14 days above 200%
+def fetch_price_data(ticker: str, start_date: str, end_date: str = None) -> List[Dict]:
+    """Fetch daily price data from Polygon API"""
+    
+    # Calculate end date (180 days after start if not specified)
+    if not end_date:
+        start_dt = datetime.strptime(start_date, '%Y-%m-%d')
+        end_dt = start_dt + timedelta(days=180)
+        end_date = end_dt.strftime('%Y-%m-%d')
+    
+    url = f"https://api.polygon.io/v2/aggs/ticker/{ticker}/range/1/day/{start_date}/{end_date}"
+    params = {
+        'apiKey': POLYGON_API_KEY,
+        'adjusted': 'true',
+        'sort': 'asc',
+        'limit': 5000
+    }
+    
+    try:
+        response = requests.get(url, params=params, timeout=10)
+        if response.status_code == 200:
+            data = response.json()
+            if data.get('status') == 'OK' and data.get('results'):
+                return data['results']
+    except Exception as e:
+        print(f"  ⚠️ API error for {ticker}: {str(e)}")
+    
+    return []
 
-class SustainabilityFilter:
-    """Filter stocks based on exit window - Total Days Above 200% method"""
+def test_sustainability(stock: Dict) -> Tuple[bool, Dict]:
+    """
+    Test if stock stayed above 200% gain for minimum days
+    Returns: (is_sustainable, stats_dict)
+    """
     
-    def __init__(self):
-        self.api_key = POLYGON_API_KEY
-        self.api_calls = 0
-        self.stats = {
-            "filter_version": "4.0",
-            "filter_method": "Total Days Above 200% Threshold",
-            "test_method": "Exit Window Analysis (Total Days)",
-            "filter_date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "threshold_gain_pct": GAIN_THRESHOLD_PCT,
-            "min_days_required": MIN_DAYS_ABOVE_THRESHOLD,
-            "total_stocks": 0,
-            "sustainable": 0,
-            "unsustainable": 0,
-            "not_tested": 0,
-            "api_calls": 0,
-            "errors": []
-        }
+    ticker = stock['ticker']
+    entry_date = stock.get('entry_date')
+    entry_price = stock.get('entry_price')
     
-    def load_catalog(self) -> tuple:
-        """Load stocks from CLEAN.json"""
-        try:
-            with open(INPUT_FILE, 'r') as f:
-                data = json.load(f)
-                
-            # Handle both structures
-            if isinstance(data, dict) and 'stocks' in data:
-                stocks = data['stocks']
-                file_structure = {k: v for k, v in data.items() if k != 'stocks'}
-            else:
-                stocks = data
-                file_structure = {}
-            
-            self.stats['total_stocks'] = len(stocks)
-            return stocks, file_structure
-            
-        except FileNotFoundError:
-            print(f"❌ Error: {INPUT_FILE} not found")
-            return [], {}
-        except json.JSONDecodeError as e:
-            print(f"❌ Error: Invalid JSON in {INPUT_FILE}: {e}")
-            return [], {}
+    if not entry_date or not entry_price:
+        return False, {"error": "Missing entry data"}
     
-    def get_price_data(self, ticker: str, start_date: str, end_date: str) -> Optional[List[Dict]]:
-        """Fetch daily price data from Polygon API"""
-        url = f"https://api.polygon.io/v2/aggs/ticker/{ticker}/range/1/day/{start_date}/{end_date}"
-        params = {
-            "adjusted": "true",
-            "sort": "asc",
-            "limit": 50000,
-            "apiKey": self.api_key
-        }
-        
-        try:
-            response = requests.get(url, params=params, timeout=30)
-            self.api_calls += 1
-            
-            if response.status_code == 200:
-                data = response.json()
-                if data.get('results'):
-                    return data['results']
-                else:
-                    return None
-            elif response.status_code == 429:
-                print(f"⚠️  Rate limit hit for {ticker}, waiting 60s...")
-                time.sleep(60)
-                return self.get_price_data(ticker, start_date, end_date)
-            else:
-                return None
-                
-        except Exception as e:
-            error_msg = f"API error for {ticker}: {str(e)}"
-            print(f"⚠️  {error_msg}")
-            self.stats['errors'].append(error_msg)
-            return None
+    # Fetch price data for 180 days after entry
+    price_data = fetch_price_data(ticker, entry_date)
     
-    def calculate_exit_window(self, stock: Dict) -> Optional[Dict]:
-        """
-        Calculate exit window analysis for a stock
-        
-        Returns dict with:
-        - total_days_above_threshold: Total days above 200% gain
-        - max_gain_observed: Highest gain achieved
-        - first_cross_date: When it first crossed 200%
-        - last_above_date: Last date above 200%
-        - tradeable: True if >= 14 days above 200%
-        - reason: Human-readable explanation
-        """
-        ticker = stock.get('ticker')
-        entry_date = stock.get('entry_date')
-        entry_price = stock.get('entry_price')
-        peak_date = stock.get('peak_date')
-        
-        # Validate required fields
-        if not all([ticker, entry_date, entry_price, peak_date]):
-            return None
-        
-        # Parse dates
-        try:
-            entry_dt = datetime.strptime(entry_date, "%Y-%m-%d")
-            peak_dt = datetime.strptime(peak_date, "%Y-%m-%d")
-        except (ValueError, TypeError):
-            return None
-        
-        # Define analysis window: entry to peak + 60 days
-        end_dt = peak_dt + timedelta(days=60)
-        
-        # Fetch price data
-        start_str = entry_dt.strftime("%Y-%m-%d")
-        end_str = end_dt.strftime("%Y-%m-%d")
-        
-        price_data = self.get_price_data(ticker, start_str, end_str)
-        
-        if not price_data:
-            return None
-        
-        # Analyze daily gains
-        days_above_threshold = 0
-        max_gain_pct = 0.0
-        first_cross_date = None
-        last_above_date = None
-        daily_gains = []
-        
-        for bar in price_data:
-            close_price = bar['c']
-            bar_date = datetime.fromtimestamp(bar['t'] / 1000).strftime("%Y-%m-%d")
-            
-            # Calculate gain from entry
-            gain_pct = ((close_price - entry_price) / entry_price) * 100
-            
-            # Track days above threshold
-            above_threshold = gain_pct >= GAIN_THRESHOLD_PCT
-            if above_threshold:
-                days_above_threshold += 1
-                last_above_date = bar_date
-                if first_cross_date is None:
-                    first_cross_date = bar_date
-            
-            # Track max gain
-            if gain_pct > max_gain_pct:
-                max_gain_pct = gain_pct
-            
-            daily_gains.append({
-                "date": bar_date,
-                "price": round(close_price, 2),
-                "gain_pct": round(gain_pct, 2),
-                "above_threshold": above_threshold
-            })
-        
-        # Determine if sustainable
-        sustainable = days_above_threshold >= MIN_DAYS_ABOVE_THRESHOLD
-        
-        return {
-            "total_days_above_threshold": days_above_threshold,
-            "min_days_required": MIN_DAYS_ABOVE_THRESHOLD,
-            "max_gain_observed": round(max_gain_pct, 2),
-            "first_cross_date": first_cross_date,
-            "last_above_date": last_above_date,
-            "sustainable": sustainable,
-            "reason": self._get_reason(days_above_threshold, sustainable),
-            "daily_gains": daily_gains,
-            "test_date": datetime.now().strftime("%Y-%m-%d"),
-            "filter_version": "4.0",
-            "threshold_tested": f"{GAIN_THRESHOLD_PCT}% gain"
-        }
+    if not price_data:
+        return False, {"error": "No price data available"}
     
-    def _get_reason(self, days_above: int, sustainable: bool) -> str:
-        """Generate human-readable reason"""
-        if sustainable:
-            return f"SUSTAINABLE: Stock was above 200% for {days_above} days - sufficient exit window"
-        else:
-            return f"PUMP-AND-DUMP: Only above 200% for {days_above} days (need {MIN_DAYS_ABOVE_THRESHOLD}+)"
+    # Calculate threshold price (200% gain = 3x entry)
+    threshold_price = entry_price * 3.0
     
-    def filter_stocks(self):
-        """Main filtering process"""
-        print("=" * 80)
-        print("GEM TRADING SYSTEM - SUSTAINABILITY FILTER v4.0")
-        print("=" * 80)
-        print(f"Method: Total Days Above {GAIN_THRESHOLD_PCT}% Threshold")
-        print(f"Minimum Required: {MIN_DAYS_ABOVE_THRESHOLD} days")
-        print()
-        
-        # Load stocks
-        stocks, file_structure = self.load_catalog()
-        if not stocks:
-            print("❌ No stocks to process")
-            return
-        
-        print(f"📊 Loaded {len(stocks)} stocks from CLEAN.json")
-        print()
-        
-        sustainable_stocks = []
-        unsustainable_stocks = []
-        
-        for idx, stock in enumerate(stocks, 1):
-            ticker = stock.get('ticker', 'UNKNOWN')
-            year = stock.get('year_discovered', stock.get('year', 'N/A'))
-            
-            print(f"[{idx}/{len(stocks)}] Processing {ticker} ({year})...", end=" ")
-            
-            # Skip if already tested with v4.0
-            existing_test = stock.get('sustained_gain_test', {})
-            if existing_test.get('filter_version') == '4.0':
-                print("✓ Already tested (v4.0)")
-                self.stats['not_tested'] += 1
-                
-                if existing_test.get('sustainable'):
-                    sustainable_stocks.append(stock)
-                    self.stats['sustainable'] += 1
-                else:
-                    unsustainable_stocks.append(stock)
-                    self.stats['unsustainable'] += 1
-                
-                continue
-            
-            # Calculate exit window
-            exit_window = self.calculate_exit_window(stock)
-            
-            if exit_window is None:
-                print("⚠️  No data / incomplete")
-                self.stats['not_tested'] += 1
-                # Keep in sustainable by default (benefit of doubt)
-                sustainable_stocks.append(stock)
-                continue
-            
-            # Add to stock data with "sustained_gain_test" key to match existing structure
-            stock['sustained_gain_test'] = exit_window
-            
-            # Classify
-            if exit_window['sustainable']:
-                print(f"✅ SUSTAINABLE ({exit_window['total_days_above_threshold']} days)")
-                sustainable_stocks.append(stock)
-                self.stats['sustainable'] += 1
-            else:
-                print(f"❌ PUMP-AND-DUMP ({exit_window['total_days_above_threshold']} days)")
-                unsustainable_stocks.append(stock)
-                self.stats['unsustainable'] += 1
-            
-            # Rate limiting
-            if self.api_calls % 5 == 0 and self.api_calls > 0:
-                time.sleep(0.2)
-        
-        # Update stats
-        self.stats['api_calls'] = self.api_calls
-        
-        # Save results
-        self.save_results(sustainable_stocks, unsustainable_stocks, file_structure)
-        self.print_summary()
+    # Count days above threshold
+    days_above_threshold = 0
+    max_gain_seen = 0
+    first_threshold_day = None
+    last_threshold_day = None
     
-    def save_results(self, sustainable: List[Dict], unsustainable: List[Dict], file_structure: Dict):
-        """Save filtered results to match existing structure"""
-        # Update CLEAN.json with sustainable stocks only
-        if file_structure:
-            clean_output = file_structure.copy()
-            clean_output['stocks'] = sustainable
-        else:
-            clean_output = {"stocks": sustainable}
+    for i, bar in enumerate(price_data):
+        # Use high price of the day for checking if it went above threshold
+        high_price = bar.get('h', 0)
+        close_price = bar.get('c', 0)
         
-        with open(INPUT_FILE, 'w') as f:
-            json.dump(clean_output, f, indent=2)
+        # Track maximum gain
+        if high_price > 0:
+            gain_pct = ((high_price - entry_price) / entry_price) * 100
+            max_gain_seen = max(max_gain_seen, gain_pct)
         
-        print(f"\n✅ Updated {INPUT_FILE}: {len(sustainable)} sustainable stocks")
-        
-        # Save unsustainable stocks
-        with open(OUTPUT_UNSUSTAINABLE, 'w') as f:
-            json.dump(unsustainable, f, indent=2)
-        
-        print(f"✅ Saved {OUTPUT_UNSUSTAINABLE}: {len(unsustainable)} pump-and-dumps")
-        
-        # Save summary
-        with open(SUMMARY_FILE, 'w') as f:
-            json.dump(self.stats, f, indent=2)
-        
-        print(f"✅ Saved {SUMMARY_FILE}")
+        # Check if price stayed above threshold
+        if close_price >= threshold_price:
+            days_above_threshold += 1
+            if first_threshold_day is None:
+                first_threshold_day = i + 1
+            last_threshold_day = i + 1
     
-    def print_summary(self):
-        """Print filtering summary"""
-        print("\n" + "=" * 80)
-        print("FILTER SUMMARY")
-        print("=" * 80)
-        print(f"Total Stocks: {self.stats['total_stocks']}")
-        print(f"Not Tested: {self.stats['not_tested']} (no data or already v4.0)")
-        print()
-        print(f"✅ SUSTAINABLE: {self.stats['sustainable']} stocks")
-        print(f"   - Had {MIN_DAYS_ABOVE_THRESHOLD}+ days above {GAIN_THRESHOLD_PCT}% gain")
-        print(f"   - Sufficient exit window")
-        print()
-        print(f"❌ UNSUSTAINABLE: {self.stats['unsustainable']} stocks")
-        print(f"   - Less than {MIN_DAYS_ABOVE_THRESHOLD} days above {GAIN_THRESHOLD_PCT}% gain")
-        print(f"   - Pump-and-dump pattern")
-        print()
-        
-        total_tested = self.stats['sustainable'] + self.stats['unsustainable']
-        if total_tested > 0:
-            sustainability_rate = (self.stats['sustainable'] / total_tested) * 100
-            print(f"📊 Sustainability Rate: {sustainability_rate:.1f}%")
-        
-        print(f"🔌 API Calls: {self.stats['api_calls']}")
-        
-        if self.stats['errors']:
-            print(f"\n⚠️  Errors: {len(self.stats['errors'])}")
-            for error in self.stats['errors'][:5]:
-                print(f"   - {error}")
-        
-        print("=" * 80)
-
+    # Determine if sustainable
+    is_sustainable = days_above_threshold >= MIN_DAYS_ABOVE_200
+    
+    # Build stats
+    stats = {
+        "days_above_200pct": days_above_threshold,
+        "max_gain_percent": round(max_gain_seen, 1),
+        "first_day_above": first_threshold_day,
+        "last_day_above": last_threshold_day,
+        "threshold_price": round(threshold_price, 2),
+        "is_sustainable": is_sustainable,
+        "total_days_checked": len(price_data)
+    }
+    
+    return is_sustainable, stats
 
 def main():
-    """Run the sustainability filter"""
-    filter_tool = SustainabilityFilter()
-    filter_tool.filter_stocks()
-
+    print("\n" + "="*60)
+    print("🔬 SUSTAINABILITY FILTER V4.0")
+    print("Testing: Total Days Above 200% Gain")
+    print("="*60 + "\n")
+    
+    # Load current CLEAN data
+    clean_file = os.path.join(DATA_DIR, 'explosive_stocks_CLEAN.json')
+    
+    if not os.path.exists(clean_file):
+        print(f"❌ Error: {clean_file} not found!")
+        sys.exit(1)
+    
+    with open(clean_file, 'r') as f:
+        data = json.load(f)
+    
+    # Handle both nested and flat JSON structures
+    if isinstance(data, dict) and 'stocks' in data:
+        stocks = data['stocks']
+        metadata = {k: v for k, v in data.items() if k != 'stocks'}
+    else:
+        stocks = data if isinstance(data, list) else []
+        metadata = {}
+    
+    print(f"📊 Loaded {len(stocks)} stocks from CLEAN.json\n")
+    print(f"Criteria: Stocks must stay above 200% gain for {MIN_DAYS_ABOVE_200}+ days")
+    print(f"Testing each stock for realistic exit window...\n")
+    print("-" * 60)
+    
+    # Process each stock
+    sustainable_stocks = []
+    unsustainable_stocks = []
+    untestable_stocks = []
+    api_calls = 0
+    
+    for i, stock in enumerate(stocks, 1):
+        ticker = stock['ticker']
+        year = stock.get('year_discovered', 'Unknown')
+        gain = stock.get('gain_percent', 0)
+        
+        print(f"\n[{i}/{len(stocks)}] Testing {ticker} ({year}) - {gain:.0f}% gain")
+        
+        is_sustainable, stats = test_sustainability(stock)
+        api_calls += 1
+        
+        # Add stats to stock data
+        stock['sustainability_stats'] = stats
+        
+        if 'error' in stats:
+            print(f"  ⚠️ Cannot test: {stats['error']}")
+            untestable_stocks.append(stock)
+        elif is_sustainable:
+            print(f"  ✅ SUSTAINABLE: {stats['days_above_200pct']} days above 200% (max: {stats['max_gain_percent']:.0f}%)")
+            sustainable_stocks.append(stock)
+        else:
+            print(f"  ❌ PUMP & DUMP: Only {stats['days_above_200pct']} days above 200%")
+            unsustainable_stocks.append(stock)
+    
+    print("\n" + "="*60)
+    print("📊 FILTER RESULTS")
+    print("="*60 + "\n")
+    
+    total_tested = len(sustainable_stocks) + len(unsustainable_stocks)
+    
+    print(f"Total Stocks: {len(stocks)}")
+    print(f"Sustainable: {len(sustainable_stocks)} ({len(sustainable_stocks)/len(stocks)*100:.1f}%)")
+    print(f"Pump & Dumps: {len(unsustainable_stocks)} ({len(unsustainable_stocks)/len(stocks)*100:.1f}%)")
+    print(f"Untestable: {len(untestable_stocks)} ({len(untestable_stocks)/len(stocks)*100:.1f}%)")
+    
+    if total_tested > 0:
+        print(f"\nOf testable stocks:")
+        print(f"  Pass Rate: {len(sustainable_stocks)/total_tested*100:.1f}%")
+        print(f"  Fail Rate: {len(unsustainable_stocks)/total_tested*100:.1f}%")
+    
+    print(f"\nAPI Calls Made: {api_calls}")
+    
+    # Save sustainable stocks (update CLEAN.json)
+    clean_output = {
+        **metadata,
+        'stocks': sustainable_stocks,
+        'filter_info': {
+            'last_filtered': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'filter_version': 'V4.0',
+            'method': 'Total Days Above 200%',
+            'min_days_required': MIN_DAYS_ABOVE_200,
+            'threshold_gain_percent': THRESHOLD_GAIN_PERCENT,
+            'total_stocks': len(stocks),
+            'sustainable': len(sustainable_stocks),
+            'unsustainable': len(unsustainable_stocks),
+            'untestable': len(untestable_stocks)
+        }
+    }
+    
+    with open(clean_file, 'w') as f:
+        json.dump(clean_output, f, indent=2)
+    print(f"\n✅ Updated {clean_file}")
+    
+    # Save unsustainable stocks
+    unsustainable_file = os.path.join(DATA_DIR, 'explosive_stocks_UNSUSTAINABLE.json')
+    unsustainable_output = {
+        **metadata,
+        'stocks': unsustainable_stocks,
+        'filter_info': {
+            'last_filtered': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'filter_version': 'V4.0',
+            'description': 'Pump & dump stocks that failed sustainability test',
+            'criteria': f'Less than {MIN_DAYS_ABOVE_200} days above 200% gain'
+        }
+    }
+    
+    with open(unsustainable_file, 'w') as f:
+        json.dump(unsustainable_output, f, indent=2)
+    print(f"✅ Created {unsustainable_file}")
+    
+    # Save summary statistics
+    summary_file = os.path.join(DATA_DIR, 'sustainability_summary.json')
+    summary = {
+        'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        'filter_version': 'V4.0',
+        'filter_method': 'Total Days Above 200% Threshold',
+        'min_days_required': MIN_DAYS_ABOVE_200,
+        'threshold_gain_pct': THRESHOLD_GAIN_PERCENT,
+        'total_stocks': len(stocks),
+        'sustainable': len(sustainable_stocks),
+        'unsustainable': len(unsustainable_stocks),
+        'not_tested': len(untestable_stocks),
+        'api_calls': api_calls,
+        'pass_rate': round(len(sustainable_stocks)/total_tested*100, 1) if total_tested > 0 else 0,
+        'key_findings': {
+            'sustainable_stocks_have': '14+ days above 200% gain to exit',
+            'pump_dumps_have': 'Less than 14 days above 200% before crashing',
+            'exit_window': 'Minimum 2 weeks to notice and exit position'
+        }
+    }
+    
+    with open(summary_file, 'w') as f:
+        json.dump(summary, f, indent=2)
+    print(f"✅ Created {summary_file}")
+    
+    print("\n" + "="*60)
+    print("✅ SUSTAINABILITY FILTER COMPLETE")
+    print("="*60)
+    print(f"\n🎯 Ready for Phase 3 pattern analysis with {len(sustainable_stocks)} sustainable stocks!\n")
 
 if __name__ == "__main__":
     main()
