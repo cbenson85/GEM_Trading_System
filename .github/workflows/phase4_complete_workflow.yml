@@ -36,7 +36,7 @@ jobs:
         pip install requests pandas numpy
         # Note: yfinance removed since we're using mock data for testing
     
-    - name: Generate strategic dates and screen markets
+      - name: Generate strategic dates and screen markets
       id: screen
       env:
         POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
@@ -51,11 +51,12 @@ jobs:
         # Run the full integrated screener
         python phase4_integrated_screener.py --mode $MODE
         
-        # Get stock count for output
-        STOCK_COUNT=$(python -c "import json; data=json.load(open('phase4_screening_results.json')); print(len(data['all_selected_stocks']))")
-        echo "total_stocks=$STOCK_COUNT" >> $GITHUB_OUTPUT
-        
-        echo "✅ Screened $STOCK_COUNT stocks across multiple dates"
+        # Check if file was created
+        if [ -f "phase4_screening_results.json" ]; then
+          # Get stock count for output
+          STOCK_COUNT=$(python -c "import json; data=json.load(open('phase4_screening_results.json')); print(len(data['all_selected_stocks']))")
+          echo "total_stocks=$STOCK_COUNT" >> $GITHUB_OUTPUT
+          echo "✅ Screened $STOCK_COUNT stocks across multiple dates"
         else
           echo "⚠️ No screening results file created"
           echo "total_stocks=0" >> $GITHUB_OUTPUT
