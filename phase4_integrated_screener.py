@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Phase 4 Integrated Screener - Generates strategic dates and screens entire market
-Runs entirely on GitHub Actions with Polygon API
+Phase 4 Integrated Screener - Screens ENTIRE US MARKET
+No predefined stocks - finds random winners from thousands of stocks
 """
 
 import json
@@ -72,49 +72,108 @@ class Phase4MarketScreener:
         
         return selected_dates
     
-    def get_market_stocks(self, date: str) -> List[Dict]:
+    def get_all_tickers_for_date(self, date: str) -> List[str]:
         """
-        Get stocks using a predefined list for reliable testing
+        Get ALL active tickers that were trading on a specific date
+        Uses Polygon snapshots API for historical ticker lists
         """
-        print(f"\n📊 Getting stocks for screening on {date}...")
+        print(f"\n📊 Fetching ALL market tickers for {date}...")
         
-        # Use a curated list of stocks that existed during our test periods
-        # These are stocks known to have data in Polygon
-        tickers = [
-            # Large caps (always have data)
-            'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'META', 'NVDA', 'TSLA',
-            'JPM', 'JNJ', 'V', 'PG', 'UNH', 'HD', 'MA', 'DIS',
-            
-            # Mid caps with good volatility
-            'AMD', 'NFLX', 'PYPL', 'SHOP', 'SQ', 'ROKU', 'SNAP',
-            'TWTR', 'UBER', 'LYFT', 'ZM', 'DOCU', 'CRWD', 'NET',
-            
-            # Small caps that often explode
-            'GME', 'AMC', 'BBBY', 'BB', 'NOK', 'PLTR', 'SPCE',
-            'WISH', 'CLOV', 'SOFI', 'HOOD', 'LCID', 'RIVN', 'NIO',
-            
-            # Biotech (explosive sector)
-            'MRNA', 'BNTX', 'NVAX', 'INO', 'VXRT', 'OCGN', 'BNGO',
-            
-            # Energy/Commodities
-            'OXY', 'RIG', 'USO', 'GLD', 'SLV', 'GOLD', 'NEM',
-            
-            # More volatile stocks
-            'PINS', 'SPOT', 'RBLX', 'COIN', 'AFRM', 'UPST', 'CFLT'
-        ]
+        all_tickers = []
         
-        # Convert to stock info format
-        all_stocks = []
-        for ticker in tickers:
-            all_stocks.append({
-                'ticker': ticker,
-                'name': ticker,
-                'market_cap': 0,
-                'exchange': 'UNKNOWN'
-            })
+        # Method 1: Try to get snapshot of all tickers for that date
+        try:
+            # Use grouped daily endpoint to get all tickers that traded on that date
+            url = f"{self.base_url}/v2/aggs/grouped/locale/us/market/stocks/{date}"
+            params = {
+                'apiKey': self.polygon_api_key,
+                'adjusted': 'true'
+            }
+            
+            response = requests.get(url, params=params, timeout=30)
+            
+            if response.status_code == 200:
+                data = response.json()
+                
+                if data.get('status') == 'OK' and data.get('results'):
+                    results = data['results']
+                    print(f"  Found {len(results)} tickers that traded on {date}")
+                    
+                    for item in results:
+                        ticker = item.get('T')  # T is the ticker symbol in grouped daily
+                        if ticker:
+                            all_tickers.append(ticker)
+                    
+                    return all_tickers
+                else:
+                    print(f"  ⚠️ No trading data for {date} (might be weekend/holiday)")
+            else:
+                print(f"  ⚠️ Snapshot API error: {response.status_code}")
+                
+        except Exception as e:
+            print(f"  ❌ Error fetching snapshot: {e}")
         
-        print(f"  Using {len(all_stocks)} stocks for screening")
-        return all_stocks
+        # Method 2: If snapshot fails, get current ticker list (less accurate but works)
+        try:
+            print("  Falling back to current ticker list...")
+            url = f"{self.base_url}/v3/reference/tickers"
+            
+            all_tickers = []
+            next_url = url
+            pages = 0
+            max_pages = 100  # Limit to prevent infinite loops
+            
+            while next_url and pages < max_pages:
+                if pages == 0:
+                    params = {
+                        'apiKey': self.polygon_api_key,
+                        'market': 'stocks',
+                        'active': 'true',
+                        'limit': 1000,
+                        'sort': 'ticker',
+                        'order': 'asc'
+                    }
+                    response = requests.get(next_url, params=params, timeout=30)
+                else:
+                    # For pagination, the next_url already has parameters
+                    response = requests.get(next_url, timeout=30)
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    
+                    if 'results' in data:
+                        for ticker_info in data['results']:
+                            ticker = ticker_info.get('ticker')
+                            if ticker and '.' not in ticker:  # Skip warrants and special securities
+                                all_tickers.append(ticker)
+                        
+                        # Get next page URL
+                        next_url = data.get('next_url')
+                        if next_url:
+                            # Add API key to next URL if not present
+                            if 'apiKey=' not in next_url:
+                                separator = '&' if '?' in next_url else '?'
+                                next_url = f"{next_url}{separator}apiKey={self.polygon_api_key}"
+                        
+                        pages += 1
+                        
+                        if pages % 10 == 0:
+                            print(f"    Loaded {len(all_tickers)} tickers so far...")
+                    else:
+                        break
+                else:
+                    print(f"  ⚠️ API error on page {pages}: {response.status_code}")
+                    break
+                    
+                # Small delay to avoid rate limits
+                time.sleep(0.1)
+            
+            print(f"  ✅ Loaded {len(all_tickers)} total tickers")
+            
+        except Exception as e:
+            print(f"  ❌ Error fetching ticker list: {e}")
+        
+        return all_tickers
     
     def get_stock_data(self, ticker: str, date: str) -> Dict:
         """
@@ -142,7 +201,7 @@ class Phase4MarketScreener:
                 if data.get('status') == 'OK' and data.get('results'):
                     results = data['results']
                     
-                    if len(results) > 0:
+                    if len(results) >= 20:  # Need at least 20 days of data
                         # Get most recent data
                         recent_bar = results[-1]
                         
@@ -152,34 +211,32 @@ class Phase4MarketScreener:
                         highs = [bar['h'] for bar in results]
                         lows = [bar['l'] for bar in results]
                         
-                        # Calculate 20-day averages (last 20 bars)
-                        avg_volume_20d = sum(volumes[-20:]) / min(20, len(volumes)) if volumes else 0
-                        avg_price_20d = sum(prices[-20:]) / min(20, len(prices)) if prices else 0
+                        # Calculate 20-day averages
+                        avg_volume_20d = sum(volumes[-20:]) / 20
+                        avg_price_20d = sum(prices[-20:]) / 20
                         
                         return {
                             'price': recent_bar['c'],
                             'volume': recent_bar['v'],
                             'avg_volume_20d': avg_volume_20d,
                             'avg_price_20d': avg_price_20d,
-                            'high': max(highs[-20:]) if highs else recent_bar['h'],
-                            'low': min(lows[-20:]) if lows else recent_bar['l'],
+                            'high': max(highs[-20:]),
+                            'low': min(lows[-20:]),
                             'open': recent_bar['o']
                         }
             
             elif response.status_code == 429:
-                print(f"    Rate limit hit, waiting...")
-                time.sleep(15)  # Wait 15 seconds on rate limit
-                return None
+                # Rate limit - wait and return None
+                time.sleep(15)
                 
         except Exception as e:
-            # Silently fail and return None
             pass
         
         return None
     
     def score_stock(self, ticker: str, data: Dict, date: str) -> Tuple[float, Dict]:
         """
-        Score a stock based on Phase 4 insights
+        Score a stock based on Phase 3 patterns
         """
         score = 0
         breakdown = {
@@ -206,23 +263,22 @@ class Phase4MarketScreener:
         elif volume_ratio >= 3:
             breakdown['volume_score'] = 25
         
-        # RSI proxy (price relative to average)
+        # RSI proxy (based on Phase 4 test showing overbought > oversold)
         if data['avg_price_20d'] > 0:
             price_ratio = data['price'] / data['avg_price_20d']
             
-            # Based on test results: overbought is better than oversold
-            if price_ratio > 1.15:  # Overbought
+            if price_ratio > 1.15:  # Overbought is GOOD
                 breakdown['rsi_score'] = 30
             elif price_ratio > 1.10:
                 breakdown['rsi_score'] = 20
-            elif price_ratio < 0.85:  # Oversold (negative)
+            elif price_ratio < 0.85:  # Oversold is BAD
                 breakdown['rsi_score'] = -20
         
         # Breakout scoring
         if data['high'] > 0 and data['price'] > data['high'] * 0.95:
             breakdown['breakout_score'] = 30
         
-        # Accumulation (higher lows with volume)
+        # Accumulation
         if data['low'] > 0 and data['avg_price_20d'] > 0:
             if data['low'] > data['avg_price_20d'] * 0.95 and volume_ratio > 1.5:
                 breakdown['accumulation_score'] = 30
@@ -247,32 +303,54 @@ class Phase4MarketScreener:
     
     def screen_market(self, date: str) -> Dict:
         """
-        Screen the market on a specific date
+        Screen the ENTIRE market on a specific date
         """
-        print(f"\n🔍 SCREENING MARKET: {date}")
+        print(f"\n🔍 SCREENING ENTIRE MARKET: {date}")
         print("="*50)
         
-        # Get stocks to screen
-        all_stocks = self.get_market_stocks(date)
+        # Get ALL tickers
+        all_tickers = self.get_all_tickers_for_date(date)
+        
+        if not all_tickers:
+            print("  ❌ Failed to get market tickers")
+            return {
+                'screening_date': date,
+                'market_stats': {
+                    'total_stocks_scanned': 0,
+                    'api_failures': 0,
+                    'passed_filters': 0,
+                    'top_30_selected': 0
+                },
+                'selected_stocks': [],
+                'runners_up': []
+            }
+        
+        # Randomly sample if too many (for testing)
+        if len(all_tickers) > 500 and os.environ.get('PHASE4_SAMPLE_SIZE'):
+            sample_size = int(os.environ.get('PHASE4_SAMPLE_SIZE', '500'))
+            print(f"  Sampling {sample_size} random tickers from {len(all_tickers)} total")
+            all_tickers = random.sample(all_tickers, min(sample_size, len(all_tickers)))
         
         # Filter and score stocks
         scored_stocks = []
         api_failures = 0
+        stocks_analyzed = 0
         
-        print(f"  Analyzing {len(all_stocks)} stocks...")
+        print(f"  Analyzing {len(all_tickers)} tickers...")
+        print("  This will take several minutes...")
         
-        for i, stock_info in enumerate(all_stocks):
-            ticker = stock_info['ticker']
-            
+        for i, ticker in enumerate(all_tickers):
             # Progress indicator
-            if (i + 1) % 10 == 0:
-                print(f"    Progress: {i + 1}/{len(all_stocks)}")
+            if (i + 1) % 100 == 0:
+                print(f"    Progress: {i + 1}/{len(all_tickers)} - Found {len(scored_stocks)} qualifying stocks so far")
             
             # Get stock data
             stock_data = self.get_stock_data(ticker, date)
             
             if stock_data:
-                # Apply basic filters
+                stocks_analyzed += 1
+                
+                # Apply filters
                 if (stock_data['price'] >= 0.50 and 
                     stock_data['price'] <= 15.00 and
                     stock_data['avg_volume_20d'] >= 10000):
@@ -288,18 +366,18 @@ class Phase4MarketScreener:
                             'entry_price': stock_data['price'],
                             'entry_volume': stock_data['volume'],
                             'screening_date': date,
-                            'rank': 0  # Will be set after sorting
+                            'rank': 0
                         })
             else:
                 api_failures += 1
-                
-            # Add small delay to avoid rate limits
-            time.sleep(0.1)
+            
+            # Rate limit protection
+            if (i + 1) % 50 == 0:
+                time.sleep(1)  # 1 second pause every 50 stocks
         
-        # Sort by score and select top 30
+        # Sort by score and rank
         scored_stocks.sort(key=lambda x: x['score'], reverse=True)
         
-        # Assign ranks
         for i, stock in enumerate(scored_stocks):
             stock['rank'] = i + 1
         
@@ -308,20 +386,22 @@ class Phase4MarketScreener:
         runners_up = scored_stocks[30:60] if len(scored_stocks) > 30 else []
         
         print(f"\n  ✅ Screening complete:")
-        print(f"    Total stocks analyzed: {len(all_stocks)}")
-        print(f"    Successful API calls: {len(all_stocks) - api_failures}")
-        print(f"    Passed filters: {len(scored_stocks)}")
+        print(f"    Total tickers checked: {len(all_tickers)}")
+        print(f"    Successfully analyzed: {stocks_analyzed}")
+        print(f"    API failures: {api_failures}")
+        print(f"    Passed all filters: {len(scored_stocks)}")
         print(f"    Top 30 selected: {len(top_30)}")
         
         if top_30:
-            print(f"\n  Top 5 picks:")
+            print(f"\n  🏆 Top 5 picks:")
             for stock in top_30[:5]:
                 print(f"    {stock['rank']}. {stock['ticker']}: Score {stock['score']}")
         
         return {
             'screening_date': date,
             'market_stats': {
-                'total_stocks_scanned': len(all_stocks),
+                'total_stocks_scanned': len(all_tickers),
+                'stocks_analyzed': stocks_analyzed,
                 'api_failures': api_failures,
                 'passed_filters': len(scored_stocks),
                 'top_30_selected': len(top_30)
@@ -332,13 +412,8 @@ class Phase4MarketScreener:
     
     def check_false_miss(self, stock: Dict) -> Dict:
         """
-        Check if stock would have been caught earlier (60 days lookback)
+        Check if stock would have been caught earlier
         """
-        ticker = stock['ticker']
-        screening_date = datetime.fromisoformat(stock['screening_date'])
-        lookback_date = screening_date - timedelta(days=60)
-        
-        # Simplified false miss check
         return {
             'is_false_miss': False,
             'status': 'NOT_CHECKED',
@@ -351,7 +426,7 @@ def main():
     """
     import argparse
     
-    parser = argparse.ArgumentParser(description='Phase 4 Integrated Screener')
+    parser = argparse.ArgumentParser(description='Phase 4 Market Screener')
     parser.add_argument('--mode', choices=['test', 'full'], default='test',
                        help='Test mode (3 dates) or full mode (15 dates)')
     
@@ -382,13 +457,12 @@ def main():
         result = screener.screen_market(date)
         all_results['screening_results'].append(result)
         
-        # Add false miss check for selected stocks
+        # Add stocks to combined lists
         for stock in result['selected_stocks']:
             false_miss_check = screener.check_false_miss(stock)
             stock['false_miss_analysis'] = false_miss_check
             all_results['all_selected_stocks'].append(stock)
         
-        # Also track runners-up
         for stock in result['runners_up']:
             all_results['all_runners_up'].append(stock)
     
@@ -409,7 +483,9 @@ def main():
     for result in all_results['screening_results']:
         date = result['screening_date']
         stats = result['market_stats']
-        print(f"  {date}: {stats['top_30_selected']} stocks from {stats['total_stocks_scanned']} scanned")
+        selected = stats.get('top_30_selected', 0)
+        total = stats.get('total_stocks_scanned', 0)
+        print(f"  {date}: {selected} stocks selected from {total} scanned")
 
 if __name__ == '__main__':
     main()
