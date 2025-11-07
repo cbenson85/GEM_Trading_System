@@ -1,2 +1,2 @@
 # Backtest Results
-This folder contains backtesting data and analysis.
+Historical backtesting results and optimized weights.
