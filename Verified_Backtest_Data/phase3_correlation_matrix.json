@@ -1,65 +1,89 @@
 {
-  "generated_date": "2025-11-07T08:01:34.349281",
-  "total_stocks": 10,
-  "successful_analyses": 10,
+  "generated_date": "2025-11-07T08:56:20.054292",
+  "total_stocks": 694,
+  "successful_analyses": 694,
   "pattern_frequencies": {
     "volume_3x_spike": {
-      "count": 9,
-      "frequency_percent": 90.0,
-      "avg_gain_when_present": 9232.0,
-      "big_gain_rate": 100.0
+      "count": 632,
+      "frequency_percent": 91.1,
+      "avg_gain_when_present": 927.0,
+      "big_gain_rate": 20.1
     },
     "volume_5x_spike": {
-      "count": 7,
-      "frequency_percent": 70.0,
-      "avg_gain_when_present": 10234.0,
-      "big_gain_rate": 100.0
+      "count": 510,
+      "frequency_percent": 73.5,
+      "avg_gain_when_present": 951.0,
+      "big_gain_rate": 21.6
+    },
+    "volume_10x_spike": {
+      "count": 261,
+      "frequency_percent": 37.6,
+      "avg_gain_when_present": 841.0,
+      "big_gain_rate": 21.1
     },
     "rsi_oversold": {
-      "count": 9,
-      "frequency_percent": 90.0,
-      "avg_gain_when_present": 9413.0,
-      "big_gain_rate": 100.0
+      "count": 582,
+      "frequency_percent": 83.9,
+      "avg_gain_when_present": 921.0,
+      "big_gain_rate": 19.2
     },
     "accumulation": {
-      "count": 2,
-      "frequency_percent": 20.0,
-      "avg_gain_when_present": 22155.0,
-      "big_gain_rate": 100.0
+      "count": 199,
+      "frequency_percent": 28.7,
+      "avg_gain_when_present": 1044.0,
+      "big_gain_rate": 20.6
     },
     "market_outperform": {
-      "count": 10,
+      "count": 694,
       "frequency_percent": 100.0,
-      "avg_gain_when_present": 8875.0,
-      "big_gain_rate": 100.0
+      "avg_gain_when_present": 915.0,
+      "big_gain_rate": 19.3
     }
   },
   "pattern_correlations": {
     "volume_3x_spike": {
-      "correlation_score": 0.9,
-      "mega_winner_rate": 90.0,
-      "moderate_winner_rate": 0,
-      "predictive_power": "HIGH"
+      "correlation_score": 0.029,
+      "mega_winner_rate": 93.1,
+      "moderate_winner_rate": 90.2,
+      "predictive_power": "LOW"
     },
     "volume_5x_spike": {
-      "correlation_score": 0.7,
-      "mega_winner_rate": 70.0,
-      "moderate_winner_rate": 0,
-      "predictive_power": "HIGH"
+      "correlation_score": 0.045,
+      "mega_winner_rate": 75.9,
+      "moderate_winner_rate": 71.4,
+      "predictive_power": "LOW"
     },
     "rsi_oversold": {
-      "correlation_score": 0.9,
-      "mega_winner_rate": 90.0,
-      "moderate_winner_rate": 0,
-      "predictive_power": "HIGH"
+      "correlation_score": -0.046,
+      "mega_winner_rate": 79.3,
+      "moderate_winner_rate": 83.9,
+      "predictive_power": "LOW"
     },
     "gain_distribution": {
       "mega_winners": {
-        "stock_count": 10,
+        "stock_count": 29,
         "patterns": {
-          "volume_3x_spike": 90.0,
-          "volume_5x_spike": 70.0,
-          "rsi_oversold": 90.0,
+          "volume_3x_spike": 93.1,
+          "volume_5x_spike": 75.9,
+          "rsi_oversold": 79.3,
+          "breakout_20d_high": 0.0
+        }
+      },
+      "big_winners": {
+        "stock_count": 106,
+        "patterns": {
+          "volume_3x_spike": 95.3,
+          "volume_5x_spike": 84.0,
+          "rsi_oversold": 84.9,
+          "breakout_20d_high": 0.0
+        }
+      },
+      "moderate_winners": {
+        "stock_count": 559,
+        "patterns": {
+          "volume_3x_spike": 90.2,
+          "volume_5x_spike": 71.4,
+          "rsi_oversold": 83.9,
           "breakout_20d_high": 0.0
         }
       }
@@ -67,57 +91,25 @@
   },
   "composite_patterns": {
     "volume_and_rsi": {
-      "count": 8,
-      "frequency_percent": 80.0,
-      "avg_gain": 9882.0
+      "count": 550,
+      "frequency_percent": 79.3,
+      "avg_gain": 927.0
     },
     "rsi_and_accumulation": {
-      "count": 2,
-      "frequency_percent": 20.0,
-      "avg_gain": 22155.0
+      "count": 181,
+      "frequency_percent": 26.1,
+      "avg_gain": 1078.0
     },
     "triple_signal": {
-      "count": 2,
-      "frequency_percent": 20.0,
-      "avg_gain": 22155.0
+      "count": 178,
+      "frequency_percent": 25.6,
+      "avg_gain": 1085.0
     }
   },
   "screening_criteria": {
-    "primary_signals": [
-      {
-        "pattern": "volume_3x_spike",
-        "correlation": 0.9,
-        "mega_winner_rate": 90.0
-      },
-      {
-        "pattern": "volume_5x_spike",
-        "correlation": 0.7,
-        "mega_winner_rate": 70.0
-      },
-      {
-        "pattern": "rsi_oversold",
-        "correlation": 0.9,
-        "mega_winner_rate": 90.0
-      }
-    ],
+    "primary_signals": [],
     "secondary_signals": [],
-    "composite_signals": [
-      {
-        "pattern": "volume_and_rsi",
-        "avg_gain": 9882.0,
-        "frequency": 80.0
-      },
-      {
-        "pattern": "rsi_and_accumulation",
-        "avg_gain": 22155.0,
-        "frequency": 20.0
-      },
-      {
-        "pattern": "triple_signal",
-        "avg_gain": 22155.0,
-        "frequency": 20.0
-      }
-    ],
+    "composite_signals": [],
     "entry_rules": [
       "PRIMARY: Any primary signal present",
       "SECONDARY: 2+ secondary signals present",
@@ -139,14 +131,14 @@
     },
     {
       "finding": "Highest Correlation Pattern",
-      "pattern": "volume_3x_spike",
-      "correlation": 0.9,
+      "pattern": "volume_5x_spike",
+      "correlation": 0.045,
       "significance": "VERY HIGH"
     },
     {
       "finding": "Best Composite Pattern",
-      "pattern": "rsi_and_accumulation",
-      "avg_gain": "22155%",
+      "pattern": "triple_signal",
+      "avg_gain": "1085%",
       "significance": "HIGH"
     }
   ]
