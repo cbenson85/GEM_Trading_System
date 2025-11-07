@@ -217,64 +217,65 @@ class Phase4MarketScreener:
         
         return rsi
     
-    def score_stock(self, ticker: str, data: Dict, date: str) -> Tuple[float, Dict]:
-        """
-        Score a stock based on Phase 3 insights
-        """
-        score = 0
-        breakdown = {
-            'volume_score': 0,
-            'rsi_score': 0,
-            'breakout_score': 0,
-            'accumulation_score': 0,
-            'composite_bonus': 0
-        }
-        
-        if not data:
-            return 0, breakdown
-        
-        # Volume scoring (most important pattern from Phase 3)
-        volume_ratio = data['volume'] / data['avg_volume_20d'] if data['avg_volume_20d'] > 0 else 0
-        
-        if volume_ratio >= 10:
-            breakdown['volume_score'] = 50
-        elif volume_ratio >= 5:
-            breakdown['volume_score'] = 35
-        elif volume_ratio >= 3:
-            breakdown['volume_score'] = 25
-        
-        # RSI scoring (look for oversold bounce)
-        # Note: Simplified RSI calculation for screening
-        if data['price'] < data['avg_price_20d'] * 0.85:  # Proxy for oversold
-            breakdown['rsi_score'] = 30
-        elif data['price'] < data['avg_price_20d'] * 0.90:
-            breakdown['rsi_score'] = 20
-        
-        # Breakout scoring
-        if data['price'] > data['high'] * 0.95:  # Near high
-            breakdown['breakout_score'] = 20
-        
-        # Accumulation (higher lows)
-        if data['low'] > data['avg_price_20d'] * 0.95 and volume_ratio > 1.5:
-            breakdown['accumulation_score'] = 30
-        
-        # Composite bonuses
-        signals = sum([
-            breakdown['volume_score'] > 0,
-            breakdown['rsi_score'] > 0,
-            breakdown['breakout_score'] > 0,
-            breakdown['accumulation_score'] > 0
-        ])
-        
-        if signals >= 3:
-            breakdown['composite_bonus'] = 50
-        elif signals >= 2:
-            breakdown['composite_bonus'] = 25
-        
-        # Calculate total score
-        score = sum(breakdown.values())
-        
-        return score, breakdown
+def score_stock(self, ticker: str, data: Dict, date: str) -> Tuple[float, Dict]:
+    """Score a stock based on Phase 4 insights (UPDATED)"""
+    score = 0
+    breakdown = {
+        'volume_score': 0,
+        'rsi_score': 0,
+        'breakout_score': 0,
+        'accumulation_score': 0,
+        'composite_bonus': 0
+    }
+    
+    if not data:
+        return 0, breakdown
+    
+    # Volume scoring (MOST IMPORTANT - 61.5% correlation)
+    volume_ratio = data['volume'] / data['avg_volume_20d'] if data['avg_volume_20d'] > 0 else 0
+    
+    if volume_ratio >= 10:
+        breakdown['volume_score'] = 50
+    elif volume_ratio >= 5:
+        breakdown['volume_score'] = 35
+    elif volume_ratio >= 3:
+        breakdown['volume_score'] = 25
+    
+    # RSI scoring (REVERSED based on negative correlation!)
+    # Now we want stocks that are NOT oversold
+    if data['price'] > data['avg_price_20d'] * 1.15:  # Overbought is GOOD
+        breakdown['rsi_score'] = 30
+    elif data['price'] > data['avg_price_20d'] * 1.10:
+        breakdown['rsi_score'] = 20
+    # Penalize oversold stocks
+    elif data['price'] < data['avg_price_20d'] * 0.85:
+        breakdown['rsi_score'] = -20  # NEGATIVE score for oversold
+    
+    # Breakout scoring (61.5% correlation - keep strong)
+    if data['price'] > data['high'] * 0.95:
+        breakdown['breakout_score'] = 30  # Increased from 20
+    
+    # Accumulation (52.8% correlation - good)
+    if data['low'] > data['avg_price_20d'] * 0.95 and volume_ratio > 1.5:
+        breakdown['accumulation_score'] = 30
+    
+    # Composite bonuses (61.5% correlation)
+    signals = sum([
+        breakdown['volume_score'] > 0,
+        breakdown['rsi_score'] > 10,  # Changed threshold
+        breakdown['breakout_score'] > 0,
+        breakdown['accumulation_score'] > 0
+    ])
+    
+    if signals >= 3:
+        breakdown['composite_bonus'] = 50
+    elif signals >= 2:
+        breakdown['composite_bonus'] = 25
+    
+    # Calculate total score
+    score = sum(breakdown.values())
+    
+    return score, breakdown
     
     def screen_market(self, date: str) -> Dict:
         """
