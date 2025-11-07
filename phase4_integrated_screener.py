@@ -10,7 +10,7 @@ import sys
 import random
 from datetime import datetime, timedelta
 import requests
-import yfinance as yf
+# import yfinance as yf  # REMOVED - not used
 from typing import List, Dict, Tuple
 
 class Phase4MarketScreener:
