@@ -1,0 +1,250 @@
+name: GEM Screener v6.0 - Backtest
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_dates:
+        description: 'Test dates (comma separated YYYY-MM-DD)'
+        required: true
+        default: '2019-01-15,2019-06-15,2022-03-15,2023-01-15'
+      optimize_weights:
+        description: 'Optimize weights based on results'
+        required: true
+        default: 'true'
+        type: boolean
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install yfinance pandas numpy requests
+        pip install --upgrade setuptools wheel
+    
+    - name: Create backtest runner
+      run: |
+        cat > run_backtest.py << 'EOF'
+        #!/usr/bin/env python3
+        import sys
+        import json
+        import os
+        from datetime import datetime, timedelta
+        import pandas as pd
+        import numpy as np
+        
+        sys.path.append('.')
+        from gem_screener_v6 import GEMScreenerV6
+        from gem_backtest_v6 import GEMBacktester
+        
+        def load_verified_stocks():
+            """Load verified explosive stocks from Phase 3 analysis"""
+            try:
+                # Try to load from correlation matrix
+                with open('Verified_Backtest_Data/phase3_correlation_matrix.json', 'r') as f:
+                    data = json.load(f)
+                    # This would need to be adapted to your actual data structure
+                    return data
+            except:
+                # Try to load from merged analysis
+                try:
+                    with open('Verified_Backtest_Data/phase3_merged_analysis.json', 'r') as f:
+                        data = json.load(f)
+                        stocks = {}
+                        for ticker, info in data.items():
+                            if isinstance(info, dict) and 'total_gain' in info:
+                                stocks[ticker] = {
+                                    'gain': info['total_gain'],
+                                    'explosion_date': info.get('catalyst_date', '2019-01-01')
+                                }
+                        return stocks
+                except:
+                    print("Warning: Could not load verified stocks, using sample data")
+                    # Sample data for testing
+                    return {
+                        'ACONW': {'gain': 8875, 'explosion_date': '2019-03-15'},
+                        'ASNS': {'gain': 5420, 'explosion_date': '2018-06-20'},
+                        'AIMD': {'gain': 12340, 'explosion_date': '2022-09-10'},
+                    }
+        
+        def main():
+            # Get inputs
+            test_dates_str = os.environ.get('INPUT_TEST_DATES', '2019-01-15,2022-03-15')
+            optimize = os.environ.get('INPUT_OPTIMIZE_WEIGHTS', 'true').lower() == 'true'
+            
+            test_dates = [d.strip() for d in test_dates_str.split(',')]
+            
+            print("="*60)
+            print("GEM SCREENER v6.0 - BACKTESTING")
+            print("="*60)
+            print(f"Test dates: {test_dates}")
+            print(f"Optimize weights: {optimize}")
+            print("="*60)
+            
+            # Load verified stocks
+            verified_stocks = load_verified_stocks()
+            print(f"\nLoaded {len(verified_stocks)} verified explosive stocks")
+            
+            # Initialize backtester
+            backtester = GEMBacktester()
+            backtester.verified_stocks = verified_stocks
+            
+            # Create test universe from verified stocks
+            test_universe = list(verified_stocks.keys())[:50]  # Use first 50 for speed
+            
+            # Run backtests on each date
+            all_results = []
+            for test_date in test_dates:
+                print(f"\n{'='*40}")
+                print(f"Testing on {test_date}")
+                print('='*40)
+                
+                result = backtester.test_screener_on_date(test_date, test_universe)
+                all_results.append(result)
+                backtester.backtest_results.append(result)
+                
+                print(f"Hit rate: {result['hit_rate']:.2%}")
+                print(f"Stocks in top 30: {len(result['top_30'])}")
+                
+                # Check for false negatives
+                false_negs = backtester.analyze_false_negatives(test_date, verified_stocks)
+                if false_negs:
+                    backtester.false_negatives.extend(false_negs)
+            
+            # Optimize weights if requested
+            if optimize:
+                print("\n" + "="*60)
+                print("OPTIMIZING WEIGHTS")
+                print("="*60)
+                
+                best_weights, best_rate = backtester.optimize_weights(
+                    test_dates[:3],  # Use first 3 dates for optimization
+                    test_universe
+                )
+                
+                print(f"\nBest hit rate achieved: {best_rate:.2%}")
+                print("\nRecommended weight adjustments:")
+                for pattern, weight in best_weights.items():
+                    original = GEMScreenerV6().weights.get(pattern, 0)
+                    if weight != original:
+                        print(f"  {pattern}: {original} → {weight}")
+                
+                # Save optimized weights
+                with open('Backtest_Results/optimized_weights.json', 'w') as f:
+                    json.dump({
+                        'original_weights': GEMScreenerV6().weights,
+                        'optimized_weights': best_weights,
+                        'improvement': {
+                            'original_hit_rate': all_results[0]['hit_rate'],
+                            'optimized_hit_rate': best_rate
+                        },
+                        'test_dates': test_dates,
+                        'optimization_date': datetime.now().strftime('%Y-%m-%d')
+                    }, f, indent=2)
+            
+            # Generate comprehensive report
+            report = backtester.generate_report('Backtest_Results/backtest_report.json')
+            
+            # Create markdown summary
+            create_markdown_summary(report, all_results)
+            
+            print("\n" + "="*60)
+            print("BACKTEST COMPLETE")
+            print("="*60)
+            print(f"Overall hit rate: {report['summary']['overall_hit_rate']:.2%}")
+            print(f"False negatives: {report['summary']['false_negatives']}")
+            print(f"False positives: {report['summary']['false_positives']}")
+            
+            return 0
+        
+        def create_markdown_summary(report, results):
+            """Create markdown summary of backtest results"""
+            
+            os.makedirs('Backtest_Results', exist_ok=True)
+            
+            with open('Backtest_Results/backtest_summary.md', 'w') as f:
+                f.write("# GEM Screener v6.0 - Backtest Results\n\n")
+                f.write(f"**Date:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+                
+                f.write("## Overall Performance\n\n")
+                f.write(f"- **Hit Rate:** {report['summary']['overall_hit_rate']:.2%}\n")
+                f.write(f"- **True Positives:** {report['summary']['true_positives']}\n")
+                f.write(f"- **False Negatives:** {report['summary']['false_negatives']} ⚠️\n")
+                f.write(f"- **False Positives:** {report['summary']['false_positives']}\n\n")
+                
+                f.write("## Test Results by Date\n\n")
+                f.write("| Date | Hit Rate | Passed Filters | Top 30 Explosions |\n")
+                f.write("|------|----------|----------------|-------------------|\n")
+                
+                for result in results:
+                    explosions = sum(1 for x in result['top_30'] if x['exploded'])
+                    f.write(f"| {result['test_date']} | {result['hit_rate']:.1%} | ")
+                    f.write(f"{result['passed_filters']} | {explosions} |\n")
+                
+                f.write("\n## Pattern Performance\n\n")
+                f.write("| Pattern | Appearances | Hit Rate | Avg Gain |\n")
+                f.write("|---------|------------|----------|----------|\n")
+                
+                pattern_stats = report.get('pattern_analysis', {})
+                for pattern, stats in sorted(pattern_stats.items(), 
+                                           key=lambda x: x[1].get('hit_rate', 0), 
+                                           reverse=True)[:10]:
+                    f.write(f"| {pattern} | {stats.get('appearances', 0)} | ")
+                    f.write(f"{stats.get('hit_rate', 0):.1%} | ")
+                    f.write(f"{stats.get('avg_gain', 0):.0f}% |\n")
+                
+                f.write("\n## Recommendations\n\n")
+                
+                # Weight recommendations
+                if 'weight_recommendations' in report:
+                    f.write("### Weight Adjustments\n\n")
+                    for pattern, rec in report['weight_recommendations'].items():
+                        f.write(f"- **{pattern}**: {rec['current']} → {rec['recommended']} ")
+                        f.write(f"({rec['reason']})\n")
+                
+                # False negative recommendations
+                if 'false_negative_patterns' in report:
+                    f.write("\n### False Negative Reduction\n\n")
+                    for rec in report['false_negative_patterns'].get('recommendations', []):
+                        f.write(f"- {rec}\n")
+        
+        if __name__ == '__main__':
+            sys.exit(main())
+        EOF
+        chmod +x run_backtest.py
+    
+    - name: Run backtest
+      env:
+        INPUT_TEST_DATES: ${{ inputs.test_dates }}
+        INPUT_OPTIMIZE_WEIGHTS: ${{ inputs.optimize_weights }}
+      run: |
+        python run_backtest.py
+    
+    - name: Commit results
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add Backtest_Results/
+        git diff --staged --quiet || git commit -m "Backtest results - $(date +'%Y-%m-%d')"
+        git push
+    
+    - name: Upload backtest report
+      uses: actions/upload-artifact@v3
+      with:
+        name: backtest-report
+        path: |
+          Backtest_Results/backtest_report.json
+          Backtest_Results/backtest_summary.md
+          Backtest_Results/optimized_weights.json

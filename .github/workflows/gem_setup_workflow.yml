@@ -1,0 +1,203 @@
+name: GEM Screener v6.0 - Setup
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Create directory structure
+      run: |
+        echo "Creating GEM v6.0 directory structure..."
+        
+        # Create all necessary directories
+        mkdir -p Daily_Screens
+        mkdir -p Backtest_Results  
+        mkdir -p Tracking_Data
+        mkdir -p Tracking_Reports
+        mkdir -p Screening_Universe
+        mkdir -p .github/workflows
+        
+        # Create README files for each directory
+        echo "# Daily Screening Results" > Daily_Screens/README.md
+        echo "All daily screening results are stored here with timestamps." >> Daily_Screens/README.md
+        
+        echo "# Backtest Results" > Backtest_Results/README.md
+        echo "Historical backtesting results and optimized weights." >> Backtest_Results/README.md
+        
+        echo "# Tracking Data" > Tracking_Data/README.md
+        echo "Master tracking file for all top 30 picks and their 120-day outcomes." >> Tracking_Data/README.md
+        
+        echo "# Tracking Reports" > Tracking_Reports/README.md
+        echo "Performance reports and false negative analysis." >> Tracking_Reports/README.md
+        
+        echo "# Screening Universe" > Screening_Universe/README.md
+        echo "Stock lists for different screening universes." >> Screening_Universe/README.md
+    
+    - name: Download GEM v6.0 screener files
+      run: |
+        echo "Downloading GEM v6.0 screener components..."
+        
+        # Note: These URLs would need to be updated to your actual file locations
+        # For now, creating them inline
+        
+        # Create gem_screener_v6.py
+        cat > gem_screener_v6.py << 'SCREENER_EOF'
+        # [Full gem_screener_v6.py content would go here]
+        # This is a placeholder - copy the actual content
+        SCREENER_EOF
+        
+        # Create gem_backtest_v6.py  
+        cat > gem_backtest_v6.py << 'BACKTEST_EOF'
+        # [Full gem_backtest_v6.py content would go here]
+        # This is a placeholder - copy the actual content
+        BACKTEST_EOF
+        
+        # Create gem_tracker_v6.py
+        cat > gem_tracker_v6.py << 'TRACKER_EOF'
+        # [Full gem_tracker_v6.py content would go here]
+        # This is a placeholder - copy the actual content
+        TRACKER_EOF
+    
+    - name: Create sample stock universe
+      run: |
+        cat > Screening_Universe/penny_stocks.json << 'EOF'
+        [
+          "PLTR", "SOFI", "RIVN", "LCID", "NIO", "BBIG", "PROG", "ATER",
+          "VERU", "IMPP", "MULN", "NILE", "HYMC", "XELA", "CEI", "INDO",
+          "BBAI", "APRN", "ALLK", "COSM", "SNDL", "CLOV", "WISH", "WKHS",
+          "RIDE", "GOEV", "NKLA", "SPCE", "ASTS", "RKLB", "RDW", "ASTR",
+          "VORB", "MNMD", "CMPS", "ATAI", "DRUG", "SAVA", "ANVS", "AVXL",
+          "KMPH", "SESN", "OCGN", "VXRT", "INO", "SRNE", "GEVO", "AMTX",
+          "FCEL", "PLUG", "BLNK", "CHPT", "EVGO", "FSR", "FFIE", "ARVL"
+        ]
+        EOF
+    
+    - name: Move workflows to .github/workflows
+      run: |
+        # Note: In actual use, these would be downloaded or copied
+        echo "Workflow files should be placed in .github/workflows/"
+        
+        # Create a master README
+        cat > README_GEM_v6.md << 'EOF'
+        # GEM Screener v6.0 - GitHub Actions Setup
+        
+        ## Quick Start
+        
+        1. **Run Setup** (one time only):
+           - Go to Actions tab
+           - Select "GEM Screener v6.0 - Setup"
+           - Click "Run workflow"
+        
+        2. **Daily Screening**:
+           - Go to Actions tab
+           - Select "GEM Screener v6.0 - Daily Screen"
+           - Choose universe size and run
+           - Or wait for automatic 4:30 PM ET run
+        
+        3. **Track Positions**:
+           - After buying/rejecting stocks
+           - Go to "GEM Screener v6.0 - Track & Validate"
+           - Select "update_positions"
+           - Enter ticker, decision, and reason
+        
+        4. **Check Outcomes** (automatic weekly):
+           - Runs every Sunday
+           - Checks all stocks 120+ days old
+           - Creates issue if false negatives found
+        
+        5. **Backtest** (as needed):
+           - Go to "GEM Screener v6.0 - Backtest"
+           - Enter test dates
+           - Optionally optimize weights
+        
+        ## Directory Structure
+        
+        ```
+        GEM_Trading_System/
+        ├── Daily_Screens/          # Daily screening results
+        ├── Backtest_Results/       # Backtest reports
+        ├── Tracking_Data/          # Master tracking file
+        ├── Tracking_Reports/       # Performance reports
+        ├── Screening_Universe/     # Stock lists
+        ├── gem_screener_v6.py      # Main screener
+        ├── gem_backtest_v6.py      # Backtester
+        └── gem_tracker_v6.py       # Tracker
+        ```
+        
+        ## Workflows
+        
+        - **Daily Screen**: Runs screener on stock universe
+        - **Track & Validate**: Updates positions and checks outcomes
+        - **Backtest**: Tests screener on historical data
+        - **Setup**: Initializes repository (run once)
+        
+        ## Alerts
+        
+        The system will create GitHub issues when:
+        - Strong buy signals detected (score 100+)
+        - False negatives discovered (rejected stocks that exploded)
+        
+        ## Based on Verified Data
+        
+        All patterns and weights derived from:
+        - 694 verified explosive stocks
+        - 2014-2024 data (excluding COVID)
+        - Minimum 500% gain in 6 months
+        - Verified via Polygon API
+        EOF
+    
+    - name: Commit setup
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add .
+        git diff --staged --quiet || git commit -m "Setup GEM Screener v6.0 infrastructure"
+        git push
+    
+    - name: Create setup complete issue
+      uses: actions/github-script@v6
+      with:
+        script: |
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: '✅ GEM Screener v6.0 Setup Complete',
+            body: `# Setup Complete!
+            
+            The GEM Screener v6.0 infrastructure is now ready.
+            
+            ## Next Steps:
+            
+            1. **Copy the screener files** to your repository:
+               - gem_screener_v6.py
+               - gem_backtest_v6.py
+               - gem_tracker_v6.py
+            
+            2. **Copy workflow files** to .github/workflows/:
+               - gem_screener_workflow.yml
+               - gem_backtest_workflow.yml
+               - gem_tracker_workflow.yml
+            
+            3. **Run your first screen**:
+               - Go to Actions tab
+               - Select "GEM Screener v6.0 - Daily Screen"
+               - Click "Run workflow"
+            
+            ## Important Notes:
+            
+            - The screener will run automatically every weekday at 4:30 PM ET
+            - Outcome checks run automatically every Sunday
+            - Track ALL top 30 stocks (even rejects) for false negative analysis
+            - Review false negatives monthly to improve weights
+            
+            Good luck with your trading! 🚀`,
+            labels: ['setup-complete', 'gem-v6']
+          })

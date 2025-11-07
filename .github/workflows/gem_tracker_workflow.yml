@@ -1,0 +1,278 @@
+name: GEM Screener v6.0 - Track & Validate
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform'
+        required: true
+        default: 'check_outcomes'
+        type: choice
+        options:
+          - check_outcomes
+          - update_positions
+          - generate_report
+      ticker:
+        description: 'Ticker (for update_positions)'
+        required: false
+      decision:
+        description: 'Decision (bought/rejected for update_positions)'
+        required: false
+        type: choice
+        options:
+          - bought
+          - rejected
+      reason:
+        description: 'Reason for decision'
+        required: false
+  schedule:
+    # Run every Sunday to check 120-day outcomes
+    - cron: '0 18 * * 0'  # 18:00 UTC Sunday
+
+jobs:
+  track_and_validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install yfinance pandas numpy requests
+        pip install --upgrade setuptools wheel
+    
+    - name: Create tracking runner
+      run: |
+        cat > run_tracking.py << 'EOF'
+        #!/usr/bin/env python3
+        import sys
+        import json
+        import os
+        from datetime import datetime, timedelta
+        import pandas as pd
+        
+        sys.path.append('.')
+        from gem_tracker_v6 import GEMTracker
+        
+        def load_latest_screen():
+            """Load the latest screening results"""
+            try:
+                with open('Daily_Screens/latest_screen.json', 'r') as f:
+                    return json.load(f)
+            except:
+                return None
+        
+        def check_outcomes_action(tracker):
+            """Check 120-day outcomes for all tracked stocks"""
+            print("="*60)
+            print("CHECKING 120-DAY OUTCOMES")
+            print("="*60)
+            
+            outcomes = tracker.check_outcomes()
+            
+            if outcomes['false_negatives']:
+                print("\n⚠️ FALSE NEGATIVES FOUND!")
+                print("These stocks were rejected but exploded:")
+                for fn in outcomes['false_negatives'][:10]:
+                    print(f"  {fn['ticker']}: Score {fn['score']}, Reason: {fn['reason']}")
+                
+                # Create alert file for issue
+                with open('false_negatives_alert.md', 'w') as f:
+                    f.write("# ⚠️ False Negatives Detected\n\n")
+                    f.write("The following rejected stocks exploded within 120 days:\n\n")
+                    for fn in outcomes['false_negatives']:
+                        f.write(f"- **{fn['ticker']}**: Score {fn['score']}, ")
+                        f.write(f"Rejected for: {fn['reason']}\n")
+                        f.write(f"  - Gain: {fn['outcome']['max_gain']:.0f}%\n")
+                        f.write(f"  - Patterns: {', '.join(fn['patterns'][:3])}\n\n")
+                    
+                    f.write("\n## Recommendations\n\n")
+                    f.write("Review rejection criteria to reduce false negatives.\n")
+            
+            # Generate performance report
+            report = tracker.generate_report()
+            
+            print("\n" + "="*60)
+            print("PERFORMANCE METRICS")
+            print("="*60)
+            print(f"True Positives: {report['performance']['true_positives']}")
+            print(f"False Negatives: {report['performance']['false_negatives']}")
+            print(f"False Positives: {report['performance']['false_positives']}")
+            
+            # Check pending
+            pending = tracker.get_pending_checks()
+            if pending:
+                print(f"\n{len(pending)} stocks still pending outcome check")
+            
+            return report
+        
+        def update_positions_action(tracker, ticker, decision, reason):
+            """Update position decision for a stock"""
+            print("="*60)
+            print("UPDATING POSITION DECISION")
+            print("="*60)
+            
+            # Find the latest screen date
+            latest_screen = load_latest_screen()
+            if latest_screen:
+                screen_date = latest_screen['screen_date'].split()[0]
+                tracker.update_position_decision(screen_date, ticker, decision, reason)
+                print(f"✅ Updated {ticker}: {decision} - {reason}")
+            else:
+                print("❌ No latest screen found")
+            
+            return tracker
+        
+        def generate_report_action(tracker):
+            """Generate comprehensive tracking report"""
+            print("="*60)
+            print("GENERATING TRACKING REPORT")
+            print("="*60)
+            
+            report = tracker.generate_report()
+            
+            # Create detailed markdown report
+            with open('Tracking_Reports/tracking_report.md', 'w') as f:
+                f.write("# GEM Screener v6.0 - Tracking Report\n\n")
+                f.write(f"**Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+                
+                f.write("## Performance Summary\n\n")
+                perf = report['performance']
+                total_signals = perf['true_positives'] + perf['false_positives']
+                hit_rate = perf['true_positives'] / total_signals if total_signals > 0 else 0
+                
+                f.write(f"- **Hit Rate:** {hit_rate:.1%}\n")
+                f.write(f"- **True Positives:** {perf['true_positives']}\n")
+                f.write(f"- **False Negatives:** {perf['false_negatives']} ⚠️\n")
+                f.write(f"- **False Positives:** {perf['false_positives']}\n\n")
+                
+                f.write("## Pattern Performance\n\n")
+                f.write("| Pattern | Total | Hit Rate | False Neg Rate |\n")
+                f.write("|---------|-------|----------|----------------|\n")
+                
+                for pattern, stats in report['pattern_analysis'].items():
+                    f.write(f"| {pattern} | {stats['total']} | ")
+                    f.write(f"{stats['hit_rate']:.1%} | ")
+                    f.write(f"{stats.get('false_neg_rate', 0):.1%} |\n")
+                
+                f.write("\n## Rejection Analysis\n\n")
+                rejection = report['rejection_analysis']
+                
+                f.write("### Rejection Reasons\n\n")
+                f.write("| Reason | Total | False Negatives |\n")
+                f.write("|--------|-------|----------------|\n")
+                
+                for reason, count in rejection['total_rejections'].items():
+                    fn_count = rejection['false_negatives_by_reason'].get(reason, 0)
+                    f.write(f"| {reason} | {count} | {fn_count} |\n")
+                
+                f.write("\n## Recommendations\n\n")
+                for rec in report['recommendations']:
+                    f.write(f"- {rec}\n")
+            
+            print(f"✅ Report saved to Tracking_Reports/tracking_report.md")
+            return report
+        
+        def main():
+            # Get inputs
+            action = os.environ.get('INPUT_ACTION', 'check_outcomes')
+            ticker = os.environ.get('INPUT_TICKER', '')
+            decision = os.environ.get('INPUT_DECISION', '')
+            reason = os.environ.get('INPUT_REASON', '')
+            
+            print("="*60)
+            print(f"GEM TRACKER v6.0 - {action.upper()}")
+            print("="*60)
+            
+            # Initialize tracker
+            tracker = GEMTracker('Tracking_Data/gem_tracking_master.json')
+            
+            # Check if we need to add latest screen results
+            latest_screen = load_latest_screen()
+            if latest_screen and 'results' in latest_screen:
+                # Check if this screen is already tracked
+                screen_date = latest_screen['screen_date'].split()[0]
+                already_tracked = any(
+                    s['screen_date'] == screen_date 
+                    for s in tracker.tracking_data['screens']
+                )
+                
+                if not already_tracked:
+                    print(f"Adding new screen results from {screen_date}")
+                    tracker.add_screening_results(
+                        screen_date,
+                        latest_screen['results']['all_results']
+                    )
+            
+            # Perform requested action
+            if action == 'check_outcomes':
+                result = check_outcomes_action(tracker)
+                
+            elif action == 'update_positions' and ticker and decision:
+                result = update_positions_action(tracker, ticker, decision, reason)
+                
+            elif action == 'generate_report':
+                result = generate_report_action(tracker)
+                
+            else:
+                print(f"Invalid action or missing parameters")
+                return 1
+            
+            # Save tracker data
+            tracker.save_tracking_data()
+            
+            print("\n✅ Tracking complete")
+            return 0
+        
+        if __name__ == '__main__':
+            sys.exit(main())
+        EOF
+        chmod +x run_tracking.py
+    
+    - name: Create necessary directories
+      run: |
+        mkdir -p Tracking_Data
+        mkdir -p Tracking_Reports
+    
+    - name: Run tracking action
+      env:
+        INPUT_ACTION: ${{ inputs.action || 'check_outcomes' }}
+        INPUT_TICKER: ${{ inputs.ticker || '' }}
+        INPUT_DECISION: ${{ inputs.decision || '' }}
+        INPUT_REASON: ${{ inputs.reason || '' }}
+      run: |
+        python run_tracking.py
+    
+    - name: Commit tracking data
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add Tracking_Data/ Tracking_Reports/
+        git diff --staged --quiet || git commit -m "Tracking update - $(date +'%Y-%m-%d')"
+        git push
+    
+    - name: Create issue for false negatives
+      if: ${{ inputs.action == 'check_outcomes' || github.event_name == 'schedule' }}
+      run: |
+        if [ -f "false_negatives_alert.md" ]; then
+          echo "FALSE_NEGATIVES_FOUND=true" >> $GITHUB_ENV
+        fi
+    
+    - name: Create GitHub Issue
+      if: env.FALSE_NEGATIVES_FOUND == 'true'
+      uses: peter-evans/create-issue-from-file@v4
+      with:
+        title: "⚠️ GEM Screener - False Negatives Detected"
+        content-filepath: ./false_negatives_alert.md
+        labels: |
+          false-negative
+          review-needed
+          automated

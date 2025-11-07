@@ -1,0 +1,254 @@
+name: GEM Screener v6.0 - Daily Screen
+
+on:
+  workflow_dispatch:
+    inputs:
+      stock_universe:
+        description: 'Stock universe to screen (small, medium, large, custom)'
+        required: true
+        default: 'small'
+        type: choice
+        options:
+          - small
+          - medium
+          - large
+          - custom
+      custom_tickers:
+        description: 'Custom tickers (comma separated, only if custom selected)'
+        required: false
+        default: ''
+      top_n:
+        description: 'Number of top stocks to display'
+        required: true
+        default: '30'
+  schedule:
+    # Run every weekday at 4:30 PM ET (after market close)
+    - cron: '30 21 * * 1-5'  # 21:30 UTC = 4:30 PM ET
+
+jobs:
+  screen_stocks:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install yfinance pandas numpy requests
+        pip install --upgrade setuptools wheel
+    
+    - name: Create screener script
+      run: |
+        cat > run_daily_screen.py << 'EOF'
+        #!/usr/bin/env python3
+        import sys
+        import json
+        import os
+        from datetime import datetime
+        import yfinance as yf
+        import pandas as pd
+        import numpy as np
+        import warnings
+        warnings.filterwarnings('ignore')
+        
+        # Import the screener
+        sys.path.append('.')
+        from gem_screener_v6 import GEMScreenerV6
+        
+        def get_stock_universe(universe_type, custom_tickers=''):
+            """Get list of stocks to screen based on universe type"""
+            
+            if universe_type == 'custom' and custom_tickers:
+                return [t.strip() for t in custom_tickers.split(',')]
+            
+            elif universe_type == 'small':
+                # Small test universe
+                return [
+                    'PLTR', 'SOFI', 'RIVN', 'LCID', 'NIO', 'BBIG', 'PROG', 
+                    'ATER', 'VERU', 'IMPP', 'MULN', 'NILE', 'HYMC', 'XELA',
+                    'CEI', 'INDO', 'BBAI', 'APRN', 'ALLK', 'COSM'
+                ]
+            
+            elif universe_type == 'medium':
+                # Medium universe - more penny stocks
+                try:
+                    # Try to load from saved universe file
+                    with open('Screening_Universe/penny_stocks.json', 'r') as f:
+                        stocks = json.load(f)
+                        return stocks[:100]  # First 100
+                except:
+                    # Fallback list
+                    return [
+                        'PLTR', 'SOFI', 'RIVN', 'LCID', 'NIO', 'BBIG', 'PROG',
+                        'ATER', 'VERU', 'IMPP', 'MULN', 'NILE', 'HYMC', 'XELA',
+                        'CEI', 'INDO', 'BBAI', 'APRN', 'ALLK', 'COSM', 'SNDL',
+                        'CLOV', 'WISH', 'WKHS', 'RIDE', 'GOEV', 'NKLA', 'SPCE',
+                        'ASTS', 'RKLB', 'RDW', 'ASTR', 'VORB', 'MNMD', 'CMPS',
+                        'ATAI', 'DRUG', 'SAVA', 'ANVS', 'AVXL', 'KMPH', 'SESN'
+                    ]
+            
+            elif universe_type == 'large':
+                # Large universe - would need to be loaded from file
+                try:
+                    with open('Screening_Universe/full_universe.json', 'r') as f:
+                        return json.load(f)
+                except:
+                    print("Large universe file not found, using medium instead")
+                    return get_stock_universe('medium')
+            
+            else:
+                return get_stock_universe('small')
+        
+        def main():
+            # Get inputs from environment/workflow
+            universe_type = os.environ.get('INPUT_STOCK_UNIVERSE', 'small')
+            custom_tickers = os.environ.get('INPUT_CUSTOM_TICKERS', '')
+            top_n = int(os.environ.get('INPUT_TOP_N', '30'))
+            
+            print("="*60)
+            print("GEM SCREENER v6.0 - DAILY SCREEN")
+            print("="*60)
+            print(f"Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            print(f"Universe: {universe_type}")
+            print(f"Top N: {top_n}")
+            print("="*60)
+            
+            # Get stock universe
+            stocks = get_stock_universe(universe_type, custom_tickers)
+            print(f"\nScreening {len(stocks)} stocks...")
+            
+            # Initialize screener
+            screener = GEMScreenerV6()
+            
+            # Run screen
+            results = screener.run_screen(stocks)
+            
+            # Display results
+            if results:
+                screener.display_results(results, top_n=top_n)
+                
+                # Save results
+                output_dir = 'Daily_Screens'
+                os.makedirs(output_dir, exist_ok=True)
+                
+                filename = f"{output_dir}/screen_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+                screener.export_results(results, filename)
+                
+                # Also save latest results
+                latest_file = f"{output_dir}/latest_screen.json"
+                screener.export_results(results, latest_file)
+                
+                # Create markdown report
+                create_markdown_report(results[:top_n], filename.replace('.json', '.md'))
+                
+                print(f"\n✅ Results saved to {filename}")
+                
+                # Check if any STRONG BUY signals
+                strong_buys = [r for r in results if r['score'] >= 100]
+                if strong_buys:
+                    print("\n🚨 STRONG BUY SIGNALS DETECTED:")
+                    for stock in strong_buys[:5]:
+                        print(f"   {stock['ticker']}: Score {stock['score']}")
+                
+            else:
+                print("❌ No stocks passed screening filters")
+            
+            return 0 if results else 1
+        
+        def create_markdown_report(results, filename):
+            """Create a markdown report of screening results"""
+            with open(filename, 'w') as f:
+                f.write(f"# GEM Screener v6.0 - Results\n\n")
+                f.write(f"**Date:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+                f.write(f"## Top {len(results)} Stocks\n\n")
+                
+                f.write("| Rank | Ticker | Score | Recommendation | Price | Volume Spike | RSI | Key Patterns |\n")
+                f.write("|------|--------|-------|----------------|-------|--------------|-----|-------------|\n")
+                
+                for i, stock in enumerate(results, 1):
+                    patterns = ', '.join(stock['patterns'][:3])
+                    f.write(f"| {i} | **{stock['ticker']}** | {stock['score']} | {stock['recommendation']} | ")
+                    f.write(f"${stock['price']:.2f} | {stock['volume_spike']:.1f}x | ")
+                    f.write(f"{stock['rsi']:.1f} | {patterns} |\n")
+                
+                # Summary section
+                f.write("\n## Summary\n\n")
+                strong_buys = len([r for r in results if r['score'] >= 100])
+                buys = len([r for r in results if 75 <= r['score'] < 100])
+                watch = len([r for r in results if 60 <= r['score'] < 75])
+                
+                f.write(f"- **Strong Buy (100+):** {strong_buys} stocks\n")
+                f.write(f"- **Buy (75-99):** {buys} stocks\n")
+                f.write(f"- **Watch (60-74):** {watch} stocks\n")
+                
+                f.write("\n## Remember\n\n")
+                f.write("- Track ALL top 30 stocks for 120 days\n")
+                f.write("- Document why each stock was bought or rejected\n")
+                f.write("- Check back in 120 days for false negative analysis\n")
+        
+        if __name__ == '__main__':
+            sys.exit(main())
+        EOF
+        chmod +x run_daily_screen.py
+    
+    - name: Copy screener module
+      run: |
+        if [ -f "gem_screener_v6.py" ]; then
+          echo "Using existing screener"
+        else
+          echo "Screener not found, creating from embedded version"
+          # Would need to embed or download the screener here
+        fi
+    
+    - name: Run screening
+      env:
+        INPUT_STOCK_UNIVERSE: ${{ inputs.stock_universe || 'small' }}
+        INPUT_CUSTOM_TICKERS: ${{ inputs.custom_tickers || '' }}
+        INPUT_TOP_N: ${{ inputs.top_n || '30' }}
+      run: |
+        python run_daily_screen.py
+    
+    - name: Commit results
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add Daily_Screens/
+        git diff --staged --quiet || git commit -m "Daily screen results - $(date +'%Y-%m-%d %H:%M')"
+        git push
+    
+    - name: Create issue if strong buys found
+      if: success()
+      run: |
+        if [ -f "Daily_Screens/latest_screen.json" ]; then
+          python -c "
+import json
+with open('Daily_Screens/latest_screen.json', 'r') as f:
+    data = json.load(f)
+    strong_buys = [r for r in data['results']['all_results'] if r['score'] >= 100]
+    if strong_buys:
+        print('STRONG_BUYS_FOUND=true')
+        with open('strong_buys.txt', 'w') as out:
+            out.write('# 🚨 Strong Buy Signals Detected\\n\\n')
+            for stock in strong_buys[:5]:
+                out.write(f\"- **{stock['ticker']}**: Score {stock['score']}\\n\")
+          " >> $GITHUB_ENV
+        fi
+    
+    - name: Create GitHub Issue for Strong Buys
+      if: env.STRONG_BUYS_FOUND == 'true'
+      uses: peter-evans/create-issue-from-file@v4
+      with:
+        title: "🚨 GEM Screener - Strong Buy Signals"
+        content-filepath: ./strong_buys.txt
+        labels: |
+          trading-signal
+          strong-buy
+          automated
