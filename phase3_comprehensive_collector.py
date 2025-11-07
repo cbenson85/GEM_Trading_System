@@ -918,7 +918,20 @@ def analyze_batch(batch_name: str, batch_file: str):
     
     # Load batch stocks
     with open(batch_file, 'r') as f:
-        stocks = json.load(f)
+        batch_data = json.load(f)
+    
+    # Handle different JSON structures
+    if isinstance(batch_data, dict):
+        if 'stocks' in batch_data:
+            stocks = batch_data['stocks']
+        else:
+            # If it's a dict but no 'stocks' key, use the whole dict as a single stock
+            stocks = [batch_data]
+    elif isinstance(batch_data, list):
+        stocks = batch_data
+    else:
+        print(f"ERROR: Unexpected batch file structure")
+        stocks = []
     
     print(f"Loaded {len(stocks)} stocks for analysis")
     
