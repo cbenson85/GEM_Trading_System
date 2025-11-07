@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   # Job 1: Generate strategic dates and run market screening
- screen-markets:
+  screen-markets:
     runs-on: ubuntu-latest
     outputs:
       total_stocks: ${{ steps.screen.outputs.total_stocks }}
