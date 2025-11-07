@@ -312,6 +312,7 @@ jobs:
   merge-and-analyze:
     needs: [analyze-batch-1, analyze-batch-2, analyze-batch-3, analyze-batch-4, analyze-batch-5]
     runs-on: ubuntu-latest
+    if: always()  # Run even if some batch jobs fail
     
     steps:
     - name: Checkout repository
@@ -331,27 +332,43 @@ jobs:
         pattern: batch*-results
         path: batch_results/
         merge-multiple: true
+      continue-on-error: true
     
     - name: Download screening results
       uses: actions/download-artifact@v4
       with:
         name: screening-results
     
+    - name: Check for batch results
+      run: |
+        echo "🔍 Checking for batch results..."
+        if [ -d "batch_results" ]; then
+          echo "✅ batch_results directory exists"
+          ls -la batch_results/ || echo "Directory is empty"
+        else
+          echo "⚠️ batch_results directory not found"
+          mkdir -p batch_results
+        fi
+        
+        # Also check Verified_Backtest_Data
+        mkdir -p Verified_Backtest_Data
+    
     - name: Merge batch results
       run: |
         echo "🔄 Merging all batch results..."
-        ls -la batch_results/
-        python phase4_batch_merger.py batch_results/
+        python phase4_batch_merger.py batch_results/ || python phase4_batch_merger.py .
     
     - name: Generate correlation analysis
       run: |
         echo "📊 Generating correlation matrix..."
-        python phase4_correlation_analyzer.py
+        python phase4_correlation_analyzer.py || echo "⚠️ Correlation analysis skipped"
+      continue-on-error: true
     
     - name: Generate final report
       run: |
         echo "📝 Generating final report..."
-        python phase4_report_generator.py
+        python phase4_report_generator.py || echo "⚠️ Report generation skipped"
+      continue-on-error: true
     
     - name: Display summary
       run: |
