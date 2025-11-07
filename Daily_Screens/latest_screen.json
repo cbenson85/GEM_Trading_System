@@ -1,0 +1,194 @@
+{
+  "screen_date": "2025-11-07T21:37:33.227129",
+  "total_screened": 20,
+  "passed_filters": 9,
+  "results": {
+    "all_results": [
+      {
+        "ticker": "ATER",
+        "score": 30,
+        "price": 0.82,
+        "volume_spike": 0.8,
+        "rsi": 18.0,
+        "patterns": [
+          "rsi_30"
+        ],
+        "recommendation": "PASS"
+      },
+      {
+        "ticker": "VERU",
+        "score": 30,
+        "price": 2.56,
+        "volume_spike": 0.7,
+        "rsi": 16.6,
+        "patterns": [
+          "rsi_30"
+        ],
+        "recommendation": "PASS"
+      },
+      {
+        "ticker": "BBAI",
+        "score": 30,
+        "price": 5.68,
+        "volume_spike": 0.5,
+        "rsi": 22.6,
+        "patterns": [
+          "rsi_30"
+        ],
+        "recommendation": "PASS"
+      },
+      {
+        "ticker": "COSM",
+        "score": 30,
+        "price": 0.69,
+        "volume_spike": 0.2,
+        "rsi": 12.1,
+        "patterns": [
+          "rsi_30"
+        ],
+        "recommendation": "PASS"
+      },
+      {
+        "ticker": "SNDL",
+        "score": 30,
+        "price": 1.78,
+        "volume_spike": 0.9,
+        "rsi": 15.1,
+        "patterns": [
+          "rsi_30"
+        ],
+        "recommendation": "PASS"
+      },
+      {
+        "ticker": "NIO",
+        "score": 0,
+        "price": 6.86,
+        "volume_spike": 1.1,
+        "rsi": 50.7,
+        "patterns": [],
+        "recommendation": "PASS"
+      },
+      {
+        "ticker": "IMPP",
+        "score": 0,
+        "price": 5.38,
+        "volume_spike": 0.6,
+        "rsi": 64.6,
+        "patterns": [],
+        "recommendation": "PASS"
+      },
+      {
+        "ticker": "HYMC",
+        "score": 0,
+        "price": 7.65,
+        "volume_spike": 0.4,
+        "rsi": 41.7,
+        "patterns": [],
+        "recommendation": "PASS"
+      },
+      {
+        "ticker": "INDO",
+        "score": 0,
+        "price": 2.69,
+        "volume_spike": 0.2,
+        "rsi": 48.9,
+        "patterns": [],
+        "recommendation": "PASS"
+      }
+    ],
+    "top_30": [
+      {
+        "ticker": "ATER",
+        "score": 30,
+        "price": 0.82,
+        "volume_spike": 0.8,
+        "rsi": 18.0,
+        "patterns": [
+          "rsi_30"
+        ],
+        "recommendation": "PASS"
+      },
+      {
+        "ticker": "VERU",
+        "score": 30,
+        "price": 2.56,
+        "volume_spike": 0.7,
+        "rsi": 16.6,
+        "patterns": [
+          "rsi_30"
+        ],
+        "recommendation": "PASS"
+      },
+      {
+        "ticker": "BBAI",
+        "score": 30,
+        "price": 5.68,
+        "volume_spike": 0.5,
+        "rsi": 22.6,
+        "patterns": [
+          "rsi_30"
+        ],
+        "recommendation": "PASS"
+      },
+      {
+        "ticker": "COSM",
+        "score": 30,
+        "price": 0.69,
+        "volume_spike": 0.2,
+        "rsi": 12.1,
+        "patterns": [
+          "rsi_30"
+        ],
+        "recommendation": "PASS"
+      },
+      {
+        "ticker": "SNDL",
+        "score": 30,
+        "price": 1.78,
+        "volume_spike": 0.9,
+        "rsi": 15.1,
+        "patterns": [
+          "rsi_30"
+        ],
+        "recommendation": "PASS"
+      },
+      {
+        "ticker": "NIO",
+        "score": 0,
+        "price": 6.86,
+        "volume_spike": 1.1,
+        "rsi": 50.7,
+        "patterns": [],
+        "recommendation": "PASS"
+      },
+      {
+        "ticker": "IMPP",
+        "score": 0,
+        "price": 5.38,
+        "volume_spike": 0.6,
+        "rsi": 64.6,
+        "patterns": [],
+        "recommendation": "PASS"
+      },
+      {
+        "ticker": "HYMC",
+        "score": 0,
+        "price": 7.65,
+        "volume_spike": 0.4,
+        "rsi": 41.7,
+        "patterns": [],
+        "recommendation": "PASS"
+      },
+      {
+        "ticker": "INDO",
+        "score": 0,
+        "price": 2.69,
+        "volume_spike": 0.2,
+        "rsi": 48.9,
+        "patterns": [],
+        "recommendation": "PASS"
+      }
+    ],
+    "strong_buys": []
+  }
+}
