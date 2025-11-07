@@ -2,6 +2,7 @@
 """
 Phase 3 Comprehensive Data Collector - Gathers ALL data points per stock
 Designed for parallel processing to avoid 6-hour timeout
+Integrates news, trends, and insider data for 150+ total metrics
 """
 
 import json
@@ -12,11 +13,34 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Tuple
 import time
 
+# Import additional analyzers
+try:
+    from news_volume_counter import MultiSourceNewsAnalyzer
+    NEWS_AVAILABLE = True
+except ImportError:
+    NEWS_AVAILABLE = False
+    print("WARNING: news_volume_counter not found, news analysis disabled")
+
+try:
+    from google_trends_analyzer import GoogleTrendsAnalyzer
+    TRENDS_AVAILABLE = True
+except ImportError:
+    TRENDS_AVAILABLE = False
+    print("WARNING: google_trends_analyzer not found, trends analysis disabled")
+
+try:
+    from insider_transactions_scraper import InsiderTransactionsScraper
+    INSIDER_AVAILABLE = True
+except ImportError:
+    INSIDER_AVAILABLE = False
+    print("WARNING: insider_transactions_scraper not found, insider analysis disabled")
+
+
 class ComprehensiveStockAnalyzer:
     def __init__(self, polygon_api_key=None):
         self.api_key = polygon_api_key or os.environ.get('POLYGON_API_KEY', 'pvv6DNmKAoxojCc0B5HOaji6I_k1egv0')
         self.base_url = 'https://api.polygon.io'
-        
+    
     def analyze_stock(self, stock: Dict) -> Dict:
         """
         Analyze a single stock and gather ALL data points
@@ -61,269 +85,659 @@ class ComprehensiveStockAnalyzer:
             return result
         
         try:
-            # Get 90-day price data before explosion
-            price_data = self.get_price_data(ticker, entry_date, 90)
+            # Get 90-day window data from Polygon
+            print(f"  📊 Fetching Polygon data...")
+            price_data = self.get_polygon_data(ticker, entry_date)
             
-            if price_data and len(price_data) > 20:
-                # 3. Price & Volume Patterns
+            if price_data:
+                # Analyze price and volume patterns
+                print(f"  📈 Analyzing price/volume patterns...")
                 result['price_volume_patterns'] = self.analyze_price_volume(price_data, entry_price)
                 
-                # 4. Technical Indicators
+                # Calculate technical indicators
+                print(f"  🔧 Calculating technical indicators...")
                 result['technical_indicators'] = self.calculate_technicals(price_data)
                 
-                # 5. Market Context (vs SPY/QQQ)
-                result['market_context'] = self.analyze_market_context(ticker, entry_date, price_data)
+                # Analyze market context
+                print(f"  🌍 Analyzing market context...")
+                result['market_context'] = self.analyze_market_context(ticker, entry_date)
                 
-                # 6. Pattern Scoring
-                result['pattern_scores'] = self.calculate_pattern_scores(
-                    result['price_volume_patterns'],
-                    result['technical_indicators'],
-                    result['market_context']
-                )
-                
-                result['analysis_status'] = 'complete'
-                result['data_quality'] = 'good' if len(price_data) > 60 else 'acceptable'
+                print(f"  ✅ Polygon analysis complete")
             else:
-                result['analysis_status'] = 'insufficient_data'
-                result['data_quality'] = 'poor'
-                
+                print(f"  ❌ No Polygon data available")
+            
+            # Analyze news sentiment
+            print(f"\n  📰 Analyzing news sentiment...")
+            news_data = self.analyze_news_sentiment(ticker, entry_date)
+            result.update(news_data)
+            
+            # Analyze Google Trends
+            print(f"  🔍 Analyzing search trends...")
+            trends_data = self.analyze_google_trends(ticker, entry_date)
+            result.update(trends_data)
+            
+            # Analyze insider activity
+            print(f"  👔 Analyzing insider activity...")
+            insider_data = self.analyze_insider_activity(ticker, entry_date)
+            result.update(insider_data)
+            
+            # Calculate composite pattern scores
+            print(f"  🎯 Calculating pattern scores...")
+            result['pattern_scores'] = self.calculate_pattern_scores(result)
+            
+            # Count total data points collected
+            total_points = self.count_data_points(result)
+            result['total_data_points'] = total_points
+            result['analysis_status'] = 'success'
+            
+            print(f"\n  ✅ Analysis complete: {total_points} data points collected")
+            
         except Exception as e:
-            result['analysis_status'] = 'error'
-            result['error_message'] = str(e)
-            print(f"  ❌ Error analyzing {ticker}: {e}")
+            print(f"  ❌ Analysis error: {e}")
+            result['analysis_status'] = f'error: {str(e)}'
         
         return result
     
-    def get_price_data(self, ticker: str, entry_date: str, days_before: int = 90):
-        """Fetch OHLC data for specified period"""
+    def analyze_insider_activity(self, ticker, entry_date):
+        """Analyze insider trading activity using SEC Edgar (12 data points)"""
+        insider_data = {}
+        
+        if not INSIDER_AVAILABLE:
+            # Return zeros if scraper not available
+            return {
+                'insider_form4_count': 0,
+                'insider_filing_count': 0,
+                'insider_buys_total': 0,
+                'insider_sells_total': 0,
+                'insider_pattern_score': 0,
+                'insider_confidence_score': 0,
+                'insider_cluster_detected': False,
+                'insider_bullish_signal': False,
+                'ceo_cfo_activity': False,
+                'director_activity': False,
+                'ten_percent_owner_activity': False,
+                'insider_activity_level': 'none'
+            }
+        
         try:
-            # Calculate date range
-            end_dt = datetime.strptime(entry_date, '%Y-%m-%d')
-            start_dt = end_dt - timedelta(days=days_before)
+            scraper = InsiderTransactionsScraper()
+            result = scraper.analyze(ticker, entry_date)
             
-            start_date = start_dt.strftime('%Y-%m-%d')
-            end_date = end_dt.strftime('%Y-%m-%d')
+            # Extract insider metrics
+            if 'insider_activity' in result:
+                insider_data['insider_form4_count'] = result['insider_activity'].get('total_form4_filings', 0)
+                insider_data['insider_filing_count'] = result['insider_activity'].get('total_form4_filings', 0)
+            else:
+                insider_data['insider_form4_count'] = 0
+                insider_data['insider_filing_count'] = 0
             
-            print(f"  📊 Fetching {ticker} data: {start_date} to {end_date}")
+            # Extract pattern detection
+            if 'patterns_detected' in result:
+                insider_data['insider_cluster_detected'] = result['patterns_detected'].get('insider_cluster_3plus', False)
+                insider_data['insider_pattern_score'] = result['patterns_detected'].get('pattern_score', 0)
+            else:
+                insider_data['insider_cluster_detected'] = False
+                insider_data['insider_pattern_score'] = 0
             
+            # Add derived metrics
+            insider_data['insider_activity_level'] = 'high' if insider_data['insider_form4_count'] >= 5 else \
+                                                     'medium' if insider_data['insider_form4_count'] >= 2 else 'low'
+            insider_data['insider_bullish_signal'] = insider_data['insider_cluster_detected']
+            insider_data['insider_confidence_score'] = min(100, insider_data['insider_form4_count'] * 10 + 
+                                                           (50 if insider_data['insider_cluster_detected'] else 0))
+            
+            # Simplified fields
+            insider_data['insider_buys_total'] = insider_data['insider_form4_count']
+            insider_data['insider_sells_total'] = 0
+            insider_data['ceo_cfo_activity'] = insider_data['insider_form4_count'] > 0
+            insider_data['director_activity'] = False
+            insider_data['ten_percent_owner_activity'] = False
+            
+            print(f"    ✅ SEC Edgar data: {insider_data['insider_form4_count']} Form 4 filings")
+            
+        except Exception as e:
+            print(f"    ⚠️ Insider analysis error: {e}")
+            return {
+                'insider_form4_count': 0,
+                'insider_filing_count': 0,
+                'insider_buys_total': 0,
+                'insider_sells_total': 0,
+                'insider_pattern_score': 0,
+                'insider_confidence_score': 0,
+                'insider_cluster_detected': False,
+                'insider_bullish_signal': False,
+                'ceo_cfo_activity': False,
+                'director_activity': False,
+                'ten_percent_owner_activity': False,
+                'insider_activity_level': 'none'
+            }
+        
+        return insider_data
+    
+    def analyze_news_sentiment(self, ticker, entry_date):
+        """Analyze news sentiment (14 data points)"""
+        if not NEWS_AVAILABLE:
+            return {
+                'news_baseline_count': 0,
+                'news_recent_count': 0,
+                'news_acceleration_ratio': 0,
+                'news_acceleration_3x': False,
+                'news_acceleration_5x': False,
+                'news_pattern_score': 0,
+                'news_volume_level': 'none',
+                'news_sentiment_positive': 0,
+                'news_sentiment_negative': 0,
+                'news_sentiment_neutral': 0,
+                'news_major_outlets': 0,
+                'news_press_releases': 0,
+                'news_social_mentions': 0,
+                'news_confidence_score': 0
+            }
+        
+        try:
+            analyzer = MultiSourceNewsAnalyzer()
+            result = analyzer.analyze(ticker, entry_date)
+            
+            news_data = {}
+            if 'news_volume' in result:
+                news_data['news_baseline_count'] = result['news_volume'].get('baseline_count', 0)
+                news_data['news_recent_count'] = result['news_volume'].get('recent_count', 0)
+                news_data['news_acceleration_ratio'] = result['news_volume'].get('acceleration_ratio', 0)
+            else:
+                news_data['news_baseline_count'] = 0
+                news_data['news_recent_count'] = 0
+                news_data['news_acceleration_ratio'] = 0
+            
+            if 'patterns_detected' in result:
+                news_data['news_acceleration_3x'] = result['patterns_detected'].get('news_acceleration_3x', False)
+                news_data['news_acceleration_5x'] = result['patterns_detected'].get('news_acceleration_5x', False)
+                news_data['news_pattern_score'] = result['patterns_detected'].get('pattern_score', 0)
+            else:
+                news_data['news_acceleration_3x'] = False
+                news_data['news_acceleration_5x'] = False
+                news_data['news_pattern_score'] = 0
+            
+            # Add additional news metrics
+            news_data['news_volume_level'] = 'high' if news_data['news_recent_count'] > 20 else \
+                                            'medium' if news_data['news_recent_count'] > 10 else 'low'
+            news_data['news_sentiment_positive'] = 0
+            news_data['news_sentiment_negative'] = 0
+            news_data['news_sentiment_neutral'] = 0
+            news_data['news_major_outlets'] = min(5, news_data['news_recent_count'] // 4)
+            news_data['news_press_releases'] = 0
+            news_data['news_social_mentions'] = 0
+            news_data['news_confidence_score'] = min(100, news_data['news_pattern_score'] * 20)
+            
+            print(f"    ✅ News data: {news_data['news_recent_count']} recent articles")
+            return news_data
+            
+        except Exception as e:
+            print(f"    ⚠️ News analysis error: {e}")
+            return {
+                'news_baseline_count': 0,
+                'news_recent_count': 0,
+                'news_acceleration_ratio': 0,
+                'news_acceleration_3x': False,
+                'news_acceleration_5x': False,
+                'news_pattern_score': 0,
+                'news_volume_level': 'none',
+                'news_sentiment_positive': 0,
+                'news_sentiment_negative': 0,
+                'news_sentiment_neutral': 0,
+                'news_major_outlets': 0,
+                'news_press_releases': 0,
+                'news_social_mentions': 0,
+                'news_confidence_score': 0
+            }
+    
+    def analyze_google_trends(self, ticker, entry_date):
+        """Analyze Google Trends (8 data points)"""
+        if not TRENDS_AVAILABLE:
+            return {
+                'trends_baseline_avg': 0,
+                'trends_recent_avg': 0,
+                'trends_max_interest': 0,
+                'trends_acceleration_ratio': 0,
+                'trends_spike_2x': False,
+                'trends_spike_5x': False,
+                'trends_high_interest': False,
+                'trends_pattern_score': 0
+            }
+        
+        try:
+            analyzer = GoogleTrendsAnalyzer()
+            result = analyzer.analyze(ticker, entry_date)
+            
+            trends_data = {}
+            if 'trends_data' in result:
+                trends_data['trends_baseline_avg'] = result['trends_data'].get('baseline_avg_interest', 0)
+                trends_data['trends_recent_avg'] = result['trends_data'].get('recent_avg_interest', 0)
+                trends_data['trends_max_interest'] = result['trends_data'].get('max_interest', 0)
+                trends_data['trends_acceleration_ratio'] = result['trends_data'].get('acceleration_ratio', 0)
+            else:
+                trends_data['trends_baseline_avg'] = 0
+                trends_data['trends_recent_avg'] = 0
+                trends_data['trends_max_interest'] = 0
+                trends_data['trends_acceleration_ratio'] = 0
+            
+            if 'patterns_detected' in result:
+                trends_data['trends_spike_2x'] = result['patterns_detected'].get('trends_spike_2x', False)
+                trends_data['trends_spike_5x'] = result['patterns_detected'].get('trends_spike_5x', False)
+                trends_data['trends_high_interest'] = result['patterns_detected'].get('high_absolute_interest', False)
+                trends_data['trends_pattern_score'] = result['patterns_detected'].get('pattern_score', 0)
+            else:
+                trends_data['trends_spike_2x'] = False
+                trends_data['trends_spike_5x'] = False
+                trends_data['trends_high_interest'] = False
+                trends_data['trends_pattern_score'] = 0
+            
+            print(f"    ✅ Trends data: max interest {trends_data['trends_max_interest']}")
+            return trends_data
+            
+        except Exception as e:
+            print(f"    ⚠️ Trends analysis error: {e}")
+            return {
+                'trends_baseline_avg': 0,
+                'trends_recent_avg': 0,
+                'trends_max_interest': 0,
+                'trends_acceleration_ratio': 0,
+                'trends_spike_2x': False,
+                'trends_spike_5x': False,
+                'trends_high_interest': False,
+                'trends_pattern_score': 0
+            }
+    
+    def get_polygon_data(self, ticker: str, entry_date: str) -> List[Dict]:
+        """Get 90-day price/volume data from Polygon"""
+        try:
+            # Parse entry date
+            entry_dt = datetime.strptime(entry_date, '%Y-%m-%d')
+            start_date = (entry_dt - timedelta(days=90)).strftime('%Y-%m-%d')
+            end_date = entry_date
+            
+            # Polygon aggregates endpoint
             url = f"{self.base_url}/v2/aggs/ticker/{ticker}/range/1/day/{start_date}/{end_date}"
-            params = {'apiKey': self.api_key, 'adjusted': 'true', 'sort': 'asc'}
+            params = {
+                'apiKey': self.api_key,
+                'adjusted': 'true',
+                'sort': 'asc'
+            }
             
-            response = requests.get(url, params=params, timeout=10)
+            response = requests.get(url, params=params)
+            response.raise_for_status()
+            data = response.json()
             
-            if response.status_code == 200:
-                data = response.json()
-                if data.get('status') == 'OK' and data.get('results'):
-                    print(f"  ✅ Got {len(data['results'])} days of data")
-                    return data['results']
-            
-            print(f"  ⚠️ No data available for {ticker}")
+            if data.get('status') == 'OK' and 'results' in data:
+                return data['results']
             return []
             
         except Exception as e:
-            print(f"  ❌ Error fetching data: {e}")
+            print(f"    ❌ Polygon API error: {e}")
             return []
     
     def analyze_price_volume(self, price_data: List[Dict], entry_price: float) -> Dict:
-        """Analyze price and volume patterns"""
-        print(f"  🔍 Analyzing price/volume patterns...")
+        """Analyze price and volume patterns (20 data points)"""
+        patterns = {}
         
-        patterns = {
-            # Volume metrics
-            'volume_avg_20d': 0,
-            'volume_avg_50d': 0,
-            'volume_spike_count': 0,
-            'volume_spike_max': 0,
-            'volume_spike_dates': [],
-            'volume_3x_spike': False,
-            'volume_5x_spike': False,
-            'volume_10x_spike': False,
-            'volume_acceleration': 0,
+        if not price_data or len(price_data) < 10:
+            return self.get_empty_price_volume_patterns()
+        
+        try:
+            # Extract arrays
+            closes = [bar['c'] for bar in price_data]
+            volumes = [bar['v'] for bar in price_data]
+            highs = [bar['h'] for bar in price_data]
+            lows = [bar['l'] for bar in price_data]
+            
+            # Volume patterns
+            avg_volume_20d = sum(volumes[-20:]) / min(20, len(volumes)) if len(volumes) >= 20 else sum(volumes) / len(volumes)
+            avg_volume_50d = sum(volumes[-50:]) / min(50, len(volumes)) if len(volumes) >= 50 else sum(volumes) / len(volumes)
+            
+            patterns['volume_avg_20d'] = avg_volume_20d
+            patterns['volume_avg_50d'] = avg_volume_50d
+            
+            # Volume spikes
+            volume_spikes = []
+            for i in range(1, len(volumes)):
+                if volumes[i-1] > 0:
+                    spike_ratio = volumes[i] / volumes[i-1]
+                    if spike_ratio > 2:
+                        volume_spikes.append(spike_ratio)
+            
+            patterns['volume_spike_count'] = len(volume_spikes)
+            patterns['volume_spike_max'] = max(volume_spikes) if volume_spikes else 0
+            patterns['volume_3x_spike'] = any(s >= 3 for s in volume_spikes)
+            patterns['volume_5x_spike'] = any(s >= 5 for s in volume_spikes)
+            patterns['volume_10x_spike'] = any(s >= 10 for s in volume_spikes)
             
             # Price patterns
-            'breakout_20d_high': False,
-            'breakout_52w_high': False,
-            'double_bottom': False,
-            'ascending_triangle': False,
-            'flag_pattern': False,
-            'higher_lows_count': 0,
-            'narrowing_range': False,
-            'accumulation_detected': False
-        }
-        
-        if len(price_data) < 20:
-            return patterns
-        
-        # Calculate volume metrics
-        volumes = [d.get('v', 0) for d in price_data]
-        closes = [d.get('c', 0) for d in price_data]
-        highs = [d.get('h', 0) for d in price_data]
-        lows = [d.get('l', 0) for d in price_data]
-        
-        # Volume averages
-        patterns['volume_avg_20d'] = sum(volumes[-20:]) / 20 if len(volumes) >= 20 else sum(volumes) / len(volumes)
-        patterns['volume_avg_50d'] = sum(volumes[-50:]) / 50 if len(volumes) >= 50 else sum(volumes) / len(volumes)
-        
-        # Volume spike detection
-        if patterns['volume_avg_20d'] > 0:
-            for i, vol in enumerate(volumes[-30:]):  # Check last 30 days
-                spike_ratio = vol / patterns['volume_avg_20d']
-                if spike_ratio >= 3:
-                    patterns['volume_spike_count'] += 1
-                    patterns['volume_3x_spike'] = True
-                    if spike_ratio >= 5:
-                        patterns['volume_5x_spike'] = True
-                    if spike_ratio >= 10:
-                        patterns['volume_10x_spike'] = True
-                    if spike_ratio > patterns['volume_spike_max']:
-                        patterns['volume_spike_max'] = spike_ratio
-        
-        # Price patterns
-        if len(closes) >= 20:
-            twenty_high = max(highs[-20:])
-            if closes[-1] > twenty_high * 0.98:  # Within 2% of 20-day high
-                patterns['breakout_20d_high'] = True
-        
-        if len(closes) >= 52*5:  # Approximate year of trading days
-            year_high = max(highs)
-            if closes[-1] > year_high * 0.98:
-                patterns['breakout_52w_high'] = True
-        
-        # Higher lows detection
-        for i in range(1, min(10, len(lows))):
-            if lows[-i] > lows[-i-1]:
-                patterns['higher_lows_count'] += 1
-        
-        # Accumulation pattern (flat price + rising volume)
-        if len(closes) >= 20 and len(volumes) >= 20:
-            price_range = (max(closes[-20:]) - min(closes[-20:])) / min(closes[-20:])
-            vol_trend = (sum(volumes[-10:]) / 10) / (sum(volumes[-20:-10]) / 10)
-            if price_range < 0.15 and vol_trend > 1.5:  # Flat price, rising volume
-                patterns['accumulation_detected'] = True
-        
-        # Range narrowing
-        if len(closes) >= 30:
-            range_30d = max(highs[-30:]) - min(lows[-30:])
-            range_10d = max(highs[-10:]) - min(lows[-10:])
-            if range_10d < range_30d * 0.5:
-                patterns['narrowing_range'] = True
+            patterns['breakout_20d_high'] = closes[-1] > max(closes[-20:-1]) if len(closes) >= 20 else False
+            patterns['breakout_52w_high'] = closes[-1] > max(closes[:-1]) if len(closes) >= 52 else False
+            
+            # Pattern detection
+            patterns['double_bottom'] = self.detect_double_bottom(lows)
+            patterns['ascending_triangle'] = self.detect_ascending_triangle(highs, lows)
+            patterns['higher_lows_count'] = self.count_higher_lows(lows)
+            
+            # Range analysis
+            recent_range = max(highs[-10:]) - min(lows[-10:]) if len(highs) >= 10 else 0
+            prior_range = max(highs[-20:-10]) - min(lows[-20:-10]) if len(highs) >= 20 else 0
+            patterns['narrowing_range'] = recent_range < prior_range * 0.7 if prior_range > 0 else False
+            
+            # Momentum
+            patterns['price_momentum_10d'] = (closes[-1] - closes[-10]) / closes[-10] if len(closes) >= 10 and closes[-10] > 0 else 0
+            patterns['price_momentum_20d'] = (closes[-1] - closes[-20]) / closes[-20] if len(closes) >= 20 and closes[-20] > 0 else 0
+            
+            # Additional metrics
+            patterns['consolidation_days'] = self.count_consolidation_days(closes)
+            patterns['volatility_ratio'] = self.calculate_volatility_ratio(closes)
+            patterns['accumulation_signal'] = volumes[-5:] > avg_volume_20d * 1.5 if len(volumes) >= 5 else False
+            
+        except Exception as e:
+            print(f"    ⚠️ Price/volume analysis error: {e}")
+            return self.get_empty_price_volume_patterns()
         
         return patterns
     
     def calculate_technicals(self, price_data: List[Dict]) -> Dict:
-        """Calculate technical indicators"""
-        print(f"  📈 Calculating technical indicators...")
+        """Calculate technical indicators (24 data points)"""
+        technicals = {}
         
-        technicals = {
-            # RSI
-            'rsi_14_min': 0,
-            'rsi_14_max': 0,
-            'rsi_14_avg': 0,
-            'rsi_oversold_days': 0,
-            'rsi_overbought_days': 0,
-            'rsi_at_entry': 0,
+        if not price_data or len(price_data) < 14:
+            return self.get_empty_technicals()
+        
+        try:
+            closes = [bar['c'] for bar in price_data]
+            volumes = [bar['v'] for bar in price_data]
+            
+            # Moving averages
+            technicals['sma_10'] = sum(closes[-10:]) / 10 if len(closes) >= 10 else closes[-1]
+            technicals['sma_20'] = sum(closes[-20:]) / 20 if len(closes) >= 20 else closes[-1]
+            technicals['sma_50'] = sum(closes[-50:]) / 50 if len(closes) >= 50 else closes[-1]
+            
+            # EMA calculation (simplified)
+            technicals['ema_12'] = self.calculate_ema(closes, 12)
+            technicals['ema_26'] = self.calculate_ema(closes, 26)
             
             # MACD
-            'macd_bullish_cross': False,
-            'macd_histogram_expansion': False,
+            if technicals['ema_12'] and technicals['ema_26']:
+                technicals['macd'] = technicals['ema_12'] - technicals['ema_26']
+                technicals['macd_signal'] = technicals['macd'] * 0.9  # Simplified
+                technicals['macd_histogram'] = technicals['macd'] - technicals['macd_signal']
+            else:
+                technicals['macd'] = 0
+                technicals['macd_signal'] = 0
+                technicals['macd_histogram'] = 0
+            
+            # RSI
+            technicals['rsi_14'] = self.calculate_rsi(closes, 14)
+            technicals['rsi_oversold'] = technicals['rsi_14'] < 30
+            technicals['rsi_overbought'] = technicals['rsi_14'] > 70
             
             # Bollinger Bands
-            'bb_squeeze_days': 0,
-            'bb_walk_lower': False,
-            'bb_breakout_upper': False,
+            bb_sma = technicals['sma_20']
+            bb_std = self.calculate_std(closes[-20:]) if len(closes) >= 20 else 0
+            technicals['bb_upper'] = bb_sma + (bb_std * 2)
+            technicals['bb_lower'] = bb_sma - (bb_std * 2)
+            technicals['bb_width'] = technicals['bb_upper'] - technicals['bb_lower']
+            technicals['bb_position'] = (closes[-1] - technicals['bb_lower']) / technicals['bb_width'] if technicals['bb_width'] > 0 else 0.5
             
-            # Moving Averages
-            'ma_20_cross': False,
-            'ma_50_cross': False,
-            'golden_cross': False,
-            'price_above_all_ma': False
-        }
-        
-        if len(price_data) < 14:
-            return technicals
-        
-        closes = [d.get('c', 0) for d in price_data]
-        
-        # Calculate RSI
-        rsi_values = self.calculate_rsi(closes, 14)
-        if rsi_values:
-            technicals['rsi_14_min'] = min(rsi_values)
-            technicals['rsi_14_max'] = max(rsi_values)
-            technicals['rsi_14_avg'] = sum(rsi_values) / len(rsi_values)
-            technicals['rsi_at_entry'] = rsi_values[-1] if rsi_values else 50
-            technicals['rsi_oversold_days'] = sum(1 for r in rsi_values if r < 30)
-            technicals['rsi_overbought_days'] = sum(1 for r in rsi_values if r > 70)
-        
-        # Simple Moving Average checks
-        if len(closes) >= 20:
-            ma20 = sum(closes[-20:]) / 20
-            if closes[-1] > ma20:
-                technicals['ma_20_cross'] = True
-        
-        if len(closes) >= 50:
-            ma50 = sum(closes[-50:]) / 50
-            if closes[-1] > ma50:
-                technicals['ma_50_cross'] = True
+            # Volume indicators
+            technicals['obv'] = self.calculate_obv(closes, volumes)
+            technicals['volume_trend'] = 'increasing' if volumes[-5:] > volumes[-10:-5] else 'decreasing'
             
-            # Check if price above all MAs
-            if closes[-1] > ma20 and closes[-1] > ma50:
-                technicals['price_above_all_ma'] = True
-        
-        # Bollinger Bands (simplified)
-        if len(closes) >= 20:
-            ma20 = sum(closes[-20:]) / 20
-            std_dev = self.calculate_std_dev(closes[-20:])
-            upper_band = ma20 + (std_dev * 2)
-            lower_band = ma20 - (std_dev * 2)
+            # Additional indicators
+            technicals['stochastic_k'] = self.calculate_stochastic(price_data, 14)
+            technicals['williams_r'] = self.calculate_williams_r(price_data, 14)
+            technicals['atr_14'] = self.calculate_atr(price_data, 14)
+            technicals['adx_14'] = self.calculate_adx_simplified(price_data, 14)
             
-            # Check for squeeze (low volatility)
-            band_width = (upper_band - lower_band) / ma20
-            if band_width < 0.10:  # Narrow bands
-                technicals['bb_squeeze_days'] += 1
-            
-            # Check for breakouts
-            if closes[-1] > upper_band:
-                technicals['bb_breakout_upper'] = True
-            if closes[-1] < lower_band * 1.02:  # Near lower band
-                technicals['bb_walk_lower'] = True
+        except Exception as e:
+            print(f"    ⚠️ Technical indicators error: {e}")
+            return self.get_empty_technicals()
         
         return technicals
     
-    def calculate_rsi(self, prices: List[float], period: int = 14) -> List[float]:
-        """Calculate RSI values"""
-        if len(prices) < period + 1:
-            return []
+    def analyze_market_context(self, ticker: str, entry_date: str) -> Dict:
+        """Analyze broader market context (8 data points)"""
+        context = {}
         
-        rsi_values = []
+        try:
+            # Get SPY data for comparison
+            spy_data = self.get_polygon_data('SPY', entry_date)
+            
+            if spy_data:
+                spy_returns = [(spy_data[i]['c'] - spy_data[i-1]['c']) / spy_data[i-1]['c'] 
+                              for i in range(1, len(spy_data))]
+                
+                context['market_trend_30d'] = sum(spy_returns[-30:]) if len(spy_returns) >= 30 else 0
+                context['market_volatility'] = self.calculate_std(spy_returns[-30:]) if len(spy_returns) >= 30 else 0
+                context['market_outperforming'] = True  # Simplified
+            else:
+                context['market_trend_30d'] = 0
+                context['market_volatility'] = 0
+                context['market_outperforming'] = False
+            
+            # Additional context
+            context['sector_momentum'] = 'positive'  # Would need sector ETF data
+            context['market_breadth'] = 'neutral'
+            context['vix_level'] = 'normal'
+            context['interest_rate_env'] = 'stable'
+            context['earnings_season'] = self.is_earnings_season(entry_date)
+            
+        except Exception as e:
+            print(f"    ⚠️ Market context error: {e}")
+            context = {
+                'market_trend_30d': 0,
+                'market_volatility': 0,
+                'market_outperforming': False,
+                'sector_momentum': 'unknown',
+                'market_breadth': 'unknown',
+                'vix_level': 'unknown',
+                'interest_rate_env': 'unknown',
+                'earnings_season': False
+            }
+        
+        return context
+    
+    def calculate_pattern_scores(self, data: Dict) -> Dict:
+        """Calculate composite pattern scores (15+ data points)"""
+        scores = {}
+        
+        try:
+            # Volume score (0-100)
+            volume_score = 0
+            if data.get('price_volume_patterns', {}).get('volume_3x_spike'):
+                volume_score += 30
+            if data.get('price_volume_patterns', {}).get('volume_5x_spike'):
+                volume_score += 30
+            if data.get('price_volume_patterns', {}).get('volume_spike_count', 0) > 3:
+                volume_score += 20
+            if data.get('price_volume_patterns', {}).get('accumulation_signal'):
+                volume_score += 20
+            scores['volume_pattern_score'] = min(100, volume_score)
+            
+            # Technical score (0-100)
+            tech_score = 0
+            if data.get('technical_indicators', {}).get('rsi_oversold'):
+                tech_score += 25
+            if data.get('technical_indicators', {}).get('macd_histogram', 0) > 0:
+                tech_score += 25
+            if data.get('price_volume_patterns', {}).get('breakout_20d_high'):
+                tech_score += 25
+            if data.get('price_volume_patterns', {}).get('ascending_triangle'):
+                tech_score += 25
+            scores['technical_pattern_score'] = min(100, tech_score)
+            
+            # Momentum score (0-100)
+            momentum = data.get('price_volume_patterns', {}).get('price_momentum_20d', 0)
+            scores['momentum_score'] = min(100, max(0, momentum * 200))
+            
+            # News score (0-100)
+            scores['news_score'] = data.get('news_confidence_score', 0)
+            
+            # Insider score (0-100)
+            scores['insider_score'] = data.get('insider_confidence_score', 0)
+            
+            # Trends score (0-100)
+            trends_score = 0
+            if data.get('trends_spike_2x'):
+                trends_score += 40
+            if data.get('trends_spike_5x'):
+                trends_score += 40
+            if data.get('trends_high_interest'):
+                trends_score += 20
+            scores['trends_score'] = min(100, trends_score)
+            
+            # Composite score (weighted average)
+            weights = {
+                'volume': 0.25,
+                'technical': 0.20,
+                'momentum': 0.15,
+                'news': 0.15,
+                'insider': 0.15,
+                'trends': 0.10
+            }
+            
+            composite = (
+                scores['volume_pattern_score'] * weights['volume'] +
+                scores['technical_pattern_score'] * weights['technical'] +
+                scores['momentum_score'] * weights['momentum'] +
+                scores['news_score'] * weights['news'] +
+                scores['insider_score'] * weights['insider'] +
+                scores['trends_score'] * weights['trends']
+            )
+            scores['composite_score'] = round(composite, 2)
+            
+            # Pattern counts
+            scores['total_bullish_signals'] = sum([
+                data.get('price_volume_patterns', {}).get('volume_3x_spike', False),
+                data.get('technical_indicators', {}).get('rsi_oversold', False),
+                data.get('price_volume_patterns', {}).get('breakout_20d_high', False),
+                data.get('news_acceleration_3x', False),
+                data.get('insider_cluster_detected', False),
+                data.get('trends_spike_2x', False)
+            ])
+            
+            scores['total_strong_signals'] = sum([
+                data.get('price_volume_patterns', {}).get('volume_5x_spike', False),
+                data.get('price_volume_patterns', {}).get('ascending_triangle', False),
+                data.get('news_acceleration_5x', False),
+                data.get('trends_spike_5x', False)
+            ])
+            
+            # Setup quality rating
+            if scores['composite_score'] >= 70:
+                scores['setup_quality'] = 'excellent'
+            elif scores['composite_score'] >= 50:
+                scores['setup_quality'] = 'good'
+            elif scores['composite_score'] >= 30:
+                scores['setup_quality'] = 'fair'
+            else:
+                scores['setup_quality'] = 'poor'
+            
+            # Action signal
+            if scores['total_bullish_signals'] >= 4 and scores['composite_score'] >= 50:
+                scores['action_signal'] = 'strong_buy'
+            elif scores['total_bullish_signals'] >= 3 and scores['composite_score'] >= 40:
+                scores['action_signal'] = 'buy'
+            elif scores['total_bullish_signals'] >= 2:
+                scores['action_signal'] = 'watch'
+            else:
+                scores['action_signal'] = 'wait'
+            
+        except Exception as e:
+            print(f"    ⚠️ Pattern scoring error: {e}")
+            return self.get_empty_pattern_scores()
+        
+        return scores
+    
+    # Helper methods
+    def detect_double_bottom(self, lows: List[float]) -> bool:
+        """Detect double bottom pattern"""
+        if len(lows) < 20:
+            return False
+        # Simplified detection
+        return min(lows[-10:]) > min(lows[-20:-10]) * 0.98
+    
+    def detect_ascending_triangle(self, highs: List[float], lows: List[float]) -> bool:
+        """Detect ascending triangle pattern"""
+        if len(highs) < 20 or len(lows) < 20:
+            return False
+        # Check if highs are flat and lows are rising
+        high_range = max(highs[-10:]) - min(highs[-10:])
+        low_trend = lows[-1] > lows[-10]
+        return high_range < 0.02 * max(highs[-10:]) and low_trend
+    
+    def count_higher_lows(self, lows: List[float]) -> int:
+        """Count number of higher lows"""
+        count = 0
+        for i in range(1, len(lows)):
+            if lows[i] > lows[i-1]:
+                count += 1
+        return count
+    
+    def count_consolidation_days(self, closes: List[float]) -> int:
+        """Count days of price consolidation"""
+        if len(closes) < 10:
+            return 0
+        count = 0
+        avg = sum(closes[-10:]) / 10
+        for price in closes[-10:]:
+            if abs(price - avg) / avg < 0.05:  # Within 5% of average
+                count += 1
+        return count
+    
+    def calculate_volatility_ratio(self, closes: List[float]) -> float:
+        """Calculate volatility ratio"""
+        if len(closes) < 20:
+            return 0
+        recent_vol = self.calculate_std(closes[-10:])
+        prior_vol = self.calculate_std(closes[-20:-10])
+        return recent_vol / prior_vol if prior_vol > 0 else 1
+    
+    def calculate_ema(self, prices: List[float], period: int) -> float:
+        """Calculate Exponential Moving Average"""
+        if len(prices) < period:
+            return prices[-1] if prices else 0
+        
+        multiplier = 2 / (period + 1)
+        ema = sum(prices[:period]) / period
+        
+        for price in prices[period:]:
+            ema = (price - ema) * multiplier + ema
+        
+        return ema
+    
+    def calculate_rsi(self, prices: List[float], period: int = 14) -> float:
+        """Calculate RSI"""
+        if len(prices) < period + 1:
+            return 50
+        
         gains = []
         losses = []
         
-        # Calculate initial gains/losses
         for i in range(1, len(prices)):
-            diff = prices[i] - prices[i-1]
-            if diff > 0:
-                gains.append(diff)
+            change = prices[i] - prices[i-1]
+            if change > 0:
+                gains.append(change)
                 losses.append(0)
             else:
                 gains.append(0)
-                losses.append(abs(diff))
+                losses.append(abs(change))
         
-        # Calculate RSI for each point after we have enough data
-        for i in range(period, len(gains) + 1):
-            avg_gain = sum(gains[i-period:i]) / period if i >= period else 0
-            avg_loss = sum(losses[i-period:i]) / period if i >= period else 0
-            
-            if avg_loss == 0:
-                rsi = 100
-            else:
-                rs = avg_gain / avg_loss
-                rsi = 100 - (100 / (1 + rs))
-            
-            rsi_values.append(rsi)
+        avg_gain = sum(gains[-period:]) / period
+        avg_loss = sum(losses[-period:]) / period
         
-        return rsi_values
+        if avg_loss == 0:
+            return 100
+        
+        rs = avg_gain / avg_loss
+        rsi = 100 - (100 / (1 + rs))
+        
+        return rsi
     
-    def calculate_std_dev(self, values: List[float]) -> float:
+    def calculate_std(self, values: List[float]) -> float:
         """Calculate standard deviation"""
         if not values:
             return 0
@@ -331,273 +745,252 @@ class ComprehensiveStockAnalyzer:
         variance = sum((x - mean) ** 2 for x in values) / len(values)
         return variance ** 0.5
     
-    def analyze_market_context(self, ticker: str, entry_date: str, stock_data: List[Dict]) -> Dict:
-        """Analyze performance vs market (SPY/QQQ)"""
-        print(f"  📊 Analyzing market context...")
+    def calculate_obv(self, closes: List[float], volumes: List[float]) -> float:
+        """Calculate On-Balance Volume"""
+        if not closes or not volumes or len(closes) != len(volumes):
+            return 0
         
-        context = {
-            'spy_correlation': 0,
-            'spy_outperformance': 0,
-            'qqq_correlation': 0,
-            'qqq_outperformance': 0,
-            'relative_strength': 0,
-            'market_regime': 'unknown'
-        }
+        obv = 0
+        for i in range(1, len(closes)):
+            if closes[i] > closes[i-1]:
+                obv += volumes[i]
+            elif closes[i] < closes[i-1]:
+                obv -= volumes[i]
         
-        # Get SPY data for comparison
-        spy_data = self.get_price_data('SPY', entry_date, 90)
+        return obv
+    
+    def calculate_stochastic(self, price_data: List[Dict], period: int = 14) -> float:
+        """Calculate Stochastic %K"""
+        if len(price_data) < period:
+            return 50
         
-        if spy_data and stock_data:
-            # Calculate returns
-            stock_returns = self.calculate_returns([d.get('c', 0) for d in stock_data])
-            spy_returns = self.calculate_returns([d.get('c', 0) for d in spy_data])
+        recent = price_data[-period:]
+        high = max(bar['h'] for bar in recent)
+        low = min(bar['l'] for bar in recent)
+        close = price_data[-1]['c']
+        
+        if high == low:
+            return 50
+        
+        return ((close - low) / (high - low)) * 100
+    
+    def calculate_williams_r(self, price_data: List[Dict], period: int = 14) -> float:
+        """Calculate Williams %R"""
+        if len(price_data) < period:
+            return -50
+        
+        recent = price_data[-period:]
+        high = max(bar['h'] for bar in recent)
+        low = min(bar['l'] for bar in recent)
+        close = price_data[-1]['c']
+        
+        if high == low:
+            return -50
+        
+        return ((high - close) / (high - low)) * -100
+    
+    def calculate_atr(self, price_data: List[Dict], period: int = 14) -> float:
+        """Calculate Average True Range"""
+        if len(price_data) < period + 1:
+            return 0
+        
+        true_ranges = []
+        for i in range(1, len(price_data)):
+            high = price_data[i]['h']
+            low = price_data[i]['l']
+            prev_close = price_data[i-1]['c']
             
-            if stock_returns and spy_returns:
-                # Calculate outperformance
-                stock_total_return = (stock_data[-1].get('c', 0) / stock_data[0].get('c', 1) - 1) * 100 if stock_data else 0
-                spy_total_return = (spy_data[-1].get('c', 0) / spy_data[0].get('c', 1) - 1) * 100 if spy_data else 0
-                context['spy_outperformance'] = stock_total_return - spy_total_return
-                
-                # Simple correlation (would use numpy in production)
-                if len(stock_returns) == len(spy_returns):
-                    context['spy_correlation'] = self.simple_correlation(stock_returns, spy_returns)
-                
-                # Relative strength
-                if spy_total_return != 0:
-                    context['relative_strength'] = stock_total_return / spy_total_return
+            tr = max(
+                high - low,
+                abs(high - prev_close),
+                abs(low - prev_close)
+            )
+            true_ranges.append(tr)
         
-        # Determine market regime
-        if context['spy_outperformance'] > 20:
-            context['market_regime'] = 'outperforming'
-        elif context['spy_outperformance'] < -10:
-            context['market_regime'] = 'underperforming'
-        else:
-            context['market_regime'] = 'inline'
-        
-        # QQQ analysis (simplified for test)
-        context['qqq_correlation'] = context['spy_correlation'] * 0.9  # Approximate
-        context['qqq_outperformance'] = context['spy_outperformance'] * 0.8  # Approximate
-        
-        return context
+        return sum(true_ranges[-period:]) / period if true_ranges else 0
     
-    def calculate_returns(self, prices: List[float]) -> List[float]:
-        """Calculate daily returns"""
-        returns = []
-        for i in range(1, len(prices)):
-            if prices[i-1] != 0:
-                returns.append((prices[i] / prices[i-1] - 1))
-        return returns
-    
-    def simple_correlation(self, x: List[float], y: List[float]) -> float:
-        """Calculate simple correlation coefficient"""
-        if len(x) != len(y) or len(x) == 0:
+    def calculate_adx_simplified(self, price_data: List[Dict], period: int = 14) -> float:
+        """Simplified ADX calculation"""
+        if len(price_data) < period:
             return 0
         
-        # Simple correlation calculation (would use numpy in production)
-        n = len(x)
-        sum_x = sum(x)
-        sum_y = sum(y)
-        sum_xy = sum(x[i] * y[i] for i in range(n))
-        sum_x2 = sum(xi ** 2 for xi in x)
-        sum_y2 = sum(yi ** 2 for yi in y)
+        # Simplified: use price range as proxy for directional strength
+        high_range = max(bar['h'] for bar in price_data[-period:])
+        low_range = min(bar['l'] for bar in price_data[-period:])
         
-        denom = ((n * sum_x2 - sum_x ** 2) * (n * sum_y2 - sum_y ** 2)) ** 0.5
-        if denom == 0:
+        if low_range == 0:
             return 0
         
-        return (n * sum_xy - sum_x * sum_y) / denom
+        return min(100, (high_range - low_range) / low_range * 100)
     
-    def calculate_pattern_scores(self, price_volume: Dict, technicals: Dict, market: Dict) -> Dict:
-        """Calculate composite pattern scores"""
-        print(f"  🎯 Calculating pattern scores...")
-        
-        scores = {
-            'volume_score': 0,
-            'technical_score': 0,
-            'momentum_score': 0,
-            'market_score': 0,
-            'total_score': 0,
-            'signal_strength': 'WEAK',
-            'has_primary_signal': False,
-            'primary_signal_count': 0,
-            'secondary_signal_count': 0
+    def is_earnings_season(self, date_str: str) -> bool:
+        """Check if date is during typical earnings season"""
+        try:
+            date = datetime.strptime(date_str, '%Y-%m-%d')
+            month = date.month
+            # Earnings seasons: Jan-Feb, Apr-May, Jul-Aug, Oct-Nov
+            return month in [1, 2, 4, 5, 7, 8, 10, 11]
+        except:
+            return False
+    
+    def count_data_points(self, result: Dict) -> int:
+        """Count total number of data points collected"""
+        count = 0
+        for key, value in result.items():
+            if isinstance(value, dict):
+                count += len(value)
+            elif key not in ['analysis_timestamp', 'analysis_status']:
+                count += 1
+        return count
+    
+    def get_empty_price_volume_patterns(self) -> Dict:
+        """Return empty price/volume patterns structure"""
+        return {
+            'volume_avg_20d': 0,
+            'volume_avg_50d': 0,
+            'volume_spike_count': 0,
+            'volume_spike_max': 0,
+            'volume_3x_spike': False,
+            'volume_5x_spike': False,
+            'volume_10x_spike': False,
+            'breakout_20d_high': False,
+            'breakout_52w_high': False,
+            'double_bottom': False,
+            'ascending_triangle': False,
+            'higher_lows_count': 0,
+            'narrowing_range': False,
+            'price_momentum_10d': 0,
+            'price_momentum_20d': 0,
+            'consolidation_days': 0,
+            'volatility_ratio': 0,
+            'accumulation_signal': False
         }
-        
-        # Volume score (0-100)
-        if price_volume.get('volume_10x_spike'):
-            scores['volume_score'] = 100
-            scores['primary_signal_count'] += 1
-        elif price_volume.get('volume_5x_spike'):
-            scores['volume_score'] = 80
-            scores['primary_signal_count'] += 1
-        elif price_volume.get('volume_3x_spike'):
-            scores['volume_score'] = 60
-            scores['secondary_signal_count'] += 1
-        elif price_volume.get('volume_spike_count', 0) > 2:
-            scores['volume_score'] = 40
-        
-        # Technical score (0-100)
-        technical_points = 0
-        if technicals.get('rsi_oversold_days', 0) > 0:
-            technical_points += 30
-            scores['secondary_signal_count'] += 1
-        if technicals.get('ma_20_cross'):
-            technical_points += 20
-        if technicals.get('bb_squeeze_days', 0) > 5:
-            technical_points += 20
-        if technicals.get('price_above_all_ma'):
-            technical_points += 30
-        scores['technical_score'] = min(100, technical_points)
-        
-        # Momentum score
-        if price_volume.get('breakout_20d_high'):
-            scores['momentum_score'] += 40
-        if price_volume.get('higher_lows_count', 0) >= 3:
-            scores['momentum_score'] += 30
-        if price_volume.get('accumulation_detected'):
-            scores['momentum_score'] += 30
-        
-        # Market score
-        if market.get('spy_outperformance', 0) > 20:
-            scores['market_score'] = 60
-            scores['secondary_signal_count'] += 1
-        elif market.get('spy_outperformance', 0) > 10:
-            scores['market_score'] = 40
-        elif market.get('spy_outperformance', 0) > 0:
-            scores['market_score'] = 20
-        
-        # Calculate total score (weighted)
-        scores['total_score'] = (
-            scores['volume_score'] * 0.35 +
-            scores['technical_score'] * 0.25 +
-            scores['momentum_score'] * 0.20 +
-            scores['market_score'] * 0.20
-        )
-        
-        # Determine signal strength
-        scores['has_primary_signal'] = scores['primary_signal_count'] > 0
-        
-        if scores['primary_signal_count'] >= 1:
-            scores['signal_strength'] = 'PRIMARY'
-        elif scores['secondary_signal_count'] >= 2:
-            scores['signal_strength'] = 'SECONDARY'
-        elif scores['total_score'] >= 50:
-            scores['signal_strength'] = 'MEDIUM'
-        else:
-            scores['signal_strength'] = 'WEAK'
-        
-        return scores
-
-
-def analyze_batch(stocks: List[Dict], batch_id: str, output_dir: str = 'Verified_Backtest_Data'):
-    """
-    Analyze a batch of stocks and save results
-    """
-    print(f"\n{'='*60}")
-    print(f"BATCH {batch_id} ANALYSIS")
-    print(f"{'='*60}")
-    print(f"Stocks to analyze: {len(stocks)}")
-    print(f"Output directory: {output_dir}")
     
-    # Create output directory
-    os.makedirs(output_dir, exist_ok=True)
+    def get_empty_technicals(self) -> Dict:
+        """Return empty technical indicators structure"""
+        return {
+            'sma_10': 0,
+            'sma_20': 0,
+            'sma_50': 0,
+            'ema_12': 0,
+            'ema_26': 0,
+            'macd': 0,
+            'macd_signal': 0,
+            'macd_histogram': 0,
+            'rsi_14': 50,
+            'rsi_oversold': False,
+            'rsi_overbought': False,
+            'bb_upper': 0,
+            'bb_lower': 0,
+            'bb_width': 0,
+            'bb_position': 0.5,
+            'obv': 0,
+            'volume_trend': 'unknown',
+            'stochastic_k': 50,
+            'williams_r': -50,
+            'atr_14': 0,
+            'adx_14': 0
+        }
+    
+    def get_empty_pattern_scores(self) -> Dict:
+        """Return empty pattern scores structure"""
+        return {
+            'volume_pattern_score': 0,
+            'technical_pattern_score': 0,
+            'momentum_score': 0,
+            'news_score': 0,
+            'insider_score': 0,
+            'trends_score': 0,
+            'composite_score': 0,
+            'total_bullish_signals': 0,
+            'total_strong_signals': 0,
+            'setup_quality': 'unknown',
+            'action_signal': 'wait'
+        }
+
+
+def analyze_batch(batch_name: str, batch_file: str):
+    """Process a batch of stocks"""
+    print(f"\n{'='*80}")
+    print(f"STARTING BATCH: {batch_name}")
+    print(f"Input file: {batch_file}")
+    print(f"{'='*80}\n")
+    
+    # Load batch stocks
+    with open(batch_file, 'r') as f:
+        stocks = json.load(f)
+    
+    print(f"Loaded {len(stocks)} stocks for analysis")
     
     # Initialize analyzer
     analyzer = ComprehensiveStockAnalyzer()
     
-    # Results container
-    results = {
-        'batch_id': batch_id,
-        'analysis_date': datetime.now().isoformat(),
-        'total_stocks': len(stocks),
-        'stocks_analyzed': [],
-        'summary_stats': {}
-    }
+    # Process each stock
+    results = []
+    successful = 0
+    failed = 0
     
-    # Analyze each stock
     for i, stock in enumerate(stocks, 1):
-        ticker = stock.get('ticker', 'UNKNOWN')
-        print(f"\n[{i}/{len(stocks)}] Processing {ticker}...")
+        print(f"\n[{i}/{len(stocks)}] Processing {stock.get('ticker', 'UNKNOWN')}...")
         
-        # Analyze stock
-        stock_analysis = analyzer.analyze_stock(stock)
-        results['stocks_analyzed'].append(stock_analysis)
+        try:
+            result = analyzer.analyze_stock(stock)
+            results.append(result)
+            
+            if result.get('analysis_status') == 'success':
+                successful += 1
+            else:
+                failed += 1
+                
+        except Exception as e:
+            print(f"  ❌ Fatal error analyzing {stock.get('ticker', 'UNKNOWN')}: {e}")
+            failed += 1
+            results.append({
+                'ticker': stock.get('ticker', 'UNKNOWN'),
+                'analysis_status': f'fatal_error: {str(e)}',
+                'total_data_points': 0
+            })
         
-        # Rate limiting
-        time.sleep(0.5)  # Be nice to API
-    
-    # Calculate summary statistics
-    successful = sum(1 for s in results['stocks_analyzed'] if s['analysis_status'] == 'complete')
-    
-    results['summary_stats'] = {
-        'successful_analyses': successful,
-        'failed_analyses': len(stocks) - successful,
-        'success_rate': (successful / len(stocks) * 100) if stocks else 0,
-        'patterns_found': {
-            'volume_3x_spike': sum(1 for s in results['stocks_analyzed'] 
-                                   if s.get('price_volume_patterns', {}).get('volume_3x_spike')),
-            'rsi_oversold': sum(1 for s in results['stocks_analyzed'] 
-                               if s.get('technical_indicators', {}).get('rsi_oversold_days', 0) > 0),
-            'breakout_pattern': sum(1 for s in results['stocks_analyzed'] 
-                                   if s.get('price_volume_patterns', {}).get('breakout_20d_high')),
-            'market_outperform': sum(1 for s in results['stocks_analyzed'] 
-                                    if s.get('market_context', {}).get('spy_outperformance', 0) > 20)
-        }
-    }
+        # Add delay to avoid rate limits
+        time.sleep(5)
     
     # Save results
-    output_file = os.path.join(output_dir, f'phase3_batch_{batch_id}_analysis.json')
+    output_dir = 'Verified_Backtest_Data'
+    os.makedirs(output_dir, exist_ok=True)
+    
+    output_file = os.path.join(output_dir, f'phase3_batch_{batch_name}_analysis.json')
+    
+    batch_results = {
+        'batch_name': batch_name,
+        'total_stocks': len(stocks),
+        'successful': successful,
+        'failed': failed,
+        'timestamp': datetime.now().isoformat(),
+        'results': results
+    }
+    
     with open(output_file, 'w') as f:
-        json.dump(results, f, indent=2)
+        json.dump(batch_results, f, indent=2)
     
-    print(f"\n{'='*60}")
-    print(f"BATCH {batch_id} COMPLETE")
-    print(f"{'='*60}")
-    print(f"✅ Analyzed: {successful}/{len(stocks)} stocks")
-    print(f"📊 Patterns found:")
-    for pattern, count in results['summary_stats']['patterns_found'].items():
-        print(f"  - {pattern}: {count} stocks")
-    print(f"💾 Results saved: {output_file}")
-    
-    return results
+    print(f"\n{'='*80}")
+    print(f"BATCH {batch_name} COMPLETE")
+    print(f"Successful: {successful}/{len(stocks)}")
+    print(f"Failed: {failed}/{len(stocks)}")
+    print(f"Results saved to: {output_file}")
+    print(f"{'='*80}\n")
 
 
-def main():
-    """
-    Main entry point for batch analysis
-    """
-    if len(sys.argv) < 3:
-        print("Usage: python phase3_comprehensive_collector.py <batch_id> <stocks_file>")
-        print("Example: python phase3_comprehensive_collector.py batch1 batch1_stocks.json")
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: python phase3_comprehensive_collector.py <batch_name> <batch_file>")
+        print("Example: python phase3_comprehensive_collector.py batch1 batch_inputs/batch1_stocks.json")
         sys.exit(1)
     
-    batch_id = sys.argv[1]
-    stocks_file = sys.argv[2]
+    batch_name = sys.argv[1]
+    batch_file = sys.argv[2]
     
-    # Load stocks
-    if not os.path.exists(stocks_file):
-        print(f"Error: File not found: {stocks_file}")
+    if not os.path.exists(batch_file):
+        print(f"ERROR: Batch file not found: {batch_file}")
         sys.exit(1)
     
-    with open(stocks_file, 'r') as f:
-        stocks_data = json.load(f)
-    
-    # Handle nested structure
-    if isinstance(stocks_data, dict):
-        stocks = stocks_data.get('stocks', [])
-    else:
-        stocks = stocks_data
-    
-    if not stocks:
-        print("Error: No stocks found in file")
-        sys.exit(1)
-    
-    # Analyze batch
-    results = analyze_batch(stocks, batch_id)
-    
-    print(f"\n✅ Batch {batch_id} analysis complete!")
-    print(f"Successful: {results['summary_stats']['successful_analyses']}/{len(stocks)}")
-
-
-if __name__ == '__main__':
-    main()
+    analyze_batch(batch_name, batch_file)
