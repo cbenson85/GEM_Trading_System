@@ -10,9 +10,8 @@ on:
         type: choice
         options:
           - test       # 10 stocks (5 batches × 2 stocks)
-          - small      # 50 stocks (10 batches × 5 stocks)  
-          - medium     # 200 stocks (10 batches × 20 stocks)
-          - full       # All 694 sustainable stocks (10 batches × ~70 stocks)
+          - sample     # 200 stocks (5 batches × 40 stocks)
+          - full       # All 694 stocks (10 batches × ~70 stocks)
 
 permissions:
   contents: write
@@ -38,22 +37,17 @@ jobs:
       run: |
         MODE="${{ github.event.inputs.mode }}"
         
-        # Use sustainable_stocks.json for the 694 filtered stocks
         if [ "$MODE" = "test" ]; then
           echo "📊 TEST MODE: Splitting 10 stocks into 5 batches (2 stocks each)"
-          python phase3_batch_splitter.py Verified_Backtest_Data/sustainable_stocks.json --batches 5 --test
+          python phase3_batch_splitter.py Verified_Backtest_Data/explosive_stocks_CLEAN.json --batches 5 --test
           echo "batch_count=5" >> $GITHUB_OUTPUT
-        elif [ "$MODE" = "small" ]; then
-          echo "📊 SMALL MODE: Splitting 50 stocks into 10 batches (5 stocks each)"
-          python phase3_batch_splitter.py Verified_Backtest_Data/sustainable_stocks.json --batches 10 --limit 50
-          echo "batch_count=10" >> $GITHUB_OUTPUT
-        elif [ "$MODE" = "medium" ]; then
-          echo "📊 MEDIUM MODE: Splitting 200 stocks into 10 batches (20 stocks each)"
-          python phase3_batch_splitter.py Verified_Backtest_Data/sustainable_stocks.json --batches 10 --limit 200
-          echo "batch_count=10" >> $GITHUB_OUTPUT
+        elif [ "$MODE" = "sample" ]; then
+          echo "📊 SAMPLE MODE: Splitting 200 stocks into 5 batches (40 stocks each)"
+          python phase3_batch_splitter.py Verified_Backtest_Data/explosive_stocks_CLEAN.json --batches 5 --limit 200
+          echo "batch_count=5" >> $GITHUB_OUTPUT
         else
-          echo "📊 FULL MODE: All 694 sustainable stocks into 10 batches"
-          python phase3_batch_splitter.py Verified_Backtest_Data/sustainable_stocks.json --batches 10
+          echo "📊 FULL MODE: Splitting all 694 stocks into 10 batches"
+          python phase3_batch_splitter.py Verified_Backtest_Data/explosive_stocks_CLEAN.json --batches 10
           echo "batch_count=10" >> $GITHUB_OUTPUT
         fi
         
@@ -68,37 +62,21 @@ jobs:
         name: batch-inputs
         path: batch_inputs/
   
-  # Parallel Analysis Jobs
-  analyze-batches:
+  # Parallel Analysis Jobs (5 concurrent for test/sample, 10 for full)
+  analyze-batch-1:
     needs: prepare-batches
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 10
-      matrix:
-        batch: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     
     steps:
-    - name: Check if batch should run
-      id: check
-      run: |
-        if [ ${{ matrix.batch }} -le ${{ needs.prepare-batches.outputs.batch_count }} ]; then
-          echo "should_run=true" >> $GITHUB_OUTPUT
-        else
-          echo "should_run=false" >> $GITHUB_OUTPUT
-        fi
-    
     - name: Checkout repository
-      if: steps.check.outputs.should_run == 'true'
       uses: actions/checkout@v4
     
     - name: Set up Python
-      if: steps.check.outputs.should_run == 'true'
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
     
     - name: Install enhanced dependencies
-      if: steps.check.outputs.should_run == 'true'
       run: |
         pip install requests pandas numpy
         pip install beautifulsoup4 lxml
@@ -107,30 +85,393 @@ jobs:
         pip install GoogleNews
     
     - name: Download batch files
-      if: steps.check.outputs.should_run == 'true'
       uses: actions/download-artifact@v4
       with:
         name: batch-inputs
         path: batch_inputs/
     
-    - name: Analyze Batch ${{ matrix.batch }}
-      if: steps.check.outputs.should_run == 'true'
+    - name: Analyze Batch 1
       env:
         POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
       run: |
-        echo "🔬 Analyzing Batch ${{ matrix.batch }} with ALL data collectors..."
-        python phase3_comprehensive_collector.py batch${{ matrix.batch }} batch_inputs/batch${{ matrix.batch }}_stocks.json
+        echo "🔬 Analyzing Batch 1 with ALL data collectors..."
+        python phase3_comprehensive_collector.py batch1 batch_inputs/batch1_stocks.json
     
     - name: Upload results
-      if: steps.check.outputs.should_run == 'true'
       uses: actions/upload-artifact@v4
       with:
-        name: batch${{ matrix.batch }}-results
-        path: Verified_Backtest_Data/phase3_batch_batch${{ matrix.batch }}_analysis.json
+        name: batch1-results
+        path: Verified_Backtest_Data/phase3_batch_batch1_analysis.json
+  
+  analyze-batch-2:
+    needs: prepare-batches
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install enhanced dependencies
+      run: |
+        pip install requests pandas numpy
+        pip install beautifulsoup4 lxml
+        pip install yfinance
+        pip install pytrends
+        pip install GoogleNews
+    
+    - name: Download batch files
+      uses: actions/download-artifact@v4
+      with:
+        name: batch-inputs
+        path: batch_inputs/
+    
+    - name: Analyze Batch 2
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "🔬 Analyzing Batch 2 with ALL data collectors..."
+        python phase3_comprehensive_collector.py batch2 batch_inputs/batch2_stocks.json
+    
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: batch2-results
+        path: Verified_Backtest_Data/phase3_batch_batch2_analysis.json
+  
+  analyze-batch-3:
+    needs: prepare-batches
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install enhanced dependencies
+      run: |
+        pip install requests pandas numpy
+        pip install beautifulsoup4 lxml
+        pip install yfinance
+        pip install pytrends
+        pip install GoogleNews
+    
+    - name: Download batch files
+      uses: actions/download-artifact@v4
+      with:
+        name: batch-inputs
+        path: batch_inputs/
+    
+    - name: Analyze Batch 3
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "🔬 Analyzing Batch 3 with ALL data collectors..."
+        python phase3_comprehensive_collector.py batch3 batch_inputs/batch3_stocks.json
+    
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: batch3-results
+        path: Verified_Backtest_Data/phase3_batch_batch3_analysis.json
+  
+  analyze-batch-4:
+    needs: prepare-batches
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install enhanced dependencies
+      run: |
+        pip install requests pandas numpy
+        pip install beautifulsoup4 lxml
+        pip install yfinance
+        pip install pytrends
+        pip install GoogleNews
+    
+    - name: Download batch files
+      uses: actions/download-artifact@v4
+      with:
+        name: batch-inputs
+        path: batch_inputs/
+    
+    - name: Analyze Batch 4
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "🔬 Analyzing Batch 4 with ALL data collectors..."
+        python phase3_comprehensive_collector.py batch4 batch_inputs/batch4_stocks.json
+    
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: batch4-results
+        path: Verified_Backtest_Data/phase3_batch_batch4_analysis.json
+  
+  analyze-batch-5:
+    needs: prepare-batches
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install enhanced dependencies
+      run: |
+        pip install requests pandas numpy
+        pip install beautifulsoup4 lxml
+        pip install yfinance
+        pip install pytrends
+        pip install GoogleNews
+    
+    - name: Download batch files
+      uses: actions/download-artifact@v4
+      with:
+        name: batch-inputs
+        path: batch_inputs/
+    
+    - name: Analyze Batch 5
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "🔬 Analyzing Batch 5 with ALL data collectors..."
+        python phase3_comprehensive_collector.py batch5 batch_inputs/batch5_stocks.json
+    
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: batch5-results
+        path: Verified_Backtest_Data/phase3_batch_batch5_analysis.json
+  
+  # Additional batches for full mode (batches 6-10)
+  analyze-batch-6:
+    needs: prepare-batches
+    if: ${{ github.event.inputs.mode == 'full' }}
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install enhanced dependencies
+      run: |
+        pip install requests pandas numpy
+        pip install beautifulsoup4 lxml
+        pip install yfinance
+        pip install pytrends
+        pip install GoogleNews
+    
+    - name: Download batch files
+      uses: actions/download-artifact@v4
+      with:
+        name: batch-inputs
+        path: batch_inputs/
+    
+    - name: Analyze Batch 6
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "🔬 Analyzing Batch 6 with ALL data collectors..."
+        python phase3_comprehensive_collector.py batch6 batch_inputs/batch6_stocks.json
+    
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: batch6-results
+        path: Verified_Backtest_Data/phase3_batch_batch6_analysis.json
+  
+  analyze-batch-7:
+    needs: prepare-batches
+    if: ${{ github.event.inputs.mode == 'full' }}
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install enhanced dependencies
+      run: |
+        pip install requests pandas numpy
+        pip install beautifulsoup4 lxml
+        pip install yfinance
+        pip install pytrends
+        pip install GoogleNews
+    
+    - name: Download batch files
+      uses: actions/download-artifact@v4
+      with:
+        name: batch-inputs
+        path: batch_inputs/
+    
+    - name: Analyze Batch 7
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "🔬 Analyzing Batch 7 with ALL data collectors..."
+        python phase3_comprehensive_collector.py batch7 batch_inputs/batch7_stocks.json
+    
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: batch7-results
+        path: Verified_Backtest_Data/phase3_batch_batch7_analysis.json
+  
+  analyze-batch-8:
+    needs: prepare-batches
+    if: ${{ github.event.inputs.mode == 'full' }}
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install enhanced dependencies
+      run: |
+        pip install requests pandas numpy
+        pip install beautifulsoup4 lxml
+        pip install yfinance
+        pip install pytrends
+        pip install GoogleNews
+    
+    - name: Download batch files
+      uses: actions/download-artifact@v4
+      with:
+        name: batch-inputs
+        path: batch_inputs/
+    
+    - name: Analyze Batch 8
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "🔬 Analyzing Batch 8 with ALL data collectors..."
+        python phase3_comprehensive_collector.py batch8 batch_inputs/batch8_stocks.json
+    
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: batch8-results
+        path: Verified_Backtest_Data/phase3_batch_batch8_analysis.json
+  
+  analyze-batch-9:
+    needs: prepare-batches
+    if: ${{ github.event.inputs.mode == 'full' }}
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install enhanced dependencies
+      run: |
+        pip install requests pandas numpy
+        pip install beautifulsoup4 lxml
+        pip install yfinance
+        pip install pytrends
+        pip install GoogleNews
+    
+    - name: Download batch files
+      uses: actions/download-artifact@v4
+      with:
+        name: batch-inputs
+        path: batch_inputs/
+    
+    - name: Analyze Batch 9
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "🔬 Analyzing Batch 9 with ALL data collectors..."
+        python phase3_comprehensive_collector.py batch9 batch_inputs/batch9_stocks.json
+    
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: batch9-results
+        path: Verified_Backtest_Data/phase3_batch_batch9_analysis.json
+  
+  analyze-batch-10:
+    needs: prepare-batches
+    if: ${{ github.event.inputs.mode == 'full' }}
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install enhanced dependencies
+      run: |
+        pip install requests pandas numpy
+        pip install beautifulsoup4 lxml
+        pip install yfinance
+        pip install pytrends
+        pip install GoogleNews
+    
+    - name: Download batch files
+      uses: actions/download-artifact@v4
+      with:
+        name: batch-inputs
+        path: batch_inputs/
+    
+    - name: Analyze Batch 10
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "🔬 Analyzing Batch 10 with ALL data collectors..."
+        python phase3_comprehensive_collector.py batch10 batch_inputs/batch10_stocks.json
+    
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: batch10-results
+        path: Verified_Backtest_Data/phase3_batch_batch10_analysis.json
   
   # Merge all results
   merge-results:
-    needs: analyze-batches
+    needs: [analyze-batch-1, analyze-batch-2, analyze-batch-3, analyze-batch-4, analyze-batch-5, analyze-batch-6, analyze-batch-7, analyze-batch-8, analyze-batch-9, analyze-batch-10]
     if: always()
     runs-on: ubuntu-latest
     
