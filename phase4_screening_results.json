@@ -1,0 +1,566 @@
+{
+  "mode": "test",
+  "test_dates": [
+    "2019-03-15",
+    "2022-06-20",
+    "2023-09-10"
+  ],
+  "screening_results": [
+    {
+      "screening_date": "2019-03-15",
+      "market_stats": {
+        "total_stocks_scanned": 20,
+        "passed_filters": 5,
+        "top_30_selected": 5
+      },
+      "selected_stocks": [
+        {
+          "ticker": "MSFT",
+          "score": 150,
+          "score_breakdown": {
+            "volume_score": 50,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 30,
+            "composite_bonus": 50
+          },
+          "entry_price": 13.458564064994038,
+          "entry_volume": 49144690.0,
+          "screening_date": "2019-03-15",
+          "rank": 1,
+          "false_miss_analysis": {
+            "is_false_miss": false,
+            "status": "MOCK_DATA",
+            "price_60d_ago": 10.76685125199523
+          }
+        },
+        {
+          "ticker": "SNDL",
+          "score": 150,
+          "score_breakdown": {
+            "volume_score": 50,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 30,
+            "composite_bonus": 50
+          },
+          "entry_price": 9.403960249199422,
+          "entry_volume": 34115460.0,
+          "screening_date": "2019-03-15",
+          "rank": 2,
+          "false_miss_analysis": {
+            "is_false_miss": false,
+            "status": "MOCK_DATA",
+            "price_60d_ago": 7.523168199359538
+          }
+        },
+        {
+          "ticker": "SQ",
+          "score": 135,
+          "score_breakdown": {
+            "volume_score": 35,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 30,
+            "composite_bonus": 50
+          },
+          "entry_price": 5.944521415592456,
+          "entry_volume": 13709785.0,
+          "screening_date": "2019-03-15",
+          "rank": 3,
+          "false_miss_analysis": {
+            "is_false_miss": false,
+            "status": "MOCK_DATA",
+            "price_60d_ago": 4.755617132473965
+          }
+        },
+        {
+          "ticker": "BBBY",
+          "score": 135,
+          "score_breakdown": {
+            "volume_score": 35,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 30,
+            "composite_bonus": 50
+          },
+          "entry_price": 0.8855483267185814,
+          "entry_volume": 4278180.0,
+          "screening_date": "2019-03-15",
+          "rank": 4,
+          "false_miss_analysis": {
+            "is_false_miss": false,
+            "status": "MOCK_DATA",
+            "price_60d_ago": 0.7084386613748652
+          }
+        },
+        {
+          "ticker": "HEXO",
+          "score": 125,
+          "score_breakdown": {
+            "volume_score": 25,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 30,
+            "composite_bonus": 50
+          },
+          "entry_price": 13.64959165296353,
+          "entry_volume": 9222045.0,
+          "screening_date": "2019-03-15",
+          "rank": 5,
+          "false_miss_analysis": {
+            "is_false_miss": false,
+            "status": "MOCK_DATA",
+            "price_60d_ago": 10.919673322370825
+          }
+        }
+      ],
+      "runners_up": []
+    },
+    {
+      "screening_date": "2022-06-20",
+      "market_stats": {
+        "total_stocks_scanned": 20,
+        "passed_filters": 2,
+        "top_30_selected": 2
+      },
+      "selected_stocks": [
+        {
+          "ticker": "AMC",
+          "score": 150,
+          "score_breakdown": {
+            "volume_score": 50,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 30,
+            "composite_bonus": 50
+          },
+          "entry_price": 7.533996275638045,
+          "entry_volume": 18113470.0,
+          "screening_date": "2022-06-20",
+          "rank": 1,
+          "false_miss_analysis": {
+            "is_false_miss": false,
+            "status": "MOCK_DATA",
+            "price_60d_ago": 6.027197020510436
+          }
+        },
+        {
+          "ticker": "NOK",
+          "score": 95,
+          "score_breakdown": {
+            "volume_score": 50,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 0,
+            "composite_bonus": 25
+          },
+          "entry_price": 11.301346973346073,
+          "entry_volume": 28526410.0,
+          "screening_date": "2022-06-20",
+          "rank": 2,
+          "false_miss_analysis": {
+            "is_false_miss": false,
+            "status": "MOCK_DATA",
+            "price_60d_ago": 9.041077578676859
+          }
+        }
+      ],
+      "runners_up": []
+    },
+    {
+      "screening_date": "2023-09-10",
+      "market_stats": {
+        "total_stocks_scanned": 20,
+        "passed_filters": 6,
+        "top_30_selected": 6
+      },
+      "selected_stocks": [
+        {
+          "ticker": "SNAP",
+          "score": 135,
+          "score_breakdown": {
+            "volume_score": 35,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 30,
+            "composite_bonus": 50
+          },
+          "entry_price": 8.306026137495596,
+          "entry_volume": 20873770.0,
+          "screening_date": "2023-09-10",
+          "rank": 1,
+          "false_miss_analysis": {
+            "is_false_miss": false,
+            "status": "MOCK_DATA",
+            "price_60d_ago": 6.6448209099964775
+          }
+        },
+        {
+          "ticker": "GOOGL",
+          "score": 125,
+          "score_breakdown": {
+            "volume_score": 25,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 30,
+            "composite_bonus": 50
+          },
+          "entry_price": 4.0339297915129535,
+          "entry_volume": 4736769.0,
+          "screening_date": "2023-09-10",
+          "rank": 2,
+          "false_miss_analysis": {
+            "is_false_miss": false,
+            "status": "MOCK_DATA",
+            "price_60d_ago": 3.227143833210363
+          }
+        },
+        {
+          "ticker": "NVDA",
+          "score": 125,
+          "score_breakdown": {
+            "volume_score": 25,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 30,
+            "composite_bonus": 50
+          },
+          "entry_price": 1.2307190931230942,
+          "entry_volume": 5064714.0,
+          "screening_date": "2023-09-10",
+          "rank": 3,
+          "false_miss_analysis": {
+            "is_false_miss": false,
+            "status": "MOCK_DATA",
+            "price_60d_ago": 0.9845752744984755
+          }
+        },
+        {
+          "ticker": "AMD",
+          "score": 80,
+          "score_breakdown": {
+            "volume_score": 35,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 0,
+            "composite_bonus": 25
+          },
+          "entry_price": 11.529100627530763,
+          "entry_volume": 20584060.0,
+          "screening_date": "2023-09-10",
+          "rank": 4,
+          "false_miss_analysis": {
+            "is_false_miss": false,
+            "status": "MOCK_DATA",
+            "price_60d_ago": 9.223280502024611
+          }
+        },
+        {
+          "ticker": "SNDL",
+          "score": 80,
+          "score_breakdown": {
+            "volume_score": 35,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 0,
+            "composite_bonus": 25
+          },
+          "entry_price": 4.1617222119004715,
+          "entry_volume": 3872315.0,
+          "screening_date": "2023-09-10",
+          "rank": 5,
+          "false_miss_analysis": {
+            "is_false_miss": false,
+            "status": "MOCK_DATA",
+            "price_60d_ago": 3.3293777695203772
+          }
+        },
+        {
+          "ticker": "TLRY",
+          "score": 70,
+          "score_breakdown": {
+            "volume_score": 25,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 0,
+            "composite_bonus": 25
+          },
+          "entry_price": 7.9145562079977445,
+          "entry_volume": 4666914.0,
+          "screening_date": "2023-09-10",
+          "rank": 6,
+          "false_miss_analysis": {
+            "is_false_miss": false,
+            "status": "MOCK_DATA",
+            "price_60d_ago": 6.331644966398196
+          }
+        }
+      ],
+      "runners_up": []
+    }
+  ],
+  "all_selected_stocks": [
+    {
+      "ticker": "MSFT",
+      "score": 150,
+      "score_breakdown": {
+        "volume_score": 50,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "entry_price": 13.458564064994038,
+      "entry_volume": 49144690.0,
+      "screening_date": "2019-03-15",
+      "rank": 1,
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 10.76685125199523
+      }
+    },
+    {
+      "ticker": "SNDL",
+      "score": 150,
+      "score_breakdown": {
+        "volume_score": 50,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "entry_price": 9.403960249199422,
+      "entry_volume": 34115460.0,
+      "screening_date": "2019-03-15",
+      "rank": 2,
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 7.523168199359538
+      }
+    },
+    {
+      "ticker": "SQ",
+      "score": 135,
+      "score_breakdown": {
+        "volume_score": 35,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "entry_price": 5.944521415592456,
+      "entry_volume": 13709785.0,
+      "screening_date": "2019-03-15",
+      "rank": 3,
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 4.755617132473965
+      }
+    },
+    {
+      "ticker": "BBBY",
+      "score": 135,
+      "score_breakdown": {
+        "volume_score": 35,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "entry_price": 0.8855483267185814,
+      "entry_volume": 4278180.0,
+      "screening_date": "2019-03-15",
+      "rank": 4,
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 0.7084386613748652
+      }
+    },
+    {
+      "ticker": "HEXO",
+      "score": 125,
+      "score_breakdown": {
+        "volume_score": 25,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "entry_price": 13.64959165296353,
+      "entry_volume": 9222045.0,
+      "screening_date": "2019-03-15",
+      "rank": 5,
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 10.919673322370825
+      }
+    },
+    {
+      "ticker": "AMC",
+      "score": 150,
+      "score_breakdown": {
+        "volume_score": 50,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "entry_price": 7.533996275638045,
+      "entry_volume": 18113470.0,
+      "screening_date": "2022-06-20",
+      "rank": 1,
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 6.027197020510436
+      }
+    },
+    {
+      "ticker": "NOK",
+      "score": 95,
+      "score_breakdown": {
+        "volume_score": 50,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 0,
+        "composite_bonus": 25
+      },
+      "entry_price": 11.301346973346073,
+      "entry_volume": 28526410.0,
+      "screening_date": "2022-06-20",
+      "rank": 2,
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 9.041077578676859
+      }
+    },
+    {
+      "ticker": "SNAP",
+      "score": 135,
+      "score_breakdown": {
+        "volume_score": 35,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "entry_price": 8.306026137495596,
+      "entry_volume": 20873770.0,
+      "screening_date": "2023-09-10",
+      "rank": 1,
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 6.6448209099964775
+      }
+    },
+    {
+      "ticker": "GOOGL",
+      "score": 125,
+      "score_breakdown": {
+        "volume_score": 25,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "entry_price": 4.0339297915129535,
+      "entry_volume": 4736769.0,
+      "screening_date": "2023-09-10",
+      "rank": 2,
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 3.227143833210363
+      }
+    },
+    {
+      "ticker": "NVDA",
+      "score": 125,
+      "score_breakdown": {
+        "volume_score": 25,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "entry_price": 1.2307190931230942,
+      "entry_volume": 5064714.0,
+      "screening_date": "2023-09-10",
+      "rank": 3,
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 0.9845752744984755
+      }
+    },
+    {
+      "ticker": "AMD",
+      "score": 80,
+      "score_breakdown": {
+        "volume_score": 35,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 0,
+        "composite_bonus": 25
+      },
+      "entry_price": 11.529100627530763,
+      "entry_volume": 20584060.0,
+      "screening_date": "2023-09-10",
+      "rank": 4,
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 9.223280502024611
+      }
+    },
+    {
+      "ticker": "SNDL",
+      "score": 80,
+      "score_breakdown": {
+        "volume_score": 35,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 0,
+        "composite_bonus": 25
+      },
+      "entry_price": 4.1617222119004715,
+      "entry_volume": 3872315.0,
+      "screening_date": "2023-09-10",
+      "rank": 5,
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 3.3293777695203772
+      }
+    },
+    {
+      "ticker": "TLRY",
+      "score": 70,
+      "score_breakdown": {
+        "volume_score": 25,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 0,
+        "composite_bonus": 25
+      },
+      "entry_price": 7.9145562079977445,
+      "entry_volume": 4666914.0,
+      "screening_date": "2023-09-10",
+      "rank": 6,
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 6.331644966398196
+      }
+    }
+  ],
+  "all_runners_up": []
+}

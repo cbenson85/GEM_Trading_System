@@ -1,0 +1,618 @@
+{
+  "merge_date": "2025-11-07T22:33:56.502563",
+  "total_batches": 1,
+  "total_stocks": 13,
+  "classifications": {
+    "TRUE_POSITIVE": 8,
+    "MODERATE_WIN": 1,
+    "SMALL_WIN": 0,
+    "BREAK_EVEN": 0,
+    "LOSS": 3,
+    "NO_DATA": 1,
+    "ERROR": 0
+  },
+  "all_stocks": [
+    {
+      "ticker": "MSFT",
+      "screening_date": "2019-03-15",
+      "entry_price": 13.458564064994038,
+      "screening_score": 150,
+      "screening_rank": 1,
+      "score_breakdown": {
+        "volume_score": 50,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 10.76685125199523
+      },
+      "analysis_timestamp": "2025-11-07T22:32:54.479543",
+      "lookback_analysis": {
+        "data_available": true,
+        "lowest_price_60d": 101.26,
+        "highest_price_60d": 117.25,
+        "avg_volume_60d": 28196679.837209303,
+        "volume_spike_days": 0,
+        "price_range": 15.989999999999995
+      },
+      "technical_indicators": {
+        "rsi_14": 73.07692307692308,
+        "ma_20": 111.633,
+        "ma_50": 107.5388,
+        "price_vs_ma20": 3.831304363405087,
+        "price_vs_ma50": 7.784353182293277
+      },
+      "forward_performance": {
+        "data_available": true,
+        "max_gain_percent": 934.43,
+        "max_loss_percent": 751.43,
+        "max_price_reached": 139.22,
+        "min_price_reached": 114.59,
+        "days_to_peak": 82,
+        "classification": "TRUE_POSITIVE",
+        "is_explosive": true
+      },
+      "final_classification": "TRUE_POSITIVE",
+      "is_success": true
+    },
+    {
+      "ticker": "SNDL",
+      "screening_date": "2019-03-15",
+      "entry_price": 9.403960249199422,
+      "screening_score": 150,
+      "screening_rank": 2,
+      "score_breakdown": {
+        "volume_score": 50,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 7.523168199359538
+      },
+      "analysis_timestamp": "2025-11-07T22:32:57.284165",
+      "lookback_analysis": {
+        "data_available": false
+      },
+      "technical_indicators": {
+        "rsi_14": 50,
+        "ma_20": 0,
+        "ma_50": 0,
+        "price_vs_ma20": 0,
+        "price_vs_ma50": 0
+      },
+      "forward_performance": {
+        "data_available": false,
+        "classification": "NO_DATA"
+      },
+      "final_classification": "NO_DATA",
+      "is_success": false
+    },
+    {
+      "ticker": "SQ",
+      "screening_date": "2019-03-15",
+      "entry_price": 5.944521415592456,
+      "screening_score": 135,
+      "screening_rank": 3,
+      "score_breakdown": {
+        "volume_score": 35,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 4.755617132473965
+      },
+      "analysis_timestamp": "2025-11-07T22:33:00.013155",
+      "lookback_analysis": {
+        "data_available": true,
+        "lowest_price_60d": 63.74,
+        "highest_price_60d": 82.78,
+        "avg_volume_60d": 13842439.232558139,
+        "volume_spike_days": 0,
+        "price_range": 19.04
+      },
+      "technical_indicators": {
+        "rsi_14": 48.72881355932206,
+        "ma_20": 76.521,
+        "ma_50": 72.23819999999999,
+        "price_vs_ma20": 0.1685811737954351,
+        "price_vs_ma50": 6.107295032268265
+      },
+      "forward_performance": {
+        "data_available": true,
+        "max_gain_percent": 1290.52,
+        "max_loss_percent": 907.52,
+        "max_price_reached": 82.66,
+        "min_price_reached": 59.8922,
+        "days_to_peak": 83,
+        "classification": "TRUE_POSITIVE",
+        "is_explosive": true
+      },
+      "final_classification": "TRUE_POSITIVE",
+      "is_success": true
+    },
+    {
+      "ticker": "BBBY",
+      "screening_date": "2019-03-15",
+      "entry_price": 0.8855483267185814,
+      "screening_score": 135,
+      "screening_rank": 4,
+      "score_breakdown": {
+        "volume_score": 35,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 0.7084386613748652
+      },
+      "analysis_timestamp": "2025-11-07T22:33:02.759544",
+      "lookback_analysis": {
+        "data_available": true,
+        "lowest_price_60d": 12.9182,
+        "highest_price_60d": 15.5955,
+        "avg_volume_60d": 5917178.632558138,
+        "volume_spike_days": 0,
+        "price_range": 2.677299999999999
+      },
+      "technical_indicators": {
+        "rsi_14": 19.81061097418602,
+        "ma_20": 14.564089999999998,
+        "ma_50": 13.779275999999998,
+        "price_vs_ma20": -10.864324513237689,
+        "price_vs_ma50": -5.787502913796037
+      },
+      "forward_performance": {
+        "data_available": true,
+        "max_gain_percent": 1909.03,
+        "max_loss_percent": 970.73,
+        "max_price_reached": 17.7909,
+        "min_price_reached": 9.4818,
+        "days_to_peak": 19,
+        "classification": "TRUE_POSITIVE",
+        "is_explosive": true
+      },
+      "final_classification": "TRUE_POSITIVE",
+      "is_success": true
+    },
+    {
+      "ticker": "HEXO",
+      "screening_date": "2019-03-15",
+      "entry_price": 13.64959165296353,
+      "screening_score": 125,
+      "screening_rank": 5,
+      "score_breakdown": {
+        "volume_score": 25,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 10.919673322370825
+      },
+      "analysis_timestamp": "2025-11-07T22:33:05.497434",
+      "lookback_analysis": {
+        "data_available": true,
+        "lowest_price_60d": 274.96,
+        "highest_price_60d": 353.36,
+        "avg_volume_60d": 42414.73601891893,
+        "volume_spike_days": 0,
+        "price_range": 78.40000000000003
+      },
+      "technical_indicators": {
+        "rsi_14": 65.03496503496507,
+        "ma_20": 318.80800000000005,
+        "ma_50": 342.16,
+        "price_vs_ma20": 7.324784823467407,
+        "price_vs_ma50": 0.0
+      },
+      "forward_performance": {
+        "data_available": true,
+        "max_gain_percent": 3346.26,
+        "max_loss_percent": 1869.29,
+        "max_price_reached": 470.4,
+        "min_price_reached": 268.8,
+        "days_to_peak": 31,
+        "classification": "TRUE_POSITIVE",
+        "is_explosive": true
+      },
+      "final_classification": "TRUE_POSITIVE",
+      "is_success": true
+    },
+    {
+      "ticker": "AMC",
+      "screening_date": "2022-06-20",
+      "entry_price": 7.533996275638045,
+      "screening_score": 150,
+      "screening_rank": 1,
+      "score_breakdown": {
+        "volume_score": 50,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 6.027197020510436
+      },
+      "analysis_timestamp": "2025-11-07T22:33:08.239488",
+      "lookback_analysis": {
+        "data_available": true,
+        "lowest_price_60d": 97,
+        "highest_price_60d": 180.7,
+        "avg_volume_60d": 4210114.673170733,
+        "volume_spike_days": 0,
+        "price_range": 83.69999999999999
+      },
+      "technical_indicators": {
+        "rsi_14": 40.575396825396815,
+        "ma_20": 124.84,
+        "ma_50": 141.918,
+        "price_vs_ma20": 0.36847164370393604,
+        "price_vs_ma50": -11.709578770839505
+      },
+      "forward_performance": {
+        "data_available": true,
+        "max_gain_percent": 3550.12,
+        "max_loss_percent": 626.04,
+        "max_price_reached": 275,
+        "min_price_reached": 54.7,
+        "days_to_peak": 34,
+        "classification": "TRUE_POSITIVE",
+        "is_explosive": true
+      },
+      "final_classification": "TRUE_POSITIVE",
+      "is_success": true
+    },
+    {
+      "ticker": "NOK",
+      "screening_date": "2022-06-20",
+      "entry_price": 11.301346973346073,
+      "screening_score": 95,
+      "screening_rank": 2,
+      "score_breakdown": {
+        "volume_score": 50,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 0,
+        "composite_bonus": 25
+      },
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 9.041077578676859
+      },
+      "analysis_timestamp": "2025-11-07T22:33:10.949583",
+      "lookback_analysis": {
+        "data_available": true,
+        "lowest_price_60d": 4.55,
+        "highest_price_60d": 5.41,
+        "avg_volume_60d": 38063967.19512195,
+        "volume_spike_days": 0,
+        "price_range": 0.8600000000000003
+      },
+      "technical_indicators": {
+        "rsi_14": 29.32330827067669,
+        "ma_20": 4.8865,
+        "ma_50": 4.997199999999999,
+        "price_vs_ma20": -6.06773764453085,
+        "price_vs_ma50": -8.14856319538941
+      },
+      "forward_performance": {
+        "data_available": true,
+        "max_gain_percent": -53.28,
+        "max_loss_percent": -62.92,
+        "max_price_reached": 5.28,
+        "min_price_reached": 4.19,
+        "days_to_peak": 34,
+        "classification": "LOSS",
+        "is_explosive": false
+      },
+      "final_classification": "LOSS",
+      "is_success": false
+    },
+    {
+      "ticker": "SNAP",
+      "screening_date": "2023-09-10",
+      "entry_price": 8.306026137495596,
+      "screening_score": 135,
+      "screening_rank": 1,
+      "score_breakdown": {
+        "volume_score": 35,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 6.6448209099964775
+      },
+      "analysis_timestamp": "2025-11-07T22:33:13.666010",
+      "lookback_analysis": {
+        "data_available": true,
+        "lowest_price_60d": 8.86,
+        "highest_price_60d": 13.89,
+        "avg_volume_60d": 28357526.476190478,
+        "volume_spike_days": 1,
+        "price_range": 5.030000000000001
+      },
+      "technical_indicators": {
+        "rsi_14": 53.48837209302327,
+        "ma_20": 9.641499999999999,
+        "ma_50": 10.962000000000003,
+        "price_vs_ma20": -2.608515272519819,
+        "price_vs_ma50": -14.340448823207463
+      },
+      "forward_performance": {
+        "data_available": true,
+        "max_gain_percent": 115.51,
+        "max_loss_percent": -0.31,
+        "max_price_reached": 17.9,
+        "min_price_reached": 8.28,
+        "days_to_peak": 70,
+        "classification": "MODERATE_WIN",
+        "is_explosive": false
+      },
+      "final_classification": "MODERATE_WIN",
+      "is_success": false
+    },
+    {
+      "ticker": "GOOGL",
+      "screening_date": "2023-09-10",
+      "entry_price": 4.0339297915129535,
+      "screening_score": 125,
+      "screening_rank": 2,
+      "score_breakdown": {
+        "volume_score": 25,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 3.227143833210363
+      },
+      "analysis_timestamp": "2025-11-07T22:33:16.375772",
+      "lookback_analysis": {
+        "data_available": true,
+        "lowest_price_60d": 118.22,
+        "highest_price_60d": 138,
+        "avg_volume_60d": 29856170.833333332,
+        "volume_spike_days": 0,
+        "price_range": 19.78
+      },
+      "technical_indicators": {
+        "rsi_14": 75.14092446448704,
+        "ma_20": 132.06949999999998,
+        "ma_50": 127.60100000000003,
+        "price_vs_ma20": 3.2638118566361043,
+        "price_vs_ma50": 6.880040125077364
+      },
+      "forward_performance": {
+        "data_available": true,
+        "max_gain_percent": 3437.0,
+        "max_loss_percent": 2879.87,
+        "max_price_reached": 142.68,
+        "min_price_reached": 120.2057,
+        "days_to_peak": 75,
+        "classification": "TRUE_POSITIVE",
+        "is_explosive": true
+      },
+      "final_classification": "TRUE_POSITIVE",
+      "is_success": true
+    },
+    {
+      "ticker": "NVDA",
+      "screening_date": "2023-09-10",
+      "entry_price": 1.2307190931230942,
+      "screening_score": 125,
+      "screening_rank": 3,
+      "score_breakdown": {
+        "volume_score": 25,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 30,
+        "composite_bonus": 50
+      },
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 0.9845752744984755
+      },
+      "analysis_timestamp": "2025-11-07T22:33:19.117948",
+      "lookback_analysis": {
+        "data_available": true,
+        "lowest_price_60d": 40.311,
+        "highest_price_60d": 50.266,
+        "avg_volume_60d": 540841547.3809524,
+        "volume_spike_days": 0,
+        "price_range": 9.954999999999998
+      },
+      "technical_indicators": {
+        "rsi_14": 57.67646065518407,
+        "ma_20": 46.088875,
+        "ma_50": 45.10294000000001,
+        "price_vs_ma20": -1.1214745423922776,
+        "price_vs_ma50": 1.039976551417694
+      },
+      "forward_performance": {
+        "data_available": true,
+        "max_gain_percent": 4147.52,
+        "max_loss_percent": 3087.57,
+        "max_price_reached": 52.275,
+        "min_price_reached": 39.23,
+        "days_to_peak": 83,
+        "classification": "TRUE_POSITIVE",
+        "is_explosive": true
+      },
+      "final_classification": "TRUE_POSITIVE",
+      "is_success": true
+    },
+    {
+      "ticker": "AMD",
+      "screening_date": "2023-09-10",
+      "entry_price": 11.529100627530763,
+      "screening_score": 80,
+      "screening_rank": 4,
+      "score_breakdown": {
+        "volume_score": 35,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 0,
+        "composite_bonus": 25
+      },
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 9.223280502024611
+      },
+      "analysis_timestamp": "2025-11-07T22:33:21.850367",
+      "lookback_analysis": {
+        "data_available": true,
+        "lowest_price_60d": 99.58,
+        "highest_price_60d": 122.12,
+        "avg_volume_60d": 64493772.78571428,
+        "volume_spike_days": 0,
+        "price_range": 22.540000000000006
+      },
+      "technical_indicators": {
+        "rsi_14": 50.995644057249535,
+        "ma_20": 106.9185,
+        "ma_50": 110.87960000000001,
+        "price_vs_ma20": -0.7748892848290906,
+        "price_vs_ma50": -4.319640402743162
+      },
+      "forward_performance": {
+        "data_available": true,
+        "max_gain_percent": 1210.16,
+        "max_loss_percent": 704.4,
+        "max_price_reached": 151.05,
+        "min_price_reached": 92.74,
+        "days_to_peak": 78,
+        "classification": "TRUE_POSITIVE",
+        "is_explosive": true
+      },
+      "final_classification": "TRUE_POSITIVE",
+      "is_success": true
+    },
+    {
+      "ticker": "SNDL",
+      "screening_date": "2023-09-10",
+      "entry_price": 4.1617222119004715,
+      "screening_score": 80,
+      "screening_rank": 5,
+      "score_breakdown": {
+        "volume_score": 35,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 0,
+        "composite_bonus": 25
+      },
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 3.3293777695203772
+      },
+      "analysis_timestamp": "2025-11-07T22:33:24.557197",
+      "lookback_analysis": {
+        "data_available": true,
+        "lowest_price_60d": 1.35,
+        "highest_price_60d": 2.02,
+        "avg_volume_60d": 4505622.476190476,
+        "volume_spike_days": 0,
+        "price_range": 0.6699999999999999
+      },
+      "technical_indicators": {
+        "rsi_14": 55.932203389830505,
+        "ma_20": 1.709,
+        "ma_50": 1.5655000000000008,
+        "price_vs_ma20": 14.101813926272666,
+        "price_vs_ma50": 24.56084318109224
+      },
+      "forward_performance": {
+        "data_available": true,
+        "max_gain_percent": -43.29,
+        "max_loss_percent": -68.52,
+        "max_price_reached": 2.36,
+        "min_price_reached": 1.31,
+        "days_to_peak": 5,
+        "classification": "LOSS",
+        "is_explosive": false
+      },
+      "final_classification": "LOSS",
+      "is_success": false
+    },
+    {
+      "ticker": "TLRY",
+      "screening_date": "2023-09-10",
+      "entry_price": 7.9145562079977445,
+      "screening_score": 70,
+      "screening_rank": 6,
+      "score_breakdown": {
+        "volume_score": 25,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 0,
+        "composite_bonus": 25
+      },
+      "false_miss_analysis": {
+        "is_false_miss": false,
+        "status": "MOCK_DATA",
+        "price_60d_ago": 6.331644966398196
+      },
+      "analysis_timestamp": "2025-11-07T22:33:27.276015",
+      "lookback_analysis": {
+        "data_available": true,
+        "lowest_price_60d": 1.62,
+        "highest_price_60d": 3.4,
+        "avg_volume_60d": 32997348.666666668,
+        "volume_spike_days": 1,
+        "price_range": 1.7799999999999998
+      },
+      "technical_indicators": {
+        "rsi_14": 63.57142857142857,
+        "ma_20": 2.6585000000000005,
+        "ma_50": 2.2481999999999993,
+        "price_vs_ma20": 13.597893548993772,
+        "price_vs_ma50": 34.329685970999066
+      },
+      "forward_performance": {
+        "data_available": true,
+        "max_gain_percent": -57.42,
+        "max_loss_percent": -79.66,
+        "max_price_reached": 3.37,
+        "min_price_reached": 1.61,
+        "days_to_peak": 1,
+        "classification": "LOSS",
+        "is_explosive": false
+      },
+      "final_classification": "LOSS",
+      "is_success": false
+    }
+  ],
+  "hit_rate": 0.6153846153846154,
+  "win_rate": 0.6923076923076923
+}
