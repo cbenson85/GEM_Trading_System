@@ -36,7 +36,7 @@ jobs:
         pip install requests pandas numpy
         # Note: yfinance removed since we're using mock data for testing
     
-      - name: Generate strategic dates and screen markets
+    - name: Generate strategic dates and screen markets
       id: screen
       env:
         POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
