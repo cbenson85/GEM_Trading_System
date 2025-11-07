@@ -1,4 +1,4 @@
-name: Phase 3 Parallel Analysis - Test 10 Stocks
+name: Phase 3 Parallel Analysis - All Data Points
 
 on:
   workflow_dispatch:
@@ -10,8 +10,9 @@ on:
         type: choice
         options:
           - test       # 10 stocks (5 batches × 2 stocks)
-          - sample     # 200 stocks (5 batches × 40 stocks)
-          - full       # All 1,454 stocks (10 batches × ~145 stocks)
+          - small      # 50 stocks (10 batches × 5 stocks)  
+          - medium     # 200 stocks (10 batches × 20 stocks)
+          - full       # All 694 sustainable stocks (10 batches × ~70 stocks)
 
 permissions:
   contents: write
@@ -37,17 +38,22 @@ jobs:
       run: |
         MODE="${{ github.event.inputs.mode }}"
         
+        # Use sustainable_stocks.json for the 694 filtered stocks
         if [ "$MODE" = "test" ]; then
           echo "📊 TEST MODE: Splitting 10 stocks into 5 batches (2 stocks each)"
-          python phase3_batch_splitter.py Verified_Backtest_Data/explosive_stocks_CLEAN.json --batches 5 --test
+          python phase3_batch_splitter.py Verified_Backtest_Data/sustainable_stocks.json --batches 5 --test
           echo "batch_count=5" >> $GITHUB_OUTPUT
-        elif [ "$MODE" = "sample" ]; then
-          echo "📊 SAMPLE MODE: Splitting 200 stocks into 5 batches (40 stocks each)"
-          python phase3_batch_splitter.py Verified_Backtest_Data/explosive_stocks_CLEAN.json --batches 5
-          echo "batch_count=5" >> $GITHUB_OUTPUT
+        elif [ "$MODE" = "small" ]; then
+          echo "📊 SMALL MODE: Splitting 50 stocks into 10 batches (5 stocks each)"
+          python phase3_batch_splitter.py Verified_Backtest_Data/sustainable_stocks.json --batches 10 --limit 50
+          echo "batch_count=10" >> $GITHUB_OUTPUT
+        elif [ "$MODE" = "medium" ]; then
+          echo "📊 MEDIUM MODE: Splitting 200 stocks into 10 batches (20 stocks each)"
+          python phase3_batch_splitter.py Verified_Backtest_Data/sustainable_stocks.json --batches 10 --limit 200
+          echo "batch_count=10" >> $GITHUB_OUTPUT
         else
-          echo "📊 FULL MODE: Splitting all stocks into 10 batches"
-          python phase3_batch_splitter.py Verified_Backtest_Data/explosive_stocks_CLEAN.json --batches 10
+          echo "📊 FULL MODE: All 694 sustainable stocks into 10 batches"
+          python phase3_batch_splitter.py Verified_Backtest_Data/sustainable_stocks.json --batches 10
           echo "batch_count=10" >> $GITHUB_OUTPUT
         fi
         
@@ -62,185 +68,70 @@ jobs:
         name: batch-inputs
         path: batch_inputs/
   
-  # Parallel Analysis Jobs (5 concurrent)
-  analyze-batch-1:
+  # Parallel Analysis Jobs - I'll create a matrix strategy for cleaner code
+  analyze-batches:
     needs: prepare-batches
     runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 10
+      matrix:
+        batch: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     
     steps:
+    - name: Check if batch should run
+      id: check
+      run: |
+        if [ ${{ matrix.batch }} -le ${{ needs.prepare-batches.outputs.batch_count }} ]; then
+          echo "should_run=true" >> $GITHUB_OUTPUT
+        else
+          echo "should_run=false" >> $GITHUB_OUTPUT
+        fi
+    
     - name: Checkout repository
+      if: steps.check.outputs.should_run == 'true'
       uses: actions/checkout@v4
     
     - name: Set up Python
+      if: steps.check.outputs.should_run == 'true'
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
     
-    - name: Install dependencies
-      run: pip install requests
+    - name: Install enhanced dependencies
+      if: steps.check.outputs.should_run == 'true'
+      run: |
+        pip install requests pandas numpy
+        pip install beautifulsoup4 lxml
+        pip install yfinance
+        pip install pytrends
+        pip install GoogleNews
     
     - name: Download batch files
+      if: steps.check.outputs.should_run == 'true'
       uses: actions/download-artifact@v4
       with:
         name: batch-inputs
         path: batch_inputs/
     
-    - name: Analyze Batch 1
+    - name: Analyze Batch ${{ matrix.batch }}
+      if: steps.check.outputs.should_run == 'true'
       env:
         POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
       run: |
-        echo "🔬 Analyzing Batch 1..."
-        python phase3_comprehensive_collector.py batch1 batch_inputs/batch1_stocks.json
+        echo "🔬 Analyzing Batch ${{ matrix.batch }} with ALL data collectors..."
+        python phase3_comprehensive_collector.py batch${{ matrix.batch }} batch_inputs/batch${{ matrix.batch }}_stocks.json
     
     - name: Upload results
+      if: steps.check.outputs.should_run == 'true'
       uses: actions/upload-artifact@v4
       with:
-        name: batch1-results
-        path: Verified_Backtest_Data/phase3_batch_batch1_analysis.json
-  
-  analyze-batch-2:
-    needs: prepare-batches
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-    
-    - name: Install dependencies
-      run: pip install requests
-    
-    - name: Download batch files
-      uses: actions/download-artifact@v4
-      with:
-        name: batch-inputs
-        path: batch_inputs/
-    
-    - name: Analyze Batch 2
-      env:
-        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
-      run: |
-        echo "🔬 Analyzing Batch 2..."
-        python phase3_comprehensive_collector.py batch2 batch_inputs/batch2_stocks.json
-    
-    - name: Upload results
-      uses: actions/upload-artifact@v4
-      with:
-        name: batch2-results
-        path: Verified_Backtest_Data/phase3_batch_batch2_analysis.json
-  
-  analyze-batch-3:
-    needs: prepare-batches
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-    
-    - name: Install dependencies
-      run: pip install requests
-    
-    - name: Download batch files
-      uses: actions/download-artifact@v4
-      with:
-        name: batch-inputs
-        path: batch_inputs/
-    
-    - name: Analyze Batch 3
-      env:
-        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
-      run: |
-        echo "🔬 Analyzing Batch 3..."
-        python phase3_comprehensive_collector.py batch3 batch_inputs/batch3_stocks.json
-    
-    - name: Upload results
-      uses: actions/upload-artifact@v4
-      with:
-        name: batch3-results
-        path: Verified_Backtest_Data/phase3_batch_batch3_analysis.json
-  
-  analyze-batch-4:
-    needs: prepare-batches
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-    
-    - name: Install dependencies
-      run: pip install requests
-    
-    - name: Download batch files
-      uses: actions/download-artifact@v4
-      with:
-        name: batch-inputs
-        path: batch_inputs/
-    
-    - name: Analyze Batch 4
-      env:
-        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
-      run: |
-        echo "🔬 Analyzing Batch 4..."
-        python phase3_comprehensive_collector.py batch4 batch_inputs/batch4_stocks.json
-    
-    - name: Upload results
-      uses: actions/upload-artifact@v4
-      with:
-        name: batch4-results
-        path: Verified_Backtest_Data/phase3_batch_batch4_analysis.json
-  
-  analyze-batch-5:
-    needs: prepare-batches
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-    
-    - name: Install dependencies
-      run: pip install requests
-    
-    - name: Download batch files
-      uses: actions/download-artifact@v4
-      with:
-        name: batch-inputs
-        path: batch_inputs/
-    
-    - name: Analyze Batch 5
-      env:
-        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
-      run: |
-        echo "🔬 Analyzing Batch 5..."
-        python phase3_comprehensive_collector.py batch5 batch_inputs/batch5_stocks.json
-    
-    - name: Upload results
-      uses: actions/upload-artifact@v4
-      with:
-        name: batch5-results
-        path: Verified_Backtest_Data/phase3_batch_batch5_analysis.json
+        name: batch${{ matrix.batch }}-results
+        path: Verified_Backtest_Data/phase3_batch_batch${{ matrix.batch }}_analysis.json
   
   # Merge all results
   merge-results:
-    needs: [analyze-batch-1, analyze-batch-2, analyze-batch-3, analyze-batch-4, analyze-batch-5]
+    needs: analyze-batches
+    if: always()
     runs-on: ubuntu-latest
     
     steps:
@@ -271,48 +162,45 @@ jobs:
     
     - name: Generate correlation matrix
       run: |
-        echo "📊 Building correlation matrix..."
+        echo "📊 Building correlation matrix with ALL data points..."
         python phase3_correlation_analyzer.py Verified_Backtest_Data/phase3_merged_analysis.json
     
     - name: Display results summary
       run: |
-        echo "## 📊 Phase 3 Parallel Analysis Complete" >> $GITHUB_STEP_SUMMARY
+        echo "## 📊 Phase 3 Enhanced Analysis Complete" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "**Mode**: ${{ github.event.inputs.mode }}" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         
         if [ -f "Verified_Backtest_Data/phase3_correlation_matrix.json" ]; then
           python -c "
-          import json
-          with open('Verified_Backtest_Data/phase3_correlation_matrix.json') as f:
-              data = json.load(f)
-              print('### Summary Statistics')
-              print(f\"- Total Stocks Analyzed: {data.get('total_stocks', 0)}\")
-              print(f\"- Successful Analyses: {data.get('successful_analyses', 0)}\")
-              print()
-              print('### Top Patterns Found')
-              patterns = data.get('pattern_frequencies', {})
-              sorted_patterns = sorted(patterns.items(), key=lambda x: x[1].get('frequency_percent', 0), reverse=True)
-              for i, (pattern, info) in enumerate(sorted_patterns[:5], 1):
-                  print(f\"{i}. **{pattern}**: {info.get('frequency_percent', 0):.1f}% frequency\")
+import json
+with open('Verified_Backtest_Data/phase3_correlation_matrix.json') as f:
+    data = json.load(f)
+    print('### Summary Statistics')
+    print(f\"- Total Stocks Analyzed: {data.get('total_stocks', 0)}\")
+    print(f\"- Successful Analyses: {data.get('successful_analyses', 0)}\")
+    print()
+    print('### Top Patterns Found')
+    patterns = data.get('pattern_frequencies', {})
+    sorted_patterns = sorted(patterns.items(), key=lambda x: x[1].get('frequency_percent', 0), reverse=True)
+    for i, (pattern, info) in enumerate(sorted_patterns[:5], 1):
+        print(f\"{i}. **{pattern}**: {info.get('frequency_percent', 0):.1f}% frequency\")
           " >> $GITHUB_STEP_SUMMARY
         fi
     
     - name: Commit results
       run: |
         git config --local user.email "action@github.com"
-        git config --local user.name "Phase 3 Bot"
+        git config --local user.name "Phase 3 Enhanced Bot"
         
         # Add batch inputs and results
         git add batch_inputs/ 2>/dev/null || true
         git add Verified_Backtest_Data/phase3_*.json
         
-        git diff --staged --quiet || git commit -m "🔬 Phase 3 Parallel Analysis: ${{ github.event.inputs.mode }} mode
+        git diff --staged --quiet || git commit -m "🔬 Phase 3 Enhanced Analysis: ${{ github.event.inputs.mode }} mode
         
-        Analyzed stocks in 5 parallel batches
-        Generated comprehensive data points
-        Built correlation matrix
-        
+        Analyzed stocks with ALL 150+ data points
         Mode: ${{ github.event.inputs.mode }}
         Date: $(date +'%Y-%m-%d %H:%M')"
         
