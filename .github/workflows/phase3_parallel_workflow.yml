@@ -185,7 +185,8 @@ with open('Verified_Backtest_Data/phase3_correlation_matrix.json') as f:
     patterns = data.get('pattern_frequencies', {})
     sorted_patterns = sorted(patterns.items(), key=lambda x: x[1].get('frequency_percent', 0), reverse=True)
     for i, (pattern, info) in enumerate(sorted_patterns[:5], 1):
-        print(f\"{i}. **{pattern}**: {info.get('frequency_percent', 0):.1f}% frequency\")" >> $GITHUB_STEP_SUMMARY
+        print(f\"{i}. **{pattern}**: {info.get('frequency_percent', 0):.1f}% frequency\")
+          " >> $GITHUB_STEP_SUMMARY
         fi
     
     - name: Commit results
