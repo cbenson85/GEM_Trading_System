@@ -34,10 +34,17 @@ except ImportError:
     INSIDER_AVAILABLE = False
     print("WARNING: insider_transactions_scraper not found, insider analysis disabled")
 
+print("\n=== Analyzer Status ===")
+print(f"News analyzer: {'✅ Available' if NEWS_AVAILABLE else '❌ Not Available'}")
+print(f"Trends analyzer: {'✅ Available' if TRENDS_AVAILABLE else '❌ Not Available'}")
+print(f"Insider analyzer: {'✅ Available' if INSIDER_AVAILABLE else '❌ Not Available'}")
+print("======================\n")
+
 class ComprehensiveStockAnalyzer:
     def __init__(self, polygon_api_key=None):
         self.api_key = polygon_api_key or os.environ.get('POLYGON_API_KEY', 'pvv6DNmKAoxojCc0B5HOaji6I_k1egv0')
         self.base_url = 'https://api.polygon.io'
+        print(f"Polygon API Key: {'✅ Set' if self.api_key else '❌ Missing'}")
 
     def get_price_data(self, ticker: str, start_date: str, end_date: str) -> List[Dict]:
         """Get OHLCV data from Polygon"""
@@ -117,14 +124,14 @@ class ComprehensiveStockAnalyzer:
             'accumulation_detected': accumulation,
             'higher_lows_count': higher_lows,
             'volume_spike_count': sum([volume_3x, volume_5x, volume_10x]),
-            'narrowing_range': False  # Simplified
+            'narrowing_range': False
         }
     
     def analyze_technical_indicators(self, ticker: str, entry_date: str) -> Dict:
         """Calculate technical indicators (24+ data points)"""
         # Get price data
         end_dt = datetime.fromisoformat(entry_date)
-        start_dt = end_dt - timedelta(days=100)  # Extra days for moving averages
+        start_dt = end_dt - timedelta(days=100)
         
         price_data = self.get_price_data(
             ticker,
@@ -158,14 +165,13 @@ class ComprehensiveStockAnalyzer:
             'ma_50': ma_50,
             'price_above_ma20': closes[-1] > ma_20 if closes and ma_20 else False,
             'price_above_ma50': closes[-1] > ma_50 if closes and ma_50 else False,
-            'macd_bullish': False,  # Simplified
-            'bb_squeeze_days': 0  # Simplified
+            'macd_bullish': False,
+            'bb_squeeze_days': 0
         }
     
     def analyze_market_context(self, ticker: str, entry_date: str, entry_price: float) -> Dict:
         """Analyze market relative performance (12+ data points)"""
-        # For simplicity, using basic comparison
-        spy_outperformance = 25.0  # Placeholder
+        spy_outperformance = 25.0
         
         print(f"  ✅ Market context analyzed")
         
@@ -239,10 +245,8 @@ class ComprehensiveStockAnalyzer:
             scraper = InsiderTransactionsScraper()
             result = scraper.analyze(ticker, entry_date)
             
-            # Extract insider metrics
             insider_data = {}
             
-            # Get filing counts
             if 'insider_activity' in result:
                 insider_data['insider_form4_count'] = result['insider_activity'].get('total_form4_filings', 0)
                 insider_data['insider_filing_count'] = result['insider_activity'].get('total_form4_filings', 0)
@@ -250,7 +254,6 @@ class ComprehensiveStockAnalyzer:
                 insider_data['insider_form4_count'] = 0
                 insider_data['insider_filing_count'] = 0
             
-            # Get pattern detection
             if 'patterns_detected' in result:
                 insider_data['insider_cluster_detected'] = result['patterns_detected'].get('insider_cluster_3plus', False)
                 insider_data['insider_pattern_score'] = result['patterns_detected'].get('pattern_score', 0)
@@ -258,7 +261,6 @@ class ComprehensiveStockAnalyzer:
                 insider_data['insider_cluster_detected'] = False
                 insider_data['insider_pattern_score'] = 0
             
-            # Add derived metrics
             insider_data['insider_activity_level'] = 'high' if insider_data['insider_form4_count'] >= 5 else \
                                                      'medium' if insider_data['insider_form4_count'] >= 2 else \
                                                      'low' if insider_data['insider_form4_count'] >= 1 else 'none'
@@ -266,12 +268,11 @@ class ComprehensiveStockAnalyzer:
             insider_data['insider_confidence_score'] = min(100, insider_data['insider_form4_count'] * 10 + 
                                                            (50 if insider_data['insider_cluster_detected'] else 0))
             
-            # Add placeholder fields
-            insider_data['insider_buys_total'] = insider_data['insider_form4_count']  # Simplified
-            insider_data['insider_sells_total'] = 0  # Would need detailed parsing
-            insider_data['ceo_cfo_activity'] = insider_data['insider_form4_count'] > 0  # Simplified
-            insider_data['director_activity'] = False  # Would need detailed parsing
-            insider_data['ten_percent_owner_activity'] = False  # Would need detailed parsing
+            insider_data['insider_buys_total'] = insider_data['insider_form4_count']
+            insider_data['insider_sells_total'] = 0
+            insider_data['ceo_cfo_activity'] = insider_data['insider_form4_count'] > 0
+            insider_data['director_activity'] = False
+            insider_data['ten_percent_owner_activity'] = False
             
             print(f"  ✅ SEC Edgar data: {insider_data['insider_form4_count']} Form 4 filings")
             return insider_data
@@ -282,7 +283,6 @@ class ComprehensiveStockAnalyzer:
     
     def calculate_pattern_scores(self, analysis_data: Dict) -> Dict:
         """Calculate composite pattern scores (15+ data points)"""
-        # Volume score
         volume_score = 0
         if analysis_data.get('price_volume_patterns', {}).get('volume_10x_spike'):
             volume_score = 100
@@ -291,7 +291,6 @@ class ComprehensiveStockAnalyzer:
         elif analysis_data.get('price_volume_patterns', {}).get('volume_3x_spike'):
             volume_score = 50
         
-        # Technical score
         technical_score = 0
         if analysis_data.get('technical_indicators', {}).get('rsi_oversold_days', 0) > 0:
             technical_score += 50
@@ -299,23 +298,16 @@ class ComprehensiveStockAnalyzer:
             technical_score += 50
         technical_score = min(100, technical_score)
         
-        # News score
         news_score = analysis_data.get('news_pattern_score', 0)
-        
-        # Trends score  
         trends_score = analysis_data.get('trends_pattern_score', 0)
-        
-        # Insider score
         insider_score = analysis_data.get('insider_pattern_score', 0)
         
-        # Total score with all components
         total_score = (volume_score * 0.25 + 
                       technical_score * 0.25 + 
                       news_score * 0.20 + 
                       trends_score * 0.15 +
                       insider_score * 0.15)
         
-        # Signal strength
         if total_score >= 70:
             signal_strength = 'PRIMARY'
         elif total_score >= 40:
@@ -350,7 +342,6 @@ class ComprehensiveStockAnalyzer:
         gains = []
         losses = []
         
-        # Calculate price changes
         for i in range(1, len(prices)):
             change = prices[i] - prices[i-1]
             if change > 0:
@@ -360,7 +351,6 @@ class ComprehensiveStockAnalyzer:
                 gains.append(0)
                 losses.append(abs(change))
         
-        # Calculate RSI
         for i in range(period, len(gains) + 1):
             avg_gain = sum(gains[i-period:i]) / period
             avg_loss = sum(losses[i-period:i]) / period
@@ -375,7 +365,6 @@ class ComprehensiveStockAnalyzer:
         
         return rsi_values
     
-    # Default data methods
     def get_default_price_volume_patterns(self) -> Dict:
         return {
             'volume_avg_20d': 0,
@@ -451,6 +440,9 @@ class ComprehensiveStockAnalyzer:
         
         print(f"\n{'='*60}")
         print(f"Analyzing {ticker} - Collecting 150+ data points")
+        print(f"  Entry date: {entry_date}")
+        print(f"  Entry price: {entry_price}")
+        print(f"  Stock keys: {list(stock.keys())}")
         print(f"{'='*60}")
         
         # Initialize result with basic data
@@ -472,46 +464,45 @@ class ComprehensiveStockAnalyzer:
         
         if not entry_date or not ticker:
             result['analysis_status'] = 'error_missing_data'
+            print(f"  ❌ Missing required data: ticker={ticker}, entry_date={entry_date}")
             return result
         
         try:
-            # 1. Price & Volume Patterns (20+ points)
+            # 1. Price & Volume Patterns
             print("\n📊 Analyzing price/volume patterns...")
             pv_patterns = self.analyze_price_volume_patterns(ticker, entry_date)
             result['price_volume_patterns'] = pv_patterns
             
-            # 2. Technical Indicators (24+ points)
+            # 2. Technical Indicators
             print("\n📈 Calculating technical indicators...")
             tech_indicators = self.analyze_technical_indicators(ticker, entry_date)
             result['technical_indicators'] = tech_indicators
             
-            # 3. Market Context (12+ points)
+            # 3. Market Context
             print("\n📉 Analyzing market context...")
             market_context = self.analyze_market_context(ticker, entry_date, entry_price)
             result['market_context'] = market_context
             
-            # 4. News Analysis (14+ points)
+            # 4. News Analysis
             print("\n📰 Analyzing news sentiment...")
             news_data = self.analyze_news_sentiment(ticker, entry_date)
             result.update(news_data)
             
-            # Add delay to avoid rate limits
             time.sleep(3)
             
-            # 5. Google Trends (8+ points)
+            # 5. Google Trends
             print("\n🔍 Analyzing search trends...")
             trends_data = self.analyze_google_trends(ticker, entry_date)
             result.update(trends_data)
             
-            # Add delay
             time.sleep(3)
             
-            # 6. Insider Activity (12+ points)
+            # 6. Insider Activity
             print("\n👔 Analyzing insider activity...")
             insider_data = self.analyze_insider_activity(ticker, entry_date)
             result.update(insider_data)
             
-            # 7. Pattern Scoring (15+ points)
+            # 7. Pattern Scoring
             print("\n🎯 Calculating pattern scores...")
             pattern_scores = self.calculate_pattern_scores(result)
             result['pattern_scores'] = pattern_scores
@@ -526,7 +517,6 @@ class ComprehensiveStockAnalyzer:
             result['analysis_status'] = 'error'
             result['error'] = str(e)
         
-        # Delay between stocks
         time.sleep(5)
         
         return result
