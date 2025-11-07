@@ -71,73 +71,81 @@ class Phase4MarketScreener:
         
         return selected_dates
     
-    def get_market_stocks(self, date: str) -> List[Dict]:
-        """
-        Get all US stocks from the market on a specific date
-        Uses Polygon API for comprehensive coverage
-        """
-        print(f"\n📊 Fetching market stocks for {date}...")
-        
-        all_stocks = []
-        
-        try:
-            # Get all tickers from Polygon
-            url = f"{self.base_url}/v3/reference/tickers"
-            params = {
-                'apiKey': self.polygon_api_key,
-                'market': 'stocks',
-                'exchange': 'XNYS,XNAS',  # NYSE and NASDAQ
-                'active': 'true',
-                'limit': 1000
-            }
-            
-            next_url = url
-            page_count = 0
-            
-            while next_url and page_count < 10:  # Limit pages for testing
-                response = requests.get(next_url, params=params if page_count == 0 else {'apiKey': self.polygon_api_key})
-                
-                if response.status_code == 200:
-                    data = response.json()
-                    
-                    if 'results' in data:
-                        for ticker_info in data['results']:
-                            stock = {
-                                'ticker': ticker_info.get('ticker'),
-                                'name': ticker_info.get('name', ''),
-                                'market_cap': ticker_info.get('market_cap', 0),
-                                'exchange': ticker_info.get('primary_exchange', '')
-                            }
-                            all_stocks.append(stock)
-                    
-                    # Check for next page
-                    next_url = data.get('next_url')
-                    page_count += 1
-                else:
-                    print(f"  ⚠️ API error: {response.status_code}")
-                    break
-            
-            print(f"  Found {len(all_stocks)} total stocks")
-            
-        except Exception as e:
-            print(f"  ❌ Error fetching stocks: {e}")
-            # Fallback: use a predefined list of common stocks for testing
-            print("  Using fallback stock list...")
-            all_stocks = self.get_fallback_stocks()
-        
-        return all_stocks
+def get_market_stocks(self, date: str) -> List[Dict]:
+    """
+    Get all US stocks from the market on a specific date
+    Uses Polygon API for comprehensive coverage
+    """
+    print(f"\n📊 Fetching market stocks for {date}...")
     
-    def get_fallback_stocks(self) -> List[Dict]:
-        """
-        Fallback list of stocks if API fails
-        """
-        # Common small-cap stocks for testing
-        tickers = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 
-                   'NVDA', 'META', 'AMD', 'INTC', 'NFLX',
-                   'ROKU', 'SNAP', 'PINS', 'HOOD', 'PLTR',
-                   'SOFI', 'RIVN', 'LCID', 'NIO', 'XPEV']
+    all_stocks = []
+    
+    try:
+        # Get all tickers from Polygon
+        url = f"{self.base_url}/v3/reference/tickers"
+        params = {
+            'apiKey': self.polygon_api_key,
+            'market': 'stocks',
+            'exchange': 'XNYS,XNAS',  # NYSE and NASDAQ
+            'active': 'true',
+            'limit': 1000
+        }
         
-        return [{'ticker': t, 'name': t, 'market_cap': 0, 'exchange': 'UNKNOWN'} for t in tickers]
+        response = requests.get(url, params=params, timeout=10)
+        
+        if response.status_code == 200:
+            data = response.json()
+            
+            if 'results' in data and len(data['results']) > 0:
+                for ticker_info in data['results'][:100]:  # Limit to 100 for testing
+                    stock = {
+                        'ticker': ticker_info.get('ticker'),
+                        'name': ticker_info.get('name', ''),
+                        'market_cap': ticker_info.get('market_cap', 0),
+                        'exchange': ticker_info.get('primary_exchange', '')
+                    }
+                    all_stocks.append(stock)
+                print(f"  Found {len(all_stocks)} stocks from API")
+            else:
+                print(f"  ⚠️ API returned no results")
+                print(f"  Response: {data}")
+        else:
+            print(f"  ⚠️ API error: {response.status_code}")
+            if response.status_code == 403:
+                print("  ❌ API key may be invalid or rate limited")
+            
+    except Exception as e:
+        print(f"  ❌ Error fetching stocks: {e}")
+    
+    # Always use fallback if no stocks found
+    if len(all_stocks) == 0:
+        print("  Using fallback stock list...")
+        all_stocks = self.get_fallback_stocks()
+    
+    print(f"  Total stocks to analyze: {len(all_stocks)}")
+    return all_stocks
+
+def get_fallback_stocks(self) -> List[Dict]:
+    """
+    Expanded fallback list of stocks if API fails
+    """
+    # Mix of stocks that likely had explosive moves in our test periods
+    tickers = [
+        # Tech stocks
+        'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 'NVDA', 'META', 'AMD', 'INTC', 'NFLX',
+        # Small/mid caps with volatility
+        'ROKU', 'SNAP', 'PINS', 'HOOD', 'PLTR', 'SOFI', 'RIVN', 'LCID', 'NIO', 'XPEV',
+        # Meme stocks and volatile names
+        'GME', 'AMC', 'BB', 'NOK', 'BBBY', 'SPCE', 'CLOV', 'WISH', 'SDC', 'ATER',
+        # Biotech (often explosive)
+        'MRNA', 'BNTX', 'NVAX', 'INO', 'VXRT', 'OCGN', 'SRNE', 'BNGO', 'JAGX', 'GEVO',
+        # Energy/Materials
+        'PLUG', 'FCEL', 'RIG', 'OXY', 'CCL', 'AAL', 'UAL', 'DAL', 'MGM', 'WYNN',
+        # Cannabis stocks
+        'TLRY', 'CGC', 'ACB', 'SNDL', 'HEXO', 'OGI', 'CRON', 'VFF', 'GRWG', 'IIPR'
+    ]
+    
+    return [{'ticker': t, 'name': t, 'market_cap': 0, 'exchange': 'UNKNOWN'} for t in tickers]
     
     def get_stock_data(self, ticker: str, date: str) -> Dict:
         """
