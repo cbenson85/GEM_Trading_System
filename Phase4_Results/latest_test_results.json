@@ -1,0 +1,595 @@
+{
+  "test_summary": {
+    "dates_tested": 72,
+    "stocks_tested": 2,
+    "total_picks": 20,
+    "total_true_positives": 0,
+    "total_false_positives": 20,
+    "total_false_negatives": 0,
+    "overall_hit_rate": 0.0,
+    "test_years": [
+      "2019",
+      "2022",
+      "2023"
+    ],
+    "timestamp": "2025-11-07T17:03:04.129860"
+  },
+  "detailed_results": [
+    {
+      "date": "2019-01-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-01-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-02-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-02-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-03-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-03-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-04-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-04-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-05-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-05-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-06-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-06-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-07-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-07-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-08-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-08-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-09-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-09-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-10-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-10-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-11-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-11-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-12-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2019-12-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-01-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-01-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-02-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-02-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-03-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-03-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-04-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-04-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-05-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-05-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-06-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-06-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-07-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-07-15",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2022-08-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-08-15",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2022-09-01",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2022-09-15",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2022-10-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-10-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-11-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-11-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-12-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2022-12-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2023-01-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2023-01-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2023-02-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2023-02-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2023-03-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2023-03-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2023-04-01",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2023-04-15",
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "total_picks": 0,
+      "hit_rate": 0
+    },
+    {
+      "date": "2023-05-01",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2023-05-15",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2023-06-01",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2023-06-15",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2023-07-01",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2023-07-15",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2023-08-01",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2023-08-15",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2023-09-01",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2023-09-15",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2023-10-01",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2023-10-15",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2023-11-01",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2023-11-15",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2023-12-01",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    },
+    {
+      "date": "2023-12-15",
+      "true_positives": 0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "total_picks": 1,
+      "hit_rate": 0.0
+    }
+  ]
+}
