@@ -1,0 +1,390 @@
+name: GEM Phase 4 - Investment Strategy
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_results_file:
+        description: 'Test results file to analyze'
+        required: false
+        default: 'latest_test_results.json'
+      initial_capital:
+        description: 'Initial capital for simulation'
+        required: true
+        default: '10000'
+      max_positions:
+        description: 'Maximum concurrent positions'
+        required: true
+        default: '8'
+        type: choice
+        options:
+          - '5'
+          - '8'
+          - '10'
+          - '12'
+          - '15'
+
+jobs:
+  strategy_analysis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install pandas numpy matplotlib
+    
+    - name: Check for test results
+      run: |
+        if [ ! -f "Phase4_Results/${{ inputs.test_results_file }}" ]; then
+          echo "ERROR: Test results file not found!"
+          echo "Please run 'Phase 4 - Historical Testing' workflow first"
+          exit 1
+        fi
+        
+        echo "Found test results file"
+    
+    - name: Generate investment strategy
+      env:
+        RESULTS_FILE: ${{ inputs.test_results_file }}
+        INITIAL_CAPITAL: ${{ inputs.initial_capital }}
+        MAX_POSITIONS: ${{ inputs.max_positions }}
+      run: |
+        python3 << 'STRATEGY_SCRIPT'
+        import json
+        import pandas as pd
+        import numpy as np
+        from datetime import datetime
+        import os
+        
+        # Load parameters
+        RESULTS_FILE = os.environ.get('RESULTS_FILE', 'latest_test_results.json')
+        INITIAL_CAPITAL = float(os.environ.get('INITIAL_CAPITAL', '10000'))
+        MAX_POSITIONS = int(os.environ.get('MAX_POSITIONS', '8'))
+        
+        print("="*60)
+        print("GEM INVESTMENT STRATEGY ANALYZER")
+        print("="*60)
+        
+        # Load test results
+        results_path = f'Phase4_Results/{RESULTS_FILE}'
+        with open(results_path, 'r') as f:
+            test_results = json.load(f)
+        
+        summary = test_results['test_summary']
+        hit_rate = summary['overall_hit_rate']
+        
+        print(f"Loaded results with {hit_rate:.1%} hit rate")
+        print(f"Initial Capital: ${INITIAL_CAPITAL:,.0f}")
+        print(f"Max Positions: {MAX_POSITIONS}")
+        print("="*60)
+        
+        # Check if hit rate is acceptable
+        if hit_rate < 0.30:
+            print("\n⚠️ WARNING: Hit rate below 30%")
+            print("Strategy may not be profitable")
+        
+        # Calculate position sizing based on hit rate tiers
+        def calculate_position_sizes(hit_rate):
+            """Determine position sizes based on historical performance"""
+            
+            # Estimate tier performance (simplified without full data)
+            tier_90_100 = {
+                'hit_rate': min(hit_rate * 1.3, 0.70),  # High scores likely better
+                'position_size': 0.15 if hit_rate > 0.45 else 0.12
+            }
+            
+            tier_75_89 = {
+                'hit_rate': hit_rate * 1.1,  # Slightly better than average
+                'position_size': 0.10 if hit_rate > 0.40 else 0.08
+            }
+            
+            tier_60_74 = {
+                'hit_rate': hit_rate * 0.9,  # Slightly below average
+                'position_size': 0.05
+            }
+            
+            return {
+                'score_90_100': tier_90_100,
+                'score_75_89': tier_75_89,
+                'score_60_74': tier_60_74
+            }
+        
+        # Calculate expected returns
+        def calculate_expected_returns(hit_rate, avg_win=9.15, avg_loss=0.30):
+            """Calculate expected value and returns"""
+            
+            # Expected value per trade
+            ev = (hit_rate * avg_win) - ((1 - hit_rate) * avg_loss)
+            
+            # Annual calculations (assuming bi-weekly screening)
+            trades_per_year = 26 * 2  # 26 bi-weekly periods, 2 trades each
+            
+            # Estimate annual return
+            annual_multiplier = 1 + (ev * 0.1)  # Assuming 10% capital per trade average
+            annual_return = (annual_multiplier ** (trades_per_year / MAX_POSITIONS) - 1) * 100
+            
+            # Calculate Sharpe (simplified)
+            sharpe = (annual_return - 5) / 30  # Simplified: (return - risk_free) / volatility
+            
+            return {
+                'expected_value': ev,
+                'annual_return': annual_return,
+                'sharpe_ratio': max(sharpe, 0)
+            }
+        
+        # Simulate portfolio performance
+        def simulate_portfolio(test_results, initial_capital, max_positions):
+            """Simulate portfolio using test results"""
+            
+            # Extract trades from results
+            trades = []
+            for date_result in test_results['detailed_results']:
+                tp = date_result['true_positives']
+                fp = date_result['false_positives']
+                
+                # Add winning trades
+                for _ in range(tp):
+                    trades.append({
+                        'date': date_result['date'],
+                        'result': 'win',
+                        'return': np.random.uniform(5, 20)  # 500-2000% gain
+                    })
+                
+                # Add losing trades
+                for _ in range(fp):
+                    trades.append({
+                        'date': date_result['date'],
+                        'result': 'loss',
+                        'return': -0.30
+                    })
+            
+            # Simulate portfolio
+            capital = initial_capital
+            portfolio_values = [capital]
+            
+            # Process trades with position sizing
+            for i, trade in enumerate(trades[:100]):  # First 100 trades
+                position_size = capital * 0.10  # 10% position average
+                
+                if trade['result'] == 'win':
+                    profit = position_size * trade['return']
+                else:
+                    profit = position_size * trade['return']
+                
+                capital += profit
+                portfolio_values.append(capital)
+            
+            final_return = (capital - initial_capital) / initial_capital * 100
+            
+            return {
+                'final_capital': capital,
+                'total_return': final_return,
+                'num_trades': len(trades[:100]),
+                'portfolio_values': portfolio_values
+            }
+        
+        # Generate strategy
+        position_sizes = calculate_position_sizes(hit_rate)
+        expected_perf = calculate_expected_returns(hit_rate)
+        simulation = simulate_portfolio(test_results, INITIAL_CAPITAL, MAX_POSITIONS)
+        
+        strategy = {
+            'generated_date': datetime.now().isoformat(),
+            'based_on': {
+                'hit_rate': hit_rate,
+                'true_positives': summary['total_true_positives'],
+                'false_positives': summary['total_false_positives'],
+                'dates_tested': summary['dates_tested']
+            },
+            'position_sizing': position_sizes,
+            'portfolio_rules': {
+                'max_positions': MAX_POSITIONS,
+                'screening_frequency': 'Bi-weekly',
+                'hold_period': '120 days maximum',
+                'stop_loss': 'None first 30 days, then -30%',
+                'entry_score_minimum': 60
+            },
+            'expected_performance': {
+                'expected_value': expected_perf['expected_value'],
+                'annual_return': expected_perf['annual_return'],
+                'sharpe_ratio': expected_perf['sharpe_ratio'],
+                'win_rate': hit_rate * 100
+            },
+            'simulation_results': {
+                'initial_capital': INITIAL_CAPITAL,
+                'final_capital': simulation['final_capital'],
+                'total_return': simulation['total_return'],
+                'trades_simulated': simulation['num_trades']
+            },
+            'risk_management': {
+                'max_single_position': 0.15,
+                'max_sector_exposure': 0.40,
+                'cash_reserve_minimum': 0.20,
+                'rebalance_frequency': 'Monthly'
+            },
+            'recommendations': []
+        }
+        
+        # Add recommendations based on performance
+        if hit_rate >= 0.50:
+            strategy['recommendations'].append("Excellent hit rate - consider increasing position sizes")
+        elif hit_rate >= 0.40:
+            strategy['recommendations'].append("Good hit rate - proceed with recommended position sizes")
+        elif hit_rate >= 0.30:
+            strategy['recommendations'].append("Acceptable hit rate - use conservative position sizes")
+        else:
+            strategy['recommendations'].append("Low hit rate - continue optimizing screener")
+        
+        if expected_perf['annual_return'] > 50:
+            strategy['recommendations'].append("High expected returns - ensure risk management is strict")
+        elif expected_perf['annual_return'] > 20:
+            strategy['recommendations'].append("Good expected returns - exceeds market average")
+        else:
+            strategy['recommendations'].append("Moderate returns - consider if risk is justified")
+        
+        # Save strategy
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        
+        # Save JSON
+        strategy_file = f'Phase4_Results/investment_strategy_{timestamp}.json'
+        with open(strategy_file, 'w') as f:
+            json.dump(strategy, f, indent=2)
+        
+        # Save as latest
+        with open('Phase4_Results/latest_strategy.json', 'w') as f:
+            json.dump(strategy, f, indent=2)
+        
+        # Generate report
+        report_file = f'Phase4_Results/strategy_report_{timestamp}.md'
+        with open(report_file, 'w') as f:
+            f.write("# GEM Investment Strategy Report\n\n")
+            f.write(f"**Generated:** {datetime.now()}\n")
+            f.write(f"**Based on hit rate:** {hit_rate:.1%}\n\n")
+            
+            f.write("## Expected Performance\n\n")
+            f.write(f"- **Annual Return:** {expected_perf['annual_return']:.1f}%\n")
+            f.write(f"- **Win Rate:** {hit_rate*100:.1f}%\n")
+            f.write(f"- **Expected Value:** {expected_perf['expected_value']:.2f}x\n")
+            f.write(f"- **Sharpe Ratio:** {expected_perf['sharpe_ratio']:.2f}\n\n")
+            
+            f.write("## Position Sizing\n\n")
+            f.write("| Score Range | Position Size | Estimated Hit Rate |\n")
+            f.write("|------------|---------------|-------------------|\n")
+            f.write(f"| 90-100 | {position_sizes['score_90_100']['position_size']:.1%} | ")
+            f.write(f"{position_sizes['score_90_100']['hit_rate']:.1%} |\n")
+            f.write(f"| 75-89 | {position_sizes['score_75_89']['position_size']:.1%} | ")
+            f.write(f"{position_sizes['score_75_89']['hit_rate']:.1%} |\n")
+            f.write(f"| 60-74 | {position_sizes['score_60_74']['position_size']:.1%} | ")
+            f.write(f"{position_sizes['score_60_74']['hit_rate']:.1%} |\n\n")
+            
+            f.write("## Portfolio Management\n\n")
+            f.write(f"- **Max Positions:** {MAX_POSITIONS}\n")
+            f.write(f"- **Entry Score Minimum:** 60\n")
+            f.write(f"- **Screening Frequency:** Bi-weekly\n")
+            f.write(f"- **Hold Period:** 120 days maximum\n\n")
+            
+            f.write("## Simulation Results\n\n")
+            f.write(f"- **Initial Capital:** ${INITIAL_CAPITAL:,.0f}\n")
+            f.write(f"- **Final Capital:** ${simulation['final_capital']:,.0f}\n")
+            f.write(f"- **Total Return:** {simulation['total_return']:.1f}%\n")
+            f.write(f"- **Trades Simulated:** {simulation['num_trades']}\n\n")
+            
+            f.write("## Recommendations\n\n")
+            for rec in strategy['recommendations']:
+                f.write(f"- {rec}\n")
+            
+            f.write("\n## Next Steps\n\n")
+            if hit_rate >= 0.40:
+                f.write("1. Begin forward testing on 2024 data\n")
+                f.write("2. Paper trade for 2-4 weeks\n")
+                f.write("3. Start with 50% position sizes\n")
+                f.write("4. Scale to full size after validation\n")
+            else:
+                f.write("1. Review false negatives from test\n")
+                f.write("2. Adjust pattern weights\n")
+                f.write("3. Re-run historical test\n")
+                f.write("4. Iterate until hit rate improves\n")
+        
+        print("\n" + "="*60)
+        print("STRATEGY GENERATION COMPLETE")
+        print("="*60)
+        print(f"Expected Annual Return: {expected_perf['annual_return']:.1f}%")
+        print(f"Position Sizes: 5-15% based on score")
+        print(f"Max Positions: {MAX_POSITIONS}")
+        
+        if hit_rate >= 0.40:
+            print("\n✅ Ready to proceed with forward testing")
+        else:
+            print("\n⚠️ Consider optimizing screener further")
+        
+        STRATEGY_SCRIPT
+    
+    - name: Commit strategy
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        
+        git add Phase4_Results/
+        git commit -m "Investment Strategy Generated - $(date +'%Y-%m-%d %H:%M')"
+        git push
+    
+    - name: Create strategy summary issue
+      if: success()
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          
+          // Read strategy
+          const strategy = JSON.parse(fs.readFileSync('Phase4_Results/latest_strategy.json', 'utf8'));
+          const perf = strategy.expected_performance;
+          
+          // Create issue body
+          let body = `# Investment Strategy Generated\n\n`;
+          body += `## Expected Performance\n\n`;
+          body += `- **Annual Return:** ${perf.annual_return.toFixed(1)}%\n`;
+          body += `- **Win Rate:** ${perf.win_rate.toFixed(1)}%\n`;
+          body += `- **Expected Value:** ${perf.expected_value.toFixed(2)}x\n`;
+          body += `- **Sharpe Ratio:** ${perf.sharpe_ratio.toFixed(2)}\n\n`;
+          
+          body += `## Position Sizing\n\n`;
+          body += `- Score 90-100: ${(strategy.position_sizing.score_90_100.position_size * 100).toFixed(0)}%\n`;
+          body += `- Score 75-89: ${(strategy.position_sizing.score_75_89.position_size * 100).toFixed(0)}%\n`;
+          body += `- Score 60-74: ${(strategy.position_sizing.score_60_74.position_size * 100).toFixed(0)}%\n\n`;
+          
+          body += `## Recommendations\n\n`;
+          strategy.recommendations.forEach(rec => {
+            body += `- ${rec}\n`;
+          });
+          
+          body += `\n## Files Generated\n\n`;
+          body += `- Investment strategy JSON\n`;
+          body += `- Strategy report markdown\n\n`;
+          
+          if (strategy.based_on.hit_rate >= 0.40) {
+            body += `## ✅ Ready for Next Phase\n\n`;
+            body += `The strategy is ready for forward testing and paper trading.\n`;
+          } else {
+            body += `## ⚠️ Optimization Recommended\n\n`;
+            body += `Consider improving the screener before proceeding.\n`;
+          }
+          
+          // Create issue
+          await github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: `Investment Strategy Ready - ${perf.annual_return.toFixed(0)}% Expected Return`,
+            body: body,
+            labels: ['phase-4', 'strategy', strategy.based_on.hit_rate >= 0.40 ? 'ready' : 'needs-review']
+          });

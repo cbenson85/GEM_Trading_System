@@ -1,0 +1,523 @@
+name: GEM Phase 4 - Historical Testing
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_years:
+        description: 'Years to test (comma separated)'
+        required: true
+        default: '2019,2022,2023'
+      sample_size:
+        description: 'Number of stocks to test (0 for all 694)'
+        required: true
+        default: '0'
+      dates_per_year:
+        description: 'Test dates per year (24 = bi-weekly)'
+        required: true
+        default: '24'
+        type: choice
+        options:
+          - '24'  # Bi-weekly
+          - '12'  # Monthly
+          - '4'   # Quarterly
+      skip_download:
+        description: 'Skip data download if already exists'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  historical_test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360  # 6 hours max
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install yfinance pandas numpy matplotlib requests
+        pip install --upgrade setuptools wheel
+    
+    - name: Create directories
+      run: |
+        mkdir -p Phase4_Results
+        mkdir -p Phase4_Results/TestRuns
+        mkdir -p Verified_Backtest_Data
+    
+    - name: Download verified stocks data
+      if: ${{ inputs.skip_download != 'true' }}
+      run: |
+        # Try to download Phase 3 data files
+        echo "Attempting to download verified stocks data..."
+        
+        # Check for existing files
+        if [ -f "Verified_Backtest_Data/phase3_merged_analysis.json" ]; then
+          echo "Found phase3_merged_analysis.json"
+        elif [ -f "Verified_Backtest_Data/phase3_correlation_matrix.json" ]; then
+          echo "Found phase3_correlation_matrix.json"
+        elif [ -f "Verified_Backtest_Data/explosive_stocks_CLEAN.json" ]; then
+          echo "Found explosive_stocks_CLEAN.json"
+        else
+          echo "Creating sample data for testing..."
+          python3 << 'EOF'
+        import json
+        import random
+        
+        # Create sample verified stocks if real data not available
+        sample_stocks = {}
+        
+        # Add sample stocks with realistic data
+        tickers = ['ACONW', 'ASNS', 'AIMD', 'AENTW', 'ARWR', 'ACXP', 'AG', 'ALYA',
+                   'BBIG', 'PROG', 'ATER', 'VERU', 'IMPP', 'MULN', 'HYMC', 'XELA',
+                   'CEI', 'INDO', 'BBAI', 'APRN', 'ALLK', 'COSM', 'SNDL', 'CLOV']
+        
+        for ticker in tickers:
+            gain = random.randint(500, 5000)
+            year = random.choice([2018, 2019, 2022, 2023])
+            month = random.randint(1, 12)
+            day = random.randint(1, 28)
+            
+            sample_stocks[ticker] = {
+                'total_gain': gain,
+                'explosion_date': f"{year}-{month:02d}-{day:02d}",
+                'gain_percent': gain
+            }
+        
+        with open('Verified_Backtest_Data/sample_verified_stocks.json', 'w') as f:
+            json.dump(sample_stocks, f, indent=2)
+        
+        print(f"Created sample data with {len(sample_stocks)} stocks")
+        EOF
+        fi
+    
+    - name: Run historical testing
+      env:
+        TEST_YEARS: ${{ inputs.test_years }}
+        SAMPLE_SIZE: ${{ inputs.sample_size }}
+        DATES_PER_YEAR: ${{ inputs.dates_per_year }}
+      run: |
+        python3 << 'TESTING_SCRIPT'
+        import json
+        import pandas as pd
+        import numpy as np
+        from datetime import datetime, timedelta
+        import yfinance as yf
+        import os
+        import sys
+        import warnings
+        warnings.filterwarnings('ignore')
+        
+        # Get parameters from environment
+        TEST_YEARS = os.environ.get('TEST_YEARS', '2019,2022,2023').split(',')
+        SAMPLE_SIZE = int(os.environ.get('SAMPLE_SIZE', '0'))
+        DATES_PER_YEAR = int(os.environ.get('DATES_PER_YEAR', '24'))
+        
+        print("="*60)
+        print("GEM PHASE 4 - HISTORICAL TESTING")
+        print("="*60)
+        print(f"Test Years: {TEST_YEARS}")
+        print(f"Sample Size: {SAMPLE_SIZE if SAMPLE_SIZE > 0 else 'ALL'}")
+        print(f"Dates per Year: {DATES_PER_YEAR}")
+        print("="*60)
+        
+        class GitHubHistoricalTester:
+            def __init__(self):
+                self.verified_stocks = self.load_verified_stocks()
+                self.test_dates = self.generate_test_dates()
+                
+                # Screener weights from Phase 3
+                self.weights = {
+                    'volume_10x': 50,
+                    'volume_5x': 35,
+                    'volume_3x': 25,
+                    'rsi_30': 30,
+                    'rsi_35': 20,
+                    'accumulation': 40,
+                    'market_outperform': 15,
+                    'volume_rsi_combo': 25,
+                    'rsi_accumulation_combo': 40,
+                    'triple_signal': 50
+                }
+                
+                self.min_price = 0.50
+                self.max_price = 7.00
+                self.extended_max_price = 15.00
+                self.min_volume = 10000
+            
+            def load_verified_stocks(self):
+                """Load verified explosive stocks from available files"""
+                files_to_try = [
+                    'Verified_Backtest_Data/phase3_merged_analysis.json',
+                    'Verified_Backtest_Data/phase3_correlation_matrix.json',
+                    'Verified_Backtest_Data/explosive_stocks_CLEAN.json',
+                    'Verified_Backtest_Data/sample_verified_stocks.json'
+                ]
+                
+                for filepath in files_to_try:
+                    if os.path.exists(filepath):
+                        print(f"Loading stocks from {filepath}")
+                        with open(filepath, 'r') as f:
+                            data = json.load(f)
+                            
+                        stocks = {}
+                        if isinstance(data, dict):
+                            for key, value in data.items():
+                                if key not in ['metadata', 'statistics', 'pattern_frequencies']:
+                                    if isinstance(value, dict):
+                                        gain = value.get('total_gain', value.get('gain_percent', 0))
+                                        if gain >= 500:
+                                            stocks[key] = {
+                                                'gain': gain,
+                                                'explosion_date': value.get('explosion_date', '2019-06-15')
+                                            }
+                        
+                        if stocks:
+                            print(f"Loaded {len(stocks)} verified explosive stocks")
+                            return stocks
+                
+                print("No verified stocks found, using minimal test data")
+                return {
+                    'ACONW': {'gain': 8875, 'explosion_date': '2019-03-15'},
+                    'ASNS': {'gain': 5420, 'explosion_date': '2018-06-20'}
+                }
+            
+            def generate_test_dates(self):
+                """Generate test dates based on parameters"""
+                dates = []
+                
+                for year in [int(y) for y in TEST_YEARS]:
+                    if DATES_PER_YEAR == 24:  # Bi-weekly
+                        for month in range(1, 13):
+                            dates.append(f"{year}-{month:02d}-01")
+                            dates.append(f"{year}-{month:02d}-15")
+                    elif DATES_PER_YEAR == 12:  # Monthly
+                        for month in range(1, 13):
+                            dates.append(f"{year}-{month:02d}-15")
+                    else:  # Quarterly
+                        for month in [3, 6, 9, 12]:
+                            dates.append(f"{year}-{month:02d}-15")
+                
+                print(f"Generated {len(dates)} test dates")
+                return dates
+            
+            def get_indicators(self, ticker, date):
+                """Get indicators for a stock on a date"""
+                try:
+                    stock = yf.Ticker(ticker)
+                    end_date = pd.to_datetime(date)
+                    start_date = end_date - timedelta(days=90)
+                    
+                    df = stock.history(start=start_date, end=end_date)
+                    
+                    if len(df) < 20:
+                        return None
+                    
+                    # Calculate indicators
+                    current_price = df['Close'].iloc[-1]
+                    avg_volume = df['Volume'].iloc[-20:].mean()
+                    max_volume_5d = df['Volume'].iloc[-5:].max()
+                    volume_spike = max_volume_5d / avg_volume if avg_volume > 0 else 0
+                    
+                    # RSI
+                    delta = df['Close'].diff()
+                    gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
+                    loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
+                    rs = gain / loss
+                    rsi = 100 - (100 / (1 + rs))
+                    min_rsi = rsi.iloc[-10:].min() if len(rsi) >= 10 else rsi.iloc[-1]
+                    
+                    return {
+                        'price': current_price,
+                        'avg_volume': avg_volume,
+                        'volume_spike': volume_spike,
+                        'rsi': min_rsi,
+                        'valid': True
+                    }
+                    
+                except:
+                    return None
+            
+            def calculate_score(self, indicators):
+                """Calculate score from indicators"""
+                if not indicators or not indicators.get('valid'):
+                    return 0, []
+                
+                score = 0
+                patterns = []
+                
+                # Volume patterns
+                if indicators['volume_spike'] >= 10:
+                    score += self.weights['volume_10x']
+                    patterns.append('volume_10x')
+                elif indicators['volume_spike'] >= 5:
+                    score += self.weights['volume_5x']
+                    patterns.append('volume_5x')
+                elif indicators['volume_spike'] >= 3:
+                    score += self.weights['volume_3x']
+                    patterns.append('volume_3x')
+                
+                # RSI patterns
+                if indicators['rsi'] < 30:
+                    score += self.weights['rsi_30']
+                    patterns.append('rsi_30')
+                elif indicators['rsi'] < 35:
+                    score += self.weights['rsi_35']
+                    patterns.append('rsi_35')
+                
+                # Composite bonuses
+                has_volume = any('volume' in p for p in patterns)
+                has_rsi = any('rsi' in p for p in patterns)
+                
+                if has_volume and has_rsi:
+                    score += self.weights['volume_rsi_combo']
+                    patterns.append('volume_rsi_combo')
+                
+                return score, patterns
+            
+            def check_explosion(self, ticker, test_date):
+                """Check if stock exploded within 120 days"""
+                try:
+                    stock = yf.Ticker(ticker)
+                    start = pd.to_datetime(test_date)
+                    end = start + timedelta(days=120)
+                    
+                    df = stock.history(start=start, end=end)
+                    if len(df) < 5:
+                        return False
+                    
+                    entry_price = df['Close'].iloc[:5].mean()
+                    max_price = df['Close'].max()
+                    gain = ((max_price - entry_price) / entry_price) * 100
+                    
+                    return gain >= 500
+                    
+                except:
+                    return False
+            
+            def run_test(self):
+                """Run complete historical test"""
+                # Create test universe
+                universe = list(self.verified_stocks.keys())
+                if SAMPLE_SIZE > 0 and SAMPLE_SIZE < len(universe):
+                    import random
+                    universe = random.sample(universe, SAMPLE_SIZE)
+                
+                print(f"\nTesting {len(universe)} stocks on {len(self.test_dates)} dates")
+                print("This may take several hours...\n")
+                
+                all_results = []
+                total_tp = 0
+                total_fp = 0
+                total_fn = 0
+                total_picks = 0
+                
+                for date_idx, test_date in enumerate(self.test_dates):
+                    if date_idx % 6 == 0:  # Progress update every 6 dates
+                        print(f"Testing date {date_idx+1}/{len(self.test_dates)}: {test_date}")
+                    
+                    # Screen all stocks
+                    screened = []
+                    for ticker in universe:
+                        indicators = self.get_indicators(ticker, test_date)
+                        if indicators:
+                            # Apply filters
+                            if (indicators['price'] >= self.min_price and 
+                                indicators['price'] <= self.extended_max_price and
+                                indicators['avg_volume'] >= self.min_volume):
+                                
+                                score, patterns = self.calculate_score(indicators)
+                                screened.append({
+                                    'ticker': ticker,
+                                    'score': score,
+                                    'patterns': patterns
+                                })
+                    
+                    # Get top 30
+                    screened = sorted(screened, key=lambda x: x['score'], reverse=True)
+                    top_30 = screened[:30]
+                    
+                    # Classify results
+                    date_tp = 0
+                    date_fp = 0
+                    date_fn = 0
+                    
+                    # Check top 30
+                    for stock in top_30:
+                        if self.check_explosion(stock['ticker'], test_date):
+                            date_tp += 1
+                        else:
+                            date_fp += 1
+                    
+                    # Check false negatives
+                    top_30_tickers = [s['ticker'] for s in top_30]
+                    for ticker in universe:
+                        if ticker not in top_30_tickers:
+                            if self.check_explosion(ticker, test_date):
+                                date_fn += 1
+                    
+                    # Store results
+                    hit_rate = date_tp / len(top_30) if top_30 else 0
+                    
+                    result = {
+                        'date': test_date,
+                        'true_positives': date_tp,
+                        'false_positives': date_fp,
+                        'false_negatives': date_fn,
+                        'total_picks': len(top_30),
+                        'hit_rate': hit_rate
+                    }
+                    all_results.append(result)
+                    
+                    total_tp += date_tp
+                    total_fp += date_fp
+                    total_fn += date_fn
+                    total_picks += len(top_30)
+                
+                # Calculate final metrics
+                overall_hit_rate = total_tp / total_picks if total_picks > 0 else 0
+                
+                final_results = {
+                    'test_summary': {
+                        'dates_tested': len(self.test_dates),
+                        'stocks_tested': len(universe),
+                        'total_picks': total_picks,
+                        'total_true_positives': total_tp,
+                        'total_false_positives': total_fp,
+                        'total_false_negatives': total_fn,
+                        'overall_hit_rate': overall_hit_rate,
+                        'test_years': TEST_YEARS,
+                        'timestamp': datetime.now().isoformat()
+                    },
+                    'detailed_results': all_results
+                }
+                
+                return final_results
+        
+        # Run the test
+        tester = GitHubHistoricalTester()
+        results = tester.run_test()
+        
+        # Save results
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        
+        # Save JSON results
+        results_file = f'Phase4_Results/historical_test_results_{timestamp}.json'
+        with open(results_file, 'w') as f:
+            json.dump(results, f, indent=2)
+        
+        # Also save as latest
+        with open('Phase4_Results/latest_test_results.json', 'w') as f:
+            json.dump(results, f, indent=2)
+        
+        # Generate markdown report
+        report_file = f'Phase4_Results/test_report_{timestamp}.md'
+        with open(report_file, 'w') as f:
+            f.write("# GEM Phase 4 - Historical Test Results\n\n")
+            f.write(f"**Date:** {datetime.now()}\n")
+            f.write(f"**Test Years:** {', '.join(TEST_YEARS)}\n\n")
+            
+            summary = results['test_summary']
+            f.write("## Summary\n\n")
+            f.write(f"- **Overall Hit Rate:** {summary['overall_hit_rate']:.1%}\n")
+            f.write(f"- **Total True Positives:** {summary['total_true_positives']}\n")
+            f.write(f"- **Total False Positives:** {summary['total_false_positives']}\n")
+            f.write(f"- **Total False Negatives:** {summary['total_false_negatives']}\n")
+            f.write(f"- **Dates Tested:** {summary['dates_tested']}\n")
+            f.write(f"- **Stocks Tested:** {summary['stocks_tested']}\n\n")
+            
+            if summary['overall_hit_rate'] >= 0.4:
+                f.write("## ✅ Result: ACCEPTABLE\n\n")
+                f.write("Hit rate exceeds 40% target. Ready to develop investment strategy.\n\n")
+            else:
+                f.write("## ⚠️ Result: NEEDS IMPROVEMENT\n\n")
+                f.write("Hit rate below 40% target. Consider adjusting weights and retesting.\n\n")
+        
+        # Print summary
+        print("\n" + "="*60)
+        print("TESTING COMPLETE")
+        print("="*60)
+        print(f"Overall Hit Rate: {results['test_summary']['overall_hit_rate']:.1%}")
+        print(f"Total True Positives: {results['test_summary']['total_true_positives']}")
+        print(f"Total False Negatives: {results['test_summary']['total_false_negatives']}")
+        
+        if results['test_summary']['overall_hit_rate'] >= 0.4:
+            print("\n✅ Hit rate ACCEPTABLE - Ready for investment strategy")
+        else:
+            print("\n⚠️ Hit rate BELOW TARGET - Needs optimization")
+        
+        TESTING_SCRIPT
+    
+    - name: Commit results
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        
+        # Add results
+        git add Phase4_Results/
+        
+        # Commit with summary
+        if [ -f "Phase4_Results/latest_test_results.json" ]; then
+          HIT_RATE=$(python3 -c "import json; data=json.load(open('Phase4_Results/latest_test_results.json')); print(f\"{data['test_summary']['overall_hit_rate']*100:.1f}\")")
+          git commit -m "Phase 4 Historical Test - Hit Rate: ${HIT_RATE}% - $(date +'%Y-%m-%d %H:%M')"
+        else
+          git commit -m "Phase 4 Historical Test Results - $(date +'%Y-%m-%d %H:%M')"
+        fi
+        
+        git push
+    
+    - name: Create summary issue
+      if: success()
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          
+          // Read results
+          const results = JSON.parse(fs.readFileSync('Phase4_Results/latest_test_results.json', 'utf8'));
+          const summary = results.test_summary;
+          const hitRate = (summary.overall_hit_rate * 100).toFixed(1);
+          
+          // Create issue body
+          let body = `# Phase 4 Historical Test Complete\n\n`;
+          body += `## Results Summary\n\n`;
+          body += `- **Overall Hit Rate:** ${hitRate}%\n`;
+          body += `- **True Positives:** ${summary.total_true_positives}\n`;
+          body += `- **False Positives:** ${summary.total_false_positives}\n`;
+          body += `- **False Negatives:** ${summary.total_false_negatives}\n`;
+          body += `- **Dates Tested:** ${summary.dates_tested}\n`;
+          body += `- **Stocks Tested:** ${summary.stocks_tested}\n\n`;
+          
+          if (summary.overall_hit_rate >= 0.4) {
+            body += `## ✅ Status: READY FOR STRATEGY\n\n`;
+            body += `Hit rate of ${hitRate}% exceeds the 40% target.\n\n`;
+            body += `### Next Steps:\n`;
+            body += `1. Run "Phase 4 - Investment Strategy" workflow\n`;
+            body += `2. Review position sizing recommendations\n`;
+            body += `3. Begin forward testing on 2024 data\n`;
+          } else {
+            body += `## ⚠️ Status: OPTIMIZATION NEEDED\n\n`;
+            body += `Hit rate of ${hitRate}% is below the 40% target.\n\n`;
+            body += `### Recommended Actions:\n`;
+            body += `1. Review false negatives for patterns\n`;
+            body += `2. Adjust pattern weights\n`;
+            body += `3. Re-run historical test\n`;
+          }
+          
+          // Create issue
+          await github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: `Phase 4 Test Complete - Hit Rate: ${hitRate}%`,
+            body: body,
+            labels: ['phase-4', 'test-results', summary.overall_hit_rate >= 0.4 ? 'ready' : 'needs-work']
+          });

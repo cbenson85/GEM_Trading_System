@@ -1,0 +1,339 @@
+name: GEM Phase 4 - Optimize Weights
+
+on:
+  workflow_dispatch:
+    inputs:
+      volume_3x:
+        description: 'Weight for 3x volume spike'
+        required: true
+        default: '25'
+      volume_5x:
+        description: 'Weight for 5x volume spike'
+        required: true
+        default: '35'
+      volume_10x:
+        description: 'Weight for 10x volume spike'
+        required: true
+        default: '50'
+      rsi_30:
+        description: 'Weight for RSI < 30'
+        required: true
+        default: '30'
+      rsi_35:
+        description: 'Weight for RSI < 35'
+        required: true
+        default: '20'
+      accumulation:
+        description: 'Weight for accumulation pattern'
+        required: true
+        default: '40'
+      test_sample:
+        description: 'Number of stocks to test (0 for all)'
+        required: true
+        default: '50'
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install yfinance pandas numpy
+    
+    - name: Create directories
+      run: |
+        mkdir -p Phase4_Results/Optimization
+    
+    - name: Run optimization test
+      env:
+        W_VOLUME_3X: ${{ inputs.volume_3x }}
+        W_VOLUME_5X: ${{ inputs.volume_5x }}
+        W_VOLUME_10X: ${{ inputs.volume_10x }}
+        W_RSI_30: ${{ inputs.rsi_30 }}
+        W_RSI_35: ${{ inputs.rsi_35 }}
+        W_ACCUMULATION: ${{ inputs.accumulation }}
+        TEST_SAMPLE: ${{ inputs.test_sample }}
+      run: |
+        python3 << 'OPTIMIZE_SCRIPT'
+        import json
+        import pandas as pd
+        import numpy as np
+        from datetime import datetime, timedelta
+        import yfinance as yf
+        import os
+        import warnings
+        warnings.filterwarnings('ignore')
+        
+        print("="*60)
+        print("GEM SCREENER WEIGHT OPTIMIZATION")
+        print("="*60)
+        
+        # Get weights from inputs
+        weights = {
+            'volume_3x': float(os.environ.get('W_VOLUME_3X', 25)),
+            'volume_5x': float(os.environ.get('W_VOLUME_5X', 35)),
+            'volume_10x': float(os.environ.get('W_VOLUME_10X', 50)),
+            'rsi_30': float(os.environ.get('W_RSI_30', 30)),
+            'rsi_35': float(os.environ.get('W_RSI_35', 20)),
+            'accumulation': float(os.environ.get('W_ACCUMULATION', 40)),
+            'market_outperform': 15,
+            'volume_rsi_combo': 25,
+            'rsi_accumulation_combo': 40,
+            'triple_signal': 50
+        }
+        
+        sample_size = int(os.environ.get('TEST_SAMPLE', 50))
+        
+        print("Testing weights:")
+        for key, value in weights.items():
+            if key in ['volume_3x', 'volume_5x', 'volume_10x', 'rsi_30', 'rsi_35', 'accumulation']:
+                print(f"  {key}: {value}")
+        print(f"\nSample size: {sample_size if sample_size > 0 else 'ALL'}")
+        print("="*60)
+        
+        # Load verified stocks
+        def load_stocks():
+            files = [
+                'Verified_Backtest_Data/phase3_merged_analysis.json',
+                'Verified_Backtest_Data/sample_verified_stocks.json',
+                'Phase4_Results/latest_test_results.json'
+            ]
+            
+            for f in files:
+                if os.path.exists(f):
+                    with open(f, 'r') as file:
+                        data = json.load(file)
+                        if 'test_summary' in data:
+                            # It's test results, extract stock universe
+                            return ['ACONW', 'ASNS', 'AIMD', 'AENTW', 'ARWR']  # Sample
+                        else:
+                            stocks = {}
+                            for k, v in data.items():
+                                if isinstance(v, dict) and 'total_gain' in v:
+                                    stocks[k] = v
+                            if stocks:
+                                return list(stocks.keys())
+            
+            # Fallback
+            return ['ACONW', 'ASNS', 'AIMD', 'AENTW', 'ARWR']
+        
+        # Quick test on subset of dates
+        test_dates = [
+            '2019-01-15', '2019-06-15', '2019-09-15',
+            '2022-03-15', '2022-06-15', '2022-09-15',
+            '2023-03-15', '2023-06-15', '2023-09-15'
+        ]
+        
+        universe = load_stocks()
+        if sample_size > 0 and sample_size < len(universe):
+            import random
+            universe = random.sample(universe, min(sample_size, len(universe)))
+        
+        print(f"\nTesting {len(universe)} stocks on {len(test_dates)} dates...")
+        
+        # Test with new weights
+        total_tp = 0
+        total_fp = 0
+        total_picks = 0
+        
+        for test_date in test_dates:
+            # Screen stocks with new weights
+            screened = []
+            
+            for ticker in universe:
+                try:
+                    stock = yf.Ticker(ticker)
+                    end_date = pd.to_datetime(test_date)
+                    start_date = end_date - timedelta(days=90)
+                    df = stock.history(start=start_date, end=end_date)
+                    
+                    if len(df) < 20:
+                        continue
+                    
+                    # Get indicators
+                    price = df['Close'].iloc[-1]
+                    avg_vol = df['Volume'].iloc[-20:].mean()
+                    max_vol_5d = df['Volume'].iloc[-5:].max()
+                    vol_spike = max_vol_5d / avg_vol if avg_vol > 0 else 0
+                    
+                    # RSI
+                    delta = df['Close'].diff()
+                    gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
+                    loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
+                    rs = gain / loss
+                    rsi = 100 - (100 / (1 + rs))
+                    min_rsi = rsi.iloc[-10:].min()
+                    
+                    # Apply filters
+                    if price < 0.50 or price > 15 or avg_vol < 10000:
+                        continue
+                    
+                    # Calculate score with NEW weights
+                    score = 0
+                    if vol_spike >= 10:
+                        score += weights['volume_10x']
+                    elif vol_spike >= 5:
+                        score += weights['volume_5x']
+                    elif vol_spike >= 3:
+                        score += weights['volume_3x']
+                    
+                    if min_rsi < 30:
+                        score += weights['rsi_30']
+                    elif min_rsi < 35:
+                        score += weights['rsi_35']
+                    
+                    screened.append({
+                        'ticker': ticker,
+                        'score': score
+                    })
+                    
+                except:
+                    continue
+            
+            # Get top 30
+            screened = sorted(screened, key=lambda x: x['score'], reverse=True)
+            top_30 = screened[:30]
+            
+            # Check for explosions (simplified)
+            tp = 0
+            for stock in top_30:
+                try:
+                    ticker = stock['ticker']
+                    stock_obj = yf.Ticker(ticker)
+                    start = pd.to_datetime(test_date)
+                    end = start + timedelta(days=120)
+                    future_df = stock_obj.history(start=start, end=end)
+                    
+                    if len(future_df) >= 5:
+                        entry = future_df['Close'].iloc[:5].mean()
+                        peak = future_df['Close'].max()
+                        gain = ((peak - entry) / entry) * 100
+                        if gain >= 500:
+                            tp += 1
+                except:
+                    pass
+            
+            fp = len(top_30) - tp
+            total_tp += tp
+            total_fp += fp
+            total_picks += len(top_30)
+            
+            print(f"  {test_date}: {tp}/{len(top_30)} hits")
+        
+        # Calculate results
+        hit_rate = total_tp / total_picks if total_picks > 0 else 0
+        
+        results = {
+            'optimization_date': datetime.now().isoformat(),
+            'weights_tested': weights,
+            'test_summary': {
+                'dates_tested': len(test_dates),
+                'stocks_tested': len(universe),
+                'total_picks': total_picks,
+                'true_positives': total_tp,
+                'false_positives': total_fp,
+                'hit_rate': hit_rate
+            },
+            'improvement': None
+        }
+        
+        # Compare to baseline if available
+        if os.path.exists('Phase4_Results/latest_test_results.json'):
+            with open('Phase4_Results/latest_test_results.json', 'r') as f:
+                baseline = json.load(f)
+                baseline_rate = baseline['test_summary']['overall_hit_rate']
+                improvement = hit_rate - baseline_rate
+                results['improvement'] = {
+                    'baseline_hit_rate': baseline_rate,
+                    'new_hit_rate': hit_rate,
+                    'change': improvement,
+                    'percent_change': (improvement / baseline_rate * 100) if baseline_rate > 0 else 0
+                }
+        
+        # Save results
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        opt_file = f'Phase4_Results/Optimization/optimization_{timestamp}.json'
+        with open(opt_file, 'w') as f:
+            json.dump(results, f, indent=2)
+        
+        # Generate report
+        report = f'Phase4_Results/Optimization/optimization_report_{timestamp}.md'
+        with open(report, 'w') as f:
+            f.write("# Weight Optimization Results\n\n")
+            f.write(f"**Date:** {datetime.now()}\n\n")
+            
+            f.write("## Weights Tested\n\n")
+            f.write("| Pattern | Weight |\n")
+            f.write("|---------|--------|\n")
+            for key in ['volume_3x', 'volume_5x', 'volume_10x', 'rsi_30', 'rsi_35', 'accumulation']:
+                f.write(f"| {key} | {weights[key]} |\n")
+            
+            f.write(f"\n## Results\n\n")
+            f.write(f"- **Hit Rate:** {hit_rate:.1%}\n")
+            f.write(f"- **True Positives:** {total_tp}\n")
+            f.write(f"- **False Positives:** {total_fp}\n")
+            f.write(f"- **Dates Tested:** {len(test_dates)}\n\n")
+            
+            if results['improvement']:
+                imp = results['improvement']
+                f.write("## Comparison to Baseline\n\n")
+                f.write(f"- **Baseline Hit Rate:** {imp['baseline_hit_rate']:.1%}\n")
+                f.write(f"- **New Hit Rate:** {imp['new_hit_rate']:.1%}\n")
+                f.write(f"- **Change:** {imp['change']:+.1%}\n")
+                
+                if imp['change'] > 0:
+                    f.write("\n✅ **IMPROVEMENT FOUND**\n")
+                elif imp['change'] < 0:
+                    f.write("\n❌ **PERFORMANCE DECREASED**\n")
+                else:
+                    f.write("\n➖ **NO CHANGE**\n")
+        
+        print("\n" + "="*60)
+        print("OPTIMIZATION COMPLETE")
+        print("="*60)
+        print(f"Hit Rate: {hit_rate:.1%}")
+        
+        if results['improvement']:
+            if results['improvement']['change'] > 0:
+                print(f"✅ IMPROVED by {results['improvement']['change']:.1%}")
+                print("\nRecommendation: Run full test with these weights")
+            else:
+                print(f"❌ DECREASED by {abs(results['improvement']['change']):.1%}")
+                print("\nRecommendation: Keep original weights")
+        
+        # Save recommended weights if improved
+        if results['improvement'] and results['improvement']['change'] > 0:
+            with open('Phase4_Results/recommended_weights.json', 'w') as f:
+                json.dump({
+                    'weights': weights,
+                    'hit_rate': hit_rate,
+                    'recommendation': 'Use these weights for next full test'
+                }, f, indent=2)
+            print("\n💾 Saved as recommended_weights.json")
+        
+        OPTIMIZE_SCRIPT
+    
+    - name: Commit optimization results
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        
+        git add Phase4_Results/
+        
+        # Get hit rate for commit message
+        HIT_RATE=$(python3 -c "import json, glob; files=glob.glob('Phase4_Results/Optimization/optimization_*.json'); data=json.load(open(sorted(files)[-1])) if files else {'test_summary':{'hit_rate':0}}; print(f\"{data['test_summary']['hit_rate']*100:.1f}\")" 2>/dev/null || echo "0")
+        
+        git commit -m "Weight Optimization Test - Hit Rate: ${HIT_RATE}% - $(date +'%Y-%m-%d %H:%M')"
+        git push
