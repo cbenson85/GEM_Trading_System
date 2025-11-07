@@ -1,10 +1,10 @@
-name: GEM Screener v6.0 - Daily Screen
+name: GEM Screener v6.0 - Daily Screen (Simplified)
 
 on:
   workflow_dispatch:
     inputs:
       stock_universe:
-        description: 'Stock universe to screen (small, medium, large, custom)'
+        description: 'Stock universe size'
         required: true
         default: 'small'
         type: choice
@@ -14,28 +14,23 @@ on:
           - large
           - custom
       custom_tickers:
-        description: 'Custom tickers (comma separated, only if custom selected)'
+        description: 'Custom tickers (comma separated)'
         required: false
         default: ''
-      top_n:
-        description: 'Number of top stocks to display'
-        required: true
-        default: '30'
   schedule:
-    # Run every weekday at 4:30 PM ET (after market close)
-    - cron: '30 21 * * 1-5'  # 21:30 UTC = 4:30 PM ET
+    # Run every weekday at 4:30 PM ET
+    - cron: '30 21 * * 1-5'
 
 jobs:
-  screen_stocks:
+  screen:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     
     steps:
-    - name: Checkout repository
+    - name: Checkout
       uses: actions/checkout@v3
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
     
-    - name: Set up Python
+    - name: Setup Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
@@ -45,210 +40,230 @@ jobs:
         pip install yfinance pandas numpy requests
         pip install --upgrade setuptools wheel
     
-    - name: Create screener script
+    - name: Create stock universe
       run: |
-        cat > run_daily_screen.py << 'EOF'
-        #!/usr/bin/env python3
+        mkdir -p Daily_Screens
+        
+        # Create universe based on input
+        if [ "${{ inputs.stock_universe }}" == "custom" ] && [ -n "${{ inputs.custom_tickers }}" ]; then
+          echo "${{ inputs.custom_tickers }}" | tr ',' '\n' > stock_universe.txt
+        else
+          # Default small universe
+          cat > stock_universe.txt << 'EOF'
+        PLTR
+        SOFI
+        RIVN
+        LCID
+        NIO
+        BBIG
+        PROG
+        ATER
+        VERU
+        IMPP
+        MULN
+        HYMC
+        XELA
+        CEI
+        INDO
+        BBAI
+        APRN
+        ALLK
+        COSM
+        SNDL
+        EOF
+        fi
+        
+        echo "Stock universe:"
+        cat stock_universe.txt
+    
+    - name: Run screener
+      run: |
+        python3 << 'PYTHON_EOF'
         import sys
         import json
-        import os
-        from datetime import datetime
         import yfinance as yf
         import pandas as pd
         import numpy as np
+        from datetime import datetime
         import warnings
         warnings.filterwarnings('ignore')
         
-        # Import the screener
-        sys.path.append('.')
-        from gem_screener_v6 import GEMScreenerV6
-        
-        def get_stock_universe(universe_type, custom_tickers=''):
-            """Get list of stocks to screen based on universe type"""
+        # Simplified screener for workflow
+        class SimpleGEMScreener:
+            def __init__(self):
+                self.weights = {
+                    'volume_3x': 25,
+                    'volume_5x': 35,
+                    'volume_10x': 50,
+                    'rsi_oversold_35': 20,
+                    'rsi_oversold_30': 30,
+                    'accumulation': 40,
+                    'market_outperform': 15
+                }
             
-            if universe_type == 'custom' and custom_tickers:
-                return [t.strip() for t in custom_tickers.split(',')]
-            
-            elif universe_type == 'small':
-                # Small test universe
-                return [
-                    'PLTR', 'SOFI', 'RIVN', 'LCID', 'NIO', 'BBIG', 'PROG', 
-                    'ATER', 'VERU', 'IMPP', 'MULN', 'NILE', 'HYMC', 'XELA',
-                    'CEI', 'INDO', 'BBAI', 'APRN', 'ALLK', 'COSM'
-                ]
-            
-            elif universe_type == 'medium':
-                # Medium universe - more penny stocks
+            def analyze_stock(self, ticker):
                 try:
-                    # Try to load from saved universe file
-                    with open('Screening_Universe/penny_stocks.json', 'r') as f:
-                        stocks = json.load(f)
-                        return stocks[:100]  # First 100
-                except:
-                    # Fallback list
-                    return [
-                        'PLTR', 'SOFI', 'RIVN', 'LCID', 'NIO', 'BBIG', 'PROG',
-                        'ATER', 'VERU', 'IMPP', 'MULN', 'NILE', 'HYMC', 'XELA',
-                        'CEI', 'INDO', 'BBAI', 'APRN', 'ALLK', 'COSM', 'SNDL',
-                        'CLOV', 'WISH', 'WKHS', 'RIDE', 'GOEV', 'NKLA', 'SPCE',
-                        'ASTS', 'RKLB', 'RDW', 'ASTR', 'VORB', 'MNMD', 'CMPS',
-                        'ATAI', 'DRUG', 'SAVA', 'ANVS', 'AVXL', 'KMPH', 'SESN'
-                    ]
-            
-            elif universe_type == 'large':
-                # Large universe - would need to be loaded from file
-                try:
-                    with open('Screening_Universe/full_universe.json', 'r') as f:
-                        return json.load(f)
-                except:
-                    print("Large universe file not found, using medium instead")
-                    return get_stock_universe('medium')
-            
-            else:
-                return get_stock_universe('small')
+                    stock = yf.Ticker(ticker)
+                    df = stock.history(period="3mo")
+                    
+                    if len(df) < 20:
+                        return None
+                    
+                    # Basic calculations
+                    current_price = df['Close'].iloc[-1]
+                    current_volume = df['Volume'].iloc[-1]
+                    avg_volume = df['Volume'].iloc[-20:].mean()
+                    
+                    # Volume spike
+                    volume_spike = current_volume / avg_volume if avg_volume > 0 else 0
+                    
+                    # RSI
+                    delta = df['Close'].diff()
+                    gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
+                    loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
+                    rs = gain / loss
+                    rsi = 100 - (100 / (1 + rs))
+                    current_rsi = rsi.iloc[-1]
+                    
+                    # Score calculation
+                    score = 0
+                    patterns = []
+                    
+                    if volume_spike >= 10:
+                        score += self.weights['volume_10x']
+                        patterns.append('volume_10x')
+                    elif volume_spike >= 5:
+                        score += self.weights['volume_5x']
+                        patterns.append('volume_5x')
+                    elif volume_spike >= 3:
+                        score += self.weights['volume_3x']
+                        patterns.append('volume_3x')
+                    
+                    if current_rsi < 30:
+                        score += self.weights['rsi_oversold_30']
+                        patterns.append('rsi_30')
+                    elif current_rsi < 35:
+                        score += self.weights['rsi_oversold_35']
+                        patterns.append('rsi_35')
+                    
+                    return {
+                        'ticker': ticker,
+                        'score': score,
+                        'price': round(current_price, 2),
+                        'volume_spike': round(volume_spike, 1),
+                        'rsi': round(current_rsi, 1),
+                        'patterns': patterns,
+                        'recommendation': 'STRONG BUY' if score >= 100 else 'BUY' if score >= 75 else 'WATCH' if score >= 60 else 'PASS'
+                    }
+                    
+                except Exception as e:
+                    print(f"Error analyzing {ticker}: {e}")
+                    return None
         
-        def main():
-            # Get inputs from environment/workflow
-            universe_type = os.environ.get('INPUT_STOCK_UNIVERSE', 'small')
-            custom_tickers = os.environ.get('INPUT_CUSTOM_TICKERS', '')
-            top_n = int(os.environ.get('INPUT_TOP_N', '30'))
-            
-            print("="*60)
-            print("GEM SCREENER v6.0 - DAILY SCREEN")
-            print("="*60)
-            print(f"Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-            print(f"Universe: {universe_type}")
-            print(f"Top N: {top_n}")
-            print("="*60)
-            
-            # Get stock universe
-            stocks = get_stock_universe(universe_type, custom_tickers)
-            print(f"\nScreening {len(stocks)} stocks...")
-            
-            # Initialize screener
-            screener = GEMScreenerV6()
-            
-            # Run screen
-            results = screener.run_screen(stocks)
-            
-            # Display results
-            if results:
-                screener.display_results(results, top_n=top_n)
-                
-                # Save results
-                output_dir = 'Daily_Screens'
-                os.makedirs(output_dir, exist_ok=True)
-                
-                filename = f"{output_dir}/screen_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-                screener.export_results(results, filename)
-                
-                # Also save latest results
-                latest_file = f"{output_dir}/latest_screen.json"
-                screener.export_results(results, latest_file)
-                
-                # Create markdown report
-                create_markdown_report(results[:top_n], filename.replace('.json', '.md'))
-                
-                print(f"\n✅ Results saved to {filename}")
-                
-                # Check if any STRONG BUY signals
-                strong_buys = [r for r in results if r['score'] >= 100]
-                if strong_buys:
-                    print("\n🚨 STRONG BUY SIGNALS DETECTED:")
-                    for stock in strong_buys[:5]:
-                        print(f"   {stock['ticker']}: Score {stock['score']}")
-                
-            else:
-                print("❌ No stocks passed screening filters")
-            
-            return 0 if results else 1
+        # Main execution
+        print("="*60)
+        print(f"GEM Screener v6.0 - {datetime.now()}")
+        print("="*60)
         
-        def create_markdown_report(results, filename):
-            """Create a markdown report of screening results"""
-            with open(filename, 'w') as f:
-                f.write(f"# GEM Screener v6.0 - Results\n\n")
-                f.write(f"**Date:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
-                f.write(f"## Top {len(results)} Stocks\n\n")
-                
-                f.write("| Rank | Ticker | Score | Recommendation | Price | Volume Spike | RSI | Key Patterns |\n")
-                f.write("|------|--------|-------|----------------|-------|--------------|-----|-------------|\n")
-                
-                for i, stock in enumerate(results, 1):
-                    patterns = ', '.join(stock['patterns'][:3])
-                    f.write(f"| {i} | **{stock['ticker']}** | {stock['score']} | {stock['recommendation']} | ")
-                    f.write(f"${stock['price']:.2f} | {stock['volume_spike']:.1f}x | ")
-                    f.write(f"{stock['rsi']:.1f} | {patterns} |\n")
-                
-                # Summary section
-                f.write("\n## Summary\n\n")
-                strong_buys = len([r for r in results if r['score'] >= 100])
-                buys = len([r for r in results if 75 <= r['score'] < 100])
-                watch = len([r for r in results if 60 <= r['score'] < 75])
-                
-                f.write(f"- **Strong Buy (100+):** {strong_buys} stocks\n")
-                f.write(f"- **Buy (75-99):** {buys} stocks\n")
-                f.write(f"- **Watch (60-74):** {watch} stocks\n")
-                
-                f.write("\n## Remember\n\n")
-                f.write("- Track ALL top 30 stocks for 120 days\n")
-                f.write("- Document why each stock was bought or rejected\n")
-                f.write("- Check back in 120 days for false negative analysis\n")
+        # Read stock universe
+        with open('stock_universe.txt', 'r') as f:
+            stocks = [line.strip() for line in f if line.strip()]
         
-        if __name__ == '__main__':
-            sys.exit(main())
-        EOF
-        chmod +x run_daily_screen.py
+        print(f"Screening {len(stocks)} stocks...")
+        
+        # Run screener
+        screener = SimpleGEMScreener()
+        results = []
+        
+        for ticker in stocks:
+            result = screener.analyze_stock(ticker)
+            if result and result['price'] >= 0.50 and result['price'] <= 15.00:
+                results.append(result)
+        
+        # Sort by score
+        results = sorted(results, key=lambda x: x['score'], reverse=True)
+        
+        # Display top 30
+        print("\nTOP 30 RESULTS:")
+        print("-"*60)
+        for i, r in enumerate(results[:30], 1):
+            print(f"{i}. {r['ticker']}: Score {r['score']} - {r['recommendation']}")
+            print(f"   Price: ${r['price']}, Volume: {r['volume_spike']}x, RSI: {r['rsi']}")
+        
+        # Save results
+        output = {
+            'screen_date': datetime.now().isoformat(),
+            'total_screened': len(stocks),
+            'passed_filters': len(results),
+            'results': {
+                'all_results': results,
+                'top_30': results[:30],
+                'strong_buys': [r for r in results if r['score'] >= 100]
+            }
+        }
+        
+        with open('Daily_Screens/latest_screen.json', 'w') as f:
+            json.dump(output, f, indent=2)
+        
+        # Create markdown report
+        with open('Daily_Screens/latest_screen.md', 'w') as f:
+            f.write(f"# GEM Screener Results - {datetime.now()}\n\n")
+            f.write("## Top 30 Stocks\n\n")
+            f.write("| Rank | Ticker | Score | Rec | Price | Vol Spike | RSI |\n")
+            f.write("|------|--------|-------|-----|-------|-----------|-----|\n")
+            for i, r in enumerate(results[:30], 1):
+                f.write(f"| {i} | {r['ticker']} | {r['score']} | {r['recommendation']} | ${r['price']} | {r['volume_spike']}x | {r['rsi']} |\n")
+        
+        # Check for strong buys
+        strong_buys = [r for r in results if r['score'] >= 100]
+        if strong_buys:
+            print(f"\n🚨 STRONG BUY ALERTS: {len(strong_buys)} stocks with score 100+")
+            with open('strong_buy_alert.txt', 'w') as f:
+                f.write("STRONG_BUYS_FOUND=true\n")
+                f.write(f"COUNT={len(strong_buys)}\n")
+        
+        print(f"\n✅ Results saved to Daily_Screens/")
+        PYTHON_EOF
     
-    - name: Copy screener module
+    - name: Check for alerts
+      id: check_alerts
       run: |
-        if [ -f "gem_screener_v6.py" ]; then
-          echo "Using existing screener"
-        else
-          echo "Screener not found, creating from embedded version"
-          # Would need to embed or download the screener here
+        if [ -f "strong_buy_alert.txt" ]; then
+          cat strong_buy_alert.txt >> $GITHUB_ENV
+          echo "Strong buy signals detected!"
         fi
-    
-    - name: Run screening
-      env:
-        INPUT_STOCK_UNIVERSE: ${{ inputs.stock_universe || 'small' }}
-        INPUT_CUSTOM_TICKERS: ${{ inputs.custom_tickers || '' }}
-        INPUT_TOP_N: ${{ inputs.top_n || '30' }}
-      run: |
-        python run_daily_screen.py
     
     - name: Commit results
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
-        git add Daily_Screens/
-        git diff --staged --quiet || git commit -m "Daily screen results - $(date +'%Y-%m-%d %H:%M')"
-        git push
+        git add Daily_Screens/ || true
+        git diff --staged --quiet || git commit -m "Screen results - $(date +'%Y-%m-%d %H:%M')"
+        git push || echo "No changes to push"
     
-    - name: Create issue if strong buys found
-      if: success()
-      run: |
-        if [ -f "Daily_Screens/latest_screen.json" ]; then
-          python -c "
-import json
-with open('Daily_Screens/latest_screen.json', 'r') as f:
-    data = json.load(f)
-    strong_buys = [r for r in data['results']['all_results'] if r['score'] >= 100]
-    if strong_buys:
-        print('STRONG_BUYS_FOUND=true')
-        with open('strong_buys.txt', 'w') as out:
-            out.write('# 🚨 Strong Buy Signals Detected\\n\\n')
-            for stock in strong_buys[:5]:
-                out.write(f\"- **{stock['ticker']}**: Score {stock['score']}\\n\")
-          " >> $GITHUB_ENV
-        fi
-    
-    - name: Create GitHub Issue for Strong Buys
+    - name: Create issue for strong buys
       if: env.STRONG_BUYS_FOUND == 'true'
-      uses: peter-evans/create-issue-from-file@v4
+      uses: actions/github-script@v6
       with:
-        title: "🚨 GEM Screener - Strong Buy Signals"
-        content-filepath: ./strong_buys.txt
-        labels: |
-          trading-signal
-          strong-buy
-          automated
+        script: |
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('Daily_Screens/latest_screen.json', 'utf8'));
+          const strongBuys = data.results.strong_buys.slice(0, 5);
+          
+          let body = '# 🚨 Strong Buy Signals Detected\n\n';
+          body += 'The following stocks have scores of 100+:\n\n';
+          
+          strongBuys.forEach(stock => {
+            body += `- **${stock.ticker}**: Score ${stock.score}\n`;
+            body += `  - Price: $${stock.price}\n`;
+            body += `  - Volume Spike: ${stock.volume_spike}x\n`;
+            body += `  - RSI: ${stock.rsi}\n\n`;
+          });
+          
+          await github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: `🚨 Strong Buy Alert - ${new Date().toLocaleDateString()}`,
+            body: body,
+            labels: ['trading-signal', 'strong-buy']
+          });
