@@ -1,0 +1,153 @@
+{
+  "generated_date": "2025-11-07T08:01:34.349281",
+  "total_stocks": 10,
+  "successful_analyses": 10,
+  "pattern_frequencies": {
+    "volume_3x_spike": {
+      "count": 9,
+      "frequency_percent": 90.0,
+      "avg_gain_when_present": 9232.0,
+      "big_gain_rate": 100.0
+    },
+    "volume_5x_spike": {
+      "count": 7,
+      "frequency_percent": 70.0,
+      "avg_gain_when_present": 10234.0,
+      "big_gain_rate": 100.0
+    },
+    "rsi_oversold": {
+      "count": 9,
+      "frequency_percent": 90.0,
+      "avg_gain_when_present": 9413.0,
+      "big_gain_rate": 100.0
+    },
+    "accumulation": {
+      "count": 2,
+      "frequency_percent": 20.0,
+      "avg_gain_when_present": 22155.0,
+      "big_gain_rate": 100.0
+    },
+    "market_outperform": {
+      "count": 10,
+      "frequency_percent": 100.0,
+      "avg_gain_when_present": 8875.0,
+      "big_gain_rate": 100.0
+    }
+  },
+  "pattern_correlations": {
+    "volume_3x_spike": {
+      "correlation_score": 0.9,
+      "mega_winner_rate": 90.0,
+      "moderate_winner_rate": 0,
+      "predictive_power": "HIGH"
+    },
+    "volume_5x_spike": {
+      "correlation_score": 0.7,
+      "mega_winner_rate": 70.0,
+      "moderate_winner_rate": 0,
+      "predictive_power": "HIGH"
+    },
+    "rsi_oversold": {
+      "correlation_score": 0.9,
+      "mega_winner_rate": 90.0,
+      "moderate_winner_rate": 0,
+      "predictive_power": "HIGH"
+    },
+    "gain_distribution": {
+      "mega_winners": {
+        "stock_count": 10,
+        "patterns": {
+          "volume_3x_spike": 90.0,
+          "volume_5x_spike": 70.0,
+          "rsi_oversold": 90.0,
+          "breakout_20d_high": 0.0
+        }
+      }
+    }
+  },
+  "composite_patterns": {
+    "volume_and_rsi": {
+      "count": 8,
+      "frequency_percent": 80.0,
+      "avg_gain": 9882.0
+    },
+    "rsi_and_accumulation": {
+      "count": 2,
+      "frequency_percent": 20.0,
+      "avg_gain": 22155.0
+    },
+    "triple_signal": {
+      "count": 2,
+      "frequency_percent": 20.0,
+      "avg_gain": 22155.0
+    }
+  },
+  "screening_criteria": {
+    "primary_signals": [
+      {
+        "pattern": "volume_3x_spike",
+        "correlation": 0.9,
+        "mega_winner_rate": 90.0
+      },
+      {
+        "pattern": "volume_5x_spike",
+        "correlation": 0.7,
+        "mega_winner_rate": 70.0
+      },
+      {
+        "pattern": "rsi_oversold",
+        "correlation": 0.9,
+        "mega_winner_rate": 90.0
+      }
+    ],
+    "secondary_signals": [],
+    "composite_signals": [
+      {
+        "pattern": "volume_and_rsi",
+        "avg_gain": 9882.0,
+        "frequency": 80.0
+      },
+      {
+        "pattern": "rsi_and_accumulation",
+        "avg_gain": 22155.0,
+        "frequency": 20.0
+      },
+      {
+        "pattern": "triple_signal",
+        "avg_gain": 22155.0,
+        "frequency": 20.0
+      }
+    ],
+    "entry_rules": [
+      "PRIMARY: Any primary signal present",
+      "SECONDARY: 2+ secondary signals present",
+      "COMPOSITE: Any high-gain composite pattern",
+      "TIMING: Enter on signal day or next day open"
+    ],
+    "filters": [
+      "Price range: $0.50 - $10.00",
+      "Volume: >100,000 daily average",
+      "Market cap: <$500M preferred"
+    ]
+  },
+  "key_findings": [
+    {
+      "finding": "Most Common Pattern",
+      "pattern": "market_outperform",
+      "frequency": "100.0%",
+      "significance": "HIGH"
+    },
+    {
+      "finding": "Highest Correlation Pattern",
+      "pattern": "volume_3x_spike",
+      "correlation": 0.9,
+      "significance": "VERY HIGH"
+    },
+    {
+      "finding": "Best Composite Pattern",
+      "pattern": "rsi_and_accumulation",
+      "avg_gain": "22155%",
+      "significance": "HIGH"
+    }
+  ]
+}
