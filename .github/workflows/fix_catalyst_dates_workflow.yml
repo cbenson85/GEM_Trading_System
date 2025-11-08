@@ -1,0 +1,70 @@
+name: Fix Catalyst Dates
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix-catalyst-dates:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests
+    
+    - name: Find and fix catalyst dates
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        python find_real_catalyst_dates.py
+    
+    - name: Show fixed files
+      run: |
+        echo "📁 Fixed data files:"
+        ls -la Verified_Backtest_Data/*CATALYST*.json || echo "No fixed files created"
+        
+        # Show first few lines of fixed file
+        if [ -f "Verified_Backtest_Data/explosive_stocks_CATALYST_FIXED.json" ]; then
+          echo ""
+          echo "📊 Sample of fixed data:"
+          head -n 50 Verified_Backtest_Data/explosive_stocks_CATALYST_FIXED.json
+        fi
+    
+    - name: Commit fixed catalyst dates
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "Catalyst Fix Bot"
+        
+        git add Verified_Backtest_Data/*.json
+        git add find_real_catalyst_dates.py
+        
+        git diff --staged --quiet || git commit -m "🎯 Fixed catalyst dates using 100%+ spike detection
+        
+        - Found real catalyst dates by detecting first 100%+ price spike
+        - Verified continuation to 500%+ gains
+        - Fixed future dates like DXF
+        - Ready for Phase 3 analysis with proper historical data"
+        
+        git pull origin main --rebase --autostash || true
+        git push
+
+    - name: Summary
+      run: |
+        echo "## 🎯 Catalyst Date Fixes Complete" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "Fixed catalyst dates by detecting first 100%+ price spikes" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "Next steps:" >> $GITHUB_STEP_SUMMARY
+        echo "1. Review the fixed data in explosive_stocks_CATALYST_FIXED.json" >> $GITHUB_STEP_SUMMARY
+        echo "2. Run Phase 3 analysis with corrected dates" >> $GITHUB_STEP_SUMMARY
