@@ -38,8 +38,12 @@ def merge_batch_results(batch_dir):
     for batch_file in sorted(batch_files):
         print(f"\nProcessing: {os.path.basename(batch_file)}")
         
-        with open(batch_file, 'r') as f:
-            batch_data = json.load(f)
+        try:
+            with open(batch_file, 'r') as f:
+                batch_data = json.load(f)
+        except Exception as e:
+            print(f"  Error reading file: {e}")
+            continue
         
         results = batch_data.get('results', [])
         batch_successful = batch_data.get('successful_analyses', 0)
@@ -71,11 +75,12 @@ def merge_batch_results(batch_dir):
     print(f"Failed analyses: {total_failed}")
     
     # Show pattern detection rates
-    print("\n📊 Pattern Detection Summary:")
-    for pattern, count in sorted(pattern_tracker.items(), 
-                                key=lambda x: x[1], reverse=True)[:10]:
-        pct = count / len(all_stocks) * 100 if all_stocks else 0
-        print(f"  {pattern}: {count}/{len(all_stocks)} ({pct:.1f}%)")
+    if pattern_tracker:
+        print("\n📊 Pattern Detection Summary:")
+        for pattern, count in sorted(pattern_tracker.items(), 
+                                    key=lambda x: x[1], reverse=True)[:10]:
+            pct = count / len(all_stocks) * 100 if all_stocks else 0
+            print(f"  {pattern}: {count}/{len(all_stocks)} ({pct:.1f}%)")
     
     # Create merged output
     merged_data = {
@@ -118,22 +123,22 @@ def extract_stock_data(stock_result):
         'sector': stock_result.get('sector'),
         'analysis_status': stock_result.get('analysis_status'),
         'data_source': stock_result.get('data_source', 'Unknown'),
-        'price_change_180d': None  # Would need historical calculation
+        'price_change_180d': stock_result.get('price_change_180d')
     }
     
     # Extract price_volume_patterns
     pv = stock_result.get('price_volume_patterns', {})
     flat_stock.update({
         'volume_avg_90d_pre': pv.get('volume_avg_90d_pre', 0),
-        'volume_spike_3x_pre': pv.get('volume_3x_spike_pre', False),
-        'volume_spike_5x_pre': pv.get('volume_5x_spike_pre', False),
-        'volume_spike_10x_pre': pv.get('volume_10x_spike_pre', False),
+        'volume_spike_3x_pre': pv.get('volume_3x_spike_pre', False) or pv.get('volume_spike_3x_pre', False),
+        'volume_spike_5x_pre': pv.get('volume_5x_spike_pre', False) or pv.get('volume_spike_5x_pre', False),
+        'volume_spike_10x_pre': pv.get('volume_10x_spike_pre', False) or pv.get('volume_spike_10x_pre', False),
         'volume_spike_count_pre': pv.get('volume_spike_count_pre', 0),
-        'accumulation_detected_pre': pv.get('accumulation_detected', False),
+        'accumulation_detected_pre': pv.get('accumulation_detected', False) or pv.get('accumulation_detected_pre', False),
         'higher_lows_count_pre': pv.get('higher_lows_count', 0),
-        'narrowing_range_pre': pv.get('narrowing_range', False),
-        'base_building_pre': pv.get('base_building', False),
-        'price_coiling_pre': pv.get('price_coiling', False)
+        'narrowing_range_pre': pv.get('narrowing_range', False) or pv.get('narrowing_range_pre', False),
+        'base_building_pre': pv.get('base_building', False) or pv.get('base_building_pre', False),
+        'price_coiling_pre': pv.get('price_coiling', False) or pv.get('price_coiling_pre', False)
     })
     
     # Extract technical_indicators
@@ -147,29 +152,31 @@ def extract_stock_data(stock_result):
         'rsi_oversold_depth_pre': ti.get('rsi_14_min_pre', 50),
         'ma_20_pre': ti.get('ma_20_pre', 0),
         'ma_50_pre': ti.get('ma_50_pre', 0),
-        'price_vs_ma20_pct_pre': ti.get('price_vs_ma20_pct', 0),
-        'price_vs_ma50_pct_pre': ti.get('price_vs_ma50_pct', 0),
+        'price_vs_ma20_pct_pre': ti.get('price_vs_ma20_pct', 0) or ti.get('price_vs_ma20_pct_pre', 0),
+        'price_vs_ma50_pct_pre': ti.get('price_vs_ma50_pct', 0) or ti.get('price_vs_ma50_pct_pre', 0),
         'price_above_ma20_pre': ti.get('price_above_ma20_pre', False),
         'price_above_ma50_pre': ti.get('price_above_ma50_pre', False),
-        'golden_cross_detected_pre': ti.get('golden_cross_detected', False),
-        'volume_trend_up_pre': ti.get('volume_trend_up', False)
+        'golden_cross_detected_pre': ti.get('golden_cross_detected', False) or ti.get('golden_cross_detected_pre', False),
+        'volume_trend_up_pre': ti.get('volume_trend_up', False) or ti.get('volume_trend_up_pre', False)
     })
     
-    # Extract news data (flat fields)
+    # Extract news data (check both nested and flat)
+    news = stock_result.get('news_data', {})
     flat_stock.update({
-        'news_baseline_count_pre': stock_result.get('news_baseline_count_pre', 0),
-        'news_recent_count_pre': stock_result.get('news_recent_count_pre', 0),
-        'news_acceleration_ratio_pre': stock_result.get('news_acceleration_ratio_pre', 0),
+        'news_baseline_count_pre': stock_result.get('news_baseline_count_pre', news.get('baseline_count', 0)),
+        'news_recent_count_pre': stock_result.get('news_recent_count_pre', news.get('recent_count', 0)),
+        'news_acceleration_ratio_pre': stock_result.get('news_acceleration_ratio_pre', news.get('acceleration_ratio', 0)),
         'news_acceleration_3x_pre': stock_result.get('news_acceleration_3x_pre', False),
         'news_acceleration_5x_pre': stock_result.get('news_acceleration_5x_pre', False),
         'news_pattern_score_pre': stock_result.get('news_pattern_score_pre', 0)
     })
     
-    # Extract trends data (flat fields)
+    # Extract trends data (check both nested and flat)
+    trends = stock_result.get('trends_data', {})
     flat_stock.update({
-        'trends_baseline_avg_pre': stock_result.get('trends_baseline_avg_pre', 0),
-        'trends_recent_avg_pre': stock_result.get('trends_recent_avg_pre', 0),
-        'trends_max_interest_pre': stock_result.get('trends_max_interest_pre', 0),
+        'trends_baseline_avg_pre': stock_result.get('trends_baseline_avg_pre', trends.get('baseline_avg', 0)),
+        'trends_recent_avg_pre': stock_result.get('trends_recent_avg_pre', trends.get('recent_avg', 0)),
+        'trends_max_interest_pre': stock_result.get('trends_max_interest_pre', trends.get('max_interest', 0)),
         'trends_acceleration_ratio_pre': stock_result.get('trends_acceleration_ratio_pre', 0),
         'trends_spike_2x_pre': stock_result.get('trends_spike_2x_pre', False),
         'trends_spike_5x_pre': stock_result.get('trends_spike_5x_pre', False),
@@ -177,10 +184,11 @@ def extract_stock_data(stock_result):
         'trends_pattern_score_pre': stock_result.get('trends_pattern_score_pre', 0)
     })
     
-    # Extract insider data (flat fields)
+    # Extract insider data (check both nested and flat)
+    insider = stock_result.get('insider_data', {})
     flat_stock.update({
-        'insider_form4_count_pre': stock_result.get('insider_form4_count_pre', 0),
-        'insider_filing_count_pre': stock_result.get('insider_filing_count_pre', 0),
+        'insider_form4_count_pre': stock_result.get('insider_form4_count_pre', insider.get('form4_count', 0)),
+        'insider_filing_count_pre': stock_result.get('insider_filing_count_pre', insider.get('filing_count', 0)),
         'insider_cluster_detected_pre': stock_result.get('insider_cluster_detected_pre', False),
         'insider_pattern_score_pre': stock_result.get('insider_pattern_score_pre', 0),
         'insider_activity_level_pre': stock_result.get('insider_activity_level_pre', 'none'),
@@ -190,15 +198,15 @@ def extract_stock_data(stock_result):
     # Extract pattern_scores
     ps = stock_result.get('pattern_scores', {})
     flat_stock.update({
-        'volume_score_pre': ps.get('volume_score_pre', 0),
-        'technical_score_pre': ps.get('technical_score_pre', 0),
-        'news_score_pre': ps.get('news_score_pre', 0),
-        'trends_score_pre': ps.get('trends_score_pre', 0),
-        'insider_score_pre': ps.get('insider_score_pre', 0),
-        'total_score_pre': ps.get('total_score_pre', 0),
-        'signal_strength_pre': ps.get('signal_strength_pre', 'WEAK'),
+        'volume_score_pre': ps.get('volume_score_pre', 0) or ps.get('volume_score', 0),
+        'technical_score_pre': ps.get('technical_score_pre', 0) or ps.get('technical_score', 0),
+        'news_score_pre': ps.get('news_score_pre', 0) or ps.get('news_score', 0),
+        'trends_score_pre': ps.get('trends_score_pre', 0) or ps.get('trends_score', 0),
+        'insider_score_pre': ps.get('insider_score_pre', 0) or ps.get('insider_score', 0),
+        'total_score_pre': ps.get('total_score_pre', 0) or ps.get('total_score', 0),
+        'signal_strength_pre': ps.get('signal_strength_pre', 'WEAK') or ps.get('signal_strength', 'WEAK'),
         'has_primary_signal_pre': ps.get('has_primary_signal_pre', False),
-        'pattern_count_pre': ps.get('pattern_count', 0)
+        'pattern_count_pre': ps.get('pattern_count', 0) or ps.get('pattern_count_pre', 0)
     })
     
     # Add placeholders for patterns not yet implemented
@@ -208,6 +216,11 @@ def extract_stock_data(stock_result):
         'support_bounce_pre': False,
         'resistance_test_pre': False
     })
+    
+    # Also check if data is at the top level (for simpler formats)
+    for key in stock_result.keys():
+        if key.endswith('_pre') and key not in flat_stock:
+            flat_stock[key] = stock_result[key]
     
     return flat_stock
 
@@ -223,37 +236,45 @@ def run_diagnostic(stocks):
         return
     
     # Check field population
-    sample = stocks[0]
+    sample = stocks[0] if stocks else {}
     field_stats = {}
     
     for field in sample.keys():
         populated = 0
         for stock in stocks:
             value = stock.get(field)
-            if value not in [None, False, 0, '', 'none', 'WEAK']:
+            if value not in [None, False, 0, '', 'none', 'WEAK', 'Unknown']:
                 populated += 1
         
         field_stats[field] = {
             'populated': populated,
-            'percentage': populated / len(stocks) * 100
+            'percentage': populated / len(stocks) * 100 if stocks else 0
         }
     
     # Show fields with good data
     print("\n✅ Fields with data (>10% populated):")
     good_fields = [(k, v) for k, v in field_stats.items() 
                    if v['percentage'] > 10]
-    for field, stats in sorted(good_fields, 
-                               key=lambda x: x[1]['percentage'], 
-                               reverse=True)[:15]:
-        print(f"  {field}: {stats['populated']}/{len(stocks)} "
-              f"({stats['percentage']:.1f}%)")
+    
+    if good_fields:
+        for field, stats in sorted(good_fields, 
+                                   key=lambda x: x[1]['percentage'], 
+                                   reverse=True)[:15]:
+            print(f"  {field}: {stats['populated']}/{len(stocks)} "
+                  f"({stats['percentage']:.1f}%)")
+    else:
+        print("  No fields with >10% population")
     
     # Show fields with no data
-    print("\n❌ Fields with NO data:")
+    print("\n❌ Fields with NO data (<1% populated):")
     empty_fields = [k for k, v in field_stats.items() 
-                   if v['percentage'] == 0]
-    for field in empty_fields[:10]:
-        print(f"  {field}")
+                   if v['percentage'] < 1]
+    
+    if empty_fields:
+        for field in empty_fields[:10]:
+            print(f"  {field}")
+    else:
+        print("  All fields have some data")
     
     # Score distribution
     scores = [s.get('total_score_pre', 0) for s in stocks]
@@ -268,11 +289,18 @@ def run_diagnostic(stocks):
         print(f"  Min: {min_score}")
         print(f"  Stocks scoring 50+: {sum(1 for s in scores if s >= 50)}")
         print(f"  Stocks scoring 70+: {sum(1 for s in scores if s >= 70)}")
+    else:
+        print("\n📊 No score data available")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python phase3_batch_merger.py <batch_results_directory>")
+        print("Usage: python phase3_batch_merger_v2.py <batch_results_directory>")
         sys.exit(1)
     
     batch_dir = sys.argv[1]
+    
+    if not os.path.exists(batch_dir):
+        print(f"Error: Directory {batch_dir} does not exist")
+        sys.exit(1)
+    
     merge_batch_results(batch_dir)
