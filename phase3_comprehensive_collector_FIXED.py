@@ -460,12 +460,30 @@ class Phase3RealDataCollector:
             'trends_pattern_score_pre': 0,
             'trends_high_interest_pre': False,
             'price_change_180d': None,
-            'rsi_oversold_depth_pre': result.get('rsi_14_min_pre', 50)
+            'rsi_oversold_depth_pre': result.get('rsi_14_min_pre', 50),
+            'sector': result.get('sector', 'Unknown')
         }
         
         for key, default_value in defaults.items():
             if key not in result:
                 result[key] = default_value
+
+def convert_numpy_types(obj):
+    """Convert numpy types to native Python types for JSON serialization"""
+    if isinstance(obj, np.bool_):
+        return bool(obj)
+    elif isinstance(obj, np.integer):
+        return int(obj)
+    elif isinstance(obj, np.floating):
+        return float(obj)
+    elif isinstance(obj, np.ndarray):
+        return obj.tolist()
+    elif isinstance(obj, dict):
+        return {key: convert_numpy_types(value) for key, value in obj.items()}
+    elif isinstance(obj, list):
+        return [convert_numpy_types(item) for item in obj]
+    else:
+        return obj
 
 def main():
     """Main function to run Phase 3 analysis with REAL data"""
@@ -529,11 +547,14 @@ def main():
         'results': results
     }
     
+    # Convert numpy types to native Python types
+    output_converted = convert_numpy_types(output)
+    
     output_file = f'Verified_Backtest_Data/phase3_batch_{batch_name}_analysis.json'
     os.makedirs('Verified_Backtest_Data', exist_ok=True)
     
     with open(output_file, 'w') as f:
-        json.dump(output, f, indent=2)
+        json.dump(output_converted, f, indent=2)
     
     print(f"\n{'='*60}")
     print(f"ANALYSIS COMPLETE")
