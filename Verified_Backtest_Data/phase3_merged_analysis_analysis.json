@@ -1,69 +1,31 @@
 {
   "analysis_type": "PRE_EXPLOSION_PATTERNS",
-  "total_stocks": 10,
-  "successful_analyses": 10,
+  "total_stocks": 2,
+  "successful_analyses": 2,
   "data_completeness": {
     "missing_fields": {
-      "price_change_180d": 10
+      "price_change_180d": 2
     },
     "pattern_coverage": {
-      "rsi_oversold_depth_pre": 10,
-      "rsi_oversold_days_pre": 7,
-      "volume_trend_up_pre": 5,
-      "volume_spike_3x_pre": 5,
-      "volume_spike_5x_pre": 2,
-      "volume_spike_10x_pre": 2
+      "rsi_oversold_depth_pre": 2
     }
   },
   "pattern_frequencies": {
-    "rsi_oversold_depth_pre": 10,
-    "volume_trend_up_pre": 5,
-    "rsi_oversold_days_pre": 7,
-    "volume_spike_3x_pre": 5,
-    "volume_spike_5x_pre": 2,
-    "volume_spike_10x_pre": 2
+    "rsi_oversold_depth_pre": 2
   },
   "score_distribution": {
-    "0-9": 3,
-    "30.0-39.0": 2,
-    "0.0-9.0": 2,
-    "10.0-19.0": 3
+    "0-9": 2
   },
   "high_scorers": [],
   "top_patterns": [
     {
       "pattern": "rsi_oversold_depth_pre",
-      "frequency": 10,
+      "frequency": 2,
       "percentage": 100.0
-    },
-    {
-      "pattern": "rsi_oversold_days_pre",
-      "frequency": 7,
-      "percentage": 70.0
-    },
-    {
-      "pattern": "volume_trend_up_pre",
-      "frequency": 5,
-      "percentage": 50.0
-    },
-    {
-      "pattern": "volume_spike_3x_pre",
-      "frequency": 5,
-      "percentage": 50.0
-    },
-    {
-      "pattern": "volume_spike_5x_pre",
-      "frequency": 2,
-      "percentage": 20.0
-    },
-    {
-      "pattern": "volume_spike_10x_pre",
-      "frequency": 2,
-      "percentage": 20.0
     }
   ],
   "key_findings": [
-    "Most common pattern: rsi_oversold_depth_pre (10/10 stocks)",
-    "Average pre-explosion score: 13.9"
+    "Most common pattern: rsi_oversold_depth_pre (2/2 stocks)",
+    "Average pre-explosion score: 0.0"
   ]
 }
