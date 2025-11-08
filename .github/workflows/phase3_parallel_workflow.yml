@@ -31,35 +31,110 @@ jobs:
       with:
         python-version: '3.11'
     
+    - name: Debug - Check JSON structure
+      run: |
+        echo "🔍 Checking explosive_stocks_CLEAN.json structure..."
+        head -n 20 Verified_Backtest_Data/explosive_stocks_CLEAN.json || echo "File not found"
+        
+        python << 'CHECK'
+        import json
+        
+        try:
+            with open('Verified_Backtest_Data/explosive_stocks_CLEAN.json', 'r') as f:
+                data = json.load(f)
+            
+            print(f"Type of loaded data: {type(data)}")
+            
+            if isinstance(data, dict):
+                print(f"Keys in dictionary: {list(data.keys())[:5]}")
+                # Check if there's a 'stocks' key or similar
+                for key in ['stocks', 'results', 'data', 'explosive_stocks']:
+                    if key in data:
+                        print(f"Found '{key}' key with {len(data[key])} items")
+            elif isinstance(data, list):
+                print(f"Data is a list with {len(data)} items")
+                if data:
+                    print(f"First item type: {type(data[0])}")
+        except Exception as e:
+            print(f"Error checking file: {e}")
+        CHECK
+    
     - name: Split stocks into batches
       id: split
       env:
         MODE: ${{ github.event.inputs.mode }}
       run: |
-        cat > batch_splitter.py << 'SCRIPT'
+        cat > batch_splitter_fixed.py << 'SCRIPT'
         import json
         import os
         import sys
         
         # Get mode from environment
         mode = os.environ.get('MODE', 'test')
+        print(f"Running in {mode} mode")
         
-        # Load explosive stocks
-        with open('Verified_Backtest_Data/explosive_stocks_CLEAN.json', 'r') as f:
-            all_stocks = json.load(f)
+        # Load explosive stocks - handle both list and dict formats
+        try:
+            with open('Verified_Backtest_Data/explosive_stocks_CLEAN.json', 'r') as f:
+                data = json.load(f)
+            
+            # Handle different possible data structures
+            if isinstance(data, list):
+                # Data is already a list of stocks
+                all_stocks = data
+                print(f"Loaded {len(all_stocks)} stocks from list")
+            elif isinstance(data, dict):
+                # Data is a dictionary, find the stocks
+                # Try common keys
+                possible_keys = ['stocks', 'results', 'data', 'explosive_stocks', 'all_stocks']
+                all_stocks = None
+                
+                for key in possible_keys:
+                    if key in data and isinstance(data[key], list):
+                        all_stocks = data[key]
+                        print(f"Found stocks under '{key}' key: {len(all_stocks)} stocks")
+                        break
+                
+                if all_stocks is None:
+                    # If no standard key, try to find any list value
+                    for key, value in data.items():
+                        if isinstance(value, list) and len(value) > 0:
+                            # Check if it looks like stock data
+                            if isinstance(value[0], dict) and any(k in value[0] for k in ['ticker', 'symbol']):
+                                all_stocks = value
+                                print(f"Found stocks under '{key}' key: {len(all_stocks)} stocks")
+                                break
+                
+                if all_stocks is None:
+                    print("ERROR: Could not find stock list in JSON file")
+                    print(f"Available keys: {list(data.keys())}")
+                    sys.exit(1)
+            else:
+                print(f"ERROR: Unexpected data type: {type(data)}")
+                sys.exit(1)
+                
+        except FileNotFoundError:
+            print("ERROR: explosive_stocks_CLEAN.json not found")
+            sys.exit(1)
+        except json.JSONDecodeError as e:
+            print(f"ERROR: Invalid JSON in file: {e}")
+            sys.exit(1)
+        except Exception as e:
+            print(f"ERROR: Unexpected error: {e}")
+            sys.exit(1)
         
         # Determine batch parameters
         if mode == "test":
-            stocks_to_process = all_stocks[:10]
-            batch_count = 5
+            stocks_to_process = all_stocks[:10] if len(all_stocks) >= 10 else all_stocks
+            batch_count = min(5, len(stocks_to_process))
             print(f"TEST MODE: Processing {len(stocks_to_process)} stocks in {batch_count} batches")
         elif mode == "sample":
-            stocks_to_process = all_stocks[:100]
-            batch_count = 5
+            stocks_to_process = all_stocks[:100] if len(all_stocks) >= 100 else all_stocks
+            batch_count = min(5, len(stocks_to_process))
             print(f"SAMPLE MODE: Processing {len(stocks_to_process)} stocks in {batch_count} batches")
         else:  # full
             stocks_to_process = all_stocks
-            batch_count = 10
+            batch_count = min(10, len(stocks_to_process))
             print(f"FULL MODE: Processing {len(stocks_to_process)} stocks in {batch_count} batches")
         
         # Create batch_inputs directory
@@ -67,15 +142,25 @@ jobs:
         
         # Calculate batch size
         total_stocks = len(stocks_to_process)
+        
+        if total_stocks == 0:
+            print("ERROR: No stocks to process")
+            sys.exit(1)
+        
         batch_size = total_stocks // batch_count
         remainder = total_stocks % batch_count
         
         # Split into batches
         start_idx = 0
+        batches_created = 0
+        
         for i in range(batch_count):
             # Add extra stock to earlier batches if there's a remainder
             current_batch_size = batch_size + (1 if i < remainder else 0)
             end_idx = start_idx + current_batch_size
+            
+            if end_idx > total_stocks:
+                end_idx = total_stocks
             
             batch_stocks = stocks_to_process[start_idx:end_idx]
             
@@ -92,20 +177,25 @@ jobs:
                     json.dump(batch_data, f, indent=2)
                 
                 print(f"Created batch {batch_num}: {len(batch_stocks)} stocks")
+                batches_created += 1
             
             start_idx = end_idx
+            
+            if start_idx >= total_stocks:
+                break
         
         # Write output for GitHub Actions
         with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
-            f.write(f"batch_count={batch_count}\n")
+            f.write(f"batch_count={batches_created}\n")
         
-        print(f"Successfully created {batch_count} batches")
+        print(f"Successfully created {batches_created} batches")
         SCRIPT
         
-        python batch_splitter.py
+        python batch_splitter_fixed.py
         
+        echo ""
         echo "📁 Batch files created:"
-        ls -la batch_inputs/
+        ls -la batch_inputs/ || echo "No batch_inputs directory created"
     
     - name: Upload batch files
       uses: actions/upload-artifact@v4
