@@ -33,48 +33,76 @@ jobs:
     
     - name: Split stocks into batches
       id: split
+      env:
+        MODE: ${{ github.event.inputs.mode }}
       run: |
-        python << 'EOF'
+        cat > batch_splitter.py << 'SCRIPT'
         import json
         import os
+        import sys
+        
+        # Get mode from environment
+        mode = os.environ.get('MODE', 'test')
         
         # Load explosive stocks
         with open('Verified_Backtest_Data/explosive_stocks_CLEAN.json', 'r') as f:
             all_stocks = json.load(f)
         
-        mode = "${{ github.event.inputs.mode }}"
-        
+        # Determine batch parameters
         if mode == "test":
-            stocks = all_stocks[:10]
+            stocks_to_process = all_stocks[:10]
             batch_count = 5
-            print(f"TEST MODE: {len(stocks)} stocks in {batch_count} batches")
+            print(f"TEST MODE: Processing {len(stocks_to_process)} stocks in {batch_count} batches")
         elif mode == "sample":
-            stocks = all_stocks[:100]
+            stocks_to_process = all_stocks[:100]
             batch_count = 5
-            print(f"SAMPLE MODE: {len(stocks)} stocks in {batch_count} batches")
+            print(f"SAMPLE MODE: Processing {len(stocks_to_process)} stocks in {batch_count} batches")
         else:  # full
-            stocks = all_stocks
+            stocks_to_process = all_stocks
             batch_count = 10
-            print(f"FULL MODE: {len(stocks)} stocks in {batch_count} batches")
+            print(f"FULL MODE: Processing {len(stocks_to_process)} stocks in {batch_count} batches")
         
         # Create batch_inputs directory
         os.makedirs('batch_inputs', exist_ok=True)
         
+        # Calculate batch size
+        total_stocks = len(stocks_to_process)
+        batch_size = total_stocks // batch_count
+        remainder = total_stocks % batch_count
+        
         # Split into batches
-        batch_size = len(stocks) // batch_count + (1 if len(stocks) % batch_count else 0)
-        
+        start_idx = 0
         for i in range(batch_count):
-            batch_stocks = stocks[i*batch_size:(i+1)*batch_size]
+            # Add extra stock to earlier batches if there's a remainder
+            current_batch_size = batch_size + (1 if i < remainder else 0)
+            end_idx = start_idx + current_batch_size
+            
+            batch_stocks = stocks_to_process[start_idx:end_idx]
+            
             if batch_stocks:
-                batch_file = f'batch_inputs/batch{i+1}_stocks.json'
+                batch_num = i + 1
+                batch_file = f'batch_inputs/batch{batch_num}_stocks.json'
+                
+                batch_data = {
+                    'batch': batch_num,
+                    'stocks': batch_stocks
+                }
+                
                 with open(batch_file, 'w') as f:
-                    json.dump({'batch': i+1, 'stocks': batch_stocks}, f, indent=2)
-                print(f"Created batch{i+1} with {len(batch_stocks)} stocks")
+                    json.dump(batch_data, f, indent=2)
+                
+                print(f"Created batch {batch_num}: {len(batch_stocks)} stocks")
+            
+            start_idx = end_idx
         
-        # Set output for GitHub Actions
+        # Write output for GitHub Actions
         with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
             f.write(f"batch_count={batch_count}\n")
-        EOF
+        
+        print(f"Successfully created {batch_count} batches")
+        SCRIPT
+        
+        python batch_splitter.py
         
         echo "📁 Batch files created:"
         ls -la batch_inputs/
@@ -119,18 +147,22 @@ jobs:
         
         # Try to run the collector
         if [ -f "phase3_comprehensive_collector_FIXED.py" ]; then
-          echo "Using comprehensive collector"
+          echo "Using comprehensive collector FIXED"
           python phase3_comprehensive_collector_FIXED.py batch1 batch_inputs/batch1_stocks.json
         elif [ -f "phase3_comprehensive_collector.py" ]; then
           echo "Using original collector"
           python phase3_comprehensive_collector.py batch1 batch_inputs/batch1_stocks.json
         else
           echo "No collector found - creating minimal output"
-          python << 'EOF'
+          cat > minimal_collector.py << 'COLLECTOR'
         import json
+        import sys
         from datetime import datetime
         
-        with open('batch_inputs/batch1_stocks.json', 'r') as f:
+        batch_name = sys.argv[1] if len(sys.argv) > 1 else "batch1"
+        batch_file = sys.argv[2] if len(sys.argv) > 2 else "batch_inputs/batch1_stocks.json"
+        
+        with open(batch_file, 'r') as f:
             batch_data = json.load(f)
         
         results = []
@@ -138,21 +170,23 @@ jobs:
             results.append({
                 'ticker': stock.get('ticker'),
                 'gain_percent': stock.get('gain_percent'),
-                'analysis_status': 'minimal'
+                'analysis_status': 'minimal',
+                'total_score_pre': 0
             })
         
         output = {
-            'batch_name': 'batch1',
+            'batch_name': batch_name,
             'analysis_date': datetime.now().isoformat(),
             'successful_analyses': len(results),
             'failed_analyses': 0,
             'results': results
         }
         
-        with open('Verified_Backtest_Data/phase3_batch_batch1_analysis.json', 'w') as f:
+        with open(f'Verified_Backtest_Data/phase3_batch_{batch_name}_analysis.json', 'w') as f:
             json.dump(output, f, indent=2)
         print(f"Created minimal output with {len(results)} stocks")
-        EOF
+        COLLECTOR
+          python minimal_collector.py batch1 batch_inputs/batch1_stocks.json
         fi
         
         # Verify output exists
@@ -373,19 +407,6 @@ jobs:
         mkdir -p batch_results
         mkdir -p Verified_Backtest_Data
     
-    - name: Download all results
-      run: |
-        echo "📥 Downloading batch results..."
-        
-        # Try to download each batch individually
-        for i in 1 2 3 4 5; do
-          echo "Attempting to download batch${i}-results..."
-          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-               -H "Accept: application/vnd.github.v3+json" \
-               -L "https://api.github.com/repos/${{ github.repository }}/actions/artifacts" \
-               2>/dev/null | grep -q "batch${i}-results" && echo "Found batch${i}" || echo "batch${i} not found"
-        done
-    
     - name: Download batch 1
       uses: actions/download-artifact@v4
       with:
@@ -435,12 +456,14 @@ jobs:
           
           # Merge using v2 merger if available
           if [ -f "phase3_batch_merger_v2.py" ]; then
+            echo "Using v2 merger"
             python phase3_batch_merger_v2.py batch_results/
           elif [ -f "phase3_batch_merger.py" ]; then
+            echo "Using original merger"
             python phase3_batch_merger.py batch_results/
           else
             echo "Creating simple merger..."
-            python << 'EOF'
+            cat > simple_merger.py << 'MERGER'
         import json
         import glob
         from datetime import datetime
@@ -449,35 +472,50 @@ jobs:
         print(f"Merging {len(files)} files")
         
         all_stocks = []
+        successful = 0
+        failed = 0
+        
         for file in files:
             try:
                 with open(file) as f:
                     data = json.load(f)
                     if 'results' in data:
                         all_stocks.extend(data['results'])
-            except:
-                pass
+                        successful += data.get('successful_analyses', 0)
+                        failed += data.get('failed_analyses', 0)
+            except Exception as e:
+                print(f"Error reading {file}: {e}")
         
         with open('Verified_Backtest_Data/phase3_merged_analysis.json', 'w') as f:
             json.dump({
                 'merge_date': datetime.now().isoformat(),
                 'total_stocks': len(all_stocks),
+                'successful_analyses': successful,
+                'failed_analyses': failed,
                 'all_stocks': all_stocks
             }, f, indent=2)
         
         print(f"Merged {len(all_stocks)} stocks")
-        EOF
+        print(f"Successful: {successful}, Failed: {failed}")
+        MERGER
+            python simple_merger.py
           fi
         fi
     
     - name: Run correlation analysis
       run: |
         if [ -f "Verified_Backtest_Data/phase3_merged_analysis.json" ]; then
+          echo "Running correlation analysis..."
+          
           if [ -f "phase3_correlation_analyzer_v2.py" ]; then
             python phase3_correlation_analyzer_v2.py Verified_Backtest_Data/phase3_merged_analysis.json
           elif [ -f "phase3_correlation_analyzer.py" ]; then
             python phase3_correlation_analyzer.py Verified_Backtest_Data/phase3_merged_analysis.json
+          else
+            echo "No correlation analyzer found"
           fi
+        else
+          echo "No merged data to analyze"
         fi
     
     - name: Display summary
@@ -486,14 +524,19 @@ jobs:
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "**Mode**: ${{ github.event.inputs.mode }}" >> $GITHUB_STEP_SUMMARY
         echo "**Status**: Completed" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
         
         if [ -f "Verified_Backtest_Data/phase3_merged_analysis.json" ]; then
-          python << 'EOF'
+          python << 'SUMMARY'
         import json
         with open('Verified_Backtest_Data/phase3_merged_analysis.json') as f:
             data = json.load(f)
-        print(f"**Stocks Analyzed**: {data.get('total_stocks', 0)}")
-        EOF >> $GITHUB_STEP_SUMMARY
+        print(f"**Total Stocks Analyzed**: {data.get('total_stocks', 0)}")
+        print(f"**Successful Analyses**: {data.get('successful_analyses', 0)}")
+        print(f"**Failed Analyses**: {data.get('failed_analyses', 0)}")
+        SUMMARY >> $GITHUB_STEP_SUMMARY
+        else
+          echo "No results to display" >> $GITHUB_STEP_SUMMARY
         fi
     
     - name: Commit results
