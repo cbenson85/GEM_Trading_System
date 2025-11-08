@@ -96,7 +96,7 @@ class Phase4MarketScreener:
             selected_dates = []
             attempts = 0
             
-            while len(selected_dates) < 15 and attempts < 1000:
+            while len(selected_dates) < 25 and attempts < 1000:
                 attempts += 1
                 
                 range_idx = random.randint(0, len(valid_ranges) - 1)
