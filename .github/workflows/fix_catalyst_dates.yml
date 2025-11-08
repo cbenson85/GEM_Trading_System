@@ -1,0 +1,28 @@
+name: Fix Catalyst Dates
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fix-dates:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Fix catalyst dates
+      run: python fix_catalyst_dates.py
+    
+    - name: Commit fixed data
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "Date Fix Bot"
+        
+        git add Verified_Backtest_Data/*.json
+        git commit -m "🔧 Fixed catalyst dates to historical values"
+        git push
