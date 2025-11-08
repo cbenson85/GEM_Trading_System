@@ -553,7 +553,7 @@ jobs:
             python phase3_batch_merger.py batch_results/
           else
             echo "Creating simple merger..."
-            cat > simple_merger.py << 'MERGER'
+            cat > simple_merger.py << 'MERGESCRIPT'
         import json
         import glob
         from datetime import datetime
@@ -576,6 +576,7 @@ jobs:
             except Exception as e:
                 print(f"Error reading {file}: {e}")
         
+        os.makedirs('Verified_Backtest_Data', exist_ok=True)
         with open('Verified_Backtest_Data/phase3_merged_analysis.json', 'w') as f:
             json.dump({
                 'merge_date': datetime.now().isoformat(),
@@ -587,7 +588,7 @@ jobs:
         
         print(f"Merged {len(all_stocks)} stocks")
         print(f"Successful: {successful}, Failed: {failed}")
-        MERGER
+        MERGESCRIPT
             python simple_merger.py
           fi
         fi
@@ -617,14 +618,18 @@ jobs:
         echo "" >> $GITHUB_STEP_SUMMARY
         
         if [ -f "Verified_Backtest_Data/phase3_merged_analysis.json" ]; then
-          python << 'SUMMARY'
+          cat > summary_generator.py << 'PYTHONSCRIPT'
         import json
-        with open('Verified_Backtest_Data/phase3_merged_analysis.json') as f:
-            data = json.load(f)
-        print(f"**Total Stocks Analyzed**: {data.get('total_stocks', 0)}")
-        print(f"**Successful Analyses**: {data.get('successful_analyses', 0)}")
-        print(f"**Failed Analyses**: {data.get('failed_analyses', 0)}")
-        SUMMARY >> $GITHUB_STEP_SUMMARY
+        try:
+            with open('Verified_Backtest_Data/phase3_merged_analysis.json') as f:
+                data = json.load(f)
+            print(f"**Total Stocks Analyzed**: {data.get('total_stocks', 0)}")
+            print(f"**Successful Analyses**: {data.get('successful_analyses', 0)}")
+            print(f"**Failed Analyses**: {data.get('failed_analyses', 0)}")
+        except Exception as e:
+            print(f"Error reading results: {e}")
+        PYTHONSCRIPT
+          python summary_generator.py >> $GITHUB_STEP_SUMMARY
         else
           echo "No results to display" >> $GITHUB_STEP_SUMMARY
         fi
