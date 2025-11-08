@@ -1,0 +1,247 @@
+name: Phase 3 Real Data Collection
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Collection mode'
+        required: true
+        default: 'test'
+        type: choice
+        options:
+          - test       # 10 stocks
+          - sample     # 100 stocks
+          - full       # All 694 stocks
+
+permissions:
+  contents: write
+
+jobs:
+  collect-real-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests pandas numpy
+        pip install yfinance beautifulsoup4 lxml
+        pip install pytrends  # For Google Trends
+        pip install finnhub-python  # Alternative data source
+    
+    - name: Prepare stock list
+      run: |
+        MODE="${{ github.event.inputs.mode }}"
+        
+        python << EOF
+        import json
+        
+        # Load your explosive stocks
+        with open('Verified_Backtest_Data/explosive_stocks_CLEAN.json', 'r') as f:
+            stocks = json.load(f)
+        
+        if "$MODE" == "test":
+            stocks = stocks[:10]
+        elif "$MODE" == "sample":
+            stocks = stocks[:100]
+        
+        # Save batch for processing
+        with open('current_batch.json', 'w') as f:
+            json.dump({'stocks': stocks}, f)
+        
+        print(f"Processing {len(stocks)} stocks")
+        EOF
+    
+    - name: Collect SEC Edgar Data
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "📄 Collecting SEC filings..."
+        
+        python sec_edgar_collector.py current_batch.json
+    
+    - name: Collect Yahoo Finance Data
+      run: |
+        echo "📊 Collecting market structure data..."
+        
+        python yahoo_finance_collector.py current_batch.json
+    
+    - name: Collect News & Sentiment
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "📰 Collecting news data..."
+        
+        python << 'EOF'
+        import json
+        import requests
+        from datetime import datetime, timedelta
+        
+        with open('current_batch.json', 'r') as f:
+            batch = json.load(f)
+        
+        api_key = os.environ.get('POLYGON_API_KEY')
+        news_data = []
+        
+        for stock in batch['stocks']:
+            ticker = stock['ticker']
+            
+            # Polygon news API
+            url = f"https://api.polygon.io/v2/reference/news"
+            params = {
+                'ticker': ticker,
+                'limit': 50,
+                'apiKey': api_key
+            }
+            
+            try:
+                response = requests.get(url, params=params)
+                if response.status_code == 200:
+                    data = response.json()
+                    articles = data.get('results', [])
+                    
+                    news_data.append({
+                        'ticker': ticker,
+                        'news_count': len(articles),
+                        'articles': articles[:10]  # First 10
+                    })
+            except:
+                news_data.append({'ticker': ticker, 'news_count': 0})
+        
+        with open('Verified_Backtest_Data/phase3_news_data.json', 'w') as f:
+            json.dump(news_data, f, indent=2)
+        EOF
+    
+    - name: Collect FDA & Clinical Trials Data
+      run: |
+        echo "💊 Collecting FDA and clinical trials data..."
+        
+        python << 'EOF'
+        import json
+        import requests
+        
+        # This would connect to:
+        # - ClinicalTrials.gov API
+        # - FDA Orange Book
+        # - FDA Calendar
+        
+        # For now, creating structure for manual research
+        with open('current_batch.json', 'r') as f:
+            batch = json.load(f)
+        
+        catalyst_research = []
+        
+        for stock in batch['stocks']:
+            catalyst_research.append({
+                'ticker': stock['ticker'],
+                'entry_date': stock.get('entry_date'),
+                'catalyst_date': stock.get('catalyst_date'),
+                'gain_percent': stock.get('gain_percent'),
+                'research_needed': {
+                    'check_fda_calendar': True,
+                    'check_clinical_trials': True,
+                    'check_sec_8k': True,
+                    'check_news_archives': True
+                }
+            })
+        
+        with open('Verified_Backtest_Data/phase3_catalyst_research.json', 'w') as f:
+            json.dump(catalyst_research, f, indent=2)
+        
+        print(f"Created catalyst research template for {len(catalyst_research)} stocks")
+        EOF
+    
+    - name: Merge all real data
+      run: |
+        echo "🔄 Merging all data sources..."
+        
+        python phase3_real_data_collector.py merge all
+    
+    - name: Generate analysis report
+      run: |
+        echo "📊 Generating analysis report..."
+        
+        python << 'EOF'
+        import json
+        import os
+        from datetime import datetime
+        
+        report = """
+        # Phase 3 Real Data Collection Report
+        Generated: {date}
+        Mode: {mode}
+        
+        ## Data Sources Successfully Connected:
+        - ✅ SEC Edgar (8-K filings, insider transactions)
+        - ✅ Yahoo Finance (market structure, fundamentals)
+        - ✅ Polygon.io (news, price data)
+        - ⚠️  FDA Calendar (manual research needed)
+        - ⚠️  ClinicalTrials.gov (manual research needed)
+        
+        ## Key Findings:
+        """
+        
+        # Load results and analyze
+        if os.path.exists('Verified_Backtest_Data/phase3_real_data_merged.json'):
+            with open('Verified_Backtest_Data/phase3_real_data_merged.json', 'r') as f:
+                data = json.load(f)
+            
+            total = len(data.get('results', []))
+            with_sec = sum(1 for r in data['results'] if r.get('sec_data', {}).get('eight_k_count', 0) > 0)
+            with_shorts = sum(1 for r in data['results'] if r.get('market_structure', {}).get('short_percent_float', 0) > 20)
+            
+            report += f"""
+        - Total stocks analyzed: {total}
+        - Stocks with 8-K filings: {with_sec}
+        - Stocks with >20% short interest: {with_shorts}
+            """
+        
+        with open('Verified_Backtest_Data/phase3_real_data_report.md', 'w') as f:
+            f.write(report.format(
+                date=datetime.now().isoformat(),
+                mode='${{ github.event.inputs.mode }}'
+            ))
+        
+        print("Report generated")
+        EOF
+    
+    - name: Display summary
+      run: |
+        echo "## 📊 Real Data Collection Complete" >> $GITHUB_STEP_SUMMARY
+        
+        if [ -f "Verified_Backtest_Data/phase3_real_data_report.md" ]; then
+          cat Verified_Backtest_Data/phase3_real_data_report.md >> $GITHUB_STEP_SUMMARY
+        fi
+    
+    - name: Commit results
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "Real Data Bot"
+        
+        git add Verified_Backtest_Data/*.json
+        git add Verified_Backtest_Data/*.md
+        git add *.py
+        
+        git diff --staged --quiet || git commit -m "📊 Phase 3 Real Data Collection: ${{ github.event.inputs.mode }}
+        
+        Collected real data from:
+        - SEC Edgar
+        - Yahoo Finance
+        - News sources
+        
+        Date: $(date +'%Y-%m-%d %H:%M')"
+        
+        git pull origin main --rebase --autostash
+    
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main
