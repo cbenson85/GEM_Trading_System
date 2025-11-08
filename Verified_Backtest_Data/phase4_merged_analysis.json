@@ -1,5 +1,5 @@
 {
-  "merge_date": "2025-11-07T22:33:56.502563",
+  "merge_date": "2025-11-08T00:18:02.584767",
   "total_batches": 1,
   "total_stocks": 13,
   "classifications": {
@@ -30,7 +30,7 @@
         "status": "MOCK_DATA",
         "price_60d_ago": 10.76685125199523
       },
-      "analysis_timestamp": "2025-11-07T22:32:54.479543",
+      "analysis_timestamp": "2025-11-08T00:17:05.243176",
       "lookback_analysis": {
         "data_available": true,
         "lowest_price_60d": 101.26,
@@ -77,7 +77,7 @@
         "status": "MOCK_DATA",
         "price_60d_ago": 7.523168199359538
       },
-      "analysis_timestamp": "2025-11-07T22:32:57.284165",
+      "analysis_timestamp": "2025-11-08T00:17:07.779658",
       "lookback_analysis": {
         "data_available": false
       },
@@ -113,7 +113,7 @@
         "status": "MOCK_DATA",
         "price_60d_ago": 4.755617132473965
       },
-      "analysis_timestamp": "2025-11-07T22:33:00.013155",
+      "analysis_timestamp": "2025-11-08T00:17:10.201552",
       "lookback_analysis": {
         "data_available": true,
         "lowest_price_60d": 63.74,
@@ -160,7 +160,7 @@
         "status": "MOCK_DATA",
         "price_60d_ago": 0.7084386613748652
       },
-      "analysis_timestamp": "2025-11-07T22:33:02.759544",
+      "analysis_timestamp": "2025-11-08T00:17:12.737193",
       "lookback_analysis": {
         "data_available": true,
         "lowest_price_60d": 12.9182,
@@ -207,7 +207,7 @@
         "status": "MOCK_DATA",
         "price_60d_ago": 10.919673322370825
       },
-      "analysis_timestamp": "2025-11-07T22:33:05.497434",
+      "analysis_timestamp": "2025-11-08T00:17:15.181353",
       "lookback_analysis": {
         "data_available": true,
         "lowest_price_60d": 274.96,
@@ -254,7 +254,7 @@
         "status": "MOCK_DATA",
         "price_60d_ago": 6.027197020510436
       },
-      "analysis_timestamp": "2025-11-07T22:33:08.239488",
+      "analysis_timestamp": "2025-11-08T00:17:17.568287",
       "lookback_analysis": {
         "data_available": true,
         "lowest_price_60d": 97,
@@ -301,7 +301,7 @@
         "status": "MOCK_DATA",
         "price_60d_ago": 9.041077578676859
       },
-      "analysis_timestamp": "2025-11-07T22:33:10.949583",
+      "analysis_timestamp": "2025-11-08T00:17:19.912193",
       "lookback_analysis": {
         "data_available": true,
         "lowest_price_60d": 4.55,
@@ -348,7 +348,7 @@
         "status": "MOCK_DATA",
         "price_60d_ago": 6.6448209099964775
       },
-      "analysis_timestamp": "2025-11-07T22:33:13.666010",
+      "analysis_timestamp": "2025-11-08T00:17:22.337933",
       "lookback_analysis": {
         "data_available": true,
         "lowest_price_60d": 8.86,
@@ -395,7 +395,7 @@
         "status": "MOCK_DATA",
         "price_60d_ago": 3.227143833210363
       },
-      "analysis_timestamp": "2025-11-07T22:33:16.375772",
+      "analysis_timestamp": "2025-11-08T00:17:24.674136",
       "lookback_analysis": {
         "data_available": true,
         "lowest_price_60d": 118.22,
@@ -442,7 +442,7 @@
         "status": "MOCK_DATA",
         "price_60d_ago": 0.9845752744984755
       },
-      "analysis_timestamp": "2025-11-07T22:33:19.117948",
+      "analysis_timestamp": "2025-11-08T00:17:27.008493",
       "lookback_analysis": {
         "data_available": true,
         "lowest_price_60d": 40.311,
@@ -489,7 +489,7 @@
         "status": "MOCK_DATA",
         "price_60d_ago": 9.223280502024611
       },
-      "analysis_timestamp": "2025-11-07T22:33:21.850367",
+      "analysis_timestamp": "2025-11-08T00:17:29.348513",
       "lookback_analysis": {
         "data_available": true,
         "lowest_price_60d": 99.58,
@@ -536,7 +536,7 @@
         "status": "MOCK_DATA",
         "price_60d_ago": 3.3293777695203772
       },
-      "analysis_timestamp": "2025-11-07T22:33:24.557197",
+      "analysis_timestamp": "2025-11-08T00:17:31.693845",
       "lookback_analysis": {
         "data_available": true,
         "lowest_price_60d": 1.35,
@@ -583,7 +583,7 @@
         "status": "MOCK_DATA",
         "price_60d_ago": 6.331644966398196
       },
-      "analysis_timestamp": "2025-11-07T22:33:27.276015",
+      "analysis_timestamp": "2025-11-08T00:17:34.263330",
       "lookback_analysis": {
         "data_available": true,
         "lowest_price_60d": 1.62,
