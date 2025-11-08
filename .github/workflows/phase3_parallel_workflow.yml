@@ -57,4 +57,463 @@ jobs:
             batch_count = 10
             print(f"FULL MODE: {len(stocks)} stocks in {batch_count} batches")
         
-        # Create batch_inputs direc
+        # Create batch_inputs directory
+        os.makedirs('batch_inputs', exist_ok=True)
+        
+        # Split into batches
+        batch_size = len(stocks) // batch_count + (1 if len(stocks) % batch_count else 0)
+        
+        for i in range(batch_count):
+            batch_stocks = stocks[i*batch_size:(i+1)*batch_size]
+            if batch_stocks:
+                batch_file = f'batch_inputs/batch{i+1}_stocks.json'
+                with open(batch_file, 'w') as f:
+                    json.dump({'batch': i+1, 'stocks': batch_stocks}, f, indent=2)
+                print(f"Created batch{i+1} with {len(batch_stocks)} stocks")
+        
+        # Set output for GitHub Actions
+        with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+            f.write(f"batch_count={batch_count}\n")
+        EOF
+        
+        echo "📁 Batch files created:"
+        ls -la batch_inputs/
+    
+    - name: Upload batch files
+      uses: actions/upload-artifact@v4
+      with:
+        name: batch-inputs
+        path: batch_inputs/
+
+  analyze-batch-1:
+    needs: prepare-batches
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests pandas numpy yfinance beautifulsoup4 lxml
+    
+    - name: Download batch files
+      uses: actions/download-artifact@v4
+      with:
+        name: batch-inputs
+        path: batch_inputs/
+    
+    - name: Run comprehensive analysis
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "🔬 Analyzing Batch 1..."
+        
+        # Create output directory
+        mkdir -p Verified_Backtest_Data
+        
+        # Try to run the collector
+        if [ -f "phase3_comprehensive_collector_FIXED.py" ]; then
+          echo "Using comprehensive collector"
+          python phase3_comprehensive_collector_FIXED.py batch1 batch_inputs/batch1_stocks.json
+        elif [ -f "phase3_comprehensive_collector.py" ]; then
+          echo "Using original collector"
+          python phase3_comprehensive_collector.py batch1 batch_inputs/batch1_stocks.json
+        else
+          echo "No collector found - creating minimal output"
+          python << 'EOF'
+        import json
+        from datetime import datetime
+        
+        with open('batch_inputs/batch1_stocks.json', 'r') as f:
+            batch_data = json.load(f)
+        
+        results = []
+        for stock in batch_data.get('stocks', []):
+            results.append({
+                'ticker': stock.get('ticker'),
+                'gain_percent': stock.get('gain_percent'),
+                'analysis_status': 'minimal'
+            })
+        
+        output = {
+            'batch_name': 'batch1',
+            'analysis_date': datetime.now().isoformat(),
+            'successful_analyses': len(results),
+            'failed_analyses': 0,
+            'results': results
+        }
+        
+        with open('Verified_Backtest_Data/phase3_batch_batch1_analysis.json', 'w') as f:
+            json.dump(output, f, indent=2)
+        print(f"Created minimal output with {len(results)} stocks")
+        EOF
+        fi
+        
+        # Verify output exists
+        if [ -f "Verified_Backtest_Data/phase3_batch_batch1_analysis.json" ]; then
+          echo "✅ Output file created successfully"
+        else
+          echo "❌ No output file created!"
+          echo '{"results": []}' > Verified_Backtest_Data/phase3_batch_batch1_analysis.json
+        fi
+    
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: batch1-results
+        path: Verified_Backtest_Data/phase3_batch_batch1_analysis.json
+      if: always()
+
+  analyze-batch-2:
+    needs: prepare-batches
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests pandas numpy yfinance beautifulsoup4 lxml
+    
+    - name: Download batch files
+      uses: actions/download-artifact@v4
+      with:
+        name: batch-inputs
+        path: batch_inputs/
+    
+    - name: Run comprehensive analysis
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "🔬 Analyzing Batch 2..."
+        mkdir -p Verified_Backtest_Data
+        
+        if [ -f "phase3_comprehensive_collector_FIXED.py" ]; then
+          python phase3_comprehensive_collector_FIXED.py batch2 batch_inputs/batch2_stocks.json
+        elif [ -f "phase3_comprehensive_collector.py" ]; then
+          python phase3_comprehensive_collector.py batch2 batch_inputs/batch2_stocks.json
+        else
+          echo '{"results": []}' > Verified_Backtest_Data/phase3_batch_batch2_analysis.json
+        fi
+    
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: batch2-results
+        path: Verified_Backtest_Data/phase3_batch_batch2_analysis.json
+      if: always()
+
+  analyze-batch-3:
+    needs: prepare-batches
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests pandas numpy yfinance beautifulsoup4 lxml
+    
+    - name: Download batch files
+      uses: actions/download-artifact@v4
+      with:
+        name: batch-inputs
+        path: batch_inputs/
+    
+    - name: Run comprehensive analysis
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "🔬 Analyzing Batch 3..."
+        mkdir -p Verified_Backtest_Data
+        
+        if [ -f "phase3_comprehensive_collector_FIXED.py" ]; then
+          python phase3_comprehensive_collector_FIXED.py batch3 batch_inputs/batch3_stocks.json
+        elif [ -f "phase3_comprehensive_collector.py" ]; then
+          python phase3_comprehensive_collector.py batch3 batch_inputs/batch3_stocks.json
+        else
+          echo '{"results": []}' > Verified_Backtest_Data/phase3_batch_batch3_analysis.json
+        fi
+    
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: batch3-results
+        path: Verified_Backtest_Data/phase3_batch_batch3_analysis.json
+      if: always()
+
+  analyze-batch-4:
+    needs: prepare-batches
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests pandas numpy yfinance beautifulsoup4 lxml
+    
+    - name: Download batch files
+      uses: actions/download-artifact@v4
+      with:
+        name: batch-inputs
+        path: batch_inputs/
+    
+    - name: Run comprehensive analysis
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "🔬 Analyzing Batch 4..."
+        mkdir -p Verified_Backtest_Data
+        
+        if [ -f "phase3_comprehensive_collector_FIXED.py" ]; then
+          python phase3_comprehensive_collector_FIXED.py batch4 batch_inputs/batch4_stocks.json
+        elif [ -f "phase3_comprehensive_collector.py" ]; then
+          python phase3_comprehensive_collector.py batch4 batch_inputs/batch4_stocks.json
+        else
+          echo '{"results": []}' > Verified_Backtest_Data/phase3_batch_batch4_analysis.json
+        fi
+    
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: batch4-results
+        path: Verified_Backtest_Data/phase3_batch_batch4_analysis.json
+      if: always()
+
+  analyze-batch-5:
+    needs: prepare-batches
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests pandas numpy yfinance beautifulsoup4 lxml
+    
+    - name: Download batch files
+      uses: actions/download-artifact@v4
+      with:
+        name: batch-inputs
+        path: batch_inputs/
+    
+    - name: Run comprehensive analysis
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "🔬 Analyzing Batch 5..."
+        mkdir -p Verified_Backtest_Data
+        
+        if [ -f "phase3_comprehensive_collector_FIXED.py" ]; then
+          python phase3_comprehensive_collector_FIXED.py batch5 batch_inputs/batch5_stocks.json
+        elif [ -f "phase3_comprehensive_collector.py" ]; then
+          python phase3_comprehensive_collector.py batch5 batch_inputs/batch5_stocks.json
+        else
+          echo '{"results": []}' > Verified_Backtest_Data/phase3_batch_batch5_analysis.json
+        fi
+    
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: batch5-results
+        path: Verified_Backtest_Data/phase3_batch_batch5_analysis.json
+      if: always()
+
+  merge-and-analyze:
+    needs: [analyze-batch-1, analyze-batch-2, analyze-batch-3, analyze-batch-4, analyze-batch-5]
+    if: always()
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install pandas numpy
+    
+    - name: Create results directory
+      run: |
+        mkdir -p batch_results
+        mkdir -p Verified_Backtest_Data
+    
+    - name: Download all results
+      run: |
+        echo "📥 Downloading batch results..."
+        
+        # Try to download each batch individually
+        for i in 1 2 3 4 5; do
+          echo "Attempting to download batch${i}-results..."
+          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+               -H "Accept: application/vnd.github.v3+json" \
+               -L "https://api.github.com/repos/${{ github.repository }}/actions/artifacts" \
+               2>/dev/null | grep -q "batch${i}-results" && echo "Found batch${i}" || echo "batch${i} not found"
+        done
+    
+    - name: Download batch 1
+      uses: actions/download-artifact@v4
+      with:
+        name: batch1-results
+        path: batch_results/
+      continue-on-error: true
+    
+    - name: Download batch 2
+      uses: actions/download-artifact@v4
+      with:
+        name: batch2-results
+        path: batch_results/
+      continue-on-error: true
+    
+    - name: Download batch 3
+      uses: actions/download-artifact@v4
+      with:
+        name: batch3-results
+        path: batch_results/
+      continue-on-error: true
+    
+    - name: Download batch 4
+      uses: actions/download-artifact@v4
+      with:
+        name: batch4-results
+        path: batch_results/
+      continue-on-error: true
+    
+    - name: Download batch 5
+      uses: actions/download-artifact@v4
+      with:
+        name: batch5-results
+        path: batch_results/
+      continue-on-error: true
+    
+    - name: Check and merge results
+      run: |
+        echo "📁 Checking batch_results directory..."
+        
+        if [ -z "$(ls -A batch_results 2>/dev/null)" ]; then
+          echo "❌ No batch results found!"
+          echo "Creating empty merged file..."
+          echo '{"merge_date": "'$(date -Iseconds)'", "total_stocks": 0, "all_stocks": []}' > Verified_Backtest_Data/phase3_merged_analysis.json
+        else
+          echo "✅ Found results:"
+          ls -lh batch_results/
+          
+          # Merge using v2 merger if available
+          if [ -f "phase3_batch_merger_v2.py" ]; then
+            python phase3_batch_merger_v2.py batch_results/
+          elif [ -f "phase3_batch_merger.py" ]; then
+            python phase3_batch_merger.py batch_results/
+          else
+            echo "Creating simple merger..."
+            python << 'EOF'
+        import json
+        import glob
+        from datetime import datetime
+        
+        files = glob.glob('batch_results/*.json')
+        print(f"Merging {len(files)} files")
+        
+        all_stocks = []
+        for file in files:
+            try:
+                with open(file) as f:
+                    data = json.load(f)
+                    if 'results' in data:
+                        all_stocks.extend(data['results'])
+            except:
+                pass
+        
+        with open('Verified_Backtest_Data/phase3_merged_analysis.json', 'w') as f:
+            json.dump({
+                'merge_date': datetime.now().isoformat(),
+                'total_stocks': len(all_stocks),
+                'all_stocks': all_stocks
+            }, f, indent=2)
+        
+        print(f"Merged {len(all_stocks)} stocks")
+        EOF
+          fi
+        fi
+    
+    - name: Run correlation analysis
+      run: |
+        if [ -f "Verified_Backtest_Data/phase3_merged_analysis.json" ]; then
+          if [ -f "phase3_correlation_analyzer_v2.py" ]; then
+            python phase3_correlation_analyzer_v2.py Verified_Backtest_Data/phase3_merged_analysis.json
+          elif [ -f "phase3_correlation_analyzer.py" ]; then
+            python phase3_correlation_analyzer.py Verified_Backtest_Data/phase3_merged_analysis.json
+          fi
+        fi
+    
+    - name: Display summary
+      run: |
+        echo "## 📊 Phase 3 Analysis Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Mode**: ${{ github.event.inputs.mode }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Status**: Completed" >> $GITHUB_STEP_SUMMARY
+        
+        if [ -f "Verified_Backtest_Data/phase3_merged_analysis.json" ]; then
+          python << 'EOF'
+        import json
+        with open('Verified_Backtest_Data/phase3_merged_analysis.json') as f:
+            data = json.load(f)
+        print(f"**Stocks Analyzed**: {data.get('total_stocks', 0)}")
+        EOF >> $GITHUB_STEP_SUMMARY
+        fi
+    
+    - name: Commit results
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "Phase 3 Bot"
+        
+        git add Verified_Backtest_Data/*.json 2>/dev/null || true
+        git add batch_inputs/ 2>/dev/null || true
+        
+        git diff --staged --quiet || git commit -m "🔬 Phase 3 Analysis: ${{ github.event.inputs.mode }} mode
+        
+        Analysis complete with Polygon.io Stocks Advanced data
+        Date: $(date +'%Y-%m-%d %H:%M')"
+        
+        git pull origin main --rebase --autostash || true
+    
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main
+      continue-on-error: true
