@@ -1,0 +1,253 @@
+name: Phase 3 Market Structure Collection
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Number of stocks to analyze'
+        required: true
+        default: '10'
+        type: choice
+        options:
+          - '10'
+          - '50'
+          - '100'
+          - '200'
+          - 'all'
+
+permissions:
+  contents: write
+
+jobs:
+  collect-market-structure:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests pandas numpy yfinance
+    
+    - name: Create market structure collector
+      run: |
+        cat > phase3_market_structure_collector.py << 'EOF'
+        import json
+        import requests
+        import os
+        import sys
+        from datetime import datetime, timedelta
+        
+        def get_market_data(ticker, api_key):
+            """Get market structure data from Polygon"""
+            base_url = 'https://api.polygon.io'
+            
+            # Get ticker details
+            url = f"{base_url}/v3/reference/tickers/{ticker}"
+            params = {'apiKey': api_key}
+            
+            try:
+                response = requests.get(url, params=params, timeout=10)
+                data = response.json()
+                
+                if data.get('status') == 'OK' and data.get('results'):
+                    result = data['results']
+                    return {
+                        'shares_outstanding': result.get('share_class_shares_outstanding', 0),
+                        'market_cap': result.get('market_cap', 0),
+                        'weighted_shares': result.get('weighted_shares_outstanding', 0),
+                        'sic_description': result.get('sic_description', ''),
+                        'data_available': True
+                    }
+            except Exception as e:
+                print(f"  Error getting data for {ticker}: {e}")
+            
+            return {
+                'shares_outstanding': 0,
+                'market_cap': 0,
+                'data_available': False
+            }
+        
+        def calculate_metrics(stock, market_data):
+            """Calculate key market structure metrics"""
+            
+            # Estimate float (70% of outstanding for micro-caps)
+            shares = market_data.get('shares_outstanding', 0)
+            estimated_float = shares * 0.7 if shares > 0 else 0
+            
+            market_cap = market_data.get('market_cap', 0)
+            
+            # Categorize by market cap
+            if market_cap == 0:
+                cap_category = 'unknown'
+            elif market_cap < 50_000_000:
+                cap_category = 'micro_cap'
+            elif market_cap < 300_000_000:
+                cap_category = 'small_cap'
+            elif market_cap < 2_000_000_000:
+                cap_category = 'mid_cap'
+            else:
+                cap_category = 'large_cap'
+            
+            # Float category
+            if estimated_float == 0:
+                float_category = 'unknown'
+            elif estimated_float < 5_000_000:
+                float_category = 'ultra_low'
+            elif estimated_float < 10_000_000:
+                float_category = 'low'
+            elif estimated_float < 50_000_000:
+                float_category = 'medium'
+            else:
+                float_category = 'high'
+            
+            return {
+                'ticker': stock['ticker'],
+                'explosion_date': stock.get('catalyst_date') or stock['entry_date'],
+                'gain_percent': stock['gain_percent'],
+                'days_to_peak': stock.get('days_to_peak', 0),
+                'shares_outstanding': shares,
+                'estimated_float': estimated_float,
+                'market_cap': market_cap,
+                'cap_category': cap_category,
+                'float_category': float_category,
+                'data_available': market_data['data_available']
+            }
+        
+        def main():
+            # Load stocks
+            with open('Verified_Backtest_Data/explosive_stocks_CLEAN.json', 'r') as f:
+                all_stocks = json.load(f)
+            
+            # Limit stocks if specified
+            limit = sys.argv[1] if len(sys.argv) > 1 else '10'
+            if limit != 'all':
+                all_stocks = all_stocks[:int(limit)]
+            
+            print(f"Collecting market structure for {len(all_stocks)} stocks...")
+            
+            api_key = os.environ.get('POLYGON_API_KEY', 'pvv6DNmKAoxojCc0B5HOaji6I_k1egv0')
+            
+            results = []
+            stats = {
+                'total': len(all_stocks),
+                'micro_cap': 0,
+                'small_cap': 0,
+                'ultra_low_float': 0,
+                'low_float': 0,
+                'data_available': 0
+            }
+            
+            for i, stock in enumerate(all_stocks, 1):
+                ticker = stock['ticker']
+                print(f"[{i}/{len(all_stocks)}] Processing {ticker}...")
+                
+                # Get market data
+                market_data = get_market_data(ticker, api_key)
+                
+                # Calculate metrics
+                metrics = calculate_metrics(stock, market_data)
+                results.append(metrics)
+                
+                # Update stats
+                if metrics['data_available']:
+                    stats['data_available'] += 1
+                    
+                    if metrics['cap_category'] == 'micro_cap':
+                        stats['micro_cap'] += 1
+                    elif metrics['cap_category'] == 'small_cap':
+                        stats['small_cap'] += 1
+                    
+                    if metrics['float_category'] == 'ultra_low':
+                        stats['ultra_low_float'] += 1
+                    elif metrics['float_category'] == 'low':
+                        stats['low_float'] += 1
+                
+                # Rate limiting
+                if i % 5 == 0:
+                    import time
+                    time.sleep(1)
+            
+            # Save results
+            output = {
+                'collection_date': datetime.now().isoformat(),
+                'stocks_analyzed': len(results),
+                'statistics': stats,
+                'market_structure_data': results
+            }
+            
+            os.makedirs('Verified_Backtest_Data', exist_ok=True)
+            with open('Verified_Backtest_Data/phase3_market_structure.json', 'w') as f:
+                json.dump(output, f, indent=2)
+            
+            # Print summary
+            print("\n" + "="*60)
+            print("MARKET STRUCTURE COLLECTION COMPLETE")
+            print("="*60)
+            print(f"Total analyzed: {stats['total']}")
+            print(f"Data available: {stats['data_available']}")
+            print(f"Micro-cap (<$50M): {stats['micro_cap']}")
+            print(f"Small-cap (<$300M): {stats['small_cap']}")
+            print(f"Ultra-low float (<5M): {stats['ultra_low_float']}")
+            print(f"Low float (<10M): {stats['low_float']}")
+        
+        if __name__ == "__main__":
+            main()
+        EOF
+    
+    - name: Run market structure collection
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        python phase3_market_structure_collector.py ${{ github.event.inputs.limit }}
+    
+    - name: Display results
+      run: |
+        echo "## 📊 Market Structure Analysis" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        python << 'EOF'
+        import json
+        
+        with open('Verified_Backtest_Data/phase3_market_structure.json', 'r') as f:
+            data = json.load(f)
+        
+        stats = data['statistics']
+        print(f"**Stocks Analyzed**: {stats['total']}")
+        print(f"**Data Retrieved**: {stats['data_available']}")
+        print("")
+        print("### Market Cap Distribution")
+        print(f"- Micro-cap (<$50M): {stats['micro_cap']}")
+        print(f"- Small-cap (<$300M): {stats['small_cap']}")
+        print("")
+        print("### Float Distribution")
+        print(f"- Ultra-low (<5M shares): {stats['ultra_low_float']}")
+        print(f"- Low (<10M shares): {stats['low_float']}")
+        EOF >> $GITHUB_STEP_SUMMARY
+    
+    - name: Commit results
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "Market Structure Bot"
+        
+        git add Verified_Backtest_Data/phase3_market_structure.json
+        git add phase3_market_structure_collector.py
+        
+        git diff --staged --quiet || git commit -m "📊 Market Structure Collection: ${{ github.event.inputs.limit }} stocks
+        
+        Collected market cap and float data
+        Date: $(date +'%Y-%m-%d %H:%M')"
+        
+        git pull origin main --rebase --autostash
+    
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main

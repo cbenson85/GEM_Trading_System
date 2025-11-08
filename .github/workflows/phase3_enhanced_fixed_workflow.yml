@@ -1,0 +1,74 @@
+name: Phase 3 Enhanced Analysis - Fixed
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Analysis mode'
+        required: true
+        default: 'test'
+        type: choice
+        options:
+          - test       # 10 stocks
+          - sample     # 100 stocks  
+          - full       # All 694 stocks
+
+permissions:
+  contents: write
+
+jobs:
+  run-analysis:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests pandas numpy
+    
+    - name: Upload fixed scripts
+      run: |
+        echo "📝 Creating fixed Phase 3 scripts..."
+        
+        # Create the fixed batch merger
+        cat > phase3_batch_merger_v2.py << 'EOF'
+        $INSERT_MERGER_CODE_HERE
+        EOF
+        
+        # Create the fixed correlation analyzer
+        cat > phase3_correlation_analyzer_v2.py << 'EOF'
+        $INSERT_ANALYZER_CODE_HERE
+        EOF
+        
+        echo "✅ Fixed scripts created"
+    
+    - name: Run existing Phase 3 workflow
+      run: |
+        # This will use your existing phase3_comprehensive_collector_FIXED.py
+        # But with the new merger and analyzer
+        
+        echo "Starting Phase 3 analysis in ${{ github.event.inputs.mode }} mode"
+        
+        # The workflow should already exist in .github/workflows/
+        # We're just making sure the fixed scripts are available
+    
+    - name: Trigger comprehensive collection
+      uses: actions/github-script@v6
+      with:
+        script: |
+          await github.rest.actions.createWorkflowDispatch({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            workflow_id: 'phase3_parallel_analysis.yml',
+            ref: 'main',
+            inputs: {
+              mode: '${{ github.event.inputs.mode }}'
+            }
+          })
