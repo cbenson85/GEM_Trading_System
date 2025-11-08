@@ -1,55 +1,55 @@
 # Phase 4 Historical Screener Testing - Final Report
-**Generated**: 2025-11-08 00:18:02
+**Generated**: 2025-11-08 01:23:56
 **Test Mode**: test
 
 ## Executive Summary
 
 - **Test Dates**: 3 strategic dates
-- **Total Stocks Analyzed**: 13
-- **True Positives (500%+ gains)**: 8
-- **Hit Rate**: 61.5%
-- **Win Rate (100%+ gains)**: 69.2%
+- **Total Stocks Analyzed**: 120
+- **True Positives (500%+ gains)**: 1
+- **Hit Rate**: 0.8%
+- **Win Rate (100%+ gains)**: 4.2%
 
 ## Key Findings
 
-- Optimal score threshold: 90 (hit rate: 70.0%)
-- Most predictive pattern: volume_score (+61.5% correlation)
-- Average gain for explosions: 2478%
-- Average days to peak: 61 days
+- Optimal score threshold: 90 (hit rate: 1.0%)
+- Most predictive pattern: rsi_score (+2.3% correlation)
+- Average gain for explosions: 786%
+- Average days to peak: 68 days
 
 ## Classification Breakdown
 
 | Classification | Count | Percentage |
 |---------------|-------|------------|
-| TRUE_POSITIVE | 8 | 61.5% |
-| MODERATE_WIN | 1 | 7.7% |
-| SMALL_WIN | 0 | 0.0% |
-| BREAK_EVEN | 0 | 0.0% |
-| LOSS | 3 | 23.1% |
-| NO_DATA | 1 | 7.7% |
+| TRUE_POSITIVE | 1 | 0.8% |
+| MODERATE_WIN | 4 | 3.3% |
+| SMALL_WIN | 7 | 5.8% |
+| BREAK_EVEN | 108 | 90.0% |
+| LOSS | 0 | 0.0% |
+| NO_DATA | 0 | 0.0% |
 | ERROR | 0 | 0.0% |
 
 ## Pattern Effectiveness
 
 | Pattern | Correlation | Success Rate |
 |---------|-------------|-------------|
-| volume_score | 0.615 | 61.5% |
-| breakout_score | 0.615 | 61.5% |
-| composite_bonus | 0.615 | 61.5% |
-| accumulation_score | 0.528 | 77.8% |
-| rsi_score | -0.615 | 0.0% |
+| rsi_score | 0.023 | 2.3% |
+| volume_score | 0.010 | 1.0% |
+| composite_bonus | 0.008 | 0.8% |
+| accumulation_score | -0.020 | 0.0% |
+| breakout_score | -0.071 | 0.0% |
 
 ## Score Threshold Analysis
 
 | Threshold | Stocks | True Positives | Hit Rate |
 |-----------|--------|----------------|----------|
-| 60 | 13 | 8 | 61.5% |
-| 75 | 12 | 8 | 66.7% |
-| 90 | 10 | 7 | 70.0% |
-| 105 | 9 | 7 | 77.8% |
-| 120 | 9 | 7 | 77.8% |
-| 135 | 6 | 4 | 66.7% |
-| 150 | 3 | 2 | 66.7% |
+| 60 | 120 | 1 | 0.8% |
+| 75 | 120 | 1 | 0.8% |
+| 90 | 101 | 1 | 1.0% |
+| 105 | 82 | 0 | 0.0% |
+| 120 | 80 | 0 | 0.0% |
+| 135 | 73 | 0 | 0.0% |
+| 150 | 6 | 0 | 0.0% |
 
 ## Recommendations
 
