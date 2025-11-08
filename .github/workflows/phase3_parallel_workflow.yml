@@ -499,7 +499,7 @@ jobs:
     - name: Merge batch results
       run: |
         echo "🔄 Merging all batch results..."
-        python phase3_batch_merger.py batch_results/
+        python phase3_batch_merger_v2.py batch_results/
     
     - name: Generate correlation matrix
       run: |
