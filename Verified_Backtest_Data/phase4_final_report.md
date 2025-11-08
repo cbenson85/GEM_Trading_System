@@ -1,30 +1,27 @@
 # Phase 4 Historical Screener Testing - Final Report
-**Generated**: 2025-11-08 01:23:56
+**Generated**: 2025-11-08 03:13:28
 **Test Mode**: test
 
 ## Executive Summary
 
 - **Test Dates**: 3 strategic dates
 - **Total Stocks Analyzed**: 120
-- **True Positives (500%+ gains)**: 1
-- **Hit Rate**: 0.8%
-- **Win Rate (100%+ gains)**: 4.2%
+- **True Positives (500%+ gains)**: 0
+- **Hit Rate**: 0.0%
+- **Win Rate (100%+ gains)**: 2.5%
 
 ## Key Findings
 
-- Optimal score threshold: 90 (hit rate: 1.0%)
-- Most predictive pattern: rsi_score (+2.3% correlation)
-- Average gain for explosions: 786%
-- Average days to peak: 68 days
+- Most predictive pattern: volume_score (+0.0% correlation)
 
 ## Classification Breakdown
 
 | Classification | Count | Percentage |
 |---------------|-------|------------|
-| TRUE_POSITIVE | 1 | 0.8% |
-| MODERATE_WIN | 4 | 3.3% |
-| SMALL_WIN | 7 | 5.8% |
-| BREAK_EVEN | 108 | 90.0% |
+| TRUE_POSITIVE | 0 | 0.0% |
+| MODERATE_WIN | 3 | 2.5% |
+| SMALL_WIN | 3 | 2.5% |
+| BREAK_EVEN | 114 | 95.0% |
 | LOSS | 0 | 0.0% |
 | NO_DATA | 0 | 0.0% |
 | ERROR | 0 | 0.0% |
@@ -33,23 +30,21 @@
 
 | Pattern | Correlation | Success Rate |
 |---------|-------------|-------------|
-| rsi_score | 0.023 | 2.3% |
-| volume_score | 0.010 | 1.0% |
-| composite_bonus | 0.008 | 0.8% |
-| accumulation_score | -0.020 | 0.0% |
-| breakout_score | -0.071 | 0.0% |
+| volume_score | 0.000 | 0.0% |
+| rsi_score | 0.000 | 0.0% |
+| breakout_score | 0.000 | 0.0% |
+| accumulation_score | 0.000 | 0.0% |
+| composite_bonus | 0.000 | 0.0% |
 
 ## Score Threshold Analysis
 
 | Threshold | Stocks | True Positives | Hit Rate |
 |-----------|--------|----------------|----------|
-| 60 | 120 | 1 | 0.8% |
-| 75 | 120 | 1 | 0.8% |
-| 90 | 101 | 1 | 1.0% |
-| 105 | 82 | 0 | 0.0% |
-| 120 | 80 | 0 | 0.0% |
-| 135 | 73 | 0 | 0.0% |
-| 150 | 6 | 0 | 0.0% |
+| 60 | 120 | 0 | 0.0% |
+| 75 | 115 | 0 | 0.0% |
+| 90 | 96 | 0 | 0.0% |
+| 105 | 30 | 0 | 0.0% |
+| 120 | 6 | 0 | 0.0% |
 
 ## Recommendations
 

@@ -1,85 +1,73 @@
 {
-  "generated_date": "2025-11-08T01:23:56.897930",
+  "generated_date": "2025-11-08T03:13:28.748161",
   "total_stocks": 120,
-  "true_positives": 1,
-  "hit_rate": 0.008333333333333333,
-  "win_rate": 0.041666666666666664,
+  "true_positives": 0,
+  "hit_rate": 0.0,
+  "win_rate": 0.025,
   "pattern_correlations": {
     "volume_score": {
-      "stocks_with_pattern": 101,
-      "stocks_without_pattern": 19,
-      "success_rate_with": 0.01,
-      "success_rate_without": 0.0,
-      "correlation": 0.01
-    },
-    "rsi_score": {
-      "stocks_with_pattern": 44,
-      "stocks_without_pattern": 76,
-      "success_rate_with": 0.023,
-      "success_rate_without": 0.0,
-      "correlation": 0.023
-    },
-    "breakout_score": {
       "stocks_with_pattern": 106,
       "stocks_without_pattern": 14,
       "success_rate_with": 0.0,
-      "success_rate_without": 0.071,
-      "correlation": -0.071
+      "success_rate_without": 0.0,
+      "correlation": 0.0
+    },
+    "rsi_score": {
+      "stocks_with_pattern": 65,
+      "stocks_without_pattern": 55,
+      "success_rate_with": 0.0,
+      "success_rate_without": 0.0,
+      "correlation": 0.0
+    },
+    "breakout_score": {
+      "stocks_with_pattern": 110,
+      "stocks_without_pattern": 10,
+      "success_rate_with": 0.0,
+      "success_rate_without": 0.0,
+      "correlation": 0.0
     },
     "accumulation_score": {
-      "stocks_with_pattern": 69,
-      "stocks_without_pattern": 51,
+      "stocks_with_pattern": 104,
+      "stocks_without_pattern": 16,
       "success_rate_with": 0.0,
-      "success_rate_without": 0.02,
-      "correlation": -0.02
+      "success_rate_without": 0.0,
+      "correlation": 0.0
     },
     "composite_bonus": {
       "stocks_with_pattern": 120,
       "stocks_without_pattern": 0,
-      "success_rate_with": 0.008,
+      "success_rate_with": 0.0,
       "success_rate_without": 0,
-      "correlation": 0.008
+      "correlation": 0.0
     }
   },
   "score_correlations": {
     "score_60": {
       "threshold": 60,
       "stocks_above": 120,
-      "true_positives": 1,
-      "hit_rate": 0.008
+      "true_positives": 0,
+      "hit_rate": 0.0
     },
     "score_75": {
       "threshold": 75,
-      "stocks_above": 120,
-      "true_positives": 1,
-      "hit_rate": 0.008
+      "stocks_above": 115,
+      "true_positives": 0,
+      "hit_rate": 0.0
     },
     "score_90": {
       "threshold": 90,
-      "stocks_above": 101,
-      "true_positives": 1,
-      "hit_rate": 0.01
+      "stocks_above": 96,
+      "true_positives": 0,
+      "hit_rate": 0.0
     },
     "score_105": {
       "threshold": 105,
-      "stocks_above": 82,
+      "stocks_above": 30,
       "true_positives": 0,
       "hit_rate": 0.0
     },
     "score_120": {
       "threshold": 120,
-      "stocks_above": 80,
-      "true_positives": 0,
-      "hit_rate": 0.0
-    },
-    "score_135": {
-      "threshold": 135,
-      "stocks_above": 73,
-      "true_positives": 0,
-      "hit_rate": 0.0
-    },
-    "score_150": {
-      "threshold": 150,
       "stocks_above": 6,
       "true_positives": 0,
       "hit_rate": 0.0
@@ -87,35 +75,32 @@
   },
   "top_patterns": [
     {
-      "name": "rsi_score",
-      "correlation": 0.023,
-      "success_rate": 0.023
-    },
-    {
       "name": "volume_score",
-      "correlation": 0.01,
-      "success_rate": 0.01
+      "correlation": 0.0,
+      "success_rate": 0.0
     },
     {
-      "name": "composite_bonus",
-      "correlation": 0.008,
-      "success_rate": 0.008
-    },
-    {
-      "name": "accumulation_score",
-      "correlation": -0.02,
+      "name": "rsi_score",
+      "correlation": 0.0,
       "success_rate": 0.0
     },
     {
       "name": "breakout_score",
-      "correlation": -0.071,
+      "correlation": 0.0,
+      "success_rate": 0.0
+    },
+    {
+      "name": "accumulation_score",
+      "correlation": 0.0,
+      "success_rate": 0.0
+    },
+    {
+      "name": "composite_bonus",
+      "correlation": 0.0,
       "success_rate": 0.0
     }
   ],
   "key_findings": [
-    "Optimal score threshold: 90 (hit rate: 1.0%)",
-    "Most predictive pattern: rsi_score (+2.3% correlation)",
-    "Average gain for explosions: 786%",
-    "Average days to peak: 68 days"
+    "Most predictive pattern: volume_score (+0.0% correlation)"
   ]
 }

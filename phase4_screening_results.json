@@ -10,24 +10,24 @@
       "screening_date": "2019-03-15",
       "market_stats": {
         "total_stocks_scanned": 5045,
-        "stocks_analyzed": 5007,
-        "api_failures": 38,
-        "passed_filters": 209,
+        "stocks_analyzed": 5009,
+        "api_failures": 36,
+        "passed_filters": 286,
         "top_30_selected": 30
       },
       "selected_stocks": [
         {
-          "ticker": "AVID",
-          "score": 160,
+          "ticker": "ANH",
+          "score": 125,
           "score_breakdown": {
-            "volume_score": 50,
+            "volume_score": 35,
             "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 6.23,
-          "entry_volume": 2922552.0,
+          "entry_price": 4.1,
+          "entry_volume": 4439802.0,
           "screening_date": "2019-03-15",
           "rank": 1,
           "false_miss_analysis": {
@@ -37,17 +37,17 @@
           }
         },
         {
-          "ticker": "PACQ",
-          "score": 145,
+          "ticker": "FMNB",
+          "score": 110,
           "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 20,
+            "rsi_score": 20,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.01,
-          "entry_volume": 422652,
+          "entry_price": 14.39,
+          "entry_volume": 101081,
           "screening_date": "2019-03-15",
           "rank": 2,
           "false_miss_analysis": {
@@ -57,17 +57,17 @@
           }
         },
         {
-          "ticker": "MRT",
-          "score": 145,
+          "ticker": "UMC",
+          "score": 110,
           "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 20,
+            "rsi_score": 20,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.69,
-          "entry_volume": 3648619.0,
+          "entry_price": 1.83,
+          "entry_volume": 2711400.0,
           "screening_date": "2019-03-15",
           "rank": 3,
           "false_miss_analysis": {
@@ -77,17 +77,17 @@
           }
         },
         {
-          "ticker": "UBFO",
-          "score": 145,
+          "ticker": "UCFC",
+          "score": 110,
           "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 20,
+            "rsi_score": 30,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.75,
-          "entry_volume": 62443,
+          "entry_price": 9.43,
+          "entry_volume": 340153,
           "screening_date": "2019-03-15",
           "rank": 4,
           "false_miss_analysis": {
@@ -97,17 +97,17 @@
           }
         },
         {
-          "ticker": "CIA",
-          "score": 145,
+          "ticker": "IX",
+          "score": 110,
           "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 20,
+            "rsi_score": 30,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 7.01,
-          "entry_volume": 356950,
+          "entry_price": 13.996,
+          "entry_volume": 1004000.0,
           "screening_date": "2019-03-15",
           "rank": 5,
           "false_miss_analysis": {
@@ -117,17 +117,17 @@
           }
         },
         {
-          "ticker": "CNAC",
-          "score": 145,
+          "ticker": "FCF",
+          "score": 110,
           "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 20,
+            "rsi_score": 30,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.34,
-          "entry_volume": 613628,
+          "entry_price": 13.48,
+          "entry_volume": 1387249.0,
           "screening_date": "2019-03-15",
           "rank": 6,
           "false_miss_analysis": {
@@ -137,17 +137,17 @@
           }
         },
         {
-          "ticker": "CELH",
-          "score": 145,
+          "ticker": "BAR",
+          "score": 110,
           "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
+            "volume_score": 20,
+            "rsi_score": 20,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 1.6167,
-          "entry_volume": 1044012.0,
+          "entry_price": 12.98,
+          "entry_volume": 461164,
           "screening_date": "2019-03-15",
           "rank": 7,
           "false_miss_analysis": {
@@ -157,17 +157,17 @@
           }
         },
         {
-          "ticker": "CART",
-          "score": 145,
+          "ticker": "PFLT",
+          "score": 110,
           "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 10,
+            "rsi_score": 30,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 8.27,
-          "entry_volume": 118136,
+          "entry_price": 12.98,
+          "entry_volume": 347480,
           "screening_date": "2019-03-15",
           "rank": 8,
           "false_miss_analysis": {
@@ -177,17 +177,17 @@
           }
         },
         {
-          "ticker": "GPL",
-          "score": 145,
+          "ticker": "FFWM",
+          "score": 110,
           "score_breakdown": {
-            "volume_score": 35,
+            "volume_score": 20,
             "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 11.5,
-          "entry_volume": 1160534.8,
+          "entry_price": 14.29,
+          "entry_volume": 430177,
           "screening_date": "2019-03-15",
           "rank": 9,
           "false_miss_analysis": {
@@ -197,17 +197,17 @@
           }
         },
         {
-          "ticker": "SVBI",
-          "score": 145,
+          "ticker": "UBFO",
+          "score": 105,
           "score_breakdown": {
             "volume_score": 35,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 9.34,
-          "entry_volume": 97841,
+          "entry_price": 10.75,
+          "entry_volume": 62443,
           "screening_date": "2019-03-15",
           "rank": 10,
           "false_miss_analysis": {
@@ -217,17 +217,17 @@
           }
         },
         {
-          "ticker": "ATEN",
-          "score": 135,
+          "ticker": "CNAC",
+          "score": 105,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 35,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 7.21,
-          "entry_volume": 1594956.0,
+          "entry_price": 10.34,
+          "entry_volume": 613628,
           "screening_date": "2019-03-15",
           "rank": 11,
           "false_miss_analysis": {
@@ -237,17 +237,17 @@
           }
         },
         {
-          "ticker": "BRT",
-          "score": 135,
+          "ticker": "PACQ",
+          "score": 105,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 35,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 13.66,
-          "entry_volume": 86929,
+          "entry_price": 10.01,
+          "entry_volume": 422652,
           "screening_date": "2019-03-15",
           "rank": 12,
           "false_miss_analysis": {
@@ -257,17 +257,17 @@
           }
         },
         {
-          "ticker": "FMNB",
-          "score": 135,
+          "ticker": "CART",
+          "score": 105,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 35,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 14.39,
-          "entry_volume": 101081,
+          "entry_price": 8.27,
+          "entry_volume": 118136,
           "screening_date": "2019-03-15",
           "rank": 13,
           "false_miss_analysis": {
@@ -277,17 +277,17 @@
           }
         },
         {
-          "ticker": "WRLS",
-          "score": 135,
+          "ticker": "CIA",
+          "score": 105,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 35,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.25,
-          "entry_volume": 103262,
+          "entry_price": 7.01,
+          "entry_volume": 356950,
           "screening_date": "2019-03-15",
           "rank": 14,
           "false_miss_analysis": {
@@ -297,17 +297,17 @@
           }
         },
         {
-          "ticker": "MUFG",
-          "score": 135,
+          "ticker": "MRT",
+          "score": 105,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 35,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 5.17,
-          "entry_volume": 3613040.0,
+          "entry_price": 10.69,
+          "entry_volume": 3648619.0,
           "screening_date": "2019-03-15",
           "rank": 15,
           "false_miss_analysis": {
@@ -317,17 +317,17 @@
           }
         },
         {
-          "ticker": "KRNY",
-          "score": 135,
+          "ticker": "SVBI",
+          "score": 105,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 35,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 13.17,
-          "entry_volume": 1192201.0,
+          "entry_price": 9.34,
+          "entry_volume": 97841,
           "screening_date": "2019-03-15",
           "rank": 16,
           "false_miss_analysis": {
@@ -337,17 +337,17 @@
           }
         },
         {
-          "ticker": "BRG",
-          "score": 135,
+          "ticker": "SLCT",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 20,
+            "rsi_score": 20,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.55,
-          "entry_volume": 743042,
+          "entry_price": 11.29,
+          "entry_volume": 80406,
           "screening_date": "2019-03-15",
           "rank": 17,
           "false_miss_analysis": {
@@ -357,17 +357,17 @@
           }
         },
         {
-          "ticker": "DGICA",
-          "score": 135,
+          "ticker": "NRIM",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 10,
+            "rsi_score": 30,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 13.38,
-          "entry_volume": 78622,
+          "entry_price": 9.2675,
+          "entry_volume": 134536,
           "screening_date": "2019-03-15",
           "rank": 18,
           "false_miss_analysis": {
@@ -377,17 +377,17 @@
           }
         },
         {
-          "ticker": "LAND",
-          "score": 135,
+          "ticker": "BRKL",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 10,
+            "rsi_score": 30,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 12.04,
-          "entry_volume": 240728,
+          "entry_price": 15,
+          "entry_volume": 862358,
           "screening_date": "2019-03-15",
           "rank": 19,
           "false_miss_analysis": {
@@ -397,17 +397,17 @@
           }
         },
         {
-          "ticker": "LMRK",
-          "score": 135,
+          "ticker": "RBKB",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 20,
+            "rsi_score": 20,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 14.97,
-          "entry_volume": 552425,
+          "entry_price": 11.36,
+          "entry_volume": 129448,
           "screening_date": "2019-03-15",
           "rank": 20,
           "false_miss_analysis": {
@@ -417,17 +417,17 @@
           }
         },
         {
-          "ticker": "CIDM",
-          "score": 135,
+          "ticker": "CFFN",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
+            "volume_score": 20,
+            "rsi_score": 20,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 1.82,
-          "entry_volume": 492698,
+          "entry_price": 12.86,
+          "entry_volume": 1227849.0,
           "screening_date": "2019-03-15",
           "rank": 21,
           "false_miss_analysis": {
@@ -437,17 +437,17 @@
           }
         },
         {
-          "ticker": "HCFT",
-          "score": 135,
+          "ticker": "OSBC",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 10,
+            "rsi_score": 30,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 3.54,
-          "entry_volume": 284621,
+          "entry_price": 13.91,
+          "entry_volume": 127344,
           "screening_date": "2019-03-15",
           "rank": 22,
           "false_miss_analysis": {
@@ -457,17 +457,17 @@
           }
         },
         {
-          "ticker": "PCYO",
-          "score": 135,
+          "ticker": "FHN",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 10,
+            "rsi_score": 30,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 9.95,
-          "entry_volume": 68030,
+          "entry_price": 14.98,
+          "entry_volume": 4888358.0,
           "screening_date": "2019-03-15",
           "rank": 23,
           "false_miss_analysis": {
@@ -477,17 +477,17 @@
           }
         },
         {
-          "ticker": "PDLB",
-          "score": 135,
+          "ticker": "HBAN",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 20,
+            "rsi_score": 20,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 13.8,
-          "entry_volume": 73621,
+          "entry_price": 13.75,
+          "entry_volume": 50641098.0,
           "screening_date": "2019-03-15",
           "rank": 24,
           "false_miss_analysis": {
@@ -497,17 +497,17 @@
           }
         },
         {
-          "ticker": "CUE",
-          "score": 135,
+          "ticker": "VMM",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
+            "volume_score": 10,
+            "rsi_score": 20,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 8.01,
-          "entry_volume": 317116,
+          "entry_price": 12.37,
+          "entry_volume": 39994,
           "screening_date": "2019-03-15",
           "rank": 25,
           "false_miss_analysis": {
@@ -517,17 +517,17 @@
           }
         },
         {
-          "ticker": "TPHS",
-          "score": 135,
+          "ticker": "NWS",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
+            "volume_score": 20,
+            "rsi_score": 20,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 4.67,
-          "entry_volume": 293913,
+          "entry_price": 12.74,
+          "entry_volume": 2386294.0,
           "screening_date": "2019-03-15",
           "rank": 26,
           "false_miss_analysis": {
@@ -537,17 +537,17 @@
           }
         },
         {
-          "ticker": "XAN",
-          "score": 135,
+          "ticker": "MFT",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 10,
+            "rsi_score": 20,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.67,
-          "entry_volume": 560699,
+          "entry_price": 12.95,
+          "entry_volume": 57206,
           "screening_date": "2019-03-15",
           "rank": 27,
           "false_miss_analysis": {
@@ -557,17 +557,17 @@
           }
         },
         {
-          "ticker": "BV",
-          "score": 135,
+          "ticker": "COTY",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 10,
+            "rsi_score": 20,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 14.42,
-          "entry_volume": 1168149.0,
+          "entry_price": 10.89,
+          "entry_volume": 22118799.0,
           "screening_date": "2019-03-15",
           "rank": 28,
           "false_miss_analysis": {
@@ -577,17 +577,17 @@
           }
         },
         {
-          "ticker": "TBRG",
-          "score": 135,
+          "ticker": "JOF",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 10,
+            "rsi_score": 30,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.19,
-          "entry_volume": 970775,
+          "entry_price": 8.54,
+          "entry_volume": 85332,
           "screening_date": "2019-03-15",
           "rank": 29,
           "false_miss_analysis": {
@@ -597,17 +597,17 @@
           }
         },
         {
-          "ticker": "USLM",
-          "score": 135,
+          "ticker": "NFBK",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 10,
+            "rsi_score": 20,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 14.754,
-          "entry_volume": 51130,
+          "entry_price": 14.55,
+          "entry_volume": 192641,
           "screening_date": "2019-03-15",
           "rank": 30,
           "false_miss_analysis": {
@@ -619,452 +619,452 @@
       ],
       "runners_up": [
         {
-          "ticker": "UMC",
-          "score": 135,
+          "ticker": "ARCO",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 10,
+            "rsi_score": 20,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 1.83,
-          "entry_volume": 2711400.0,
+          "entry_price": 8.0363,
+          "entry_volume": 900837.3726,
           "screening_date": "2019-03-15",
           "rank": 31
         },
         {
-          "ticker": "GWRS",
-          "score": 135,
+          "ticker": "DRD",
+          "score": 95,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 50,
+            "rsi_score": 30,
+            "breakout_score": 0,
+            "accumulation_score": 0,
+            "composite_bonus": 15
           },
-          "entry_price": 9.93,
-          "entry_volume": 102395,
+          "entry_price": 1.91,
+          "entry_volume": 3066599.0,
           "screening_date": "2019-03-15",
           "rank": 32
         },
         {
-          "ticker": "CVIA",
-          "score": 135,
+          "ticker": "GDEN",
+          "score": 95,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 50,
             "rsi_score": 30,
-            "breakout_score": 30,
+            "breakout_score": 0,
             "accumulation_score": 0,
-            "composite_bonus": 50
+            "composite_bonus": 15
           },
-          "entry_price": 6.41,
-          "entry_volume": 1231798.0,
+          "entry_price": 13,
+          "entry_volume": 2266977.0,
           "screening_date": "2019-03-15",
           "rank": 33
         },
         {
-          "ticker": "CVRS",
-          "score": 135,
-          "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
-          },
-          "entry_price": 1.98,
-          "entry_volume": 3549077.0,
-          "screening_date": "2019-03-15",
-          "rank": 34
-        },
-        {
-          "ticker": "LUNA",
-          "score": 135,
-          "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
-          },
-          "entry_price": 4.24,
-          "entry_volume": 403831,
-          "screening_date": "2019-03-15",
-          "rank": 35
-        },
-        {
-          "ticker": "BAR",
-          "score": 135,
-          "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
-          },
-          "entry_price": 12.98,
-          "entry_volume": 461164,
-          "screening_date": "2019-03-15",
-          "rank": 36
-        },
-        {
-          "ticker": "TIS",
-          "score": 135,
-          "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
-          },
-          "entry_price": 1.5,
-          "entry_volume": 358919,
-          "screening_date": "2019-03-15",
-          "rank": 37
-        },
-        {
-          "ticker": "UROV",
-          "score": 125,
-          "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 20,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
-          },
-          "entry_price": 14.1,
-          "entry_volume": 174478,
-          "screening_date": "2019-03-15",
-          "rank": 38
-        },
-        {
-          "ticker": "MAG",
-          "score": 125,
-          "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 20,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
-          },
-          "entry_price": 10.92,
-          "entry_volume": 1108686.0,
-          "screening_date": "2019-03-15",
-          "rank": 39
-        },
-        {
-          "ticker": "SPRO",
-          "score": 125,
-          "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 20,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
-          },
-          "entry_price": 13.31,
-          "entry_volume": 281174,
-          "screening_date": "2019-03-15",
-          "rank": 40
-        },
-        {
-          "ticker": "STML",
-          "score": 125,
-          "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 20,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
-          },
-          "entry_price": 13.62,
-          "entry_volume": 2407518.0,
-          "screening_date": "2019-03-15",
-          "rank": 41
-        },
-        {
-          "ticker": "RVP",
-          "score": 105,
-          "score_breakdown": {
-            "volume_score": 50,
-            "rsi_score": 30,
-            "breakout_score": 0,
-            "accumulation_score": 0,
-            "composite_bonus": 25
-          },
-          "entry_price": 0.9,
-          "entry_volume": 5540025.0,
-          "screening_date": "2019-03-15",
-          "rank": 42
-        },
-        {
-          "ticker": "PHAS",
-          "score": 105,
-          "score_breakdown": {
-            "volume_score": 50,
-            "rsi_score": 30,
-            "breakout_score": 0,
-            "accumulation_score": 0,
-            "composite_bonus": 25
-          },
-          "entry_price": 3.72,
-          "entry_volume": 620312,
-          "screening_date": "2019-03-15",
-          "rank": 43
-        },
-        {
-          "ticker": "PRAN",
+          "ticker": "SMTA",
           "score": 95,
           "score_breakdown": {
-            "volume_score": 50,
-            "rsi_score": 20,
-            "breakout_score": 0,
-            "accumulation_score": 0,
-            "composite_bonus": 25
-          },
-          "entry_price": 1.94,
-          "entry_volume": 1381541.0,
-          "screening_date": "2019-03-15",
-          "rank": 44
-        },
-        {
-          "ticker": "DRAD",
-          "score": 90,
-          "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 30,
-            "breakout_score": 0,
-            "accumulation_score": 0,
-            "composite_bonus": 25
-          },
-          "entry_price": 0.85,
-          "entry_volume": 763905,
-          "screening_date": "2019-03-15",
-          "rank": 45
-        },
-        {
-          "ticker": "SES",
-          "score": 90,
-          "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 30,
-            "breakout_score": 0,
-            "accumulation_score": 0,
-            "composite_bonus": 25
-          },
-          "entry_price": 6.5432,
-          "entry_volume": 125719.875,
-          "screening_date": "2019-03-15",
-          "rank": 46
-        },
-        {
-          "ticker": "BBCP",
-          "score": 90,
-          "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 30,
-            "breakout_score": 0,
-            "accumulation_score": 0,
-            "composite_bonus": 25
-          },
-          "entry_price": 10.52,
-          "entry_volume": 69994,
-          "screening_date": "2019-03-15",
-          "rank": 47
-        },
-        {
-          "ticker": "ANH",
-          "score": 90,
-          "score_breakdown": {
             "volume_score": 35,
             "rsi_score": 0,
-            "breakout_score": 0,
-            "accumulation_score": 30,
-            "composite_bonus": 25
-          },
-          "entry_price": 4.1,
-          "entry_volume": 4439802.0,
-          "screening_date": "2019-03-15",
-          "rank": 48
-        },
-        {
-          "ticker": "HWCC",
-          "score": 90,
-          "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 25
-          },
-          "entry_price": 6.01,
-          "entry_volume": 203921,
-          "screening_date": "2019-03-15",
-          "rank": 49
-        },
-        {
-          "ticker": "TCCO",
-          "score": 90,
-          "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 25
-          },
-          "entry_price": 2.91,
-          "entry_volume": 92462,
-          "screening_date": "2019-03-15",
-          "rank": 50
-        },
-        {
-          "ticker": "FTAC",
-          "score": 90,
-          "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 0,
-            "accumulation_score": 30,
-            "composite_bonus": 25
-          },
-          "entry_price": 9.71,
-          "entry_volume": 241241,
-          "screening_date": "2019-03-15",
-          "rank": 51
-        },
-        {
-          "ticker": "HNRG",
-          "score": 90,
-          "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 25
-          },
-          "entry_price": 5.89,
-          "entry_volume": 244839,
-          "screening_date": "2019-03-15",
-          "rank": 52
-        },
-        {
-          "ticker": "CATS",
-          "score": 90,
-          "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 30,
-            "breakout_score": 0,
-            "accumulation_score": 0,
-            "composite_bonus": 25
-          },
-          "entry_price": 13.82,
-          "entry_volume": 1041737.0,
-          "screening_date": "2019-03-15",
-          "rank": 53
-        },
-        {
-          "ticker": "SMTA",
-          "score": 90,
-          "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 0,
-            "accumulation_score": 30,
-            "composite_bonus": 25
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
           "entry_price": 7.23,
           "entry_volume": 2401524.0,
           "screening_date": "2019-03-15",
-          "rank": 54
+          "rank": 34
         },
         {
-          "ticker": "SIEB",
-          "score": 90,
+          "ticker": "MHLD",
+          "score": 95,
+          "score_breakdown": {
+            "volume_score": 50,
+            "rsi_score": 30,
+            "breakout_score": 0,
+            "accumulation_score": 0,
+            "composite_bonus": 15
+          },
+          "entry_price": 0.6223,
+          "entry_volume": 14137505.0,
+          "screening_date": "2019-03-15",
+          "rank": 35
+        },
+        {
+          "ticker": "FTAC",
+          "score": 95,
           "score_breakdown": {
             "volume_score": 35,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 25
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 13.35,
-          "entry_volume": 109028,
+          "entry_price": 9.71,
+          "entry_volume": 241241,
+          "screening_date": "2019-03-15",
+          "rank": 36
+        },
+        {
+          "ticker": "SCM",
+          "score": 95,
+          "score_breakdown": {
+            "volume_score": 35,
+            "rsi_score": 20,
+            "breakout_score": 10,
+            "accumulation_score": 0,
+            "composite_bonus": 30
+          },
+          "entry_price": 14,
+          "entry_volume": 1144032.0,
+          "screening_date": "2019-03-15",
+          "rank": 37
+        },
+        {
+          "ticker": "WRLS",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
+          },
+          "entry_price": 10.25,
+          "entry_volume": 103262,
+          "screening_date": "2019-03-15",
+          "rank": 38
+        },
+        {
+          "ticker": "SACH",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 10,
+            "rsi_score": 20,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
+          },
+          "entry_price": 4.41,
+          "entry_volume": 137832,
+          "screening_date": "2019-03-15",
+          "rank": 39
+        },
+        {
+          "ticker": "BRT",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
+          },
+          "entry_price": 13.66,
+          "entry_volume": 86929,
+          "screening_date": "2019-03-15",
+          "rank": 40
+        },
+        {
+          "ticker": "XAN",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
+          },
+          "entry_price": 10.67,
+          "entry_volume": 560699,
+          "screening_date": "2019-03-15",
+          "rank": 41
+        },
+        {
+          "ticker": "BV",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
+          },
+          "entry_price": 14.42,
+          "entry_volume": 1168149.0,
+          "screening_date": "2019-03-15",
+          "rank": 42
+        },
+        {
+          "ticker": "FNB",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 10,
+            "rsi_score": 20,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
+          },
+          "entry_price": 11.85,
+          "entry_volume": 4896527.0,
+          "screening_date": "2019-03-15",
+          "rank": 43
+        },
+        {
+          "ticker": "PCYO",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
+          },
+          "entry_price": 9.95,
+          "entry_volume": 68030,
+          "screening_date": "2019-03-15",
+          "rank": 44
+        },
+        {
+          "ticker": "KRNY",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
+          },
+          "entry_price": 13.17,
+          "entry_volume": 1192201.0,
+          "screening_date": "2019-03-15",
+          "rank": 45
+        },
+        {
+          "ticker": "ATEN",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
+          },
+          "entry_price": 7.21,
+          "entry_volume": 1594956.0,
+          "screening_date": "2019-03-15",
+          "rank": 46
+        },
+        {
+          "ticker": "USLM",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
+          },
+          "entry_price": 14.754,
+          "entry_volume": 51130,
+          "screening_date": "2019-03-15",
+          "rank": 47
+        },
+        {
+          "ticker": "MUFG",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
+          },
+          "entry_price": 5.17,
+          "entry_volume": 3613040.0,
+          "screening_date": "2019-03-15",
+          "rank": 48
+        },
+        {
+          "ticker": "TBRG",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
+          },
+          "entry_price": 10.19,
+          "entry_volume": 970775,
+          "screening_date": "2019-03-15",
+          "rank": 49
+        },
+        {
+          "ticker": "LAND",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
+          },
+          "entry_price": 12.04,
+          "entry_volume": 240728,
+          "screening_date": "2019-03-15",
+          "rank": 50
+        },
+        {
+          "ticker": "LMRK",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
+          },
+          "entry_price": 14.97,
+          "entry_volume": 552425,
+          "screening_date": "2019-03-15",
+          "rank": 51
+        },
+        {
+          "ticker": "GWRS",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
+          },
+          "entry_price": 9.93,
+          "entry_volume": 102395,
+          "screening_date": "2019-03-15",
+          "rank": 52
+        },
+        {
+          "ticker": "EEX",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 10,
+            "rsi_score": 20,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
+          },
+          "entry_price": 12.62,
+          "entry_volume": 382212,
+          "screening_date": "2019-03-15",
+          "rank": 53
+        },
+        {
+          "ticker": "BRG",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
+          },
+          "entry_price": 10.55,
+          "entry_volume": 743042,
+          "screening_date": "2019-03-15",
+          "rank": 54
+        },
+        {
+          "ticker": "MXWL",
+          "score": 90,
+          "score_breakdown": {
+            "volume_score": 0,
+            "rsi_score": 30,
+            "breakout_score": 20,
+            "accumulation_score": 10,
+            "composite_bonus": 30
+          },
+          "entry_price": 4.56,
+          "entry_volume": 5286699.0,
           "screening_date": "2019-03-15",
           "rank": 55
         },
         {
-          "ticker": "ENLC",
+          "ticker": "CDZI",
           "score": 90,
           "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 25
+            "volume_score": 10,
+            "rsi_score": 20,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 12.09,
-          "entry_volume": 20604573.0,
+          "entry_price": 9.66,
+          "entry_volume": 284758,
           "screening_date": "2019-03-15",
           "rank": 56
         },
         {
-          "ticker": "ESXB",
+          "ticker": "ACCO",
           "score": 90,
           "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 25
+            "volume_score": 10,
+            "rsi_score": 20,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 8.09,
-          "entry_volume": 192879,
+          "entry_price": 8.9,
+          "entry_volume": 1190136.0,
           "screening_date": "2019-03-15",
           "rank": 57
         },
         {
-          "ticker": "EDD",
-          "score": 85,
+          "ticker": "FCT",
+          "score": 90,
           "score_breakdown": {
             "volume_score": 0,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 25
+            "rsi_score": 30,
+            "breakout_score": 20,
+            "accumulation_score": 10,
+            "composite_bonus": 30
           },
-          "entry_price": 6.77,
-          "entry_volume": 460589,
+          "entry_price": 11.98,
+          "entry_volume": 124666,
           "screening_date": "2019-03-15",
           "rank": 58
         },
         {
-          "ticker": "NMI",
-          "score": 85,
+          "ticker": "CBNK",
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 0,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 25
+            "volume_score": 10,
+            "rsi_score": 20,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.84,
-          "entry_volume": 26501,
+          "entry_price": 11.22,
+          "entry_volume": 31861,
           "screening_date": "2019-03-15",
           "rank": 59
         },
         {
-          "ticker": "MBT",
-          "score": 85,
+          "ticker": "DGICA",
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 0,
+            "volume_score": 20,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 25
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 8.13,
-          "entry_volume": 4928144.0,
+          "entry_price": 13.38,
+          "entry_volume": 78622,
           "screening_date": "2019-03-15",
           "rank": 60
         }
@@ -1086,24 +1086,24 @@
       "screening_date": "2023-09-11",
       "market_stats": {
         "total_stocks_scanned": 6033,
-        "stocks_analyzed": 5989,
-        "api_failures": 44,
-        "passed_filters": 192,
+        "stocks_analyzed": 5992,
+        "api_failures": 41,
+        "passed_filters": 179,
         "top_30_selected": 30
       },
       "selected_stocks": [
         {
-          "ticker": "OCAX",
-          "score": 160,
+          "ticker": "NXJ",
+          "score": 125,
           "score_breakdown": {
-            "volume_score": 50,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 35,
+            "rsi_score": 20,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.61,
-          "entry_volume": 465718,
+          "entry_price": 10.985,
+          "entry_volume": 416937,
           "screening_date": "2023-09-11",
           "rank": 1,
           "false_miss_analysis": {
@@ -1113,17 +1113,17 @@
           }
         },
         {
-          "ticker": "ACB",
-          "score": 160,
+          "ticker": "FGB",
+          "score": 125,
           "score_breakdown": {
-            "volume_score": 50,
+            "volume_score": 35,
             "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 9.108,
-          "entry_volume": 25571746.6,
+          "entry_price": 3.24,
+          "entry_volume": 285314,
           "screening_date": "2023-09-11",
           "rank": 2,
           "false_miss_analysis": {
@@ -1133,17 +1133,17 @@
           }
         },
         {
-          "ticker": "ALSA",
-          "score": 160,
+          "ticker": "IHIT",
+          "score": 125,
           "score_breakdown": {
-            "volume_score": 50,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 35,
+            "rsi_score": 20,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 11.02,
-          "entry_volume": 216669,
+          "entry_price": 7.25,
+          "entry_volume": 486528,
           "screening_date": "2023-09-11",
           "rank": 3,
           "false_miss_analysis": {
@@ -1153,17 +1153,17 @@
           }
         },
         {
-          "ticker": "HNRA",
-          "score": 160,
+          "ticker": "OCAX",
+          "score": 120,
           "score_breakdown": {
             "volume_score": 50,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.79,
-          "entry_volume": 186925,
+          "entry_price": 10.61,
+          "entry_volume": 465718,
           "screening_date": "2023-09-11",
           "rank": 4,
           "false_miss_analysis": {
@@ -1173,17 +1173,17 @@
           }
         },
         {
-          "ticker": "VIRC",
-          "score": 150,
+          "ticker": "ALSA",
+          "score": 120,
           "score_breakdown": {
             "volume_score": 50,
-            "rsi_score": 20,
-            "breakout_score": 0,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 5.08,
-          "entry_volume": 310585,
+          "entry_price": 11.02,
+          "entry_volume": 216669,
           "screening_date": "2023-09-11",
           "rank": 5,
           "false_miss_analysis": {
@@ -1193,17 +1193,17 @@
           }
         },
         {
-          "ticker": "BRD",
-          "score": 145,
+          "ticker": "PHK",
+          "score": 110,
           "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 20,
+            "rsi_score": 30,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.66,
-          "entry_volume": 289870,
+          "entry_price": 4.72,
+          "entry_volume": 1529767.0,
           "screening_date": "2023-09-11",
           "rank": 6,
           "false_miss_analysis": {
@@ -1213,17 +1213,17 @@
           }
         },
         {
-          "ticker": "DALN",
-          "score": 145,
+          "ticker": "SBI",
+          "score": 110,
           "score_breakdown": {
-            "volume_score": 35,
+            "volume_score": 10,
             "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 4.9,
-          "entry_volume": 232843,
+          "entry_price": 7.35,
+          "entry_volume": 43942,
           "screening_date": "2023-09-11",
           "rank": 7,
           "false_miss_analysis": {
@@ -1233,17 +1233,17 @@
           }
         },
         {
-          "ticker": "CXDO",
-          "score": 145,
+          "ticker": "HNRA",
+          "score": 110,
           "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
+            "volume_score": 50,
+            "rsi_score": -10,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 2.43,
-          "entry_volume": 255713,
+          "entry_price": 10.79,
+          "entry_volume": 186925,
           "screening_date": "2023-09-11",
           "rank": 8,
           "false_miss_analysis": {
@@ -1253,17 +1253,17 @@
           }
         },
         {
-          "ticker": "NXJ",
-          "score": 145,
+          "ticker": "BRD",
+          "score": 105,
           "score_breakdown": {
             "volume_score": 35,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.985,
-          "entry_volume": 416937,
+          "entry_price": 10.66,
+          "entry_volume": 289870,
           "screening_date": "2023-09-11",
           "rank": 9,
           "false_miss_analysis": {
@@ -1273,17 +1273,17 @@
           }
         },
         {
-          "ticker": "IHIT",
-          "score": 145,
+          "ticker": "GLST",
+          "score": 105,
           "score_breakdown": {
             "volume_score": 35,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 7.25,
-          "entry_volume": 486528,
+          "entry_price": 10.57,
+          "entry_volume": 297438,
           "screening_date": "2023-09-11",
           "rank": 10,
           "false_miss_analysis": {
@@ -1293,17 +1293,17 @@
           }
         },
         {
-          "ticker": "GLST",
-          "score": 145,
+          "ticker": "DECA",
+          "score": 105,
           "score_breakdown": {
             "volume_score": 35,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.57,
-          "entry_volume": 297438,
+          "entry_price": 10.89,
+          "entry_volume": 625347,
           "screening_date": "2023-09-11",
           "rank": 11,
           "false_miss_analysis": {
@@ -1313,17 +1313,17 @@
           }
         },
         {
-          "ticker": "DECA",
-          "score": 145,
+          "ticker": "RMBI",
+          "score": 105,
           "score_breakdown": {
             "volume_score": 35,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.89,
-          "entry_volume": 625347,
+          "entry_price": 11.15,
+          "entry_volume": 85755,
           "screening_date": "2023-09-11",
           "rank": 12,
           "false_miss_analysis": {
@@ -1333,17 +1333,17 @@
           }
         },
         {
-          "ticker": "RMBI",
-          "score": 145,
+          "ticker": "IPXX",
+          "score": 105,
           "score_breakdown": {
             "volume_score": 35,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 11.15,
-          "entry_volume": 85755,
+          "entry_price": 10.17,
+          "entry_volume": 785358,
           "screening_date": "2023-09-11",
           "rank": 13,
           "false_miss_analysis": {
@@ -1353,17 +1353,17 @@
           }
         },
         {
-          "ticker": "IPXX",
-          "score": 145,
+          "ticker": "GDST",
+          "score": 105,
           "score_breakdown": {
             "volume_score": 35,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.17,
-          "entry_volume": 785358,
+          "entry_price": 10.7,
+          "entry_volume": 120000,
           "screening_date": "2023-09-11",
           "rank": 14,
           "false_miss_analysis": {
@@ -1373,17 +1373,17 @@
           }
         },
         {
-          "ticker": "GDST",
-          "score": 145,
+          "ticker": "BYM",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 10,
+            "rsi_score": 30,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.7,
-          "entry_volume": 120000,
+          "entry_price": 10.32,
+          "entry_volume": 161003,
           "screening_date": "2023-09-11",
           "rank": 15,
           "false_miss_analysis": {
@@ -1393,17 +1393,17 @@
           }
         },
         {
-          "ticker": "GEO",
-          "score": 135,
+          "ticker": "VTN",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 10,
+            "rsi_score": 20,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 7.22,
-          "entry_volume": 6305400.0,
+          "entry_price": 9.61,
+          "entry_volume": 100404,
           "screening_date": "2023-09-11",
           "rank": 16,
           "false_miss_analysis": {
@@ -1413,17 +1413,17 @@
           }
         },
         {
-          "ticker": "MUJ",
-          "score": 135,
+          "ticker": "VIRC",
+          "score": 100,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 50,
+            "rsi_score": -10,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.87,
-          "entry_volume": 327191,
+          "entry_price": 5.08,
+          "entry_volume": 310585,
           "screening_date": "2023-09-11",
           "rank": 17,
           "false_miss_analysis": {
@@ -1433,17 +1433,17 @@
           }
         },
         {
-          "ticker": "DMO",
-          "score": 135,
+          "ticker": "GPRK",
+          "score": 95,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 35,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.72,
-          "entry_volume": 167520,
+          "entry_price": 9.3,
+          "entry_volume": 2354255.0,
           "screening_date": "2023-09-11",
           "rank": 18,
           "false_miss_analysis": {
@@ -1453,17 +1453,17 @@
           }
         },
         {
-          "ticker": "TOI",
-          "score": 135,
+          "ticker": "NODK",
+          "score": 95,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 30,
-            "breakout_score": 30,
+            "volume_score": 35,
+            "rsi_score": 20,
+            "breakout_score": 10,
             "accumulation_score": 0,
-            "composite_bonus": 50
+            "composite_bonus": 30
           },
-          "entry_price": 1.66,
-          "entry_volume": 990104,
+          "entry_price": 12.48,
+          "entry_volume": 208885,
           "screening_date": "2023-09-11",
           "rank": 19,
           "false_miss_analysis": {
@@ -1473,17 +1473,17 @@
           }
         },
         {
-          "ticker": "HOTH",
-          "score": 135,
+          "ticker": "WNNR",
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 2.71,
-          "entry_volume": 296478,
+          "entry_price": 10.75,
+          "entry_volume": 370348,
           "screening_date": "2023-09-11",
           "rank": 20,
           "false_miss_analysis": {
@@ -1493,17 +1493,17 @@
           }
         },
         {
-          "ticker": "OGI",
-          "score": 135,
+          "ticker": "MNP",
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 0,
             "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 10,
+            "composite_bonus": 30
           },
-          "entry_price": 1.85,
-          "entry_volume": 2250959.0,
+          "entry_price": 11.13,
+          "entry_volume": 36014,
           "screening_date": "2023-09-11",
           "rank": 21,
           "false_miss_analysis": {
@@ -1513,17 +1513,17 @@
           }
         },
         {
-          "ticker": "MPV",
-          "score": 135,
+          "ticker": "BNY",
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 0,
+            "rsi_score": 30,
+            "breakout_score": 20,
+            "accumulation_score": 10,
+            "composite_bonus": 30
           },
-          "entry_price": 13.83,
-          "entry_volume": 80324,
+          "entry_price": 9.65,
+          "entry_volume": 54949,
           "screening_date": "2023-09-11",
           "rank": 22,
           "false_miss_analysis": {
@@ -1533,17 +1533,17 @@
           }
         },
         {
-          "ticker": "IPX",
-          "score": 135,
+          "ticker": "MPV",
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 9.42,
-          "entry_volume": 74154,
+          "entry_price": 13.83,
+          "entry_volume": 80324,
           "screening_date": "2023-09-11",
           "rank": 23,
           "false_miss_analysis": {
@@ -1553,17 +1553,17 @@
           }
         },
         {
-          "ticker": "AMPE",
-          "score": 135,
+          "ticker": "GEO",
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 5.1,
-          "entry_volume": 55139.4,
+          "entry_price": 7.22,
+          "entry_volume": 6305400.0,
           "screening_date": "2023-09-11",
           "rank": 24,
           "false_miss_analysis": {
@@ -1573,17 +1573,17 @@
           }
         },
         {
-          "ticker": "ATNM",
-          "score": 135,
+          "ticker": "MUJ",
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 7.36,
-          "entry_volume": 684798,
+          "entry_price": 10.87,
+          "entry_volume": 327191,
           "screening_date": "2023-09-11",
           "rank": 25,
           "false_miss_analysis": {
@@ -1593,17 +1593,17 @@
           }
         },
         {
-          "ticker": "WNNR",
-          "score": 135,
+          "ticker": "DMO",
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 20,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.75,
-          "entry_volume": 370348,
+          "entry_price": 10.72,
+          "entry_volume": 167520,
           "screening_date": "2023-09-11",
           "rank": 26,
           "false_miss_analysis": {
@@ -1613,17 +1613,17 @@
           }
         },
         {
-          "ticker": "AGD",
-          "score": 135,
+          "ticker": "CYT",
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 20,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 9.195,
-          "entry_volume": 223288,
+          "entry_price": 2.75,
+          "entry_volume": 174941,
           "screening_date": "2023-09-11",
           "rank": 27,
           "false_miss_analysis": {
@@ -1633,17 +1633,17 @@
           }
         },
         {
-          "ticker": "LTRX",
-          "score": 135,
+          "ticker": "AGD",
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 5.31,
-          "entry_volume": 496759,
+          "entry_price": 9.195,
+          "entry_volume": 223288,
           "screening_date": "2023-09-11",
           "rank": 28,
           "false_miss_analysis": {
@@ -1653,17 +1653,17 @@
           }
         },
         {
-          "ticker": "CYT",
-          "score": 135,
+          "ticker": "NAN",
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 10,
+            "rsi_score": 20,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 2.75,
-          "entry_volume": 174941,
+          "entry_price": 10.1,
+          "entry_volume": 105044,
           "screening_date": "2023-09-11",
           "rank": 29,
           "false_miss_analysis": {
@@ -1673,17 +1673,17 @@
           }
         },
         {
-          "ticker": "MAMA",
-          "score": 135,
+          "ticker": "BMEZ",
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 50
+            "volume_score": 10,
+            "rsi_score": 20,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 4.49,
-          "entry_volume": 958059,
+          "entry_price": 14.99,
+          "entry_volume": 671346,
           "screening_date": "2023-09-11",
           "rank": 30,
           "false_miss_analysis": {
@@ -1695,74 +1695,74 @@
       ],
       "runners_up": [
         {
-          "ticker": "WNEB",
-          "score": 135,
+          "ticker": "DSM",
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 25,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "volume_score": 0,
+            "rsi_score": 30,
+            "breakout_score": 20,
+            "accumulation_score": 10,
+            "composite_bonus": 30
           },
-          "entry_price": 6.27,
-          "entry_volume": 142967,
+          "entry_price": 5.31,
+          "entry_volume": 225999,
           "screening_date": "2023-09-11",
           "rank": 31
         },
         {
-          "ticker": "ALTY",
-          "score": 135,
+          "ticker": "WNEB",
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 20,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 11.02,
-          "entry_volume": 70415,
+          "entry_price": 6.27,
+          "entry_volume": 142967,
           "screening_date": "2023-09-11",
           "rank": 32
         },
         {
-          "ticker": "HSPO",
-          "score": 135,
+          "ticker": "ALTY",
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 20,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.54,
-          "entry_volume": 153440,
+          "entry_price": 11.02,
+          "entry_volume": 70415,
           "screening_date": "2023-09-11",
           "rank": 33
         },
         {
-          "ticker": "ATMV",
-          "score": 135,
+          "ticker": "HSPO",
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 20,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 10.56,
-          "entry_volume": 331243,
+          "entry_price": 10.54,
+          "entry_volume": 153440,
           "screening_date": "2023-09-11",
           "rank": 34
         },
         {
           "ticker": "UBFO",
-          "score": 135,
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 20,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
           "entry_price": 7.37,
           "entry_volume": 57233,
@@ -1771,13 +1771,13 @@
         },
         {
           "ticker": "SKGR",
-          "score": 135,
+          "score": 90,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 20,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 50
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
           "entry_price": 10.71,
           "entry_volume": 45736,
@@ -1785,362 +1785,362 @@
           "rank": 36
         },
         {
-          "ticker": "VIOT",
-          "score": 125,
+          "ticker": "VS",
+          "score": 85,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 50,
             "rsi_score": 20,
-            "breakout_score": 30,
+            "breakout_score": 0,
             "accumulation_score": 0,
-            "composite_bonus": 50
+            "composite_bonus": 15
           },
-          "entry_price": 1.03,
-          "entry_volume": 353315,
+          "entry_price": 4.44,
+          "entry_volume": 526023.5625,
           "screening_date": "2023-09-11",
           "rank": 37
         },
         {
-          "ticker": "GENE",
-          "score": 125,
+          "ticker": "SGMA",
+          "score": 85,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 50,
             "rsi_score": 20,
-            "breakout_score": 30,
+            "breakout_score": 0,
             "accumulation_score": 0,
-            "composite_bonus": 50
+            "composite_bonus": 15
           },
-          "entry_price": 4.215,
-          "entry_volume": 51720.4,
+          "entry_price": 4.04,
+          "entry_volume": 1373590.0,
           "screening_date": "2023-09-11",
           "rank": 38
         },
         {
-          "ticker": "CELZ",
-          "score": 125,
+          "ticker": "PSTV",
+          "score": 85,
           "score_breakdown": {
-            "volume_score": 25,
+            "volume_score": 50,
             "rsi_score": 20,
-            "breakout_score": 30,
+            "breakout_score": 0,
             "accumulation_score": 0,
-            "composite_bonus": 50
+            "composite_bonus": 15
           },
-          "entry_price": 5.35,
-          "entry_volume": 57852,
+          "entry_price": 1.5,
+          "entry_volume": 16393029.0,
           "screening_date": "2023-09-11",
           "rank": 39
         },
         {
-          "ticker": "RTL",
-          "score": 90,
+          "ticker": "JG",
+          "score": 85,
           "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 30,
+            "volume_score": 50,
+            "rsi_score": 20,
+            "breakout_score": 0,
             "accumulation_score": 0,
-            "composite_bonus": 25
+            "composite_bonus": 15
           },
-          "entry_price": 7.61,
-          "entry_volume": 10269532.0,
+          "entry_price": 3.198,
+          "entry_volume": 462447.95,
           "screening_date": "2023-09-11",
           "rank": 40
         },
         {
-          "ticker": "GNL",
-          "score": 90,
+          "ticker": "IHS",
+          "score": 80,
           "score_breakdown": {
             "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 30,
+            "rsi_score": 30,
+            "breakout_score": 0,
             "accumulation_score": 0,
-            "composite_bonus": 25
+            "composite_bonus": 15
           },
-          "entry_price": 11.31,
-          "entry_volume": 23335771.0,
+          "entry_price": 5.31,
+          "entry_volume": 2082154.0,
           "screening_date": "2023-09-11",
           "rank": 41
         },
         {
-          "ticker": "GPRK",
-          "score": 90,
+          "ticker": "NRK",
+          "score": 80,
           "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 0,
-            "breakout_score": 0,
-            "accumulation_score": 30,
-            "composite_bonus": 25
+            "volume_score": 0,
+            "rsi_score": 20,
+            "breakout_score": 20,
+            "accumulation_score": 10,
+            "composite_bonus": 30
           },
-          "entry_price": 9.3,
-          "entry_volume": 2354255.0,
+          "entry_price": 9.76,
+          "entry_volume": 295345,
           "screening_date": "2023-09-11",
           "rank": 42
         },
         {
-          "ticker": "FGB",
-          "score": 90,
+          "ticker": "ENLV",
+          "score": 80,
           "score_breakdown": {
             "volume_score": 35,
-            "rsi_score": 0,
+            "rsi_score": 30,
             "breakout_score": 0,
-            "accumulation_score": 30,
-            "composite_bonus": 25
+            "accumulation_score": 0,
+            "composite_bonus": 15
           },
-          "entry_price": 3.24,
-          "entry_volume": 285314,
+          "entry_price": 1.92,
+          "entry_volume": 122477,
           "screening_date": "2023-09-11",
           "rank": 43
         },
         {
-          "ticker": "CHEK",
-          "score": 90,
+          "ticker": "KTF",
+          "score": 80,
           "score_breakdown": {
-            "volume_score": 35,
-            "rsi_score": 30,
-            "breakout_score": 0,
-            "accumulation_score": 0,
-            "composite_bonus": 25
+            "volume_score": 0,
+            "rsi_score": 20,
+            "breakout_score": 20,
+            "accumulation_score": 10,
+            "composite_bonus": 30
           },
-          "entry_price": 3.565,
-          "entry_volume": 489258,
+          "entry_price": 8.22,
+          "entry_volume": 128048,
           "screening_date": "2023-09-11",
           "rank": 44
         },
         {
-          "ticker": "UP",
-          "score": 85,
+          "ticker": "MIY",
+          "score": 80,
           "score_breakdown": {
             "volume_score": 0,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 25
+            "rsi_score": 20,
+            "breakout_score": 20,
+            "accumulation_score": 10,
+            "composite_bonus": 30
           },
-          "entry_price": 2.9,
-          "entry_volume": 1211297.0,
+          "entry_price": 10.52,
+          "entry_volume": 93718,
           "screening_date": "2023-09-11",
           "rank": 45
         },
         {
-          "ticker": "TCPC",
-          "score": 85,
+          "ticker": "YYY",
+          "score": 80,
           "score_breakdown": {
             "volume_score": 0,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 25
+            "rsi_score": 20,
+            "breakout_score": 20,
+            "accumulation_score": 10,
+            "composite_bonus": 30
           },
-          "entry_price": 12.43,
-          "entry_volume": 518040,
+          "entry_price": 11.5,
+          "entry_volume": 208148,
           "screening_date": "2023-09-11",
           "rank": 46
         },
         {
-          "ticker": "CTCX",
-          "score": 85,
+          "ticker": "CULP",
+          "score": 80,
           "score_breakdown": {
-            "volume_score": 0,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 25
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 4.79,
-          "entry_volume": 34217,
+          "entry_price": 5.45,
+          "entry_volume": 38509,
           "screening_date": "2023-09-11",
           "rank": 47
         },
         {
-          "ticker": "PAI",
-          "score": 85,
+          "ticker": "NPV",
+          "score": 80,
           "score_breakdown": {
             "volume_score": 0,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 25
+            "rsi_score": 20,
+            "breakout_score": 20,
+            "accumulation_score": 10,
+            "composite_bonus": 30
           },
-          "entry_price": 11.41,
-          "entry_volume": 29647,
+          "entry_price": 10.29,
+          "entry_volume": 43003,
           "screening_date": "2023-09-11",
           "rank": 48
         },
         {
-          "ticker": "PRQR",
-          "score": 85,
+          "ticker": "PMF",
+          "score": 80,
           "score_breakdown": {
             "volume_score": 0,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 25
+            "rsi_score": 30,
+            "breakout_score": 10,
+            "accumulation_score": 10,
+            "composite_bonus": 30
           },
-          "entry_price": 1.6,
-          "entry_volume": 293189,
+          "entry_price": 9.1,
+          "entry_volume": 112646,
           "screening_date": "2023-09-11",
           "rank": 49
         },
         {
-          "ticker": "FINS",
-          "score": 85,
+          "ticker": "TAIL",
+          "score": 80,
           "score_breakdown": {
             "volume_score": 0,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 25
+            "rsi_score": 20,
+            "breakout_score": 20,
+            "accumulation_score": 10,
+            "composite_bonus": 30
           },
-          "entry_price": 12.15,
-          "entry_volume": 75568,
+          "entry_price": 13.08,
+          "entry_volume": 128184,
           "screening_date": "2023-09-11",
           "rank": 50
         },
         {
-          "ticker": "MDV",
-          "score": 85,
+          "ticker": "CPIX",
+          "score": 80,
           "score_breakdown": {
-            "volume_score": 0,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 25
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 15,
-          "entry_volume": 57146,
+          "entry_price": 1.64,
+          "entry_volume": 66161,
           "screening_date": "2023-09-11",
           "rank": 51
         },
         {
-          "ticker": "FOLD",
-          "score": 85,
+          "ticker": "ATMV",
+          "score": 80,
           "score_breakdown": {
-            "volume_score": 0,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 25
+            "volume_score": 20,
+            "rsi_score": -10,
+            "breakout_score": 20,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 13.29,
-          "entry_volume": 2870826.0,
+          "entry_price": 10.56,
+          "entry_volume": 331243,
           "screening_date": "2023-09-11",
           "rank": 52
         },
         {
-          "ticker": "FNGR",
-          "score": 85,
+          "ticker": "PPHP",
+          "score": 80,
           "score_breakdown": {
-            "volume_score": 0,
-            "rsi_score": 30,
-            "breakout_score": 30,
-            "accumulation_score": 0,
-            "composite_bonus": 25
+            "volume_score": 20,
+            "rsi_score": 0,
+            "breakout_score": 10,
+            "accumulation_score": 20,
+            "composite_bonus": 30
           },
-          "entry_price": 6.85,
-          "entry_volume": 1802136.0,
+          "entry_price": 10.92,
+          "entry_volume": 32757,
           "screening_date": "2023-09-11",
           "rank": 53
         },
         {
-          "ticker": "BKCC",
-          "score": 85,
+          "ticker": "ACB",
+          "score": 75,
           "score_breakdown": {
-            "volume_score": 0,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 25
+            "volume_score": 50,
+            "rsi_score": -10,
+            "breakout_score": 20,
+            "accumulation_score": 0,
+            "composite_bonus": 15
           },
-          "entry_price": 3.865,
-          "entry_volume": 465614,
+          "entry_price": 9.108,
+          "entry_volume": 25571746.6,
           "screening_date": "2023-09-11",
           "rank": 54
         },
         {
-          "ticker": "COYA",
-          "score": 85,
+          "ticker": "VRAX",
+          "score": 75,
           "score_breakdown": {
-            "volume_score": 0,
-            "rsi_score": 30,
-            "breakout_score": 30,
+            "volume_score": 50,
+            "rsi_score": 0,
+            "breakout_score": 10,
             "accumulation_score": 0,
-            "composite_bonus": 25
+            "composite_bonus": 15
           },
-          "entry_price": 5.08,
-          "entry_volume": 111060,
+          "entry_price": 3.71,
+          "entry_volume": 502518.1,
           "screening_date": "2023-09-11",
           "rank": 55
         },
         {
-          "ticker": "CSTR",
-          "score": 85,
+          "ticker": "RTL",
+          "score": 70,
           "score_breakdown": {
-            "volume_score": 0,
+            "volume_score": 35,
             "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 25
+            "breakout_score": 20,
+            "accumulation_score": 0,
+            "composite_bonus": 15
           },
-          "entry_price": 13.98,
-          "entry_volume": 48152,
+          "entry_price": 7.61,
+          "entry_volume": 10269532.0,
           "screening_date": "2023-09-11",
           "rank": 56
         },
         {
-          "ticker": "VTN",
-          "score": 85,
+          "ticker": "LEVI",
+          "score": 70,
           "score_breakdown": {
             "volume_score": 0,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 25
+            "rsi_score": 20,
+            "breakout_score": 10,
+            "accumulation_score": 10,
+            "composite_bonus": 30
           },
-          "entry_price": 9.61,
-          "entry_volume": 100404,
+          "entry_price": 13.41,
+          "entry_volume": 3063764.0,
           "screening_date": "2023-09-11",
           "rank": 57
         },
         {
-          "ticker": "ORN",
-          "score": 85,
+          "ticker": "IOBT",
+          "score": 70,
           "score_breakdown": {
-            "volume_score": 0,
-            "rsi_score": 30,
-            "breakout_score": 30,
+            "volume_score": 35,
+            "rsi_score": 20,
+            "breakout_score": 0,
             "accumulation_score": 0,
-            "composite_bonus": 25
+            "composite_bonus": 15
           },
-          "entry_price": 4.84,
-          "entry_volume": 148111,
+          "entry_price": 1.6706,
+          "entry_volume": 625360,
           "screening_date": "2023-09-11",
           "rank": 58
         },
         {
-          "ticker": "DSM",
-          "score": 85,
+          "ticker": "PFN",
+          "score": 70,
           "score_breakdown": {
             "volume_score": 0,
-            "rsi_score": 0,
-            "breakout_score": 30,
-            "accumulation_score": 30,
-            "composite_bonus": 25
+            "rsi_score": 20,
+            "breakout_score": 10,
+            "accumulation_score": 10,
+            "composite_bonus": 30
           },
-          "entry_price": 5.31,
-          "entry_volume": 225999,
+          "entry_price": 6.73,
+          "entry_volume": 416370,
           "screening_date": "2023-09-11",
           "rank": 59
         },
         {
-          "ticker": "PFIE",
-          "score": 85,
+          "ticker": "GNL",
+          "score": 70,
           "score_breakdown": {
-            "volume_score": 0,
-            "rsi_score": 30,
-            "breakout_score": 30,
+            "volume_score": 35,
+            "rsi_score": 0,
+            "breakout_score": 20,
             "accumulation_score": 0,
-            "composite_bonus": 25
+            "composite_bonus": 15
           },
-          "entry_price": 3,
-          "entry_volume": 1411682.0,
+          "entry_price": 11.31,
+          "entry_volume": 23335771.0,
           "screening_date": "2023-09-11",
           "rank": 60
         }
@@ -2149,17 +2149,17 @@
   ],
   "all_selected_stocks": [
     {
-      "ticker": "AVID",
-      "score": 160,
+      "ticker": "ANH",
+      "score": 125,
       "score_breakdown": {
-        "volume_score": 50,
+        "volume_score": 35,
         "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 6.23,
-      "entry_volume": 2922552.0,
+      "entry_price": 4.1,
+      "entry_volume": 4439802.0,
       "screening_date": "2019-03-15",
       "rank": 1,
       "false_miss_analysis": {
@@ -2169,17 +2169,17 @@
       }
     },
     {
-      "ticker": "PACQ",
-      "score": 145,
+      "ticker": "FMNB",
+      "score": 110,
       "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 20,
+        "rsi_score": 20,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.01,
-      "entry_volume": 422652,
+      "entry_price": 14.39,
+      "entry_volume": 101081,
       "screening_date": "2019-03-15",
       "rank": 2,
       "false_miss_analysis": {
@@ -2189,17 +2189,17 @@
       }
     },
     {
-      "ticker": "MRT",
-      "score": 145,
+      "ticker": "UMC",
+      "score": 110,
       "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 20,
+        "rsi_score": 20,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.69,
-      "entry_volume": 3648619.0,
+      "entry_price": 1.83,
+      "entry_volume": 2711400.0,
       "screening_date": "2019-03-15",
       "rank": 3,
       "false_miss_analysis": {
@@ -2209,17 +2209,17 @@
       }
     },
     {
-      "ticker": "UBFO",
-      "score": 145,
+      "ticker": "UCFC",
+      "score": 110,
       "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 20,
+        "rsi_score": 30,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.75,
-      "entry_volume": 62443,
+      "entry_price": 9.43,
+      "entry_volume": 340153,
       "screening_date": "2019-03-15",
       "rank": 4,
       "false_miss_analysis": {
@@ -2229,17 +2229,17 @@
       }
     },
     {
-      "ticker": "CIA",
-      "score": 145,
+      "ticker": "IX",
+      "score": 110,
       "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 20,
+        "rsi_score": 30,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 7.01,
-      "entry_volume": 356950,
+      "entry_price": 13.996,
+      "entry_volume": 1004000.0,
       "screening_date": "2019-03-15",
       "rank": 5,
       "false_miss_analysis": {
@@ -2249,17 +2249,17 @@
       }
     },
     {
-      "ticker": "CNAC",
-      "score": 145,
+      "ticker": "FCF",
+      "score": 110,
       "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 20,
+        "rsi_score": 30,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.34,
-      "entry_volume": 613628,
+      "entry_price": 13.48,
+      "entry_volume": 1387249.0,
       "screening_date": "2019-03-15",
       "rank": 6,
       "false_miss_analysis": {
@@ -2269,17 +2269,17 @@
       }
     },
     {
-      "ticker": "CELH",
-      "score": 145,
+      "ticker": "BAR",
+      "score": 110,
       "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
+        "volume_score": 20,
+        "rsi_score": 20,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 1.6167,
-      "entry_volume": 1044012.0,
+      "entry_price": 12.98,
+      "entry_volume": 461164,
       "screening_date": "2019-03-15",
       "rank": 7,
       "false_miss_analysis": {
@@ -2289,17 +2289,17 @@
       }
     },
     {
-      "ticker": "CART",
-      "score": 145,
+      "ticker": "PFLT",
+      "score": 110,
       "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 10,
+        "rsi_score": 30,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 8.27,
-      "entry_volume": 118136,
+      "entry_price": 12.98,
+      "entry_volume": 347480,
       "screening_date": "2019-03-15",
       "rank": 8,
       "false_miss_analysis": {
@@ -2309,17 +2309,17 @@
       }
     },
     {
-      "ticker": "GPL",
-      "score": 145,
+      "ticker": "FFWM",
+      "score": 110,
       "score_breakdown": {
-        "volume_score": 35,
+        "volume_score": 20,
         "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 11.5,
-      "entry_volume": 1160534.8,
+      "entry_price": 14.29,
+      "entry_volume": 430177,
       "screening_date": "2019-03-15",
       "rank": 9,
       "false_miss_analysis": {
@@ -2329,17 +2329,17 @@
       }
     },
     {
-      "ticker": "SVBI",
-      "score": 145,
+      "ticker": "UBFO",
+      "score": 105,
       "score_breakdown": {
         "volume_score": 35,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 9.34,
-      "entry_volume": 97841,
+      "entry_price": 10.75,
+      "entry_volume": 62443,
       "screening_date": "2019-03-15",
       "rank": 10,
       "false_miss_analysis": {
@@ -2349,17 +2349,17 @@
       }
     },
     {
-      "ticker": "ATEN",
-      "score": 135,
+      "ticker": "CNAC",
+      "score": 105,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 35,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 7.21,
-      "entry_volume": 1594956.0,
+      "entry_price": 10.34,
+      "entry_volume": 613628,
       "screening_date": "2019-03-15",
       "rank": 11,
       "false_miss_analysis": {
@@ -2369,17 +2369,17 @@
       }
     },
     {
-      "ticker": "BRT",
-      "score": 135,
+      "ticker": "PACQ",
+      "score": 105,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 35,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 13.66,
-      "entry_volume": 86929,
+      "entry_price": 10.01,
+      "entry_volume": 422652,
       "screening_date": "2019-03-15",
       "rank": 12,
       "false_miss_analysis": {
@@ -2389,17 +2389,17 @@
       }
     },
     {
-      "ticker": "FMNB",
-      "score": 135,
+      "ticker": "CART",
+      "score": 105,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 35,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 14.39,
-      "entry_volume": 101081,
+      "entry_price": 8.27,
+      "entry_volume": 118136,
       "screening_date": "2019-03-15",
       "rank": 13,
       "false_miss_analysis": {
@@ -2409,17 +2409,17 @@
       }
     },
     {
-      "ticker": "WRLS",
-      "score": 135,
+      "ticker": "CIA",
+      "score": 105,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 35,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.25,
-      "entry_volume": 103262,
+      "entry_price": 7.01,
+      "entry_volume": 356950,
       "screening_date": "2019-03-15",
       "rank": 14,
       "false_miss_analysis": {
@@ -2429,17 +2429,17 @@
       }
     },
     {
-      "ticker": "MUFG",
-      "score": 135,
+      "ticker": "MRT",
+      "score": 105,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 35,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 5.17,
-      "entry_volume": 3613040.0,
+      "entry_price": 10.69,
+      "entry_volume": 3648619.0,
       "screening_date": "2019-03-15",
       "rank": 15,
       "false_miss_analysis": {
@@ -2449,17 +2449,17 @@
       }
     },
     {
-      "ticker": "KRNY",
-      "score": 135,
+      "ticker": "SVBI",
+      "score": 105,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 35,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 13.17,
-      "entry_volume": 1192201.0,
+      "entry_price": 9.34,
+      "entry_volume": 97841,
       "screening_date": "2019-03-15",
       "rank": 16,
       "false_miss_analysis": {
@@ -2469,17 +2469,17 @@
       }
     },
     {
-      "ticker": "BRG",
-      "score": 135,
+      "ticker": "SLCT",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 20,
+        "rsi_score": 20,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.55,
-      "entry_volume": 743042,
+      "entry_price": 11.29,
+      "entry_volume": 80406,
       "screening_date": "2019-03-15",
       "rank": 17,
       "false_miss_analysis": {
@@ -2489,17 +2489,17 @@
       }
     },
     {
-      "ticker": "DGICA",
-      "score": 135,
+      "ticker": "NRIM",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 10,
+        "rsi_score": 30,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 13.38,
-      "entry_volume": 78622,
+      "entry_price": 9.2675,
+      "entry_volume": 134536,
       "screening_date": "2019-03-15",
       "rank": 18,
       "false_miss_analysis": {
@@ -2509,17 +2509,17 @@
       }
     },
     {
-      "ticker": "LAND",
-      "score": 135,
+      "ticker": "BRKL",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 10,
+        "rsi_score": 30,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 12.04,
-      "entry_volume": 240728,
+      "entry_price": 15,
+      "entry_volume": 862358,
       "screening_date": "2019-03-15",
       "rank": 19,
       "false_miss_analysis": {
@@ -2529,17 +2529,17 @@
       }
     },
     {
-      "ticker": "LMRK",
-      "score": 135,
+      "ticker": "RBKB",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 20,
+        "rsi_score": 20,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 14.97,
-      "entry_volume": 552425,
+      "entry_price": 11.36,
+      "entry_volume": 129448,
       "screening_date": "2019-03-15",
       "rank": 20,
       "false_miss_analysis": {
@@ -2549,17 +2549,17 @@
       }
     },
     {
-      "ticker": "CIDM",
-      "score": 135,
+      "ticker": "CFFN",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
+        "volume_score": 20,
+        "rsi_score": 20,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 1.82,
-      "entry_volume": 492698,
+      "entry_price": 12.86,
+      "entry_volume": 1227849.0,
       "screening_date": "2019-03-15",
       "rank": 21,
       "false_miss_analysis": {
@@ -2569,17 +2569,17 @@
       }
     },
     {
-      "ticker": "HCFT",
-      "score": 135,
+      "ticker": "OSBC",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 10,
+        "rsi_score": 30,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 3.54,
-      "entry_volume": 284621,
+      "entry_price": 13.91,
+      "entry_volume": 127344,
       "screening_date": "2019-03-15",
       "rank": 22,
       "false_miss_analysis": {
@@ -2589,17 +2589,17 @@
       }
     },
     {
-      "ticker": "PCYO",
-      "score": 135,
+      "ticker": "FHN",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 10,
+        "rsi_score": 30,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 9.95,
-      "entry_volume": 68030,
+      "entry_price": 14.98,
+      "entry_volume": 4888358.0,
       "screening_date": "2019-03-15",
       "rank": 23,
       "false_miss_analysis": {
@@ -2609,17 +2609,17 @@
       }
     },
     {
-      "ticker": "PDLB",
-      "score": 135,
+      "ticker": "HBAN",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 20,
+        "rsi_score": 20,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 13.8,
-      "entry_volume": 73621,
+      "entry_price": 13.75,
+      "entry_volume": 50641098.0,
       "screening_date": "2019-03-15",
       "rank": 24,
       "false_miss_analysis": {
@@ -2629,17 +2629,17 @@
       }
     },
     {
-      "ticker": "CUE",
-      "score": 135,
+      "ticker": "VMM",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
+        "volume_score": 10,
+        "rsi_score": 20,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 8.01,
-      "entry_volume": 317116,
+      "entry_price": 12.37,
+      "entry_volume": 39994,
       "screening_date": "2019-03-15",
       "rank": 25,
       "false_miss_analysis": {
@@ -2649,17 +2649,17 @@
       }
     },
     {
-      "ticker": "TPHS",
-      "score": 135,
+      "ticker": "NWS",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
+        "volume_score": 20,
+        "rsi_score": 20,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 4.67,
-      "entry_volume": 293913,
+      "entry_price": 12.74,
+      "entry_volume": 2386294.0,
       "screening_date": "2019-03-15",
       "rank": 26,
       "false_miss_analysis": {
@@ -2669,17 +2669,17 @@
       }
     },
     {
-      "ticker": "XAN",
-      "score": 135,
+      "ticker": "MFT",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 10,
+        "rsi_score": 20,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.67,
-      "entry_volume": 560699,
+      "entry_price": 12.95,
+      "entry_volume": 57206,
       "screening_date": "2019-03-15",
       "rank": 27,
       "false_miss_analysis": {
@@ -2689,17 +2689,17 @@
       }
     },
     {
-      "ticker": "BV",
-      "score": 135,
+      "ticker": "COTY",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 10,
+        "rsi_score": 20,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 14.42,
-      "entry_volume": 1168149.0,
+      "entry_price": 10.89,
+      "entry_volume": 22118799.0,
       "screening_date": "2019-03-15",
       "rank": 28,
       "false_miss_analysis": {
@@ -2709,17 +2709,17 @@
       }
     },
     {
-      "ticker": "TBRG",
-      "score": 135,
+      "ticker": "JOF",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 10,
+        "rsi_score": 30,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.19,
-      "entry_volume": 970775,
+      "entry_price": 8.54,
+      "entry_volume": 85332,
       "screening_date": "2019-03-15",
       "rank": 29,
       "false_miss_analysis": {
@@ -2729,17 +2729,17 @@
       }
     },
     {
-      "ticker": "USLM",
-      "score": 135,
+      "ticker": "NFBK",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 10,
+        "rsi_score": 20,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 14.754,
-      "entry_volume": 51130,
+      "entry_price": 14.55,
+      "entry_volume": 192641,
       "screening_date": "2019-03-15",
       "rank": 30,
       "false_miss_analysis": {
@@ -2749,17 +2749,17 @@
       }
     },
     {
-      "ticker": "OCAX",
-      "score": 160,
+      "ticker": "NXJ",
+      "score": 125,
       "score_breakdown": {
-        "volume_score": 50,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 35,
+        "rsi_score": 20,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.61,
-      "entry_volume": 465718,
+      "entry_price": 10.985,
+      "entry_volume": 416937,
       "screening_date": "2023-09-11",
       "rank": 1,
       "false_miss_analysis": {
@@ -2769,17 +2769,17 @@
       }
     },
     {
-      "ticker": "ACB",
-      "score": 160,
+      "ticker": "FGB",
+      "score": 125,
       "score_breakdown": {
-        "volume_score": 50,
+        "volume_score": 35,
         "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 9.108,
-      "entry_volume": 25571746.6,
+      "entry_price": 3.24,
+      "entry_volume": 285314,
       "screening_date": "2023-09-11",
       "rank": 2,
       "false_miss_analysis": {
@@ -2789,17 +2789,17 @@
       }
     },
     {
-      "ticker": "ALSA",
-      "score": 160,
+      "ticker": "IHIT",
+      "score": 125,
       "score_breakdown": {
-        "volume_score": 50,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 35,
+        "rsi_score": 20,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 11.02,
-      "entry_volume": 216669,
+      "entry_price": 7.25,
+      "entry_volume": 486528,
       "screening_date": "2023-09-11",
       "rank": 3,
       "false_miss_analysis": {
@@ -2809,17 +2809,17 @@
       }
     },
     {
-      "ticker": "HNRA",
-      "score": 160,
+      "ticker": "OCAX",
+      "score": 120,
       "score_breakdown": {
         "volume_score": 50,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.79,
-      "entry_volume": 186925,
+      "entry_price": 10.61,
+      "entry_volume": 465718,
       "screening_date": "2023-09-11",
       "rank": 4,
       "false_miss_analysis": {
@@ -2829,17 +2829,17 @@
       }
     },
     {
-      "ticker": "VIRC",
-      "score": 150,
+      "ticker": "ALSA",
+      "score": 120,
       "score_breakdown": {
         "volume_score": 50,
-        "rsi_score": 20,
-        "breakout_score": 0,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 5.08,
-      "entry_volume": 310585,
+      "entry_price": 11.02,
+      "entry_volume": 216669,
       "screening_date": "2023-09-11",
       "rank": 5,
       "false_miss_analysis": {
@@ -2849,17 +2849,17 @@
       }
     },
     {
-      "ticker": "BRD",
-      "score": 145,
+      "ticker": "PHK",
+      "score": 110,
       "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 20,
+        "rsi_score": 30,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.66,
-      "entry_volume": 289870,
+      "entry_price": 4.72,
+      "entry_volume": 1529767.0,
       "screening_date": "2023-09-11",
       "rank": 6,
       "false_miss_analysis": {
@@ -2869,17 +2869,17 @@
       }
     },
     {
-      "ticker": "DALN",
-      "score": 145,
+      "ticker": "SBI",
+      "score": 110,
       "score_breakdown": {
-        "volume_score": 35,
+        "volume_score": 10,
         "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 4.9,
-      "entry_volume": 232843,
+      "entry_price": 7.35,
+      "entry_volume": 43942,
       "screening_date": "2023-09-11",
       "rank": 7,
       "false_miss_analysis": {
@@ -2889,17 +2889,17 @@
       }
     },
     {
-      "ticker": "CXDO",
-      "score": 145,
+      "ticker": "HNRA",
+      "score": 110,
       "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
+        "volume_score": 50,
+        "rsi_score": -10,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 2.43,
-      "entry_volume": 255713,
+      "entry_price": 10.79,
+      "entry_volume": 186925,
       "screening_date": "2023-09-11",
       "rank": 8,
       "false_miss_analysis": {
@@ -2909,17 +2909,17 @@
       }
     },
     {
-      "ticker": "NXJ",
-      "score": 145,
+      "ticker": "BRD",
+      "score": 105,
       "score_breakdown": {
         "volume_score": 35,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.985,
-      "entry_volume": 416937,
+      "entry_price": 10.66,
+      "entry_volume": 289870,
       "screening_date": "2023-09-11",
       "rank": 9,
       "false_miss_analysis": {
@@ -2929,17 +2929,17 @@
       }
     },
     {
-      "ticker": "IHIT",
-      "score": 145,
+      "ticker": "GLST",
+      "score": 105,
       "score_breakdown": {
         "volume_score": 35,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 7.25,
-      "entry_volume": 486528,
+      "entry_price": 10.57,
+      "entry_volume": 297438,
       "screening_date": "2023-09-11",
       "rank": 10,
       "false_miss_analysis": {
@@ -2949,17 +2949,17 @@
       }
     },
     {
-      "ticker": "GLST",
-      "score": 145,
+      "ticker": "DECA",
+      "score": 105,
       "score_breakdown": {
         "volume_score": 35,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.57,
-      "entry_volume": 297438,
+      "entry_price": 10.89,
+      "entry_volume": 625347,
       "screening_date": "2023-09-11",
       "rank": 11,
       "false_miss_analysis": {
@@ -2969,17 +2969,17 @@
       }
     },
     {
-      "ticker": "DECA",
-      "score": 145,
+      "ticker": "RMBI",
+      "score": 105,
       "score_breakdown": {
         "volume_score": 35,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.89,
-      "entry_volume": 625347,
+      "entry_price": 11.15,
+      "entry_volume": 85755,
       "screening_date": "2023-09-11",
       "rank": 12,
       "false_miss_analysis": {
@@ -2989,17 +2989,17 @@
       }
     },
     {
-      "ticker": "RMBI",
-      "score": 145,
+      "ticker": "IPXX",
+      "score": 105,
       "score_breakdown": {
         "volume_score": 35,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 11.15,
-      "entry_volume": 85755,
+      "entry_price": 10.17,
+      "entry_volume": 785358,
       "screening_date": "2023-09-11",
       "rank": 13,
       "false_miss_analysis": {
@@ -3009,17 +3009,17 @@
       }
     },
     {
-      "ticker": "IPXX",
-      "score": 145,
+      "ticker": "GDST",
+      "score": 105,
       "score_breakdown": {
         "volume_score": 35,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.17,
-      "entry_volume": 785358,
+      "entry_price": 10.7,
+      "entry_volume": 120000,
       "screening_date": "2023-09-11",
       "rank": 14,
       "false_miss_analysis": {
@@ -3029,17 +3029,17 @@
       }
     },
     {
-      "ticker": "GDST",
-      "score": 145,
+      "ticker": "BYM",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 10,
+        "rsi_score": 30,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.7,
-      "entry_volume": 120000,
+      "entry_price": 10.32,
+      "entry_volume": 161003,
       "screening_date": "2023-09-11",
       "rank": 15,
       "false_miss_analysis": {
@@ -3049,17 +3049,17 @@
       }
     },
     {
-      "ticker": "GEO",
-      "score": 135,
+      "ticker": "VTN",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 10,
+        "rsi_score": 20,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 7.22,
-      "entry_volume": 6305400.0,
+      "entry_price": 9.61,
+      "entry_volume": 100404,
       "screening_date": "2023-09-11",
       "rank": 16,
       "false_miss_analysis": {
@@ -3069,17 +3069,17 @@
       }
     },
     {
-      "ticker": "MUJ",
-      "score": 135,
+      "ticker": "VIRC",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 50,
+        "rsi_score": -10,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.87,
-      "entry_volume": 327191,
+      "entry_price": 5.08,
+      "entry_volume": 310585,
       "screening_date": "2023-09-11",
       "rank": 17,
       "false_miss_analysis": {
@@ -3089,17 +3089,17 @@
       }
     },
     {
-      "ticker": "DMO",
-      "score": 135,
+      "ticker": "GPRK",
+      "score": 95,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 35,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.72,
-      "entry_volume": 167520,
+      "entry_price": 9.3,
+      "entry_volume": 2354255.0,
       "screening_date": "2023-09-11",
       "rank": 18,
       "false_miss_analysis": {
@@ -3109,17 +3109,17 @@
       }
     },
     {
-      "ticker": "TOI",
-      "score": 135,
+      "ticker": "NODK",
+      "score": 95,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 30,
-        "breakout_score": 30,
+        "volume_score": 35,
+        "rsi_score": 20,
+        "breakout_score": 10,
         "accumulation_score": 0,
-        "composite_bonus": 50
+        "composite_bonus": 30
       },
-      "entry_price": 1.66,
-      "entry_volume": 990104,
+      "entry_price": 12.48,
+      "entry_volume": 208885,
       "screening_date": "2023-09-11",
       "rank": 19,
       "false_miss_analysis": {
@@ -3129,17 +3129,17 @@
       }
     },
     {
-      "ticker": "HOTH",
-      "score": 135,
+      "ticker": "WNNR",
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 2.71,
-      "entry_volume": 296478,
+      "entry_price": 10.75,
+      "entry_volume": 370348,
       "screening_date": "2023-09-11",
       "rank": 20,
       "false_miss_analysis": {
@@ -3149,17 +3149,17 @@
       }
     },
     {
-      "ticker": "OGI",
-      "score": 135,
+      "ticker": "MNP",
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 0,
         "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 10,
+        "composite_bonus": 30
       },
-      "entry_price": 1.85,
-      "entry_volume": 2250959.0,
+      "entry_price": 11.13,
+      "entry_volume": 36014,
       "screening_date": "2023-09-11",
       "rank": 21,
       "false_miss_analysis": {
@@ -3169,17 +3169,17 @@
       }
     },
     {
-      "ticker": "MPV",
-      "score": 135,
+      "ticker": "BNY",
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 0,
+        "rsi_score": 30,
+        "breakout_score": 20,
+        "accumulation_score": 10,
+        "composite_bonus": 30
       },
-      "entry_price": 13.83,
-      "entry_volume": 80324,
+      "entry_price": 9.65,
+      "entry_volume": 54949,
       "screening_date": "2023-09-11",
       "rank": 22,
       "false_miss_analysis": {
@@ -3189,17 +3189,17 @@
       }
     },
     {
-      "ticker": "IPX",
-      "score": 135,
+      "ticker": "MPV",
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 9.42,
-      "entry_volume": 74154,
+      "entry_price": 13.83,
+      "entry_volume": 80324,
       "screening_date": "2023-09-11",
       "rank": 23,
       "false_miss_analysis": {
@@ -3209,17 +3209,17 @@
       }
     },
     {
-      "ticker": "AMPE",
-      "score": 135,
+      "ticker": "GEO",
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 5.1,
-      "entry_volume": 55139.4,
+      "entry_price": 7.22,
+      "entry_volume": 6305400.0,
       "screening_date": "2023-09-11",
       "rank": 24,
       "false_miss_analysis": {
@@ -3229,17 +3229,17 @@
       }
     },
     {
-      "ticker": "ATNM",
-      "score": 135,
+      "ticker": "MUJ",
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 7.36,
-      "entry_volume": 684798,
+      "entry_price": 10.87,
+      "entry_volume": 327191,
       "screening_date": "2023-09-11",
       "rank": 25,
       "false_miss_analysis": {
@@ -3249,17 +3249,17 @@
       }
     },
     {
-      "ticker": "WNNR",
-      "score": 135,
+      "ticker": "DMO",
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 20,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.75,
-      "entry_volume": 370348,
+      "entry_price": 10.72,
+      "entry_volume": 167520,
       "screening_date": "2023-09-11",
       "rank": 26,
       "false_miss_analysis": {
@@ -3269,17 +3269,17 @@
       }
     },
     {
-      "ticker": "AGD",
-      "score": 135,
+      "ticker": "CYT",
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 20,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 9.195,
-      "entry_volume": 223288,
+      "entry_price": 2.75,
+      "entry_volume": 174941,
       "screening_date": "2023-09-11",
       "rank": 27,
       "false_miss_analysis": {
@@ -3289,17 +3289,17 @@
       }
     },
     {
-      "ticker": "LTRX",
-      "score": 135,
+      "ticker": "AGD",
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 5.31,
-      "entry_volume": 496759,
+      "entry_price": 9.195,
+      "entry_volume": 223288,
       "screening_date": "2023-09-11",
       "rank": 28,
       "false_miss_analysis": {
@@ -3309,17 +3309,17 @@
       }
     },
     {
-      "ticker": "CYT",
-      "score": 135,
+      "ticker": "NAN",
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 10,
+        "rsi_score": 20,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 2.75,
-      "entry_volume": 174941,
+      "entry_price": 10.1,
+      "entry_volume": 105044,
       "screening_date": "2023-09-11",
       "rank": 29,
       "false_miss_analysis": {
@@ -3329,17 +3329,17 @@
       }
     },
     {
-      "ticker": "MAMA",
-      "score": 135,
+      "ticker": "BMEZ",
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
+        "volume_score": 10,
+        "rsi_score": 20,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 4.49,
-      "entry_volume": 958059,
+      "entry_price": 14.99,
+      "entry_volume": 671346,
       "screening_date": "2023-09-11",
       "rank": 30,
       "false_miss_analysis": {
@@ -3351,524 +3351,524 @@
   ],
   "all_runners_up": [
     {
-      "ticker": "UMC",
-      "score": 135,
+      "ticker": "ARCO",
+      "score": 100,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 10,
+        "rsi_score": 20,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 1.83,
-      "entry_volume": 2711400.0,
+      "entry_price": 8.0363,
+      "entry_volume": 900837.3726,
       "screening_date": "2019-03-15",
       "rank": 31
     },
     {
-      "ticker": "GWRS",
-      "score": 135,
+      "ticker": "DRD",
+      "score": 95,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 50,
+        "rsi_score": 30,
+        "breakout_score": 0,
+        "accumulation_score": 0,
+        "composite_bonus": 15
       },
-      "entry_price": 9.93,
-      "entry_volume": 102395,
+      "entry_price": 1.91,
+      "entry_volume": 3066599.0,
       "screening_date": "2019-03-15",
       "rank": 32
     },
     {
-      "ticker": "CVIA",
-      "score": 135,
+      "ticker": "GDEN",
+      "score": 95,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 50,
         "rsi_score": 30,
-        "breakout_score": 30,
+        "breakout_score": 0,
         "accumulation_score": 0,
-        "composite_bonus": 50
+        "composite_bonus": 15
       },
-      "entry_price": 6.41,
-      "entry_volume": 1231798.0,
+      "entry_price": 13,
+      "entry_volume": 2266977.0,
       "screening_date": "2019-03-15",
       "rank": 33
     },
     {
-      "ticker": "CVRS",
-      "score": 135,
-      "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
-      },
-      "entry_price": 1.98,
-      "entry_volume": 3549077.0,
-      "screening_date": "2019-03-15",
-      "rank": 34
-    },
-    {
-      "ticker": "LUNA",
-      "score": 135,
-      "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
-      },
-      "entry_price": 4.24,
-      "entry_volume": 403831,
-      "screening_date": "2019-03-15",
-      "rank": 35
-    },
-    {
-      "ticker": "BAR",
-      "score": 135,
-      "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
-      },
-      "entry_price": 12.98,
-      "entry_volume": 461164,
-      "screening_date": "2019-03-15",
-      "rank": 36
-    },
-    {
-      "ticker": "TIS",
-      "score": 135,
-      "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
-      },
-      "entry_price": 1.5,
-      "entry_volume": 358919,
-      "screening_date": "2019-03-15",
-      "rank": 37
-    },
-    {
-      "ticker": "UROV",
-      "score": 125,
-      "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 20,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
-      },
-      "entry_price": 14.1,
-      "entry_volume": 174478,
-      "screening_date": "2019-03-15",
-      "rank": 38
-    },
-    {
-      "ticker": "MAG",
-      "score": 125,
-      "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 20,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
-      },
-      "entry_price": 10.92,
-      "entry_volume": 1108686.0,
-      "screening_date": "2019-03-15",
-      "rank": 39
-    },
-    {
-      "ticker": "SPRO",
-      "score": 125,
-      "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 20,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
-      },
-      "entry_price": 13.31,
-      "entry_volume": 281174,
-      "screening_date": "2019-03-15",
-      "rank": 40
-    },
-    {
-      "ticker": "STML",
-      "score": 125,
-      "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 20,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 50
-      },
-      "entry_price": 13.62,
-      "entry_volume": 2407518.0,
-      "screening_date": "2019-03-15",
-      "rank": 41
-    },
-    {
-      "ticker": "RVP",
-      "score": 105,
-      "score_breakdown": {
-        "volume_score": 50,
-        "rsi_score": 30,
-        "breakout_score": 0,
-        "accumulation_score": 0,
-        "composite_bonus": 25
-      },
-      "entry_price": 0.9,
-      "entry_volume": 5540025.0,
-      "screening_date": "2019-03-15",
-      "rank": 42
-    },
-    {
-      "ticker": "PHAS",
-      "score": 105,
-      "score_breakdown": {
-        "volume_score": 50,
-        "rsi_score": 30,
-        "breakout_score": 0,
-        "accumulation_score": 0,
-        "composite_bonus": 25
-      },
-      "entry_price": 3.72,
-      "entry_volume": 620312,
-      "screening_date": "2019-03-15",
-      "rank": 43
-    },
-    {
-      "ticker": "PRAN",
+      "ticker": "SMTA",
       "score": 95,
       "score_breakdown": {
-        "volume_score": 50,
-        "rsi_score": 20,
-        "breakout_score": 0,
-        "accumulation_score": 0,
-        "composite_bonus": 25
-      },
-      "entry_price": 1.94,
-      "entry_volume": 1381541.0,
-      "screening_date": "2019-03-15",
-      "rank": 44
-    },
-    {
-      "ticker": "DRAD",
-      "score": 90,
-      "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 30,
-        "breakout_score": 0,
-        "accumulation_score": 0,
-        "composite_bonus": 25
-      },
-      "entry_price": 0.85,
-      "entry_volume": 763905,
-      "screening_date": "2019-03-15",
-      "rank": 45
-    },
-    {
-      "ticker": "SES",
-      "score": 90,
-      "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 30,
-        "breakout_score": 0,
-        "accumulation_score": 0,
-        "composite_bonus": 25
-      },
-      "entry_price": 6.5432,
-      "entry_volume": 125719.875,
-      "screening_date": "2019-03-15",
-      "rank": 46
-    },
-    {
-      "ticker": "BBCP",
-      "score": 90,
-      "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 30,
-        "breakout_score": 0,
-        "accumulation_score": 0,
-        "composite_bonus": 25
-      },
-      "entry_price": 10.52,
-      "entry_volume": 69994,
-      "screening_date": "2019-03-15",
-      "rank": 47
-    },
-    {
-      "ticker": "ANH",
-      "score": 90,
-      "score_breakdown": {
         "volume_score": 35,
         "rsi_score": 0,
-        "breakout_score": 0,
-        "accumulation_score": 30,
-        "composite_bonus": 25
-      },
-      "entry_price": 4.1,
-      "entry_volume": 4439802.0,
-      "screening_date": "2019-03-15",
-      "rank": 48
-    },
-    {
-      "ticker": "HWCC",
-      "score": 90,
-      "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 25
-      },
-      "entry_price": 6.01,
-      "entry_volume": 203921,
-      "screening_date": "2019-03-15",
-      "rank": 49
-    },
-    {
-      "ticker": "TCCO",
-      "score": 90,
-      "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 25
-      },
-      "entry_price": 2.91,
-      "entry_volume": 92462,
-      "screening_date": "2019-03-15",
-      "rank": 50
-    },
-    {
-      "ticker": "FTAC",
-      "score": 90,
-      "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 0,
-        "accumulation_score": 30,
-        "composite_bonus": 25
-      },
-      "entry_price": 9.71,
-      "entry_volume": 241241,
-      "screening_date": "2019-03-15",
-      "rank": 51
-    },
-    {
-      "ticker": "HNRG",
-      "score": 90,
-      "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 25
-      },
-      "entry_price": 5.89,
-      "entry_volume": 244839,
-      "screening_date": "2019-03-15",
-      "rank": 52
-    },
-    {
-      "ticker": "CATS",
-      "score": 90,
-      "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 30,
-        "breakout_score": 0,
-        "accumulation_score": 0,
-        "composite_bonus": 25
-      },
-      "entry_price": 13.82,
-      "entry_volume": 1041737.0,
-      "screening_date": "2019-03-15",
-      "rank": 53
-    },
-    {
-      "ticker": "SMTA",
-      "score": 90,
-      "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 0,
-        "accumulation_score": 30,
-        "composite_bonus": 25
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
       "entry_price": 7.23,
       "entry_volume": 2401524.0,
       "screening_date": "2019-03-15",
-      "rank": 54
+      "rank": 34
     },
     {
-      "ticker": "SIEB",
-      "score": 90,
+      "ticker": "MHLD",
+      "score": 95,
+      "score_breakdown": {
+        "volume_score": 50,
+        "rsi_score": 30,
+        "breakout_score": 0,
+        "accumulation_score": 0,
+        "composite_bonus": 15
+      },
+      "entry_price": 0.6223,
+      "entry_volume": 14137505.0,
+      "screening_date": "2019-03-15",
+      "rank": 35
+    },
+    {
+      "ticker": "FTAC",
+      "score": 95,
       "score_breakdown": {
         "volume_score": 35,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 25
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 13.35,
-      "entry_volume": 109028,
+      "entry_price": 9.71,
+      "entry_volume": 241241,
+      "screening_date": "2019-03-15",
+      "rank": 36
+    },
+    {
+      "ticker": "SCM",
+      "score": 95,
+      "score_breakdown": {
+        "volume_score": 35,
+        "rsi_score": 20,
+        "breakout_score": 10,
+        "accumulation_score": 0,
+        "composite_bonus": 30
+      },
+      "entry_price": 14,
+      "entry_volume": 1144032.0,
+      "screening_date": "2019-03-15",
+      "rank": 37
+    },
+    {
+      "ticker": "WRLS",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
+      },
+      "entry_price": 10.25,
+      "entry_volume": 103262,
+      "screening_date": "2019-03-15",
+      "rank": 38
+    },
+    {
+      "ticker": "SACH",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 10,
+        "rsi_score": 20,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
+      },
+      "entry_price": 4.41,
+      "entry_volume": 137832,
+      "screening_date": "2019-03-15",
+      "rank": 39
+    },
+    {
+      "ticker": "BRT",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
+      },
+      "entry_price": 13.66,
+      "entry_volume": 86929,
+      "screening_date": "2019-03-15",
+      "rank": 40
+    },
+    {
+      "ticker": "XAN",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
+      },
+      "entry_price": 10.67,
+      "entry_volume": 560699,
+      "screening_date": "2019-03-15",
+      "rank": 41
+    },
+    {
+      "ticker": "BV",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
+      },
+      "entry_price": 14.42,
+      "entry_volume": 1168149.0,
+      "screening_date": "2019-03-15",
+      "rank": 42
+    },
+    {
+      "ticker": "FNB",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 10,
+        "rsi_score": 20,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
+      },
+      "entry_price": 11.85,
+      "entry_volume": 4896527.0,
+      "screening_date": "2019-03-15",
+      "rank": 43
+    },
+    {
+      "ticker": "PCYO",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
+      },
+      "entry_price": 9.95,
+      "entry_volume": 68030,
+      "screening_date": "2019-03-15",
+      "rank": 44
+    },
+    {
+      "ticker": "KRNY",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
+      },
+      "entry_price": 13.17,
+      "entry_volume": 1192201.0,
+      "screening_date": "2019-03-15",
+      "rank": 45
+    },
+    {
+      "ticker": "ATEN",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
+      },
+      "entry_price": 7.21,
+      "entry_volume": 1594956.0,
+      "screening_date": "2019-03-15",
+      "rank": 46
+    },
+    {
+      "ticker": "USLM",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
+      },
+      "entry_price": 14.754,
+      "entry_volume": 51130,
+      "screening_date": "2019-03-15",
+      "rank": 47
+    },
+    {
+      "ticker": "MUFG",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
+      },
+      "entry_price": 5.17,
+      "entry_volume": 3613040.0,
+      "screening_date": "2019-03-15",
+      "rank": 48
+    },
+    {
+      "ticker": "TBRG",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
+      },
+      "entry_price": 10.19,
+      "entry_volume": 970775,
+      "screening_date": "2019-03-15",
+      "rank": 49
+    },
+    {
+      "ticker": "LAND",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
+      },
+      "entry_price": 12.04,
+      "entry_volume": 240728,
+      "screening_date": "2019-03-15",
+      "rank": 50
+    },
+    {
+      "ticker": "LMRK",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
+      },
+      "entry_price": 14.97,
+      "entry_volume": 552425,
+      "screening_date": "2019-03-15",
+      "rank": 51
+    },
+    {
+      "ticker": "GWRS",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
+      },
+      "entry_price": 9.93,
+      "entry_volume": 102395,
+      "screening_date": "2019-03-15",
+      "rank": 52
+    },
+    {
+      "ticker": "EEX",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 10,
+        "rsi_score": 20,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
+      },
+      "entry_price": 12.62,
+      "entry_volume": 382212,
+      "screening_date": "2019-03-15",
+      "rank": 53
+    },
+    {
+      "ticker": "BRG",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
+      },
+      "entry_price": 10.55,
+      "entry_volume": 743042,
+      "screening_date": "2019-03-15",
+      "rank": 54
+    },
+    {
+      "ticker": "MXWL",
+      "score": 90,
+      "score_breakdown": {
+        "volume_score": 0,
+        "rsi_score": 30,
+        "breakout_score": 20,
+        "accumulation_score": 10,
+        "composite_bonus": 30
+      },
+      "entry_price": 4.56,
+      "entry_volume": 5286699.0,
       "screening_date": "2019-03-15",
       "rank": 55
     },
     {
-      "ticker": "ENLC",
+      "ticker": "CDZI",
       "score": 90,
       "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 25
+        "volume_score": 10,
+        "rsi_score": 20,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 12.09,
-      "entry_volume": 20604573.0,
+      "entry_price": 9.66,
+      "entry_volume": 284758,
       "screening_date": "2019-03-15",
       "rank": 56
     },
     {
-      "ticker": "ESXB",
+      "ticker": "ACCO",
       "score": 90,
       "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 25
+        "volume_score": 10,
+        "rsi_score": 20,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 8.09,
-      "entry_volume": 192879,
+      "entry_price": 8.9,
+      "entry_volume": 1190136.0,
       "screening_date": "2019-03-15",
       "rank": 57
     },
     {
-      "ticker": "EDD",
-      "score": 85,
+      "ticker": "FCT",
+      "score": 90,
       "score_breakdown": {
         "volume_score": 0,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 25
+        "rsi_score": 30,
+        "breakout_score": 20,
+        "accumulation_score": 10,
+        "composite_bonus": 30
       },
-      "entry_price": 6.77,
-      "entry_volume": 460589,
+      "entry_price": 11.98,
+      "entry_volume": 124666,
       "screening_date": "2019-03-15",
       "rank": 58
     },
     {
-      "ticker": "NMI",
-      "score": 85,
+      "ticker": "CBNK",
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 0,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 25
+        "volume_score": 10,
+        "rsi_score": 20,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.84,
-      "entry_volume": 26501,
+      "entry_price": 11.22,
+      "entry_volume": 31861,
       "screening_date": "2019-03-15",
       "rank": 59
     },
     {
-      "ticker": "MBT",
-      "score": 85,
+      "ticker": "DGICA",
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 0,
+        "volume_score": 20,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 25
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 8.13,
-      "entry_volume": 4928144.0,
+      "entry_price": 13.38,
+      "entry_volume": 78622,
       "screening_date": "2019-03-15",
       "rank": 60
     },
     {
-      "ticker": "WNEB",
-      "score": 135,
+      "ticker": "DSM",
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 25,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "volume_score": 0,
+        "rsi_score": 30,
+        "breakout_score": 20,
+        "accumulation_score": 10,
+        "composite_bonus": 30
       },
-      "entry_price": 6.27,
-      "entry_volume": 142967,
+      "entry_price": 5.31,
+      "entry_volume": 225999,
       "screening_date": "2023-09-11",
       "rank": 31
     },
     {
-      "ticker": "ALTY",
-      "score": 135,
+      "ticker": "WNEB",
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 20,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 11.02,
-      "entry_volume": 70415,
+      "entry_price": 6.27,
+      "entry_volume": 142967,
       "screening_date": "2023-09-11",
       "rank": 32
     },
     {
-      "ticker": "HSPO",
-      "score": 135,
+      "ticker": "ALTY",
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 20,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.54,
-      "entry_volume": 153440,
+      "entry_price": 11.02,
+      "entry_volume": 70415,
       "screening_date": "2023-09-11",
       "rank": 33
     },
     {
-      "ticker": "ATMV",
-      "score": 135,
+      "ticker": "HSPO",
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 20,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 10.56,
-      "entry_volume": 331243,
+      "entry_price": 10.54,
+      "entry_volume": 153440,
       "screening_date": "2023-09-11",
       "rank": 34
     },
     {
       "ticker": "UBFO",
-      "score": 135,
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 20,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
       "entry_price": 7.37,
       "entry_volume": 57233,
@@ -3877,13 +3877,13 @@
     },
     {
       "ticker": "SKGR",
-      "score": 135,
+      "score": 90,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 20,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 50
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
       "entry_price": 10.71,
       "entry_volume": 45736,
@@ -3891,362 +3891,362 @@
       "rank": 36
     },
     {
-      "ticker": "VIOT",
-      "score": 125,
+      "ticker": "VS",
+      "score": 85,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 50,
         "rsi_score": 20,
-        "breakout_score": 30,
+        "breakout_score": 0,
         "accumulation_score": 0,
-        "composite_bonus": 50
+        "composite_bonus": 15
       },
-      "entry_price": 1.03,
-      "entry_volume": 353315,
+      "entry_price": 4.44,
+      "entry_volume": 526023.5625,
       "screening_date": "2023-09-11",
       "rank": 37
     },
     {
-      "ticker": "GENE",
-      "score": 125,
+      "ticker": "SGMA",
+      "score": 85,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 50,
         "rsi_score": 20,
-        "breakout_score": 30,
+        "breakout_score": 0,
         "accumulation_score": 0,
-        "composite_bonus": 50
+        "composite_bonus": 15
       },
-      "entry_price": 4.215,
-      "entry_volume": 51720.4,
+      "entry_price": 4.04,
+      "entry_volume": 1373590.0,
       "screening_date": "2023-09-11",
       "rank": 38
     },
     {
-      "ticker": "CELZ",
-      "score": 125,
+      "ticker": "PSTV",
+      "score": 85,
       "score_breakdown": {
-        "volume_score": 25,
+        "volume_score": 50,
         "rsi_score": 20,
-        "breakout_score": 30,
+        "breakout_score": 0,
         "accumulation_score": 0,
-        "composite_bonus": 50
+        "composite_bonus": 15
       },
-      "entry_price": 5.35,
-      "entry_volume": 57852,
+      "entry_price": 1.5,
+      "entry_volume": 16393029.0,
       "screening_date": "2023-09-11",
       "rank": 39
     },
     {
-      "ticker": "RTL",
-      "score": 90,
+      "ticker": "JG",
+      "score": 85,
       "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 30,
+        "volume_score": 50,
+        "rsi_score": 20,
+        "breakout_score": 0,
         "accumulation_score": 0,
-        "composite_bonus": 25
+        "composite_bonus": 15
       },
-      "entry_price": 7.61,
-      "entry_volume": 10269532.0,
+      "entry_price": 3.198,
+      "entry_volume": 462447.95,
       "screening_date": "2023-09-11",
       "rank": 40
     },
     {
-      "ticker": "GNL",
-      "score": 90,
+      "ticker": "IHS",
+      "score": 80,
       "score_breakdown": {
         "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 30,
+        "rsi_score": 30,
+        "breakout_score": 0,
         "accumulation_score": 0,
-        "composite_bonus": 25
+        "composite_bonus": 15
       },
-      "entry_price": 11.31,
-      "entry_volume": 23335771.0,
+      "entry_price": 5.31,
+      "entry_volume": 2082154.0,
       "screening_date": "2023-09-11",
       "rank": 41
     },
     {
-      "ticker": "GPRK",
-      "score": 90,
+      "ticker": "NRK",
+      "score": 80,
       "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 0,
-        "breakout_score": 0,
-        "accumulation_score": 30,
-        "composite_bonus": 25
+        "volume_score": 0,
+        "rsi_score": 20,
+        "breakout_score": 20,
+        "accumulation_score": 10,
+        "composite_bonus": 30
       },
-      "entry_price": 9.3,
-      "entry_volume": 2354255.0,
+      "entry_price": 9.76,
+      "entry_volume": 295345,
       "screening_date": "2023-09-11",
       "rank": 42
     },
     {
-      "ticker": "FGB",
-      "score": 90,
+      "ticker": "ENLV",
+      "score": 80,
       "score_breakdown": {
         "volume_score": 35,
-        "rsi_score": 0,
+        "rsi_score": 30,
         "breakout_score": 0,
-        "accumulation_score": 30,
-        "composite_bonus": 25
+        "accumulation_score": 0,
+        "composite_bonus": 15
       },
-      "entry_price": 3.24,
-      "entry_volume": 285314,
+      "entry_price": 1.92,
+      "entry_volume": 122477,
       "screening_date": "2023-09-11",
       "rank": 43
     },
     {
-      "ticker": "CHEK",
-      "score": 90,
+      "ticker": "KTF",
+      "score": 80,
       "score_breakdown": {
-        "volume_score": 35,
-        "rsi_score": 30,
-        "breakout_score": 0,
-        "accumulation_score": 0,
-        "composite_bonus": 25
+        "volume_score": 0,
+        "rsi_score": 20,
+        "breakout_score": 20,
+        "accumulation_score": 10,
+        "composite_bonus": 30
       },
-      "entry_price": 3.565,
-      "entry_volume": 489258,
+      "entry_price": 8.22,
+      "entry_volume": 128048,
       "screening_date": "2023-09-11",
       "rank": 44
     },
     {
-      "ticker": "UP",
-      "score": 85,
+      "ticker": "MIY",
+      "score": 80,
       "score_breakdown": {
         "volume_score": 0,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 25
+        "rsi_score": 20,
+        "breakout_score": 20,
+        "accumulation_score": 10,
+        "composite_bonus": 30
       },
-      "entry_price": 2.9,
-      "entry_volume": 1211297.0,
+      "entry_price": 10.52,
+      "entry_volume": 93718,
       "screening_date": "2023-09-11",
       "rank": 45
     },
     {
-      "ticker": "TCPC",
-      "score": 85,
+      "ticker": "YYY",
+      "score": 80,
       "score_breakdown": {
         "volume_score": 0,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 25
+        "rsi_score": 20,
+        "breakout_score": 20,
+        "accumulation_score": 10,
+        "composite_bonus": 30
       },
-      "entry_price": 12.43,
-      "entry_volume": 518040,
+      "entry_price": 11.5,
+      "entry_volume": 208148,
       "screening_date": "2023-09-11",
       "rank": 46
     },
     {
-      "ticker": "CTCX",
-      "score": 85,
+      "ticker": "CULP",
+      "score": 80,
       "score_breakdown": {
-        "volume_score": 0,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 25
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 4.79,
-      "entry_volume": 34217,
+      "entry_price": 5.45,
+      "entry_volume": 38509,
       "screening_date": "2023-09-11",
       "rank": 47
     },
     {
-      "ticker": "PAI",
-      "score": 85,
+      "ticker": "NPV",
+      "score": 80,
       "score_breakdown": {
         "volume_score": 0,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 25
+        "rsi_score": 20,
+        "breakout_score": 20,
+        "accumulation_score": 10,
+        "composite_bonus": 30
       },
-      "entry_price": 11.41,
-      "entry_volume": 29647,
+      "entry_price": 10.29,
+      "entry_volume": 43003,
       "screening_date": "2023-09-11",
       "rank": 48
     },
     {
-      "ticker": "PRQR",
-      "score": 85,
+      "ticker": "PMF",
+      "score": 80,
       "score_breakdown": {
         "volume_score": 0,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 25
+        "rsi_score": 30,
+        "breakout_score": 10,
+        "accumulation_score": 10,
+        "composite_bonus": 30
       },
-      "entry_price": 1.6,
-      "entry_volume": 293189,
+      "entry_price": 9.1,
+      "entry_volume": 112646,
       "screening_date": "2023-09-11",
       "rank": 49
     },
     {
-      "ticker": "FINS",
-      "score": 85,
+      "ticker": "TAIL",
+      "score": 80,
       "score_breakdown": {
         "volume_score": 0,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 25
+        "rsi_score": 20,
+        "breakout_score": 20,
+        "accumulation_score": 10,
+        "composite_bonus": 30
       },
-      "entry_price": 12.15,
-      "entry_volume": 75568,
+      "entry_price": 13.08,
+      "entry_volume": 128184,
       "screening_date": "2023-09-11",
       "rank": 50
     },
     {
-      "ticker": "MDV",
-      "score": 85,
+      "ticker": "CPIX",
+      "score": 80,
       "score_breakdown": {
-        "volume_score": 0,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 25
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 15,
-      "entry_volume": 57146,
+      "entry_price": 1.64,
+      "entry_volume": 66161,
       "screening_date": "2023-09-11",
       "rank": 51
     },
     {
-      "ticker": "FOLD",
-      "score": 85,
+      "ticker": "ATMV",
+      "score": 80,
       "score_breakdown": {
-        "volume_score": 0,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 25
+        "volume_score": 20,
+        "rsi_score": -10,
+        "breakout_score": 20,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 13.29,
-      "entry_volume": 2870826.0,
+      "entry_price": 10.56,
+      "entry_volume": 331243,
       "screening_date": "2023-09-11",
       "rank": 52
     },
     {
-      "ticker": "FNGR",
-      "score": 85,
+      "ticker": "PPHP",
+      "score": 80,
       "score_breakdown": {
-        "volume_score": 0,
-        "rsi_score": 30,
-        "breakout_score": 30,
-        "accumulation_score": 0,
-        "composite_bonus": 25
+        "volume_score": 20,
+        "rsi_score": 0,
+        "breakout_score": 10,
+        "accumulation_score": 20,
+        "composite_bonus": 30
       },
-      "entry_price": 6.85,
-      "entry_volume": 1802136.0,
+      "entry_price": 10.92,
+      "entry_volume": 32757,
       "screening_date": "2023-09-11",
       "rank": 53
     },
     {
-      "ticker": "BKCC",
-      "score": 85,
+      "ticker": "ACB",
+      "score": 75,
       "score_breakdown": {
-        "volume_score": 0,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 25
+        "volume_score": 50,
+        "rsi_score": -10,
+        "breakout_score": 20,
+        "accumulation_score": 0,
+        "composite_bonus": 15
       },
-      "entry_price": 3.865,
-      "entry_volume": 465614,
+      "entry_price": 9.108,
+      "entry_volume": 25571746.6,
       "screening_date": "2023-09-11",
       "rank": 54
     },
     {
-      "ticker": "COYA",
-      "score": 85,
+      "ticker": "VRAX",
+      "score": 75,
       "score_breakdown": {
-        "volume_score": 0,
-        "rsi_score": 30,
-        "breakout_score": 30,
+        "volume_score": 50,
+        "rsi_score": 0,
+        "breakout_score": 10,
         "accumulation_score": 0,
-        "composite_bonus": 25
+        "composite_bonus": 15
       },
-      "entry_price": 5.08,
-      "entry_volume": 111060,
+      "entry_price": 3.71,
+      "entry_volume": 502518.1,
       "screening_date": "2023-09-11",
       "rank": 55
     },
     {
-      "ticker": "CSTR",
-      "score": 85,
+      "ticker": "RTL",
+      "score": 70,
       "score_breakdown": {
-        "volume_score": 0,
+        "volume_score": 35,
         "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 25
+        "breakout_score": 20,
+        "accumulation_score": 0,
+        "composite_bonus": 15
       },
-      "entry_price": 13.98,
-      "entry_volume": 48152,
+      "entry_price": 7.61,
+      "entry_volume": 10269532.0,
       "screening_date": "2023-09-11",
       "rank": 56
     },
     {
-      "ticker": "VTN",
-      "score": 85,
+      "ticker": "LEVI",
+      "score": 70,
       "score_breakdown": {
         "volume_score": 0,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 25
+        "rsi_score": 20,
+        "breakout_score": 10,
+        "accumulation_score": 10,
+        "composite_bonus": 30
       },
-      "entry_price": 9.61,
-      "entry_volume": 100404,
+      "entry_price": 13.41,
+      "entry_volume": 3063764.0,
       "screening_date": "2023-09-11",
       "rank": 57
     },
     {
-      "ticker": "ORN",
-      "score": 85,
+      "ticker": "IOBT",
+      "score": 70,
       "score_breakdown": {
-        "volume_score": 0,
-        "rsi_score": 30,
-        "breakout_score": 30,
+        "volume_score": 35,
+        "rsi_score": 20,
+        "breakout_score": 0,
         "accumulation_score": 0,
-        "composite_bonus": 25
+        "composite_bonus": 15
       },
-      "entry_price": 4.84,
-      "entry_volume": 148111,
+      "entry_price": 1.6706,
+      "entry_volume": 625360,
       "screening_date": "2023-09-11",
       "rank": 58
     },
     {
-      "ticker": "DSM",
-      "score": 85,
+      "ticker": "PFN",
+      "score": 70,
       "score_breakdown": {
         "volume_score": 0,
-        "rsi_score": 0,
-        "breakout_score": 30,
-        "accumulation_score": 30,
-        "composite_bonus": 25
+        "rsi_score": 20,
+        "breakout_score": 10,
+        "accumulation_score": 10,
+        "composite_bonus": 30
       },
-      "entry_price": 5.31,
-      "entry_volume": 225999,
+      "entry_price": 6.73,
+      "entry_volume": 416370,
       "screening_date": "2023-09-11",
       "rank": 59
     },
     {
-      "ticker": "PFIE",
-      "score": 85,
+      "ticker": "GNL",
+      "score": 70,
       "score_breakdown": {
-        "volume_score": 0,
-        "rsi_score": 30,
-        "breakout_score": 30,
+        "volume_score": 35,
+        "rsi_score": 0,
+        "breakout_score": 20,
         "accumulation_score": 0,
-        "composite_bonus": 25
+        "composite_bonus": 15
       },
-      "entry_price": 3,
-      "entry_volume": 1411682.0,
+      "entry_price": 11.31,
+      "entry_volume": 23335771.0,
       "screening_date": "2023-09-11",
       "rank": 60
     }
