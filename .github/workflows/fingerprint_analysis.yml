@@ -1,0 +1,41 @@
+name: Fingerprint Analysis
+
+on:
+  workflow_dispatch:
+    inputs:
+      input_file:
+        description: 'Input file with clean explosions'
+        required: true
+        default: 'CLEAN_EXPLOSIONS.json'
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360  # 6 hours max
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        pip install requests numpy
+    
+    - name: Run fingerprint analysis
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+      run: |
+        echo "Analyzing fingerprints from ${{ github.event.inputs.input_file }}..."
+        python fingerprint_analyzer.py
+    
+    - name: Commit results
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+        git add FINGERPRINTS.json fingerprints_progress.json
+        git commit -m "Fingerprint analysis complete - 130 explosions analyzed"
+        git push
