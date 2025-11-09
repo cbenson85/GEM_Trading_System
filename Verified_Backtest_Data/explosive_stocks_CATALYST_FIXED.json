@@ -1,29 +1,4 @@
 {
-  "scan_info": {
-    "scan_date": "2025-11-06 15:17:11",
-    "scan_period_start": "2010-01-01",
-    "scan_period_end": "2024-12-31",
-    "criteria": "500%+ gain in any 120-day window",
-    "data_sources": [
-      "Polygon API",
-      "Yahoo Finance"
-    ],
-    "coverage": "Complete - all active US stock tickers (COVID years excluded)",
-    "covid_years_excluded": "2020-2021",
-    "total_stocks_scanned": 154271,
-    "total_explosive_stocks_found": 1454,
-    "data_errors": 85542,
-    "api_calls_made": 154418,
-    "scan_complete": true,
-    "merged_from_scans": 7,
-    "merged_locally": true
-  },
-  "metadata": {
-    "last_updated": "2025-11-06 15:17:11",
-    "verified_by": "Local merge from 7 downloaded scan artifacts",
-    "quality_checks_passed": true,
-    "notes": "COVID years (2020-2021) excluded from scan. Merged locally after GitHub Actions timeout issue."
-  },
   "stocks": [
     {
       "ticker": "DXF",
@@ -46,12 +21,18 @@
         "threshold_price": 0.27,
         "is_sustainable": true,
         "total_days_checked": 36
-      }
+      },
+      "analysis_start_date": "2024-10-26",
+      "catalyst_price": 29,
+      "baseline_price": 0.1817,
+      "baseline_date": "2024-04-23",
+      "max_gain_verified": 26460.264171711613,
+      "catalyst_verified": true
     },
     {
       "ticker": "DBD",
       "year_discovered": 2023,
-      "catalyst_date": "2023-08-14",
+      "catalyst_date": "2023-02-24",
       "entry_price": 0.25,
       "peak_price": 25.38,
       "gain_percent": 10052.0,
@@ -69,12 +50,18 @@
         "threshold_price": 0.75,
         "is_sustainable": true,
         "total_days_checked": 73
-      }
+      },
+      "analysis_start_date": "2022-11-26",
+      "catalyst_price": 2.89,
+      "baseline_price": 1.26,
+      "baseline_date": "2022-12-20",
+      "max_gain_verified": 3483.3333333333335,
+      "catalyst_verified": true
     },
     {
       "ticker": "SNWV",
       "year_discovered": 2022,
-      "catalyst_date": "2022-05-10",
+      "catalyst_date": "2022-04-12",
       "entry_price": 0.53,
       "peak_price": 37.5,
       "gain_percent": 7042.9,
@@ -92,12 +79,18 @@
         "threshold_price": 1.59,
         "is_sustainable": true,
         "total_days_checked": 105
-      }
+      },
+      "analysis_start_date": "2022-01-12",
+      "catalyst_price": 45,
+      "baseline_price": 0.0375,
+      "baseline_date": "2022-02-04",
+      "max_gain_verified": 149900.0,
+      "catalyst_verified": true
     },
     {
       "ticker": "ZJYL",
       "year_discovered": 2023,
-      "catalyst_date": "2023-12-18",
+      "catalyst_date": "2023-08-01",
       "entry_price": 0.44,
       "peak_price": 25.49,
       "gain_percent": 5667.8,
@@ -115,12 +108,18 @@
         "threshold_price": 1.32,
         "is_sustainable": true,
         "total_days_checked": 123
-      }
+      },
+      "analysis_start_date": "2023-05-03",
+      "catalyst_price": 0.6505,
+      "baseline_price": 0.242,
+      "baseline_date": "2023-05-19",
+      "max_gain_verified": 10434.504132231405,
+      "catalyst_verified": true
     },
     {
       "ticker": "VSSYW",
       "year_discovered": 2024,
-      "catalyst_date": "2024-06-07",
+      "catalyst_date": "2024-05-08",
       "entry_price": 0.02,
       "peak_price": 1,
       "gain_percent": 5191.0,
@@ -138,7 +137,13 @@
         "threshold_price": 0.06,
         "is_sustainable": true,
         "total_days_checked": 109
-      }
+      },
+      "analysis_start_date": "2024-02-08",
+      "catalyst_price": 0.0353,
+      "baseline_price": 0.0036,
+      "baseline_date": "2023-11-28",
+      "max_gain_verified": 27677.777777777777,
+      "catalyst_verified": true
     },
     {
       "ticker": "KOOL",
@@ -15988,15 +15993,10 @@
       }
     }
   ],
-  "filter_info": {
-    "last_filtered": "2025-11-06 22:15:30",
-    "filter_version": "V4.0",
-    "method": "Total Days Above 200%",
-    "min_days_required": 14,
-    "threshold_gain_percent": 200,
-    "total_stocks": 1454,
-    "sustainable": 694,
-    "unsustainable": 241,
-    "untestable": 519
+  "metadata": {
+    "last_updated": "2025-11-09T00:03:11.570891",
+    "fixed_count": 5,
+    "error_count": 0,
+    "total_stocks": 694
   }
 }
