@@ -10,22 +10,19 @@ on:
         description: 'End date (YYYY-MM-DD)'
         required: true
         default: '2024-12-31'
-      batch_start:
-        description: 'Starting batch'
+      batch_size:
+        description: 'Stocks per batch (use 1000 for full scan)'
         required: true
-        default: '0'
-      batch_end:
-        description: 'Ending batch'
-        required: true
-        default: '19'
+        default: '1000'
+
 jobs:
   scan:
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 10
+      max-parallel: 6
       fail-fast: false
       matrix:
-        offset: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+        batch: [0,1,2,3,4,5]  # 6 batches × 1000 = 6000 stocks covers everything
     
     steps:
     - uses: actions/checkout@v2
@@ -41,15 +38,13 @@ jobs:
     - name: Run scanner
       env:
         POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
-        BATCH_NUMBER: ${{ matrix.offset }}
-        BATCH_SIZE: 100
+        BATCH_NUMBER: ${{ matrix.batch }}
+        BATCH_SIZE: ${{ github.event.inputs.batch_size }}
         SCAN_START: ${{ github.event.inputs.scan_start }}
         SCAN_END: ${{ github.event.inputs.scan_end }}
-      timeout-minutes: 300
+      timeout-minutes: 30  # 30 minutes is plenty
       run: |
-        # Calculate actual batch number
-        export BATCH_NUMBER=$((${{ github.event.inputs.batch_start }} + ${{ matrix.offset }}))
-        echo "Running batch $BATCH_NUMBER"
+        echo "Running batch ${{ matrix.batch }} (1000 stocks)"
         python pure_scanner.py
     
     - name: Commit results
@@ -57,5 +52,5 @@ jobs:
         git config --global user.name 'GitHub Actions'
         git config --global user.email 'actions@github.com'
         git add scan_results/
-        git commit -m "Batch $BATCH_NUMBER" || echo "No changes"
+        git commit -m "Batch ${{ matrix.batch }} (1000 stocks)" || echo "No changes"
         git push || echo "Push failed"
