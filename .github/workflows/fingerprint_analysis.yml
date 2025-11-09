@@ -31,32 +31,20 @@ jobs:
       env:
         POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
       run: |
-        echo "Running fingerprint analysis..."
         python fingerprint_analyzer.py
-        
-        echo "Files created:"
-        ls -la *.json
     
     - name: Commit and push results
       run: |
         git config --global user.name 'GitHub Actions'
         git config --global user.email 'actions@github.com'
         
-        git pull origin main --rebase --autostash
+        git pull origin main --rebase
         
-        # The script saves as FINGERPRINTS_COMPLETE.json
-        if [ -f "FINGERPRINTS_COMPLETE.json" ]; then
-          git add FINGERPRINTS_COMPLETE.json
-          echo "Added FINGERPRINTS_COMPLETE.json"
-        fi
-        
-        if [ -f "fingerprints_progress.json" ]; then
-          git add fingerprints_progress.json
-          echo "Added fingerprints_progress.json"
-        fi
+        # Add FINGERPRINTS.json (not FINGERPRINTS_COMPLETE.json)
+        git add FINGERPRINTS.json fingerprints_progress.json || true
         
         if git diff --cached --quiet; then
-          echo "No changes detected - files may already be committed"
+          echo "No changes to commit"
         else
           git commit -m "Fingerprint analysis complete - $(date)"
           git push origin main
