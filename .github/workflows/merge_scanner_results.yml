@@ -15,8 +15,49 @@ jobs:
         cat > merge.py << 'EOF'
         import json
         import os
-        from datetime import datetime
+        from datetime import datetime, timedelta
         
+        def dates_overlap(exp1, exp2, threshold_days=30):
+            """Check if two explosions overlap in time"""
+            # Parse dates
+            cat1 = datetime.strptime(exp1['catalyst_date'], '%Y-%m-%d')
+            cat2 = datetime.strptime(exp2['catalyst_date'], '%Y-%m-%d')
+            peak1 = datetime.strptime(exp1['peak_date'], '%Y-%m-%d')
+            peak2 = datetime.strptime(exp2['peak_date'], '%Y-%m-%d')
+            
+            # Check if catalyst dates are within threshold
+            if abs((cat1 - cat2).days) <= threshold_days:
+                return True
+            
+            # Check if peak dates are within threshold  
+            if abs((peak1 - peak2).days) <= threshold_days:
+                return True
+                
+            # Check if one explosion contains the other
+            if (cat1 <= cat2 <= peak1) or (cat2 <= cat1 <= peak2):
+                return True
+                
+            return False
+        
+        def choose_best_explosion(explosions):
+            """From overlapping explosions, choose the best one"""
+            # Prefer the one with highest gain
+            best = max(explosions, key=lambda x: x['gain_pct'])
+            
+            # But if gains are similar, prefer earlier catalyst with better volume
+            similar = [e for e in explosions if e['gain_pct'] > best['gain_pct'] * 0.8]
+            if similar:
+                # Sort by volume spike (remove 'x' and convert to float)
+                for exp in similar:
+                    spike_str = exp.get('volume_spike', '1x').replace('x', '')
+                    exp['volume_numeric'] = float(spike_str) if spike_str else 1
+                
+                # Prefer highest volume spike
+                best = max(similar, key=lambda x: x['volume_numeric'])
+            
+            return best
+        
+        # Load all discoveries
         all_discoveries = []
         batches = 0
         
@@ -27,30 +68,108 @@ jobs:
                     all_discoveries.extend(data['discoveries'])
                     batches += 1
         
-        # Remove duplicates
-        unique = []
-        seen = set()
+        print(f"Loaded {len(all_discoveries)} raw discoveries from {batches} batches")
+        
+        # Group by ticker
+        ticker_groups = {}
         for d in all_discoveries:
-            key = f"{d['ticker']}_{d['catalyst_date']}"
-            if key not in seen:
-                unique.append(d)
-                seen.add(key)
+            ticker = d['ticker']
+            if ticker not in ticker_groups:
+                ticker_groups[ticker] = []
+            ticker_groups[ticker].append(d)
+        
+        # Deduplicate each ticker's explosions
+        unique = []
+        total_removed = 0
+        
+        for ticker, explosions in ticker_groups.items():
+            if len(explosions) == 1:
+                unique.append(explosions[0])
+                continue
+            
+            # Sort by catalyst date
+            explosions.sort(key=lambda x: x['catalyst_date'])
+            
+            # Group overlapping explosions
+            explosion_groups = []
+            for exp in explosions:
+                # Find which group this belongs to
+                added_to_group = False
+                for group in explosion_groups:
+                    # Check if overlaps with any explosion in the group
+                    if any(dates_overlap(exp, g) for g in group):
+                        group.append(exp)
+                        added_to_group = True
+                        break
+                
+                if not added_to_group:
+                    explosion_groups.append([exp])
+            
+            # Choose best from each group
+            for group in explosion_groups:
+                best = choose_best_explosion(group)
+                unique.append(best)
+                if len(group) > 1:
+                    total_removed += len(group) - 1
+                    print(f"{ticker}: Kept 1 of {len(group)} overlapping explosions (gain: {best['gain_pct']:.0f}%)")
         
         # Sort by gain
         unique.sort(key=lambda x: x['gain_pct'], reverse=True)
         
+        # Create summary
         results = {
             'scan_date': datetime.now().isoformat(),
             'batches_merged': batches,
+            'raw_discoveries': len(all_discoveries),
+            'duplicates_removed': total_removed,
             'total_explosions': len(unique),
             'unique_tickers': len(set([d['ticker'] for d in unique])),
+            'deduplication_stats': {
+                'method': 'overlapping_time_windows',
+                'threshold_days': 30,
+                'selection': 'highest_gain_with_best_volume'
+            },
             'discoveries': unique
         }
         
+        # Save main results
         with open('FINAL_SCAN.json', 'w') as f:
             json.dump(results, f, indent=2)
         
-        print(f"Merged {batches} batches: {len(unique)} explosions")
+        # Save summary statistics
+        gain_buckets = {
+            '500-1000%': len([d for d in unique if 500 <= d['gain_pct'] < 1000]),
+            '1000-2000%': len([d for d in unique if 1000 <= d['gain_pct'] < 2000]),
+            '2000-5000%': len([d for d in unique if 2000 <= d['gain_pct'] < 5000]),
+            '5000-10000%': len([d for d in unique if 5000 <= d['gain_pct'] < 10000]),
+            '10000%+': len([d for d in unique if d['gain_pct'] >= 10000])
+        }
+        
+        summary = {
+            'total_unique_explosions': len(unique),
+            'unique_tickers': len(set([d['ticker'] for d in unique])),
+            'gain_distribution': gain_buckets,
+            'top_10_explosions': [
+                {
+                    'ticker': d['ticker'],
+                    'gain': f"{d['gain_pct']:.0f}%",
+                    'catalyst_date': d['catalyst_date'],
+                    'volume_spike': d['volume_spike']
+                }
+                for d in unique[:10]
+            ]
+        }
+        
+        with open('SCAN_SUMMARY.json', 'w') as f:
+            json.dump(summary, f, indent=2)
+        
+        print(f"\n{'='*60}")
+        print(f"MERGE COMPLETE")
+        print(f"Raw discoveries: {len(all_discoveries)}")
+        print(f"After deduplication: {len(unique)}")
+        print(f"Duplicates removed: {total_removed}")
+        print(f"Unique tickers: {len(set([d['ticker'] for d in unique]))}")
+        print("="*60)
         EOF
         
         python merge.py
@@ -59,6 +178,6 @@ jobs:
       run: |
         git config --global user.name 'GitHub Actions'
         git config --global user.email 'actions@github.com'
-        git add FINAL_SCAN.json
-        git commit -m "Final scan results"
-        git push
+        git add FINAL_SCAN.json SCAN_SUMMARY.json
+        git commit -m "Merged and deduplicated scan results - $(date)" || echo "No changes"
+        git push || echo "Push failed"
