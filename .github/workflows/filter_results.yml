@@ -35,6 +35,11 @@ jobs:
       run: |
         git config --global user.name 'GitHub Actions'
         git config --global user.email 'actions@github.com'
-        git add CLEAN_EXPLOSIONS.json
-        git commit -m "Filtered clean explosions"
+        git add CLEAN_EXPLOSIONS.json REJECTED_EXPLOSIONS.json
+        git commit -m "Filtered results - clean and rejected"
         git push
+```
+
+The key change is in the commit step:
+```
+git add CLEAN_EXPLOSIONS.json REJECTED_EXPLOSIONS.json
