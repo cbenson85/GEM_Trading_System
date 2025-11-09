@@ -1,0 +1,64 @@
+name: Merge Scanner Results
+
+on:
+  workflow_dispatch:
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Merge all batches
+      run: |
+        cat > merge.py << 'EOF'
+        import json
+        import os
+        from datetime import datetime
+        
+        all_discoveries = []
+        batches = 0
+        
+        for file in os.listdir('scan_results/batches'):
+            if file.endswith('.json'):
+                with open(f'scan_results/batches/{file}', 'r') as f:
+                    data = json.load(f)
+                    all_discoveries.extend(data['discoveries'])
+                    batches += 1
+        
+        # Remove duplicates
+        unique = []
+        seen = set()
+        for d in all_discoveries:
+            key = f"{d['ticker']}_{d['catalyst_date']}"
+            if key not in seen:
+                unique.append(d)
+                seen.add(key)
+        
+        # Sort by gain
+        unique.sort(key=lambda x: x['gain_pct'], reverse=True)
+        
+        results = {
+            'scan_date': datetime.now().isoformat(),
+            'batches_merged': batches,
+            'total_explosions': len(unique),
+            'unique_tickers': len(set([d['ticker'] for d in unique])),
+            'discoveries': unique
+        }
+        
+        with open('FINAL_SCAN.json', 'w') as f:
+            json.dump(results, f, indent=2)
+        
+        print(f"Merged {batches} batches: {len(unique)} explosions")
+        EOF
+        
+        python merge.py
+    
+    - name: Commit
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+        git add FINAL_SCAN.json
+        git commit -m "Final scan results"
+        git push
