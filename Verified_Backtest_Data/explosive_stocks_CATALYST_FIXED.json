@@ -21,12 +21,14 @@
         "threshold_price": 0.27,
         "is_sustainable": true,
         "total_days_checked": 36
-      }
+      },
+      "catalyst_error": "no_catalyst",
+      "catalyst_verified": false
     },
     {
       "ticker": "DBD",
       "year_discovered": 2023,
-      "catalyst_date": "2023-08-14",
+      "catalyst_date": "2023-02-15",
       "entry_price": 0.25,
       "peak_price": 25.38,
       "gain_percent": 10052.0,
@@ -44,12 +46,19 @@
         "threshold_price": 0.75,
         "is_sustainable": true,
         "total_days_checked": 73
-      }
+      },
+      "analysis_start_date": "2022-11-17",
+      "catalyst_price": 3.15,
+      "baseline_price": 1.425,
+      "baseline_date": "2023-01-05",
+      "max_gain_verified_pct": 1957.5438596491229,
+      "catalyst_verified": true,
+      "catalyst_fixed_date": "2025-11-09T00:15:57.524253"
     },
     {
       "ticker": "SNWV",
       "year_discovered": 2022,
-      "catalyst_date": "2022-05-10",
+      "catalyst_date": "2022-02-07",
       "entry_price": 0.53,
       "peak_price": 37.5,
       "gain_percent": 7042.9,
@@ -67,7 +76,14 @@
         "threshold_price": 1.59,
         "is_sustainable": true,
         "total_days_checked": 105
-      }
+      },
+      "analysis_start_date": "2021-11-09",
+      "catalyst_price": 50.4563,
+      "baseline_price": 0.0375,
+      "baseline_date": "2022-02-04",
+      "max_gain_verified_pct": 184900.00000000003,
+      "catalyst_verified": true,
+      "catalyst_fixed_date": "2025-11-09T00:15:57.854218"
     },
     {
       "ticker": "ZJYL",
@@ -15964,12 +15980,9 @@
     }
   ],
   "metadata": {
-    "last_updated": "2025-11-09T00:05:56.287642",
-    "total_stocks": 694,
-    "stocks_needing_fix": 0,
-    "stocks_processed": 0,
-    "stocks_fixed": 0,
-    "stocks_errored": 0,
-    "batch_size": 10
+    "updated": "2025-11-09T00:15:57.854232",
+    "total": 694,
+    "fixed": 2,
+    "errors": 1
   }
 }
