@@ -183,8 +183,8 @@ class PureScanner:
                             peak_idx = window_start + j
                     
                     if base_idx and peak_idx and base_idx < peak_idx:
-                        # Find catalyst with FIXED method
-                        catalyst = self.find_catalyst(bars, base_idx, peak_idx)
+                        # Find TRUE initial catalyst
+                        catalyst = self.find_true_catalyst(bars, base_idx, peak_idx)
                         
                         if catalyst:
                             explosions.append({
@@ -199,7 +199,7 @@ class PureScanner:
                                 'catalyst_type': catalyst['type'],
                                 'volume_spike': catalyst['volume_spike'],
                                 'analysis_start': catalyst['analysis_start'],
-                                'days_to_peak': peak_idx - base_idx
+                                'days_to_peak': peak_idx - catalyst['idx']
                             })
             
             return explosions
@@ -207,32 +207,45 @@ class PureScanner:
         except Exception as e:
             return []
     
-    def find_catalyst(self, bars: List[Dict], base_idx: int, peak_idx: int) -> Optional[Dict]:
-        """Find INITIAL catalyst that started the move - search BEFORE/AT base, not within explosion"""
+    def find_true_catalyst(self, bars: List[Dict], base_idx: int, peak_idx: int) -> Optional[Dict]:
+        """Find TRUE initial catalyst by searching for first major move from quiet period"""
         
-        if base_idx < 50:
+        # Need at least 100 days of history before to find quiet period
+        if base_idx < 100:
             return None
         
-        # CRITICAL FIX: Search from 30 days BEFORE base to 10 days AFTER
-        # This finds the initial breakout, not continuation patterns
-        search_start = max(50, base_idx - 30)
-        search_end = min(base_idx + 10, peak_idx)
+        # Step 1: Find the TRUE start by working FORWARD from a quiet period
+        # Look for the lowest volatility period in the 60 days before the base
+        search_start = max(50, base_idx - 60)
         
-        # Track best catalyst found
-        best_catalyst = None
-        best_volume_spike = 0
+        # Find the quietest 20-day period (lowest average daily range)
+        quietest_start = search_start
+        min_volatility = float('inf')
         
-        for i in range(search_start, search_end):
+        for i in range(search_start, base_idx - 20):
+            # Calculate average daily range for 20-day window
+            daily_ranges = []
+            for j in range(i, i + 20):
+                if j < len(bars):
+                    high = bars[j].get('h', 0)
+                    low = bars[j].get('l', 0)
+                    close = bars[j].get('c', 1)
+                    if close > 0:
+                        daily_range = (high - low) / close
+                        daily_ranges.append(daily_range)
+            
+            avg_volatility = sum(daily_ranges) / len(daily_ranges) if daily_ranges else float('inf')
+            
+            if avg_volatility < min_volatility:
+                min_volatility = avg_volatility
+                quietest_start = i
+        
+        # Step 2: From the quiet period, find the FIRST significant breakout
+        for i in range(quietest_start + 20, min(peak_idx, quietest_start + 100)):
             if i < 50:
                 continue
             
-            # Check if stock is already exploding (skip continuation patterns)
-            if i > search_start + 5:
-                recent_gain = (bars[i]['c'] - bars[i-5]['c']) / bars[i-5]['c'] if bars[i-5]['c'] > 0 else 0
-                if recent_gain > 0.5:  # Already up >50% in 5 days
-                    continue
-            
-            # Calculate 50-day average volume
+            # Calculate metrics
             vol_50 = sum([bars[j].get('v', 0) for j in range(i-50, i)]) / 50
             current_vol = bars[i].get('v', 0)
             
@@ -241,112 +254,110 @@ class PureScanner:
             
             volume_spike = current_vol / vol_50
             
-            # Need 5x+ volume for real catalyst
-            if volume_spike < 5.0:
+            # Need significant volume
+            if volume_spike < 3.0:
                 continue
             
             current_close = bars[i].get('c', 0)
             prev_close = bars[i-1].get('c', 0) if i > 0 else 0
             
-            # Calculate 50-day MA
-            ma50 = sum([bars[j].get('c', 0) for j in range(i-50, i)]) / 50
-            prev_ma50 = sum([bars[j].get('c', 0) for j in range(i-51, i-1)]) / 50
+            if prev_close == 0:
+                continue
             
-            # Check for valid breakout patterns
-            catalyst_type = None
+            daily_gain = (current_close - prev_close) / prev_close
             
-            # MA breakout check
-            if prev_close <= prev_ma50 * 1.05 and current_close > ma50:  # Allow 5% above MA
-                catalyst_type = "50MA_BREAKOUT"
+            # Calculate 20-day average before this point
+            avg_20 = sum([bars[j].get('c', 0) for j in range(i-20, i)]) / 20
             
-            # 52-week high check
-            elif i >= 252:
-                year_high = max([bars[j].get('h', 0) for j in range(i-252, i)])
-                if current_close > year_high * 0.98:  # Within 2% of 52W high
-                    catalyst_type = "52W_HIGH"
+            # Check if this is a significant move from recent average
+            move_from_avg = (current_close - avg_20) / avg_20 if avg_20 > 0 else 0
             
-            # Volume-only catalyst (massive volume without specific pattern)
-            elif volume_spike > 10.0:
-                catalyst_type = "VOLUME_SURGE"
+            # VALIDATION: Make sure stock hasn't already exploded
+            # Check 30-day return before this point
+            price_30_ago = bars[i-30].get('c', 0) if i >= 30 else 0
+            return_30d = (current_close - price_30_ago) / price_30_ago if price_30_ago > 0 else 0
             
-            # If we found a catalyst, check if it's better than previous
-            if catalyst_type and volume_spike > best_volume_spike:
-                # Additional validation: check RSI isn't already extreme
-                rsi = self.calculate_simple_rsi(bars, i)
-                if rsi < 80:  # Not already overbought
+            # If already up >100% in 30 days, this is NOT the initial catalyst
+            if return_30d > 1.0:
+                continue
+            
+            # Found a potential catalyst - check if it's valid
+            if (daily_gain > 0.05 and volume_spike >= 3.0 and move_from_avg > 0.10):
+                
+                # Final validation: check that the explosion actually continues
+                # Look ahead 10 days - should see continued upward movement
+                future_gains = []
+                for j in range(i+1, min(i+10, peak_idx)):
+                    future_price = bars[j].get('c', 0)
+                    future_gain = (future_price - current_close) / current_close if current_close > 0 else 0
+                    future_gains.append(future_gain)
+                
+                # If stock continues up (at least some positive days)
+                if future_gains and max(future_gains) > 0.20:
                     catalyst_dt = datetime.fromtimestamp(bars[i]['t']/1000)
-                    best_catalyst = {
+                    
+                    # Determine catalyst type
+                    ma50 = sum([bars[j].get('c', 0) for j in range(i-50, i)]) / 50
+                    
+                    if prev_close <= ma50 * 1.05 and current_close > ma50:
+                        catalyst_type = "50MA_BREAKOUT"
+                    elif daily_gain > 0.15:
+                        catalyst_type = "PRICE_SURGE"
+                    elif volume_spike > 10:
+                        catalyst_type = "VOLUME_EXPLOSION"
+                    else:
+                        catalyst_type = "BREAKOUT"
+                    
+                    return {
                         'date': catalyst_dt.strftime('%Y-%m-%d'),
                         'price': current_close,
                         'type': catalyst_type,
                         'volume_spike': f"{volume_spike:.1f}x",
-                        'analysis_start': (catalyst_dt - timedelta(days=120)).strftime('%Y-%m-%d')
+                        'analysis_start': (catalyst_dt - timedelta(days=120)).strftime('%Y-%m-%d'),
+                        'idx': i
                     }
-                    best_volume_spike = volume_spike
         
-        # If no catalyst found in the early window, look for the first significant move
-        if not best_catalyst and search_end < peak_idx:
-            # Extend search slightly but with stricter criteria
-            for i in range(search_end, min(search_end + 20, peak_idx)):
-                if i < 50:
-                    continue
-                
-                vol_50 = sum([bars[j].get('v', 0) for j in range(i-50, i)]) / 50
-                current_vol = bars[i].get('v', 0)
-                
-                if vol_50 == 0:
-                    continue
-                
-                volume_spike = current_vol / vol_50
-                
-                # Require even higher volume for later catalysts
-                if volume_spike >= 8.0:
-                    # Check it's the start of a move
-                    price_change = (bars[i]['c'] - bars[i-1]['c']) / bars[i-1]['c'] if bars[i-1]['c'] > 0 else 0
-                    if price_change > 0.1:  # >10% price move
-                        catalyst_dt = datetime.fromtimestamp(bars[i]['t']/1000)
-                        best_catalyst = {
-                            'date': catalyst_dt.strftime('%Y-%m-%d'),
-                            'price': bars[i]['c'],
-                            'type': 'BREAKOUT',
-                            'volume_spike': f"{volume_spike:.1f}x",
-                            'analysis_start': (catalyst_dt - timedelta(days=120)).strftime('%Y-%m-%d')
-                        }
-                        break
+        # If no clean catalyst found in quiet period search, 
+        # fall back to finding first major move but with strict validation
+        for i in range(max(50, base_idx - 30), min(base_idx + 30, peak_idx)):
+            vol_50 = sum([bars[j].get('v', 0) for j in range(i-50, i)]) / 50
+            current_vol = bars[i].get('v', 0)
+            
+            if vol_50 == 0:
+                continue
+            
+            volume_spike = current_vol / vol_50
+            
+            # Require higher volume for fallback
+            if volume_spike < 5.0:
+                continue
+            
+            current_close = bars[i].get('c', 0)
+            
+            # Check that stock is still near lows (within 50% of base)
+            if current_close > base * 1.5:
+                continue
+            
+            # Check 30-day return - must be low
+            price_30_ago = bars[i-30].get('c', 0) if i >= 30 else 0
+            return_30d = (current_close - price_30_ago) / price_30_ago if price_30_ago > 0 else 0
+            
+            if return_30d < 0.5:  # Less than 50% up in 30 days
+                catalyst_dt = datetime.fromtimestamp(bars[i]['t']/1000)
+                return {
+                    'date': catalyst_dt.strftime('%Y-%m-%d'),
+                    'price': current_close,
+                    'type': 'VOLUME_SURGE',
+                    'volume_spike': f"{volume_spike:.1f}x",
+                    'analysis_start': (catalyst_dt - timedelta(days=120)).strftime('%Y-%m-%d'),
+                    'idx': i
+                }
         
-        return best_catalyst
-    
-    def calculate_simple_rsi(self, bars: List[Dict], idx: int, period: int = 14) -> float:
-        """Calculate simple RSI for validation"""
-        if idx < period:
-            return 50.0
-        
-        gains = []
-        losses = []
-        
-        for i in range(idx - period, idx):
-            change = bars[i]['c'] - bars[i-1]['c']
-            if change > 0:
-                gains.append(change)
-                losses.append(0)
-            else:
-                gains.append(0)
-                losses.append(abs(change))
-        
-        avg_gain = sum(gains) / period if gains else 0
-        avg_loss = sum(losses) / period if losses else 0
-        
-        if avg_loss == 0:
-            return 100.0
-        
-        rs = avg_gain / avg_loss
-        rsi = 100 - (100 / (1 + rs))
-        
-        return rsi
+        return None
 
 def main():
     print("="*70)
-    print("120-DAY WINDOW SCANNER - FIXED CATALYST DETECTION")
+    print("TRUE CATALYST SCANNER - FINDING REAL EXPLOSION STARTS")
     print("="*70)
     
     if not POLYGON_API_KEY:
@@ -365,7 +376,7 @@ def main():
     print(f"Size: {batch_size}")
     print(f"Period: {scan_start} to {scan_end}")
     print(f"Window: 120 days")
-    print("Catalyst: FIXED - searching BEFORE base, not within explosion")
+    print("Method: Finding TRUE initial catalysts from quiet periods")
     
     # Get universe
     universe = scanner.get_universe()
@@ -405,7 +416,7 @@ def main():
             'end_idx': end_idx,
             'universe_size': len(universe),
             'window_days': 120,
-            'catalyst_method': 'FIXED_BEFORE_BASE'
+            'catalyst_method': 'TRUE_INITIAL_FROM_QUIET'
         },
         'scan_parameters': {
             'start': scan_start,
