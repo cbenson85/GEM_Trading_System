@@ -11,6 +11,13 @@ class PureScanner:
     def __init__(self, api_key: str):
         self.api_key = api_key
         self.base_url = "https://api.polygon.io"
+        self.api_calls = 0
+        self.errors = {
+            'not_found': [],
+            'api_error': [],
+            'insufficient_data': [],
+            'no_results': []
+        }
         
     def get_universe(self, limit: int = None) -> List[str]:
         """Get ALL active US stocks"""
@@ -35,30 +42,37 @@ class PureScanner:
             page_count += 1
             print(f"Fetching page {page_count}...")
             
-            if next_url:
-                response = requests.get(next_url)
-            else:
-                response = requests.get(url, params=params)
-            
-            if response.status_code != 200:
-                print(f"ERROR: Status {response.status_code}")
-                break
+            try:
+                if next_url:
+                    response = requests.get(next_url)
+                else:
+                    response = requests.get(url, params=params)
                 
-            data = response.json()
-            page_tickers = [t['ticker'] for t in data.get('results', [])]
-            universe.extend(page_tickers)
-            
-            print(f"  Page {page_count}: Got {len(page_tickers)} tickers")
-            print(f"  Total so far: {len(universe)}")
-            
-            if limit and len(universe) >= limit:
-                return universe[:limit]
-            
-            next_url = data.get('next_url')
-            if next_url:
-                next_url += f"&apiKey={self.api_key}"
-            else:
-                print("  No more pages")
+                self.api_calls += 1
+                
+                if response.status_code != 200:
+                    print(f"ERROR: Status {response.status_code}")
+                    break
+                    
+                data = response.json()
+                page_tickers = [t['ticker'] for t in data.get('results', [])]
+                universe.extend(page_tickers)
+                
+                print(f"  Page {page_count}: Got {len(page_tickers)} tickers")
+                print(f"  Total so far: {len(universe)}")
+                
+                if limit and len(universe) >= limit:
+                    return universe[:limit]
+                
+                next_url = data.get('next_url')
+                if next_url:
+                    next_url += f"&apiKey={self.api_key}"
+                else:
+                    print("  No more pages")
+                    break
+                    
+            except Exception as e:
+                print(f"ERROR fetching page {page_count}: {e}")
                 break
         
         print(f"\nUNIVERSE COMPLETE: {len(universe)} tickers")
@@ -83,14 +97,32 @@ class PureScanner:
         }
         
         try:
+            start_time = time.time()
             response = requests.get(url, params=params)
-            if response.status_code != 200:
+            api_time = time.time() - start_time
+            self.api_calls += 1
+            
+            # Track API response times
+            if api_time < 0.01:
+                print(f"  WARNING: {ticker} returned in {api_time:.3f}s - too fast, likely cached or error")
+            
+            if response.status_code == 404:
+                self.errors['not_found'].append(ticker)
+                return []
+            elif response.status_code != 200:
+                self.errors['api_error'].append(f"{ticker}:{response.status_code}")
                 return []
             
             data = response.json()
+            
+            if 'results' not in data:
+                self.errors['no_results'].append(ticker)
+                return []
+                
             bars = data.get('results', [])
             
             if len(bars) < 340:
+                self.errors['insufficient_data'].append(f"{ticker}:{len(bars)}")
                 return []
             
             explosions = []
@@ -104,7 +136,9 @@ class PureScanner:
                     break
             
             # Scan all 90-day windows
+            windows_checked = 0
             for window_start in range(scan_idx, len(bars) - 90):
+                windows_checked += 1
                 window = bars[window_start:window_start + 90]
                 
                 # Find min/max in window
@@ -117,10 +151,9 @@ class PureScanner:
                 base = min(lows)
                 peak = max(highs)
                 
-                # VALIDATION: Skip data errors (prices in millions)
+                # Skip data errors
                 if base > 10000 or peak > 100000:
                     continue
-                # Skip penny stocks below 0.10
                 if base < 0.10:
                     continue
                 
@@ -157,20 +190,18 @@ class PureScanner:
                                 'days_to_peak': peak_idx - base_idx
                             })
             
+            if windows_checked > 0 and windows_checked < 100:
+                print(f"  WARNING: {ticker} only checked {windows_checked} windows")
+                
             return explosions
             
         except Exception as e:
-            print(f"Error scanning {ticker}: {e}")
+            print(f"ERROR scanning {ticker}: {e}")
+            self.errors['api_error'].append(f"{ticker}:exception")
             return []
     
     def find_catalyst(self, bars: List[Dict], base_idx: int, peak_idx: int) -> Optional[Dict]:
-        """
-        Find catalyst for explosive moves
-        Realistic volume for 500% moves:
-        - Catalyst: 5-15x normal volume  
-        - Ascent: 3-8x sustained
-        - Climax: 10-50x+ (can be 1000x+ for short squeezes)
-        """
+        """Find catalyst with realistic volume for 500% moves"""
         
         if base_idx < 50:
             return None
@@ -188,8 +219,7 @@ class PureScanner:
             
             volume_spike = current_vol / vol_50
             
-            # For 500% moves, we need SIGNIFICANT volume
-            # Catalyst should be at least 5x volume
+            # For 500% moves, catalyst should be 5x+ volume
             if volume_spike < 5.0:
                 continue
             
@@ -215,14 +245,6 @@ class PureScanner:
                 catalyst_dt = datetime.fromtimestamp(bars[i]['t']/1000)
                 analysis_start = (catalyst_dt - timedelta(days=90)).strftime('%Y-%m-%d')
                 
-                # Check if this is a climax top (extreme volume)
-                if volume_spike >= 100:
-                    catalyst_type += "_CLIMAX"
-                elif volume_spike >= 50:
-                    catalyst_type += "_EXTREME"
-                elif volume_spike >= 15:
-                    catalyst_type += "_MAJOR"
-                
                 return {
                     'date': catalyst_dt.strftime('%Y-%m-%d'),
                     'price': current_close,
@@ -235,7 +257,8 @@ class PureScanner:
 
 def main():
     print("="*70)
-    print("EXPLOSIVE STOCK SCANNER - 500% MOVES")
+    print("PURE SCANNER v3.0 - FULL DEBUG MODE")
+    print("MINIMUM VOLUME: 5X")
     print("="*70)
     
     if not POLYGON_API_KEY:
@@ -254,62 +277,104 @@ def main():
     print(f"SIZE: {batch_size}")
     print(f"PERIOD: {scan_start} to {scan_end}")
     
+    # Track timing
+    start_time = time.time()
+    
     # Get universe
     universe = scanner.get_universe()
+    
+    fetch_time = time.time() - start_time
+    print(f"\nUniverse fetched in {fetch_time:.1f}s")
+    print(f"API calls so far: {scanner.api_calls}")
     
     # Process batch
     start_idx = batch_number * batch_size
     end_idx = min(start_idx + batch_size, len(universe))
     batch_tickers = universe[start_idx:end_idx] if start_idx < len(universe) else []
     
-    print(f"\nProcessing {len(batch_tickers)} tickers (indices {start_idx}-{end_idx})")
-    if batch_tickers:
-        print(f"First: {batch_tickers[0]}, Last: {batch_tickers[-1]}")
-    else:
+    print(f"\nBatch {batch_number}: indices {start_idx}-{end_idx}")
+    print(f"Tickers in batch: {len(batch_tickers)}")
+    
+    if not batch_tickers:
         print("BATCH EMPTY - beyond universe size")
-    
-    # Scan
-    all_discoveries = []
-    
-    for idx, ticker in enumerate(batch_tickers):
-        if idx % 10 == 0:
-            print(f"Progress: {idx}/{len(batch_tickers)}")
+        results = {
+            'batch_info': {
+                'batch_number': batch_number,
+                'empty': True,
+                'reason': 'beyond_universe_size'
+            }
+        }
+    else:
+        print(f"First: {batch_tickers[0]}, Last: {batch_tickers[-1]}")
         
-        explosions = scanner.scan_ticker(ticker, scan_start, scan_end)
+        # Scan
+        all_discoveries = []
+        scan_start_time = time.time()
         
-        if explosions:
-            all_discoveries.extend(explosions)
-            for exp in explosions:
-                print(f"  💥 {ticker}: {exp['catalyst_date']} ({exp['gain_pct']:.0f}% in {exp.get('days_to_peak', 'N/A')} days, {exp['volume_spike']} volume)")
+        for idx, ticker in enumerate(batch_tickers):
+            if idx % 10 == 0:
+                elapsed = time.time() - scan_start_time
+                rate = idx / elapsed if elapsed > 0 else 0
+                print(f"\nProgress: {idx}/{len(batch_tickers)} ({rate:.1f} tickers/sec)")
+                print(f"  API calls: {scanner.api_calls}")
+            
+            explosions = scanner.scan_ticker(ticker, scan_start, scan_end)
+            
+            if explosions:
+                all_discoveries.extend(explosions)
+                for exp in explosions:
+                    print(f"  💥 {ticker}: {exp['catalyst_date']} ({exp['gain_pct']:.0f}% in {exp.get('days_to_peak', 'N/A')} days, {exp['volume_spike']} volume)")
+        
+        scan_time = time.time() - scan_start_time
+        
+        # Results
+        results = {
+            'batch_info': {
+                'batch_number': batch_number,
+                'batch_size': batch_size,
+                'start_idx': start_idx,
+                'end_idx': end_idx,
+                'universe_size': len(universe),
+                'tickers_scanned': len(batch_tickers)
+            },
+            'performance': {
+                'total_time': time.time() - start_time,
+                'fetch_time': fetch_time,
+                'scan_time': scan_time,
+                'api_calls': scanner.api_calls,
+                'tickers_per_second': len(batch_tickers) / scan_time if scan_time > 0 else 0
+            },
+            'errors': scanner.errors,
+            'error_counts': {
+                'not_found': len(scanner.errors['not_found']),
+                'api_error': len(scanner.errors['api_error']),
+                'insufficient_data': len(scanner.errors['insufficient_data']),
+                'no_results': len(scanner.errors['no_results'])
+            },
+            'scan_parameters': {
+                'start': scan_start,
+                'end': scan_end,
+                'timestamp': datetime.now().isoformat()
+            },
+            'discoveries': all_discoveries,
+            'summary': {
+                'tickers_scanned': len(batch_tickers),
+                'explosions_found': len(all_discoveries)
+            }
+        }
     
     # Save
-    results = {
-        'batch_info': {
-            'batch_number': batch_number,
-            'batch_size': batch_size,
-            'start_idx': start_idx,
-            'end_idx': end_idx,
-            'universe_size': len(universe)
-        },
-        'scan_parameters': {
-            'start': scan_start,
-            'end': scan_end,
-            'timestamp': datetime.now().isoformat()
-        },
-        'discoveries': all_discoveries,
-        'summary': {
-            'tickers_scanned': len(batch_tickers),
-            'explosions_found': len(all_discoveries)
-        }
-    }
-    
     os.makedirs('scan_results/batches', exist_ok=True)
     output_file = f'scan_results/batches/batch_{batch_number}.json'
     with open(output_file, 'w') as f:
         json.dump(results, f, indent=2)
     
+    # Print summary
     print(f"\n{'='*70}")
-    print(f"COMPLETE: Batch {batch_number}")
+    print(f"BATCH {batch_number} COMPLETE")
+    print(f"  Time: {results.get('performance', {}).get('total_time', 0):.1f}s")
+    print(f"  API calls: {scanner.api_calls}")
+    print(f"  Errors: {sum(results.get('error_counts', {}).values())}")
     print(f"  Found: {len(all_discoveries)} explosions")
     print(f"  Saved: {output_file}")
     print("="*70)
