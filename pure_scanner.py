@@ -20,9 +20,9 @@ class PureScanner:
         print("="*50)
         
         url = f"{self.base_url}/v3/reference/tickers"
-        all_tickers = set()  # Use set to avoid duplicates between active/inactive
+        all_tickers = set()
         
-        # FIRST: Get ACTIVE stocks
+        # ACTIVE stocks
         print("\n1. Fetching ACTIVE stocks...")
         params = {
             'apiKey': self.api_key,
@@ -43,7 +43,6 @@ class PureScanner:
                     response = requests.get(url, params=params)
                 
                 if response.status_code != 200:
-                    print(f"Error: {response.status_code}")
                     break
                 
                 data = response.json()
@@ -58,13 +57,13 @@ class PureScanner:
                     break
                     
             except Exception as e:
-                print(f"Error on page {page}: {e}")
+                print(f"Error: {e}")
                 break
         
         active_count = len(all_tickers)
         print(f"\nActive stocks: {active_count}")
         
-        # SECOND: Get INACTIVE/DELISTED stocks
+        # INACTIVE/DELISTED stocks
         print("\n2. Fetching INACTIVE/DELISTED stocks...")
         params['active'] = 'false'
         
@@ -80,7 +79,6 @@ class PureScanner:
                     response = requests.get(url, params=params)
                 
                 if response.status_code != 200:
-                    print(f"Error: {response.status_code}")
                     break
                 
                 data = response.json()
@@ -97,26 +95,24 @@ class PureScanner:
                     break
                     
             except Exception as e:
-                print(f"Error on page {page}: {e}")
+                print(f"Error: {e}")
                 break
         
         print(f"\n{'='*50}")
-        print(f"UNIVERSE COMPLETE:")
-        print(f"  Active: {active_count}")
-        print(f"  Total (Active + Delisted): {len(all_tickers)}")
+        print(f"TOTAL UNIVERSE: {len(all_tickers)} stocks")
         print("="*50)
         
         return list(all_tickers)
     
     def scan_ticker(self, ticker: str, scan_start: str, scan_end: str) -> List[Dict]:
-        """Scan one ticker for 500% moves with catalyst"""
+        """Scan one ticker for 500% moves with catalyst - 120 DAY WINDOWS"""
         
-        # Skip obviously bad tickers
+        # Skip bad tickers
         if len(ticker) > 6 or ticker.startswith('$') or '/' in ticker:
             return []
         
-        # Need buffer for MA calculations
-        buffer_start = (datetime.strptime(scan_start, '%Y-%m-%d') - timedelta(days=300)).strftime('%Y-%m-%d')
+        # Need buffer for MA calculations (350 days for 120-day window + 50MA + 52W high)
+        buffer_start = (datetime.strptime(scan_start, '%Y-%m-%d') - timedelta(days=400)).strftime('%Y-%m-%d')
         
         url = f"{self.base_url}/v2/aggs/ticker/{ticker}/range/1/day/{buffer_start}/{scan_end}"
         params = {
@@ -139,7 +135,8 @@ class PureScanner:
                 
             bars = data.get('results', [])
             
-            if len(bars) < 340:
+            # Need enough history for 120-day window + technical indicators
+            if len(bars) < 400:
                 return []
             
             explosions = []
@@ -152,11 +149,11 @@ class PureScanner:
                     scan_idx = i
                     break
             
-            # Scan all 90-day windows
-            for window_start in range(scan_idx, len(bars) - 90):
-                window = bars[window_start:window_start + 90]
+            # Scan all 120-day windows
+            for window_start in range(scan_idx, len(bars) - 120):
+                window = bars[window_start:window_start + 120]
                 
-                # Find min/max in window
+                # Find min/max in 120-day window
                 lows = [b['l'] for b in window if 'l' in b]
                 highs = [b['h'] for b in window if 'h' in b]
                 
@@ -166,10 +163,10 @@ class PureScanner:
                 base = min(lows)
                 peak = max(highs)
                 
-                # Skip obvious data errors (we'll filter more carefully later)
+                # Skip data errors
                 if base > 10000 or peak > 100000:
                     continue
-                if base < 0.01:  # Skip sub-penny
+                if base < 0.01:
                     continue
                 
                 gain = ((peak - base) / base) * 100
@@ -211,7 +208,7 @@ class PureScanner:
             return []
     
     def find_catalyst(self, bars: List[Dict], base_idx: int, peak_idx: int) -> Optional[Dict]:
-        """Find catalyst with realistic volume for 500% moves"""
+        """Find catalyst with 5x+ volume"""
         
         if base_idx < 50:
             return None
@@ -229,8 +226,7 @@ class PureScanner:
             
             volume_spike = current_vol / vol_50
             
-            # For 500% moves, catalyst should be 5x+ volume
-            # But don't filter out extreme spikes - they're often the best signals
+            # Need 5x+ volume for real catalyst
             if volume_spike < 5.0:
                 continue
             
@@ -254,7 +250,8 @@ class PureScanner:
             
             if catalyst_type:
                 catalyst_dt = datetime.fromtimestamp(bars[i]['t']/1000)
-                analysis_start = (catalyst_dt - timedelta(days=90)).strftime('%Y-%m-%d')
+                # 120-day analysis window before catalyst
+                analysis_start = (catalyst_dt - timedelta(days=120)).strftime('%Y-%m-%d')
                 
                 return {
                     'date': catalyst_dt.strftime('%Y-%m-%d'),
@@ -268,7 +265,7 @@ class PureScanner:
 
 def main():
     print("="*70)
-    print("FULL HISTORICAL SCANNER - ALL STOCKS")
+    print("120-DAY WINDOW SCANNER - FULL UNIVERSE")
     print("="*70)
     
     if not POLYGON_API_KEY:
@@ -278,7 +275,7 @@ def main():
     scanner = PureScanner(POLYGON_API_KEY)
     
     # Get batch parameters
-    batch_size = int(os.environ.get('BATCH_SIZE', '500'))  # Bigger batches
+    batch_size = int(os.environ.get('BATCH_SIZE', '500'))
     batch_number = int(os.environ.get('BATCH_NUMBER', '0'))
     scan_start = os.environ.get('SCAN_START', '2010-01-01')
     scan_end = os.environ.get('SCAN_END', '2024-12-31')
@@ -286,8 +283,9 @@ def main():
     print(f"\nBatch: {batch_number}")
     print(f"Size: {batch_size}")
     print(f"Period: {scan_start} to {scan_end}")
+    print(f"Window: 120 days")
     
-    # Get universe (this will be much bigger now)
+    # Get universe
     universe = scanner.get_universe()
     
     # Process batch
@@ -314,7 +312,7 @@ def main():
         if explosions:
             all_discoveries.extend(explosions)
             for exp in explosions:
-                print(f"  💥 {ticker}: {exp['catalyst_date']} ({exp['gain_pct']:.0f}%, {exp['volume_spike']})")
+                print(f"  💥 {ticker}: {exp['gain_pct']:.0f}% in {exp.get('days_to_peak', 'N/A')} days")
     
     # Save
     results = {
@@ -323,7 +321,8 @@ def main():
             'batch_size': batch_size,
             'start_idx': start_idx,
             'end_idx': end_idx,
-            'universe_size': len(universe)
+            'universe_size': len(universe),
+            'window_days': 120
         },
         'scan_parameters': {
             'start': scan_start,
@@ -343,7 +342,7 @@ def main():
         json.dump(results, f, indent=2)
     
     print(f"\n{'='*70}")
-    print(f"Batch {batch_number} complete: {len(all_discoveries)} explosions")
+    print(f"Batch {batch_number}: {len(all_discoveries)} explosions found")
     print("="*70)
 
 if __name__ == "__main__":
