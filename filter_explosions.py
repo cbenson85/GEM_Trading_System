@@ -34,14 +34,15 @@ class ExplosionFilter:
         
         reject_reason = None
         
+        # Price sanity checks
         if explosion['peak_price'] > 20000:
             reject_reason = f"Peak price ${explosion['peak_price']}"
         elif explosion['base_price'] < 0.01:
             reject_reason = f"Base price ${explosion['base_price']}"
         elif explosion['gain_pct'] > 20000:
             reject_reason = f"Gain {explosion['gain_pct']:.0f}%"
-        elif explosion.get('days_to_peak', 0) < 3:
-            reject_reason = f"Only {explosion.get('days_to_peak', 0)} days to peak"
+        # REMOVED days_to_peak check - we're analyzing pre-catalyst patterns
+        # Timing of peak vs catalyst doesn't matter for our analysis
             
         if reject_reason:
             self.stats['removed_bad_data'] += 1
@@ -55,7 +56,7 @@ class ExplosionFilter:
         return True
     
     def check_pre_catalyst_liquidity(self, ticker: str, catalyst_date: str, explosion: Dict) -> bool:
-        """Filter 2: Check liquidity BEFORE the catalyst"""
+        """Filter 2: Flexible liquidity check - price and volume can compensate for each other"""
         
         catalyst_dt = datetime.strptime(catalyst_date, '%Y-%m-%d')
         end_date = (catalyst_dt - timedelta(days=1)).strftime('%Y-%m-%d')
@@ -78,11 +79,28 @@ class ExplosionFilter:
             avg_volume = sum([b.get('v', 0) for b in bars]) / len(bars)
             avg_price = sum([b.get('c', 0) for b in bars]) / len(bars)
             
-            if avg_volume < 75000 or avg_price < 0.50:
+            # FLEXIBLE LIQUIDITY SCORING
+            # Absolute minimums (very relaxed)
+            if avg_volume < 5000 or avg_price < 0.10:
                 self.stats['removed_low_liquidity'] += 1
                 self.rejected['low_liquidity'].append({
                     'ticker': ticker,
-                    'reason': f"Vol: {avg_volume:.0f}, Price: ${avg_price:.2f}",
+                    'reason': f"Vol: {avg_volume:.0f}, Price: ${avg_price:.2f} (below absolute minimum)",
+                    'data': explosion
+                })
+                return False
+            
+            # Liquidity score: volume * price
+            # $0.50 stock with 50k volume = 25,000 score
+            # $5.00 stock with 5k volume = 25,000 score (same liquidity)
+            liquidity_score = avg_volume * avg_price
+            
+            # Minimum score of 25,000 (much more flexible than fixed thresholds)
+            if liquidity_score < 25000:
+                self.stats['removed_low_liquidity'] += 1
+                self.rejected['low_liquidity'].append({
+                    'ticker': ticker,
+                    'reason': f"Vol: {avg_volume:.0f}, Price: ${avg_price:.2f}, Score: {liquidity_score:.0f}",
                     'data': explosion
                 })
                 return False
