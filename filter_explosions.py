@@ -13,50 +13,50 @@ class ExplosionFilter:
         self.base_url = "https://api.polygon.io"
         self.stats = {
             'total_input': 0,
-            'removed_bad_data': 0,
-            'removed_low_liquidity': 0,
-            'removed_gap_risk': 0,
-            'removed_crash_speed': 0,
-            'removed_pump_dump': 0,
+            'removed_data_errors': 0,
+            'removed_no_liquidity': 0,
+            'tagged_volatile': 0,
+            'tagged_sustained': 0,
             'total_passed': 0
         }
-        # Track rejected stocks
-        self.rejected = {
-            'bad_data': [],
-            'low_liquidity': [],
-            'gap_risk': [],
-            'crash_speed': [],
-            'pump_dump': []
-        }
-    
-    def filter_bad_data(self, explosion: Dict) -> bool:
-        """Filter 1: Remove obvious data errors"""
+        self.removed = []
         
-        reject_reason = None
+    def filter_data_errors(self, explosion: Dict) -> bool:
+        """Only remove OBVIOUS data errors"""
         
-        # Price sanity checks
+        # Remove extreme price errors
         if explosion['peak_price'] > 20000:
-            reject_reason = f"Peak price ${explosion['peak_price']}"
-        elif explosion['base_price'] < 0.01:
-            reject_reason = f"Base price ${explosion['base_price']}"
-        elif explosion['gain_pct'] > 20000:
-            reject_reason = f"Gain {explosion['gain_pct']:.0f}%"
-        # REMOVED days_to_peak check - we're analyzing pre-catalyst patterns
-        # Timing of peak vs catalyst doesn't matter for our analysis
-            
-        if reject_reason:
-            self.stats['removed_bad_data'] += 1
-            self.rejected['bad_data'].append({
+            self.stats['removed_data_errors'] += 1
+            self.removed.append({
                 'ticker': explosion['ticker'],
-                'reason': reject_reason,
+                'reason': f"Peak price ${explosion['peak_price']} (data error)",
+                'data': explosion
+            })
+            return False
+            
+        if explosion['base_price'] < 0.01 or explosion['base_price'] > 10000:
+            self.stats['removed_data_errors'] += 1
+            self.removed.append({
+                'ticker': explosion['ticker'],
+                'reason': f"Base price ${explosion['base_price']} (data error)",
+                'data': explosion
+            })
+            return False
+            
+        # Remove impossible gains
+        if explosion['gain_pct'] > 20000:
+            self.stats['removed_data_errors'] += 1
+            self.removed.append({
+                'ticker': explosion['ticker'],
+                'reason': f"Gain {explosion['gain_pct']:.0f}% (likely split/adjustment error)",
                 'data': explosion
             })
             return False
             
         return True
     
-    def check_pre_catalyst_liquidity(self, ticker: str, catalyst_date: str, explosion: Dict) -> bool:
-        """Filter 2: Flexible liquidity check - price and volume can compensate for each other"""
+    def check_minimum_liquidity(self, ticker: str, catalyst_date: str, explosion: Dict) -> bool:
+        """Very minimal liquidity check - just avoid complete garbage"""
         
         catalyst_dt = datetime.strptime(catalyst_date, '%Y-%m-%d')
         end_date = (catalyst_dt - timedelta(days=1)).strftime('%Y-%m-%d')
@@ -73,34 +73,27 @@ class ExplosionFilter:
             data = response.json()
             bars = data.get('results', [])
             
-            if len(bars) < 30:
+            if len(bars) < 20:  # Need some trading history
                 return False
             
             avg_volume = sum([b.get('v', 0) for b in bars]) / len(bars)
             avg_price = sum([b.get('c', 0) for b in bars]) / len(bars)
             
-            # FLEXIBLE LIQUIDITY SCORING
-            # Absolute minimums (very relaxed)
-            if avg_volume < 5000 or avg_price < 0.10:
-                self.stats['removed_low_liquidity'] += 1
-                self.rejected['low_liquidity'].append({
+            # VERY minimal requirements - just filter out true garbage
+            if avg_volume < 1000:  # Less than 1k shares/day is untradeable
+                self.stats['removed_no_liquidity'] += 1
+                self.removed.append({
                     'ticker': ticker,
-                    'reason': f"Vol: {avg_volume:.0f}, Price: ${avg_price:.2f} (below absolute minimum)",
+                    'reason': f"Volume {avg_volume:.0f} shares/day (untradeable)",
                     'data': explosion
                 })
                 return False
             
-            # Liquidity score: volume * price
-            # $0.50 stock with 50k volume = 25,000 score
-            # $5.00 stock with 5k volume = 25,000 score (same liquidity)
-            liquidity_score = avg_volume * avg_price
-            
-            # Minimum score of 25,000 (much more flexible than fixed thresholds)
-            if liquidity_score < 25000:
-                self.stats['removed_low_liquidity'] += 1
-                self.rejected['low_liquidity'].append({
+            if avg_price < 0.05:  # Sub-nickel stocks are too manipulated
+                self.stats['removed_no_liquidity'] += 1
+                self.removed.append({
                     'ticker': ticker,
-                    'reason': f"Vol: {avg_volume:.0f}, Price: ${avg_price:.2f}, Score: {liquidity_score:.0f}",
+                    'reason': f"Price ${avg_price:.3f} (sub-nickel)",
                     'data': explosion
                 })
                 return False
@@ -110,94 +103,8 @@ class ExplosionFilter:
         except:
             return False
     
-    def check_gap_risk(self, ticker: str, peak_date: str, explosion: Dict) -> bool:
-        """Filter 3: Check for catastrophic gaps after peak"""
-        
-        peak_dt = datetime.strptime(peak_date, '%Y-%m-%d')
-        start_date = peak_date
-        end_date = (peak_dt + timedelta(days=15)).strftime('%Y-%m-%d')
-        
-        url = f"{self.base_url}/v2/aggs/ticker/{ticker}/range/1/day/{start_date}/{end_date}"
-        params = {'apiKey': self.api_key, 'adjusted': 'true'}
-        
-        try:
-            response = requests.get(url, params=params)
-            if response.status_code != 200:
-                return True
-                
-            data = response.json()
-            bars = data.get('results', [])
-            
-            for i in range(1, min(11, len(bars))):
-                if i >= len(bars):
-                    break
-                    
-                yesterday_close = bars[i-1].get('c', 0)
-                today_open = bars[i].get('o', 0)
-                
-                if yesterday_close > 0:
-                    gap = abs((today_open - yesterday_close) / yesterday_close)
-                    
-                    if gap >= 0.25:
-                        self.stats['removed_gap_risk'] += 1
-                        self.rejected['gap_risk'].append({
-                            'ticker': ticker,
-                            'reason': f"{gap*100:.0f}% gap on day {i}",
-                            'data': explosion
-                        })
-                        return False
-                        
-            return True
-            
-        except:
-            return True
-    
-    def check_crash_speed(self, explosion: Dict, ticker: str) -> bool:
-        """Filter 4: Check if drop from 500% to <200% in 5 days"""
-        
-        if explosion['gain_pct'] < 500:
-            return True
-            
-        peak_dt = datetime.strptime(explosion['peak_date'], '%Y-%m-%d')
-        base_price = explosion['base_price']
-        
-        start_date = explosion['peak_date']
-        end_date = (peak_dt + timedelta(days=6)).strftime('%Y-%m-%d')
-        
-        url = f"{self.base_url}/v2/aggs/ticker/{ticker}/range/1/day/{start_date}/{end_date}"
-        params = {'apiKey': self.api_key, 'adjusted': 'true'}
-        
-        try:
-            response = requests.get(url, params=params)
-            if response.status_code != 200:
-                return True
-                
-            data = response.json()
-            bars = data.get('results', [])
-            
-            if len(bars) < 5:
-                return True
-                
-            for day, bar in enumerate(bars[1:6], 1):
-                low = bar.get('l', 0)
-                if low > 0:
-                    gain = ((low - base_price) / base_price) * 100
-                    if gain < 200:
-                        self.stats['removed_crash_speed'] += 1
-                        self.rejected['crash_speed'].append({
-                            'ticker': ticker,
-                            'reason': f"Dropped to {gain:.0f}% gain on day {day}",
-                            'data': explosion
-                        })
-                        return False
-                        
-            return True
-            
-        except:
-            return True
-    
-    def check_pump_dump(self, ticker: str, peak_date: str, peak_price: float, explosion: Dict) -> bool:
-        """Filter 5: Standard pump & dump check"""
+    def tag_exit_quality(self, ticker: str, peak_date: str, peak_price: float, explosion: Dict) -> str:
+        """Tag as volatile vs sustained - don't filter, just categorize"""
         
         peak_dt = datetime.strptime(peak_date, '%Y-%m-%d')
         start_date = peak_date
@@ -209,55 +116,50 @@ class ExplosionFilter:
         try:
             response = requests.get(url, params=params)
             if response.status_code != 200:
-                return True
+                return "unknown"
                 
             data = response.json()
             bars = data.get('results', [])
             
             if len(bars) < 5:
-                return True
+                return "unknown"
                 
+            # Calculate 5-day drop
             five_day_low = min([b.get('l', peak_price) for b in bars[1:6]])
             drop_pct = ((peak_price - five_day_low) / peak_price) * 100
             
-            if drop_pct >= 20:
-                self.stats['removed_pump_dump'] += 1
-                self.rejected['pump_dump'].append({
-                    'ticker': ticker,
-                    'reason': f"{drop_pct:.0f}% drop in 5 days",
-                    'data': explosion
-                })
-                return False
+            # Tag based on exit behavior
+            if drop_pct >= 30:
+                self.stats['tagged_volatile'] += 1
+                return "volatile_exit"
+            else:
+                self.stats['tagged_sustained'] += 1
+                return "sustained_move"
                 
-            return True
-            
         except:
-            return True
+            return "unknown"
     
-    def filter_explosion(self, explosion: Dict) -> bool:
-        """Run all filters on a single explosion"""
+    def process_explosion(self, explosion: Dict) -> Dict:
+        """Process and tag a single explosion"""
         
-        if not self.filter_bad_data(explosion):
-            return False
+        # Add exit quality tag
+        explosion['exit_quality'] = self.tag_exit_quality(
+            explosion['ticker'],
+            explosion['peak_date'],
+            explosion['peak_price'],
+            explosion
+        )
         
-        ticker = explosion['ticker']
+        # Add liquidity score for reference
+        explosion['pre_catalyst_liquidity'] = "unknown"
         
-        if not self.check_pre_catalyst_liquidity(ticker, explosion['catalyst_date'], explosion):
-            return False
+        # Add data quality flag
+        explosion['data_quality'] = "clean"
         
-        if not self.check_gap_risk(ticker, explosion['peak_date'], explosion):
-            return False
-        
-        if not self.check_crash_speed(explosion, ticker):
-            return False
-        
-        if not self.check_pump_dump(ticker, explosion['peak_date'], explosion['peak_price'], explosion):
-            return False
-        
-        return True
+        return explosion
     
     def process_file(self, input_file: str, output_file: str):
-        """Process a complete scan file"""
+        """Process the scan file with minimal filtering"""
         
         print(f"\nProcessing {input_file}...")
         
@@ -267,7 +169,8 @@ class ExplosionFilter:
         explosions = data.get('discoveries', [])
         self.stats['total_input'] = len(explosions)
         
-        print(f"Found {len(explosions)} explosions to filter")
+        print(f"Found {len(explosions)} explosions to process")
+        print("Applying minimal filters and tagging...")
         
         clean_explosions = []
         
@@ -275,14 +178,26 @@ class ExplosionFilter:
             if i % 10 == 0:
                 print(f"Progress: {i}/{len(explosions)}")
             
-            if self.filter_explosion(explosion):
-                clean_explosions.append(explosion)
-                self.stats['total_passed'] += 1
+            # Only filter out extreme garbage
+            if not self.filter_data_errors(explosion):
+                continue
+                
+            ticker = explosion['ticker']
             
+            # Minimal liquidity check
+            if not self.check_minimum_liquidity(ticker, explosion['catalyst_date'], explosion):
+                continue
+            
+            # Process and tag the explosion
+            tagged_explosion = self.process_explosion(explosion)
+            clean_explosions.append(tagged_explosion)
+            self.stats['total_passed'] += 1
+            
+            # Small delay to avoid API rate limits
             if i % 5 == 0:
                 time.sleep(0.1)
         
-        # Save clean data
+        # Save results
         output_data = {
             'filter_date': datetime.now().isoformat(),
             'filter_stats': self.stats,
@@ -293,28 +208,26 @@ class ExplosionFilter:
         with open(output_file, 'w') as f:
             json.dump(output_data, f, indent=2)
         
-        # Save rejected stocks
-        rejected_file = 'REJECTED_EXPLOSIONS.json'
-        with open(rejected_file, 'w') as f:
-            json.dump({
-                'filter_date': datetime.now().isoformat(),
-                'filter_stats': self.stats,
-                'rejected_by_category': self.rejected
-            }, f, indent=2)
+        # Save removed stocks (minimal)
+        if self.removed:
+            with open('REMOVED_ERRORS.json', 'w') as f:
+                json.dump({
+                    'filter_date': datetime.now().isoformat(),
+                    'removed_count': len(self.removed),
+                    'removed': self.removed
+                }, f, indent=2)
         
         # Print summary
         print("\n" + "="*50)
-        print("FILTERING COMPLETE")
+        print("PROCESSING COMPLETE")
         print("="*50)
         print(f"Input explosions: {self.stats['total_input']}")
-        print(f"Removed - Bad data: {self.stats['removed_bad_data']}")
-        print(f"Removed - Low liquidity: {self.stats['removed_low_liquidity']}")
-        print(f"Removed - Gap risk: {self.stats['removed_gap_risk']}")
-        print(f"Removed - Crash speed: {self.stats['removed_crash_speed']}")
-        print(f"Removed - Pump & dump: {self.stats['removed_pump_dump']}")
-        print(f"PASSED ALL FILTERS: {self.stats['total_passed']}")
-        print(f"Pass rate: {(self.stats['total_passed']/self.stats['total_input']*100):.1f}%")
-        print(f"\nRejected stocks saved to: {rejected_file}")
+        print(f"Removed data errors: {self.stats['removed_data_errors']}")
+        print(f"Removed no liquidity: {self.stats['removed_no_liquidity']}")
+        print(f"TOTAL KEPT: {self.stats['total_passed']}")
+        print(f"\nTagged as volatile exit: {self.stats['tagged_volatile']}")
+        print(f"Tagged as sustained move: {self.stats['tagged_sustained']}")
+        print(f"\nPass rate: {(self.stats['total_passed']/self.stats['total_input']*100):.1f}%")
 
 def main():
     filter = ExplosionFilter(POLYGON_API_KEY)
