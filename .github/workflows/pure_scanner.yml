@@ -1,5 +1,4 @@
 name: Pure Scanner
-
 on:
   workflow_dispatch:
     inputs:
@@ -19,7 +18,6 @@ on:
         description: 'Ending batch'
         required: true
         default: '19'
-
 jobs:
   scan:
     runs-on: ubuntu-latest
@@ -40,32 +38,24 @@ jobs:
     - name: Install dependencies
       run: pip install requests
     
-    - name: Set up Python
-  uses: actions/setup-python@v2
-  with:
-    python-version: '3.9'
+    - name: Run scanner
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+        BATCH_NUMBER: ${{ matrix.offset }}
+        BATCH_SIZE: 100
+        SCAN_START: ${{ github.event.inputs.scan_start }}
+        SCAN_END: ${{ github.event.inputs.scan_end }}
+      timeout-minutes: 300
+      run: |
+        # Calculate actual batch number
+        export BATCH_NUMBER=$((${{ github.event.inputs.batch_start }} + ${{ matrix.offset }}))
+        echo "Running batch $BATCH_NUMBER"
+        python pure_scanner.py
     
-- name: Install dependencies
-  run: pip install requests
-    
-- name: Run scanner
-  env:
-    POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
-    BATCH_NUMBER: ${{ matrix.offset }}
-    BATCH_SIZE: 100
-    SCAN_START: ${{ github.event.inputs.scan_start }}
-    SCAN_END: ${{ github.event.inputs.scan_end }}
-  timeout-minutes: 300
-  run: |
-    # Calculate actual batch number
-    export BATCH_NUMBER=$((${{ github.event.inputs.batch_start }} + ${{ matrix.offset }}))
-    echo "Running batch $BATCH_NUMBER"
-    python pure_scanner.py   
-     
-  - name: Commit results
+    - name: Commit results
       run: |
         git config --global user.name 'GitHub Actions'
         git config --global user.email 'actions@github.com'
         git add scan_results/
-        git commit -m "Batch ${{ steps.calc.outputs.batch }}" || echo "No changes"
+        git commit -m "Batch $BATCH_NUMBER" || echo "No changes"
         git push || echo "Push failed"
