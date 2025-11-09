@@ -2,101 +2,98 @@ name: Fix Catalyst Dates
 
 on:
   workflow_dispatch:
-
-permissions:
-  contents: write
+  push:
+    paths:
+      - 'find_real_catalyst_dates.py'
 
 jobs:
   fix-catalyst-dates:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v2
     
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v2
       with:
-        python-version: '3.11'
+        python-version: '3.9'
     
     - name: Install dependencies
       run: |
         pip install requests
+        echo "✓ Dependencies installed"
     
-    - name: Check input file exists
+    - name: Check file exists
       run: |
-        echo "📁 Checking for input file..."
+        echo "Checking for input file..."
         if [ -f "Verified_Backtest_Data/explosive_stocks_CLEAN.json" ]; then
-          echo "✅ Found explosive_stocks_CLEAN.json"
-          echo "File size: $(wc -c < Verified_Backtest_Data/explosive_stocks_CLEAN.json) bytes"
-          echo ""
-          echo "First 500 characters:"
+          echo "✓ Found explosive_stocks_CLEAN.json"
+          echo "File size: $(stat -c%s Verified_Backtest_Data/explosive_stocks_CLEAN.json) bytes"
+          echo "First 500 chars:"
           head -c 500 Verified_Backtest_Data/explosive_stocks_CLEAN.json
         else
-          echo "❌ explosive_stocks_CLEAN.json NOT FOUND!"
-          ls -la Verified_Backtest_Data/
+          echo "✗ File not found!"
+          exit 1
         fi
     
-    - name: Test Polygon API key
+    - name: Test API Key
       env:
         POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
       run: |
-        echo "Testing Polygon API connection..."
-        python -c "
-        import os
-        import requests
-        
-        key = os.environ.get('POLYGON_API_KEY')
-        if not key:
-            print('❌ No API key found!')
-        else:
-            print(f'✅ API key found: {key[:10]}...')
-            
-            # Test API call
-            url = 'https://api.polygon.io/v2/aggs/ticker/AAPL/range/1/day/2024-01-01/2024-01-10'
-            params = {'apiKey': key}
-            
-            try:
-                response = requests.get(url, params=params)
-                if response.status_code == 200:
-                    print('✅ API test successful!')
-                else:
-                    print(f'❌ API error: {response.status_code}')
-                    print(response.text[:500])
-            except Exception as e:
-                print(f'❌ Connection error: {e}')
-        "
+        echo "Testing Polygon API key..."
+        if [ -z "$POLYGON_API_KEY" ]; then
+          echo "✗ POLYGON_API_KEY is not set!"
+          exit 1
+        else
+          echo "✓ API Key is set (length: ${#POLYGON_API_KEY})"
+          # Test API with a simple call
+          response=$(curl -s "https://api.polygon.io/v2/aggs/ticker/AAPL/range/1/day/2024-01-01/2024-01-02?apiKey=$POLYGON_API_KEY")
+          echo "Test API Response: ${response:0:200}..."
+          if [[ $response == *"results"* ]]; then
+            echo "✓ API Key is valid!"
+          else
+            echo "✗ API Key might be invalid"
+          fi
+        fi
     
-    - name: Find and fix catalyst dates
+    - name: Run catalyst date finder
       env:
         POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
       run: |
-        echo "Running catalyst date finder..."
-        python find_real_catalyst_dates.py || echo "Script failed with exit code $?"
-    
-    - name: Check for output
-      run: |
-        echo "📁 Checking for output files..."
-        ls -la Verified_Backtest_Data/*.json
+        echo "Starting catalyst date finder..."
+        echo "This will make REAL API calls and should take 30+ seconds..."
+        start_time=$(date +%s)
         
-        if [ -f "Verified_Backtest_Data/explosive_stocks_CATALYST_FIXED.json" ]; then
-          echo "✅ Output file created!"
-          echo "File size: $(wc -c < Verified_Backtest_Data/explosive_stocks_CATALYST_FIXED.json) bytes"
+        python find_real_catalyst_dates.py
+        
+        end_time=$(date +%s)
+        duration=$((end_time - start_time))
+        echo ""
+        echo "Script completed in $duration seconds"
+        
+        if [ $duration -lt 10 ]; then
+          echo "⚠️ WARNING: Script ran too fast ($duration seconds)"
+          echo "This likely means API calls weren't made properly!"
         else
-          echo "❌ No output file created"
+          echo "✓ Script took $duration seconds - API calls were likely made"
         fi
     
-    - name: Commit if successful
+    - name: Check output
       run: |
+        echo "Checking for output file..."
         if [ -f "Verified_Backtest_Data/explosive_stocks_CATALYST_FIXED.json" ]; then
-          git config --local user.email "action@github.com"
-          git config --local user.name "Catalyst Fix Bot"
-          
-          git add Verified_Backtest_Data/*.json
-          git add find_real_catalyst_dates.py
-          
-          git diff --staged --quiet || git commit -m "🎯 Fixed catalyst dates"
-          git push
+          echo "✓ Output file created"
+          echo "File size: $(stat -c%s Verified_Backtest_Data/explosive_stocks_CATALYST_FIXED.json) bytes"
+          echo "First 1000 chars:"
+          head -c 1000 Verified_Backtest_Data/explosive_stocks_CATALYST_FIXED.json
         else
-          echo "No files to commit"
+          echo "✗ Output file not created!"
         fi
+    
+    - name: Commit results
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+        git add -A
+        git diff --staged --quiet || git commit -m "Fixed catalyst dates with real API data"
+        git push
