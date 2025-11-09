@@ -15,15 +15,74 @@ def load_explosive_stocks():
             return data['stocks']
         return data
 
+def debug_stock_dates(stocks):
+    """Debug function to see what's in the data"""
+    print("\n" + "="*70)
+    print("DEBUGGING FIRST 5 STOCKS:")
+    print("="*70)
+    
+    for i, stock in enumerate(stocks[:5]):
+        ticker = stock.get('ticker', 'NO_TICKER')
+        catalyst = stock.get('catalyst_date', 'NO_DATE')
+        year = stock.get('year_discovered', 'NO_YEAR')
+        
+        print(f"\nStock {i+1}: {ticker}")
+        print(f"  Year Discovered: {year}")
+        print(f"  Catalyst Date: {catalyst}")
+        
+        # Check if date is bad
+        if catalyst != 'NO_DATE':
+            try:
+                catalyst_dt = datetime.fromisoformat(catalyst)
+                now = datetime.now()
+                
+                if catalyst_dt > now:
+                    print(f"  ⚠️ FUTURE DATE! ({catalyst_dt.date()} vs today {now.date()})")
+                elif catalyst_dt.year < 2014:
+                    print(f"  ⚠️ TOO OLD! (Year {catalyst_dt.year})")
+                else:
+                    days_ago = (now - catalyst_dt).days
+                    print(f"  ✓ Valid date ({days_ago} days ago)")
+            except Exception as e:
+                print(f"  ⚠️ INVALID DATE FORMAT! Error: {e}")
+        else:
+            print(f"  ⚠️ MISSING DATE!")
+    
+    # Count total issues
+    future_count = 0
+    missing_count = 0
+    invalid_count = 0
+    old_count = 0
+    
+    for stock in stocks:
+        catalyst = stock.get('catalyst_date', None)
+        if not catalyst:
+            missing_count += 1
+        else:
+            try:
+                catalyst_dt = datetime.fromisoformat(catalyst)
+                if catalyst_dt > datetime.now():
+                    future_count += 1
+                elif catalyst_dt.year < 2014:
+                    old_count += 1
+            except:
+                invalid_count += 1
+    
+    print(f"\n{'='*70}")
+    print(f"TOTAL ISSUES IN ALL {len(stocks)} STOCKS:")
+    print(f"  Future dates: {future_count}")
+    print(f"  Missing dates: {missing_count}")
+    print(f"  Invalid format: {invalid_count}")
+    print(f"  Too old (<2014): {old_count}")
+    print(f"  TOTAL BAD: {future_count + missing_count + invalid_count + old_count}")
+    print("="*70)
+
 def find_real_catalyst(ticker: str, year_discovered: int) -> Dict:
-    """
-    Find the REAL catalyst date by scanning the appropriate year
-    """
+    """Find the REAL catalyst date by scanning the appropriate year"""
     print(f"\n{'='*60}")
     print(f"Processing {ticker} (discovered in {year_discovered})")
     
     # Create search window based on year discovered
-    # Scan from January of that year to December (or current date if same year)
     start_date = f"{year_discovered}-01-01"
     end_date = f"{year_discovered}-12-31"
     
@@ -32,10 +91,9 @@ def find_real_catalyst(ticker: str, year_discovered: int) -> Dict:
     if datetime.fromisoformat(end_date) > today:
         end_date = today.strftime('%Y-%m-%d')
     
-    print(f"Scanning {start_date} to {end_date} for catalyst")
-    print(f"Making Polygon API call...")
+    print(f"Scanning {start_date} to {end_date}")
+    print(f"Making API call...")
     
-    # Get daily bars from Polygon
     url = f"https://api.polygon.io/v2/aggs/ticker/{ticker}/range/1/day/{start_date}/{end_date}"
     params = {
         'apiKey': POLYGON_API_KEY,
@@ -48,43 +106,33 @@ def find_real_catalyst(ticker: str, year_discovered: int) -> Dict:
         start_time = time.time()
         response = requests.get(url, params=params)
         api_time = time.time() - start_time
-        print(f"API call took {api_time:.2f} seconds")
+        print(f"API took {api_time:.2f}s")
         
-        # Rate limiting
-        time.sleep(0.25)
+        time.sleep(0.25)  # Rate limit
         
-        if response.status_code == 404:
-            print(f"TICKER NOT FOUND: {ticker} may be delisted or invalid")
-            return {'error': 'ticker_not_found'}
-            
         if response.status_code != 200:
-            print(f"API ERROR: Status {response.status_code}")
-            return {'error': f'api_error_{response.status_code}'}
-            
+            print(f"API ERROR: {response.status_code}")
+            return {'error': f'api_{response.status_code}'}
+        
         data = response.json()
         
         if 'results' not in data or not data['results']:
-            print(f"NO DATA: No price data found for {ticker} in {year_discovered}")
-            # Try previous year
-            prev_year = year_discovered - 1
-            print(f"Trying {prev_year}...")
-            return find_real_catalyst_previous_year(ticker, prev_year)
+            print(f"NO DATA for {year_discovered}")
+            return {'error': 'no_data'}
         
         bars = data['results']
-        print(f"Received {len(bars)} daily bars")
+        print(f"Got {len(bars)} bars")
         
         if len(bars) < 20:
-            print(f"INSUFFICIENT DATA: Only {len(bars)} bars")
             return {'error': 'insufficient_data'}
         
-        # Find the lowest point in first 30 days (or all bars if less than 30)
+        # Find baseline (lowest in first 30 days)
         baseline_days = min(30, len(bars) // 3)
-        baseline_bars = bars[:baseline_days]
-        baseline = min([b['l'] for b in baseline_bars if 'l' in b])
-        baseline_idx = 0
+        baseline = min([b['l'] for b in bars[:baseline_days] if 'l' in b])
         baseline_date = None
+        baseline_idx = 0
         
-        for idx, b in enumerate(baseline_bars):
+        for idx, b in enumerate(bars[:baseline_days]):
             if b.get('l') == baseline:
                 baseline_idx = idx
                 baseline_date = datetime.fromtimestamp(b['t']/1000).strftime('%Y-%m-%d')
@@ -92,44 +140,32 @@ def find_real_catalyst(ticker: str, year_discovered: int) -> Dict:
         
         print(f"Baseline: ${baseline:.4f} on {baseline_date}")
         
-        # Track all significant jumps
-        jumps_found = []
-        
-        # Scan for 100%+ jumps starting after baseline
+        # Find first 100% jump that leads to 500%
         for i in range(baseline_idx + 1, len(bars)):
             bar = bars[i]
             if 'c' not in bar:
                 continue
             
-            date = datetime.fromtimestamp(bar['t']/1000).strftime('%Y-%m-%d')
             close = bar['c']
-            
-            # Check for 100%+ gain from baseline
             gain_pct = ((close - baseline) / baseline) * 100
             
             if gain_pct >= 100:
-                # Found a 100%+ jump, verify it leads to 500%+
-                print(f"\nTesting potential catalyst on {date}")
-                print(f"  Price: ${close:.4f} ({gain_pct:.1f}% from baseline)")
+                date = datetime.fromtimestamp(bar['t']/1000).strftime('%Y-%m-%d')
+                print(f"Testing {date}: ${close:.4f} ({gain_pct:.1f}%)")
                 
-                # Check maximum gain in remaining bars
-                remaining_bars = bars[i:]
-                if len(remaining_bars) < 5:  # Need at least 5 days to verify
-                    print(f"  Not enough data to verify (only {len(remaining_bars)} days left)")
+                # Verify it reaches 500%
+                remaining = bars[i:]
+                if len(remaining) < 5:
                     continue
                 
-                max_price = max([b['h'] for b in remaining_bars if 'h' in b])
+                max_price = max([b['h'] for b in remaining if 'h' in b])
                 max_gain = ((max_price - baseline) / baseline) * 100
                 
-                print(f"  Maximum reached: ${max_price:.4f} ({max_gain:.1f}% gain)")
-                
                 if max_gain >= 500:
-                    # This is our catalyst!
                     catalyst_dt = datetime.fromisoformat(date)
                     analysis_start = (catalyst_dt - timedelta(days=90)).strftime('%Y-%m-%d')
                     
-                    print(f"  ✓ CONFIRMED CATALYST!")
-                    print(f"  Analysis window: {analysis_start} to {date}")
+                    print(f"✓ CATALYST FOUND! Max: {max_gain:.1f}%")
                     
                     return {
                         'catalyst_date': date,
@@ -140,51 +176,17 @@ def find_real_catalyst(ticker: str, year_discovered: int) -> Dict:
                         'max_gain_pct': max_gain,
                         'verified': True
                     }
-                else:
-                    print(f"  ✗ Only reached {max_gain:.1f}% (need 500%+)")
-                    jumps_found.append({
-                        'date': date,
-                        'gain': gain_pct,
-                        'max_gain': max_gain
-                    })
         
-        print(f"\nNO VALID CATALYST FOUND")
-        if jumps_found:
-            print(f"Found {len(jumps_found)} jumps but none led to 500%+")
-        
-        return {'error': 'no_catalyst_found', 'jumps_tested': len(jumps_found)}
+        print("No valid catalyst found")
+        return {'error': 'no_catalyst'}
         
     except Exception as e:
-        print(f"ERROR: {str(e)}")
+        print(f"ERROR: {e}")
         return {'error': str(e)}
-
-def find_real_catalyst_previous_year(ticker: str, year: int) -> Dict:
-    """Try to find catalyst in previous year if not found in discovered year"""
-    print(f"\nChecking {year} for earlier catalyst...")
-    
-    start_date = f"{year}-01-01"
-    end_date = f"{year}-12-31"
-    
-    url = f"https://api.polygon.io/v2/aggs/ticker/{ticker}/range/1/day/{start_date}/{end_date}"
-    params = {'apiKey': POLYGON_API_KEY, 'adjusted': 'true', 'sort': 'asc', 'limit': 50000}
-    
-    try:
-        response = requests.get(url, params=params)
-        time.sleep(0.25)
-        
-        if response.status_code != 200 or 'results' not in response.json():
-            return {'error': 'no_data_previous_year'}
-            
-        # Use same logic as main function
-        # ... (similar processing logic)
-        return {'error': 'catalyst_in_previous_year_not_implemented'}
-        
-    except Exception as e:
-        return {'error': f'previous_year_error: {str(e)}'}
 
 def main():
     print("="*70)
-    print("CATALYST DATE FINDER - FULL PROCESSING")
+    print("CATALYST DATE FINDER - DEBUG VERSION")
     print("="*70)
     
     if not POLYGON_API_KEY:
@@ -197,22 +199,23 @@ def main():
     stocks = load_explosive_stocks()
     print(f"Loaded {len(stocks)} stocks")
     
-    # Identify stocks needing fixes
+    # DEBUG: Show what's in the data
+    debug_stock_dates(stocks)
+    
+    # Find stocks needing fixes
     stocks_to_fix = []
     for stock in stocks:
+        catalyst = stock.get('catalyst_date', None)
         needs_fix = False
         
-        # Check if catalyst date is missing or invalid
-        if 'catalyst_date' not in stock:
+        if not catalyst:
             needs_fix = True
         else:
             try:
-                catalyst_dt = datetime.fromisoformat(stock['catalyst_date'])
-                # If date is in future, needs fix
+                catalyst_dt = datetime.fromisoformat(catalyst)
                 if catalyst_dt > datetime.now():
                     needs_fix = True
-                # If date is before 2014, probably wrong
-                if catalyst_dt.year < 2014:
+                elif catalyst_dt.year < 2014:
                     needs_fix = True
             except:
                 needs_fix = True
@@ -220,27 +223,29 @@ def main():
         if needs_fix:
             stocks_to_fix.append(stock)
     
-    print(f"Found {len(stocks_to_fix)} stocks needing catalyst fixes")
+    print(f"\nFound {len(stocks_to_fix)} stocks needing fixes")
     
-    # Process in batches to avoid timeout
-    batch_size = 10
-    process_count = min(batch_size, len(stocks_to_fix))
+    if len(stocks_to_fix) == 0:
+        print("\n⚠️ No stocks detected as needing fixes!")
+        print("But let's force-process the first 3 anyway to test:")
+        stocks_to_fix = stocks[:3]
     
-    print(f"\nProcessing first {process_count} stocks...")
+    # Process first few
+    process_count = min(3, len(stocks_to_fix))
+    print(f"\nProcessing {process_count} stocks...")
     
-    fixed_count = 0
-    error_count = 0
+    fixed = 0
+    errors = 0
     
     for idx, stock in enumerate(stocks_to_fix[:process_count]):
-        ticker = stock['ticker']
+        ticker = stock.get('ticker', 'UNKNOWN')
         year = stock.get('year_discovered', 2024)
         
-        print(f"\n[{idx+1}/{process_count}] Processing {ticker}")
+        print(f"\n[{idx+1}/{process_count}] {ticker}")
         
         result = find_real_catalyst(ticker, year)
         
-        if result and 'catalyst_date' in result:
-            # Update stock with new data
+        if 'catalyst_date' in result:
             stock['catalyst_date'] = result['catalyst_date']
             stock['analysis_start_date'] = result['analysis_start_date']
             stock['catalyst_price'] = result['catalyst_price']
@@ -249,42 +254,32 @@ def main():
             stock['max_gain_verified_pct'] = result['max_gain_pct']
             stock['catalyst_verified'] = True
             stock['catalyst_fixed_date'] = datetime.now().isoformat()
-            fixed_count += 1
-            print(f"✓ Fixed {ticker}: catalyst on {result['catalyst_date']}")
+            fixed += 1
+            print(f"✓ Fixed: {result['catalyst_date']}")
         else:
-            # Mark as error
-            stock['catalyst_error'] = result.get('error', 'unknown_error')
+            stock['catalyst_error'] = result.get('error', 'unknown')
             stock['catalyst_verified'] = False
-            error_count += 1
-            print(f"✗ Could not fix {ticker}: {result.get('error', 'unknown')}")
+            errors += 1
+            print(f"✗ Error: {result.get('error')}")
     
     print(f"\n{'='*70}")
-    print(f"PROCESSING COMPLETE")
-    print(f"  Fixed: {fixed_count}/{process_count} stocks")
-    print(f"  Errors: {error_count}/{process_count} stocks")
-    print(f"  Remaining: {len(stocks_to_fix) - process_count} stocks need processing")
+    print(f"COMPLETE: Fixed {fixed}, Errors {errors}")
     
-    # Save results
+    # Save
     output_data = {
         'stocks': stocks,
         'metadata': {
-            'last_updated': datetime.now().isoformat(),
-            'total_stocks': len(stocks),
-            'stocks_needing_fix': len(stocks_to_fix),
-            'stocks_processed': process_count,
-            'stocks_fixed': fixed_count,
-            'stocks_errored': error_count,
-            'batch_size': batch_size
+            'updated': datetime.now().isoformat(),
+            'total': len(stocks),
+            'fixed': fixed,
+            'errors': errors
         }
     }
     
-    output_file = 'Verified_Backtest_Data/explosive_stocks_CATALYST_FIXED.json'
-    os.makedirs('Verified_Backtest_Data', exist_ok=True)
-    
-    with open(output_file, 'w') as f:
+    with open('Verified_Backtest_Data/explosive_stocks_CATALYST_FIXED.json', 'w') as f:
         json.dump(output_data, f, indent=2)
     
-    print(f"\nSaved to: {output_file}")
+    print(f"Saved to explosive_stocks_CATALYST_FIXED.json")
     print("="*70)
 
 if __name__ == "__main__":
