@@ -11,13 +11,15 @@ on:
 jobs:
   analyze:
     runs-on: ubuntu-latest
-    timeout-minutes: 360  # 6 hours max
+    timeout-minutes: 360
     
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.9'
     
@@ -29,18 +31,23 @@ jobs:
       env:
         POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
       run: |
-        echo "Analyzing fingerprints from ${{ github.event.inputs.input_file }}..."
+        echo "Running fingerprint analysis..."
         python fingerprint_analyzer.py
+        
+        echo "Files created:"
+        ls -la *.json
     
-    - name: Commit results
+    - name: Commit and push results
       run: |
         git config --global user.name 'GitHub Actions'
         git config --global user.email 'actions@github.com'
         
-        # Check which files exist before trying to commit
-        if [ -f "FINGERPRINTS.json" ]; then
-          git add FINGERPRINTS.json
-          echo "Added FINGERPRINTS.json"
+        git pull origin main --rebase --autostash
+        
+        # The script saves as FINGERPRINTS_COMPLETE.json
+        if [ -f "FINGERPRINTS_COMPLETE.json" ]; then
+          git add FINGERPRINTS_COMPLETE.json
+          echo "Added FINGERPRINTS_COMPLETE.json"
         fi
         
         if [ -f "fingerprints_progress.json" ]; then
@@ -48,10 +55,9 @@ jobs:
           echo "Added fingerprints_progress.json"
         fi
         
-        # Only commit if there are changes
-        if git diff --staged --quiet; then
-          echo "No files to commit"
+        if git diff --cached --quiet; then
+          echo "No changes detected - files may already be committed"
         else
-          git commit -m "Fingerprint analysis - $(date)"
-          git push
+          git commit -m "Fingerprint analysis complete - $(date)"
+          git push origin main
         fi
