@@ -54,7 +54,7 @@ jobs:
         SCAN_START: ${{ github.event.inputs.scan_start }}
         SCAN_END: ${{ github.event.inputs.scan_end }}
       timeout-minutes: 300
-      run: python purescanner.py
+      run: python pure_scanner.py
     
     - name: Commit results
       run: |
