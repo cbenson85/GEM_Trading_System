@@ -75,8 +75,8 @@ class PreCatalystFingerprint:
             'ticker': ticker,
             'catalyst_date': catalyst_date,
             'explosion_metrics': {
-                'gain_pct': explosion['gain_pct'],
-                'volume_spike': explosion['volume_spike'],
+                'gain_pct': float(explosion['gain_pct']),  # Ensure float
+                'volume_spike': str(explosion['volume_spike']),  # Keep as string
                 'exit_quality': explosion.get('exit_quality', 'unknown')
             },
             
@@ -112,12 +112,16 @@ class PreCatalystFingerprint:
             market_cap = data.get('market_cap', 0)
             shares = data.get('share_class_shares_outstanding', 0)
             
+            # Convert to Python types
+            market_cap = float(market_cap) if market_cap else 0
+            shares = float(shares) if shares else 0
+            
             return {
                 'market_cap': market_cap,
                 'shares_outstanding': shares,
-                'industry': data.get('sic_description', 'Unknown'),
-                'is_low_float': shares < 50_000_000 if shares else False,
-                'is_micro_cap': market_cap < 300_000_000 if market_cap else False,
+                'industry': str(data.get('sic_description', 'Unknown')),
+                'is_low_float': bool(shares < 50_000_000) if shares else False,
+                'is_micro_cap': bool(market_cap < 300_000_000) if market_cap else False,
                 'float_category': self.categorize_float(shares)
             }
             
@@ -163,21 +167,21 @@ class PreCatalystFingerprint:
         bb_widths = []
         for i in range(20, len(closes)):
             window = closes[i-20:i]
-            mean = np.mean(window)
-            std = np.std(window)
+            mean = float(np.mean(window))
+            std = float(np.std(window))
             bb_width = (2 * std) / mean if mean > 0 else 0
             bb_widths.append(bb_width)
         
         # Check if narrowing
         if len(bb_widths) >= 20:
-            recent_avg = np.mean(bb_widths[-10:])
-            older_avg = np.mean(bb_widths[-30:-20])
-            squeeze_ratio = recent_avg / older_avg if older_avg > 0 else 1
+            recent_avg = float(np.mean(bb_widths[-10:]))
+            older_avg = float(np.mean(bb_widths[-30:-20]))
+            squeeze_ratio = recent_avg / older_avg if older_avg > 0 else 1.0
             
             return {
-                'is_squeezing': squeeze_ratio < 0.7,
-                'squeeze_ratio': squeeze_ratio,
-                'current_bb_width': bb_widths[-1] if bb_widths else 0
+                'is_squeezing': bool(squeeze_ratio < 0.7),
+                'squeeze_ratio': float(squeeze_ratio),
+                'current_bb_width': float(bb_widths[-1]) if bb_widths else 0.0
             }
         
         return {'is_squeezing': False, 'squeeze_ratio': 1.0}
@@ -186,17 +190,17 @@ class PreCatalystFingerprint:
         """Calculate Bollinger Band squeeze metrics"""
         
         if len(closes) < 20:
-            return {'is_squeezing': False}
+            return {'is_squeezing': False, 'bb_width': 0.0}
         
         # Calculate 20-day MA and standard deviation
-        ma20 = np.mean(closes[-20:])
-        std20 = np.std(closes[-20:])
+        ma20 = float(np.mean(closes[-20:]))
+        std20 = float(np.std(closes[-20:]))
         
-        bb_width = (2 * std20) / ma20 if ma20 > 0 else 0
+        bb_width = (2 * std20) / ma20 if ma20 > 0 else 0.0
         
         return {
-            'is_squeezing': bb_width < 0.05,  # Very tight bands
-            'bb_width': bb_width
+            'is_squeezing': bool(bb_width < 0.05),
+            'bb_width': float(bb_width)
         }
     
     def analyze_volume_trend(self, bars: List[Dict]) -> Dict:
@@ -205,14 +209,14 @@ class PreCatalystFingerprint:
         volumes = [b['v'] for b in bars[-60:]]  # Last 60 days
         
         if len(volumes) >= 40:
-            recent_avg = np.mean(volumes[-20:])
-            older_avg = np.mean(volumes[-60:-20])
-            volume_ratio = recent_avg / older_avg if older_avg > 0 else 1
+            recent_avg = float(np.mean(volumes[-20:]))
+            older_avg = float(np.mean(volumes[-60:-20]))
+            volume_ratio = recent_avg / older_avg if older_avg > 0 else 1.0
             
             return {
-                'is_drying': volume_ratio < 0.7,
-                'volume_ratio': volume_ratio,
-                'avg_daily_volume': np.mean(volumes)
+                'is_drying': bool(volume_ratio < 0.7),
+                'volume_ratio': float(volume_ratio),
+                'avg_daily_volume': float(np.mean(volumes))
             }
         
         return {'is_drying': False, 'volume_ratio': 1.0}
@@ -222,18 +226,22 @@ class PreCatalystFingerprint:
         
         recent_bars = bars[-30:]  # Last 30 days
         if len(recent_bars) < 20:
-            return {'is_consolidating': False}
+            return {'is_consolidating': False, 'consolidation_range': 0.0, 'consolidation_score': 0.0}
         
         highs = [b['h'] for b in recent_bars]
         lows = [b['l'] for b in recent_bars]
         
         # Calculate range
-        price_range = (max(highs) - min(lows)) / np.mean(lows) if lows else 0
+        mean_low = float(np.mean(lows))
+        if mean_low > 0:
+            price_range = (max(highs) - min(lows)) / mean_low
+        else:
+            price_range = 0.0
         
         return {
-            'is_consolidating': price_range < 0.3,  # Less than 30% range
-            'consolidation_range': price_range,
-            'consolidation_score': 1 - price_range if price_range < 1 else 0
+            'is_consolidating': bool(price_range < 0.3),
+            'consolidation_range': float(price_range),
+            'consolidation_score': float(1 - price_range) if price_range < 1 else 0.0
         }
     
     def analyze_price_action(self, ticker: str, catalyst_dt: datetime) -> Dict:
@@ -261,9 +269,10 @@ class PreCatalystFingerprint:
                 self.api_calls += 1
                 bars = response.json().get('results', [])
                 
-                if bars:
-                    price_action[f'return_{period_name}'] = (bars[-1]['c'] - bars[0]['c']) / bars[0]['c']
-                    price_action[f'max_drawdown_{period_name}'] = self.calculate_max_drawdown(bars)
+                if bars and len(bars) >= 2:
+                    return_val = (bars[-1]['c'] - bars[0]['c']) / bars[0]['c'] if bars[0]['c'] > 0 else 0
+                    price_action[f'return_{period_name}'] = float(return_val)
+                    price_action[f'max_drawdown_{period_name}'] = float(self.calculate_max_drawdown(bars))
             except:
                 pass
         
@@ -283,16 +292,19 @@ class PreCatalystFingerprint:
             if len(bars) < 20:
                 return {}
             
-            volumes = [b['v'] for b in bars]
+            volumes = [float(b['v']) for b in bars]
+            mean_vol = float(np.mean(volumes))
+            
+            dollar_vols = [float(bars[i]['v'] * bars[i]['c']) for i in range(len(bars))]
             
             return {
-                'avg_volume': np.mean(volumes),
-                'median_volume': np.median(volumes),
-                'volume_volatility': np.std(volumes) / np.mean(volumes) if np.mean(volumes) > 0 else 0,
-                'unusual_volume_days': sum(1 for v in volumes if v > np.mean(volumes) * 2),
-                'dry_volume_days': sum(1 for v in volumes if v < np.mean(volumes) * 0.5),
-                'volume_trend_slope': self.calculate_trend_slope(volumes),
-                'dollar_volume_avg': np.mean([bars[i]['v'] * bars[i]['c'] for i in range(len(bars))])
+                'avg_volume': float(np.mean(volumes)),
+                'median_volume': float(np.median(volumes)),
+                'volume_volatility': float(np.std(volumes) / mean_vol) if mean_vol > 0 else 0.0,
+                'unusual_volume_days': int(sum(1 for v in volumes if v > mean_vol * 2)),
+                'dry_volume_days': int(sum(1 for v in volumes if v < mean_vol * 0.5)),
+                'volume_trend_slope': float(self.calculate_trend_slope(volumes)),
+                'dollar_volume_avg': float(np.mean(dollar_vols))
             }
         except:
             return {}
@@ -320,7 +332,7 @@ class PreCatalystFingerprint:
             
             # Simple keyword classification
             for article in articles:
-                title = article.get('title', '').lower()
+                title = str(article.get('title', '')).lower()
                 
                 if 'earnings' in title or 'revenue' in title:
                     return {'catalyst_type': 'earnings'}
@@ -381,34 +393,53 @@ class PreCatalystFingerprint:
     def calculate_max_drawdown(self, bars: List[Dict]) -> float:
         """Calculate maximum drawdown"""
         if not bars:
-            return 0
+            return 0.0
         
-        peak = bars[0]['h']
-        max_dd = 0
+        peak = float(bars[0]['h'])
+        max_dd = 0.0
         
         for bar in bars:
-            peak = max(peak, bar['h'])
-            drawdown = (peak - bar['l']) / peak if peak > 0 else 0
+            peak = max(peak, float(bar['h']))
+            drawdown = (peak - float(bar['l'])) / peak if peak > 0 else 0.0
             max_dd = max(max_dd, drawdown)
         
-        return max_dd
+        return float(max_dd)
     
     def calculate_trend_slope(self, values: List[float]) -> float:
         """Calculate trend slope using linear regression"""
         if len(values) < 2:
-            return 0
+            return 0.0
         
         x = np.arange(len(values))
         try:
             slope = np.polyfit(x, values, 1)[0]
-            return slope
+            return float(slope)
         except:
-            return 0
+            return 0.0
     
     def save_progress(self, data: List, filename: str):
         """Save intermediate progress"""
+        # Convert any remaining numpy types before saving
+        clean_data = self.clean_for_json(data)
         with open(filename, 'w') as f:
-            json.dump(data, f, indent=2)
+            json.dump(clean_data, f, indent=2)
+    
+    def clean_for_json(self, obj):
+        """Recursively convert numpy types to Python types"""
+        if isinstance(obj, np.bool_):
+            return bool(obj)
+        elif isinstance(obj, np.integer):
+            return int(obj)
+        elif isinstance(obj, np.floating):
+            return float(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        elif isinstance(obj, dict):
+            return {k: self.clean_for_json(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [self.clean_for_json(item) for item in obj]
+        else:
+            return obj
     
     def save_final_analysis(self, fingerprints: List, output_file: str):
         """Save final analysis with summary statistics"""
@@ -427,9 +458,9 @@ class PreCatalystFingerprint:
         
         # Add percentage calculations
         if summary['total_analyzed'] > 0:
-            summary['low_float_pct'] = (summary['low_float_count'] / summary['total_analyzed']) * 100
-            summary['squeeze_pct'] = (summary['volatility_squeeze_count'] / summary['total_analyzed']) * 100
-            summary['volume_drying_pct'] = (summary['volume_drying_count'] / summary['total_analyzed']) * 100
+            summary['low_float_pct'] = float(summary['low_float_count'] / summary['total_analyzed']) * 100
+            summary['squeeze_pct'] = float(summary['volatility_squeeze_count'] / summary['total_analyzed']) * 100
+            summary['volume_drying_pct'] = float(summary['volume_drying_count'] / summary['total_analyzed']) * 100
         
         output = {
             'analysis_date': datetime.now().isoformat(),
@@ -437,8 +468,11 @@ class PreCatalystFingerprint:
             'fingerprints': fingerprints
         }
         
+        # Clean any numpy types before saving
+        clean_output = self.clean_for_json(output)
+        
         with open(output_file, 'w') as f:
-            json.dump(output, f, indent=2)
+            json.dump(clean_output, f, indent=2)
         
         print("\n" + "="*60)
         print("ANALYSIS COMPLETE")
