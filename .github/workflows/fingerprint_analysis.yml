@@ -38,14 +38,19 @@ jobs:
         git config --global user.name 'GitHub Actions'
         git config --global user.email 'actions@github.com'
         
-        git pull origin main --rebase
-        
-        # Add FINGERPRINTS.json (not FINGERPRINTS_COMPLETE.json)
-        git add FINGERPRINTS.json fingerprints_progress.json || true
+        # First add and commit our new files
+        git add -A
+        git status
         
         if git diff --cached --quiet; then
           echo "No changes to commit"
-        else
-          git commit -m "Fingerprint analysis complete - $(date)"
-          git push origin main
+          exit 0
         fi
+        
+        git commit -m "Fingerprint analysis complete - $(date)"
+        
+        # Now pull and rebase
+        git pull origin main --rebase
+        
+        # Push the changes
+        git push origin main
