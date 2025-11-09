@@ -1,15 +1,15 @@
 {
-  "filter_date": "2025-11-09T06:00:53.021905",
+  "filter_date": "2025-11-09T06:09:11.725025",
   "filter_stats": {
     "total_input": 169,
-    "removed_bad_data": 29,
-    "removed_low_liquidity": 62,
-    "removed_gap_risk": 8,
-    "removed_crash_speed": 2,
-    "removed_pump_dump": 26,
-    "total_passed": 11
+    "removed_bad_data": 6,
+    "removed_low_liquidity": 28,
+    "removed_gap_risk": 17,
+    "removed_crash_speed": 10,
+    "removed_pump_dump": 42,
+    "total_passed": 27
   },
-  "total_explosions": 11,
+  "total_explosions": 27,
   "discoveries": [
     {
       "ticker": "XOG",
@@ -68,6 +68,20 @@
       "days_to_peak": 33
     },
     {
+      "ticker": "URRE",
+      "base_price": 0.3,
+      "base_date": "2012-12-13",
+      "peak_price": 3.99,
+      "peak_date": "2013-01-23",
+      "gain_pct": 1230.0000000000002,
+      "catalyst_date": "2012-12-17",
+      "catalyst_price": 0.41,
+      "catalyst_type": "50MA_BREAKOUT",
+      "volume_spike": "5.7x",
+      "analysis_start": "2012-09-18",
+      "days_to_peak": 26
+    },
+    {
       "ticker": "AEHR",
       "base_price": 2.08,
       "base_date": "2021-05-25",
@@ -80,6 +94,60 @@
       "volume_spike": "67.9x",
       "analysis_start": "2021-03-21",
       "days_to_peak": 115
+    },
+    {
+      "ticker": "DEFTF",
+      "base_price": 0.05,
+      "base_date": "2023-08-22",
+      "peak_price": 0.5895,
+      "peak_date": "2023-12-19",
+      "gain_pct": 1079.0,
+      "catalyst_date": "2023-12-19",
+      "catalyst_price": 0.57,
+      "catalyst_type": "52W_HIGH",
+      "volume_spike": "5.8x",
+      "analysis_start": "2023-08-21",
+      "days_to_peak": 83
+    },
+    {
+      "ticker": "MEMS",
+      "base_price": 2.64,
+      "base_date": "2013-04-01",
+      "peak_price": 25.3573,
+      "peak_date": "2024-01-11",
+      "gain_pct": 860.5037878787878,
+      "catalyst_date": "2013-04-23",
+      "catalyst_price": 4.07,
+      "catalyst_type": "50MA_BREAKOUT",
+      "volume_spike": "20.2x",
+      "analysis_start": "2012-12-24",
+      "days_to_peak": 119
+    },
+    {
+      "ticker": "ACRS",
+      "base_price": 2.08,
+      "base_date": "2020-09-11",
+      "peak_price": 19.95,
+      "peak_date": "2021-01-19",
+      "gain_pct": 859.1346153846151,
+      "catalyst_date": "2020-10-05",
+      "catalyst_price": 3.35,
+      "catalyst_type": "52W_HIGH",
+      "volume_spike": "2.1x",
+      "analysis_start": "2020-07-07"
+    },
+    {
+      "ticker": "ACRS",
+      "base_price": 3.02,
+      "base_date": "2020-10-06",
+      "peak_price": 25.48,
+      "peak_date": "2021-02-12",
+      "gain_pct": 743.7086092715232,
+      "catalyst_date": "2020-10-08",
+      "catalyst_price": 4.15,
+      "catalyst_type": "52W_HIGH",
+      "volume_spike": "3.0x",
+      "analysis_start": "2020-07-10"
     },
     {
       "ticker": "IDAI",
@@ -96,6 +164,47 @@
       "days_to_peak": 26
     },
     {
+      "ticker": "ACRS",
+      "base_price": 3.04,
+      "base_date": "2020-11-19",
+      "peak_price": 25.48,
+      "peak_date": "2021-02-12",
+      "gain_pct": 738.1578947368421,
+      "catalyst_date": "2020-12-22",
+      "catalyst_price": 7.01,
+      "catalyst_type": "52W_HIGH",
+      "volume_spike": "3.1x",
+      "analysis_start": "2020-09-23"
+    },
+    {
+      "ticker": "ARTL",
+      "base_price": 40.59,
+      "base_date": "2020-11-02",
+      "peak_price": 330.3,
+      "peak_date": "2021-02-12",
+      "gain_pct": 713.7472283813747,
+      "catalyst_date": "2021-02-12",
+      "catalyst_price": 239.4,
+      "catalyst_type": "52W_HIGH",
+      "volume_spike": "47.9x",
+      "analysis_start": "2020-10-15",
+      "days_to_peak": 70
+    },
+    {
+      "ticker": "MFH",
+      "base_price": 1.03,
+      "base_date": "2024-10-31",
+      "peak_price": 8.07,
+      "peak_date": "2024-11-25",
+      "gain_pct": 683.4951456310679,
+      "catalyst_date": "2024-11-11",
+      "catalyst_price": 2.34,
+      "catalyst_type": "50MA_BREAKOUT",
+      "volume_spike": "668.6x",
+      "analysis_start": "2024-07-14",
+      "days_to_peak": 17
+    },
+    {
       "ticker": "DAVE",
       "base_price": 4.72,
       "base_date": "2023-10-26",
@@ -108,6 +217,48 @@
       "volume_spike": "10.6x",
       "analysis_start": "2023-11-06",
       "days_to_peak": 88
+    },
+    {
+      "ticker": "SIDU",
+      "base_price": 126.01,
+      "base_date": "2022-06-14",
+      "peak_price": 922,
+      "peak_date": "2022-06-16",
+      "gain_pct": 631.6879612729149,
+      "catalyst_date": "2022-06-15",
+      "catalyst_price": 468,
+      "catalyst_type": "50MA_BREAKOUT",
+      "volume_spike": "47.4x",
+      "analysis_start": "2022-02-15",
+      "days_to_peak": 2
+    },
+    {
+      "ticker": "CCCR",
+      "base_price": 0.251,
+      "base_date": "2016-02-23",
+      "peak_price": 1.75,
+      "peak_date": "2016-06-28",
+      "gain_pct": 597.2111553784861,
+      "catalyst_date": "2016-06-28",
+      "catalyst_price": 1.75,
+      "catalyst_type": "52W_HIGH",
+      "volume_spike": "6.9x",
+      "analysis_start": "2016-03-30",
+      "days_to_peak": 88
+    },
+    {
+      "ticker": "GMBLW",
+      "base_price": 1.8501,
+      "base_date": "2020-09-24",
+      "peak_price": 12.66,
+      "peak_date": "2021-02-09",
+      "gain_pct": 584.2873358196855,
+      "catalyst_date": "2020-10-16",
+      "catalyst_price": 3.1,
+      "catalyst_type": "50MA_BREAKOUT",
+      "volume_spike": "9.3x",
+      "analysis_start": "2020-06-18",
+      "days_to_peak": 93
     },
     {
       "ticker": "QSI",
@@ -138,6 +289,33 @@
       "days_to_peak": 84
     },
     {
+      "ticker": "DEFTF",
+      "base_price": 0.27688,
+      "base_date": "2024-01-17",
+      "peak_price": 1.77,
+      "peak_date": "2024-06-11",
+      "gain_pct": 539.2661080612539,
+      "catalyst_date": "2024-04-04",
+      "catalyst_price": 0.6249,
+      "catalyst_type": "52W_HIGH",
+      "volume_spike": "11.5x",
+      "analysis_start": "2023-12-06",
+      "days_to_peak": 101
+    },
+    {
+      "ticker": "AAOI",
+      "base_price": 1.6,
+      "base_date": "2023-05-05",
+      "peak_price": 10,
+      "peak_date": "2023-07-11",
+      "gain_pct": 525.0,
+      "catalyst_date": "2023-05-30",
+      "catalyst_price": 2.3,
+      "catalyst_type": "50MA_BREAKOUT",
+      "volume_spike": "4.2x",
+      "analysis_start": "2023-03-01"
+    },
+    {
       "ticker": "URRE",
       "base_price": 0.375,
       "base_date": "2010-07-02",
@@ -152,6 +330,20 @@
       "days_to_peak": 89
     },
     {
+      "ticker": "MBRX",
+      "base_price": 29.07,
+      "base_date": "2020-03-16",
+      "peak_price": 177.3,
+      "peak_date": "2020-04-08",
+      "gain_pct": 509.90712074303406,
+      "catalyst_date": "2020-04-08",
+      "catalyst_price": 114.3,
+      "catalyst_type": "50MA_BREAKOUT",
+      "volume_spike": "96.1x",
+      "analysis_start": "2019-12-10",
+      "days_to_peak": 17
+    },
+    {
       "ticker": "KOPN",
       "base_price": 1.17,
       "base_date": "2020-10-30",
@@ -164,6 +356,34 @@
       "volume_spike": "13.6x",
       "analysis_start": "2020-08-23",
       "days_to_peak": 63
+    },
+    {
+      "ticker": "VAPO",
+      "base_price": 3.68,
+      "base_date": "2022-11-21",
+      "peak_price": 22.24,
+      "peak_date": "2022-12-21",
+      "gain_pct": 504.34782608695645,
+      "catalyst_date": "2022-12-01",
+      "catalyst_price": 10.8,
+      "catalyst_type": "50MA_BREAKOUT",
+      "volume_spike": "31.3x",
+      "analysis_start": "2022-08-03",
+      "days_to_peak": 21
+    },
+    {
+      "ticker": "NEON",
+      "base_price": 1.23,
+      "base_date": "2024-03-14",
+      "peak_price": 7.38,
+      "peak_date": "2024-08-30",
+      "gain_pct": 500.0,
+      "catalyst_date": "2024-04-18",
+      "catalyst_price": 1.63,
+      "catalyst_type": "50MA_BREAKOUT",
+      "volume_spike": "6.0x",
+      "analysis_start": "2023-12-20",
+      "days_to_peak": 117
     }
   ]
 }
