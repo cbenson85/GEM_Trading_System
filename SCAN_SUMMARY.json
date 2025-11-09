@@ -1,0 +1,73 @@
+{
+  "total_unique_explosions": 202,
+  "unique_tickers": 170,
+  "gain_distribution": {
+    "500-1000%": 117,
+    "1000-2000%": 47,
+    "2000-5000%": 22,
+    "5000-10000%": 9,
+    "10000%+": 7
+  },
+  "top_10_explosions": [
+    {
+      "ticker": "EWX",
+      "gain": "34700%",
+      "catalyst_date": "2010-04-28",
+      "volume_spike": "10.5x"
+    },
+    {
+      "ticker": "CORZW",
+      "gain": "30233%",
+      "catalyst_date": "2022-10-27",
+      "volume_spike": "53.2x"
+    },
+    {
+      "ticker": "AONE",
+      "gain": "27340%",
+      "catalyst_date": "2021-02-24",
+      "volume_spike": "51.0x"
+    },
+    {
+      "ticker": "XOG",
+      "gain": "17505%",
+      "catalyst_date": "2020-06-05",
+      "volume_spike": "9.0x"
+    },
+    {
+      "ticker": "BFLY",
+      "gain": "14497%",
+      "catalyst_date": "2021-02-16",
+      "volume_spike": "142.2x"
+    },
+    {
+      "ticker": "SMLR",
+      "gain": "11414%",
+      "catalyst_date": "2016-07-11",
+      "volume_spike": "44.9x"
+    },
+    {
+      "ticker": "IMRNW",
+      "gain": "10101%",
+      "catalyst_date": "2020-06-09",
+      "volume_spike": "261.4x"
+    },
+    {
+      "ticker": "PHUNW",
+      "gain": "9806%",
+      "catalyst_date": "2021-10-22",
+      "volume_spike": "639.0x"
+    },
+    {
+      "ticker": "TLX",
+      "gain": "8986%",
+      "catalyst_date": "2010-10-12",
+      "volume_spike": "9.7x"
+    },
+    {
+      "ticker": "TKAT",
+      "gain": "8134%",
+      "catalyst_date": "2020-12-01",
+      "volume_spike": "56.0x"
+    }
+  ]
+}
