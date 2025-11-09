@@ -38,8 +38,3 @@ jobs:
         git add CLEAN_EXPLOSIONS.json REJECTED_EXPLOSIONS.json
         git commit -m "Filtered results - clean and rejected"
         git push
-```
-
-The key change is in the commit step:
-```
-git add CLEAN_EXPLOSIONS.json REJECTED_EXPLOSIONS.json
