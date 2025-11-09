@@ -22,17 +22,17 @@
         "is_sustainable": true,
         "total_days_checked": 36
       },
-      "catalyst_error": "no_catalyst",
+      "catalyst_error": "insufficient_gain_39pct",
       "catalyst_verified": false
     },
     {
       "ticker": "DBD",
       "year_discovered": 2023,
-      "catalyst_date": "2023-02-15",
+      "catalyst_date": "2023-08-14",
       "entry_price": 0.25,
-      "peak_price": 25.38,
+      "peak_price": 66.2812,
       "gain_percent": 10052.0,
-      "days_to_peak": 1,
+      "days_to_peak": 561,
       "entry_date": "2023-05-26",
       "sector": "Unknown",
       "verified": true,
@@ -47,18 +47,19 @@
         "is_sustainable": true,
         "total_days_checked": 73
       },
-      "analysis_start_date": "2022-11-17",
-      "catalyst_price": 3.15,
-      "baseline_price": 1.425,
-      "baseline_date": "2023-01-05",
-      "max_gain_verified_pct": 1957.5438596491229,
+      "analysis_start_date": "2023-05-16",
+      "catalyst_price": 20.57,
+      "baseline_price": 0.2401,
+      "baseline_date": "2023-05-26",
+      "peak_date": "2025-11-06",
+      "max_gain_pct": 27505.664306538943,
       "catalyst_verified": true,
-      "catalyst_fixed_date": "2025-11-09T00:15:57.524253"
+      "catalyst_updated": "2025-11-09T02:13:54.792291"
     },
     {
       "ticker": "SNWV",
       "year_discovered": 2022,
-      "catalyst_date": "2022-02-07",
+      "catalyst_date": "2022-05-10",
       "entry_price": 0.53,
       "peak_price": 37.5,
       "gain_percent": 7042.9,
@@ -77,22 +78,17 @@
         "is_sustainable": true,
         "total_days_checked": 105
       },
-      "analysis_start_date": "2021-11-09",
-      "catalyst_price": 50.4563,
-      "baseline_price": 0.0375,
-      "baseline_date": "2022-02-04",
-      "max_gain_verified_pct": 184900.00000000003,
-      "catalyst_verified": true,
-      "catalyst_fixed_date": "2025-11-09T00:15:57.854218"
+      "catalyst_error": "peak_too_early",
+      "catalyst_verified": false
     },
     {
       "ticker": "ZJYL",
       "year_discovered": 2023,
-      "catalyst_date": "2023-12-18",
+      "catalyst_date": "2023-06-12",
       "entry_price": 0.44,
-      "peak_price": 25.49,
+      "peak_price": 25.4935,
       "gain_percent": 5667.8,
-      "days_to_peak": 33,
+      "days_to_peak": 131,
       "entry_date": "2023-10-31",
       "sector": "Unknown",
       "verified": true,
@@ -106,7 +102,16 @@
         "threshold_price": 1.32,
         "is_sustainable": true,
         "total_days_checked": 123
-      }
+      },
+      "old_catalyst_date": "2023-12-18",
+      "analysis_start_date": "2023-03-14",
+      "catalyst_price": 0.66,
+      "baseline_price": 0.242,
+      "baseline_date": "2023-05-19",
+      "peak_date": "2023-12-18",
+      "max_gain_pct": 10434.504132231405,
+      "catalyst_verified": true,
+      "catalyst_updated": "2025-11-09T02:13:55.732798"
     },
     {
       "ticker": "VSSYW",
@@ -129,16 +134,18 @@
         "threshold_price": 0.06,
         "is_sustainable": true,
         "total_days_checked": 109
-      }
+      },
+      "catalyst_error": "peak_too_early",
+      "catalyst_verified": false
     },
     {
       "ticker": "KOOL",
       "year_discovered": 2016,
-      "catalyst_date": "2016-03-07",
+      "catalyst_date": "2016-01-27",
       "entry_price": 0.11,
-      "peak_price": 4.77,
+      "peak_price": 13.08,
       "gain_percent": 4400.5,
-      "days_to_peak": 31,
+      "days_to_peak": 1345,
       "entry_date": "2016-01-21",
       "sector": "Unknown",
       "verified": true,
@@ -152,7 +159,16 @@
         "threshold_price": 0.33,
         "is_sustainable": true,
         "total_days_checked": 125
-      }
+      },
+      "old_catalyst_date": "2016-03-07",
+      "analysis_start_date": "2015-10-29",
+      "catalyst_price": 0.31,
+      "baseline_price": 0.0819,
+      "baseline_date": "2016-01-20",
+      "peak_date": "2025-10-29",
+      "max_gain_pct": 15870.695970695971,
+      "catalyst_verified": true,
+      "catalyst_updated": "2025-11-09T02:13:56.915456"
     },
     {
       "ticker": "TPST",
@@ -175,7 +191,9 @@
         "threshold_price": 8.97,
         "is_sustainable": true,
         "total_days_checked": 124
-      }
+      },
+      "catalyst_error": "peak_too_early",
+      "catalyst_verified": false
     },
     {
       "ticker": "OXBRW",
@@ -198,16 +216,18 @@
         "threshold_price": 0.03,
         "is_sustainable": true,
         "total_days_checked": 85
-      }
+      },
+      "catalyst_error": "insufficient_gain_358pct",
+      "catalyst_verified": false
     },
     {
       "ticker": "DRUG",
       "year_discovered": 2024,
-      "catalyst_date": "2024-10-15",
+      "catalyst_date": "2024-10-14",
       "entry_price": 0.96,
-      "peak_price": 38.49,
+      "peak_price": 79.02,
       "gain_percent": 3909.0,
-      "days_to_peak": 67,
+      "days_to_peak": 4,
       "entry_date": "2024-07-11",
       "sector": "Unknown",
       "verified": true,
@@ -221,16 +241,25 @@
         "threshold_price": 2.88,
         "is_sustainable": true,
         "total_days_checked": 125
-      }
+      },
+      "old_catalyst_date": "2024-10-15",
+      "analysis_start_date": "2024-07-16",
+      "catalyst_price": 2.49,
+      "baseline_price": 0.93,
+      "baseline_date": "2024-04-30",
+      "peak_date": "2024-10-18",
+      "max_gain_pct": 8396.774193548386,
+      "catalyst_verified": true,
+      "catalyst_updated": "2025-11-09T02:13:58.484453"
     },
     {
       "ticker": "TDW",
       "year_discovered": 2017,
       "catalyst_date": "2017-08-01",
       "entry_price": 0.7,
-      "peak_price": 26.38,
+      "peak_price": 111.4225,
       "gain_percent": 3685.3,
-      "days_to_peak": 54,
+      "days_to_peak": 1702,
       "entry_date": "2017-05-15",
       "sector": "Unknown",
       "verified": true,
@@ -244,16 +273,24 @@
         "threshold_price": 2.1,
         "is_sustainable": true,
         "total_days_checked": 127
-      }
+      },
+      "analysis_start_date": "2017-05-03",
+      "catalyst_price": 25,
+      "baseline_price": 0.6564,
+      "baseline_date": "2017-05-15",
+      "peak_date": "2024-05-07",
+      "max_gain_pct": 16874.786715417427,
+      "catalyst_verified": true,
+      "catalyst_updated": "2025-11-09T02:13:59.344821"
     },
     {
       "ticker": "CRC",
       "year_discovered": 2016,
-      "catalyst_date": "2016-06-01",
+      "catalyst_date": "2016-02-29",
       "entry_price": 0.43,
-      "peak_price": 15.92,
+      "peak_price": 60.41,
       "gain_percent": 3637.1,
-      "days_to_peak": 69,
+      "days_to_peak": 2115,
       "entry_date": "2016-02-23",
       "sector": "Unknown",
       "verified": true,
@@ -267,16 +304,25 @@
         "threshold_price": 1.29,
         "is_sustainable": true,
         "total_days_checked": 126
-      }
+      },
+      "old_catalyst_date": "2016-06-01",
+      "analysis_start_date": "2015-12-01",
+      "catalyst_price": 0.5621,
+      "baseline_price": 0.2809,
+      "baseline_date": "2016-02-25",
+      "peak_date": "2024-11-06",
+      "max_gain_pct": 21405.873976504095,
+      "catalyst_verified": true,
+      "catalyst_updated": "2025-11-09T02:13:59.985795"
     },
     {
       "ticker": "NUKKW",
       "year_discovered": 2024,
-      "catalyst_date": "2024-12-17",
+      "catalyst_date": "2024-09-24",
       "entry_price": 0.01,
-      "peak_price": 0.25,
+      "peak_price": 0.65,
       "gain_percent": 3252.2,
-      "days_to_peak": 10,
+      "days_to_peak": 52,
       "entry_date": "2024-12-02",
       "sector": "Unknown",
       "verified": true,
@@ -290,7 +336,16 @@
         "threshold_price": 0.03,
         "is_sustainable": true,
         "total_days_checked": 122
-      }
+      },
+      "old_catalyst_date": "2024-12-17",
+      "analysis_start_date": "2024-06-26",
+      "catalyst_price": 0.01308,
+      "baseline_price": 0.0057,
+      "baseline_date": "2024-09-20",
+      "peak_date": "2024-12-19",
+      "max_gain_pct": 11303.508771929823,
+      "catalyst_verified": true,
+      "catalyst_updated": "2025-11-09T02:14:00.346182"
     },
     {
       "ticker": "DFSC",
@@ -313,16 +368,18 @@
         "threshold_price": 0.66,
         "is_sustainable": true,
         "total_days_checked": 79
-      }
+      },
+      "catalyst_error": "peak_too_early",
+      "catalyst_verified": false
     },
     {
       "ticker": "BMR",
       "year_discovered": 2023,
-      "catalyst_date": "2024-02-12",
+      "catalyst_date": "2024-01-05",
       "entry_price": 1.08,
       "peak_price": 34.94,
       "gain_percent": 3135.2,
-      "days_to_peak": 69,
+      "days_to_peak": 25,
       "entry_date": "2023-11-01",
       "sector": "Unknown",
       "verified": true,
@@ -336,7 +393,16 @@
         "threshold_price": 3.24,
         "is_sustainable": true,
         "total_days_checked": 123
-      }
+      },
+      "old_catalyst_date": "2024-02-12",
+      "analysis_start_date": "2023-10-07",
+      "catalyst_price": 1.91,
+      "baseline_price": 0.91,
+      "baseline_date": "2023-11-02",
+      "peak_date": "2024-02-12",
+      "max_gain_pct": 3739.5604395604396,
+      "catalyst_verified": true,
+      "catalyst_updated": "2025-11-09T02:14:01.324112"
     },
     {
       "ticker": "VSSYW",
@@ -359,16 +425,18 @@
         "threshold_price": 0.03,
         "is_sustainable": true,
         "total_days_checked": 68
-      }
+      },
+      "catalyst_error": "peak_too_early",
+      "catalyst_verified": false
     },
     {
       "ticker": "NHICW",
       "year_discovered": 2022,
-      "catalyst_date": "2022-12-21",
+      "catalyst_date": "2020-11-19",
       "entry_price": 0.02,
-      "peak_price": 0.6,
+      "peak_price": 2.75,
       "gain_percent": 2891.0,
-      "days_to_peak": 8,
+      "days_to_peak": 83,
       "entry_date": "2022-11-29",
       "sector": "Unknown",
       "verified": true,
@@ -382,16 +450,25 @@
         "threshold_price": 0.06,
         "is_sustainable": true,
         "total_days_checked": 42
-      }
+      },
+      "old_catalyst_date": "2022-12-21",
+      "analysis_start_date": "2020-08-21",
+      "catalyst_price": 0.903001,
+      "baseline_price": 0.4,
+      "baseline_date": "2020-10-20",
+      "peak_date": "2021-03-23",
+      "max_gain_pct": 587.5,
+      "catalyst_verified": true,
+      "catalyst_updated": "2025-11-09T02:14:02.105261"
     },
     {
       "ticker": "CAMP",
       "year_discovered": 2024,
-      "catalyst_date": "2024-10-11",
+      "catalyst_date": "2011-11-16",
       "entry_price": 0.4,
-      "peak_price": 11.5,
+      "peak_price": 801.55,
       "gain_percent": 2775.0,
-      "days_to_peak": 1,
+      "days_to_peak": 575,
       "entry_date": "2024-06-11",
       "sector": "Unknown",
       "verified": true,
@@ -405,7 +482,16 @@
         "threshold_price": 1.2,
         "is_sustainable": true,
         "total_days_checked": 41
-      }
+      },
+      "old_catalyst_date": "2024-10-11",
+      "analysis_start_date": "2011-08-18",
+      "catalyst_price": 100.05,
+      "baseline_price": 45.08,
+      "baseline_date": "2010-05-07",
+      "peak_date": "2014-03-05",
+      "max_gain_pct": 1678.061224489796,
+      "catalyst_verified": true,
+      "catalyst_updated": "2025-11-09T02:14:02.824701"
     },
     {
       "ticker": "EDBLW",
@@ -428,16 +514,18 @@
         "threshold_price": 0.03,
         "is_sustainable": true,
         "total_days_checked": 105
-      }
+      },
+      "catalyst_error": "peak_too_early",
+      "catalyst_verified": false
     },
     {
       "ticker": "BMR",
       "year_discovered": 2024,
-      "catalyst_date": "2024-02-12",
+      "catalyst_date": "2024-01-05",
       "entry_price": 1.39,
       "peak_price": 34.94,
       "gain_percent": 2413.7,
-      "days_to_peak": 18,
+      "days_to_peak": 25,
       "entry_date": "2024-01-17",
       "sector": "Unknown",
       "verified": true,
@@ -451,16 +539,25 @@
         "threshold_price": 4.17,
         "is_sustainable": true,
         "total_days_checked": 124
-      }
+      },
+      "old_catalyst_date": "2024-02-12",
+      "analysis_start_date": "2023-10-07",
+      "catalyst_price": 1.91,
+      "baseline_price": 0.91,
+      "baseline_date": "2023-11-02",
+      "peak_date": "2024-02-12",
+      "max_gain_pct": 3739.5604395604396,
+      "catalyst_verified": true,
+      "catalyst_updated": "2025-11-09T02:14:03.724862"
     },
     {
       "ticker": "AMPGW",
       "year_discovered": 2024,
-      "catalyst_date": "2024-12-11",
+      "catalyst_date": "2021-02-18",
       "entry_price": 0.02,
-      "peak_price": 0.4,
+      "peak_price": 6.4875,
       "gain_percent": 2395.6,
-      "days_to_peak": 5,
+      "days_to_peak": 32,
       "entry_date": "2024-11-27",
       "sector": "Unknown",
       "verified": true,
@@ -474,7 +571,16 @@
         "threshold_price": 0.06,
         "is_sustainable": true,
         "total_days_checked": 110
-      }
+      },
+      "old_catalyst_date": "2024-12-11",
+      "analysis_start_date": "2020-11-20",
+      "catalyst_price": 1.61,
+      "baseline_price": 0.3001,
+      "baseline_date": "2021-02-17",
+      "peak_date": "2021-04-06",
+      "max_gain_pct": 2061.779406864379,
+      "catalyst_verified": true,
+      "catalyst_updated": "2025-11-09T02:14:04.117155"
     },
     {
       "ticker": "CINGW",
@@ -15980,9 +16086,15 @@
     }
   ],
   "metadata": {
-    "updated": "2025-11-09T00:15:57.854232",
-    "total": 694,
-    "fixed": 2,
-    "errors": 1
+    "updated": "2025-11-09T02:14:04.117184",
+    "total_stocks": 694,
+    "stocks_processed": 20,
+    "stocks_fixed": 12,
+    "stocks_errored": 8,
+    "error_details": {
+      "insufficient_gain_39pct": 1,
+      "peak_too_early": 6,
+      "insufficient_gain_358pct": 1
+    }
   }
 }
