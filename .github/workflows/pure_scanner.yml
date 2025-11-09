@@ -1,0 +1,126 @@
+name: Pure Market Scanner
+
+on:
+  workflow_dispatch:
+    inputs:
+      scan_start:
+        description: 'Scan start date (YYYY-MM-DD)'
+        required: true
+        default: '2024-01-01'
+      scan_end:
+        description: 'Scan end date (YYYY-MM-DD)'
+        required: true
+        default: '2024-12-31'
+      batch_size:
+        description: 'Stocks per batch'
+        required: true
+        default: '50'
+      max_batches:
+        description: 'Maximum batches to run'
+        required: true
+        default: '10'
+
+jobs:
+  scan-batch:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5  # Run 5 batches in parallel
+      matrix:
+        batch: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: pip install requests
+    
+    - name: Run scanner batch ${{ matrix.batch }}
+      env:
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+        BATCH_NUMBER: ${{ matrix.batch }}
+        BATCH_SIZE: ${{ github.event.inputs.batch_size }}
+        SCAN_START: ${{ github.event.inputs.scan_start }}
+        SCAN_END: ${{ github.event.inputs.scan_end }}
+      run: |
+        echo "Running batch ${{ matrix.batch }}"
+        python pure_scanner.py
+    
+    - name: Upload discoveries
+      uses: actions/upload-artifact@v2
+      with:
+        name: discoveries-batch-${{ matrix.batch }}
+        path: discoveries_batch_${{ matrix.batch }}.json
+  
+  merge-results:
+    needs: scan-batch
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+    
+    - name: Download all batches
+      uses: actions/download-artifact@v2
+      with:
+        path: batches
+    
+    - name: Merge results
+      run: |
+        cat > merge_results.py << 'EOF'
+        import json
+        import os
+        from datetime import datetime
+        
+        all_discoveries = []
+        batches_processed = 0
+        
+        for root, dirs, files in os.walk('batches'):
+            for file in files:
+                if file.endswith('.json'):
+                    with open(os.path.join(root, file), 'r') as f:
+                        data = json.load(f)
+                        all_discoveries.extend(data['discoveries'])
+                        batches_processed += 1
+        
+        # Remove duplicates
+        unique_discoveries = []
+        seen = set()
+        for d in all_discoveries:
+            key = f"{d['ticker']}_{d['catalyst_date']}"
+            if key not in seen:
+                unique_discoveries.append(d)
+                seen.add(key)
+        
+        final_results = {
+            'scan_complete': datetime.now().isoformat(),
+            'batches_processed': batches_processed,
+            'total_discoveries': len(unique_discoveries),
+            'unique_tickers': len(set([d['ticker'] for d in unique_discoveries])),
+            'discoveries': unique_discoveries
+        }
+        
+        with open('FINAL_DISCOVERIES.json', 'w') as f:
+            json.dump(final_results, f, indent=2)
+        
+        print(f"Merged {batches_processed} batches")
+        print(f"Total discoveries: {len(unique_discoveries)}")
+        EOF
+        
+        python merge_results.py
+    
+    - name: Commit results
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+        git add FINAL_DISCOVERIES.json
+        git commit -m "Scanner results: ${{ github.event.inputs.scan_start }} to ${{ github.event.inputs.scan_end }}"
+        git push
