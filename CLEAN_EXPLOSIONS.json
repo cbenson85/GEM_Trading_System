@@ -1,5 +1,5 @@
 {
-  "filter_date": "2025-11-09T05:45:38.085553",
+  "filter_date": "2025-11-09T05:52:32.776875",
   "filter_stats": {
     "total_input": 169,
     "removed_bad_data": 29,
@@ -7,7 +7,6 @@
     "removed_gap_risk": 8,
     "removed_crash_speed": 2,
     "removed_pump_dump": 26,
-    "removed_corporate_action": 0,
     "total_passed": 11
   },
   "total_explosions": 11,
