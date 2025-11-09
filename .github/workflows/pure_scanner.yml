@@ -32,12 +32,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Calculate batch
-      id: calc
-      run: |
-        BATCH=$(({{ github.event.inputs.batch_start }} + ${{ matrix.offset }}))
-        echo "batch=$BATCH" >> $GITHUB_OUTPUT
-    
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -46,17 +40,29 @@ jobs:
     - name: Install dependencies
       run: pip install requests
     
-    - name: Run scanner
-      env:
-        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
-        BATCH_NUMBER: ${{ steps.calc.outputs.batch }}
-        BATCH_SIZE: 100
-        SCAN_START: ${{ github.event.inputs.scan_start }}
-        SCAN_END: ${{ github.event.inputs.scan_end }}
-      timeout-minutes: 300
-      run: python pure_scanner.py
+    - name: Set up Python
+  uses: actions/setup-python@v2
+  with:
+    python-version: '3.9'
     
-    - name: Commit results
+- name: Install dependencies
+  run: pip install requests
+    
+- name: Run scanner
+  env:
+    POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+    BATCH_NUMBER: ${{ matrix.offset }}
+    BATCH_SIZE: 100
+    SCAN_START: ${{ github.event.inputs.scan_start }}
+    SCAN_END: ${{ github.event.inputs.scan_end }}
+  timeout-minutes: 300
+  run: |
+    # Calculate actual batch number
+    export BATCH_NUMBER=$((${{ github.event.inputs.batch_start }} + ${{ matrix.offset }}))
+    echo "Running batch $BATCH_NUMBER"
+    python pure_scanner.py   
+     
+  - name: Commit results
       run: |
         git config --global user.name 'GitHub Actions'
         git config --global user.email 'actions@github.com'
