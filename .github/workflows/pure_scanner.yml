@@ -36,7 +36,7 @@ jobs:
       id: calc
       run: |
         BATCH=$(({{ github.event.inputs.batch_start }} + ${{ matrix.offset }}))
-        echo "::set-output name=batch::$BATCH"
+        echo "batch=$BATCH" >> $GITHUB_OUTPUT
     
     - name: Set up Python
       uses: actions/setup-python@v2
