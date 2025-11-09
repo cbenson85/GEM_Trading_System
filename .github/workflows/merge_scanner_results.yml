@@ -17,44 +17,72 @@ jobs:
         import os
         from datetime import datetime, timedelta
         
-        def dates_overlap(exp1, exp2, threshold_days=30):
-            """Check if two explosions overlap in time"""
+        def is_same_explosion(exp1, exp2):
+            """Check if two entries are from the SAME explosion event"""
             # Parse dates
             cat1 = datetime.strptime(exp1['catalyst_date'], '%Y-%m-%d')
             cat2 = datetime.strptime(exp2['catalyst_date'], '%Y-%m-%d')
             peak1 = datetime.strptime(exp1['peak_date'], '%Y-%m-%d')
             peak2 = datetime.strptime(exp2['peak_date'], '%Y-%m-%d')
+            base1 = datetime.strptime(exp1['base_date'], '%Y-%m-%d')
+            base2 = datetime.strptime(exp2['base_date'], '%Y-%m-%d')
             
-            # Check if catalyst dates are within threshold
-            if abs((cat1 - cat2).days) <= threshold_days:
-                return True
+            # If explosions are years apart, they're different events
+            if abs((cat1 - cat2).days) > 365:
+                return False
             
-            # Check if peak dates are within threshold  
-            if abs((peak1 - peak2).days) <= threshold_days:
-                return True
+            # Check if the date ranges overlap significantly
+            # Two explosions are the same if their base-to-peak windows overlap
+            exp1_start = min(base1, cat1)
+            exp1_end = peak1
+            exp2_start = min(base2, cat2)
+            exp2_end = peak2
+            
+            # Check for overlap
+            overlap_start = max(exp1_start, exp2_start)
+            overlap_end = min(exp1_end, exp2_end)
+            
+            if overlap_end > overlap_start:
+                # Calculate overlap percentage
+                exp1_duration = (exp1_end - exp1_start).days
+                exp2_duration = (exp2_end - exp2_start).days
+                overlap_duration = (overlap_end - overlap_start).days
                 
-            # Check if one explosion contains the other
-            if (cat1 <= cat2 <= peak1) or (cat2 <= cat1 <= peak2):
+                # If overlap is >50% of either explosion, they're the same
+                if (overlap_duration / exp1_duration > 0.5 or 
+                    overlap_duration / exp2_duration > 0.5):
+                    return True
+            
+            # Also check if gains are very similar (within 20%)
+            gain_ratio = min(exp1['gain_pct'], exp2['gain_pct']) / max(exp1['gain_pct'], exp2['gain_pct'])
+            if gain_ratio > 0.8 and abs((peak1 - peak2).days) < 60:
                 return True
                 
             return False
         
         def choose_best_explosion(explosions):
-            """From overlapping explosions, choose the best one"""
-            # Prefer the one with highest gain
-            best = max(explosions, key=lambda x: x['gain_pct'])
+            """From duplicate explosions, choose the best one"""
+            # Prefer the one with:
+            # 1. Earlier catalyst date (found the start better)
+            # 2. Higher volume spike
+            # 3. Higher gain
             
-            # But if gains are similar, prefer earlier catalyst with better volume
-            similar = [e for e in explosions if e['gain_pct'] > best['gain_pct'] * 0.8]
-            if similar:
-                # Sort by volume spike (remove 'x' and convert to float)
-                for exp in similar:
-                    spike_str = exp.get('volume_spike', '1x').replace('x', '')
-                    exp['volume_numeric'] = float(spike_str) if spike_str else 1
-                
-                # Prefer highest volume spike
-                best = max(similar, key=lambda x: x['volume_numeric'])
+            # Sort by catalyst date first
+            explosions.sort(key=lambda x: x['catalyst_date'])
             
+            # If first catalyst is significantly earlier, use it
+            first_cat = datetime.strptime(explosions[0]['catalyst_date'], '%Y-%m-%d')
+            second_cat = datetime.strptime(explosions[1]['catalyst_date'], '%Y-%m-%d') if len(explosions) > 1 else first_cat
+            
+            if (second_cat - first_cat).days > 30:
+                return explosions[0]
+            
+            # Otherwise, prefer highest volume spike
+            for exp in explosions:
+                spike_str = exp.get('volume_spike', '1x').replace('x', '')
+                exp['volume_numeric'] = float(spike_str) if spike_str else 1
+            
+            best = max(explosions, key=lambda x: x['volume_numeric'])
             return best
         
         # Load all discoveries
@@ -81,6 +109,7 @@ jobs:
         # Deduplicate each ticker's explosions
         unique = []
         total_removed = 0
+        separate_explosions_kept = 0
         
         for ticker, explosions in ticker_groups.items():
             if len(explosions) == 1:
@@ -90,14 +119,14 @@ jobs:
             # Sort by catalyst date
             explosions.sort(key=lambda x: x['catalyst_date'])
             
-            # Group overlapping explosions
+            # Group explosions that are the SAME event
             explosion_groups = []
             for exp in explosions:
                 # Find which group this belongs to
                 added_to_group = False
                 for group in explosion_groups:
-                    # Check if overlaps with any explosion in the group
-                    if any(dates_overlap(exp, g) for g in group):
+                    # Check if this is the same explosion as any in the group
+                    if any(is_same_explosion(exp, g) for g in group):
                         group.append(exp)
                         added_to_group = True
                         break
@@ -105,13 +134,20 @@ jobs:
                 if not added_to_group:
                     explosion_groups.append([exp])
             
+            # Track if we kept multiple separate explosions
+            if len(explosion_groups) > 1:
+                separate_explosions_kept += len(explosion_groups)
+                print(f"{ticker}: Keeping {len(explosion_groups)} SEPARATE explosions")
+                for group in explosion_groups:
+                    best = choose_best_explosion(group)
+                    print(f"  - {best['catalyst_date']}: {best['gain_pct']:.0f}% gain")
+            
             # Choose best from each group
             for group in explosion_groups:
                 best = choose_best_explosion(group)
                 unique.append(best)
                 if len(group) > 1:
                     total_removed += len(group) - 1
-                    print(f"{ticker}: Kept 1 of {len(group)} overlapping explosions (gain: {best['gain_pct']:.0f}%)")
         
         # Sort by gain
         unique.sort(key=lambda x: x['gain_pct'], reverse=True)
@@ -124,10 +160,11 @@ jobs:
             'duplicates_removed': total_removed,
             'total_explosions': len(unique),
             'unique_tickers': len(set([d['ticker'] for d in unique])),
+            'tickers_with_multiple_explosions': separate_explosions_kept,
             'deduplication_stats': {
-                'method': 'overlapping_time_windows',
-                'threshold_days': 30,
-                'selection': 'highest_gain_with_best_volume'
+                'method': 'same_explosion_detection',
+                'separate_explosions_preserved': True,
+                'selection': 'earliest_catalyst_highest_volume'
             },
             'discoveries': unique
         }
@@ -145,10 +182,22 @@ jobs:
             '10000%+': len([d for d in unique if d['gain_pct'] >= 10000])
         }
         
+        # Find tickers with multiple explosions
+        multi_explosion_tickers = {}
+        for ticker in set([d['ticker'] for d in unique]):
+            ticker_explosions = [d for d in unique if d['ticker'] == ticker]
+            if len(ticker_explosions) > 1:
+                multi_explosion_tickers[ticker] = [
+                    {'date': e['catalyst_date'], 'gain': f"{e['gain_pct']:.0f}%"}
+                    for e in ticker_explosions
+                ]
+        
         summary = {
             'total_unique_explosions': len(unique),
             'unique_tickers': len(set([d['ticker'] for d in unique])),
+            'tickers_with_multiple_explosions': len(multi_explosion_tickers),
             'gain_distribution': gain_buckets,
+            'multiple_explosion_tickers': multi_explosion_tickers,
             'top_10_explosions': [
                 {
                     'ticker': d['ticker'],
@@ -169,6 +218,7 @@ jobs:
         print(f"After deduplication: {len(unique)}")
         print(f"Duplicates removed: {total_removed}")
         print(f"Unique tickers: {len(set([d['ticker'] for d in unique]))}")
+        print(f"Tickers with multiple explosions: {len(multi_explosion_tickers)}")
         print("="*60)
         EOF
         
@@ -179,5 +229,5 @@ jobs:
         git config --global user.name 'GitHub Actions'
         git config --global user.email 'actions@github.com'
         git add FINAL_SCAN.json SCAN_SUMMARY.json
-        git commit -m "Merged and deduplicated scan results - $(date)" || echo "No changes"
+        git commit -m "Merged scan results - preserved separate explosions - $(date)" || echo "No changes"
         git push || echo "Push failed"
