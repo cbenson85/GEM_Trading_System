@@ -72,7 +72,7 @@ class PureScanner:
             data = response.json()
             bars = data.get('results', [])
             
-            if len(bars) < 340:  # Need sufficient data
+            if len(bars) < 340:
                 return []
             
             explosions = []
@@ -193,7 +193,7 @@ class PureScanner:
 
 def main():
     print("="*70)
-    print("PURE MARKET SCANNER - GITHUB ACTIONS")
+    print("PURE MARKET SCANNER - BATCH MODE")
     print("="*70)
     
     if not POLYGON_API_KEY:
@@ -202,13 +202,13 @@ def main():
     
     scanner = PureScanner(POLYGON_API_KEY)
     
-    # Get batch parameters from environment or defaults
+    # Get batch parameters
     batch_size = int(os.environ.get('BATCH_SIZE', '100'))
     batch_number = int(os.environ.get('BATCH_NUMBER', '0'))
-    scan_start = os.environ.get('SCAN_START', '2024-01-01')
+    scan_start = os.environ.get('SCAN_START', '2010-01-01')
     scan_end = os.environ.get('SCAN_END', '2024-12-31')
     
-    print(f"\nScan Parameters:")
+    print(f"\nParameters:")
     print(f"  Period: {scan_start} to {scan_end}")
     print(f"  Batch: {batch_number}")
     print(f"  Size: {batch_size}")
@@ -218,32 +218,31 @@ def main():
     universe = scanner.get_universe()
     print(f"Total universe: {len(universe)} stocks")
     
-    # Process this batch
+    # Process batch
     start_idx = batch_number * batch_size
     end_idx = min(start_idx + batch_size, len(universe))
     batch_tickers = universe[start_idx:end_idx]
     
-    print(f"\nProcessing batch {batch_number}: stocks {start_idx} to {end_idx}")
+    print(f"\nProcessing stocks {start_idx} to {end_idx}")
     print(f"Tickers in batch: {len(batch_tickers)}")
     
-    # Scan batch
+    # Scan
     all_discoveries = []
     
     for idx, ticker in enumerate(batch_tickers):
-        print(f"\n[{idx+1}/{len(batch_tickers)}] Scanning {ticker}...")
+        print(f"\n[{idx+1}/{len(batch_tickers)}] {ticker}")
         explosions = scanner.scan_ticker(ticker, scan_start, scan_end)
         
         if explosions:
             all_discoveries.extend(explosions)
             for exp in explosions:
-                print(f"  ✓ FOUND: {exp['catalyst_date']} - {exp['gain_pct']:.0f}% gain")
+                print(f"  ✓ {exp['catalyst_date']} - {exp['gain_pct']:.0f}%")
     
-    # Save results
+    # Save
     results = {
         'batch_info': {
             'batch_number': batch_number,
             'batch_size': batch_size,
-            'tickers_in_batch': batch_tickers,
             'start_idx': start_idx,
             'end_idx': end_idx
         },
@@ -259,14 +258,15 @@ def main():
         }
     }
     
-    output_file = f'discoveries_batch_{batch_number}.json'
+    os.makedirs('scan_results/batches', exist_ok=True)
+    output_file = f'scan_results/batches/batch_{batch_number}.json'
     with open(output_file, 'w') as f:
         json.dump(results, f, indent=2)
     
     print(f"\n{'='*70}")
     print(f"BATCH {batch_number} COMPLETE")
-    print(f"  Scanned: {len(batch_tickers)} tickers")
-    print(f"  Found: {len(all_discoveries)} explosions")
+    print(f"  Scanned: {len(batch_tickers)}")
+    print(f"  Found: {len(all_discoveries)}")
     print(f"  Saved: {output_file}")
     print("="*70)
 
