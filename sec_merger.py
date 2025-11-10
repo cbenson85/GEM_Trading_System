@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SEC Data Merger for GEM Trading System (v2 - FIXED)
+SEC Data Merger for GEM Trading System (v3 - Robust Parsing)
 Enriches Polygon raw data with actual SEC filing content.
 - Parses Form 4 XML for Insider BUYS ('P' code)
 - Parses 8-K HTML/Text for Catalyst Keywords
@@ -189,10 +189,12 @@ class SECDataMerger:
         }
         
         found_keywords = []
+        # Find the *first* match and return it
         for catalyst_type, keywords in catalyst_patterns.items():
             for keyword in keywords:
                 if keyword in text:
                     found_keywords.append(keyword)
+            # If we found keywords for this type, return it immediately
             if found_keywords:
                 return catalyst_type, list(set(found_keywords))
                 
@@ -246,7 +248,10 @@ class SECDataMerger:
         }
 
     def parse_form_4_xml(self, xml_url: str) -> (int, int):
-        """Downloads and parses a Form 4 XML file to count buys and sells."""
+        """
+        --- ROBUST PARSING FIX ---
+        Downloads and parses a Form 4 XML file to count *only* real buys and sells.
+        """
         text = self.get_filing_text(xml_url) # Re-use our text downloader
         if not text:
             return 0, 0
@@ -255,39 +260,30 @@ class SECDataMerger:
         total_sells = 0
         
         try:
-            # Look for transaction codes first
-            # 'P' = Purchase, 'S' = Sale
-            purchase_codes = re.findall(r'<transactionCode>P</transactionCode>', text, re.IGNORECASE)
-            sale_codes = re.findall(r'<transactionCode>S</transactionCode>', text, re.IGNORECASE)
+            # We only care about non-derivative transactions (Table 1)
+            # Find all <nonDerivativeTransaction> blocks
+            transactions = re.findall(r'<nonDerivativeTransaction>(.*?)</nonDerivativeTransaction>', text, re.IGNORECASE | re.DOTALL)
             
-            # Try to get actual share amounts
-            transactions = re.findall(r'<transactionShares>(.*?)</transactionShares>', text, re.IGNORECASE)
-            codes = re.findall(r'<transactionAcquiredDisposedCode>(.*?)</transactionAcquiredDisposedCode>', text, re.IGNORECASE)
-            
-            for i in range(min(len(transactions), len(codes))):
-                try:
-                    shares_match = re.search(r'<value>([\d\.]+)</value>', transactions[i], re.IGNORECASE)
-                    code_match = re.search(r'<value>([AD])</value>', codes[i], re.IGNORECASE)
-                    
-                    if shares_match and code_match:
-                        shares = float(shares_match.group(1))
-                        code = code_match.group(1)
-                        
-                        if code == 'A': # Acquired
-                            total_buys += shares
-                        elif code == 'D': # Disposed
-                            total_sells += shares
-                except:
-                    continue
-            
-            # If we found transaction codes but no share amounts, just count transactions
-            if total_buys == 0 and total_sells == 0:
-                # Only count actual P codes found, no estimates
-                if purchase_codes:
-                    total_buys = len(purchase_codes)  # Count transactions, not shares
-                if sale_codes:
-                    total_sells = len(sale_codes)
+            for tx in transactions:
+                # Find the share amount and the code (A/D) FOR THIS TRANSACTION
+                shares_match = re.search(r'<transactionShares>.*?<value>([\d\.]+)</value>.*?</transactionShares>', tx, re.IGNORECASE | re.DOTALL)
+                code_match = re.search(r'<transactionAcquiredDisposedCode>.*?<value>([AD])</value>.*?</transactionAcquiredDisposedCode>', tx, re.IGNORECASE | re.DOTALL)
+                
+                # We also check the <transactionCode> to ensure it's a 'P' (Purchase) or 'S' (Sale)
+                # This avoids counting grants, gifts, exercises, etc.
+                tx_code_match = re.search(r'<transactionCode>([PS])</transactionCode>', tx, re.IGNORECASE)
 
+                if shares_match and code_match and tx_code_match:
+                    shares = float(shares_match.group(1))
+                    acq_disp_code = code_match.group(1).upper()
+                    tx_code = tx_code_match.group(1).upper()
+                    
+                    if tx_code == 'P' and acq_disp_code == 'A':
+                        total_buys += shares
+                    elif tx_code == 'S' and acq_disp_code == 'D':
+                        total_sells += shares
+            
+            # No fallback/estimation. If we can't parse it, it's 0.
             return int(total_buys), int(total_sells)
             
         except Exception as e:
@@ -349,7 +345,9 @@ def main():
     merger = SECDataMerger()
     
     # This is the output from your fingerprint_analyzer.py
+    # We will hard-code this, as it's an intermediate file.
     polygon_file = 'FINGERPRINTS.json' 
+    
     # This is the final file for your correlation script
     output_file = 'MASTER_FINGERPRINTS.json' 
     
