@@ -5,6 +5,8 @@ import requests
 from datetime import datetime, timedelta
 import numpy as np
 from typing import Dict, List, Optional
+from polygon import RESTClient # <-- This import is correct
+import sys 
 
 POLYGON_API_KEY = os.environ.get('POLYGON_API_KEY')
 
@@ -12,6 +14,9 @@ class PreCatalystFingerprint:
     def __init__(self, api_key: str):
         self.api_key = api_key
         self.base_url = "https://api.polygon.io"
+        # --- CRITICAL FIX: Initialize the client ---
+        self.polygon_client = RESTClient(api_key) 
+        # ---
         self.api_calls = 0
         
     def collect_all_fingerprints(self, input_file: str, output_file: str):
@@ -28,8 +33,8 @@ class PreCatalystFingerprint:
         explosions = data['discoveries']
         print(f"Found {len(explosions)} explosions to analyze")
         print(f"Collecting: Profile, Technicals, Fundamentals, Relative Strength,")
-        print(f"            News, Price Patterns, Volume Profile, SHORT INTEREST,")
-        print(f"            OPTIONS ACTIVITY, INTRADAY DATA")
+        print(f"              News, Price Patterns, Volume Profile, SHORT INTEREST,")
+        print(f"              OPTIONS ACTIVITY, INTRADAY DATA")
         print("="*60)
         
         fingerprints = []
@@ -45,10 +50,11 @@ class PreCatalystFingerprint:
                     self.save_progress(fingerprints, 'fingerprints_progress.json')
                     print(f"  Saved progress: {len(fingerprints)} complete")
                 
-                time.sleep(0.15)  # Rate limiting
+                # Use a slightly longer sleep to be safe with all API endpoints
+                time.sleep(0.2) # 5 calls/sec
                 
             except Exception as e:
-                print(f"  Error: {e}")
+                print(f"  CRITICAL Error processing {explosion['ticker']}: {e}")
                 fingerprints.append({
                     'ticker': explosion['ticker'],
                     'error': str(e),
@@ -92,7 +98,7 @@ class PreCatalystFingerprint:
             '6_price_patterns': self.analyze_price_patterns(ticker, catalyst_dt),
             '7_volume_profile': self.analyze_volume_profile(ticker, t_minus_120, catalyst_date),
             
-            # MISSING CATEGORIES NOW ADDED:
+            # Use the CORRECT, working functions
             '8_short_interest': self.get_short_interest(ticker, catalyst_dt),
             '9_options_activity': self.get_options_activity(ticker, catalyst_dt),
             '10_intraday_data': self.get_intraday_data(ticker, t_minus_3, t_plus_3)
@@ -103,36 +109,91 @@ class PreCatalystFingerprint:
         return fingerprint
     
     def get_short_interest(self, ticker: str, catalyst_dt: datetime) -> Dict:
-        """Get short interest data - simplified for now"""
+        """
+        --- RESTORED WORKING FUNCTION ---
+        Get short interest data using Polygon client
+        """
         
         print(f"    Getting short interest...")
         
-        # Note: Polygon's short interest data is limited for historical dates
-        # This would need a different data source for reliable historical short interest
+        try:
+            # Get 24 bi-monthly reports (1 year of data)
+            short_reports = []
+            
+            # Use the client we initialized in __init__
+            for report in self.polygon_client.list_short_interest(
+                ticker=ticker,
+                limit=24 # Get ~1 year of data
+            ):
+                self.api_calls += 1
+                
+                report_date_str = getattr(report, 'date_key', getattr(report, 'settlement_date', None))
+                if not report_date_str:
+                    continue
+
+                report_date = datetime.strptime(report_date_str, '%Y-%m-%d')
+                days_from_catalyst = (catalyst_dt - report_date).days
+                
+                # Only save reports from BEFORE the catalyst
+                if days_from_catalyst >= 0:
+                    short_reports.append({
+                        'date': report_date_str,
+                        'short_interest': float(report.short_interest) if report.short_interest else 0,
+                        'days_to_cover': float(report.days_to_cover) if report.days_to_cover else 0,
+                        'days_from_catalyst': days_from_catalyst
+                    })
+            
+            if not short_reports:
+                return {'has_data': False, 'note': 'No pre-catalyst reports found.'}
+
+            # Sort reports by date, most recent first
+            short_reports.sort(key=lambda x: x['days_from_catalyst'])
+            
+            recent = short_reports[0] # Closest report
+            older = short_reports[-1]  # Oldest report (up to 1 year ago)
+                
+            # Calculate changes
+            si_change = 0
+            if older['short_interest'] > 0:
+                si_change = ((recent['short_interest'] - older['short_interest']) / 
+                                older['short_interest'] * 100)
+            
+            # Check for squeeze setup
+            is_squeeze_setup = (
+                recent['days_to_cover'] > 3 and 
+                recent['short_interest'] > 100000 # Arbitrary floor to filter out noise
+            )
+            
+            return {
+                'has_data': True,
+                'recent_short_interest': recent['short_interest'],
+                'recent_days_to_cover': recent['days_to_cover'],
+                'short_interest_change_pct_1y': float(si_change),
+                'is_heavily_shorted': recent['days_to_cover'] > 5,
+                'is_squeeze_setup': is_squeeze_setup,
+                'reports_analyzed': len(short_reports)
+            }
+            
+        except Exception as e:
+            # This often fails for OTCs, ETFs, etc. This is normal.
+            print(f"      Short interest error (likely no data): {e}")
         
-        return {
-            'has_data': False,
-            'note': 'Historical short interest requires different data source'
-        }
+        return {'has_data': False}
     
     def get_options_activity(self, ticker: str, catalyst_dt: datetime) -> Dict:
-        """Get options activity data using historical endpoint"""
+        """
+        --- RESTORED WORKING FUNCTION ---
+        Get options activity data using the snapshot endpoint
+        """
         
         print(f"    Getting options activity...")
         
         try:
-            # Use the aggregates endpoint for options volume
-            catalyst_str = catalyst_dt.strftime('%Y-%m-%d')
-            
-            # Get options contracts for the ticker
-            url = f"{self.base_url}/v3/reference/options/contracts"
+            # Use the snapshot endpoint, which is more reliable for this
+            url = f"{self.base_url}/v3/snapshot/options/{ticker}"
             params = {
-                'underlying_ticker': ticker,
-                'expired': 'false',
-                'expiration_date.gte': catalyst_str,
-                'expiration_date.lte': (catalyst_dt + timedelta(days=60)).strftime('%Y-%m-%d'),
                 'apiKey': self.api_key,
-                'limit': 100
+                'limit': 250
             }
             
             response = requests.get(url, params=params)
@@ -140,51 +201,57 @@ class PreCatalystFingerprint:
             
             if response.status_code == 200:
                 data = response.json()
-                contracts = data.get('results', [])
+                results = data.get('results', [])
                 
-                if contracts:
-                    total_volume = 0
-                    total_oi = 0
-                    call_volume = 0
-                    put_volume = 0
+                if results:
+                    # Analyze options data
+                    total_volume = sum(r.get('day', {}).get('volume', 0) for r in results)
+                    total_oi = sum(r.get('open_interest', 0) for r in results)
                     
-                    # Sample up to 20 contracts for volume data
-                    for contract in contracts[:20]:
-                        contract_ticker = contract.get('ticker')
-                        contract_type = contract.get('contract_type')
-                        
-                        # Get day's volume for this contract
-                        vol_url = f"{self.base_url}/v2/aggs/ticker/{contract_ticker}/prev"
-                        vol_params = {'apiKey': self.api_key}
-                        
-                        vol_resp = requests.get(vol_url, params=vol_params)
-                        if vol_resp.status_code == 200:
-                            vol_data = vol_resp.json().get('results', [])
-                            if vol_data:
-                                volume = vol_data[0].get('v', 0)
-                                total_volume += volume
-                                
-                                if contract_type == 'call':
-                                    call_volume += volume
-                                else:
-                                    put_volume += volume
+                    calls = [r for r in results if r.get('details', {}).get('contract_type') == 'call']
+                    puts = [r for r in results if r.get('details', {}).get('contract_type') == 'put']
                     
-                    put_call_ratio = 0
+                    call_volume = sum(c.get('day', {}).get('volume', 0) for c in calls)
+                    put_volume = sum(p.get('day', {}).get('volume', 0) for p in puts)
+                    
+                    call_oi = sum(c.get('open_interest', 0) for c in calls)
+                    put_oi = sum(p.get('open_interest', 0) for p in puts)
+                    
+                    # Calculate ratios
+                    put_call_ratio_vol = 0
                     if call_volume > 0:
-                        put_call_ratio = put_volume / call_volume
+                        put_call_ratio_vol = put_volume / call_volume
+                    
+                    put_call_ratio_oi = 0
+                    if call_oi > 0:
+                        put_call_ratio_oi = put_oi / call_oi
+
+                    # Look for unusual activity
+                    avg_vol_per_strike = total_volume / len(results) if results else 0
+                    unusual_strikes = [
+                        {
+                            'ticker': r.get('details', {}).get('ticker'),
+                            'volume': r.get('day', {}).get('volume', 0)
+                        }
+                        for r in results 
+                        if r.get('day', {}).get('volume', 0) > avg_vol_per_strike * 5 # 5x avg vol
+                    ]
                     
                     return {
                         'has_data': True,
-                        'total_contracts': len(contracts),
-                        'sampled_volume': int(total_volume),
+                        'total_volume': int(total_volume),
+                        'total_open_interest': int(total_oi),
                         'call_volume': int(call_volume),
                         'put_volume': int(put_volume),
-                        'put_call_ratio': float(put_call_ratio),
-                        'bullish_flow': call_volume > put_volume * 2
+                        'put_call_ratio_volume': float(put_call_ratio_vol),
+                        'put_call_ratio_oi': float(put_call_ratio_oi),
+                        'unusual_strikes_count': len(unusual_strikes),
+                        'bullish_flow': call_volume > put_volume * 1.5, # 1.5x is a good signal
+                        'contracts_analyzed': len(results)
                     }
                     
         except Exception as e:
-            print(f"      Options error: {e}")
+            print(f"      Options error (likely no data): {e}")
         
         return {'has_data': False}
     
@@ -252,12 +319,6 @@ class PreCatalystFingerprint:
             print(f"      Intraday error: {e}")
         
         return {'has_data': False}
-    
-    # [Previous methods remain the same - get_ticker_details_advanced, get_price_at_date, 
-    # get_stock_financials_advanced, get_technical_analysis, detect_bb_squeeze, 
-    # analyze_volume_trend_detailed, detect_consolidation_pattern, calculate_volatility_rank,
-    # calculate_rsi, calculate_relative_strength, get_news_analysis, analyze_price_patterns,
-    # analyze_volume_profile, categorize_float]
     
     def get_ticker_details_advanced(self, ticker: str, as_of_date: str) -> Dict:
         """Get comprehensive ticker details"""
@@ -732,7 +793,7 @@ class PreCatalystFingerprint:
         options = fingerprint.get('9_options_activity', {})
         if options.get('bullish_flow'):
             scores['options_score'] += 40
-        if options.get('unusual_strikes', 0) > 3:
+        if options.get('unusual_strikes_count', 0) > 3:
             scores['options_score'] += 30
         
         # Intraday bonus
