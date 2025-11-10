@@ -900,7 +900,9 @@ class PreCatalystFingerprint:
         
         print("\n" + "="*60)
         print("COMPLETE ANALYSIS FINISHED")
-        print("="*6D)
+        # --- THIS IS THE TYPO ---
+        print("="*60) 
+        # ---
         print(f"Total analyzed: {summary['total_analyzed']}")
         print(f"\nData Coverage:")
         if 'percentages' in summary:
