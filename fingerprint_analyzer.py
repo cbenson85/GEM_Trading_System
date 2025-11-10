@@ -900,13 +900,16 @@ class PreCatalystFingerprint:
         print(f"Saved to: {output_file}")
 
 def main():
+    import sys
+    
     if not POLYGON_API_KEY:
         print("ERROR: POLYGON_API_KEY not set!")
         return
     
     analyzer = PreCatalystFingerprint(POLYGON_API_KEY)
     
-    input_file = 'CLEAN_EXPLOSIONS.json'
+    # Use command line argument or default
+    input_file = sys.argv[1] if len(sys.argv) > 1 else 'CLEAN_EXPLOSIONS.json'
     output_file = 'FINGERPRINTS.json'
     
     if not os.path.exists(input_file):
@@ -914,6 +917,7 @@ def main():
         return
     
     print(f"Starting COMPLETE Advanced Tier analysis...")
+    print(f"Input: {input_file}")
     print(f"Collecting ALL 10 data categories...")
     analyzer.collect_all_fingerprints(input_file, output_file)
 
