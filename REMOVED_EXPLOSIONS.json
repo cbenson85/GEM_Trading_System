@@ -1,6 +1,6 @@
 {
-  "filter_date": "2025-11-10T01:03:52.024183",
-  "removed_count": 139,
+  "filter_date": "2025-11-10T01:18:50.220061",
+  "removed_count": 121,
   "removed": [
     {
       "ticker": "AVL",
@@ -42,7 +42,7 @@
     },
     {
       "ticker": "SMLR",
-      "reason": "Volume 6653 shares/day < 25,000",
+      "reason": "Vol: 6653/day, Price: $1.694, Catalyst vol: 264648",
       "data": {
         "ticker": "SMLR",
         "base_price": 1.1204,
@@ -56,7 +56,12 @@
         "volume_spike": "44.9x",
         "analysis_start": "2016-03-13",
         "days_to_peak": 29,
-        "volume_numeric": 44.9
+        "volume_numeric": 44.9,
+        "pre_catalyst_volume": 6653,
+        "pre_catalyst_price": 1.694,
+        "pre_catalyst_dollar_volume": 11273,
+        "catalyst_day_volume": 264648,
+        "catalyst_day_dollar_volume": 534588.96
       }
     },
     {
@@ -79,27 +84,8 @@
       }
     },
     {
-      "ticker": "PHUNW",
-      "reason": "Price $0.209 < $0.25",
-      "data": {
-        "ticker": "PHUNW",
-        "base_price": 0.1918,
-        "base_date": "2021-10-18",
-        "peak_price": 19,
-        "peak_date": "2021-10-22",
-        "gain_pct": 9806.152241918664,
-        "catalyst_date": "2021-10-22",
-        "catalyst_price": 6.3994,
-        "catalyst_type": "52W_HIGH",
-        "volume_spike": "639.0x",
-        "analysis_start": "2021-06-24",
-        "days_to_peak": 3,
-        "volume_numeric": 639.0
-      }
-    },
-    {
       "ticker": "TLX",
-      "reason": "Volume 4206 shares/day < 25,000",
+      "reason": "Vol: 4206/day, Price: $0.489, Catalyst vol: 41067",
       "data": {
         "ticker": "TLX",
         "base_price": 0.22,
@@ -113,7 +99,12 @@
         "volume_spike": "9.7x",
         "analysis_start": "2010-06-14",
         "days_to_peak": 1,
-        "volume_numeric": 9.7
+        "volume_numeric": 9.7,
+        "pre_catalyst_volume": 4205,
+        "pre_catalyst_price": 0.489,
+        "pre_catalyst_dollar_volume": 2054,
+        "catalyst_day_volume": 41067,
+        "catalyst_day_dollar_volume": 27925.56
       }
     },
     {
@@ -194,7 +185,7 @@
     },
     {
       "ticker": "LEXXW",
-      "reason": "Volume 13907 shares/day < 25,000",
+      "reason": "Vol: 13907/day, Price: $0.792, Catalyst vol: 74292",
       "data": {
         "ticker": "LEXXW",
         "base_price": 0.05,
@@ -208,7 +199,12 @@
         "volume_spike": "6.7x",
         "analysis_start": "2023-11-09",
         "days_to_peak": 71,
-        "volume_numeric": 6.7
+        "volume_numeric": 6.7,
+        "pre_catalyst_volume": 13907,
+        "pre_catalyst_price": 0.792,
+        "pre_catalyst_dollar_volume": 11012,
+        "catalyst_day_volume": 74292,
+        "catalyst_day_dollar_volume": 149326.91999999998
       }
     },
     {
@@ -250,7 +246,7 @@
     },
     {
       "ticker": "CRTD",
-      "reason": "Price $0.223 < $0.25",
+      "reason": "Vol: 543874/day, Price: $0.223, Catalyst vol: 4349252",
       "data": {
         "ticker": "CRTD",
         "base_price": 0.0446,
@@ -264,7 +260,12 @@
         "volume_spike": "7.1x",
         "analysis_start": "2022-06-15",
         "days_to_peak": 17,
-        "volume_numeric": 7.1
+        "volume_numeric": 7.1,
+        "pre_catalyst_volume": 543874,
+        "pre_catalyst_price": 0.223,
+        "pre_catalyst_dollar_volume": 121539,
+        "catalyst_day_volume": 4349252.0,
+        "catalyst_day_dollar_volume": 500163.98000000004
       }
     },
     {
@@ -325,7 +326,7 @@
     },
     {
       "ticker": "CRTDW",
-      "reason": "Volume 21080 shares/day < 25,000",
+      "reason": "Vol: 21080/day, Price: $0.064, Catalyst vol: 76030",
       "data": {
         "ticker": "CRTDW",
         "base_price": 0.0128,
@@ -339,7 +340,12 @@
         "volume_spike": "5.3x",
         "analysis_start": "2022-07-05",
         "days_to_peak": 28,
-        "volume_numeric": 5.3
+        "volume_numeric": 5.3,
+        "pre_catalyst_volume": 21080,
+        "pre_catalyst_price": 0.064,
+        "pre_catalyst_dollar_volume": 1340,
+        "catalyst_day_volume": 76030,
+        "catalyst_day_dollar_volume": 10644.2
       }
     },
     {
@@ -363,7 +369,7 @@
     },
     {
       "ticker": "PAACW",
-      "reason": "Price $0.044 < $0.25",
+      "reason": "Vol: 32280/day, Price: $0.044, Catalyst vol: 149637",
       "data": {
         "ticker": "PAACW",
         "base_price": 0.0101,
@@ -377,12 +383,17 @@
         "volume_spike": "3.7x",
         "analysis_start": "2020-01-29",
         "days_to_peak": 9,
-        "volume_numeric": 3.7
+        "volume_numeric": 3.7,
+        "pre_catalyst_volume": 32279,
+        "pre_catalyst_price": 0.044,
+        "pre_catalyst_dollar_volume": 1426,
+        "catalyst_day_volume": 149637,
+        "catalyst_day_dollar_volume": 11970.960000000001
       }
     },
     {
       "ticker": "GLBS",
-      "reason": "Volume 10 shares/day < 25,000",
+      "reason": "Vol: 10/day, Price: $474.988, Catalyst vol: 95",
       "data": {
         "ticker": "GLBS",
         "base_price": 280,
@@ -396,12 +407,17 @@
         "volume_spike": "10.7x",
         "analysis_start": "2015-11-09",
         "days_to_peak": 63,
-        "volume_numeric": 10.7
+        "volume_numeric": 10.7,
+        "pre_catalyst_volume": 9,
+        "pre_catalyst_price": 474.988,
+        "pre_catalyst_dollar_volume": 4744,
+        "catalyst_day_volume": 95.0335,
+        "catalyst_day_dollar_volume": 72225.46
       }
     },
     {
       "ticker": "BFRIW",
-      "reason": "Volume 7182 shares/day < 25,000",
+      "reason": "Vol: 7182/day, Price: $0.011, Catalyst vol: 58774",
       "data": {
         "ticker": "BFRIW",
         "base_price": 0.01,
@@ -415,12 +431,17 @@
         "volume_spike": "9.8x",
         "analysis_start": "2023-10-23",
         "days_to_peak": 84,
-        "volume_numeric": 9.8
+        "volume_numeric": 9.8,
+        "pre_catalyst_volume": 7181,
+        "pre_catalyst_price": 0.011,
+        "pre_catalyst_dollar_volume": 82,
+        "catalyst_day_volume": 58774,
+        "catalyst_day_dollar_volume": 1810.2392
       }
     },
     {
       "ticker": "ARKOW",
-      "reason": "Volume 20342 shares/day < 25,000",
+      "reason": "Vol: 20342/day, Price: $0.298, Catalyst vol: 294875",
       "data": {
         "ticker": "ARKOW",
         "base_price": 0.052,
@@ -434,12 +455,17 @@
         "volume_spike": "18.0x",
         "analysis_start": "2024-01-09",
         "days_to_peak": 39,
-        "volume_numeric": 18.0
+        "volume_numeric": 18.0,
+        "pre_catalyst_volume": 20342,
+        "pre_catalyst_price": 0.298,
+        "pre_catalyst_dollar_volume": 6055,
+        "catalyst_day_volume": 294875,
+        "catalyst_day_dollar_volume": 71064.875
       }
     },
     {
       "ticker": "SHLDW",
-      "reason": "Volume 18995 shares/day < 25,000",
+      "reason": "Vol: 18995/day, Price: $0.201, Catalyst vol: 71771",
       "data": {
         "ticker": "SHLDW",
         "base_price": 0.0508,
@@ -453,12 +479,17 @@
         "volume_spike": "7.4x",
         "analysis_start": "2018-02-15",
         "days_to_peak": 34,
-        "volume_numeric": 7.4
+        "volume_numeric": 7.4,
+        "pre_catalyst_volume": 18994,
+        "pre_catalyst_price": 0.201,
+        "pre_catalyst_dollar_volume": 3825,
+        "catalyst_day_volume": 71771,
+        "catalyst_day_dollar_volume": 20095.88
       }
     },
     {
       "ticker": "TRMD",
-      "reason": "Volume 17876 shares/day < 25,000",
+      "reason": "Vol: 17876/day, Price: $1.452, Catalyst vol: 365394",
       "data": {
         "ticker": "TRMD",
         "base_price": 0.37,
@@ -472,7 +503,12 @@
         "volume_spike": "23.9x",
         "analysis_start": "2013-01-08",
         "days_to_peak": 112,
-        "volume_numeric": 23.9
+        "volume_numeric": 23.9,
+        "pre_catalyst_volume": 17875,
+        "pre_catalyst_price": 1.452,
+        "pre_catalyst_dollar_volume": 25949,
+        "catalyst_day_volume": 365394,
+        "catalyst_day_dollar_volume": 1150991.0999999999
       }
     },
     {
@@ -534,7 +570,7 @@
     },
     {
       "ticker": "GCTK",
-      "reason": "Volume 5 shares/day < 25,000",
+      "reason": "Vol: 5/day, Price: $4142.117, Catalyst vol: 4713",
       "data": {
         "ticker": "GCTK",
         "base_price": 1245.3,
@@ -548,12 +584,17 @@
         "volume_spike": "1366.7x",
         "analysis_start": "2022-12-07",
         "days_to_peak": 3,
-        "volume_numeric": 1366.7
+        "volume_numeric": 1366.7,
+        "pre_catalyst_volume": 4,
+        "pre_catalyst_price": 4142.117,
+        "pre_catalyst_dollar_volume": 20558,
+        "catalyst_day_volume": 4712.6515,
+        "catalyst_day_dollar_volume": 33648331.71
       }
     },
     {
       "ticker": "ZANE",
-      "reason": "Volume 12440 shares/day < 25,000",
+      "reason": "Vol: 12440/day, Price: $0.355, Catalyst vol: 215825",
       "data": {
         "ticker": "ZANE",
         "base_price": 0.21,
@@ -567,12 +608,17 @@
         "volume_spike": "22.6x",
         "analysis_start": "2009-09-15",
         "days_to_peak": 26,
-        "volume_numeric": 22.6
+        "volume_numeric": 22.6,
+        "pre_catalyst_volume": 12439,
+        "pre_catalyst_price": 0.355,
+        "pre_catalyst_dollar_volume": 4420,
+        "catalyst_day_volume": 215825,
+        "catalyst_day_dollar_volume": 88704.075
       }
     },
     {
       "ticker": "GLBS",
-      "reason": "Volume 58 shares/day < 25,000",
+      "reason": "Vol: 58/day, Price: $1982.789, Catalyst vol: 2352",
       "data": {
         "ticker": "GLBS",
         "base_price": 1408,
@@ -586,12 +632,17 @@
         "volume_spike": "35.4x",
         "analysis_start": "2016-04-04",
         "days_to_peak": 90,
-        "volume_numeric": 35.4
+        "volume_numeric": 35.4,
+        "pre_catalyst_volume": 58,
+        "pre_catalyst_price": 1982.789,
+        "pre_catalyst_dollar_volume": 115417,
+        "catalyst_day_volume": 2352.1735,
+        "catalyst_day_dollar_volume": 7715129.079999999
       }
     },
     {
       "ticker": "BRLIR",
-      "reason": "Volume 14510 shares/day < 25,000",
+      "reason": "Vol: 14510/day, Price: $0.220, Catalyst vol: 115879",
       "data": {
         "ticker": "BRLIR",
         "base_price": 0.0245,
@@ -605,12 +656,17 @@
         "volume_spike": "13.0x",
         "analysis_start": "2023-08-03",
         "days_to_peak": 82,
-        "volume_numeric": 13.0
+        "volume_numeric": 13.0,
+        "pre_catalyst_volume": 14509,
+        "pre_catalyst_price": 0.22,
+        "pre_catalyst_dollar_volume": 3193,
+        "catalyst_day_volume": 115879,
+        "catalyst_day_dollar_volume": 40546.062099999996
       }
     },
     {
       "ticker": "WGSWW",
-      "reason": "Volume 14878 shares/day < 25,000",
+      "reason": "Vol: 14878/day, Price: $0.029, Catalyst vol: 133956",
       "data": {
         "ticker": "WGSWW",
         "base_price": 0.0211,
@@ -624,12 +680,17 @@
         "volume_spike": "6.2x",
         "analysis_start": "2024-03-13",
         "days_to_peak": 67,
-        "volume_numeric": 6.2
+        "volume_numeric": 6.2,
+        "pre_catalyst_volume": 14878,
+        "pre_catalyst_price": 0.029,
+        "pre_catalyst_dollar_volume": 424,
+        "catalyst_day_volume": 133956,
+        "catalyst_day_dollar_volume": 4152.636
       }
     },
     {
       "ticker": "TRMD",
-      "reason": "Volume 6031 shares/day < 25,000",
+      "reason": "Vol: 6031/day, Price: $0.492, Catalyst vol: 67540",
       "data": {
         "ticker": "TRMD",
         "base_price": 0.261,
@@ -643,12 +704,17 @@
         "volume_spike": "7.3x",
         "analysis_start": "2012-06-04",
         "days_to_peak": 93,
-        "volume_numeric": 7.3
+        "volume_numeric": 7.3,
+        "pre_catalyst_volume": 6031,
+        "pre_catalyst_price": 0.492,
+        "pre_catalyst_dollar_volume": 2969,
+        "catalyst_day_volume": 67540,
+        "catalyst_day_dollar_volume": 40524.0
       }
     },
     {
       "ticker": "GMBLW",
-      "reason": "Volume 3221 shares/day < 25,000",
+      "reason": "Vol: 3221/day, Price: $0.031, Catalyst vol: 29987",
       "data": {
         "ticker": "GMBLW",
         "base_price": 0.0102,
@@ -662,12 +728,17 @@
         "volume_spike": "9.8x",
         "analysis_start": "2022-09-26",
         "days_to_peak": 55,
-        "volume_numeric": 9.8
+        "volume_numeric": 9.8,
+        "pre_catalyst_volume": 3221,
+        "pre_catalyst_price": 0.031,
+        "pre_catalyst_dollar_volume": 98,
+        "catalyst_day_volume": 29987,
+        "catalyst_day_dollar_volume": 1496.3513
       }
     },
     {
       "ticker": "UAVS",
-      "reason": "Volume 227 shares/day < 25,000",
+      "reason": "Vol: 227/day, Price: $392.991, Catalyst vol: 65330",
       "data": {
         "ticker": "UAVS",
         "base_price": 190.1,
@@ -681,12 +752,17 @@
         "volume_spike": "327.0x",
         "analysis_start": "2019-12-17",
         "days_to_peak": 29,
-        "volume_numeric": 327.0
+        "volume_numeric": 327.0,
+        "pre_catalyst_volume": 227,
+        "pre_catalyst_price": 392.991,
+        "pre_catalyst_dollar_volume": 89359,
+        "catalyst_day_volume": 65329.51,
+        "catalyst_day_dollar_volume": 69902575.7
       }
     },
     {
       "ticker": "OXBRW",
-      "reason": "Volume 23106 shares/day < 25,000",
+      "reason": "Vol: 23106/day, Price: $0.062, Catalyst vol: 2578406",
       "data": {
         "ticker": "OXBRW",
         "base_price": 0.0402,
@@ -700,26 +776,12 @@
         "volume_spike": "88.6x",
         "analysis_start": "2020-04-13",
         "days_to_peak": 70,
-        "volume_numeric": 88.6
-      }
-    },
-    {
-      "ticker": "ELYS",
-      "reason": "Price $0.196 < $0.25",
-      "data": {
-        "ticker": "ELYS",
-        "base_price": 0.111,
-        "base_date": "2022-12-20",
-        "peak_price": 1.47,
-        "peak_date": "2023-02-02",
-        "gain_pct": 1224.3243243243242,
-        "catalyst_date": "2022-12-27",
-        "catalyst_price": 0.37,
-        "catalyst_type": "50MA_BREAKOUT",
-        "volume_spike": "91.5x",
-        "analysis_start": "2022-08-29",
-        "days_to_peak": 29,
-        "volume_numeric": 91.5
+        "volume_numeric": 88.6,
+        "pre_catalyst_volume": 23105,
+        "pre_catalyst_price": 0.062,
+        "pre_catalyst_dollar_volume": 1441,
+        "catalyst_day_volume": 2578406.0,
+        "catalyst_day_dollar_volume": 453541.6154
       }
     },
     {
@@ -762,7 +824,7 @@
     },
     {
       "ticker": "CRKN",
-      "reason": "Volume 1439 shares/day < 25,000",
+      "reason": "Vol: 1439/day, Price: $1141.562, Catalyst vol: 138496",
       "data": {
         "ticker": "CRKN",
         "base_price": 931.5,
@@ -776,31 +838,17 @@
         "volume_spike": "128.8x",
         "analysis_start": "2024-01-17",
         "days_to_peak": 5,
-        "volume_numeric": 128.8
-      }
-    },
-    {
-      "ticker": "APT",
-      "reason": "Volume 14361 shares/day < 25,000",
-      "data": {
-        "ticker": "APT",
-        "base_price": 3.2682,
-        "base_date": "2019-12-06",
-        "peak_price": 41.59,
-        "peak_date": "2020-02-28",
-        "gain_pct": 1172.5659384370601,
-        "catalyst_date": "2020-01-21",
-        "catalyst_price": 4.85,
-        "catalyst_type": "BREAKOUT",
-        "volume_spike": "412.4x",
-        "analysis_start": "2019-09-23",
-        "days_to_peak": 56,
-        "volume_numeric": 412.4
+        "volume_numeric": 128.8,
+        "pre_catalyst_volume": 1439,
+        "pre_catalyst_price": 1141.562,
+        "pre_catalyst_dollar_volume": 1643164,
+        "catalyst_day_volume": 138496.2406,
+        "catalyst_day_dollar_volume": 747879699.2399999
       }
     },
     {
       "ticker": "USWSW",
-      "reason": "Price $0.082 < $0.25",
+      "reason": "Vol: 87175/day, Price: $0.082, Catalyst vol: 1084703",
       "data": {
         "ticker": "USWSW",
         "base_price": 0.03,
@@ -814,12 +862,17 @@
         "volume_spike": "15.4x",
         "analysis_start": "2021-10-27",
         "days_to_peak": 23,
-        "volume_numeric": 15.4
+        "volume_numeric": 15.4,
+        "pre_catalyst_volume": 87175,
+        "pre_catalyst_price": 0.082,
+        "pre_catalyst_dollar_volume": 7154,
+        "catalyst_day_volume": 1084703.0,
+        "catalyst_day_dollar_volume": 86884.7103
       }
     },
     {
       "ticker": "CTXRW",
-      "reason": "Volume 20829 shares/day < 25,000",
+      "reason": "Vol: 20829/day, Price: $0.456, Catalyst vol: 247728",
       "data": {
         "ticker": "CTXRW",
         "base_price": 0.23,
@@ -833,7 +886,12 @@
         "volume_spike": "15.5x",
         "analysis_start": "2020-10-25",
         "days_to_peak": 42,
-        "volume_numeric": 15.5
+        "volume_numeric": 15.5,
+        "pre_catalyst_volume": 20829,
+        "pre_catalyst_price": 0.456,
+        "pre_catalyst_dollar_volume": 9502,
+        "catalyst_day_volume": 247728,
+        "catalyst_day_dollar_volume": 426092.16
       }
     },
     {
@@ -857,7 +915,7 @@
     },
     {
       "ticker": "AMCIW",
-      "reason": "Price $0.130 < $0.25",
+      "reason": "Vol: 54588/day, Price: $0.130, Catalyst vol: 997652",
       "data": {
         "ticker": "AMCIW",
         "base_price": 0.088,
@@ -871,7 +929,12 @@
         "volume_spike": "24.6x",
         "analysis_start": "2019-12-30",
         "days_to_peak": 33,
-        "volume_numeric": 24.6
+        "volume_numeric": 24.6,
+        "pre_catalyst_volume": 54588,
+        "pre_catalyst_price": 0.13,
+        "pre_catalyst_dollar_volume": 7090,
+        "catalyst_day_volume": 997652,
+        "catalyst_day_dollar_volume": 129794.52519999999
       }
     },
     {
@@ -895,7 +958,7 @@
     },
     {
       "ticker": "SES.WS",
-      "reason": "Price $0.039 < $0.25",
+      "reason": "Vol: 112315/day, Price: $0.039, Catalyst vol: 703908",
       "data": {
         "ticker": "SES.WS",
         "base_price": 0.0197,
@@ -909,12 +972,17 @@
         "volume_spike": "8.5x",
         "analysis_start": "2024-08-26",
         "days_to_peak": 42,
-        "volume_numeric": 8.5
+        "volume_numeric": 8.5,
+        "pre_catalyst_volume": 112314,
+        "pre_catalyst_price": 0.039,
+        "pre_catalyst_dollar_volume": 4332,
+        "catalyst_day_volume": 703908,
+        "catalyst_day_dollar_volume": 49273.560000000005
       }
     },
     {
       "ticker": "BREZR",
-      "reason": "Volume 10179 shares/day < 25,000",
+      "reason": "Vol: 10179/day, Price: $0.106, Catalyst vol: 233059",
       "data": {
         "ticker": "BREZR",
         "base_price": 0.0156,
@@ -928,12 +996,17 @@
         "volume_spike": "26.4x",
         "analysis_start": "2023-01-26",
         "days_to_peak": 31,
-        "volume_numeric": 26.4
+        "volume_numeric": 26.4,
+        "pre_catalyst_volume": 10179,
+        "pre_catalyst_price": 0.106,
+        "pre_catalyst_dollar_volume": 1081,
+        "catalyst_day_volume": 233059,
+        "catalyst_day_dollar_volume": 22140.605
       }
     },
     {
       "ticker": "BREZR",
-      "reason": "Price $0.049 < $0.25",
+      "reason": "Vol: 73218/day, Price: $0.049, Catalyst vol: 804715",
       "data": {
         "ticker": "BREZR",
         "base_price": 0.025,
@@ -947,7 +1020,12 @@
         "volume_spike": "9.4x",
         "analysis_start": "2022-07-04",
         "days_to_peak": 31,
-        "volume_numeric": 9.4
+        "volume_numeric": 9.4,
+        "pre_catalyst_volume": 73217,
+        "pre_catalyst_price": 0.049,
+        "pre_catalyst_dollar_volume": 3579,
+        "catalyst_day_volume": 804715,
+        "catalyst_day_dollar_volume": 120626.7785
       }
     },
     {
@@ -990,7 +1068,7 @@
     },
     {
       "ticker": "RITT",
-      "reason": "Volume 3617 shares/day < 25,000",
+      "reason": "Vol: 3617/day, Price: $1.481, Catalyst vol: 133219",
       "data": {
         "ticker": "RITT",
         "base_price": 1.21,
@@ -1004,31 +1082,17 @@
         "volume_spike": "37.6x",
         "analysis_start": "2010-06-23",
         "days_to_peak": 48,
-        "volume_numeric": 37.6
-      }
-    },
-    {
-      "ticker": "SMFL",
-      "reason": "Volume 9256 shares/day < 25,000",
-      "data": {
-        "ticker": "SMFL",
-        "base_price": 2.275,
-        "base_date": "2023-12-15",
-        "peak_price": 24.43,
-        "peak_date": "2023-12-21",
-        "gain_pct": 973.8461538461539,
-        "catalyst_date": "2023-11-30",
-        "catalyst_price": 16.87,
-        "catalyst_type": "50MA_BREAKOUT",
-        "volume_spike": "575.5x",
-        "analysis_start": "2023-08-02",
-        "days_to_peak": 4,
-        "volume_numeric": 575.5
+        "volume_numeric": 37.6,
+        "pre_catalyst_volume": 3617,
+        "pre_catalyst_price": 1.481,
+        "pre_catalyst_dollar_volume": 5358,
+        "catalyst_day_volume": 133219,
+        "catalyst_day_dollar_volume": 231801.06
       }
     },
     {
       "ticker": "NXU",
-      "reason": "Volume 8691 shares/day < 25,000",
+      "reason": "Vol: 8691/day, Price: $5.575, Catalyst vol: 91384",
       "data": {
         "ticker": "NXU",
         "base_price": 4.178,
@@ -1041,12 +1105,18 @@
         "catalyst_type": "BREAKOUT",
         "volume_spike": "11.3x",
         "analysis_start": "2024-06-05",
-        "days_to_peak": 77
+        "days_to_peak": 77,
+        "volume_numeric": 11.3,
+        "pre_catalyst_volume": 8691,
+        "pre_catalyst_price": 5.575,
+        "pre_catalyst_dollar_volume": 48455,
+        "catalyst_day_volume": 91383.6,
+        "catalyst_day_dollar_volume": 503523.636
       }
     },
     {
       "ticker": "CELGZ",
-      "reason": "Volume 15385 shares/day < 25,000",
+      "reason": "Vol: 15385/day, Price: $0.450, Catalyst vol: 174304",
       "data": {
         "ticker": "CELGZ",
         "base_price": 0.26,
@@ -1060,12 +1130,17 @@
         "volume_spike": "10.1x",
         "analysis_start": "2018-03-22",
         "days_to_peak": 40,
-        "volume_numeric": 10.1
+        "volume_numeric": 10.1,
+        "pre_catalyst_volume": 15385,
+        "pre_catalyst_price": 0.45,
+        "pre_catalyst_dollar_volume": 6921,
+        "catalyst_day_volume": 174304,
+        "catalyst_day_dollar_volume": 184762.24000000002
       }
     },
     {
       "ticker": "ADD",
-      "reason": "Volume 117 shares/day < 25,000",
+      "reason": "Vol: 117/day, Price: $580.493, Catalyst vol: 4619",
       "data": {
         "ticker": "ADD",
         "base_price": 455,
@@ -1079,12 +1154,17 @@
         "volume_spike": "48.5x",
         "analysis_start": "2024-02-05",
         "days_to_peak": 52,
-        "volume_numeric": 48.5
+        "volume_numeric": 48.5,
+        "pre_catalyst_volume": 117,
+        "pre_catalyst_price": 580.493,
+        "pre_catalyst_dollar_volume": 68149,
+        "catalyst_day_volume": 4618.7072,
+        "catalyst_day_dollar_volume": 2678850.176
       }
     },
     {
       "ticker": "CBMX",
-      "reason": "Volume 418 shares/day < 25,000",
+      "reason": "Vol: 418/day, Price: $49.508, Catalyst vol: 87765",
       "data": {
         "ticker": "CBMX",
         "base_price": 21.015,
@@ -1098,7 +1178,12 @@
         "volume_spike": "278.1x",
         "analysis_start": "2012-08-09",
         "days_to_peak": 15,
-        "volume_numeric": 278.1
+        "volume_numeric": 278.1,
+        "pre_catalyst_volume": 418,
+        "pre_catalyst_price": 49.508,
+        "pre_catalyst_dollar_volume": 20718,
+        "catalyst_day_volume": 87765.0667,
+        "catalyst_day_dollar_volume": 11321693.6043
       }
     },
     {
@@ -1158,27 +1243,8 @@
       }
     },
     {
-      "ticker": "TRIT",
-      "reason": "Volume 24475 shares/day < 25,000",
-      "data": {
-        "ticker": "TRIT",
-        "base_price": 1.31,
-        "base_date": "2013-10-10",
-        "peak_price": 12.72,
-        "peak_date": "2020-12-02",
-        "gain_pct": 870.9923664122136,
-        "catalyst_date": "2013-10-15",
-        "catalyst_price": 1.85,
-        "catalyst_type": "50MA_BREAKOUT",
-        "volume_spike": "23.9x",
-        "analysis_start": "2013-06-17",
-        "days_to_peak": 59,
-        "volume_numeric": 23.9
-      }
-    },
-    {
       "ticker": "DTSS",
-      "reason": "Volume 293 shares/day < 25,000",
+      "reason": "Vol: 293/day, Price: $18.892, Catalyst vol: 7273",
       "data": {
         "ticker": "DTSS",
         "base_price": 11.481,
@@ -1192,12 +1258,17 @@
         "volume_spike": "29.5x",
         "analysis_start": "2019-04-18",
         "days_to_peak": 13,
-        "volume_numeric": 29.5
+        "volume_numeric": 29.5,
+        "pre_catalyst_volume": 293,
+        "pre_catalyst_price": 18.892,
+        "pre_catalyst_dollar_volume": 5540,
+        "catalyst_day_volume": 7273.2,
+        "catalyst_day_dollar_volume": 114552.9
       }
     },
     {
       "ticker": "EDTXW",
-      "reason": "Volume 9063 shares/day < 25,000",
+      "reason": "Vol: 9063/day, Price: $0.234, Catalyst vol: 820934",
       "data": {
         "ticker": "EDTXW",
         "base_price": 0.1523,
@@ -1211,12 +1282,17 @@
         "volume_spike": "51.9x",
         "analysis_start": "2019-08-14",
         "days_to_peak": 64,
-        "volume_numeric": 51.9
+        "volume_numeric": 51.9,
+        "pre_catalyst_volume": 9062,
+        "pre_catalyst_price": 0.234,
+        "pre_catalyst_dollar_volume": 2123,
+        "catalyst_day_volume": 820934,
+        "catalyst_day_dollar_volume": 276654.75800000003
       }
     },
     {
       "ticker": "CRTDW",
-      "reason": "Volume 6101 shares/day < 25,000",
+      "reason": "Pump & dump - 150% gap on day 1 after peak",
       "data": {
         "ticker": "CRTDW",
         "base_price": 0.45,
@@ -1230,29 +1306,13 @@
         "volume_spike": "361.3x",
         "analysis_start": "2021-06-24",
         "days_to_peak": 8,
-        "volume_numeric": 361.3
-      }
-    },
-    {
-      "ticker": "HYMC",
-      "reason": "Pump & dump - 95% gap on day 2 after peak",
-      "data": {
-        "ticker": "HYMC",
-        "base_price": 2.84,
-        "base_date": "2022-03-02",
-        "peak_price": 26.5,
-        "peak_date": "2022-03-11",
-        "gain_pct": 833.0985915492957,
-        "catalyst_date": "2022-03-08",
-        "catalyst_price": 10,
-        "catalyst_type": "50MA_BREAKOUT",
-        "volume_spike": "403.2x",
-        "analysis_start": "2021-11-08",
-        "days_to_peak": 7,
-        "volume_numeric": 403.2,
-        "pre_catalyst_volume": 63143,
-        "pre_catalyst_price": 3.768,
-        "pre_catalyst_dollar_volume": 237920
+        "volume_numeric": 361.3,
+        "pre_catalyst_volume": 6100,
+        "pre_catalyst_price": 0.799,
+        "pre_catalyst_dollar_volume": 4872,
+        "catalyst_day_volume": 1870971.0,
+        "catalyst_day_dollar_volume": 2694198.2399999998,
+        "liquidity_warning": "rescued_high_catalyst_volume"
       }
     },
     {
@@ -1275,7 +1335,7 @@
     },
     {
       "ticker": "NAKD",
-      "reason": "Volume 2466 shares/day < 25,000",
+      "reason": "Vol: 2466/day, Price: $20.648, Catalyst vol: 49509",
       "data": {
         "ticker": "NAKD",
         "base_price": 18.9,
@@ -1289,7 +1349,12 @@
         "volume_spike": "21.5x",
         "analysis_start": "2018-01-29",
         "days_to_peak": 35,
-        "volume_numeric": 21.5
+        "volume_numeric": 21.5,
+        "pre_catalyst_volume": 2466,
+        "pre_catalyst_price": 20.648,
+        "pre_catalyst_dollar_volume": 50925,
+        "catalyst_day_volume": 49509.1333,
+        "catalyst_day_dollar_volume": 1225351.049175
       }
     },
     {
@@ -1313,7 +1378,7 @@
     },
     {
       "ticker": "MTSL",
-      "reason": "Volume 2259 shares/day < 25,000",
+      "reason": "Vol: 2259/day, Price: $2.148, Catalyst vol: 92589",
       "data": {
         "ticker": "MTSL",
         "base_price": 1.02,
@@ -1327,7 +1392,12 @@
         "volume_spike": "11.6x",
         "analysis_start": "2017-05-30",
         "days_to_peak": 85,
-        "volume_numeric": 11.6
+        "volume_numeric": 11.6,
+        "pre_catalyst_volume": 2258,
+        "pre_catalyst_price": 2.148,
+        "pre_catalyst_dollar_volume": 4852,
+        "catalyst_day_volume": 92589,
+        "catalyst_day_dollar_volume": 422205.83999999997
       }
     },
     {
@@ -1370,7 +1440,7 @@
     },
     {
       "ticker": "PHUNW",
-      "reason": "Price $0.206 < $0.25",
+      "reason": "Vol: 35706/day, Price: $0.206, Catalyst vol: 433737",
       "data": {
         "ticker": "PHUNW",
         "base_price": 0.0804,
@@ -1384,12 +1454,17 @@
         "volume_spike": "15.3x",
         "analysis_start": "2020-09-28",
         "days_to_peak": 44,
-        "volume_numeric": 15.3
+        "volume_numeric": 15.3,
+        "pre_catalyst_volume": 35706,
+        "pre_catalyst_price": 0.206,
+        "pre_catalyst_dollar_volume": 7364,
+        "catalyst_day_volume": 433737,
+        "catalyst_day_dollar_volume": 237297.51270000002
       }
     },
     {
       "ticker": "SKYE",
-      "reason": "Volume 10744 shares/day < 25,000",
+      "reason": "Vol: 10744/day, Price: $4.260, Catalyst vol: 234012",
       "data": {
         "ticker": "SKYE",
         "base_price": 2.25,
@@ -1403,12 +1478,17 @@
         "volume_spike": "23.6x",
         "analysis_start": "2023-10-30",
         "days_to_peak": 26,
-        "volume_numeric": 23.6
+        "volume_numeric": 23.6,
+        "pre_catalyst_volume": 10743,
+        "pre_catalyst_price": 4.26,
+        "pre_catalyst_dollar_volume": 45774,
+        "catalyst_day_volume": 234012,
+        "catalyst_day_dollar_volume": 3393174.0
       }
     },
     {
       "ticker": "NAMSW",
-      "reason": "Volume 4181 shares/day < 25,000",
+      "reason": "Vol: 4181/day, Price: $2.640, Catalyst vol: 76983",
       "data": {
         "ticker": "NAMSW",
         "base_price": 1.7101,
@@ -1422,7 +1502,12 @@
         "volume_spike": "12.0x",
         "analysis_start": "2023-09-12",
         "days_to_peak": 32,
-        "volume_numeric": 12.0
+        "volume_numeric": 12.0,
+        "pre_catalyst_volume": 4181,
+        "pre_catalyst_price": 2.64,
+        "pre_catalyst_dollar_volume": 11037,
+        "catalyst_day_volume": 76983,
+        "catalyst_day_dollar_volume": 405700.41
       }
     },
     {
@@ -1446,7 +1531,7 @@
     },
     {
       "ticker": "CERCW",
-      "reason": "Volume 20543 shares/day < 25,000",
+      "reason": "Vol: 20543/day, Price: $0.039, Catalyst vol: 371705",
       "data": {
         "ticker": "CERCW",
         "base_price": 0.0212,
@@ -1460,12 +1545,17 @@
         "volume_spike": "25.8x",
         "analysis_start": "2017-02-26",
         "days_to_peak": 27,
-        "volume_numeric": 25.8
+        "volume_numeric": 25.8,
+        "pre_catalyst_volume": 20542,
+        "pre_catalyst_price": 0.039,
+        "pre_catalyst_dollar_volume": 799,
+        "catalyst_day_volume": 371705,
+        "catalyst_day_dollar_volume": 27394.6585
       }
     },
     {
       "ticker": "HOUR",
-      "reason": "Volume 9092 shares/day < 25,000",
+      "reason": "Vol: 9092/day, Price: $0.949, Catalyst vol: 889738",
       "data": {
         "ticker": "HOUR",
         "base_price": 0.83,
@@ -1479,12 +1569,17 @@
         "volume_spike": "96.4x",
         "analysis_start": "2024-04-11",
         "days_to_peak": 98,
-        "volume_numeric": 96.4
+        "volume_numeric": 96.4,
+        "pre_catalyst_volume": 9091,
+        "pre_catalyst_price": 0.949,
+        "pre_catalyst_dollar_volume": 8631,
+        "catalyst_day_volume": 889738,
+        "catalyst_day_dollar_volume": 978711.8
       }
     },
     {
       "ticker": "SBOT",
-      "reason": "Volume 16621 shares/day < 25,000",
+      "reason": "Vol: 16621/day, Price: $6.300, Catalyst vol: 284726",
       "data": {
         "ticker": "SBOT",
         "base_price": 4.5,
@@ -1498,31 +1593,17 @@
         "volume_spike": "13.1x",
         "analysis_start": "2019-01-24",
         "days_to_peak": 116,
-        "volume_numeric": 13.1
-      }
-    },
-    {
-      "ticker": "FOXO",
-      "reason": "Volume 14316 shares/day < 25,000",
-      "data": {
-        "ticker": "FOXO",
-        "base_price": 2.587,
-        "base_date": "2024-08-08",
-        "peak_price": 21.094,
-        "peak_date": "2024-11-06",
-        "gain_pct": 715.3846153846155,
-        "catalyst_date": "2024-11-06",
-        "catalyst_price": 15.574,
-        "catalyst_type": "50MA_BREAKOUT",
-        "volume_spike": "3974.2x",
-        "analysis_start": "2024-07-09",
-        "days_to_peak": 63,
-        "volume_numeric": 3974.2
+        "volume_numeric": 13.1,
+        "pre_catalyst_volume": 16621,
+        "pre_catalyst_price": 6.3,
+        "pre_catalyst_dollar_volume": 104707,
+        "catalyst_day_volume": 284725.8333,
+        "catalyst_day_dollar_volume": 1913357.599776
       }
     },
     {
       "ticker": "CHNR",
-      "reason": "Volume 204 shares/day < 25,000",
+      "reason": "Vol: 204/day, Price: $34.779, Catalyst vol: 3827",
       "data": {
         "ticker": "CHNR",
         "base_price": 30,
@@ -1536,12 +1617,17 @@
         "volume_spike": "16.2x",
         "analysis_start": "2020-02-10",
         "days_to_peak": 19,
-        "volume_numeric": 16.2
+        "volume_numeric": 16.2,
+        "pre_catalyst_volume": 203,
+        "pre_catalyst_price": 34.779,
+        "pre_catalyst_dollar_volume": 7079,
+        "catalyst_day_volume": 3827.4,
+        "catalyst_day_dollar_volume": 140848.32
       }
     },
     {
       "ticker": "USWSW",
-      "reason": "Price $0.027 < $0.25",
+      "reason": "Vol: 76205/day, Price: $0.027, Catalyst vol: 588512",
       "data": {
         "ticker": "USWSW",
         "base_price": 0.0125,
@@ -1555,12 +1641,17 @@
         "volume_spike": "6.5x",
         "analysis_start": "2020-08-16",
         "days_to_peak": 8,
-        "volume_numeric": 6.5
+        "volume_numeric": 6.5,
+        "pre_catalyst_volume": 76204,
+        "pre_catalyst_price": 0.027,
+        "pre_catalyst_dollar_volume": 2045,
+        "catalyst_day_volume": 588512,
+        "catalyst_day_dollar_volume": 15889.824
       }
     },
     {
       "ticker": "AUVI",
-      "reason": "Volume 1296 shares/day < 25,000",
+      "reason": "Vol: 1296/day, Price: $626.875, Catalyst vol: 21145",
       "data": {
         "ticker": "AUVI",
         "base_price": 565,
@@ -1574,7 +1665,12 @@
         "volume_spike": "11.0x",
         "analysis_start": "2020-09-22",
         "days_to_peak": 26,
-        "volume_numeric": 11.0
+        "volume_numeric": 11.0,
+        "pre_catalyst_volume": 1296,
+        "pre_catalyst_price": 626.875,
+        "pre_catalyst_dollar_volume": 812433,
+        "catalyst_day_volume": 21145.08,
+        "catalyst_day_dollar_volume": 13929321.450000001
       }
     },
     {
@@ -1598,7 +1694,7 @@
     },
     {
       "ticker": "NSTB",
-      "reason": "Volume 9788 shares/day < 25,000",
+      "reason": "Vol: 9788/day, Price: $10.280, Catalyst vol: 194386",
       "data": {
         "ticker": "NSTB",
         "base_price": 1.39,
@@ -1611,12 +1707,18 @@
         "catalyst_type": "50MA_BREAKOUT",
         "volume_spike": "23.6x",
         "analysis_start": "2023-09-28",
-        "days_to_peak": 16
+        "days_to_peak": 16,
+        "volume_numeric": 23.6,
+        "pre_catalyst_volume": 9788,
+        "pre_catalyst_price": 10.28,
+        "pre_catalyst_dollar_volume": 100621,
+        "catalyst_day_volume": 194386,
+        "catalyst_day_dollar_volume": 2039109.1400000001
       }
     },
     {
       "ticker": "SHZ",
-      "reason": "Volume 16219 shares/day < 25,000",
+      "reason": "Vol: 16219/day, Price: $1.007, Catalyst vol: 280569",
       "data": {
         "ticker": "SHZ",
         "base_price": 0.6,
@@ -1630,12 +1732,17 @@
         "volume_spike": "13.7x",
         "analysis_start": "2010-06-10",
         "days_to_peak": 8,
-        "volume_numeric": 13.7
+        "volume_numeric": 13.7,
+        "pre_catalyst_volume": 16218,
+        "pre_catalyst_price": 1.007,
+        "pre_catalyst_dollar_volume": 16329,
+        "catalyst_day_volume": 280569,
+        "catalyst_day_dollar_volume": 324674.4468
       }
     },
     {
       "ticker": "CHOP",
-      "reason": "Volume 10092 shares/day < 25,000",
+      "reason": "Vol: 10092/day, Price: $0.756, Catalyst vol: 248633",
       "data": {
         "ticker": "CHOP",
         "base_price": 0.5888,
@@ -1649,12 +1756,17 @@
         "volume_spike": "27.8x",
         "analysis_start": "2014-12-09",
         "days_to_peak": 10,
-        "volume_numeric": 27.8
+        "volume_numeric": 27.8,
+        "pre_catalyst_volume": 10092,
+        "pre_catalyst_price": 0.756,
+        "pre_catalyst_dollar_volume": 7628,
+        "catalyst_day_volume": 248633,
+        "catalyst_day_dollar_volume": 236176.48669999998
       }
     },
     {
       "ticker": "ACXP",
-      "reason": "Volume 17167 shares/day < 25,000",
+      "reason": "Vol: 17167/day, Price: $34.302, Catalyst vol: 27308",
       "data": {
         "ticker": "ACXP",
         "base_price": 23.4,
@@ -1667,12 +1779,17 @@
         "catalyst_type": "50MA_BREAKOUT",
         "volume_spike": "2.1x",
         "analysis_start": "2023-07-08",
-        "volume_numeric": 2.1
+        "volume_numeric": 2.1,
+        "pre_catalyst_volume": 17167,
+        "pre_catalyst_price": 34.302,
+        "pre_catalyst_dollar_volume": 588876,
+        "catalyst_day_volume": 27307.9,
+        "catalyst_day_dollar_volume": 1048623.36
       }
     },
     {
       "ticker": "CYCN",
-      "reason": "Volume 13845 shares/day < 25,000",
+      "reason": "Vol: 13845/day, Price: $2.747, Catalyst vol: 125048",
       "data": {
         "ticker": "CYCN",
         "base_price": 1.27,
@@ -1686,12 +1803,17 @@
         "volume_spike": "11.4x",
         "analysis_start": "2024-07-04",
         "days_to_peak": 7,
-        "volume_numeric": 11.4
+        "volume_numeric": 11.4,
+        "pre_catalyst_volume": 13844,
+        "pre_catalyst_price": 2.747,
+        "pre_catalyst_dollar_volume": 38038,
+        "catalyst_day_volume": 125048,
+        "catalyst_day_dollar_volume": 368891.60000000003
       }
     },
     {
       "ticker": "SAI",
-      "reason": "Volume 6702 shares/day < 25,000",
+      "reason": "Vol: 6702/day, Price: $1.225, Catalyst vol: 537210",
       "data": {
         "ticker": "SAI",
         "base_price": 1,
@@ -1705,12 +1827,17 @@
         "volume_spike": "63.4x",
         "analysis_start": "2022-12-14",
         "days_to_peak": 58,
-        "volume_numeric": 63.4
+        "volume_numeric": 63.4,
+        "pre_catalyst_volume": 6701,
+        "pre_catalyst_price": 1.225,
+        "pre_catalyst_dollar_volume": 8209,
+        "catalyst_day_volume": 537210,
+        "catalyst_day_dollar_volume": 816559.2
       }
     },
     {
       "ticker": "NRGU",
-      "reason": "Volume 23765 shares/day < 25,000",
+      "reason": "Vol: 23765/day, Price: $130.182, Catalyst vol: 83517",
       "data": {
         "ticker": "NRGU",
         "base_price": 21.966,
@@ -1724,12 +1851,17 @@
         "volume_spike": "4.9x",
         "analysis_start": "2019-12-19",
         "days_to_peak": 35,
-        "volume_numeric": 4.9
+        "volume_numeric": 4.9,
+        "pre_catalyst_volume": 23764,
+        "pre_catalyst_price": 130.182,
+        "pre_catalyst_dollar_volume": 3093766,
+        "catalyst_day_volume": 83517.2,
+        "catalyst_day_dollar_volume": 4626852.88
       }
     },
     {
       "ticker": "FALC",
-      "reason": "Volume 3200 shares/day < 25,000",
+      "reason": "Vol: 3200/day, Price: $26.088, Catalyst vol: 30218",
       "data": {
         "ticker": "FALC",
         "base_price": 14,
@@ -1743,7 +1875,12 @@
         "volume_spike": "10.8x",
         "analysis_start": "2017-03-16",
         "days_to_peak": 17,
-        "volume_numeric": 10.8
+        "volume_numeric": 10.8,
+        "pre_catalyst_volume": 3199,
+        "pre_catalyst_price": 26.088,
+        "pre_catalyst_dollar_volume": 83474,
+        "catalyst_day_volume": 30218.46,
+        "catalyst_day_dollar_volume": 843095.034
       }
     },
     {
@@ -1767,7 +1904,7 @@
     },
     {
       "ticker": "IMACW",
-      "reason": "Volume 2591 shares/day < 25,000",
+      "reason": "Vol: 2591/day, Price: $0.146, Catalyst vol: 91310",
       "data": {
         "ticker": "IMACW",
         "base_price": 0.1101,
@@ -1781,12 +1918,17 @@
         "volume_spike": "26.4x",
         "analysis_start": "2020-07-15",
         "days_to_peak": 49,
-        "volume_numeric": 26.4
+        "volume_numeric": 26.4,
+        "pre_catalyst_volume": 2591,
+        "pre_catalyst_price": 0.146,
+        "pre_catalyst_dollar_volume": 377,
+        "catalyst_day_volume": 91310,
+        "catalyst_day_dollar_volume": 21567.422
       }
     },
     {
       "ticker": "UAVS",
-      "reason": "Volume 4655 shares/day < 25,000",
+      "reason": "Vol: 4655/day, Price: $2741.714, Catalyst vol: 49056",
       "data": {
         "ticker": "UAVS",
         "base_price": 2440,
@@ -1800,31 +1942,17 @@
         "volume_spike": "13.0x",
         "analysis_start": "2020-08-24",
         "days_to_peak": 43,
-        "volume_numeric": 13.0
-      }
-    },
-    {
-      "ticker": "TRMD",
-      "reason": "Volume 1923 shares/day < 25,000",
-      "data": {
-        "ticker": "TRMD",
-        "base_price": 6.8,
-        "base_date": "2020-04-17",
-        "peak_price": 48.86,
-        "peak_date": "2020-04-21",
-        "gain_pct": 618.5294117647059,
-        "catalyst_date": "2020-04-21",
-        "catalyst_price": 12.5,
-        "catalyst_type": "50MA_BREAKOUT",
-        "volume_spike": "690.4x",
-        "analysis_start": "2019-12-23",
-        "days_to_peak": 2,
-        "volume_numeric": 690.4
+        "volume_numeric": 13.0,
+        "pre_catalyst_volume": 4655,
+        "pre_catalyst_price": 2741.714,
+        "pre_catalyst_dollar_volume": 12763710,
+        "catalyst_day_volume": 49055.726,
+        "catalyst_day_dollar_volume": 333088379.54
       }
     },
     {
       "ticker": "FOXO",
-      "reason": "Volume 1780 shares/day < 25,000",
+      "reason": "Vol: 1780/day, Price: $79.049, Catalyst vol: 18535",
       "data": {
         "ticker": "FOXO",
         "base_price": 45.79,
@@ -1838,12 +1966,17 @@
         "volume_spike": "7.0x",
         "analysis_start": "2022-09-22",
         "days_to_peak": 27,
-        "volume_numeric": 7.0
+        "volume_numeric": 7.0,
+        "pre_catalyst_volume": 1780,
+        "pre_catalyst_price": 79.049,
+        "pre_catalyst_dollar_volume": 140744,
+        "catalyst_day_volume": 18534.8794,
+        "catalyst_day_dollar_volume": 1844220.5003000002
       }
     },
     {
       "ticker": "PAACW",
-      "reason": "Volume 5834 shares/day < 25,000",
+      "reason": "Vol: 5834/day, Price: $0.119, Catalyst vol: 23700",
       "data": {
         "ticker": "PAACW",
         "base_price": 0.0715,
@@ -1857,12 +1990,17 @@
         "volume_spike": "5.8x",
         "analysis_start": "2016-08-23",
         "days_to_peak": 3,
-        "volume_numeric": 5.8
+        "volume_numeric": 5.8,
+        "pre_catalyst_volume": 5834,
+        "pre_catalyst_price": 0.119,
+        "pre_catalyst_dollar_volume": 697,
+        "catalyst_day_volume": 23700,
+        "catalyst_day_dollar_volume": 4026.63
       }
     },
     {
       "ticker": "EMMA",
-      "reason": "Volume 10594 shares/day < 25,000",
+      "reason": "Vol: 10594/day, Price: $0.355, Catalyst vol: 120186",
       "data": {
         "ticker": "EMMA",
         "base_price": 0.07055,
@@ -1876,12 +2014,17 @@
         "volume_spike": "13.0x",
         "analysis_start": "2022-05-19",
         "days_to_peak": 31,
-        "volume_numeric": 13.0
+        "volume_numeric": 13.0,
+        "pre_catalyst_volume": 10593,
+        "pre_catalyst_price": 0.355,
+        "pre_catalyst_dollar_volume": 3759,
+        "catalyst_day_volume": 120186,
+        "catalyst_day_dollar_volume": 33955.54965
       }
     },
     {
       "ticker": "TENX",
-      "reason": "Volume 176 shares/day < 25,000",
+      "reason": "Vol: 176/day, Price: $988.200, Catalyst vol: 1217",
       "data": {
         "ticker": "TENX",
         "base_price": 400,
@@ -1895,12 +2038,17 @@
         "volume_spike": "8.3x",
         "analysis_start": "2020-01-16",
         "days_to_peak": 8,
-        "volume_numeric": 8.3
+        "volume_numeric": 8.3,
+        "pre_catalyst_volume": 176,
+        "pre_catalyst_price": 988.2,
+        "pre_catalyst_dollar_volume": 174206,
+        "catalyst_day_volume": 1217.4788,
+        "catalyst_day_dollar_volume": 1908032.77536
       }
     },
     {
       "ticker": "JYD",
-      "reason": "Volume 2198 shares/day < 25,000",
+      "reason": "Vol: 2198/day, Price: $46.935, Catalyst vol: 216206",
       "data": {
         "ticker": "JYD",
         "base_price": 25,
@@ -1913,12 +2061,18 @@
         "catalyst_type": "50MA_BREAKOUT",
         "volume_spike": "125.2x",
         "analysis_start": "2024-08-05",
-        "days_to_peak": 99
+        "days_to_peak": 99,
+        "volume_numeric": 125.2,
+        "pre_catalyst_volume": 2198,
+        "pre_catalyst_price": 46.935,
+        "pre_catalyst_dollar_volume": 103176,
+        "catalyst_day_volume": 216206.36,
+        "catalyst_day_dollar_volume": 11783246.62
       }
     },
     {
       "ticker": "FUV",
-      "reason": "Volume 22603 shares/day < 25,000",
+      "reason": "Vol: 22603/day, Price: $48.779, Catalyst vol: 66960",
       "data": {
         "ticker": "FUV",
         "base_price": 47.2,
@@ -1932,12 +2086,17 @@
         "volume_spike": "3.7x",
         "analysis_start": "2020-02-16",
         "days_to_peak": 111,
-        "volume_numeric": 3.7
+        "volume_numeric": 3.7,
+        "pre_catalyst_volume": 22603,
+        "pre_catalyst_price": 48.779,
+        "pre_catalyst_dollar_volume": 1102583,
+        "catalyst_day_volume": 66960.3,
+        "catalyst_day_dollar_volume": 4513124.220000001
       }
     },
     {
       "ticker": "GMBLW",
-      "reason": "Volume 19509 shares/day < 25,000",
+      "reason": "Vol: 19509/day, Price: $2.479, Catalyst vol: 204701",
       "data": {
         "ticker": "GMBLW",
         "base_price": 1.8501,
@@ -1951,12 +2110,17 @@
         "volume_spike": "9.3x",
         "analysis_start": "2020-06-18",
         "days_to_peak": 93,
-        "volume_numeric": 9.3
+        "volume_numeric": 9.3,
+        "pre_catalyst_volume": 19509,
+        "pre_catalyst_price": 2.479,
+        "pre_catalyst_dollar_volume": 48362,
+        "catalyst_day_volume": 204701,
+        "catalyst_day_dollar_volume": 634573.1
       }
     },
     {
       "ticker": "NMpH",
-      "reason": "Volume 2012 shares/day < 25,000",
+      "reason": "Vol: 2012/day, Price: $2.436, Catalyst vol: 192401",
       "data": {
         "ticker": "NMpH",
         "base_price": 1.45,
@@ -1970,12 +2134,17 @@
         "volume_spike": "76.1x",
         "analysis_start": "2020-04-21",
         "days_to_peak": 111,
-        "volume_numeric": 76.1
+        "volume_numeric": 76.1,
+        "pre_catalyst_volume": 2012,
+        "pre_catalyst_price": 2.436,
+        "pre_catalyst_dollar_volume": 4901,
+        "catalyst_day_volume": 192401,
+        "catalyst_day_dollar_volume": 605947.7094
       }
     },
     {
       "ticker": "COHN",
-      "reason": "Volume 18973 shares/day < 25,000",
+      "reason": "Vol: 18973/day, Price: $3.614, Catalyst vol: 318224",
       "data": {
         "ticker": "COHN",
         "base_price": 2.77,
@@ -1989,12 +2158,17 @@
         "volume_spike": "20.5x",
         "analysis_start": "2020-02-09",
         "days_to_peak": 25,
-        "volume_numeric": 20.5
+        "volume_numeric": 20.5,
+        "pre_catalyst_volume": 18972,
+        "pre_catalyst_price": 3.614,
+        "pre_catalyst_dollar_volume": 68562,
+        "catalyst_day_volume": 318224,
+        "catalyst_day_dollar_volume": 1352452.0
       }
     },
     {
       "ticker": "NMpG",
-      "reason": "Volume 838 shares/day < 25,000",
+      "reason": "Vol: 838/day, Price: $2.429, Catalyst vol: 29556",
       "data": {
         "ticker": "NMpG",
         "base_price": 2.59,
@@ -2008,12 +2182,17 @@
         "volume_spike": "21.2x",
         "analysis_start": "2020-04-21",
         "days_to_peak": 76,
-        "volume_numeric": 21.2
+        "volume_numeric": 21.2,
+        "pre_catalyst_volume": 838,
+        "pre_catalyst_price": 2.429,
+        "pre_catalyst_dollar_volume": 2036,
+        "catalyst_day_volume": 29556,
+        "catalyst_day_dollar_volume": 98421.48
       }
     },
     {
       "ticker": "PTI",
-      "reason": "Volume 22948 shares/day < 25,000",
+      "reason": "Vol: 22948/day, Price: $16.729, Catalyst vol: 218100",
       "data": {
         "ticker": "PTI",
         "base_price": 14,
@@ -2027,106 +2206,17 @@
         "volume_spike": "9.5x",
         "analysis_start": "2019-07-09",
         "days_to_peak": 36,
-        "volume_numeric": 9.5
-      }
-    },
-    {
-      "ticker": "ADIL",
-      "reason": "Volume 1830 shares/day < 25,000",
-      "data": {
-        "ticker": "ADIL",
-        "base_price": 27.6375,
-        "base_date": "2018-11-15",
-        "peak_price": 186.25,
-        "peak_date": "2018-12-26",
-        "gain_pct": 573.9032112166442,
-        "catalyst_date": "2018-11-29",
-        "catalyst_price": 70,
-        "catalyst_type": "50MA_BREAKOUT",
-        "volume_spike": "173.8x",
-        "analysis_start": "2018-08-31",
-        "volume_numeric": 173.8
-      }
-    },
-    {
-      "ticker": "SANWW",
-      "reason": "Volume 2764 shares/day < 25,000",
-      "data": {
-        "ticker": "SANWW",
-        "base_price": 0.52,
-        "base_date": "2012-08-07",
-        "peak_price": 3.5,
-        "peak_date": "2013-03-11",
-        "gain_pct": 573.0769230769231,
-        "catalyst_date": "2012-09-13",
-        "catalyst_price": 0.9,
-        "catalyst_type": "50MA_BREAKOUT",
-        "volume_spike": "7.3x",
-        "analysis_start": "2012-05-16",
-        "days_to_peak": 113,
-        "volume_numeric": 7.3
-      }
-    },
-    {
-      "ticker": "CAPR",
-      "reason": "Volume 10690 shares/day < 25,000",
-      "data": {
-        "ticker": "CAPR",
-        "base_price": 6.34,
-        "base_date": "2017-06-23",
-        "peak_price": 42.5,
-        "peak_date": "2017-10-02",
-        "gain_pct": 570.347003154574,
-        "catalyst_date": "2017-07-18",
-        "catalyst_price": 13.6,
-        "catalyst_type": "50MA_BREAKOUT",
-        "volume_spike": "184.1x",
-        "analysis_start": "2017-03-20",
-        "days_to_peak": 69,
-        "volume_numeric": 184.1
-      }
-    },
-    {
-      "ticker": "CYAD",
-      "reason": "Volume 13211 shares/day < 25,000",
-      "data": {
-        "ticker": "CYAD",
-        "base_price": 0.4604,
-        "base_date": "2022-12-30",
-        "peak_price": 3.07,
-        "peak_date": "2023-01-18",
-        "gain_pct": 566.8114682884449,
-        "catalyst_date": "2023-01-17",
-        "catalyst_price": 1.9,
-        "catalyst_type": "50MA_BREAKOUT",
-        "volume_spike": "6432.3x",
-        "analysis_start": "2022-09-19",
-        "days_to_peak": 11,
-        "volume_numeric": 6432.3
-      }
-    },
-    {
-      "ticker": "OMH",
-      "reason": "Volume 3163 shares/day < 25,000",
-      "data": {
-        "ticker": "OMH",
-        "base_price": 9,
-        "base_date": "2024-01-30",
-        "peak_price": 60,
-        "peak_date": "2024-02-13",
-        "gain_pct": 566.6666666666667,
-        "catalyst_date": "2024-02-13",
-        "catalyst_price": 22.6,
-        "catalyst_type": "50MA_BREAKOUT",
-        "volume_spike": "3118.0x",
-        "analysis_start": "2023-10-16",
-        "days_to_peak": 10,
-        "volume_numeric": 3118.0
+        "volume_numeric": 9.5,
+        "pre_catalyst_volume": 22948,
+        "pre_catalyst_price": 16.729,
+        "pre_catalyst_dollar_volume": 383909,
+        "catalyst_day_volume": 218099.5,
+        "catalyst_day_dollar_volume": 3808453.469
       }
     },
     {
       "ticker": "CMT",
-      "reason": "Volume 22608 shares/day < 25,000",
+      "reason": "Vol: 22608/day, Price: $1.899, Catalyst vol: 231591",
       "data": {
         "ticker": "CMT",
         "base_price": 1.03,
@@ -2140,12 +2230,17 @@
         "volume_spike": "12.7x",
         "analysis_start": "2019-12-19",
         "days_to_peak": 76,
-        "volume_numeric": 12.7
+        "volume_numeric": 12.7,
+        "pre_catalyst_volume": 22608,
+        "pre_catalyst_price": 1.899,
+        "pre_catalyst_dollar_volume": 42924,
+        "catalyst_day_volume": 231591,
+        "catalyst_day_dollar_volume": 532659.2999999999
       }
     },
     {
       "ticker": "EDUC",
-      "reason": "Volume 12365 shares/day < 25,000",
+      "reason": "Vol: 12365/day, Price: $5.067, Catalyst vol: 93299",
       "data": {
         "ticker": "EDUC",
         "base_price": 3.0201,
@@ -2159,12 +2254,17 @@
         "volume_spike": "6.1x",
         "analysis_start": "2020-01-22",
         "days_to_peak": 54,
-        "volume_numeric": 6.1
+        "volume_numeric": 6.1,
+        "pre_catalyst_volume": 12364,
+        "pre_catalyst_price": 5.067,
+        "pre_catalyst_dollar_volume": 62653,
+        "catalyst_day_volume": 93299,
+        "catalyst_day_dollar_volume": 589649.68
       }
     },
     {
       "ticker": "SKBI",
-      "reason": "Volume 10686 shares/day < 25,000",
+      "reason": "Vol: 10686/day, Price: $1.398, Catalyst vol: 420127",
       "data": {
         "ticker": "SKBI",
         "base_price": 1,
@@ -2178,12 +2278,17 @@
         "volume_spike": "42.1x",
         "analysis_start": "2013-02-06",
         "days_to_peak": 106,
-        "volume_numeric": 42.1
+        "volume_numeric": 42.1,
+        "pre_catalyst_volume": 10685,
+        "pre_catalyst_price": 1.398,
+        "pre_catalyst_dollar_volume": 14939,
+        "catalyst_day_volume": 420127,
+        "catalyst_day_dollar_volume": 621787.96
       }
     },
     {
       "ticker": "EVIX",
-      "reason": "Volume 6670 shares/day < 25,000",
+      "reason": "Vol: 6670/day, Price: $3.343, Catalyst vol: 24820",
       "data": {
         "ticker": "EVIX",
         "base_price": 2.95,
@@ -2197,12 +2302,17 @@
         "volume_spike": "4.7x",
         "analysis_start": "2019-10-28",
         "days_to_peak": 16,
-        "volume_numeric": 4.7
+        "volume_numeric": 4.7,
+        "pre_catalyst_volume": 6669,
+        "pre_catalyst_price": 3.343,
+        "pre_catalyst_dollar_volume": 22299,
+        "catalyst_day_volume": 24820,
+        "catalyst_day_dollar_volume": 112255.89600000001
       }
     },
     {
       "ticker": "HUMAW",
-      "reason": "Volume 15725 shares/day < 25,000",
+      "reason": "Vol: 15725/day, Price: $0.641, Catalyst vol: 419791",
       "data": {
         "ticker": "HUMAW",
         "base_price": 0.3501,
@@ -2216,7 +2326,12 @@
         "volume_spike": "26.0x",
         "analysis_start": "2024-01-15",
         "days_to_peak": 105,
-        "volume_numeric": 26.0
+        "volume_numeric": 26.0,
+        "pre_catalyst_volume": 15725,
+        "pre_catalyst_price": 0.641,
+        "pre_catalyst_dollar_volume": 10075,
+        "catalyst_day_volume": 419791,
+        "catalyst_day_dollar_volume": 503749.19999999995
       }
     },
     {
@@ -2240,7 +2355,7 @@
     },
     {
       "ticker": "POLA",
-      "reason": "Volume 10281 shares/day < 25,000",
+      "reason": "Vol: 10281/day, Price: $10.067, Catalyst vol: 140227",
       "data": {
         "ticker": "POLA",
         "base_price": 7.21,
@@ -2254,31 +2369,17 @@
         "volume_spike": "14.3x",
         "analysis_start": "2019-12-24",
         "days_to_peak": 118,
-        "volume_numeric": 14.3
-      }
-    },
-    {
-      "ticker": "TLSA",
-      "reason": "Volume 4709 shares/day < 25,000",
-      "data": {
-        "ticker": "TLSA",
-        "base_price": 1.54,
-        "base_date": "2020-02-24",
-        "peak_price": 9.8,
-        "peak_date": "2020-07-14",
-        "gain_pct": 536.3636363636364,
-        "catalyst_date": "2020-01-09",
-        "catalyst_price": 3.0401,
-        "catalyst_type": "VOLUME_SURGE",
-        "volume_spike": "257.6x",
-        "analysis_start": "2019-09-11",
-        "days_to_peak": 98,
-        "volume_numeric": 257.6
+        "volume_numeric": 14.3,
+        "pre_catalyst_volume": 10281,
+        "pre_catalyst_price": 10.067,
+        "pre_catalyst_dollar_volume": 103502,
+        "catalyst_day_volume": 140227,
+        "catalyst_day_dollar_volume": 1707964.8599999999
       }
     },
     {
       "ticker": "APLT",
-      "reason": "Volume 13422 shares/day < 25,000",
+      "reason": "Vol: 13422/day, Price: $9.632, Catalyst vol: 143783",
       "data": {
         "ticker": "APLT",
         "base_price": 9.02,
@@ -2292,7 +2393,12 @@
         "volume_spike": "11.3x",
         "analysis_start": "2019-05-23",
         "days_to_peak": 98,
-        "volume_numeric": 11.3
+        "volume_numeric": 11.3,
+        "pre_catalyst_volume": 13421,
+        "pre_catalyst_price": 9.632,
+        "pre_catalyst_dollar_volume": 129279,
+        "catalyst_day_volume": 143783,
+        "catalyst_day_dollar_volume": 1512597.16
       }
     },
     {
@@ -2316,7 +2422,7 @@
     },
     {
       "ticker": "NDRAW",
-      "reason": "Volume 6658 shares/day < 25,000",
+      "reason": "Vol: 6658/day, Price: $0.082, Catalyst vol: 281728",
       "data": {
         "ticker": "NDRAW",
         "base_price": 0.0601,
@@ -2330,12 +2436,17 @@
         "volume_spike": "35.1x",
         "analysis_start": "2020-07-28",
         "days_to_peak": 55,
-        "volume_numeric": 35.1
+        "volume_numeric": 35.1,
+        "pre_catalyst_volume": 6657,
+        "pre_catalyst_price": 0.082,
+        "pre_catalyst_dollar_volume": 543,
+        "catalyst_day_volume": 281728,
+        "catalyst_day_dollar_volume": 42259.2
       }
     },
     {
       "ticker": "BDCO",
-      "reason": "Volume 7969 shares/day < 25,000",
+      "reason": "Vol: 7969/day, Price: $1.828, Catalyst vol: 49289",
       "data": {
         "ticker": "BDCO",
         "base_price": 1.4,
@@ -2349,7 +2460,12 @@
         "volume_spike": "5.2x",
         "analysis_start": "2022-11-29",
         "days_to_peak": 76,
-        "volume_numeric": 5.2
+        "volume_numeric": 5.2,
+        "pre_catalyst_volume": 7969,
+        "pre_catalyst_price": 1.828,
+        "pre_catalyst_dollar_volume": 14564,
+        "catalyst_day_volume": 49289,
+        "catalyst_day_dollar_volume": 86748.64
       }
     },
     {
@@ -2372,7 +2488,7 @@
     },
     {
       "ticker": "THMO",
-      "reason": "Volume 963 shares/day < 25,000",
+      "reason": "Vol: 963/day, Price: $177.676, Catalyst vol: 118419",
       "data": {
         "ticker": "THMO",
         "base_price": 73.35,
@@ -2386,31 +2502,17 @@
         "volume_spike": "98.8x",
         "analysis_start": "2019-11-25",
         "days_to_peak": 26,
-        "volume_numeric": 98.8
-      }
-    },
-    {
-      "ticker": "ELOX",
-      "reason": "Volume 23196 shares/day < 25,000",
-      "data": {
-        "ticker": "ELOX",
-        "base_price": 1.6959,
-        "base_date": "2022-12-28",
-        "peak_price": 10.51,
-        "peak_date": "2023-04-11",
-        "gain_pct": 519.7299369066573,
-        "catalyst_date": "2023-01-04",
-        "catalyst_price": 2.9,
-        "catalyst_type": "VOLUME_EXPLOSION",
-        "volume_spike": "185.3x",
-        "analysis_start": "2022-09-06",
-        "days_to_peak": 66,
-        "volume_numeric": 185.3
+        "volume_numeric": 98.8,
+        "pre_catalyst_volume": 963,
+        "pre_catalyst_price": 177.676,
+        "pre_catalyst_dollar_volume": 171151,
+        "catalyst_day_volume": 118418.9778,
+        "catalyst_day_dollar_volume": 26644270.005
       }
     },
     {
       "ticker": "MTEX",
-      "reason": "Volume 3198 shares/day < 25,000",
+      "reason": "Vol: 3198/day, Price: $7.053, Catalyst vol: 9043",
       "data": {
         "ticker": "MTEX",
         "base_price": 5.7,
@@ -2423,7 +2525,13 @@
         "catalyst_type": "PRICE_SURGE",
         "volume_spike": "3.4x",
         "analysis_start": "2013-01-10",
-        "days_to_peak": 83
+        "days_to_peak": 83,
+        "volume_numeric": 3.4,
+        "pre_catalyst_volume": 3198,
+        "pre_catalyst_price": 7.053,
+        "pre_catalyst_dollar_volume": 22557,
+        "catalyst_day_volume": 9043,
+        "catalyst_day_dollar_volume": 81387
       }
     },
     {
@@ -2447,7 +2555,7 @@
     },
     {
       "ticker": "RTC",
-      "reason": "Volume 5861 shares/day < 25,000",
+      "reason": "Vol: 5861/day, Price: $9.383, Catalyst vol: 25961",
       "data": {
         "ticker": "RTC",
         "base_price": 6.5505,
@@ -2460,12 +2568,18 @@
         "catalyst_type": "50MA_BREAKOUT",
         "volume_spike": "5.9x",
         "analysis_start": "2023-09-12",
-        "days_to_peak": 38
+        "days_to_peak": 38,
+        "volume_numeric": 5.9,
+        "pre_catalyst_volume": 5860,
+        "pre_catalyst_price": 9.383,
+        "pre_catalyst_dollar_volume": 54991,
+        "catalyst_day_volume": 25960.6,
+        "catalyst_day_dollar_volume": 303726.0397
       }
     },
     {
       "ticker": "PTI",
-      "reason": "Volume 5765 shares/day < 25,000",
+      "reason": "Vol: 5765/day, Price: $41.478, Catalyst vol: 28013",
       "data": {
         "ticker": "PTI",
         "base_price": 28.2,
@@ -2479,31 +2593,17 @@
         "volume_spike": "5.0x",
         "analysis_start": "2017-06-20",
         "days_to_peak": 83,
-        "volume_numeric": 5.0
-      }
-    },
-    {
-      "ticker": "MBRX",
-      "reason": "Volume 19931 shares/day < 25,000",
-      "data": {
-        "ticker": "MBRX",
-        "base_price": 29.07,
-        "base_date": "2020-03-16",
-        "peak_price": 177.3,
-        "peak_date": "2020-04-08",
-        "gain_pct": 509.90712074303406,
-        "catalyst_date": "2020-04-08",
-        "catalyst_price": 114.3,
-        "catalyst_type": "50MA_BREAKOUT",
-        "volume_spike": "96.1x",
-        "analysis_start": "2019-12-10",
-        "days_to_peak": 17,
-        "volume_numeric": 96.1
+        "volume_numeric": 5.0,
+        "pre_catalyst_volume": 5765,
+        "pre_catalyst_price": 41.478,
+        "pre_catalyst_dollar_volume": 239131,
+        "catalyst_day_volume": 28012.6,
+        "catalyst_day_dollar_volume": 1266169.52
       }
     },
     {
       "ticker": "FUV",
-      "reason": "Volume 5470 shares/day < 25,000",
+      "reason": "Vol: 5470/day, Price: $26.268, Catalyst vol: 33849",
       "data": {
         "ticker": "FUV",
         "base_price": 19.322,
@@ -2517,34 +2617,17 @@
         "volume_spike": "5.3x",
         "analysis_start": "2019-12-22",
         "days_to_peak": 49,
-        "volume_numeric": 5.3
-      }
-    },
-    {
-      "ticker": "SPRT",
-      "reason": "Pump & dump - 96% gap on day 4 after peak",
-      "data": {
-        "ticker": "SPRT",
-        "base_price": 1.9,
-        "base_date": "2021-03-04",
-        "peak_price": 11.5,
-        "peak_date": "2021-08-23",
-        "gain_pct": 505.2631578947368,
-        "catalyst_date": "2021-03-22",
-        "catalyst_price": 7.1,
-        "catalyst_type": "50MA_BREAKOUT",
-        "volume_spike": "1865.9x",
-        "analysis_start": "2020-11-22",
-        "days_to_peak": 119,
-        "volume_numeric": 1865.9,
-        "pre_catalyst_volume": 156629,
-        "pre_catalyst_price": 2.231,
-        "pre_catalyst_dollar_volume": 349513
+        "volume_numeric": 5.3,
+        "pre_catalyst_volume": 5470,
+        "pre_catalyst_price": 26.268,
+        "pre_catalyst_dollar_volume": 143689,
+        "catalyst_day_volume": 33848.55,
+        "catalyst_day_dollar_volume": 1198238.6700000002
       }
     },
     {
       "ticker": "TC",
-      "reason": "Volume 228 shares/day < 25,000",
+      "reason": "Vol: 228/day, Price: $802.490, Catalyst vol: 2498",
       "data": {
         "ticker": "TC",
         "base_price": 426,
@@ -2558,12 +2641,17 @@
         "volume_spike": "15.2x",
         "analysis_start": "2022-06-05",
         "days_to_peak": 67,
-        "volume_numeric": 15.2
+        "volume_numeric": 15.2,
+        "pre_catalyst_volume": 227,
+        "pre_catalyst_price": 802.49,
+        "pre_catalyst_dollar_volume": 182781,
+        "catalyst_day_volume": 2498.0633,
+        "catalyst_day_dollar_volume": 3020158.5297
       }
     },
     {
       "ticker": "STCN",
-      "reason": "Volume 9877 shares/day < 25,000",
+      "reason": "Vol: 9877/day, Price: $5.466, Catalyst vol: 102700",
       "data": {
         "ticker": "STCN",
         "base_price": 4.48,
@@ -2577,7 +2665,12 @@
         "volume_spike": "10.0x",
         "analysis_start": "2020-07-19",
         "days_to_peak": 43,
-        "volume_numeric": 10.0
+        "volume_numeric": 10.0,
+        "pre_catalyst_volume": 9877,
+        "pre_catalyst_price": 5.466,
+        "pre_catalyst_dollar_volume": 53990,
+        "catalyst_day_volume": 102700.0875,
+        "catalyst_day_dollar_volume": 632724.96907875
       }
     },
     {
@@ -2601,7 +2694,7 @@
     },
     {
       "ticker": "SQBG",
-      "reason": "Volume 2913 shares/day < 25,000",
+      "reason": "Vol: 2913/day, Price: $8.783, Catalyst vol: 0",
       "data": {
         "ticker": "SQBG",
         "base_price": 4.112,
@@ -2615,26 +2708,12 @@
         "volume_spike": "7.0x",
         "analysis_start": "2019-12-01",
         "days_to_peak": 57,
-        "volume_numeric": 7.0
-      }
-    },
-    {
-      "ticker": "NBTX",
-      "reason": "Volume 4479 shares/day < 25,000",
-      "data": {
-        "ticker": "NBTX",
-        "base_price": 1.75,
-        "base_date": "2023-05-01",
-        "peak_price": 10.5199,
-        "peak_date": "2023-07-24",
-        "gain_pct": 501.13714285714286,
-        "catalyst_date": "2023-05-05",
-        "catalyst_price": 6.68,
-        "catalyst_type": "50MA_BREAKOUT",
-        "volume_spike": "12281.3x",
-        "analysis_start": "2023-01-05",
-        "days_to_peak": 57,
-        "volume_numeric": 12281.3
+        "volume_numeric": 7.0,
+        "pre_catalyst_volume": 2912,
+        "pre_catalyst_price": 8.783,
+        "pre_catalyst_dollar_volume": 25583,
+        "catalyst_day_volume": 0,
+        "catalyst_day_dollar_volume": 0
       }
     }
   ]
