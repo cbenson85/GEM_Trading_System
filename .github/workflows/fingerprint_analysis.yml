@@ -11,71 +11,83 @@ on:
 jobs:
   analyze:
     runs-on: ubuntu-latest
-    timeout-minutes: 480
-    
+    timeout-minutes: 480 # 8-hour timeout
+
+    permissions:
+      contents: write # Allow the job to push commits
+
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-    
-    - name: Install dependencies
-      run: |
-        pip install requests numpy
-    
-    - name: Run Polygon fingerprint analysis
-      env:
-        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
-      run: |
-        echo "Step 1: Collecting Polygon data (10 categories)..."
-        python fingerprint_analyzer.py "${{ github.event.inputs.input_file }}"
-    
-    - name: Run SEC data enrichment
-      run: |
-        echo "Step 2: Enriching with SEC filing data..."
-        python sec_merger.py
-    
-    - name: Verify output files
-      run: |
-        echo "Checking generated files..."
-        if [ -f "FINGERPRINTS.json" ]; then
-          echo "✅ FINGERPRINTS.json created"
-          echo "File size: $(du -h FINGERPRINTS.json | cut -f1)"
-        else
-          echo "❌ FINGERPRINTS.json not found!"
-          exit 1
-        fi
-        
-        if [ -f "MASTER_FINGERPRINTS.json" ]; then
-          echo "✅ MASTER_FINGERPRINTS.json created"
-          echo "File size: $(du -h MASTER_FINGERPRINTS.json | cut -f1)"
-        else
-          echo "❌ MASTER_FINGERPRINTS.json not found!"
-          exit 1
-        fi
-    
-    - name: Commit and push results
-      run: |
-        git config --global user.name 'GitHub Actions'
-        git config --global user.email 'actions@github.com'
-        
-        # Add all output files
-        git add -A
-        git status
-        
-        if git diff --cached --quiet; then
-          echo "No changes to commit"
-          exit 0
-        fi
-        
-        git commit -m "Complete fingerprint analysis (Polygon + SEC) - $(date)"
-        
-        # Pull and rebase
-        git pull origin main --rebase
-        
-        # Push the changes
-        git push origin main
+      - name: 1. Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 2. Set up Python 3.9
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: 3. Install dependencies
+        run: |
+          # --- THIS IS THE FIX ---
+          # Added polygon-api-client to the installer
+          pip install requests numpy polygon-api-client
+
+      # --- STAGE 1: POLYGON DATA COLLECTION ---
+      - name: 4. Run Polygon Data Collector
+        env:
+          POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+        run: |
+          echo "Stage 1: Collecting Polygon data (10 categories)..."
+          # Pass the input file from the workflow dispatch as an argument
+          python fingerprint_analyzer.py ${{ github.event.inputs.input_file }}
+          echo "Polygon collection complete. Output: FINGERPRINTS.json"
+
+      # --- STAGE 2: SEC DATA ENRICHMENT ---
+      - name: 5. Run SEC Data Merger
+        run: |
+          echo "Stage 2: Enriching with SEC filing data..."
+          # This script will read FINGERPRINTS.json and create MASTER_FINGERPRINTS.json
+          python sec_merger.py
+          echo "SEC enrichment complete. Output: MASTER_FINGERPRINTS.json"
+
+      # --- STAGE 3: VERIFY & COMMIT ---
+      - name: 6. Verify output files
+        run: |
+          echo "Checking generated files..."
+          if [ -f "FINGERPRINTS.json" ]; then
+            echo "✅ FINGERPRINTS.json (Intermediate file) created."
+            echo "File size: $(du -h FINGERPRINTS.json | cut -f1)"
+          else
+            echo "❌ CRITICAL ERROR: FINGERPRINTS.json not found!"
+            exit 1
+          fi
+          
+          if [ -f "MASTER_FINGERPRINTS.json" ]; then
+            echo "✅ MASTER_FINGERPRINTS.json (Final file) created."
+            echo "File size: $(du -h MASTER_FINGERPRINTS.json | cut -f1)"
+          else
+            echo "❌ CRITICAL ERROR: MASTER_FINGERPRINTS.json not found!"
+            exit 1
+          fi
+
+      - name: 7. Commit and push results
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Only add the FINAL master file. The intermediate file
+          # and checkpoint files don't need to be in the repo.
+          git add MASTER_FINGERPRINTS.json
+          git status
+          
+          # Check if there are any changes to commit
+          if git diff --cached --quiet; then
+            echo "No changes to commit. MASTER_FINGERPRINTS.json is already up-to-date."
+            exit 0
+          fi
+          
+          git commit -m "Automated Workflow: Generate MASTER_FINGERPRINTS.json - $(date)"
+          
+          # A simple push is safer than rebase in an automated workflow
+          git push
