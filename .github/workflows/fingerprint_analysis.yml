@@ -2,11 +2,6 @@ name: Fingerprint Analysis
 
 on:
   workflow_dispatch:
-    inputs:
-      input_file:
-        description: 'Input file with clean explosions'
-        required: true
-        default: 'CLEAN_EXPLOSIONS.json'
 
 jobs:
   analyze:
@@ -25,7 +20,7 @@ jobs:
     
     - name: Install dependencies
       run: |
-        pip install requests numpy
+        pip install requests
     
     - name: Run fingerprint analysis
       env:
@@ -33,24 +28,15 @@ jobs:
       run: |
         python fingerprint_analyzer.py
     
-    - name: Commit and push results
+    - name: Commit results
       run: |
         git config --global user.name 'GitHub Actions'
         git config --global user.email 'actions@github.com'
-        
-        # First add and commit our new files
         git add -A
-        git status
-        
         if git diff --cached --quiet; then
-          echo "No changes to commit"
+          echo "No changes"
           exit 0
         fi
-        
-        git commit -m "Fingerprint analysis complete - $(date)"
-        
-        # Now pull and rebase
+        git commit -m "Raw data collection - $(date)"
         git pull origin main --rebase
-        
-        # Push the changes
         git push origin main
