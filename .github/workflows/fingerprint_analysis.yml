@@ -32,7 +32,7 @@ jobs:
         POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
       run: |
         echo "Step 1: Collecting Polygon data (10 categories)..."
-        python fingerprint_analyzer.py
+        python fingerprint_analyzer.py "${{ github.event.inputs.input_file }}"
     
     - name: Run SEC data enrichment
       run: |
