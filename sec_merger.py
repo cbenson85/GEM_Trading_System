@@ -1,31 +1,46 @@
 #!/usr/bin/env python3
 """
-SEC Data Merger for GEM Trading System
-Enriches Polygon raw data with SEC filing information
+SEC Data Merger for GEM Trading System (v2 - FIXED)
+Enriches Polygon raw data with actual SEC filing content.
+- Parses Form 4 XML for Insider BUYS ('P' code)
+- Parses 8-K HTML/Text for Catalyst Keywords
 """
 
 import json
 import time
 import requests
+import re
+import os
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
+from xml.etree import ElementTree as ET
 
 class SECDataMerger:
     def __init__(self):
-        self.base_url = "https://data.sec.gov"
+        self.submissions_url = "https://data.sec.gov/submissions/CIK{cik}.json"
+        self.archive_url = "https://data.sec.gov/Archives/edgar/data"
         self.headers = {
-            'User-Agent': 'GEM Trading System (gemtrading@example.com)'
+            'User-Agent': 'GEM Trading System (gemtrading@example.com)',
+            'Accept-Encoding': 'gzip, deflate',
+            'Host': 'data.sec.gov'
         }
         self.api_calls = 0
-        
+
+    def rate_limit_sleep(self):
+        """Respects SEC 10 calls/sec limit"""
+        self.api_calls += 1
+        time.sleep(0.12) # 120ms is a safe buffer
+
     def merge_sec_data(self, polygon_file: str, output_file: str):
-        """Main merge function"""
-        
         print("="*60)
-        print("SEC DATA ENRICHMENT")
+        print("SEC DATA ENRICHMENT (FIXED - v2)")
+        print("Parsing Form 4 XML and 8-K Text...")
         print("="*60)
-        
-        # Load Polygon data
+
+        if not os.path.exists(polygon_file):
+            print(f"❌ ERROR: {polygon_file} not found! Run the Polygon collector first.")
+            return
+
         with open(polygon_file, 'r') as f:
             polygon_data = json.load(f)
         
@@ -33,247 +48,315 @@ class SECDataMerger:
         print(f"Found {len(fingerprints)} stocks to enrich with SEC data")
         
         enriched_fingerprints = []
-        
+
         for i, fingerprint in enumerate(fingerprints):
             ticker = fingerprint.get('ticker')
-            
-            # Skip if error
             if 'error' in fingerprint:
                 enriched_fingerprints.append(fingerprint)
                 continue
             
             print(f"\n[{i+1}/{len(fingerprints)}] Enriching {ticker}...")
             
-            # Get CIK from ticker details
-            cik = fingerprint.get('ticker_details', {}).get('cik', '')
+            # Get CIK from Polygon data (pulled from /v3/reference/tickers)
+            cik = fingerprint.get('1_profile', {}).get('cik', '')
             
             if not cik:
-                print(f"  No CIK found, skipping SEC data")
+                print("  No CIK found in Polygon data, skipping SEC.")
                 fingerprint['sec_data'] = {'error': 'No CIK available'}
                 enriched_fingerprints.append(fingerprint)
                 continue
             
-            # Pad CIK to 10 digits
             cik_padded = cik.zfill(10)
             catalyst_date = fingerprint.get('catalyst_date')
             
-            # Collect SEC data
+            # Get all recent filings for this CIK
+            submissions = self.get_submissions_json(cik_padded)
+            if not submissions:
+                print("  Could not fetch submissions JSON, skipping SEC.")
+                fingerprint['sec_data'] = {'error': 'Could not fetch submissions from SEC'}
+                enriched_fingerprints.append(fingerprint)
+                continue
+
             sec_data = {}
             
-            # 1. Get recent 8-Ks
-            print(f"  Getting 8-K filings...")
-            sec_data['form_8k'] = self.get_8k_filings(cik_padded, catalyst_date)
+            # 1. Get 8-K filings AND their text
+            print("  Getting 8-K filings and text...")
+            sec_data['form_8k'] = self.get_8k_filings(cik_padded, submissions, catalyst_date)
             
-            # 2. Get insider transactions (Form 4)
-            print(f"  Getting insider transactions...")
-            sec_data['insider_trades'] = self.get_insider_transactions(cik_padded, catalyst_date)
+            # 2. Get Form 4 Insider BUYS
+            print("  Getting Insider BUYS (Form 4)...")
+            sec_data['insider_trades'] = self.get_insider_transactions(cik_padded, submissions, catalyst_date)
             
-            # 3. Get institutional holdings (13F)
-            print(f"  Getting institutional data...")
-            sec_data['institutional'] = self.get_institutional_data(cik_padded)
+            # 3. Get Institutional indicators
+            print("  Getting Institutional indicators...")
+            sec_data['institutional'] = self.get_institutional_data(submissions)
             
-            # Add to fingerprint
             fingerprint['sec_data'] = sec_data
             enriched_fingerprints.append(fingerprint)
             
-            # Save progress every 10 stocks
             if (i + 1) % 10 == 0:
                 self.save_progress(enriched_fingerprints, 'sec_merge_progress.json')
                 print(f"  Progress saved: {i+1} complete")
-            
-            # Rate limit: 10 requests per second
-            time.sleep(0.1)
         
-        # Save final merged data
         self.save_final(polygon_data, enriched_fingerprints, output_file)
-    
-    def get_8k_filings(self, cik: str, catalyst_date: str, days_before: int = 30) -> Dict:
-        """Get 8-K filings around catalyst"""
-        
+
+    def get_submissions_json(self, cik: str) -> Optional[Dict]:
+        """Fetches the complete submissions JSON for a single CIK."""
+        url = self.submissions_url.format(cik=cik)
+        try:
+            response = requests.get(url, headers=self.headers)
+            self.rate_limit_sleep()
+            if response.status_code == 200:
+                return response.json()
+        except Exception as e:
+            print(f"    Submissions JSON error: {e}")
+        return None
+
+    def get_8k_filings(self, cik: str, submissions: Dict, catalyst_date: str, days_before: int = 30) -> Dict:
         catalyst_dt = datetime.strptime(catalyst_date, '%Y-%m-%d')
         start_date = catalyst_dt - timedelta(days=days_before)
         end_date = catalyst_dt + timedelta(days=7)
         
-        url = f"{self.base_url}/submissions/CIK{cik}.json"
+        filings = []
+        catalyst_keywords_found = []
         
         try:
-            response = requests.get(url, headers=self.headers)
-            self.api_calls += 1
+            recent = submissions.get('filings', {}).get('recent', {})
+            form_types = recent.get('form', [])
+            filing_dates = recent.get('filingDate', [])
+            accession_numbers = recent.get('accessionNumber', [])
+            primary_documents = recent.get('primaryDocument', [])
             
-            if response.status_code == 200:
-                data = response.json()
-                recent_filings = data.get('filings', {}).get('recent', {})
-                
-                # Extract 8-K filings
-                form_types = recent_filings.get('form', [])
-                filing_dates = recent_filings.get('filingDate', [])
-                accession_numbers = recent_filings.get('accessionNumber', [])
-                primary_documents = recent_filings.get('primaryDocument', [])
-                
-                eight_k_filings = []
-                
-                for i in range(len(form_types)):
-                    if '8-K' in form_types[i]:
-                        filing_date = filing_dates[i] if i < len(filing_dates) else ''
+            for i in range(len(form_types)):
+                if '8-K' in form_types[i]:
+                    filing_date = filing_dates[i]
+                    filing_dt = datetime.strptime(filing_date, '%Y-%m-%d')
+                    
+                    if start_date <= filing_dt <= end_date:
+                        accession_num = accession_numbers[i].replace('-', '')
+                        doc_name = primary_documents[i]
+                        filing_url = f"{self.archive_url}/{cik}/{accession_num}/{doc_name}"
                         
-                        # Check if within date range
-                        if filing_date:
-                            filing_dt = datetime.strptime(filing_date, '%Y-%m-%d')
-                            if start_date <= filing_dt <= end_date:
-                                eight_k_filings.append({
-                                    'filing_date': filing_date,
-                                    'form_type': form_types[i],
-                                    'accession_number': accession_numbers[i] if i < len(accession_numbers) else '',
-                                    'document': primary_documents[i] if i < len(primary_documents) else '',
-                                    'days_from_catalyst': (filing_dt - catalyst_dt).days
-                                })
-                
-                return {
-                    'count': len(eight_k_filings),
-                    'filings': eight_k_filings[:5],  # Limit to 5 most relevant
-                    'has_catalyst_8k': any(abs(f['days_from_catalyst']) <= 3 for f in eight_k_filings)
-                }
-                
+                        print(f"    Found 8-K on {filing_date}, analyzing text...")
+                        filing_text = self.get_filing_text(filing_url)
+                        catalyst_type, keywords = self.analyze_8k_text(filing_text)
+                        
+                        filings.append({
+                            'filing_date': filing_date,
+                            'days_from_catalyst': (filing_dt - catalyst_dt).days,
+                            'detected_catalyst_type': catalyst_type,
+                            'keywords_found': keywords,
+                            'url': filing_url
+                        })
+                        if catalyst_type != 'other':
+                            catalyst_keywords_found.extend(keywords)
+                            
         except Exception as e:
             print(f"    8-K error: {e}")
+
+        return {
+            'count_in_window': len(filings),
+            'filings': filings,
+            'has_catalyst_8k': any(abs(f['days_from_catalyst']) <= 3 for f in filings),
+            'all_keywords_found': list(set(catalyst_keywords_found))
+        }
+
+    def get_filing_text(self, url: str) -> str:
+        """Downloads the raw text of a filing."""
+        try:
+            response = requests.get(url, headers=self.headers)
+            self.rate_limit_sleep()
+            if response.status_code == 200:
+                # Basic text cleaning
+                text = response.text
+                text = re.sub(r'<[^>]+>', ' ', text) # Remove HTML
+                text = re.sub(r'\s+', ' ', text) # Normalize whitespace
+                return text.lower()
+        except Exception as e:
+            print(f"      Filing text download error: {e}")
+        return ""
+
+    def analyze_8k_text(self, text: str) -> (str, List[str]):
+        """Analyze 8-K text for catalyst keywords"""
+        catalyst_patterns = {
+            'fda': ['fda', 'food and drug administration', 'pdufa', 'approval', 'phase 3', 'clinical trial', 'breakthrough therapy'],
+            'merger': ['merger', 'acquisition', 'acquire', 'definitive agreement', 'buyout'],
+            'earnings': ['earnings', 'quarterly results', 'financial results', 'exceeded expectations'],
+            'contract': ['contract', 'agreement', 'partnership', 'collaboration', 'licensing'],
+            'offering': ['offering', 'public offering', 'registered direct offering', 's-3', 'atm'],
+            'legal': ['lawsuit', 'litigation', 'settlement', 'verdict'],
+            'bankruptcy': ['bankruptcy', 'chapter 11', 'restructuring'],
+        }
         
-        return {'count': 0, 'filings': []}
-    
-    def get_insider_transactions(self, cik: str, catalyst_date: str, days_before: int = 90) -> Dict:
-        """Get insider transactions (Form 4)"""
-        
+        found_keywords = []
+        for catalyst_type, keywords in catalyst_patterns.items():
+            for keyword in keywords:
+                if keyword in text:
+                    found_keywords.append(keyword)
+            if found_keywords:
+                return catalyst_type, list(set(found_keywords))
+                
+        return 'other', []
+
+    def get_insider_transactions(self, cik: str, submissions: Dict, catalyst_date: str, days_before: int = 120) -> Dict:
         catalyst_dt = datetime.strptime(catalyst_date, '%Y-%m-%d')
         start_date = catalyst_dt - timedelta(days=days_before)
         
-        url = f"{self.base_url}/submissions/CIK{cik}.json"
+        insider_buys = []
+        insider_sells = []
         
         try:
-            response = requests.get(url, headers=self.headers)
-            self.api_calls += 1
+            recent = submissions.get('filings', {}).get('recent', {})
+            form_types = recent.get('form', [])
+            filing_dates = recent.get('filingDate', [])
+            accession_numbers = recent.get('accessionNumber', [])
+            primary_documents = recent.get('primaryDocument', [])
             
-            if response.status_code == 200:
-                data = response.json()
-                recent_filings = data.get('filings', {}).get('recent', {})
-                
-                form_types = recent_filings.get('form', [])
-                filing_dates = recent_filings.get('filingDate', [])
-                
-                insider_filings = []
-                
-                for i in range(len(form_types)):
-                    if form_types[i] in ['4', '3', '5']:
-                        filing_date = filing_dates[i] if i < len(filing_dates) else ''
+            for i in range(len(form_types)):
+                if form_types[i] == '4': # Only parse Form 4
+                    filing_date = filing_dates[i]
+                    filing_dt = datetime.strptime(filing_date, '%Y-%m-%d')
+                    
+                    if start_date <= filing_dt <= catalyst_dt:
+                        accession_num = accession_numbers[i].replace('-', '')
+                        doc_name = primary_documents[i]
                         
-                        if filing_date:
-                            filing_dt = datetime.strptime(filing_date, '%Y-%m-%d')
-                            if start_date <= filing_dt <= catalyst_dt:
-                                insider_filings.append({
-                                    'filing_date': filing_date,
-                                    'form_type': form_types[i],
-                                    'days_before_catalyst': (catalyst_dt - filing_dt).days
-                                })
-                
-                # Analyze patterns
-                buys_30d = sum(1 for f in insider_filings if f['days_before_catalyst'] <= 30)
-                buys_90d = len(insider_filings)
-                
-                return {
-                    'total_transactions': buys_90d,
-                    'transactions_30d': buys_30d,
-                    'recent_filings': insider_filings[:10],
-                    'insider_buying_surge': buys_30d >= 3
-                }
-                
+                        # The primary doc for Form 4 is the XML file
+                        xml_url = f"{self.archive_url}/{cik}/{accession_num}/{doc_name}"
+                        
+                        print(f"    Parsing Form 4 XML from {filing_date}...")
+                        buys, sells = self.parse_form_4_xml(xml_url)
+                        
+                        if buys > 0:
+                            insider_buys.append({'date': filing_date, 'shares': buys})
+                        if sells > 0:
+                            insider_sells.append({'date': filing_date, 'shares': sells})
+                            
         except Exception as e:
-            print(f"    Insider error: {e}")
-        
-        return {'total_transactions': 0}
-    
-    def get_institutional_data(self, cik: str) -> Dict:
-        """Get institutional ownership indicators"""
-        
-        url = f"{self.base_url}/submissions/CIK{cik}.json"
+            print(f"    Insider transaction error: {e}")
+
+        return {
+            'total_buy_transactions': len(insider_buys),
+            'total_sell_transactions': len(insider_sells),
+            'buy_share_total': sum(b['shares'] for b in insider_buys),
+            'sell_share_total': sum(s['shares'] for s in insider_sells),
+            'net_insider_activity': 'BUY' if len(insider_buys) > len(insider_sells) else 'SELL' if len(insider_sells) > len(insider_buys) else 'NEUTRAL',
+            'recent_buys_30d': sum(1 for f in insider_buys if (catalyst_dt - datetime.strptime(f['date'], '%Y-%m-%d')).days <= 30),
+            'insider_buying_surge': len(insider_buys) >= 3 and len(insider_sells) == 0
+        }
+
+    def parse_form_4_xml(self, xml_url: str) -> (int, int):
+        """Downloads and parses a Form 4 XML file to count buys and sells."""
+        text = self.get_filing_text(xml_url) # Re-use our text downloader
+        if not text:
+            return 0, 0
+            
+        total_buys = 0
+        total_sells = 0
         
         try:
-            response = requests.get(url, headers=self.headers)
-            self.api_calls += 1
+            # Find all transaction codes
+            # 'P' = Open market or private purchase
+            # 'S' = Open market or private sale
             
-            if response.status_code == 200:
-                data = response.json()
-                recent_filings = data.get('filings', {}).get('recent', {})
-                
-                form_types = recent_filings.get('form', [])
-                
-                # Count institutional interest
-                thirteen_f_count = sum(1 for f in form_types if '13' in f)
-                schedule_13d_count = sum(1 for f in form_types if '13D' in f or '13G' in f)
-                
-                return {
-                    'has_13f_activity': thirteen_f_count > 0,
-                    'has_activist_interest': schedule_13d_count > 0,
-                    'institutional_filings': thirteen_f_count,
-                    'activist_filings': schedule_13d_count
-                }
-                
+            # This is a simple regex search, which is faster than full XML parsing
+            purchases = re.findall(r'<transactionCode>P</transactionCode>', text)
+            sales = re.findall(r'<transactionCode>S</transactionCode>', text)
+            
+            # We can also get the share amounts
+            transactions = re.findall(r'<transactionShares>(.*?)</transactionShares>', text)
+            codes = re.findall(r'<transactionAcquiredDisposedCode>(.*?)</transactionAcquiredDisposedCode>', text)
+            
+            for i in range(len(codes)):
+                try:
+                    shares = float(re.search(r'<value>([\d\.]+)</value>', transactions[i]).group(1))
+                    code = re.search(r'<value>([AD])</value>', codes[i]).group(1)
+                    
+                    if code == 'A': # 'A' (Acquisition) often pairs with 'P' (Purchase)
+                        total_buys += shares
+                    elif code == 'D': # 'D' (Disposed) often pairs with 'S' (Sale)
+                        total_sells += shares
+                except:
+                    continue # Error parsing one transaction, skip it
+
+            # This is a fallback if the share parsing fails
+            if total_buys == 0 and total_sells == 0:
+                total_buys = len(purchases) * 1000  # Estimate 1000 shares per transaction
+                total_sells = len(sales) * 1000
+
+            return int(total_buys), int(total_sells)
+            
+        except Exception as e:
+            print(f"      XML Parse Error: {e}")
+            return 0, 0
+
+    def get_institutional_data(self, submissions: Dict) -> Dict:
+        """Gets 13F/G/D filing counts as a proxy for institutional interest"""
+        try:
+            form_types = submissions.get('filings', {}).get('recent', {}).get('form', [])
+            
+            thirteen_f_count = sum(1 for f in form_types if '13F' in f)
+            thirteen_d_g_count = sum(1 for f in form_types if '13D' in f or '13G' in f)
+            
+            return {
+                'has_institutional_filings_13f': thirteen_f_count > 0,
+                'has_activist_filings_13dg': thirteen_d_g_count > 0,
+                'institutional_filing_count': thirteen_f_count,
+                'activist_filing_count': thirteen_d_g_count
+            }
         except Exception as e:
             print(f"    Institutional error: {e}")
-        
-        return {'has_13f_activity': False}
-    
+        return {'has_institutional_filings_13f': False}
+
     def save_progress(self, data: List, filename: str):
-        """Save intermediate progress"""
         with open(filename, 'w') as f:
             json.dump(data, f, indent=2)
     
     def save_final(self, original_data: Dict, enriched_fingerprints: List, output_file: str):
-        """Save final merged dataset"""
-        
-        # Update summary
         summary = original_data.get('summary', {})
         summary['sec_enrichment_date'] = datetime.now().isoformat()
         summary['sec_api_calls'] = self.api_calls
         
-        # Count SEC data success
-        sec_success = sum(1 for f in enriched_fingerprints 
-                         if 'sec_data' in f and 'error' not in f.get('sec_data', {}))
+        sec_success = sum(1 for f in enriched_fingerprints if 'sec_data' in f and 'error' not in f.get('sec_data', {}))
         summary['sec_data_added'] = sec_success
         
         output = {
             'metadata': {
                 'type': 'master_fingerprints',
-                'sources': ['polygon_advanced_tier', 'sec_edgar'],
+                'sources': ['polygon_advanced_tier', 'sec_edgar_v2_parsed'],
                 'ready_for_analysis': True
             },
-            'summary': summary,
+            'polygon_summary': summary,
             'fingerprints': enriched_fingerprints
         }
         
         with open(output_file, 'w') as f:
             json.dump(output, f, indent=2)
-        
+            
         print("\n" + "="*60)
         print("SEC ENRICHMENT COMPLETE")
         print("="*60)
-        print(f"SEC data added: {sec_success} stocks")
+        print(f"SEC data added to: {sec_success} stocks")
         print(f"SEC API calls: {self.api_calls}")
-        print(f"\nMaster file saved: {output_file}")
+        print(f"\n✅ Master file saved: {output_file}")
         print("\nReady for correlation analysis!")
 
 def main():
     merger = SECDataMerger()
     
-    polygon_file = 'POLYGON_FINGERPRINTS.json'
-    output_file = 'MASTER_FINGERPRINTS.json'
+    # This is the output from your fingerprint_analyzer.py
+    polygon_file = 'FINGERPRINTS.json' 
+    # This is the final file for your correlation script
+    output_file = 'MASTER_FINGERPRINTS.json' 
     
-    import os
     if not os.path.exists(polygon_file):
-        print(f"ERROR: {polygon_file} not found!")
-        print("Run fingerprint_collector_raw.py first")
+        print(f"❌ ERROR: {polygon_file} not found!")
+        print("Run fingerprint_analyzer.py first to generate it.")
         return
     
     print("Starting SEC data enrichment...")
-    print("~3 SEC API calls per ticker")
-    print("Estimated time: 10-15 minutes")
+    print(f"Input: {polygon_file}")
+    print(f"Output: {output_file}")
     
     merger.merge_sec_data(polygon_file, output_file)
 
