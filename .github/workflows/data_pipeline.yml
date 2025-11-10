@@ -1,0 +1,98 @@
+name: Complete Fingerprint Analysis & Correlation
+
+on:
+  workflow_dispatch:
+    inputs:
+      input_file:
+        description: 'Input file with clean explosions'
+        required: true
+        default: 'CLEAN_EXPLOSIONS.json'
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 480 # 8-hour timeout
+
+    permissions:
+      contents: write # Allow the job to push commits
+
+    steps:
+      - name: 1. Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 2. Set up Python 3.9
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: 3. Install Collector Dependencies
+        run: |
+          echo "Installing libraries for data collection..."
+          pip install requests numpy polygon-api-client
+
+      # --- STAGE 1: POLYGON DATA COLLECTION ---
+      - name: 4. Run Polygon Data Collector
+        env:
+          POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+        run: |
+          echo "Stage 1: Collecting Polygon data (10 categories)..."
+          python fingerprint_analyzer.py ${{ github.event.inputs.input_file }}
+          echo "Polygon collection complete. Output: FINGERPRINTS.json"
+
+      # --- STAGE 2: SEC DATA ENRICHMENT ---
+      - name: 5. Run SEC Data Merger
+        run: |
+          echo "Stage 2: Enriching with SEC filing data..."
+          python sec_merger.py
+          echo "SEC enrichment complete. Output: MASTER_FINGERPRINTS.json"
+
+      # --- STAGE 3: ANALYSIS ---
+      - name: 6. Install Analysis Dependencies
+        run: |
+          echo "Installing libraries for analysis..."
+          pip install pandas seaborn matplotlib
+
+      - name: 7. Run Correlation Analyzer
+        run: |
+          echo "Stage 3: Running correlation analysis..."
+          python correlation_analyzer.py
+          echo "Analysis complete. Output: correlation_heatmap.png"
+
+      # --- STAGE 4: VERIFY & COMMIT ---
+      - name: 8. Verify output files
+        run: |
+          echo "Checking generated files..."
+          if [ ! -f "MASTER_FINGERPRINTS.json" ]; then
+            echo "❌ CRITICAL ERROR: MASTER_FINGERPRINTS.json not found!"
+            exit 1
+          fi
+          if [ ! -f "correlation_heatmap.png" ]; then
+            echo "❌ CRITICAL ERROR: correlation_heatmap.png not found!"
+            exit 1
+          fi
+          echo "✅ All required artifacts (MASTER_FINGERPRINTS.json, correlation_heatmap.png) created."
+
+
+      - name: 9. Commit and push results
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Add the final master file AND the new heatmap image
+          git add MASTER_FINGERPRINTS.json
+          git add correlation_heatmap.png
+          git add CLEAN_FINGERPRINTS.json # Also add the clean file for inspection
+          git status
+          
+          # Check if there are any changes to commit
+          if git diff --cached --quiet; then
+            echo "No changes to commit. Files are already up-to-date."
+            exit 0
+          fi
+          
+          git commit -m "Automated Workflow: Generate Master Data & Correlation Heatmap - $(date)"
+          
+          # A simple push is safer than rebase in an automated workflow
+          git push
