@@ -25,7 +25,7 @@ jobs:
     
     - name: Install dependencies
       run: |
-        pip install requests numpy polygon-api-client
+        pip install requests numpy
     
     - name: Run Polygon fingerprint analysis
       env:
