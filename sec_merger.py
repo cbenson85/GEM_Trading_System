@@ -255,34 +255,38 @@ class SECDataMerger:
         total_sells = 0
         
         try:
-            # Find all transaction codes
-            # 'P' = Open market or private purchase
-            # 'S' = Open market or private sale
+            # Look for transaction codes first
+            # 'P' = Purchase, 'S' = Sale
+            purchase_codes = re.findall(r'<transactionCode>P</transactionCode>', text, re.IGNORECASE)
+            sale_codes = re.findall(r'<transactionCode>S</transactionCode>', text, re.IGNORECASE)
             
-            # This is a simple regex search, which is faster than full XML parsing
-            purchases = re.findall(r'<transactionCode>P</transactionCode>', text)
-            sales = re.findall(r'<transactionCode>S</transactionCode>', text)
+            # Try to get actual share amounts
+            transactions = re.findall(r'<transactionShares>(.*?)</transactionShares>', text, re.IGNORECASE)
+            codes = re.findall(r'<transactionAcquiredDisposedCode>(.*?)</transactionAcquiredDisposedCode>', text, re.IGNORECASE)
             
-            # We can also get the share amounts
-            transactions = re.findall(r'<transactionShares>(.*?)</transactionShares>', text)
-            codes = re.findall(r'<transactionAcquiredDisposedCode>(.*?)</transactionAcquiredDisposedCode>', text)
-            
-            for i in range(len(codes)):
+            for i in range(min(len(transactions), len(codes))):
                 try:
-                    shares = float(re.search(r'<value>([\d\.]+)</value>', transactions[i]).group(1))
-                    code = re.search(r'<value>([AD])</value>', codes[i]).group(1)
+                    shares_match = re.search(r'<value>([\d\.]+)</value>', transactions[i], re.IGNORECASE)
+                    code_match = re.search(r'<value>([AD])</value>', codes[i], re.IGNORECASE)
                     
-                    if code == 'A': # 'A' (Acquisition) often pairs with 'P' (Purchase)
-                        total_buys += shares
-                    elif code == 'D': # 'D' (Disposed) often pairs with 'S' (Sale)
-                        total_sells += shares
+                    if shares_match and code_match:
+                        shares = float(shares_match.group(1))
+                        code = code_match.group(1)
+                        
+                        if code == 'A': # Acquired
+                            total_buys += shares
+                        elif code == 'D': # Disposed
+                            total_sells += shares
                 except:
-                    continue # Error parsing one transaction, skip it
-
-            # This is a fallback if the share parsing fails
+                    continue
+            
+            # If we found transaction codes but no share amounts, just count transactions
             if total_buys == 0 and total_sells == 0:
-                total_buys = len(purchases) * 1000  # Estimate 1000 shares per transaction
-                total_sells = len(sales) * 1000
+                # Only count actual P codes found, no estimates
+                if purchase_codes:
+                    total_buys = len(purchase_codes)  # Count transactions, not shares
+                if sale_codes:
+                    total_sells = len(sale_codes)
 
             return int(total_buys), int(total_sells)
             
