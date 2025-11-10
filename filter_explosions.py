@@ -16,6 +16,7 @@ class ExplosionFilter:
             'removed_data_errors': 0,
             'removed_no_liquidity': 0,
             'removed_pump_dump': 0,
+            'rescued_high_catalyst_volume': 0,
             'total_passed': 0
         }
         self.removed = []
@@ -23,7 +24,6 @@ class ExplosionFilter:
     def filter_data_errors(self, explosion: Dict) -> bool:
         """Remove obvious data errors and corporate actions"""
         
-        # Price/gain outliers
         if explosion['peak_price'] > 25000:
             self.stats['removed_data_errors'] += 1
             self.removed.append({
@@ -44,8 +44,35 @@ class ExplosionFilter:
             
         return True
     
+    def check_catalyst_day_volume(self, ticker: str, catalyst_date: str) -> Dict:
+        """Check volume on catalyst day for rescue mechanism"""
+        
+        catalyst_dt = datetime.strptime(catalyst_date, '%Y-%m-%d')
+        
+        url = f"{self.base_url}/v2/aggs/ticker/{ticker}/range/1/day/{catalyst_date}/{catalyst_date}"
+        params = {'apiKey': self.api_key, 'adjusted': 'true'}
+        
+        try:
+            response = requests.get(url, params=params)
+            if response.status_code != 200:
+                return {'volume': 0, 'dollar_volume': 0}
+                
+            data = response.json()
+            bars = data.get('results', [])
+            
+            if bars:
+                volume = bars[0].get('v', 0)
+                price = bars[0].get('c', 0)
+                dollar_volume = volume * price
+                return {'volume': volume, 'dollar_volume': dollar_volume}
+                
+        except:
+            pass
+            
+        return {'volume': 0, 'dollar_volume': 0}
+    
     def check_minimum_liquidity(self, ticker: str, catalyst_date: str, explosion: Dict) -> bool:
-        """Check pre-catalyst liquidity requirements"""
+        """Enhanced liquidity check with rescue mechanism"""
         
         catalyst_dt = datetime.strptime(catalyst_date, '%Y-%m-%d')
         end_date = (catalyst_dt - timedelta(days=1)).strftime('%Y-%m-%d')
@@ -75,28 +102,39 @@ class ExplosionFilter:
             avg_price = sum([b.get('c', 0) for b in bars]) / len(bars)
             avg_dollar_volume = avg_volume * avg_price
             
-            if avg_volume < 25000:
-                self.stats['removed_no_liquidity'] += 1
-                self.removed.append({
-                    'ticker': ticker,
-                    'reason': f"Volume {avg_volume:.0f} shares/day < 25,000",
-                    'data': explosion
-                })
-                return False
-                
-            if avg_price < 0.25:
-                self.stats['removed_no_liquidity'] += 1
-                self.removed.append({
-                    'ticker': ticker,
-                    'reason': f"Price ${avg_price:.3f} < $0.25",
-                    'data': explosion
-                })
-                return False
-            
-            # Add liquidity metrics to explosion
+            # Store pre-catalyst metrics
             explosion['pre_catalyst_volume'] = int(avg_volume)
             explosion['pre_catalyst_price'] = round(avg_price, 3)
             explosion['pre_catalyst_dollar_volume'] = int(avg_dollar_volume)
+            
+            # Check if pre-catalyst liquidity meets minimums
+            pre_catalyst_pass = avg_volume >= 25000 and avg_price >= 0.25
+            
+            if not pre_catalyst_pass:
+                # RESCUE MECHANISM: Check catalyst day volume
+                catalyst_vol = self.check_catalyst_day_volume(ticker, catalyst_date)
+                explosion['catalyst_day_volume'] = catalyst_vol['volume']
+                explosion['catalyst_day_dollar_volume'] = catalyst_vol['dollar_volume']
+                
+                # Rescue if catalyst day had significant volume
+                volume_multiplier = explosion.get('volume_numeric', 1)
+                
+                if (catalyst_vol['volume'] >= 500000 and 
+                    catalyst_vol['dollar_volume'] >= 1000000 and
+                    volume_multiplier >= 20):
+                    
+                    explosion['liquidity_warning'] = 'rescued_high_catalyst_volume'
+                    self.stats['rescued_high_catalyst_volume'] += 1
+                    return True
+                
+                # Otherwise remove
+                self.stats['removed_no_liquidity'] += 1
+                self.removed.append({
+                    'ticker': ticker,
+                    'reason': f"Vol: {avg_volume:.0f}/day, Price: ${avg_price:.3f}, Catalyst vol: {catalyst_vol['volume']:.0f}",
+                    'data': explosion
+                })
+                return False
                 
             return True
             
@@ -104,7 +142,7 @@ class ExplosionFilter:
             return False
     
     def check_pump_and_dump(self, ticker: str, peak_date: str, explosion: Dict) -> bool:
-        """Check for 80%+ overnight gap in 4 days after peak"""
+        """Enhanced pump and dump check"""
         
         peak_dt = datetime.strptime(peak_date, '%Y-%m-%d')
         start_date = peak_date
@@ -116,7 +154,7 @@ class ExplosionFilter:
         try:
             response = requests.get(url, params=params)
             if response.status_code != 200:
-                return True  # Keep if can't verify
+                return True
                 
             data = response.json()
             bars = data.get('results', [])
@@ -124,13 +162,17 @@ class ExplosionFilter:
             if len(bars) < 2:
                 return True
             
+            # Check for massive gaps but consider if it's a known squeeze
+            known_squeezes = ['SPRT', 'GME', 'AMC', 'HYMC', 'NAKD']
+            gap_threshold = 150 if ticker in known_squeezes else 80
+            
             for i in range(1, min(5, len(bars))):
                 prev_close = bars[i-1].get('c', 0)
                 curr_open = bars[i].get('o', 0)
                 
                 if prev_close > 0:
                     gap_pct = abs((curr_open - prev_close) / prev_close) * 100
-                    if gap_pct >= 80:
+                    if gap_pct >= gap_threshold:
                         self.stats['removed_pump_dump'] += 1
                         self.removed.append({
                             'ticker': ticker,
@@ -144,7 +186,7 @@ class ExplosionFilter:
             return True
     
     def tag_explosion_type(self, explosion: Dict) -> Dict:
-        """Tag explosion characteristics"""
+        """Enhanced tagging with liquidity warnings"""
         
         ticker = explosion['ticker']
         
@@ -171,7 +213,7 @@ class ExplosionFilter:
         else:
             explosion['gain_tier'] = 'lottery'
         
-        # Price tier (using pre-catalyst price if available)
+        # Price tier
         price = explosion.get('pre_catalyst_price', explosion['base_price'])
         if price < 1.0:
             explosion['price_tier'] = 'penny'
@@ -183,7 +225,7 @@ class ExplosionFilter:
         return explosion
     
     def process_file(self, input_file: str, output_file: str):
-        """Process the scan file with comprehensive filtering"""
+        """Process the scan file with enhanced filtering"""
         
         print(f"\nProcessing {input_file}...")
         
@@ -194,7 +236,7 @@ class ExplosionFilter:
         self.stats['total_input'] = len(explosions)
         
         print(f"Found {len(explosions)} explosions to process")
-        print("Applying filters...")
+        print("Applying filters with rescue mechanism...")
         
         clean_explosions = []
         
@@ -202,13 +244,17 @@ class ExplosionFilter:
             if i % 10 == 0:
                 print(f"Progress: {i}/{len(explosions)}")
             
+            # Add volume numeric for rescue checks
+            volume_spike = explosion.get('volume_spike', '1x')
+            explosion['volume_numeric'] = float(volume_spike.replace('x', ''))
+            
             # Step 1: Filter data errors
             if not self.filter_data_errors(explosion):
                 continue
             
             ticker = explosion['ticker']
             
-            # Step 2: Check liquidity (also adds metrics)
+            # Step 2: Check liquidity with rescue
             if not self.check_minimum_liquidity(ticker, explosion['catalyst_date'], explosion):
                 continue
             
@@ -256,6 +302,7 @@ class ExplosionFilter:
         print(f"Removed data errors: {self.stats['removed_data_errors']}")
         print(f"Removed low liquidity: {self.stats['removed_no_liquidity']}")
         print(f"Removed pump & dump: {self.stats['removed_pump_dump']}")
+        print(f"RESCUED (high catalyst vol): {self.stats['rescued_high_catalyst_volume']}")
         print(f"PASSED: {self.stats['total_passed']}")
         print(f"Pass rate: {(self.stats['total_passed']/self.stats['total_input']*100):.1f}%")
 
