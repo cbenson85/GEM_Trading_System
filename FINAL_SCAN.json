@@ -208,21 +208,6 @@
       "volume_numeric": 25.5
     },
     {
-      "ticker": "HOLO",
-      "base_price": 1200,
-      "base_date": "2024-02-06",
-      "peak_price": 78720,
-      "peak_date": "2024-02-16",
-      "gain_pct": 6459.999999999999,
-      "catalyst_date": "2024-02-07",
-      "catalyst_price": 14400,
-      "catalyst_type": "50MA_BREAKOUT",
-      "volume_spike": "1308.8x",
-      "analysis_start": "2023-10-10",
-      "days_to_peak": 8,
-      "volume_numeric": 1308.8
-    },
-    {
       "ticker": "MDGSW",
       "base_price": 0.0216,
       "base_date": "2020-04-01",
@@ -251,21 +236,6 @@
       "analysis_start": "2012-11-14",
       "days_to_peak": 117,
       "volume_numeric": 6.8
-    },
-    {
-      "ticker": "LEXXW",
-      "base_price": 0.05,
-      "base_date": "2023-10-23",
-      "peak_price": 2.4,
-      "peak_date": "2024-03-08",
-      "gain_pct": 4700.0,
-      "catalyst_date": "2024-03-08",
-      "catalyst_price": 2.01,
-      "catalyst_type": "52W_HIGH",
-      "volume_spike": "6.7x",
-      "analysis_start": "2023-11-09",
-      "days_to_peak": 71,
-      "volume_numeric": 6.7
     },
     {
       "ticker": "ADPT",
@@ -312,21 +282,6 @@
       "volume_numeric": 7.1
     },
     {
-      "ticker": "HOLOW",
-      "base_price": 0.0177,
-      "base_date": "2023-12-29",
-      "peak_price": 0.64,
-      "peak_date": "2024-02-16",
-      "gain_pct": 3515.8192090395473,
-      "catalyst_date": "2024-02-07",
-      "catalyst_price": 0.14,
-      "catalyst_type": "50MA_BREAKOUT",
-      "volume_spike": "462.9x",
-      "analysis_start": "2023-10-10",
-      "days_to_peak": 21,
-      "volume_numeric": 462.9
-    },
-    {
       "ticker": "MGEN",
       "base_price": 0.472,
       "base_date": "2020-10-22",
@@ -340,21 +295,6 @@
       "analysis_start": "2020-06-30",
       "days_to_peak": 16,
       "volume_numeric": 284.2
-    },
-    {
-      "ticker": "CRIS",
-      "base_price": 0.38,
-      "base_date": "2023-09-28",
-      "peak_price": 12.535,
-      "peak_date": "2023-11-28",
-      "gain_pct": 3198.684210526316,
-      "catalyst_date": "2023-11-17",
-      "catalyst_price": 7.35,
-      "catalyst_type": "PRICE_SURGE",
-      "volume_spike": "13.8x",
-      "analysis_start": "2023-07-20",
-      "days_to_peak": 6,
-      "volume_numeric": 13.8
     },
     {
       "ticker": "SCKT",
@@ -490,21 +430,6 @@
       "volume_numeric": 10.7
     },
     {
-      "ticker": "BFRIW",
-      "base_price": 0.01,
-      "base_date": "2024-02-14",
-      "peak_price": 0.23,
-      "peak_date": "2024-10-31",
-      "gain_pct": 2200.0,
-      "catalyst_date": "2024-02-20",
-      "catalyst_price": 0.0308,
-      "catalyst_type": "PRICE_SURGE",
-      "volume_spike": "9.8x",
-      "analysis_start": "2023-10-23",
-      "days_to_peak": 84,
-      "volume_numeric": 9.8
-    },
-    {
       "ticker": "ARKOW",
       "base_price": 0.052,
       "base_date": "2024-05-03",
@@ -580,21 +505,6 @@
       "volume_numeric": 31.3
     },
     {
-      "ticker": "GAMCW",
-      "base_price": 0.01,
-      "base_date": "2023-01-03",
-      "peak_price": 0.1991,
-      "peak_date": "2023-07-25",
-      "gain_pct": 1891.0,
-      "catalyst_date": "2022-11-10",
-      "catalyst_price": 0.0222,
-      "catalyst_type": "VOLUME_SURGE",
-      "volume_spike": "12.3x",
-      "analysis_start": "2022-07-13",
-      "days_to_peak": 61,
-      "volume_numeric": 12.3
-    },
-    {
       "ticker": "SNOW",
       "base_price": 23.57,
       "base_date": "2017-06-21",
@@ -608,21 +518,6 @@
       "analysis_start": "2020-05-19",
       "days_to_peak": 86,
       "volume_numeric": 126.9
-    },
-    {
-      "ticker": "GCTK",
-      "base_price": 1245.3,
-      "base_date": "2023-04-04",
-      "peak_price": 22500,
-      "peak_date": "2023-04-10",
-      "gain_pct": 1706.793543724404,
-      "catalyst_date": "2023-04-06",
-      "catalyst_price": 7140,
-      "catalyst_type": "50MA_BREAKOUT",
-      "volume_spike": "1366.7x",
-      "analysis_start": "2022-12-07",
-      "days_to_peak": 3,
-      "volume_numeric": 1366.7
     },
     {
       "ticker": "ZANE",
@@ -668,36 +563,6 @@
       "analysis_start": "2011-07-04",
       "days_to_peak": 12,
       "volume_numeric": 17.3
-    },
-    {
-      "ticker": "LIFW",
-      "base_price": 26.25,
-      "base_date": "2023-10-25",
-      "peak_price": 436.995,
-      "peak_date": "2023-11-06",
-      "gain_pct": 1564.7428571428572,
-      "catalyst_date": "2023-11-06",
-      "catalyst_price": 241.25,
-      "catalyst_type": "50MA_BREAKOUT",
-      "volume_spike": "23.0x",
-      "analysis_start": "2023-07-09",
-      "days_to_peak": 8,
-      "volume_numeric": 23.0
-    },
-    {
-      "ticker": "BRLIR",
-      "base_price": 0.0245,
-      "base_date": "2023-06-21",
-      "peak_price": 0.3999,
-      "peak_date": "2023-12-01",
-      "gain_pct": 1532.2448979591834,
-      "catalyst_date": "2023-12-01",
-      "catalyst_price": 0.3499,
-      "catalyst_type": "52W_HIGH",
-      "volume_spike": "13.0x",
-      "analysis_start": "2023-08-03",
-      "days_to_peak": 82,
-      "volume_numeric": 13.0
     },
     {
       "ticker": "WGSWW",
@@ -760,21 +625,6 @@
       "volume_numeric": 7.3
     },
     {
-      "ticker": "VTGN",
-      "base_price": 1.62,
-      "base_date": "2023-06-26",
-      "peak_price": 24.71,
-      "peak_date": "2023-08-07",
-      "gain_pct": 1425.3086419753085,
-      "catalyst_date": "2023-08-07",
-      "catalyst_price": 13.05,
-      "catalyst_type": "50MA_BREAKOUT",
-      "volume_spike": "205.5x",
-      "analysis_start": "2023-04-09",
-      "days_to_peak": 29,
-      "volume_numeric": 205.5
-    },
-    {
       "ticker": "PED",
       "base_price": 0.295,
       "base_date": "2018-03-28",
@@ -788,21 +638,6 @@
       "analysis_start": "2018-02-27",
       "days_to_peak": 64,
       "volume_numeric": 190.2
-    },
-    {
-      "ticker": "GMBLW",
-      "base_price": 0.0102,
-      "base_date": "2022-10-31",
-      "peak_price": 0.15,
-      "peak_date": "2023-02-01",
-      "gain_pct": 1370.5882352941173,
-      "catalyst_date": "2023-01-24",
-      "catalyst_price": 0.0499,
-      "catalyst_type": "50MA_BREAKOUT",
-      "volume_spike": "9.8x",
-      "analysis_start": "2022-09-26",
-      "days_to_peak": 55,
-      "volume_numeric": 9.8
     },
     {
       "ticker": "UAVS",
@@ -895,21 +730,6 @@
       "volume_numeric": 4.5
     },
     {
-      "ticker": "ELYS",
-      "base_price": 0.111,
-      "base_date": "2022-12-20",
-      "peak_price": 1.47,
-      "peak_date": "2023-02-02",
-      "gain_pct": 1224.3243243243242,
-      "catalyst_date": "2022-12-27",
-      "catalyst_price": 0.37,
-      "catalyst_type": "50MA_BREAKOUT",
-      "volume_spike": "91.5x",
-      "analysis_start": "2022-08-29",
-      "days_to_peak": 29,
-      "volume_numeric": 91.5
-    },
-    {
       "ticker": "AEHR",
       "base_price": 2.08,
       "base_date": "2021-05-25",
@@ -938,21 +758,6 @@
       "analysis_start": "2019-12-16",
       "days_to_peak": 16,
       "volume_numeric": 12.2
-    },
-    {
-      "ticker": "NAUH",
-      "base_price": 0.0125,
-      "base_date": "2023-12-14",
-      "peak_price": 0.16103,
-      "peak_date": "2024-01-02",
-      "gain_pct": 1188.2399999999998,
-      "catalyst_date": "2023-12-26",
-      "catalyst_price": 0.06,
-      "catalyst_type": "50MA_BREAKOUT",
-      "volume_spike": "17.0x",
-      "analysis_start": "2023-08-28",
-      "days_to_peak": 7,
-      "volume_numeric": 17.0
     },
     {
       "ticker": "CRKN",
@@ -1105,21 +910,6 @@
       "volume_numeric": 24.6
     },
     {
-      "ticker": "AUUDW",
-      "base_price": 0.0117,
-      "base_date": "2023-11-22",
-      "peak_price": 0.1387,
-      "peak_date": "2024-04-08",
-      "gain_pct": 1085.4700854700855,
-      "catalyst_date": "2024-03-11",
-      "catalyst_price": 0.03,
-      "catalyst_type": "50MA_BREAKOUT",
-      "volume_spike": "7.1x",
-      "analysis_start": "2023-11-12",
-      "days_to_peak": 15,
-      "volume_numeric": 7.1
-    },
-    {
       "ticker": "SES.WS",
       "base_price": 0.0197,
       "base_date": "2024-09-12",
@@ -1136,21 +926,6 @@
     },
     {
       "ticker": "BREZR",
-      "base_price": 0.0156,
-      "base_date": "2023-04-25",
-      "peak_price": 0.18,
-      "peak_date": "2023-06-08",
-      "gain_pct": 1053.8461538461538,
-      "catalyst_date": "2023-05-26",
-      "catalyst_price": 0.095,
-      "catalyst_type": "BREAKOUT",
-      "volume_spike": "26.4x",
-      "analysis_start": "2023-01-26",
-      "days_to_peak": 31,
-      "volume_numeric": 26.4
-    },
-    {
-      "ticker": "BREZR",
       "base_price": 0.025,
       "base_date": "2022-09-13",
       "peak_price": 0.288,
@@ -1163,21 +938,6 @@
       "analysis_start": "2022-07-04",
       "days_to_peak": 31,
       "volume_numeric": 9.4
-    },
-    {
-      "ticker": "SDA",
-      "base_price": 3.8,
-      "base_date": "2023-05-18",
-      "peak_price": 43.05,
-      "peak_date": "2023-05-31",
-      "gain_pct": 1032.8947368421052,
-      "catalyst_date": "2023-05-26",
-      "catalyst_price": 16.08,
-      "catalyst_type": "50MA_BREAKOUT",
-      "volume_spike": "4.3x",
-      "analysis_start": "2023-01-26",
-      "days_to_peak": 2,
-      "volume_numeric": 4.3
     },
     {
       "ticker": "TRIT",
@@ -1208,21 +968,6 @@
       "analysis_start": "2010-06-23",
       "days_to_peak": 48,
       "volume_numeric": 37.6
-    },
-    {
-      "ticker": "SMFL",
-      "base_price": 2.275,
-      "base_date": "2023-12-15",
-      "peak_price": 24.43,
-      "peak_date": "2023-12-21",
-      "gain_pct": 973.8461538461539,
-      "catalyst_date": "2023-11-30",
-      "catalyst_price": 16.87,
-      "catalyst_type": "50MA_BREAKOUT",
-      "volume_spike": "575.5x",
-      "analysis_start": "2023-08-02",
-      "days_to_peak": 4,
-      "volume_numeric": 575.5
     },
     {
       "ticker": "RVPH",
@@ -1508,21 +1253,6 @@
       "volume_numeric": 20.2
     },
     {
-      "ticker": "MIGI",
-      "base_price": 0.462,
-      "base_date": "2023-11-14",
-      "peak_price": 4.4,
-      "peak_date": "2024-01-11",
-      "gain_pct": 852.3809523809524,
-      "catalyst_date": "2023-12-04",
-      "catalyst_price": 1.5,
-      "catalyst_type": "BREAKOUT",
-      "volume_spike": "18.9x",
-      "analysis_start": "2023-08-06",
-      "days_to_peak": 39,
-      "volume_numeric": 18.9
-    },
-    {
       "ticker": "EDTXW",
       "base_price": 0.1523,
       "base_date": "2020-02-18",
@@ -1598,20 +1328,6 @@
       "volume_numeric": 24.1
     },
     {
-      "ticker": "ADTX",
-      "base_price": 8294200.0,
-      "base_date": "2023-08-28",
-      "peak_price": 76930400.0,
-      "peak_date": "2023-08-31",
-      "gain_pct": 827.5204359673024,
-      "catalyst_date": "2023-08-31",
-      "catalyst_price": 62150000.0,
-      "catalyst_type": "50MA_BREAKOUT",
-      "volume_spike": "15.8x",
-      "analysis_start": "2023-06-02",
-      "volume_numeric": 15.8
-    },
-    {
       "ticker": "RUBY",
       "base_price": 4.2,
       "base_date": "2020-10-30",
@@ -1684,21 +1400,6 @@
       "analysis_start": "2018-01-29",
       "days_to_peak": 35,
       "volume_numeric": 21.5
-    },
-    {
-      "ticker": "CNCT",
-      "base_price": 100,
-      "base_date": "2023-06-27",
-      "peak_price": 900,
-      "peak_date": "2023-07-03",
-      "gain_pct": 800.0,
-      "catalyst_date": "2023-04-12",
-      "catalyst_price": 150,
-      "catalyst_type": "VOLUME_SURGE",
-      "volume_spike": "32.2x",
-      "analysis_start": "2022-12-13",
-      "days_to_peak": 4,
-      "volume_numeric": 32.2
     },
     {
       "ticker": "AXN",
@@ -1791,21 +1492,6 @@
       "volume_numeric": 15.3
     },
     {
-      "ticker": "SKYE",
-      "base_price": 2.25,
-      "base_date": "2024-01-25",
-      "peak_price": 19.4099,
-      "peak_date": "2024-03-04",
-      "gain_pct": 762.6622222222222,
-      "catalyst_date": "2024-02-27",
-      "catalyst_price": 14.5,
-      "catalyst_type": "BREAKOUT",
-      "volume_spike": "23.6x",
-      "analysis_start": "2023-10-30",
-      "days_to_peak": 26,
-      "volume_numeric": 23.6
-    },
-    {
       "ticker": "CORZW",
       "base_price": 0.88,
       "base_date": "2024-04-30",
@@ -1819,21 +1505,6 @@
       "analysis_start": "2024-02-05",
       "days_to_peak": 102,
       "volume_numeric": 46.4
-    },
-    {
-      "ticker": "NAMSW",
-      "base_price": 1.7101,
-      "base_date": "2023-11-21",
-      "peak_price": 14.67,
-      "peak_date": "2024-01-25",
-      "gain_pct": 757.8445704929536,
-      "catalyst_date": "2024-01-10",
-      "catalyst_price": 5.27,
-      "catalyst_type": "BREAKOUT",
-      "volume_spike": "12.0x",
-      "analysis_start": "2023-09-12",
-      "days_to_peak": 32,
-      "volume_numeric": 12.0
     },
     {
       "ticker": "SQBG",
@@ -2117,20 +1788,6 @@
       "analysis_start": "2024-04-21",
       "days_to_peak": 6,
       "volume_numeric": 379.9
-    },
-    {
-      "ticker": "AAOI",
-      "base_price": 2.0801,
-      "base_date": "2023-06-01",
-      "peak_price": 16.26,
-      "peak_date": "2023-08-24",
-      "gain_pct": 681.6931878275084,
-      "catalyst_date": "2023-06-15",
-      "catalyst_price": 4.33,
-      "catalyst_type": "52W_HIGH",
-      "volume_spike": "7.7x",
-      "analysis_start": "2023-03-17",
-      "volume_numeric": 7.7
     },
     {
       "ticker": "CYBI",
@@ -3713,21 +3370,6 @@
       "volume_numeric": 10.0
     },
     {
-      "ticker": "GCT",
-      "base_price": 6.71,
-      "base_date": "2023-09-28",
-      "peak_price": 40.4951,
-      "peak_date": "2024-03-01",
-      "gain_pct": 503.50372578241434,
-      "catalyst_date": "2023-12-01",
-      "catalyst_price": 11.8,
-      "catalyst_type": "50MA_BREAKOUT",
-      "volume_spike": "4.0x",
-      "analysis_start": "2023-08-03",
-      "days_to_peak": 61,
-      "volume_numeric": 4.0
-    },
-    {
       "ticker": "AVIR",
       "base_price": 5.709,
       "base_date": "2017-11-08",
@@ -3756,21 +3398,6 @@
       "analysis_start": "2019-12-01",
       "days_to_peak": 57,
       "volume_numeric": 7.0
-    },
-    {
-      "ticker": "NBTX",
-      "base_price": 1.75,
-      "base_date": "2023-05-01",
-      "peak_price": 10.5199,
-      "peak_date": "2023-07-24",
-      "gain_pct": 501.13714285714286,
-      "catalyst_date": "2023-05-05",
-      "catalyst_price": 6.68,
-      "catalyst_type": "50MA_BREAKOUT",
-      "volume_spike": "12281.3x",
-      "analysis_start": "2023-01-05",
-      "days_to_peak": 57,
-      "volume_numeric": 12281.3
     }
   ]
 }
