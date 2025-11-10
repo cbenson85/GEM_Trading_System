@@ -17,6 +17,7 @@ class ExplosionFilter:
             'removed_no_liquidity': 0,
             'removed_pump_dump': 0,
             'rescued_high_catalyst_volume': 0,
+            'rescued_new_listing': 0,
             'total_passed': 0
         }
         self.removed = []
@@ -47,8 +48,6 @@ class ExplosionFilter:
     def check_catalyst_day_volume(self, ticker: str, catalyst_date: str) -> Dict:
         """Check volume on catalyst day for rescue mechanism"""
         
-        catalyst_dt = datetime.strptime(catalyst_date, '%Y-%m-%d')
-        
         url = f"{self.base_url}/v2/aggs/ticker/{ticker}/range/1/day/{catalyst_date}/{catalyst_date}"
         params = {'apiKey': self.api_key, 'adjusted': 'true'}
         
@@ -72,7 +71,7 @@ class ExplosionFilter:
         return {'volume': 0, 'dollar_volume': 0}
     
     def check_minimum_liquidity(self, ticker: str, catalyst_date: str, explosion: Dict) -> bool:
-        """Enhanced liquidity check with rescue mechanism"""
+        """Enhanced liquidity check with dual rescue mechanisms"""
         
         catalyst_dt = datetime.strptime(catalyst_date, '%Y-%m-%d')
         end_date = (catalyst_dt - timedelta(days=1)).strftime('%Y-%m-%d')
@@ -89,11 +88,39 @@ class ExplosionFilter:
             data = response.json()
             bars = data.get('results', [])
             
+            # Check catalyst day volume first
+            catalyst_vol = self.check_catalyst_day_volume(ticker, catalyst_date)
+            explosion['catalyst_day_volume'] = catalyst_vol['volume']
+            explosion['catalyst_day_dollar_volume'] = catalyst_vol['dollar_volume']
+            
+            # SECOND RESCUE: New listings with extreme catalyst volume
             if len(bars) < 20:
+                volume_multiplier = explosion.get('volume_numeric', 1)
+                
+                # Rescue if massive catalyst day volume (IPOs, new listings)
+                if (catalyst_vol['dollar_volume'] >= 10000000 and  # $10M+
+                    volume_multiplier >= 20):
+                    
+                    explosion['liquidity_warning'] = 'rescued_new_listing'
+                    self.stats['rescued_new_listing'] += 1
+                    
+                    # Still calculate what pre-catalyst metrics we can
+                    if bars:
+                        avg_volume = sum([b.get('v', 0) for b in bars]) / len(bars)
+                        avg_price = sum([b.get('c', 0) for b in bars]) / len(bars)
+                        avg_dollar_volume = avg_volume * avg_price
+                        explosion['pre_catalyst_volume'] = int(avg_volume)
+                        explosion['pre_catalyst_price'] = round(avg_price, 3)
+                        explosion['pre_catalyst_dollar_volume'] = int(avg_dollar_volume)
+                        explosion['trading_days_pre_catalyst'] = len(bars)
+                    
+                    return True
+                
+                # Otherwise remove
                 self.stats['removed_no_liquidity'] += 1
                 self.removed.append({
                     'ticker': ticker,
-                    'reason': f"Less than 20 trading days pre-catalyst",
+                    'reason': f"Only {len(bars)} trading days pre-catalyst, catalyst vol: ${catalyst_vol['dollar_volume']:.0f}",
                     'data': explosion
                 })
                 return False
@@ -111,12 +138,7 @@ class ExplosionFilter:
             pre_catalyst_pass = avg_volume >= 25000 and avg_price >= 0.25
             
             if not pre_catalyst_pass:
-                # RESCUE MECHANISM: Check catalyst day volume
-                catalyst_vol = self.check_catalyst_day_volume(ticker, catalyst_date)
-                explosion['catalyst_day_volume'] = catalyst_vol['volume']
-                explosion['catalyst_day_dollar_volume'] = catalyst_vol['dollar_volume']
-                
-                # Rescue if catalyst day had significant volume
+                # FIRST RESCUE: Low pre-catalyst but high catalyst volume
                 volume_multiplier = explosion.get('volume_numeric', 1)
                 
                 if (catalyst_vol['volume'] >= 500000 and 
@@ -162,7 +184,7 @@ class ExplosionFilter:
             if len(bars) < 2:
                 return True
             
-            # Check for massive gaps but consider if it's a known squeeze
+            # Known squeezes get higher threshold
             known_squeezes = ['SPRT', 'GME', 'AMC', 'HYMC', 'NAKD']
             gap_threshold = 150 if ticker in known_squeezes else 80
             
@@ -225,7 +247,7 @@ class ExplosionFilter:
         return explosion
     
     def process_file(self, input_file: str, output_file: str):
-        """Process the scan file with enhanced filtering"""
+        """Process the scan file with dual rescue mechanisms"""
         
         print(f"\nProcessing {input_file}...")
         
@@ -236,7 +258,7 @@ class ExplosionFilter:
         self.stats['total_input'] = len(explosions)
         
         print(f"Found {len(explosions)} explosions to process")
-        print("Applying filters with rescue mechanism...")
+        print("Applying filters with dual rescue mechanisms...")
         
         clean_explosions = []
         
@@ -254,7 +276,7 @@ class ExplosionFilter:
             
             ticker = explosion['ticker']
             
-            # Step 2: Check liquidity with rescue
+            # Step 2: Check liquidity with dual rescue
             if not self.check_minimum_liquidity(ticker, explosion['catalyst_date'], explosion):
                 continue
             
@@ -303,6 +325,7 @@ class ExplosionFilter:
         print(f"Removed low liquidity: {self.stats['removed_no_liquidity']}")
         print(f"Removed pump & dump: {self.stats['removed_pump_dump']}")
         print(f"RESCUED (high catalyst vol): {self.stats['rescued_high_catalyst_volume']}")
+        print(f"RESCUED (new listings): {self.stats['rescued_new_listing']}")
         print(f"PASSED: {self.stats['total_passed']}")
         print(f"Pass rate: {(self.stats['total_passed']/self.stats['total_input']*100):.1f}%")
 
