@@ -1,0 +1,66 @@
+name: Split and Archive Dataset
+
+# This makes the workflow runnable manually from the "Actions" tab in GitHub
+on:
+  workflow_dispatch:
+
+jobs:
+  split-and-commit:
+    runs-on: ubuntu-latest
+    
+    # Grant permissions for the workflow to write back to your repo
+    permissions:
+      contents: write
+
+    steps:
+      # 1. Check out your repository's code
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # 2. Set up a Python environment
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # 3. Run the split script
+      #    (This assumes split_dataset.py is in the root of your repo)
+      - name: Run dataset split script
+        run: |
+          python split_dataset.py
+        # This script will modify CLEAN_EXPLOSIONS.json
+        # and create DISCARD_EXPLOSIONS.json
+
+      # 4. Check if the script actually created/modified any files
+      - name: Check for file changes
+        id: git-check
+        run: |
+          # The 'git status --porcelain' command lists changed files.
+          # If it's empty, we set 'changed' to 'false'.
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No changes detected. Workflow complete."
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "Changes detected. Proceeding to commit."
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      # 5. Configure Git for the bot (only if files changed)
+      - name: Configure Git
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions-bot@github.com'
+
+      # 6. Add, Commit, and Push the changes (only if files changed)
+      - name: Commit and push changes
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          # Add both files to the staging area
+          git add CLEAN_EXPLOSIONS.json DISCARD_EXPLOSIONS.json
+          
+          # Commit the changes
+          git commit -m "Automated Workflow: Split dataset into training and discard files"
+          
+          # Push the commit back to your repository
+          git push
