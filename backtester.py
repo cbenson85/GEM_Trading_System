@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import os
 from typing import Dict, List, TextIO
+from datetime import datetime # <-- FIX: Added the missing import
 
 MASTER_FILE = 'MASTER_FINGERPRINTS.json'
 CLEAN_FILE = 'CLEAN_FINGERPRINTS_FOR_BACKTEST.json'
