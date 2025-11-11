@@ -204,7 +204,8 @@ def main():
         # 4. Define our "Golden Fingerprint" Tiers for backtesting
         
         # --- Tier 3: The Setup (Our Base Filter) ---
-        query_tier_3 = "is_ultra_low_float == True and (sector_BIOTECH_HEALTH == True or sector_ENERGY_MINING == True or sector_TECH == True)"
+        # --- FIX: Added backticks `` around names with special chars ---
+        query_tier_3 = "is_ultra_low_float == True and (`sector_BIOTECH/HEALTH` == True or `sector_ENERGY/MINING` == True or sector_TECH == True)"
         df_tier_3 = df_all_clean.query(query_tier_3)
 
         # --- Tier 2: Setup + Momentum (The "Heating Up" Filter) ---
