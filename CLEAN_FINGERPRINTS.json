@@ -13,6 +13,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 138660000.0,
       "sic_description": "CRUDE PETROLEUM & NATURAL GAS",
+      "sector": "ENERGY/MINING",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -39,6 +40,7 @@
       "rsi": 73.58885017421603,
       "price_ma20": 0.32136,
       "price_ma50": 0.371422,
+      "is_golden_cross": false,
       "volume_ma20": 3518456.35
     },
     "3_fundamentals": {
@@ -50,7 +52,11 @@
       "net_income": 24544000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 90000000.0
+      "total_debt": 90000000.0,
+      "operating_expenses": 116345000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.6647951768090451,
@@ -116,38 +122,34 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 4,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2020-06-11",
             "days_from_catalyst": 6,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001655020/000165502020000114/xog-20200608.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-06-09",
             "days_from_catalyst": 4,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001655020/000165502020000111/xog-20200608.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-05-15",
             "days_from_catalyst": -21,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001655020/000165502020000105/xog-20200515.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-05-11",
             "days_from_catalyst": -25,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001655020/000165502020000099/xog-20200331.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -155,14 +157,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 35
+        "activist_filing_count": 35,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -180,6 +184,7 @@
       "market_cap": 12282470.64,
       "shares_outstanding": 11270000.0,
       "sic_description": "RETAIL-RETAIL STORES, NEC",
+      "sector": "ENERGY/MINING",
       "primary_exchange": "XASE",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -206,6 +211,7 @@
       "rsi": 48.59780404224071,
       "price_ma20": 1.13686,
       "price_ma50": 1.10033198,
+      "is_golden_cross": true,
       "volume_ma20": 108110.85
     },
     "3_fundamentals": {
@@ -217,7 +223,11 @@
       "net_income": 6817575.0,
       "turning_profitable": true,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 0.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.3185848109735699,
@@ -283,9 +293,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -293,14 +303,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 7
+        "activist_filing_count": 7,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -318,6 +330,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 99999000.0,
       "sic_description": "ELECTRIC SERVICES",
+      "sector": "OTHER",
       "primary_exchange": "XNYS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -344,6 +357,7 @@
       "rsi": 76.54639175257734,
       "price_ma20": 19.939500000000002,
       "price_ma50": 20.0028,
+      "is_golden_cross": false,
       "volume_ma20": 664364.8
     },
     "3_fundamentals": {
@@ -355,7 +369,11 @@
       "net_income": -108041000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 99147000.0
+      "total_debt": 99147000.0,
+      "operating_expenses": 113892000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.05036904553033536,
@@ -416,38 +434,34 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 4,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2013-03-19",
             "days_from_catalyst": 5,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001379895/000110465913022213/a13-7856_18k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2013-03-15",
             "days_from_catalyst": 1,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001379895/000110465913021180/a13-7595_18k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2013-03-14",
             "days_from_catalyst": 0,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001379895/000110465913020396/a13-7429_18k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2013-02-12",
             "days_from_catalyst": -30,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001379895/000110465913009512/a13-4917_18k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -455,14 +469,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 120
+        "activist_filing_count": 120,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -480,6 +496,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 53080000.0,
       "sic_description": "SERVICES-MEDICAL LABORATORIES",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -506,6 +523,7 @@
       "rsi": 87.1228266965788,
       "price_ma20": 0.612145,
       "price_ma50": 0.786806,
+      "is_golden_cross": false,
       "volume_ma20": 14440758.25
     },
     "3_fundamentals": {
@@ -517,7 +535,11 @@
       "net_income": -5494000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 5410000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.07578891642972574,
@@ -583,38 +605,34 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 4,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2020-10-28",
             "days_from_catalyst": 0,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001590750/000119312520279263/d49501d8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-10-14",
             "days_from_catalyst": -14,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001590750/000159075020000095/mgen-20201008.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-10-05",
             "days_from_catalyst": -23,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001590750/000159075020000092/mgen-20201005.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-10-01",
             "days_from_catalyst": -27,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001590750/000159075020000088/mgen-20200913.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -622,14 +640,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 101
+        "activist_filing_count": 101,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -647,6 +667,7 @@
       "market_cap": 10625255.959999999,
       "shares_outstanding": 6010000.0,
       "sic_description": "ELECTRONIC COMPUTERS",
+      "sector": "TECH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -673,6 +694,7 @@
       "rsi": 93.10344827586208,
       "price_ma20": 1.394285,
       "price_ma50": 1.3725539999999998,
+      "is_golden_cross": true,
       "volume_ma20": 8972871.05
     },
     "3_fundamentals": {
@@ -684,7 +706,11 @@
       "net_income": -1198050.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 2538560.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.5979363697518896,
@@ -750,24 +776,22 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 2,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2020-10-22",
             "days_from_catalyst": -1,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000944075/000094407520000040/form-8k1022.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-10-06",
             "days_from_catalyst": -17,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000944075/000094407520000039/form-8k1001.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -775,14 +799,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 25
+        "activist_filing_count": 25,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -800,6 +826,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 0.0,
       "sic_description": "BIOLOGICAL PRODUCTS, (NO DISGNOSTIC SUBSTANCES)",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -826,6 +853,7 @@
       "rsi": 72.72727272727273,
       "price_ma20": 1.05991,
       "price_ma50": 1.009822,
+      "is_golden_cross": true,
       "volume_ma20": 50863.90909000001
     },
     "3_fundamentals": {
@@ -837,7 +865,11 @@
       "net_income": -3702684.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 3726504.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.13645977634344705,
@@ -898,9 +930,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -908,14 +940,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 98
+        "activist_filing_count": 98,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -933,6 +967,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 212693000.0,
       "sic_description": "BITUMINOUS COAL & LIGNITE SURFACE MINING",
+      "sector": "ENERGY/MINING",
       "primary_exchange": "XNYS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -959,6 +994,7 @@
       "rsi": 75.85604985399435,
       "price_ma20": 1.141295,
       "price_ma50": 0.667188,
+      "is_golden_cross": true,
       "volume_ma20": 3549291.8
     },
     "3_fundamentals": {
@@ -970,7 +1006,11 @@
       "net_income": 168500000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 4811300000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 2.315933152922186,
@@ -1031,31 +1071,28 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 3,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2015-08-04",
             "days_from_catalyst": -16,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001037676/000110465915055585/a15-16252_18k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2015-07-30",
             "days_from_catalyst": -21,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001037676/000110465915054657/a15-16380_18k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2015-07-29",
             "days_from_catalyst": -22,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001037676/000110465915054053/a15-16512_18k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -1063,14 +1100,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 98
+        "activist_filing_count": 98,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -1088,6 +1127,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 90337000.0,
       "sic_description": "BIOLOGICAL PRODUCTS, (NO DISGNOSTIC SUBSTANCES)",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -1114,6 +1154,7 @@
       "rsi": 64.24581005586592,
       "price_ma20": 0.23516499999999993,
       "price_ma50": 0.272514,
+      "is_golden_cross": false,
       "volume_ma20": 742881.25
     },
     "3_fundamentals": {
@@ -1125,7 +1166,11 @@
       "net_income": -1763134.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 2126675.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.6547346821007967,
@@ -1186,24 +1231,22 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 2,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2016-08-11",
             "days_from_catalyst": -5,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001357459/000117184316011710/f8k_081116.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2016-08-09",
             "days_from_catalyst": -7,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001357459/000117184316011645/f8k_080916.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -1211,14 +1254,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 55
+        "activist_filing_count": 55,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -1236,6 +1281,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 63131721.0,
       "sic_description": "SAVINGS INSTITUTION, FEDERALLY CHARTERED",
+      "sector": "OTHER",
       "primary_exchange": "XNYS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -1262,6 +1308,7 @@
       "rsi": 90.98286744815148,
       "price_ma20": 1.73328,
       "price_ma50": 1.112862,
+      "is_golden_cross": true,
       "volume_ma20": 225601.65
     },
     "3_fundamentals": {
@@ -1273,7 +1320,11 @@
       "net_income": -11794000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 45498000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 4.52361793597347,
@@ -1334,38 +1385,34 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 4,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2011-11-07",
             "days_from_catalyst": 6,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000921768/000119312511299801/d251345d8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2011-11-07",
             "days_from_catalyst": 6,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000921768/000119312511298962/d251598d8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2011-10-27",
             "days_from_catalyst": -5,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000921768/000119312511284315/d248058d8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2011-10-14",
             "days_from_catalyst": -18,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000921768/000119312511271848/d243666d8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -1373,14 +1420,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 61
+        "activist_filing_count": 61,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -1398,6 +1447,7 @@
       "market_cap": 13947386.48,
       "shares_outstanding": 11430000.0,
       "sic_description": "OIL & GAS FIELD SERVICES, NEC",
+      "sector": "ENERGY/MINING",
       "primary_exchange": "XASE",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -1424,6 +1474,7 @@
       "rsi": 67.9206706195052,
       "price_ma20": 0.6360949999999999,
       "price_ma50": 0.77568198,
+      "is_golden_cross": false,
       "volume_ma20": 1480139.25
     },
     "3_fundamentals": {
@@ -1435,7 +1486,11 @@
       "net_income": -2198000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 8779000.0
+      "total_debt": 8779000.0,
+      "operating_expenses": 2205000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.24073799254751993,
@@ -1501,9 +1556,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -1511,14 +1566,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 61
+        "activist_filing_count": 61,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -1536,6 +1593,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 60920000.0,
       "sic_description": "ELECTROMEDICAL & ELECTROTHERAPEUTIC APPARATUS",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -1562,6 +1620,7 @@
       "rsi": 80.95238095238093,
       "price_ma20": 3.0484999999999998,
       "price_ma50": 2.9444,
+      "is_golden_cross": true,
       "volume_ma20": 283338.4
     },
     "3_fundamentals": {
@@ -1573,7 +1632,11 @@
       "net_income": -160089.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 9589387.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.3633535867900426,
@@ -1639,17 +1702,16 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 1,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2018-03-12",
             "days_from_catalyst": 0,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000894237/000114036118013088/form8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -1657,14 +1719,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 49
+        "activist_filing_count": 49,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -1682,6 +1746,7 @@
       "market_cap": 25254639.8797,
       "shares_outstanding": 6090000.0,
       "sic_description": "CRUDE PETROLEUM & NATURAL GAS",
+      "sector": "ENERGY/MINING",
       "primary_exchange": "XASE",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -1708,6 +1773,7 @@
       "rsi": 98.8504029921109,
       "price_ma20": 0.41455889999999995,
       "price_ma50": 0.3605491,
+      "is_golden_cross": true,
       "volume_ma20": 1176334.9
     },
     "3_fundamentals": {
@@ -1719,7 +1785,11 @@
       "net_income": -1676000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 8859000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 6.921145307129487,
@@ -1785,31 +1855,28 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 3,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2018-07-03",
             "days_from_catalyst": 6,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001141197/000165495418007316/ped_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2018-06-29",
             "days_from_catalyst": 2,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001141197/000165495418007183/ped_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2018-06-26",
             "days_from_catalyst": -1,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001141197/000165495418006988/ped_8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -1817,14 +1884,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 47
+        "activist_filing_count": 48,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -1842,6 +1911,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 39770000.0,
       "sic_description": "",
+      "sector": "UNKNOWN",
       "primary_exchange": "XNYS",
       "is_ultra_low_float": false,
       "is_low_float": true,
@@ -1868,6 +1938,7 @@
       "rsi": 54.43037974683546,
       "price_ma20": 24.1615,
       "price_ma50": 23.489999999999995,
+      "is_golden_cross": true,
       "volume_ma20": 324260.95
     },
     "3_fundamentals": {
@@ -1879,7 +1950,11 @@
       "net_income": -297930000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 1113430000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.23748353770830533,
@@ -1955,6 +2030,7 @@
       "market_cap": 583287797.95,
       "shares_outstanding": 22580000.0,
       "sic_description": "PHARMACEUTICAL PREPARATIONS",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": true,
@@ -1981,6 +2057,7 @@
       "rsi": 98.4966787087752,
       "price_ma20": 19.741999999999997,
       "price_ma50": 16.9786,
+      "is_golden_cross": true,
       "volume_ma20": 818069.0
     },
     "3_fundamentals": {
@@ -1992,7 +2069,11 @@
       "net_income": -119119000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 136218000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 3.8158234286408104,
@@ -2058,31 +2139,28 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 3,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2019-11-21",
             "days_from_catalyst": 3,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001771917/000119312519297573/d813641d8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2019-11-18",
             "days_from_catalyst": 0,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001771917/000119312519293845/d836305d8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2019-11-07",
             "days_from_catalyst": -11,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001771917/000119312519286508/d828719d8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -2090,14 +2168,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 39
+        "activist_filing_count": 39,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -2115,6 +2195,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 0.0,
       "sic_description": "STATE COMMERCIAL BANKS",
+      "sector": "FINANCE",
       "primary_exchange": "",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -2141,6 +2222,7 @@
       "rsi": 55.947032395365326,
       "price_ma20": 0.44569500000000006,
       "price_ma50": 0.545668,
+      "is_golden_cross": false,
       "volume_ma20": 69557.6
     },
     "3_fundamentals": {
@@ -2205,17 +2287,16 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 1,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2009-12-31",
             "days_from_catalyst": -13,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000895541/000095012309074406/k48717e8vk.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -2223,14 +2304,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 15
+        "activist_filing_count": 15,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -2248,6 +2331,7 @@
       "market_cap": 14773445.500000002,
       "shares_outstanding": 26860000.0,
       "sic_description": "SERVICES-PREPACKAGED SOFTWARE",
+      "sector": "TECH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": true,
@@ -2274,6 +2358,7 @@
       "rsi": 76.97031729785056,
       "price_ma20": 0.15983495,
       "price_ma50": 0.24139035999999997,
+      "is_golden_cross": false,
       "volume_ma20": 6969025.3
     },
     "3_fundamentals": {
@@ -2285,7 +2370,11 @@
       "net_income": -3300250.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 11397329.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.27454441591987233,
@@ -2351,17 +2440,16 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 1,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2022-11-28",
             "days_from_catalyst": -29,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001080319/000101738622000554/elys_2022nov28-8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -2369,14 +2457,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": false,
         "institutional_filing_count": 0,
-        "activist_filing_count": 0
+        "activist_filing_count": 0,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -2394,6 +2484,7 @@
       "market_cap": 69845080.95,
       "shares_outstanding": 23310000.0,
       "sic_description": "INSTRUMENTS FOR MEAS & TESTING OF ELECTRICITY & ELEC SIGNALS",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": true,
@@ -2420,6 +2511,7 @@
       "rsi": 87.82961460446248,
       "price_ma20": 2.8905,
       "price_ma50": 2.5869,
+      "is_golden_cross": true,
       "volume_ma20": 11262056.35
     },
     "3_fundamentals": {
@@ -2431,7 +2523,11 @@
       "net_income": -2084000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 7785000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 1.3847035640255028,
@@ -2497,31 +2593,28 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 3,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2021-07-16",
             "days_from_catalyst": -3,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001040470/000165495421008007/aehr_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2021-07-15",
             "days_from_catalyst": -4,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001040470/000165495421007973/aehr_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2021-07-09",
             "days_from_catalyst": -10,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001040470/000165495421007774/aehr_8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -2529,14 +2622,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 38
+        "activist_filing_count": 39,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -2554,6 +2649,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 0.0,
       "sic_description": "CALCULATING & ACCOUNTING MACHINES (NO ELECTRONIC COMPUTERS)",
+      "sector": "TECH",
       "primary_exchange": "",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -2580,6 +2676,7 @@
       "rsi": 62.56661385568198,
       "price_ma20": 0.372565,
       "price_ma50": 0.2651260000000001,
+      "is_golden_cross": true,
       "volume_ma20": 76615.95
     },
     "3_fundamentals": {
@@ -2636,9 +2733,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -2646,14 +2743,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 69
+        "activist_filing_count": 69,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -2671,6 +2770,7 @@
       "market_cap": 47636607.6,
       "shares_outstanding": 13120000.0,
       "sic_description": "ORTHOPEDIC, PROSTHETIC & SURGICAL APPLIANCES & SUPPLIES",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XASE",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -2697,6 +2797,7 @@
       "rsi": 90.47734873821834,
       "price_ma20": 3.5516799999999997,
       "price_ma50": 3.44166,
+      "is_golden_cross": true,
       "volume_ma20": 345343.25
     },
     "3_fundamentals": {
@@ -2708,7 +2809,11 @@
       "net_income": 976000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 4771000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.2362601485157735,
@@ -2774,9 +2879,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -2784,14 +2889,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 43
+        "activist_filing_count": 43,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -2809,6 +2916,7 @@
       "market_cap": 44434445.2,
       "shares_outstanding": 4250000.0,
       "sic_description": "PHARMACEUTICAL PREPARATIONS",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -2835,6 +2943,7 @@
       "rsi": 70.42253521126761,
       "price_ma20": 1.14267,
       "price_ma50": 1.389468,
+      "is_golden_cross": false,
       "volume_ma20": 937261.95
     },
     "3_fundamentals": {
@@ -2846,7 +2955,11 @@
       "net_income": -25910791.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 27719134.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.18060189996267778,
@@ -2912,38 +3025,34 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 4,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2020-03-26",
             "days_from_catalyst": 2,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001133869/000110465920038468/tm2013873d1_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-03-18",
             "days_from_catalyst": -6,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001133869/000110465920035320/tm2013095d1_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-03-18",
             "days_from_catalyst": -6,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001133869/000110465920034994/tm2013071d1_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-03-11",
             "days_from_catalyst": -13,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001133869/000110465920031538/tm2012337d1_8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -2951,14 +3060,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 46
+        "activist_filing_count": 46,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -2976,6 +3087,7 @@
       "market_cap": 17136192.02,
       "shares_outstanding": 10130000.0,
       "sic_description": "MISCELLANEOUS ELECTRICAL MACHINERY, EQUIPMENT & SUPPLIES",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -3002,6 +3114,7 @@
       "rsi": 88.0701754385965,
       "price_ma20": 12.3375,
       "price_ma50": 15.747900000000001,
+      "is_golden_cross": false,
       "volume_ma20": 789120.685715
     },
     "3_fundamentals": {
@@ -3013,7 +3126,11 @@
       "net_income": -271000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 1040000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 1.6879388351295275,
@@ -3079,9 +3196,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -3089,14 +3206,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 9
+        "activist_filing_count": 9,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -3114,6 +3233,7 @@
       "market_cap": 31628567.74,
       "shares_outstanding": 15130000.0,
       "sic_description": "PHARMACEUTICAL PREPARATIONS",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -3140,6 +3260,7 @@
       "rsi": 90.12732890178822,
       "price_ma20": 0.960515,
       "price_ma50": 1.011084,
+      "is_golden_cross": false,
       "volume_ma20": 2999727.65
     },
     "3_fundamentals": {
@@ -3151,7 +3272,11 @@
       "net_income": -6053610.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 6072982.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.26175066229437377,
@@ -3217,17 +3342,16 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 1,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2022-08-15",
             "days_from_catalyst": -14,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001742927/000143774922020550/rvph20220811_8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -3235,14 +3359,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 49
+        "activist_filing_count": 49,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -3260,6 +3386,7 @@
       "market_cap": 2734271370.88,
       "shares_outstanding": 57550000.0,
       "sic_description": "SERVICES-MOTION PICTURE THEATERS",
+      "sector": "OTHER",
       "primary_exchange": "XNYS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -3286,6 +3413,7 @@
       "rsi": 69.59064327485382,
       "price_ma20": 23.265000000000004,
       "price_ma50": 30.397999999999996,
+      "is_golden_cross": false,
       "volume_ma20": 4976884.1899999995
     },
     "3_fundamentals": {
@@ -3297,7 +3425,11 @@
       "net_income": -298200000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 700000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.5828693442018661,
@@ -3363,24 +3495,22 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 2,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2021-01-25",
             "days_from_catalyst": 6,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001411579/000110465921006813/tm213880d1_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2021-01-19",
             "days_from_catalyst": 0,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001411579/000110465921004947/tm213345d1_8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -3388,14 +3518,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 92
+        "activist_filing_count": 92,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -3413,6 +3545,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 5040020000.0,
       "sic_description": "",
+      "sector": "UNKNOWN",
       "primary_exchange": "XNYS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -3439,6 +3572,7 @@
       "rsi": 62.08053691275168,
       "price_ma20": 5.3115,
       "price_ma50": 5.202999999999999,
+      "is_golden_cross": true,
       "volume_ma20": 433534.05
     },
     "3_fundamentals": {
@@ -3508,9 +3642,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -3518,14 +3652,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 60
+        "activist_filing_count": 60,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -3543,6 +3679,7 @@
       "market_cap": 4701541.34,
       "shares_outstanding": 5730000.0,
       "sic_description": "FIRE, MARINE & CASUALTY INSURANCE",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -3569,6 +3706,7 @@
       "rsi": 73.37257617728532,
       "price_ma20": 1.2147849999999998,
       "price_ma50": 1.170018,
+      "is_golden_cross": true,
       "volume_ma20": 4058852.3
     },
     "3_fundamentals": {
@@ -3580,7 +3718,11 @@
       "net_income": -187000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 815000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 1.0244229812972154,
@@ -3646,17 +3788,16 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 1,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2020-08-10",
             "days_from_catalyst": -1,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001584831/000165495420008722/oxbr_8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -3664,14 +3805,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 19
+        "activist_filing_count": 19,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -3689,6 +3832,7 @@
       "market_cap": 41130630.285,
       "shares_outstanding": 76530000.0,
       "sic_description": "SERVICES-BUSINESS SERVICES, NEC",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -3715,6 +3859,7 @@
       "rsi": 75.91455615246866,
       "price_ma20": 7.921899999999999,
       "price_ma50": 7.628639999999999,
+      "is_golden_cross": true,
       "volume_ma20": 291263.7125
     },
     "3_fundamentals": {
@@ -3726,7 +3871,11 @@
       "net_income": -73462000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 55941000.0
+      "total_debt": 55941000.0,
+      "operating_expenses": 87969000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 1.301493219731659,
@@ -3792,24 +3941,22 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 2,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2020-03-20",
             "days_from_catalyst": 4,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001653247/000119312520080638/d902974d8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-03-16",
             "days_from_catalyst": 0,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001653247/000156459020011001/wtrh-8k_20200316.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -3817,14 +3964,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 57
+        "activist_filing_count": 57,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -3842,6 +3991,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 0.0,
       "sic_description": "SERVICES-ENGINEERING SERVICES",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -3868,6 +4018,7 @@
       "rsi": 78.95498815477758,
       "price_ma20": 1.446105,
       "price_ma50": 1.4738619999999998,
+      "is_golden_cross": false,
       "volume_ma20": 62627.2
     },
     "3_fundamentals": {
@@ -3879,7 +4030,11 @@
       "net_income": -1443780.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 4905573.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.24387471795603066,
@@ -3940,17 +4095,16 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 1,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2013-09-24",
             "days_from_catalyst": -21,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001460801/000114420413052025/v355656_8-k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -3958,14 +4112,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 11
+        "activist_filing_count": 11,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -3983,6 +4139,7 @@
       "market_cap": 232362736.64000002,
       "shares_outstanding": 7610000.0,
       "sic_description": "RETAIL-CATALOG & MAIL-ORDER HOUSES",
+      "sector": "RETAIL",
       "primary_exchange": "XNYS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -4009,6 +4166,7 @@
       "rsi": 78.23218997361477,
       "price_ma20": 35.34,
       "price_ma50": 47.241600000000005,
+      "is_golden_cross": false,
       "volume_ma20": 285034.03333
     },
     "3_fundamentals": {
@@ -4020,7 +4178,11 @@
       "net_income": -10289000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 109190000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.05163763119098286,
@@ -4086,38 +4248,34 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 4,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2020-03-19",
             "days_from_catalyst": 3,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001701114/000110465920035956/tm2013280-1_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-02-26",
             "days_from_catalyst": -19,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001701114/000110465920025417/tm2010973-1_8ka.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-02-18",
             "days_from_catalyst": -27,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001701114/000155837020000916/f8-k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-02-18",
             "days_from_catalyst": -27,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001701114/000155837020000912/f8-k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -4125,14 +4283,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 81
+        "activist_filing_count": 81,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -4150,6 +4310,7 @@
       "market_cap": 8579138.143099999,
       "shares_outstanding": 3190000.0,
       "sic_description": "REFUSE SYSTEMS",
+      "sector": "OTHER",
       "primary_exchange": "XASE",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -4176,6 +4337,7 @@
       "rsi": 87.57690156599553,
       "price_ma20": 2.370735,
       "price_ma50": 2.2591219999999996,
+      "is_golden_cross": true,
       "volume_ma20": 729003.3
     },
     "3_fundamentals": {
@@ -4187,7 +4349,11 @@
       "net_income": 1789000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 3758000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.8737159526307727,
@@ -4253,24 +4419,22 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 2,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2018-08-01",
             "days_from_catalyst": 7,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001061069/000143774918014204/awx20180801_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2018-07-30",
             "days_from_catalyst": 5,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001061069/000143774918014025/awx20180730_8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -4278,14 +4442,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 126
+        "activist_filing_count": 126,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -4303,6 +4469,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 0.0,
       "sic_description": "",
+      "sector": "UNKNOWN",
       "primary_exchange": "",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -4329,6 +4496,7 @@
       "rsi": 86.36363636363636,
       "price_ma20": 2.8529999999999998,
       "price_ma50": 3.0834,
+      "is_golden_cross": false,
       "volume_ma20": 102499.05
     },
     "3_fundamentals": {
@@ -4393,9 +4561,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -4403,14 +4571,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": true,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 12,
-        "activist_filing_count": 7
+        "activist_filing_count": 7,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -4428,6 +4598,7 @@
       "market_cap": 99678021.3,
       "shares_outstanding": 59980000.0,
       "sic_description": "GOLD AND SILVER ORES",
+      "sector": "ENERGY/MINING",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -4454,6 +4625,7 @@
       "rsi": 84.91300366300366,
       "price_ma20": 3.7438000000000002,
       "price_ma50": 4.44797,
+      "is_golden_cross": false,
       "volume_ma20": 1108827.8649999998
     },
     "3_fundamentals": {
@@ -4465,7 +4637,11 @@
       "net_income": -9376000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 134200000.0
+      "total_debt": 134200000.0,
+      "operating_expenses": 0.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.28159853283005987,
@@ -4531,38 +4707,34 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 4,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2022-03-15",
             "days_from_catalyst": 7,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001718405/000110465922033624/tm229176d3_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2022-03-15",
             "days_from_catalyst": 7,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001718405/000110465922033556/tm229176d2_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2022-03-01",
             "days_from_catalyst": -7,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001718405/000171840522000011/hymc-20220228.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2022-02-22",
             "days_from_catalyst": -14,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001718405/000171840522000008/hymc-20220222.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -4570,14 +4742,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 66
+        "activist_filing_count": 66,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -4595,6 +4769,7 @@
       "market_cap": 23848286.0,
       "shares_outstanding": 11590000.0,
       "sic_description": "PHARMACEUTICAL PREPARATIONS",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -4621,6 +4796,7 @@
       "rsi": 63.67292225201073,
       "price_ma20": 5.897,
       "price_ma50": 4.128948,
+      "is_golden_cross": true,
       "volume_ma20": 248927.55
     },
     "3_fundamentals": {
@@ -4632,7 +4808,11 @@
       "net_income": 3966000.0,
       "turning_profitable": true,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 4189000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 4.673664695480215,
@@ -4698,38 +4878,34 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 4,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2020-10-26",
             "days_from_catalyst": 3,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000868278/000149315220019947/form8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-10-06",
             "days_from_catalyst": -17,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000868278/000149315220018968/form8-k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-09-30",
             "days_from_catalyst": -23,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000868278/000149315220018633/form8-k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-09-23",
             "days_from_catalyst": -30,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000868278/000149315220018228/form8-k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -4737,14 +4913,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 53
+        "activist_filing_count": 53,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -4762,6 +4940,7 @@
       "market_cap": 120924097.80000001,
       "shares_outstanding": 50580000.0,
       "sic_description": "BIOLOGICAL PRODUCTS, (NO DISGNOSTIC SUBSTANCES)",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -4788,6 +4967,7 @@
       "rsi": 98.55072463768116,
       "price_ma20": 1.305,
       "price_ma50": 1.2222000000000002,
+      "is_golden_cross": true,
       "volume_ma20": 1428980.6
     },
     "3_fundamentals": {
@@ -4799,7 +4979,11 @@
       "net_income": -7729000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 10100000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.31295962717522413,
@@ -4865,31 +5049,28 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 3,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2020-12-09",
             "days_from_catalyst": 7,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001108205/000119312520313343/d30069d8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-12-08",
             "days_from_catalyst": 6,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001108205/000119312520312239/d62233d8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-11-10",
             "days_from_catalyst": -22,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001108205/000156459020052943/cris-8k_20201110.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -4897,14 +5078,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 98
+        "activist_filing_count": 98,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -4922,6 +5105,7 @@
       "market_cap": 443038280.60999995,
       "shares_outstanding": 80920000.0,
       "sic_description": "BIOLOGICAL PRODUCTS, (NO DISGNOSTIC SUBSTANCES)",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -4948,6 +5132,7 @@
       "rsi": 82.02095302467049,
       "price_ma20": 13.033000000000001,
       "price_ma50": 11.736999999999998,
+      "is_golden_cross": true,
       "volume_ma20": 3024216.2
     },
     "3_fundamentals": {
@@ -4959,7 +5144,11 @@
       "net_income": -62873000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 75000000.0
+      "total_debt": 75000000.0,
+      "operating_expenses": 61582000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 4.952574482554322,
@@ -5025,31 +5214,28 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 3,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2021-03-18",
             "days_from_catalyst": 3,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001709401/000110465921038065/tm219672d4_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2021-03-15",
             "days_from_catalyst": 0,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001709401/000110465921035910/tm219672d2_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2021-02-23",
             "days_from_catalyst": -20,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001709401/000110465921026470/tm217559d1_8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -5057,14 +5243,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 22
+        "activist_filing_count": 22,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -5082,6 +5270,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 0.0,
       "sic_description": "CRUDE PETROLEUM & NATURAL GAS",
+      "sector": "ENERGY/MINING",
       "primary_exchange": "",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -5108,6 +5297,7 @@
       "rsi": 86.37718706746637,
       "price_ma20": 5.311684999999999,
       "price_ma50": 4.589298,
+      "is_golden_cross": true,
       "volume_ma20": 58155.05
     },
     "3_fundamentals": {
@@ -5172,17 +5362,16 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 1,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2012-02-02",
             "days_from_catalyst": -11,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000793306/000101054912000098/bdco8k020212.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -5190,14 +5379,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 14
+        "activist_filing_count": 14,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -5215,6 +5406,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 18060000.0,
       "sic_description": "MEN'S & BOYS' FURNISHGS, WORK CLOTHG, & ALLIED GARMENTS",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -5241,6 +5433,7 @@
       "rsi": 80.53527980535281,
       "price_ma20": 1.1947499999999998,
       "price_ma50": 1.6075799999999998,
+      "is_golden_cross": false,
       "volume_ma20": 4444632.23666
     },
     "3_fundamentals": {
@@ -5252,7 +5445,11 @@
       "net_income": -102547.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 733771.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.8639254287174055,
@@ -5318,9 +5515,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -5328,14 +5525,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 20
+        "activist_filing_count": 20,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -5353,6 +5552,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 0.0,
       "sic_description": "",
+      "sector": "UNKNOWN",
       "primary_exchange": "",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -5379,6 +5579,7 @@
       "rsi": 66.67500000000001,
       "price_ma20": 0.38484,
       "price_ma50": 0.44437,
+      "is_golden_cross": false,
       "volume_ma20": 2133674.55
     },
     "3_fundamentals": {
@@ -5390,7 +5591,11 @@
       "net_income": 46398000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 241993000.0
+      "total_debt": 241993000.0,
+      "operating_expenses": 84226000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.29258621818087605,
@@ -5451,9 +5656,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -5461,14 +5666,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": true,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 34,
-        "activist_filing_count": 33
+        "activist_filing_count": 33,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -5486,6 +5693,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 61737000.0,
       "sic_description": "PHARMACEUTICAL PREPARATIONS",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XASE",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -5512,6 +5720,7 @@
       "rsi": 96.4857911355397,
       "price_ma20": 0.5901949999999999,
       "price_ma50": 0.4254619999999999,
+      "is_golden_cross": true,
       "volume_ma20": 589697.5
     },
     "3_fundamentals": {
@@ -5523,7 +5732,11 @@
       "net_income": 143407.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 3542191.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 4.827216154120472,
@@ -5584,17 +5797,16 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 1,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2015-01-30",
             "days_from_catalyst": -21,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001060426/000109690615000111/aoxing8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -5602,14 +5814,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 8
+        "activist_filing_count": 8,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -5627,6 +5841,7 @@
       "market_cap": 12417317.9,
       "shares_outstanding": 11610000.0,
       "sic_description": "PHARMACEUTICAL PREPARATIONS",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -5653,6 +5868,7 @@
       "rsi": 69.19697713137819,
       "price_ma20": 0.44716900000000004,
       "price_ma50": 0.5672675600000001,
+      "is_golden_cross": false,
       "volume_ma20": 638207.3
     },
     "3_fundamentals": {
@@ -5664,7 +5880,11 @@
       "net_income": -2336914.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 2364596.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.36677707947207455,
@@ -5730,9 +5950,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -5740,14 +5960,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 5
+        "activist_filing_count": 5,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -5765,6 +5987,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 1650000.0,
       "sic_description": "APPAREL & OTHER FINISHD PRODS OF FABRICS & SIMILAR MATL",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -5791,6 +6014,7 @@
       "rsi": 79.59743824336688,
       "price_ma20": 21.307500000000005,
       "price_ma50": 18.5266,
+      "is_golden_cross": true,
       "volume_ma20": 44573.15
     },
     "3_fundamentals": {
@@ -5802,7 +6026,11 @@
       "net_income": 5846000.0,
       "turning_profitable": true,
       "cash": 0.0,
-      "total_debt": 453388000.0
+      "total_debt": 453388000.0,
+      "operating_expenses": 5003000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 2.8458915678331946,
@@ -5868,24 +6096,22 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 2,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2021-03-10",
             "days_from_catalyst": -8,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001648428/000110465921034519/tm219291d1_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2021-02-22",
             "days_from_catalyst": -24,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001648428/000110465921026005/tm217488d1_8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -5893,14 +6119,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 20
+        "activist_filing_count": 20,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -5918,6 +6146,7 @@
       "market_cap": 151231512.51000002,
       "shares_outstanding": 42720000.0,
       "sic_description": "PHARMACEUTICAL PREPARATIONS",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": true,
@@ -5944,6 +6173,7 @@
       "rsi": 90.59633027522936,
       "price_ma20": 4.2165,
       "price_ma50": 3.9891999999999994,
+      "is_golden_cross": true,
       "volume_ma20": 1067057.7
     },
     "3_fundamentals": {
@@ -5955,7 +6185,11 @@
       "net_income": -14614000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 19910000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 1.767136348889343,
@@ -6021,17 +6255,16 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 1,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2020-12-15",
             "days_from_catalyst": -7,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001557746/000155837020014378/acrs-20201215x8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -6039,14 +6272,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 120
+        "activist_filing_count": 120,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -6064,6 +6299,7 @@
       "market_cap": 92995837.86999999,
       "shares_outstanding": 20300000.0,
       "sic_description": "",
+      "sector": "UNKNOWN",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": true,
@@ -6090,6 +6326,7 @@
       "rsi": 84.03675970047652,
       "price_ma20": 0.50864,
       "price_ma50": 0.587761,
+      "is_golden_cross": false,
       "volume_ma20": 400892.35
     },
     "3_fundamentals": {
@@ -6159,9 +6396,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -6169,14 +6406,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 9
+        "activist_filing_count": 9,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -6194,6 +6433,7 @@
       "market_cap": 27622561.489,
       "shares_outstanding": 13790000.0,
       "sic_description": "SERVICES-BUSINESS SERVICES, NEC",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -6220,6 +6460,7 @@
       "rsi": 79.45964803473137,
       "price_ma20": 112.0617,
       "price_ma50": 84.64904999999999,
+      "is_golden_cross": true,
       "volume_ma20": 231692.89276999998
     },
     "3_fundamentals": {
@@ -6231,7 +6472,11 @@
       "net_income": -2372000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 2379000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 2.943607610695517,
@@ -6297,24 +6542,22 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 2,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2021-02-17",
             "days_from_catalyst": 5,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001621221/000164033421000370/artl_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2021-02-16",
             "days_from_catalyst": 4,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001621221/000164033421000356/artl_8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -6322,14 +6565,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 27
+        "activist_filing_count": 27,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -6347,6 +6592,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 46140000.0,
       "sic_description": "PHARMACEUTICAL PREPARATIONS",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": true,
@@ -6373,6 +6619,7 @@
       "rsi": 81.10072689511945,
       "price_ma20": 0.5998300000000001,
       "price_ma50": 0.590938,
+      "is_golden_cross": true,
       "volume_ma20": 488321.0
     },
     "3_fundamentals": {
@@ -6384,7 +6631,11 @@
       "net_income": 25043000.0,
       "turning_profitable": true,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 19934000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.1219603205792403,
@@ -6445,24 +6696,22 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 2,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2017-02-17",
             "days_from_catalyst": -24,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001069530/000106953017000005/ptie-20170217x8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2017-02-17",
             "days_from_catalyst": -24,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001069530/000117184317000950/f8k_021717.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -6470,14 +6719,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 119
+        "activist_filing_count": 119,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -6495,6 +6746,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 0.0,
       "sic_description": "RADIO BROADCASTING STATIONS",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -6521,6 +6773,7 @@
       "rsi": 87.93103448275862,
       "price_ma20": 1.211505,
       "price_ma50": 1.8622020000000001,
+      "is_golden_cross": false,
       "volume_ma20": 83759.95
     },
     "3_fundamentals": {
@@ -6532,7 +6785,11 @@
       "net_income": -4762000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 25685000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.5159778048730083,
@@ -6593,17 +6850,16 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 1,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2011-11-14",
             "days_from_catalyst": 6,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000927720/000095012311097721/c24511e8vk.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -6611,14 +6867,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 127
+        "activist_filing_count": 127,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -6636,6 +6894,7 @@
       "market_cap": 30682005.432,
       "shares_outstanding": 45560000.0,
       "sic_description": "PETROLEUM REFINING",
+      "sector": "ENERGY/MINING",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": true,
@@ -6662,6 +6921,7 @@
       "rsi": 87.46253746253745,
       "price_ma20": 0.7615599999999999,
       "price_ma50": 0.6648060000000001,
+      "is_golden_cross": true,
       "volume_ma20": 1632964.6
     },
     "3_fundamentals": {
@@ -6673,7 +6933,11 @@
       "net_income": -53845000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 236313000.0
+      "total_debt": 236313000.0,
+      "operating_expenses": 38566000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 1.2138638115626683,
@@ -6739,17 +7003,16 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 1,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2020-12-31",
             "days_from_catalyst": -14,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000890447/000158069520000461/vtnr-8k_122920.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -6757,14 +7020,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 61
+        "activist_filing_count": 61,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -6782,6 +7047,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 0.0,
       "sic_description": "SPORTING & ATHLETIC GOODS, NEC",
+      "sector": "OTHER",
       "primary_exchange": "",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -6808,6 +7074,7 @@
       "rsi": 84.72860472860474,
       "price_ma20": 0.579625,
       "price_ma50": 0.517226,
+      "is_golden_cross": true,
       "volume_ma20": 71688.7
     },
     "3_fundamentals": {
@@ -6819,7 +7086,11 @@
       "net_income": 1083000.0,
       "turning_profitable": true,
       "cash": 0.0,
-      "total_debt": 21000000.0
+      "total_debt": 21000000.0,
+      "operating_expenses": 10086000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 1.469751649636687,
@@ -6880,24 +7151,22 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 2,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2012-02-06",
             "days_from_catalyst": -1,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000060876/000119312512040300/d295693d8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2012-01-20",
             "days_from_catalyst": -18,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000060876/000119312512018835/d286399d8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -6905,14 +7174,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 53
+        "activist_filing_count": 53,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -6930,6 +7201,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 41157609.0,
       "sic_description": "PHARMACEUTICAL PREPARATIONS",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNYS",
       "is_ultra_low_float": false,
       "is_low_float": true,
@@ -6956,6 +7228,7 @@
       "rsi": 80.24316109422493,
       "price_ma20": 1.7880000000000003,
       "price_ma50": 2.2167000000000003,
+      "is_golden_cross": false,
       "volume_ma20": 1457642.75
     },
     "3_fundamentals": {
@@ -6967,7 +7240,11 @@
       "net_income": -37800000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 31200000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.34623505671664123,
@@ -7028,24 +7305,22 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 2,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2011-02-08",
             "days_from_catalyst": 4,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000057055/000119312511027312/d8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2011-01-14",
             "days_from_catalyst": -21,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000057055/000119312511008283/d8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -7053,14 +7328,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 99
+        "activist_filing_count": 99,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -7078,6 +7355,7 @@
       "market_cap": 25630700.13,
       "shares_outstanding": 8810000.0,
       "sic_description": "ELECTRONIC COMPONENTS, NEC",
+      "sector": "TECH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -7104,6 +7382,7 @@
       "rsi": 84.61851751289709,
       "price_ma20": 2.441995,
       "price_ma50": 2.1103940000000003,
+      "is_golden_cross": true,
       "volume_ma20": 120986.8
     },
     "3_fundamentals": {
@@ -7115,7 +7394,11 @@
       "net_income": 14184000.0,
       "turning_profitable": true,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 2122000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 1.1735892355364137,
@@ -7181,9 +7464,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -7191,14 +7474,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 89
+        "activist_filing_count": 89,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -7216,6 +7501,7 @@
       "market_cap": 138370199.8014,
       "shares_outstanding": 74581038.0,
       "sic_description": "ELECTROMEDICAL & ELECTROTHERAPEUTIC APPARATUS",
+      "sector": "OTHER",
       "primary_exchange": "",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -7242,6 +7528,7 @@
       "rsi": 84.71223021582736,
       "price_ma20": 1.5482399999999998,
       "price_ma50": 1.4331360000000002,
+      "is_golden_cross": true,
       "volume_ma20": 1265411.8125
     },
     "3_fundamentals": {
@@ -7253,7 +7540,11 @@
       "net_income": -5823000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 9993000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 1.7432893508083287,
@@ -7314,24 +7605,22 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 2,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2013-08-02",
             "days_from_catalyst": 3,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001289340/000118143113042525/rrd386969.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2013-07-01",
             "days_from_catalyst": -29,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001289340/000118143113037322/rrd384606.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -7339,14 +7628,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 41
+        "activist_filing_count": 41,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -7364,6 +7655,7 @@
       "market_cap": 399044278.65000004,
       "shares_outstanding": 62110000.0,
       "sic_description": "PHARMACEUTICAL PREPARATIONS",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -7390,6 +7682,7 @@
       "rsi": 74.00000000000001,
       "price_ma20": 1.2592500000000002,
       "price_ma50": 1.543502,
+      "is_golden_cross": false,
       "volume_ma20": 794506.8
     },
     "3_fundamentals": {
@@ -7401,7 +7694,11 @@
       "net_income": 2523000.0,
       "turning_profitable": true,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 9251000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.3148051196311965,
@@ -7467,24 +7764,22 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 2,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2020-05-18",
             "days_from_catalyst": 6,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001447028/000144702820000052/a2020-05x8xkxabx729update.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-05-11",
             "days_from_catalyst": -1,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001447028/000144702820000046/a2020-q1earningsrelease8xk.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -7492,14 +7787,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 101
+        "activist_filing_count": 101,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -7517,6 +7814,7 @@
       "market_cap": 156006000.0,
       "shares_outstanding": 6200000.0,
       "sic_description": "RADIOTELEPHONE COMMUNICATIONS",
+      "sector": "TECH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -7543,6 +7841,7 @@
       "rsi": 86.5296803652968,
       "price_ma20": 172.1,
       "price_ma50": 222.8588,
+      "is_golden_cross": false,
       "volume_ma20": 53690.5375
     },
     "3_fundamentals": {
@@ -7554,7 +7853,11 @@
       "net_income": -5625070.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 4263269.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.3640523163365993,
@@ -7620,17 +7923,16 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 1,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2022-06-09",
             "days_from_catalyst": -6,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001879726/000149315222016229/form8-k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -7638,14 +7940,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 14
+        "activist_filing_count": 14,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -7663,6 +7967,7 @@
       "market_cap": 40757152.0,
       "shares_outstanding": 20450000.0,
       "sic_description": "LIFE INSURANCE",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": true,
@@ -7689,6 +7994,7 @@
       "rsi": 89.1008174386921,
       "price_ma20": 2.5095,
       "price_ma50": 2.3075,
+      "is_golden_cross": true,
       "volume_ma20": 5611603.3
     },
     "3_fundamentals": {
@@ -7700,7 +8006,11 @@
       "net_income": 3316000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 51074000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 1.4722147885275467,
@@ -7766,9 +8076,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -7776,14 +8086,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 2
+        "activist_filing_count": 2,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -7801,6 +8113,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 16910000.0,
       "sic_description": "PRINTING TRADES MACHINERY & EQUIPMENT",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -7827,6 +8140,7 @@
       "rsi": 55.87863463969658,
       "price_ma20": 11.047999999999998,
       "price_ma50": 10.951100000000002,
+      "is_golden_cross": true,
       "volume_ma20": 667640.25
     },
     "3_fundamentals": {
@@ -7838,7 +8152,11 @@
       "net_income": -4907000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 12494000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.34717058357395036,
@@ -7904,9 +8222,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -7914,142 +8232,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 25
-      }
-    }
-  },
-  {
-    "ticker": "TRMD",
-    "catalyst_date": "2020-04-21",
-    "explosion_metrics": {
-      "gain_pct": 618.5294117647059,
-      "volume_spike": "690.4x",
-      "exit_quality": "unknown"
-    },
-    "1_profile": {
-      "name": "TORM plc Class A Common Stock",
-      "cik": "0001655891",
-      "market_cap": 783177010.5999999,
-      "shares_outstanding": 80739898.0,
-      "sic_description": "",
-      "primary_exchange": "XNAS",
-      "is_ultra_low_float": false,
-      "is_low_float": false,
-      "is_micro_cap": false,
-      "float_category": "medium",
-      "has_data": true
-    },
-    "2_technicals": {
-      "bar_count": 42,
-      "bb_squeeze": {
-        "is_squeezing": false
-      },
-      "volume_trend": {
-        "is_drying": false,
-        "volume_ratio": 41.72457715598246
-      },
-      "consolidation": {
-        "is_consolidating": false,
-        "range_pct": 5.3408461291987
-      },
-      "volatility_rank": 50.0,
-      "rsi": 76.48771021992238,
-      "price_ma20": 7.838850000000001,
-      "price_ma50": 0,
-      "volume_ma20": 49954.75
-    },
-    "3_fundamentals": {
-      "has_data": false
-    },
-    "4_relative_strength": {
-      "relative_strength": 0.3647622835413263,
-      "consistently_strong": true,
-      "strongly_outperforming": true
-    },
-    "5_news": {
-      "article_count": 0,
-      "primary_catalyst": "unknown",
-      "themes": {
-        "earnings": 0,
-        "fda_approval": 0,
-        "merger": 0,
-        "contract": 0,
-        "upgrade": 0,
-        "other": 0
-      }
-    },
-    "6_price_patterns": {
-      "return_7d": 0.6666666666666666,
-      "return_30d": 0.7507002801120449,
-      "return_60d": 0.7123287671232877,
-      "return_90d": 0.3144058885383807
-    },
-    "7_volume_profile": {
-      "avg_volume": 24414.119047619046,
-      "median_volume": 1037.0,
-      "unusual_volume_days": 1,
-      "dry_volume_days": 41
-    },
-    "8_short_interest": {
-      "has_data": true,
-      "recent_short_interest": 1612.0,
-      "recent_days_to_cover": 4.78,
-      "short_interest_change_pct_1y": 3189.795918367347,
-      "is_heavily_shorted": false,
-      "is_squeeze_setup": false,
-      "reports_analyzed": 24
-    },
-    "9_options_activity": {
-      "has_data": false
-    },
-    "10_intraday_data": {
-      "has_data": true,
-      "total_bars": 468,
-      "avg_intraday_range_pct": 2.5412832551314666,
-      "volume_spikes_count": 39,
-      "gap_count": 63,
-      "largest_gap_pct": 16.883116883116884,
-      "morning_volume_ratio": 0.04212859408852742,
-      "high_volatility": false,
-      "unusual_early_activity": false
-    },
-    "scores": {
-      "setup_score": 0,
-      "technical_score": 0,
-      "fundamental_score": 0,
-      "catalyst_score": 0,
-      "squeeze_score": 0,
-      "options_score": 0,
-      "total_score": 0
-    },
-    "sec_data": {
-      "form_8k": {
-        "count_in_window": 0,
-        "filings": [],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
-      },
-      "insider_trades": {
-        "total_buy_transactions": 0,
-        "total_sell_transactions": 0,
-        "buy_share_total": 0,
-        "sell_share_total": 0,
-        "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
-        "insider_buying_surge": false
-      },
-      "institutional": {
-        "has_institutional_filings_13f": false,
-        "has_activist_filings_13dg": true,
-        "institutional_filing_count": 0,
-        "activist_filing_count": 21
+        "activist_filing_count": 25,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -8067,6 +8259,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 15200000.0,
       "sic_description": "PATENT OWNERS & LESSORS",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -8093,6 +8286,7 @@
       "rsi": 86.64799253034548,
       "price_ma20": 0.71378,
       "price_ma50": 0.7544704200000001,
+      "is_golden_cross": false,
       "volume_ma20": 1211118.4
     },
     "3_fundamentals": {
@@ -8104,7 +8298,11 @@
       "net_income": -3180000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 0.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.2374148296593187,
@@ -8165,17 +8363,16 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 1,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2017-08-24",
             "days_from_catalyst": -25,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000715446/000151316217000243/form8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -8183,14 +8380,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 39
+        "activist_filing_count": 39,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -8208,6 +8407,7 @@
       "market_cap": 200876718.35,
       "shares_outstanding": 69510000.0,
       "sic_description": "LABORATORY ANALYTICAL INSTRUMENTS",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -8234,6 +8434,7 @@
       "rsi": 83.22658610271904,
       "price_ma20": 6.467499999999999,
       "price_ma50": 9.20664,
+      "is_golden_cross": false,
       "volume_ma20": 151542.22999999998
     },
     "3_fundamentals": {
@@ -8245,7 +8446,11 @@
       "net_income": -14639000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 9474000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.5316025745071066,
@@ -8311,24 +8516,22 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 2,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2022-05-17",
             "days_from_catalyst": -21,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000727207/000110465922061982/tm2215632d1_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2022-05-16",
             "days_from_catalyst": -22,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000727207/000110465922061331/tm2215632d2_8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -8336,14 +8539,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 48
+        "activist_filing_count": 48,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -8361,6 +8566,7 @@
       "market_cap": 632014309.995,
       "shares_outstanding": 153140000.0,
       "sic_description": "LABORATORY ANALYTICAL INSTRUMENTS",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -8387,6 +8593,7 @@
       "rsi": 76.84563758389261,
       "price_ma20": 4.1135,
       "price_ma50": 3.8718,
+      "is_golden_cross": true,
       "volume_ma20": 2203563.4
     },
     "3_fundamentals": {
@@ -8398,7 +8605,11 @@
       "net_income": -38000000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 54778000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.7376533307849306,
@@ -8464,38 +8675,34 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 4,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2020-08-14",
             "days_from_catalyst": 2,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001299130/000129913020000130/pacb-20200814x8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-08-07",
             "days_from_catalyst": -5,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001299130/000119312520212545/d46017d8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-08-05",
             "days_from_catalyst": -7,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001299130/000129913020000116/pacb-20200805x8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-08-03",
             "days_from_catalyst": -9,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001299130/000129913020000111/pacb-20200803x8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -8503,14 +8710,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 97
+        "activist_filing_count": 97,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -8528,6 +8737,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 50058556.0,
       "sic_description": "REAL ESTATE INVESTMENT TRUSTS",
+      "sector": "FINANCE",
       "primary_exchange": "XNYS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -8554,6 +8764,7 @@
       "rsi": 50.84146751935375,
       "price_ma20": 0.866225,
       "price_ma50": 0.757092,
+      "is_golden_cross": true,
       "volume_ma20": 1253868.0
     },
     "3_fundamentals": {
@@ -8565,7 +8776,11 @@
       "net_income": -1597000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 3053000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.4320574562968313,
@@ -8626,9 +8841,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -8636,14 +8851,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 26
+        "activist_filing_count": 26,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -8661,6 +8878,7 @@
       "market_cap": 16586613.879999999,
       "shares_outstanding": 2029999.0,
       "sic_description": "",
+      "sector": "UNKNOWN",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -8687,6 +8905,7 @@
       "rsi": 74.30746651990462,
       "price_ma20": 1.4430450000000001,
       "price_ma50": 1.695822,
+      "is_golden_cross": false,
       "volume_ma20": 466942.3
     },
     "3_fundamentals": {
@@ -8756,9 +8975,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -8766,14 +8985,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 23
+        "activist_filing_count": 23,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -8791,6 +9012,7 @@
       "market_cap": 592278209.59,
       "shares_outstanding": 297627241.0,
       "sic_description": "",
+      "sector": "UNKNOWN",
       "primary_exchange": "",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -8817,6 +9039,7 @@
       "rsi": 70.98765432098763,
       "price_ma20": 1.35025,
       "price_ma50": 1.3980000000000004,
+      "is_golden_cross": false,
       "volume_ma20": 1615795.35
     },
     "3_fundamentals": {
@@ -8881,9 +9104,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -8891,14 +9114,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 17
+        "activist_filing_count": 17,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -8916,6 +9141,7 @@
       "market_cap": 74862380.5,
       "shares_outstanding": 21400000.0,
       "sic_description": "PHARMACEUTICAL PREPARATIONS",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": true,
@@ -8942,6 +9168,7 @@
       "rsi": 80.76841883048343,
       "price_ma20": 7.5586,
       "price_ma50": 9.8542,
+      "is_golden_cross": false,
       "volume_ma20": 171759.57
     },
     "3_fundamentals": {
@@ -8953,7 +9180,11 @@
       "net_income": -25910791.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 27719134.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.5988373091076544,
@@ -9014,31 +9245,28 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 3,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2017-07-07",
             "days_from_catalyst": -11,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001133869/000114420417035956/v470439_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2017-07-03",
             "days_from_catalyst": -15,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001133869/000114420417035477/v470085_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2017-06-20",
             "days_from_catalyst": -28,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001133869/000114420417033136/v469283_8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -9046,14 +9274,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 46
+        "activist_filing_count": 46,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -9071,6 +9301,7 @@
       "market_cap": 34401135.3959,
       "shares_outstanding": 49010000.0,
       "sic_description": "SERVICES-ADVERTISING",
+      "sector": "OTHER",
       "primary_exchange": "XASE",
       "is_ultra_low_float": false,
       "is_low_float": true,
@@ -9097,6 +9328,7 @@
       "rsi": 60.57670476046318,
       "price_ma20": 2.0579099999999997,
       "price_ma50": 2.525834,
+      "is_golden_cross": false,
       "volume_ma20": 78780.01499999998
     },
     "3_fundamentals": {
@@ -9108,7 +9340,11 @@
       "net_income": -1740564.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 18237852.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.034173704486915285,
@@ -9174,80 +9410,70 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 10,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2020-04-20",
             "days_from_catalyst": 7,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000829323/000082932320000029/a8k-sbaloanandnoteamend.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-04-02",
             "days_from_catalyst": -11,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000829323/000082932320000027/a8-krdofinal4220.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-04-01",
             "days_from_catalyst": -12,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000829323/000082932320000023/a8-krdox4120.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-03-30",
             "days_from_catalyst": -14,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000829323/000082932320000020/a8-kx10kdelay.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-03-27",
             "days_from_catalyst": -17,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000829323/000082932320000018/a8krdoclosingfinalupdated.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-03-26",
             "days_from_catalyst": -18,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000829323/000082932320000013/a8-kxrdosigningfinal.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-03-25",
             "days_from_catalyst": -19,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000829323/000082932320000008/form8-kxx3x25x20earnings.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-03-20",
             "days_from_catalyst": -24,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000829323/000082932320000006/a8-kxinuvinsideroffering.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-03-17",
             "days_from_catalyst": -27,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000829323/000082932320000004/a8-kxhitachibankagreement.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-03-16",
             "days_from_catalyst": -28,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000829323/000082932320000002/form8-kxx3x16x20earnings.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -9255,14 +9481,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 42
+        "activist_filing_count": 42,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -9280,6 +9508,7 @@
       "market_cap": 358611527.64,
       "shares_outstanding": 60480000.0,
       "sic_description": "SERVICES-MEDICAL LABORATORIES",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -9306,6 +9535,7 @@
       "rsi": 71.58149171270719,
       "price_ma20": 1.0174699999999999,
       "price_ma50": 1.3933679999999997,
+      "is_golden_cross": false,
       "volume_ma20": 17364803.0
     },
     "3_fundamentals": {
@@ -9317,7 +9547,11 @@
       "net_income": -13808000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 20015000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.3268957951824545,
@@ -9383,24 +9617,22 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 2,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2021-10-06",
             "days_from_catalyst": 6,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001580063/000119312521293164/d236078d8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2021-09-01",
             "days_from_catalyst": -29,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001580063/000119312521263287/d252910d8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -9408,14 +9640,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 27
+        "activist_filing_count": 27,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -9433,6 +9667,7 @@
       "market_cap": 67122934.2,
       "shares_outstanding": 74581038.0,
       "sic_description": "ELECTROMEDICAL & ELECTROTHERAPEUTIC APPARATUS",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -9459,6 +9694,7 @@
       "rsi": 73.45981232150142,
       "price_ma20": 1.035455,
       "price_ma50": 1.1840599999999997,
+      "is_golden_cross": false,
       "volume_ma20": 76214.85
     },
     "3_fundamentals": {
@@ -9470,7 +9706,11 @@
       "net_income": -5823000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 9993000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.33429888744111447,
@@ -9531,9 +9771,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -9541,14 +9781,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 41
+        "activist_filing_count": 41,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -9566,6 +9808,7 @@
       "market_cap": 24792612.669999998,
       "shares_outstanding": 2108870000.0,
       "sic_description": "",
+      "sector": "UNKNOWN",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -9592,6 +9835,7 @@
       "rsi": 70.23809523809523,
       "price_ma20": 2.3005,
       "price_ma50": 2.588102,
+      "is_golden_cross": false,
       "volume_ma20": 214248.0
     },
     "3_fundamentals": {
@@ -9661,9 +9905,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -9671,14 +9915,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 39
+        "activist_filing_count": 39,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -9696,6 +9942,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 35000000.0,
       "sic_description": "",
+      "sector": "UNKNOWN",
       "primary_exchange": "ARCX",
       "is_ultra_low_float": false,
       "is_low_float": true,
@@ -9722,6 +9969,7 @@
       "rsi": 63.953164204070255,
       "price_ma20": 28.24,
       "price_ma50": 34.5994,
+      "is_golden_cross": false,
       "volume_ma20": 311128.3
     },
     "3_fundamentals": {
@@ -9806,6 +10054,7 @@
       "market_cap": 34615441.6839,
       "shares_outstanding": 1794000.0,
       "sic_description": "REAL ESTATE",
+      "sector": "OTHER",
       "primary_exchange": "XASE",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -9832,6 +10081,7 @@
       "rsi": 93.41288826988836,
       "price_ma20": 12.152395,
       "price_ma50": 9.602038,
+      "is_golden_cross": true,
       "volume_ma20": 50926.645
     },
     "3_fundamentals": {
@@ -9843,7 +10093,11 @@
       "net_income": -2166000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 2301000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 1.882505564463002,
@@ -9904,9 +10158,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -9914,14 +10168,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 79
+        "activist_filing_count": 79,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -9939,6 +10195,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 0.0,
       "sic_description": "",
+      "sector": "UNKNOWN",
       "primary_exchange": "",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -9965,6 +10222,7 @@
       "rsi": 53.90835579514825,
       "price_ma20": 1.175125,
       "price_ma50": 1.263084,
+      "is_golden_cross": false,
       "volume_ma20": 183119.05
     },
     "3_fundamentals": {
@@ -10044,6 +10302,7 @@
       "market_cap": 42145851.6,
       "shares_outstanding": 10020000.0,
       "sic_description": "GENERAL INDUSTRIAL MACHINERY & EQUIPMENT",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -10070,6 +10329,7 @@
       "rsi": 81.62790697674419,
       "price_ma20": 2.5,
       "price_ma50": 2.603356,
+      "is_golden_cross": false,
       "volume_ma20": 8640607.4
     },
     "3_fundamentals": {
@@ -10081,7 +10341,11 @@
       "net_income": 6585690.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 2507977.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.2625890877496402,
@@ -10147,17 +10411,16 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 1,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2020-11-17",
             "days_from_catalyst": 7,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001735041/000121390020037554/ea130060-8k_greenlandtech.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -10165,14 +10428,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 17
+        "activist_filing_count": 17,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -10190,6 +10455,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 0.0,
       "sic_description": "",
+      "sector": "UNKNOWN",
       "primary_exchange": "OTC Link",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -10216,6 +10482,7 @@
       "rsi": 87.99590769580539,
       "price_ma20": 0.74498,
       "price_ma50": 0.7230850000000001,
+      "is_golden_cross": true,
       "volume_ma20": 44417.85
     },
     "3_fundamentals": {
@@ -10300,6 +10567,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 47157000.0,
       "sic_description": "",
+      "sector": "UNKNOWN",
       "primary_exchange": "XASE",
       "is_ultra_low_float": false,
       "is_low_float": true,
@@ -10326,6 +10594,7 @@
       "rsi": 51.9536281665951,
       "price_ma20": 0.24499000000000004,
       "price_ma50": 0.277538,
+      "is_golden_cross": false,
       "volume_ma20": 172129.0
     },
     "3_fundamentals": {
@@ -10405,6 +10674,7 @@
       "market_cap": 710334851.1999999,
       "shares_outstanding": 136460000.0,
       "sic_description": "",
+      "sector": "UNKNOWN",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -10431,6 +10701,7 @@
       "rsi": 55.82544958663598,
       "price_ma20": 2.73336,
       "price_ma50": 3.026327999999999,
+      "is_golden_cross": false,
       "volume_ma20": 76884.7
     },
     "3_fundamentals": {
@@ -10500,9 +10771,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -10510,14 +10781,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 8
+        "activist_filing_count": 8,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -10535,6 +10808,7 @@
       "market_cap": 47190235.4378,
       "shares_outstanding": 97550000.0,
       "sic_description": "SERVICES-ADVERTISING",
+      "sector": "OTHER",
       "primary_exchange": "XASE",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -10561,6 +10835,7 @@
       "rsi": 86.95228091236494,
       "price_ma20": 5.79025,
       "price_ma50": 4.6242600000000005,
+      "is_golden_cross": true,
       "volume_ma20": 2059748.1
     },
     "3_fundamentals": {
@@ -10572,7 +10847,11 @@
       "net_income": -1740564.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 18237852.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 2.4906593441521343,
@@ -10638,38 +10917,34 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 4,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2021-01-22",
             "days_from_catalyst": 3,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000829323/000165495421000719/inuv-20211231.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2021-01-20",
             "days_from_catalyst": 1,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000829323/000165495421000643/inuv-20211231.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2021-01-19",
             "days_from_catalyst": 0,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000829323/000165495421000592/inuv-20211231.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2021-01-14",
             "days_from_catalyst": -5,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000829323/000165495421000415/inuv-20211231.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -10677,14 +10952,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 42
+        "activist_filing_count": 42,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -10702,6 +10979,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 0.0,
       "sic_description": "",
+      "sector": "UNKNOWN",
       "primary_exchange": "",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -10728,6 +11006,7 @@
       "rsi": 80.48359240069085,
       "price_ma20": 7.471999999999999,
       "price_ma50": 7.203,
+      "is_golden_cross": true,
       "volume_ma20": 221258.7
     },
     "3_fundamentals": {
@@ -10739,7 +11018,11 @@
       "net_income": -120084000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 1300100000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.5077673647519998,
@@ -10800,9 +11083,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -10810,14 +11093,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": true,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 40,
-        "activist_filing_count": 4
+        "activist_filing_count": 4,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -10835,6 +11120,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 97240000.0,
       "sic_description": "IN VITRO & IN VIVO DIAGNOSTIC SUBSTANCES",
+      "sector": "OTHER",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -10861,6 +11147,7 @@
       "rsi": 58.03795202291443,
       "price_ma20": 0.78931395,
       "price_ma50": 0.80701158,
+      "is_golden_cross": false,
       "volume_ma20": 156066.4
     },
     "3_fundamentals": {
@@ -10872,7 +11159,11 @@
       "net_income": -4629000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 1596000.0
+      "total_debt": 1596000.0,
+      "operating_expenses": 5924000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.3400953661108237,
@@ -10938,24 +11229,22 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 2,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2020-03-26",
             "days_from_catalyst": -1,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000926617/000092661720000008/vrml-20200326x8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-03-17",
             "days_from_catalyst": -10,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000926617/000092661720000005/vrml-20200317x8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -10963,14 +11252,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 84
+        "activist_filing_count": 84,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -10988,6 +11279,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 0.0,
       "sic_description": "MOTORS & GENERATORS",
+      "sector": "OTHER",
       "primary_exchange": "",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -11014,6 +11306,7 @@
       "rsi": 78.57306197118683,
       "price_ma20": 0.39211,
       "price_ma50": 0.440528,
+      "is_golden_cross": false,
       "volume_ma20": 295946.6
     },
     "3_fundamentals": {
@@ -11025,7 +11318,11 @@
       "net_income": -588000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 6422000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.10477887832147924,
@@ -11086,45 +11383,40 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 5,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2012-12-11",
             "days_from_catalyst": 5,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001301206/000114420412067320/v330098_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2012-12-07",
             "days_from_catalyst": 1,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001301206/000114420412066982/v329971_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2012-12-04",
             "days_from_catalyst": -2,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001301206/000114420412066248/v329478_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2012-11-19",
             "days_from_catalyst": -17,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001301206/000114420412063859/v328849_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2012-11-09",
             "days_from_catalyst": -27,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001301206/000114420412060850/v328073_8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -11132,14 +11424,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 39
+        "activist_filing_count": 39,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -11157,6 +11451,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 0.0,
       "sic_description": "RETAIL-WOMEN'S CLOTHING STORES",
+      "sector": "ENERGY/MINING",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -11183,6 +11478,7 @@
       "rsi": 71.74657534246575,
       "price_ma20": 6.02325,
       "price_ma50": 5.875299999999998,
+      "is_golden_cross": true,
       "volume_ma20": 7028414.05
     },
     "3_fundamentals": {
@@ -11194,7 +11490,11 @@
       "net_income": -35531000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 52183000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.41596611306374554,
@@ -11255,24 +11555,22 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 2,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2012-05-03",
             "days_from_catalyst": 1,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000019353/000001935312000023/chrs_8-kx04x30x2012.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2012-04-17",
             "days_from_catalyst": -15,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000019353/000001935312000019/chrs-04122012_8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -11280,14 +11578,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 94
+        "activist_filing_count": 94,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -11305,6 +11605,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 700000.0,
       "sic_description": "",
+      "sector": "UNKNOWN",
       "primary_exchange": "ARCX",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -11331,6 +11632,7 @@
       "rsi": 73.80072673974777,
       "price_ma20": 2.681395,
       "price_ma50": 4.7583779999999996,
+      "is_golden_cross": false,
       "volume_ma20": 350252.25
     },
     "3_fundamentals": {
@@ -11400,9 +11702,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -11410,14 +11712,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 3
+        "activist_filing_count": 3,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -11435,6 +11739,7 @@
       "market_cap": 157291046.22,
       "shares_outstanding": 12913879.0,
       "sic_description": "PHARMACEUTICAL PREPARATIONS",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -11461,6 +11766,7 @@
       "rsi": 81.90819081908188,
       "price_ma20": 19.002500000000005,
       "price_ma50": 16.4194,
+      "is_golden_cross": true,
       "volume_ma20": 163530.75
     },
     "3_fundamentals": {
@@ -11472,7 +11778,11 @@
       "net_income": 5164000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 71250000.0
+      "total_debt": 71250000.0,
+      "operating_expenses": 37484000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 1.0387583514751146,
@@ -11533,38 +11843,34 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 4,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2015-02-20",
             "days_from_catalyst": 3,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000827871/000110465915012666/a15-5072_18k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2015-02-17",
             "days_from_catalyst": 0,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000827871/000082787115000011/a8kearningsrelease.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2015-02-17",
             "days_from_catalyst": 0,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000827871/000110465915010852/a15-4627_18k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2015-01-20",
             "days_from_catalyst": -28,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0000827871/000082787115000004/a8-k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -11572,14 +11878,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 104
+        "activist_filing_count": 104,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -11597,6 +11905,7 @@
       "market_cap": 269610000.0,
       "shares_outstanding": 162300000.0,
       "sic_description": "",
+      "sector": "UNKNOWN",
       "primary_exchange": "XASE",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -11623,6 +11932,7 @@
       "rsi": 70.78874961785388,
       "price_ma20": 0.8264625000000001,
       "price_ma50": 0.7979669800000001,
+      "is_golden_cross": true,
       "volume_ma20": 337979.95
     },
     "3_fundamentals": {
@@ -11692,9 +12002,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -11702,14 +12012,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 15
+        "activist_filing_count": 15,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -11727,6 +12039,7 @@
       "market_cap": 29148629.76,
       "shares_outstanding": 45730000.0,
       "sic_description": "PHARMACEUTICAL PREPARATIONS",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": true,
@@ -11753,6 +12066,7 @@
       "rsi": 75.63254506366793,
       "price_ma20": 53.65734,
       "price_ma50": 61.784556,
+      "is_golden_cross": false,
       "volume_ma20": 124559.183335
     },
     "3_fundamentals": {
@@ -11764,7 +12078,11 @@
       "net_income": -7640000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 5720000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.3710827934656783,
@@ -11830,73 +12148,64 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 9,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2020-04-15",
             "days_from_catalyst": 7,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001659617/000165961720000102/form8-kq2leadingvirologist.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-04-14",
             "days_from_catalyst": 6,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001659617/000165961720000097/form8-kq2investorconferenc.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-04-08",
             "days_from_catalyst": 0,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001659617/000165961720000094/form8-kq2activeingredienti.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-04-02",
             "days_from_catalyst": -6,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001659617/000165961720000087/form8-kq2positivesafetydat.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-03-26",
             "days_from_catalyst": -13,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001659617/000165961720000079/form8-kq1moleculinnasdaq.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-03-19",
             "days_from_catalyst": -20,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001659617/000165961720000068/form8-k123119earningsrelea.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-03-17",
             "days_from_catalyst": -22,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001659617/000165961720000055/form8-kq1moleculinutmbcoll.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-03-16",
             "days_from_catalyst": -23,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001659617/000165961720000050/form8-kq12020publiccorpora.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2020-03-10",
             "days_from_catalyst": -29,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001659617/000165961720000047/form8-kq1drhongbozhaijoins.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -11904,14 +12213,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 22
+        "activist_filing_count": 22,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -11929,6 +12240,7 @@
       "market_cap": 176841426.3,
       "shares_outstanding": 14830000.0,
       "sic_description": "CRUDE PETROLEUM & NATURAL GAS",
+      "sector": "ENERGY/MINING",
       "primary_exchange": "XASE",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -11955,6 +12267,7 @@
       "rsi": 81.61222339304531,
       "price_ma20": 0.9348629,
       "price_ma50": 1.30868516,
+      "is_golden_cross": false,
       "volume_ma20": 466358.55
     },
     "3_fundamentals": {
@@ -11966,7 +12279,11 @@
       "net_income": -1676000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 8859000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.07588534826386495,
@@ -12032,31 +12349,28 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 3,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2019-01-14",
             "days_from_catalyst": 0,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001141197/000165495419000412/ped_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2019-01-04",
             "days_from_catalyst": -10,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001141197/000165495419000134/ped_8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2018-12-17",
             "days_from_catalyst": -28,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001141197/000165495418014011/ped_8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -12064,14 +12378,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 47
+        "activist_filing_count": 48,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -12089,6 +12405,7 @@
       "market_cap": 0.0,
       "shares_outstanding": 19380000.0,
       "sic_description": "SERVICES-COMPUTER PROCESSING & DATA PREPARATION",
+      "sector": "TECH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": true,
       "is_low_float": true,
@@ -12115,6 +12432,7 @@
       "rsi": 94.41441441441442,
       "price_ma20": 2.3720000000000003,
       "price_ma50": 2.2984,
+      "is_golden_cross": true,
       "volume_ma20": 14213542.0
     },
     "3_fundamentals": {
@@ -12126,7 +12444,11 @@
       "net_income": -799000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 3869000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 2.561517084169464,
@@ -12192,24 +12514,22 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 2,
+        "has_catalyst_8k": true,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2021-03-23",
             "days_from_catalyst": 1,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001104855/000119312521091304/d131914d8ka.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2021-03-22",
             "days_from_catalyst": 0,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001104855/000119312521088364/d122974d8k.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": true,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -12217,14 +12537,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 110
+        "activist_filing_count": 110,
+        "new_activist_filing_90d": true
       }
     }
   },
@@ -12242,6 +12564,7 @@
       "market_cap": 123534876.04,
       "shares_outstanding": 84960000.0,
       "sic_description": "SEMICONDUCTORS & RELATED DEVICES",
+      "sector": "TECH",
       "primary_exchange": "XNAS",
       "is_ultra_low_float": false,
       "is_low_float": false,
@@ -12268,6 +12591,7 @@
       "rsi": 81.203007518797,
       "price_ma20": 1.7924999999999998,
       "price_ma50": 1.5293999999999996,
+      "is_golden_cross": true,
       "volume_ma20": 1420371.9
     },
     "3_fundamentals": {
@@ -12279,7 +12603,11 @@
       "net_income": -5166633.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 13916266.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 0.8323811559121701,
@@ -12345,9 +12673,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -12355,14 +12683,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 75
+        "activist_filing_count": 75,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -12380,6 +12710,7 @@
       "market_cap": 92356581.88,
       "shares_outstanding": 24580499.0,
       "sic_description": "MISCELLANEOUS CHEMICAL PRODUCTS",
+      "sector": "OTHER",
       "primary_exchange": "XNYS",
       "is_ultra_low_float": false,
       "is_low_float": true,
@@ -12406,6 +12737,7 @@
       "rsi": 83.72243839169909,
       "price_ma20": 11.153699999999999,
       "price_ma50": 9.93426,
+      "is_golden_cross": true,
       "volume_ma20": 94832.38334999999
     },
     "3_fundamentals": {
@@ -12417,7 +12749,11 @@
       "net_income": 20355000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 40000000.0
+      "total_debt": 40000000.0,
+      "operating_expenses": 8681000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": 1.2786388255653753,
@@ -12478,9 +12814,9 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 0,
-        "filings": [],
         "has_catalyst_8k": false,
-        "all_keywords_found": []
+        "all_keywords_found": [],
+        "filings": []
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -12488,14 +12824,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 75
+        "activist_filing_count": 75,
+        "new_activist_filing_90d": false
       }
     }
   },
@@ -12513,6 +12851,7 @@
       "market_cap": 68002624.0,
       "shares_outstanding": 26560000.0,
       "sic_description": "SURGICAL & MEDICAL INSTRUMENTS & APPARATUS",
+      "sector": "BIOTECH/HEALTH",
       "primary_exchange": "XNYS",
       "is_ultra_low_float": false,
       "is_low_float": true,
@@ -12539,6 +12878,7 @@
       "rsi": 79.46859903381643,
       "price_ma20": 5.45744,
       "price_ma50": 9.696576,
+      "is_golden_cross": false,
       "volume_ma20": 152314.1375
     },
     "3_fundamentals": {
@@ -12550,7 +12890,11 @@
       "net_income": -15130000.0,
       "turning_profitable": false,
       "cash": 0.0,
-      "total_debt": 0.0
+      "total_debt": 0.0,
+      "operating_expenses": 16284000.0,
+      "total_assets": 0.0,
+      "total_liabilities": 0.0,
+      "debt_to_asset_ratio": 0.0
     },
     "4_relative_strength": {
       "relative_strength": -0.45559749743636146,
@@ -12616,31 +12960,28 @@
     "sec_data": {
       "form_8k": {
         "count_in_window": 3,
+        "has_catalyst_8k": false,
+        "all_keywords_found": [],
         "filings": [
           {
             "filing_date": "2022-12-06",
             "days_from_catalyst": 5,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001253176/000095017022026098/vapo-20221130.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2022-11-22",
             "days_from_catalyst": -9,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001253176/000119312522290420/d423415d8k.htm"
+            "keywords_found": []
           },
           {
             "filing_date": "2022-11-02",
             "days_from_catalyst": -29,
             "detected_catalyst_type": "other",
-            "keywords_found": [],
-            "url": "https://data.sec.gov/Archives/edgar/data/0001253176/000095017022021244/vapo-20221102.htm"
+            "keywords_found": []
           }
-        ],
-        "has_catalyst_8k": false,
-        "all_keywords_found": []
+        ]
       },
       "insider_trades": {
         "total_buy_transactions": 0,
@@ -12648,14 +12989,16 @@
         "buy_share_total": 0,
         "sell_share_total": 0,
         "net_insider_activity": "NEUTRAL",
-        "recent_buys_30d": 0,
+        "recent_buys_30d_count": 0,
+        "any_insider_buys_30d": false,
         "insider_buying_surge": false
       },
       "institutional": {
         "has_institutional_filings_13f": false,
         "has_activist_filings_13dg": true,
         "institutional_filing_count": 0,
-        "activist_filing_count": 70
+        "activist_filing_count": 70,
+        "new_activist_filing_90d": true
       }
     }
   }
