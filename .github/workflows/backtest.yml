@@ -1,12 +1,20 @@
 name: Run Backtest on Master Data
 
 on:
-  workflow_dispatch: # Allows you to run this manually from the "Actions" tab
+  workflow_dispatch:
+    inputs:
+      master_file:
+        description: 'Master file to run backtest on'
+        required: true
+        default: 'MASTER_FINGERPRINTS.json'
+      report_file:
+        description: 'Output report file name'
+        required: true
+        default: 'backtest_report.txt'
 
 jobs:
   backtest:
     runs-on: ubuntu-latest
-    
     permissions:
       contents: write # Allow the job to push the new report
 
@@ -14,7 +22,7 @@ jobs:
       - name: 1. Check out repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 
+          fetch-depth: 0
 
       - name: 2. Set up Python 3.9
         uses: actions/setup-python@v5
@@ -24,27 +32,32 @@ jobs:
       - name: 3. Install Analysis Dependencies
         run: |
           echo "Installing libraries for analysis..."
-          pip install pandas numpy
+          pip install pandas
 
-      - name: 4. Run Backtester Script
+      - name: 4. Run Backtester
         run: |
-          echo "Running backtest on MASTER_FINGERPRINTS.json..."
-          if [ ! -f "MASTER_FINGERPRINTS.json" ]; then
-            echo "❌ CRITICAL ERROR: MASTER_FINGERPRINTS.json not found!"
-            echo "Please run the 'Full Data Pipeline' workflow first to generate it."
+          INPUT_FILE=${{ github.event.inputs.master_file }}
+          OUTPUT_FILE=${{ github.event.inputs.report_file }}
+          
+          echo "Running backtest on $INPUT_FILE..."
+          if [ ! -f "$INPUT_FILE" ]; then
+            echo "❌ CRITICAL ERROR: Input file '$INPUT_FILE' not found!"
+            echo "Please run the 'Full Data Pipeline' or 'Generate Test Set Data' workflow first."
             exit 1
           fi
-          python backtester.py
-          echo "Backtest complete. Report saved to backtest_report.txt"
+          
+          python backtester.py "$INPUT_FILE" "$OUTPUT_FILE"
+          
+          echo "Backtest complete. Report saved to $OUTPUT_FILE"
 
-      - name: 5. Commit and push report
+      - name: 5. Commit and push backtest report
         run: |
           git config --global user.name 'GitHub Actions Bot'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
-          # Add the new report file and the updated clean file
-          git add backtest_report.txt
-          git add CLEAN_FINGERPRINTS_FOR_BACKTEST.json
+          OUTPUT_FILE=${{ github.event.inputs.report_file }}
+          
+          git add "$OUTPUT_FILE"
           git status
           
           if git diff --cached --quiet; then
@@ -52,5 +65,5 @@ jobs:
             exit 0
           fi
           
-          git commit -m "Automated Workflow: Run backtest and save report - $(date)"
+          git commit -m "Automated Workflow: Run backtest and save report ($OUTPUT_FILE) - $(date)"
           git push
