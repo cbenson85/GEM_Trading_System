@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """
-SEC Data Merger for GEM Trading System (v3 - Robust Parsing)
+SEC Data Merger for GEM Trading System (v4 - New Signals)
 Enriches Polygon raw data with actual SEC filing content.
 - Parses Form 4 XML for Insider BUYS ('P' code)
 - Parses 8-K HTML/Text for Catalyst Keywords
+- ADDS: any_insider_buys_30d
+- ADDS: new_activist_filing_90d
 """
 
 import json
@@ -33,8 +35,8 @@ class SECDataMerger:
 
     def merge_sec_data(self, polygon_file: str, output_file: str):
         print("="*60)
-        print("SEC DATA ENRICHMENT (FIXED - v2)")
-        print("Parsing Form 4 XML and 8-K Text...")
+        print("SEC DATA ENRICHMENT (v4 - New Signals)")
+        print("Parsing 8-K, Form 4, 13D/G...")
         print("="*60)
 
         if not os.path.exists(polygon_file):
@@ -57,7 +59,6 @@ class SECDataMerger:
             
             print(f"\n[{i+1}/{len(fingerprints)}] Enriching {ticker}...")
             
-            # Get CIK from Polygon data (pulled from /v3/reference/tickers)
             cik = fingerprint.get('1_profile', {}).get('cik', '')
             
             if not cik:
@@ -68,8 +69,8 @@ class SECDataMerger:
             
             cik_padded = cik.zfill(10)
             catalyst_date = fingerprint.get('catalyst_date')
+            catalyst_dt = datetime.strptime(catalyst_date, '%Y-%m-%d')
             
-            # Get all recent filings for this CIK
             submissions = self.get_submissions_json(cik_padded)
             if not submissions:
                 print("  Could not fetch submissions JSON, skipping SEC.")
@@ -79,17 +80,14 @@ class SECDataMerger:
 
             sec_data = {}
             
-            # 1. Get 8-K filings AND their text
             print("  Getting 8-K filings and text...")
-            sec_data['form_8k'] = self.get_8k_filings(cik_padded, submissions, catalyst_date)
+            sec_data['form_8k'] = self.get_8k_filings(cik_padded, submissions, catalyst_dt)
             
-            # 2. Get Form 4 Insider BUYS
             print("  Getting Insider BUYS (Form 4)...")
-            sec_data['insider_trades'] = self.get_insider_transactions(cik_padded, submissions, catalyst_date)
+            sec_data['insider_trades'] = self.get_insider_transactions(cik_padded, submissions, catalyst_dt)
             
-            # 3. Get Institutional indicators
-            print("  Getting Institutional indicators...")
-            sec_data['institutional'] = self.get_institutional_data(submissions)
+            print("  Getting Institutional indicators (13D/G)...")
+            sec_data['institutional'] = self.get_institutional_data(submissions, catalyst_dt)
             
             fingerprint['sec_data'] = sec_data
             enriched_fingerprints.append(fingerprint)
@@ -112,8 +110,7 @@ class SECDataMerger:
             print(f"    Submissions JSON error: {e}")
         return None
 
-    def get_8k_filings(self, cik: str, submissions: Dict, catalyst_date: str, days_before: int = 30) -> Dict:
-        catalyst_dt = datetime.strptime(catalyst_date, '%Y-%m-%d')
+    def get_8k_filings(self, cik: str, submissions: Dict, catalyst_dt: datetime, days_before: int = 30) -> Dict:
         start_date = catalyst_dt - timedelta(days=days_before)
         end_date = catalyst_dt + timedelta(days=7)
         
@@ -137,7 +134,6 @@ class SECDataMerger:
                         doc_name = primary_documents[i]
                         filing_url = f"{self.archive_url}/{cik}/{accession_num}/{doc_name}"
                         
-                        print(f"    Found 8-K on {filing_date}, analyzing text...")
                         filing_text = self.get_filing_text(filing_url)
                         catalyst_type, keywords = self.analyze_8k_text(filing_text)
                         
@@ -146,7 +142,6 @@ class SECDataMerger:
                             'days_from_catalyst': (filing_dt - catalyst_dt).days,
                             'detected_catalyst_type': catalyst_type,
                             'keywords_found': keywords,
-                            'url': filing_url
                         })
                         if catalyst_type != 'other':
                             catalyst_keywords_found.extend(keywords)
@@ -156,9 +151,9 @@ class SECDataMerger:
 
         return {
             'count_in_window': len(filings),
-            'filings': filings,
             'has_catalyst_8k': any(abs(f['days_from_catalyst']) <= 3 for f in filings),
-            'all_keywords_found': list(set(catalyst_keywords_found))
+            'all_keywords_found': list(set(catalyst_keywords_found)),
+            'filings': filings, # Store full filing list
         }
 
     def get_filing_text(self, url: str) -> str:
@@ -167,7 +162,6 @@ class SECDataMerger:
             response = requests.get(url, headers=self.headers)
             self.rate_limit_sleep()
             if response.status_code == 200:
-                # Basic text cleaning
                 text = response.text
                 text = re.sub(r'<[^>]+>', ' ', text) # Remove HTML
                 text = re.sub(r'\s+', ' ', text) # Normalize whitespace
@@ -189,19 +183,16 @@ class SECDataMerger:
         }
         
         found_keywords = []
-        # Find the *first* match and return it
         for catalyst_type, keywords in catalyst_patterns.items():
             for keyword in keywords:
                 if keyword in text:
                     found_keywords.append(keyword)
-            # If we found keywords for this type, return it immediately
             if found_keywords:
                 return catalyst_type, list(set(found_keywords))
                 
         return 'other', []
 
-    def get_insider_transactions(self, cik: str, submissions: Dict, catalyst_date: str, days_before: int = 120) -> Dict:
-        catalyst_dt = datetime.strptime(catalyst_date, '%Y-%m-%d')
+    def get_insider_transactions(self, cik: str, submissions: Dict, catalyst_dt: datetime, days_before: int = 120) -> Dict:
         start_date = catalyst_dt - timedelta(days=days_before)
         
         insider_buys = []
@@ -215,18 +206,15 @@ class SECDataMerger:
             primary_documents = recent.get('primaryDocument', [])
             
             for i in range(len(form_types)):
-                if form_types[i] == '4': # Only parse Form 4
+                if form_types[i] == '4':
                     filing_date = filing_dates[i]
                     filing_dt = datetime.strptime(filing_date, '%Y-%m-%d')
                     
                     if start_date <= filing_dt <= catalyst_dt:
                         accession_num = accession_numbers[i].replace('-', '')
                         doc_name = primary_documents[i]
-                        
-                        # The primary doc for Form 4 is the XML file
                         xml_url = f"{self.archive_url}/{cik}/{accession_num}/{doc_name}"
                         
-                        print(f"    Parsing Form 4 XML from {filing_date}...")
                         buys, sells = self.parse_form_4_xml(xml_url)
                         
                         if buys > 0:
@@ -237,22 +225,22 @@ class SECDataMerger:
         except Exception as e:
             print(f"    Insider transaction error: {e}")
 
+        recent_buys_30d_count = sum(1 for f in insider_buys if (catalyst_dt - datetime.strptime(f['date'], '%Y-%m-%d')).days <= 30)
+
         return {
             'total_buy_transactions': len(insider_buys),
             'total_sell_transactions': len(insider_sells),
             'buy_share_total': sum(b['shares'] for b in insider_buys),
             'sell_share_total': sum(s['shares'] for s in insider_sells),
             'net_insider_activity': 'BUY' if len(insider_buys) > len(insider_sells) else 'SELL' if len(insider_sells) > len(insider_buys) else 'NEUTRAL',
-            'recent_buys_30d': sum(1 for f in insider_buys if (catalyst_dt - datetime.strptime(f['date'], '%Y-%m-%d')).days <= 30),
-            'insider_buying_surge': len(insider_buys) >= 3 and len(insider_sells) == 0
+            'recent_buys_30d_count': recent_buys_30d_count, # <-- RENAMED for clarity
+            'any_insider_buys_30d': bool(recent_buys_30d_count > 0), # <-- NEW
+            'insider_buying_surge': bool(recent_buys_30d_count >= 3 and len(insider_sells) == 0) # Made more specific
         }
 
     def parse_form_4_xml(self, xml_url: str) -> (int, int):
-        """
-        --- ROBUST PARSING FIX ---
-        Downloads and parses a Form 4 XML file to count *only* real buys and sells.
-        """
-        text = self.get_filing_text(xml_url) # Re-use our text downloader
+        """Downloads and parses a Form 4 XML file to count *only* real buys and sells."""
+        text = self.get_filing_text(xml_url) 
         if not text:
             return 0, 0
             
@@ -260,17 +248,11 @@ class SECDataMerger:
         total_sells = 0
         
         try:
-            # We only care about non-derivative transactions (Table 1)
-            # Find all <nonDerivativeTransaction> blocks
             transactions = re.findall(r'<nonDerivativeTransaction>(.*?)</nonDerivativeTransaction>', text, re.IGNORECASE | re.DOTALL)
             
             for tx in transactions:
-                # Find the share amount and the code (A/D) FOR THIS TRANSACTION
                 shares_match = re.search(r'<transactionShares>.*?<value>([\d\.]+)</value>.*?</transactionShares>', tx, re.IGNORECASE | re.DOTALL)
                 code_match = re.search(r'<transactionAcquiredDisposedCode>.*?<value>([AD])</value>.*?</transactionAcquiredDisposedCode>', tx, re.IGNORECASE | re.DOTALL)
-                
-                # We also check the <transactionCode> to ensure it's a 'P' (Purchase) or 'S' (Sale)
-                # This avoids counting grants, gifts, exercises, etc.
                 tx_code_match = re.search(r'<transactionCode>([PS])</transactionCode>', tx, re.IGNORECASE)
 
                 if shares_match and code_match and tx_code_match:
@@ -283,37 +265,65 @@ class SECDataMerger:
                     elif tx_code == 'S' and acq_disp_code == 'D':
                         total_sells += shares
             
-            # No fallback/estimation. If we can't parse it, it's 0.
             return int(total_buys), int(total_sells)
             
         except Exception as e:
             print(f"      XML Parse Error: {e}")
             return 0, 0
 
-    def get_institutional_data(self, submissions: Dict) -> Dict:
-        """Gets 13F/G/D filing counts as a proxy for institutional interest"""
+    def get_institutional_data(self, submissions: Dict, catalyst_dt: datetime) -> Dict:
+        """
+        Gets 13F/G/D filing counts and checks for NEW activist filings.
+        --- UPDATED (v4) ---
+        """
+        thirteen_f_count = 0
+        thirteen_d_g_count = 0
+        new_activist_filing_90d = False
+        
         try:
-            form_types = submissions.get('filings', {}).get('recent', {}).get('form', [])
+            filings = submissions.get('filings', {}).get('recent', {})
+            form_types = filings.get('form', [])
+            filing_dates = filings.get('filingDate', [])
             
-            thirteen_f_count = sum(1 for f in form_types if '13F' in f)
-            thirteen_d_g_count = sum(1 for f in form_types if '13D' in f or '13G' in f)
+            start_date_90d = catalyst_dt - timedelta(days=90)
+            
+            for i in range(len(form_types)):
+                form_type = form_types[i]
+                
+                if '13F' in form_type:
+                    thirteen_f_count += 1
+                
+                if '13D' in form_type or '13G' in form_type:
+                    thirteen_d_g_count += 1
+                    filing_dt = datetime.strptime(filing_dates[i], '%Y-%m-%d')
+                    
+                    if start_date_90d <= filing_dt <= catalyst_dt:
+                        new_activist_filing_90d = True # <-- NEW SIGNAL
             
             return {
                 'has_institutional_filings_13f': thirteen_f_count > 0,
                 'has_activist_filings_13dg': thirteen_d_g_count > 0,
                 'institutional_filing_count': thirteen_f_count,
-                'activist_filing_count': thirteen_d_g_count
+                'activist_filing_count': thirteen_d_g_count,
+                'new_activist_filing_90d': new_activist_filing_90d # <-- NEW
             }
         except Exception as e:
             print(f"    Institutional error: {e}")
-        return {'has_institutional_filings_13f': False}
+            
+        return {
+            'has_institutional_filings_13f': False,
+            'has_activist_filings_13dg': False,
+            'institutional_filing_count': 0,
+            'activist_filing_count': 0,
+            'new_activist_filing_90d': False
+        }
 
     def save_progress(self, data: List, filename: str):
         with open(filename, 'w') as f:
             json.dump(data, f, indent=2)
     
     def save_final(self, original_data: Dict, enriched_fingerprints: List, output_file: str):
-        summary = original_data.get('summary', {})
+        summary = original_data.get('polygon_summary', original_data.get('summary', {}))
         summary['sec_enrichment_date'] = datetime.now().isoformat()
         summary['sec_api_calls'] = self.api_calls
         
@@ -334,7 +344,7 @@ class SECDataMerger:
             json.dump(output, f, indent=2)
             
         print("\n" + "="*60)
-        print("SEC ENRICHMENT COMPLETE")
+        print("SEC ENRICHMENT COMPLETE (v4)")
         print("="*60)
         print(f"SEC data added to: {sec_success} stocks")
         print(f"SEC API calls: {self.api_calls}")
@@ -343,12 +353,7 @@ class SECDataMerger:
 
 def main():
     merger = SECDataMerger()
-    
-    # This is the output from your fingerprint_analyzer.py
-    # We will hard-code this, as it's an intermediate file.
     polygon_file = 'FINGERPRINTS.json' 
-    
-    # This is the final file for your correlation script
     output_file = 'MASTER_FINGERPRINTS.json' 
     
     if not os.path.exists(polygon_file):
@@ -356,7 +361,7 @@ def main():
         print("Run fingerprint_analyzer.py first to generate it.")
         return
     
-    print("Starting SEC data enrichment...")
+    print("Starting SEC data enrichment (v4)...")
     print(f"Input: {polygon_file}")
     print(f"Output: {output_file}")
     
