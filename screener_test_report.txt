@@ -1,0 +1,14 @@
+--- RUNNING IN TEST MODE ---
+--- Screener Report (Tier 2 'Golden' Model) ---
+Scan initiated at: 2025-11-11T22:44:24.105565 on 33 tickers.
+Model: (is_ultra_low_float == True) AND (is_hot_sector == True) AND (is_golden_cross == True OR strongly_outperforming == True)
+============================================================
+Stocks that MATCHED the filter:
+
+
+============================================================
+Screener Run Complete.
+  Total Stocks Scanned: 33
+  Stocks Passed Filters: 0
+  Stocks Failed/Skipped: 33
+============================================================
