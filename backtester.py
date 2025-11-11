@@ -1,27 +1,21 @@
 #!/usr/bin/env python3
 """
-GEM TRADING SYSTEM - BACKTESTER (v3)
+GEM TRADING SYSTEM - BACKTESTER (v2)
 
 This script runs a historical backtest on a MASTER_FINGERPRINTS.json file.
 It applies a tiered filtering system based on the "Golden Fingerprint"
 model derived from our correlation analysis.
 
-It is parameterized to accept an input file and an output file.
-
-Usage:
-1. Test on main data:
-   python backtester.py MASTER_FINGERPRINTS.json backtest_report.txt
-
-2. Test on 2023-2024 "holdout" data:
-   python backtester.py MASTER_FINGERPRINTS_TEST.json backtest_report_TEST.txt
+It writes a full report to a .txt file.
 """
 
 import json
 import pandas as pd
 import numpy as np
-from datetime import datetime
+from datetime import datetime  # <-- THIS IS THE FIX
 import sys
 import os
+from typing import Dict, List, Optional, TextIO
 
 def flatten_fingerprint(fp: Dict) -> Optional[Dict]:
     """Flattens the complex JSON structure into a single-level dict for pandas."""
@@ -39,12 +33,13 @@ def flatten_fingerprint(fp: Dict) -> Optional[Dict]:
         cash = funda.get('cash', 0)
         op_ex = funda.get('operating_expenses', 0)
         
-        # Calculate quarterly burn rate. Use abs() because op_ex is negative.
+        # Calculate quarterly burn rate. Use abs() because op_ex can be negative (if expenses are negative)
         quarterly_burn = abs(op_ex) if op_ex != 0 else 0
         
         cash_runway_months = 0
         if quarterly_burn > 0:
-            cash_runway_months = (cash / quarterly_burn) * 3  # Convert quarterly burn to monthly
+            # Calculate how many 3-month periods the cash can cover, then multiply by 3
+            cash_runway_months = (cash / quarterly_burn) * 3
         
         has_6mo_cash = cash_runway_months > 6
         # ---
@@ -154,13 +149,19 @@ def load_and_clean_data(master_file: str) -> pd.DataFrame:
         json.dump(clean_fingerprints, f, indent=2)
     print(f"Saved clean, filtered data to {clean_filename}\n")
     
-    return pd.DataFrame(clean_fingerprints)
+    # Create DataFrame and dummy variables for sectors
+    df = pd.DataFrame(clean_fingerprints)
+    if 'sector' in df.columns:
+        sector_dummies = pd.get_dummies(df['sector'], prefix='sector')
+        df = pd.concat([df, sector_dummies], axis=1)
+        
+    return df
 
 def analyze_performance(df: pd.DataFrame, title: str, report_file: TextIO):
     """Calculates and prints performance metrics for a given DataFrame."""
     if df.empty:
-        report_file.write(f"--- {title} ---\n")
-        report_file.write("  No stocks matched this filter.\n\n")
+        report_file.write(f"\n--- {title} ---\n")
+        report_file.write("  No stocks matched this filter.\n")
         return
         
     total_stocks = len(df)
@@ -170,7 +171,7 @@ def analyze_performance(df: pd.DataFrame, title: str, report_file: TextIO):
     big_winners = (df['gain_pct'] > 500).sum()
     mega_winners = (df['gain_pct'] > 1000).sum()
     
-    report_file.write(f"--- {title} ---\n")
+    report_file.write(f"\n--- {title} ---\n")
     report_file.write(f"  Total Stocks:        {total_stocks}\n")
     report_file.write(f"  Average Gain:        {avg_gain:,.0f}%\n")
     report_file.write(f"  Median Gain:         {median_gain:,.0f}%\n")
@@ -211,9 +212,11 @@ def main():
     # --- Define Our "Golden Fingerprint" Filters ---
 
     # Tier 3: The Setup (ULF + Hot Sector)
+    # NOTE: This query syntax must be exact.
+    # Backticks are needed for column names with special chars like '/'.
     query_tier_3 = (
         "is_ultra_low_float == True & "
-        "(`sector` == 'BIOTECH/HEALTH' | `sector` == 'TECH' | `sector` == 'ENERGY/MINING')"
+        "(`sector_BIOTECH/HEALTH` == True | `sector_TECH` == True | `sector_ENERGY/MINING` == True)"
     )
 
     # Tier 2: The Momentum (Tier 3 + Momentum)
@@ -265,7 +268,7 @@ def main():
         baseline_mega_rate = (df_all_clean['gain_pct'] > 1000).sum() / len(df_all_clean)
         tier_1_mega_rate = (df_tier_1['gain_pct'] > 1000).sum() / len(df_tier_1) if not df_tier_1.empty else 0
 
-        report_file.write("="*60 + "\n")
+        report_file.write("\n" + "="*60 + "\n")
         report_file.write("BACKTEST SUMMARY\n")
         report_file.write("="*60 + "\n")
         report_file.write("Applying our 'Golden Fingerprint' (Tier 1) filters had the following effect:\n")
