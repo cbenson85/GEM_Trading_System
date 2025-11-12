@@ -27,6 +27,15 @@ def collect_and_summarize():
     
     if not batch_files:
         print("No batch reports found.")
+        # Create an empty report so the workflow doesn't fail
+        with open(FINAL_REPORT_FILE, 'w') as f:
+            f.write("="*80 + "\n")
+            f.write("GEM TRADING SYSTEM - HYBRID BACKTEST FINAL REPORT\n")
+            f.write(f"Generated at: {datetime.now().isoformat()}\n")
+            f.write(f"Data Range: {SCAN_START_DATE} to {SCAN_END_DATE}\n")
+            f.write("="*80 + "\n\n")
+            f.write("--- SUMMARY --- \n")
+            f.write("No batch report files were found. No signals were generated.\n")
         return
         
     print(f"Found {len(batch_files)} batch reports. Parsing...")
