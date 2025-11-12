@@ -57,6 +57,7 @@ class FullMarketBacktester:
         # No time.sleep() because of unlimited API tier
 
     def map_sic_to_sector(self, sic_description: str) -> str:
+        """Maps SIC description to a broad sector category."""
         if not sic_description: return "UNKNOWN"
         sic = sic_description.lower()
         if any(kw in sic for kw in ['pharmaceutical', 'biological', 'medical lab', 'health', 'surgical']): return "BIOTECH/HEALTH"
@@ -105,6 +106,9 @@ class FullMarketBacktester:
             ticker = ticker_info['ticker']
 
             try:
+                # --- THIS IS THE CRITICAL FIX ---
+                # We must get the *full profile* for each stock to get the
+                # reliable SIC code. The list_tickers endpoint is unreliable.
                 url = f"https://api.polygon.io/v3/reference/tickers/{ticker}?date={as_of_date}&apiKey={self.api_key}"
                 response = requests.get(url)
                 self.log_call()
@@ -118,6 +122,7 @@ class FullMarketBacktester:
                 sector = self.map_sic_to_sector(sic_desc)
                 is_hot_sector = sector in ["BIOTECH/HEALTH", "TECH", "ENERGY/MINING"]
                 
+                # Filter 1: Hot Sector
                 if not is_hot_sector:
                     continue 
                 
@@ -125,14 +130,21 @@ class FullMarketBacktester:
                 shares = float(data.get('share_class_shares_outstanding', 0) or 
                              data.get('weighted_shares_outstanding', 0) or 0)
 
+                # Filter 2: Micro-Cap
                 is_micro_cap = bool(0 < market_cap < 300_000_000)
-                is_ultra_low_float = bool(0 < shares < 20_000_000)
+                if not is_micro_cap:
+                    continue
 
-                if is_micro_cap and is_ultra_low_float:
-                    ticker_info['sector'] = sector
-                    ticker_info['market_cap'] = market_cap
-                    ticker_info['shares_outstanding'] = shares
-                    watchlist.append(ticker_info)
+                # Filter 3: Ultra-Low-Float
+                is_ultra_low_float = bool(0 < shares < 20_000_000)
+                if not is_ultra_low_float:
+                    continue
+
+                # If all 3 filters pass, add to watchlist
+                ticker_info['sector'] = sector
+                ticker_info['market_cap'] = market_cap
+                ticker_info['shares_outstanding'] = shares
+                watchlist.append(ticker_info)
             
             except Exception as e:
                 print(f"  > Error (Watchlist) {ticker}: {e}")
@@ -146,6 +158,7 @@ class FullMarketBacktester:
         """
         try:
             as_of_dt = datetime.strptime(as_of_date, '%Y-%m-%d')
+            # Extend lookback to 170 days to ensure we get 120 *trading* days
             start_170d = (as_of_dt - timedelta(days=170)).strftime('%Y-%m-%d')
             
             # Get Stock Bars
@@ -181,7 +194,7 @@ class FullMarketBacktester:
 
             ticker_return = (bars[-1]['c'] - stock_start_bar['c']) / stock_start_bar['c'] if stock_start_bar['c'] > 0 else 0
             spy_return = (spy_bars[-1]['c'] - spy_start_bar['c']) / spy_start_bar['c'] if spy_start_bar['c'] > 0 else 0
-            strongly_outperforming = bool(ticker_return > spy_return + 0.1) 
+            strongly_outperforming = bool(ticker_return > spy_return + 0.1) # 10% beat
 
             # Calculate score
             score = 0
@@ -196,7 +209,7 @@ class FullMarketBacktester:
             return score, ",".join(reasons) if reasons else "NoMomentum"
 
         except Exception as e:
-            return 0, f"MomentumErr({e})"
+            return 0, f"MomentumErr"
 
     def get_90_day_performance(self, ticker: str, as_of_date: str) -> float:
         """Gets the % gain for a ticker 90 days *after* a scan date."""
