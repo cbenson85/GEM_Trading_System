@@ -47,8 +47,9 @@ jobs:
           SCAN_END_DATE: ${{ github.event.inputs.scan_end }}
         timeout-minutes: 360 # 6-hour timeout per batch
         run: |
-          # Calculate the batch number for this job
-          export BATCH_NUMBER=$((${{ github.event.inputs.batch_start_num }} + ${{ matrix.offset }}))
+          # --- FIX: Perform shell arithmetic and export BATCH_NUMBER to env ---
+          export BATCH_NUMBER=$(( ${{ github.event.inputs.batch_start_num }} + ${{ matrix.offset }} ))
+          echo "BATCH_NUMBER=${BATCH_NUMBER}" >> $GITHUB_ENV
           echo "--- Starting Hybrid Backtest: Batch ${BATCH_NUMBER} ---"
           
           python hybrid_model_backtester.py
@@ -57,7 +58,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: batch-reports
-          path: backtest_results/batch_${{ github.event.inputs.batch_start_num + matrix.offset }}_report.json
+          # --- FIX: Use the clean env.BATCH_NUMBER variable ---
+          path: backtest_results/batch_${{ env.BATCH_NUMBER }}_report.json
 
   summarize-results:
     runs-on: ubuntu-latest
