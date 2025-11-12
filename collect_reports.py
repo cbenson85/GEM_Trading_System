@@ -6,6 +6,10 @@ from datetime import datetime
 REPORT_DIR = "backtest_results"
 FINAL_REPORT_FILE = "HYBRID_BACKTEST_FINAL_REPORT.txt"
 
+# Read from environment variables set by the workflow
+SCAN_START_DATE = os.environ.get('SCAN_START_DATE', 'N/A')
+SCAN_END_DATE = os.environ.get('SCAN_END_DATE', 'N/A')
+
 def collect_and_summarize():
     """
     Finds all 'batch_*.json' files in REPORT_DIR, combines them,
@@ -13,7 +17,6 @@ def collect_and_summarize():
     """
     all_signals = []
     total_api_calls = 0
-    total_signals = 0
     
     if not os.path.exists(REPORT_DIR):
         print(f"Error: Report directory '{REPORT_DIR}' not found.")
@@ -36,7 +39,6 @@ def collect_and_summarize():
                 data = json.load(f)
                 all_signals.extend(data.get('signals', []))
                 total_api_calls += data.get('total_api_calls', 0)
-                total_signals += data.get('total_signals_found', 0)
         except Exception as e:
             print(f"Warning: Could not parse {filename}. Error: {e}")
 
@@ -48,10 +50,11 @@ def collect_and_summarize():
             f.write("="*80 + "\n")
             f.write("GEM TRADING SYSTEM - HYBRID BACKTEST FINAL REPORT\n")
             f.write(f"Generated at: {datetime.now().isoformat()}\n")
+            f.write(f"Data Range: {SCAN_START_DATE} to {SCAN_END_DATE}\n")
             f.write("="*80 + "\n\n")
             f.write("--- SUMMARY --- \n")
             f.write("No signals were found matching the criteria in the specified date range.\n")
-            f.write(f"Total API Calls: {total_api_calls}\n")
+            f.write(f"Total API Calls: {total_api_calls:,}\n")
         return
 
     # --- 2. Create DataFrame for analysis ---
