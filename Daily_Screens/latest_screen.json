@@ -1,15 +1,26 @@
 {
-  "screen_date": "2025-11-11T21:42:40.781078",
+  "screen_date": "2025-11-12T21:42:04.349659",
   "total_screened": 20,
   "passed_filters": 9,
   "results": {
     "all_results": [
       {
+        "ticker": "ATER",
+        "score": 30,
+        "price": 0.85,
+        "volume_spike": 0.9,
+        "rsi": 16.7,
+        "patterns": [
+          "rsi_30"
+        ],
+        "recommendation": "PASS"
+      },
+      {
         "ticker": "VERU",
         "score": 30,
-        "price": 2.62,
-        "volume_spike": 0.3,
-        "rsi": 9.7,
+        "price": 2.73,
+        "volume_spike": 0.8,
+        "rsi": 18.5,
         "patterns": [
           "rsi_30"
         ],
@@ -19,8 +30,8 @@
         "ticker": "COSM",
         "score": 30,
         "price": 0.73,
-        "volume_spike": 0.2,
-        "rsi": 24.3,
+        "volume_spike": 0.1,
+        "rsi": 23.5,
         "patterns": [
           "rsi_30"
         ],
@@ -29,78 +40,78 @@
       {
         "ticker": "SNDL",
         "score": 30,
-        "price": 1.85,
-        "volume_spike": 0.5,
-        "rsi": 27.3,
+        "price": 1.79,
+        "volume_spike": 0.6,
+        "rsi": 23.5,
         "patterns": [
           "rsi_30"
         ],
         "recommendation": "PASS"
       },
       {
-        "ticker": "ATER",
-        "score": 20,
-        "price": 0.86,
-        "volume_spike": 0.3,
-        "rsi": 30.3,
-        "patterns": [
-          "rsi_35"
-        ],
-        "recommendation": "PASS"
-      },
-      {
         "ticker": "NIO",
         "score": 0,
-        "price": 6.63,
-        "volume_spike": 1.0,
-        "rsi": 44.4,
+        "price": 6.45,
+        "volume_spike": 0.9,
+        "rsi": 39.1,
         "patterns": [],
         "recommendation": "PASS"
       },
       {
         "ticker": "IMPP",
         "score": 0,
-        "price": 6.12,
-        "volume_spike": 1.3,
-        "rsi": 69.7,
+        "price": 6.14,
+        "volume_spike": 1.0,
+        "rsi": 67.8,
         "patterns": [],
         "recommendation": "PASS"
       },
       {
         "ticker": "HYMC",
         "score": 0,
-        "price": 8.1,
-        "volume_spike": 0.9,
-        "rsi": 55.0,
+        "price": 9.07,
+        "volume_spike": 1.6,
+        "rsi": 64.2,
         "patterns": [],
         "recommendation": "PASS"
       },
       {
         "ticker": "INDO",
         "score": 0,
-        "price": 2.82,
+        "price": 2.8,
         "volume_spike": 0.4,
-        "rsi": 39.5,
+        "rsi": 39.0,
         "patterns": [],
         "recommendation": "PASS"
       },
       {
         "ticker": "BBAI",
         "score": 0,
-        "price": 6.06,
-        "volume_spike": 1.1,
-        "rsi": 42.6,
+        "price": 7.17,
+        "volume_spike": 1.3,
+        "rsi": 54.2,
         "patterns": [],
         "recommendation": "PASS"
       }
     ],
     "top_30": [
       {
+        "ticker": "ATER",
+        "score": 30,
+        "price": 0.85,
+        "volume_spike": 0.9,
+        "rsi": 16.7,
+        "patterns": [
+          "rsi_30"
+        ],
+        "recommendation": "PASS"
+      },
+      {
         "ticker": "VERU",
         "score": 30,
-        "price": 2.62,
-        "volume_spike": 0.3,
-        "rsi": 9.7,
+        "price": 2.73,
+        "volume_spike": 0.8,
+        "rsi": 18.5,
         "patterns": [
           "rsi_30"
         ],
@@ -110,8 +121,8 @@
         "ticker": "COSM",
         "score": 30,
         "price": 0.73,
-        "volume_spike": 0.2,
-        "rsi": 24.3,
+        "volume_spike": 0.1,
+        "rsi": 23.5,
         "patterns": [
           "rsi_30"
         ],
@@ -120,67 +131,56 @@
       {
         "ticker": "SNDL",
         "score": 30,
-        "price": 1.85,
-        "volume_spike": 0.5,
-        "rsi": 27.3,
+        "price": 1.79,
+        "volume_spike": 0.6,
+        "rsi": 23.5,
         "patterns": [
           "rsi_30"
         ],
         "recommendation": "PASS"
       },
       {
-        "ticker": "ATER",
-        "score": 20,
-        "price": 0.86,
-        "volume_spike": 0.3,
-        "rsi": 30.3,
-        "patterns": [
-          "rsi_35"
-        ],
-        "recommendation": "PASS"
-      },
-      {
         "ticker": "NIO",
         "score": 0,
-        "price": 6.63,
-        "volume_spike": 1.0,
-        "rsi": 44.4,
+        "price": 6.45,
+        "volume_spike": 0.9,
+        "rsi": 39.1,
         "patterns": [],
         "recommendation": "PASS"
       },
       {
         "ticker": "IMPP",
         "score": 0,
-        "price": 6.12,
-        "volume_spike": 1.3,
-        "rsi": 69.7,
+        "price": 6.14,
+        "volume_spike": 1.0,
+        "rsi": 67.8,
         "patterns": [],
         "recommendation": "PASS"
       },
       {
         "ticker": "HYMC",
         "score": 0,
-        "price": 8.1,
-        "volume_spike": 0.9,
-        "rsi": 55.0,
+        "price": 9.07,
+        "volume_spike": 1.6,
+        "rsi": 64.2,
         "patterns": [],
         "recommendation": "PASS"
       },
       {
         "ticker": "INDO",
         "score": 0,
-        "price": 2.82,
+        "price": 2.8,
         "volume_spike": 0.4,
-        "rsi": 39.5,
+        "rsi": 39.0,
         "patterns": [],
         "recommendation": "PASS"
       },
       {
         "ticker": "BBAI",
         "score": 0,
-        "price": 6.06,
-        "volume_spike": 1.1,
-        "rsi": 42.6,
+        "price": 7.17,
+        "volume_spike": 1.3,
+        "rsi": 54.2,
         "patterns": [],
         "recommendation": "PASS"
       }
