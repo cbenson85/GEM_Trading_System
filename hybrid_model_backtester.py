@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """
-GEM TRADING SYSTEM - FULL MARKET BACKTESTER (v3 - Unlimited API)
+GEM TRADING SYSTEM - FULL MARKET BACKTESTER (v2 - Batch Mode)
 
-This script is built for speed, assuming no API rate limits.
-It scans the *entire* market over a specified date range in a single run,
+This script is designed to be run in parallel by a GitHub Actions workflow.
+It scans a *slice* of the stock market over a specified date range,
 simulating a daily screener.
+
+It reads its instructions (batch number, batch size, dates) from
+environment variables set by the workflow.
 
 MODEL (Tier 2 "Golden Fingerprint"):
 - PASS Threshold: 80 points
@@ -36,8 +39,9 @@ if not POLYGON_API_KEY:
 # Read from workflow environment
 SCAN_START_DATE = os.environ.get('SCAN_START_DATE', '2022-01-01')
 SCAN_END_DATE = os.environ.get('SCAN_END_DATE', '2023-12-31')
+BATCH_NUMBER = int(os.environ.get('BATCH_NUMBER', 0))
+BATCH_SIZE = int(os.environ.get('BATCH_SIZE', 500))
 PASS_THRESHOLD = 80
-FINAL_REPORT_FILE = "HYBRID_BACKTEST_FINAL_REPORT.txt"
 
 class FullMarketBacktester:
     def __init__(self, api_key: str):
@@ -50,7 +54,7 @@ class FullMarketBacktester:
     def log_call(self, service="polygon"):
         # We still count calls for reference, but we do not sleep.
         self.api_calls += 1
-        # time.sleep(0.2) # REMOVED for unlimited API tier
+        # No time.sleep() because of unlimited API tier
 
     def map_sic_to_sector(self, sic_description: str) -> str:
         if not sic_description: return "UNKNOWN"
@@ -63,11 +67,12 @@ class FullMarketBacktester:
         if 'retail' in sic: return "RETAIL"
         return "OTHER"
 
-    def get_all_tickers(self) -> List[Dict]:
-        """Fetches all active tickers from Polygon."""
-        print("Fetching all active tickers from Polygon...")
+    def get_tickers_batch(self) -> List[Dict]:
+        """Fetches all tickers and slices them based on batch number."""
+        print(f"Fetching all active tickers for Batch #{BATCH_NUMBER}...")
         all_tickers = []
         try:
+            # Iterate over the paginated generator to get *all* tickers
             for t in self.polygon_client.list_tickers(market="stocks", active=True, limit=1000):
                 all_tickers.append({
                     'ticker': t.ticker,
@@ -77,8 +82,18 @@ class FullMarketBacktester:
             print(f"  > Error fetching full ticker list: {e}")
             return []
         
-        print(f"Processing {len(all_tickers)} total tickers.")
-        return all_tickers
+        # Sort tickers alphabetically to ensure consistent batches
+        all_tickers.sort(key=lambda x: x['ticker'])
+        
+        # Calculate the slice for this batch
+        start_index = BATCH_NUMBER * BATCH_SIZE
+        end_index = (BATCH_NUMBER + 1) * BATCH_SIZE
+        
+        my_batch = all_tickers[start_index:end_index]
+        
+        print(f"Total tickers found: {len(all_tickers)}")
+        print(f"Processing Batch #{BATCH_NUMBER}: Tickers {start_index} to {end_index} ({len(my_batch)} stocks)")
+        return my_batch
 
     def get_daily_watchlist(self, tickers: List[Dict], as_of_date: str) -> List[Dict]:
         """
@@ -227,7 +242,7 @@ class FullMarketBacktester:
             day_str = day.strftime('%Y-%m-%d')
             print(f"\n--- Scanning Date: {day_str} ({i+1}/{len(date_range)}) ---")
             
-            # Phase 1: Filter 8000+ tickers down to a small watchlist
+            # Phase 1: Filter tickers down to a small watchlist
             watchlist = self.get_daily_watchlist(all_tickers, day_str)
             print(f"  > [Setup] Filtered {len(all_tickers)} tickers down to {len(watchlist)} on watchlist.")
             
@@ -268,86 +283,44 @@ class FullMarketBacktester:
 def main():
     start_time = time.time()
     
-    # --- 1. Get All Tickers ---
+    # --- 1. Get Ticker Batch ---
     backtester = FullMarketBacktester(POLYGON_API_KEY)
-    all_tickers = backtester.get_all_tickers()
+    my_tickers = backtester.get_tickers_batch()
     
-    if not all_tickers:
-        print("No tickers found. Exiting.")
-        return
+    if not my_tickers:
+        print("No tickers found for this batch. Exiting.")
+        # Create an empty report so the workflow doesn't fail
+        scan_results = []
+    else:
+        # --- 2. Run Scan ---
+        scan_results = backtester.run_daily_scan(my_tickers)
 
-    # --- 2. Run Scan ---
-    scan_results = backtester.run_daily_scan(all_tickers)
-
-    # --- 3. Create Final Report ---
-    if not scan_results:
-        print("No signals found in any batch. Report will be minimal.")
-        with open(FINAL_REPORT_FILE, 'w') as f:
-            f.write("="*80 + "\n")
-            f.write("GEM TRADING SYSTEM - HYBRID BACKTEST FINAL REPORT\n")
-            f.write(f"Generated at: {datetime.now().isoformat()}\n")
-            f.write(f"Data Range: {SCAN_START_DATE} to {SCAN_END_DATE}\n")
-            f.write("="*80 + "\n\n")
-            f.write("--- SUMMARY --- \n")
-            f.write("No signals were found matching the criteria in the specified date range.\n")
-            f.write(f"Total API Calls: {backtester.api_calls}\n")
-        return
-
-    # --- 4. Create DataFrame for analysis ---
-    df = pd.DataFrame(scan_results)
-    df['gain_pct_90d'] = pd.to_numeric(df['gain_pct_90d'], errors='coerce').fillna(0)
-
-    # --- 5. Calculate Key Metrics ---
-    avg_gain = df['gain_pct_90d'].mean()
-    median_gain = df['gain_pct_90d'].median()
+    # --- 3. Save Report ---
+    output_dir = "backtest_results"
+    os.makedirs(output_dir, exist_ok=True)
+    report_filename = os.path.join(output_dir, f"batch_{BATCH_NUMBER}_report.json")
     
-    winners = df[df['gain_pct_90d'] > 25] # > 25% gain
-    losers = df[df['gain_pct_90d'] <= 25]
+    final_report = {
+        'batch_number': BATCH_NUMBER,
+        'batch_size': BATCH_SIZE,
+        'scan_start_date': SCAN_START_DATE,
+        'scan_end_date': SCAN_END_DATE,
+        'pass_threshold': PASS_THRESHOLD,
+        'total_api_calls': backtester.api_calls,
+        'total_signals_found': len(scan_results),
+        'signals': scan_results
+    }
     
-    win_rate = (len(winners) / len(df)) * 100
-    
-    avg_win_gain = winners['gain_pct_90d'].mean() if not winners.empty else 0
-    avg_loss_pct = losers['gain_pct_90d'].mean() if not losers.empty else 0
-    
-    big_winners = df[df['gain_pct_90d'] > 500]
-    mega_winners = df[df['gain_pct_90d'] > 1000]
-
-    # --- 6. Write the Final Report ---
-    with open(FINAL_REPORT_FILE, 'w') as f:
-        f.write("="*80 + "\n")
-        f.write("GEM TRADING SYSTEM - HYBRID BACKTEST FINAL REPORT\n")
-        f.write(f"Generated at: {datetime.now().isoformat()}\n")
-        f.write(f"Data Range: {SCAN_START_DATE} to {SCAN_END_DATE}\n")
-        f.write("Model: Tier 2 (Setup + Momentum) | Pass Threshold: 80 points\n")
-        f.write("="*80 + "\n\n")
-        
-        f.write("--- EXECUTIVE SUMMARY --- \n")
-        f.write(f"  Total Signals Found:   {len(df)}\n")
-        f.write(f"  Win Rate (> 25% Gain): {win_rate:.2f}%\n")
-        f.write(f"  Average Gain (All):    {avg_gain:.2f}%\n")
-        f.write(f"  Median Gain (All):     {median_gain:.2f}%\n")
-        f.write(f"  Average Winner Gain:   {avg_win_gain:.2f}%\n")
-        f.write(f"  Average Loser Pct:     {avg_loss_pct:.2f}%\n")
-        f.write(f"  Big Winners (>500%):   {len(big_winners)}\n")
-        f.write(f"  Mega Winners (>1000%): {len(mega_winners)}\n")
-        f.write(f"  Total API Calls:       {backtester.api_calls:,}\n")
-        f.write("\n" + "="*80 + "\n")
-
-        f.write("\n--- ALL SIGNALS LOG (Sorted by Gain) --- \n")
-        f.write("Scan Date  | Ticker | Score | 90-Day Gain | Reason\n")
-        f.write("--------------------------------------------------------------------------\n")
-        
-        df_sorted = df.sort_values(by='gain_pct_90d', ascending=False)
-        for _, row in df_sorted.iterrows():
-            f.write(f"{row['scan_date']} | {row['ticker']:<6} | {row['gem_score']:<5} | {row['gain_pct_90d']:>11.2f}% | {row['reason']}\n")
+    with open(report_filename, 'w') as f:
+        json.dump(final_report, f, indent=2)
 
     end_time = time.time()
     print("\n" + "="*60)
-    print(f"FULL MARKET BACKTEST COMPLETE")
+    print(f"BATCH {BATCH_NUMBER} COMPLETE")
     print(f"  Total time: {((end_time - start_time) / 60):.2f} minutes")
     print(f"  Total API Calls: {backtester.api_calls}")
     print(f"  Signals Found: {len(scan_results)}")
-    print(f"  Report saved to: {FINAL_REPORT_FILE}")
+    print(f"  Report saved to: {report_filename}")
     print("="*60)
 
 if __name__ == "__main__":
