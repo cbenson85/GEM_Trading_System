@@ -12,7 +12,7 @@ on:
         required: true
         default: '2023-12-31'
       batch_start_num:
-        description: 'Starting batch number (e.g., 0, 20, 40, 60...)'
+        description: 'Starting batch number (e.g., 0, 40, 80...)'
         required: true
         default: '0'
 
@@ -20,11 +20,12 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 20 # Run 20 jobs at once
+      # --- FIX: Doubling the parallel jobs ---
+      max-parallel: 40
       fail-fast: false
       matrix:
-        # This creates 20 parallel jobs with offsets 0-19
-        offset: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+        # --- FIX: Creating 40 jobs (0-39) instead of 20 ---
+        offset: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39]
 
     steps:
       - name: 1. Check out repository
@@ -42,23 +43,25 @@ jobs:
       - name: 4. Run Backtest Batch
         env:
           POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
-          BATCH_SIZE: 500 # Scan 500 tickers per job
+          # --- FIX: Halving the batch size ---
+          BATCH_SIZE: 250 # Scan 250 tickers per job
           SCAN_START_DATE: ${{ github.event.inputs.scan_start }}
           SCAN_END_DATE: ${{ github.event.inputs.scan_end }}
-        timeout-minutes: 350 # 5h 50m timeout (just under 6h limit)
+        timeout-minutes: 350 # 5h 50m timeout (still a safe limit)
         run: |
-          # --- FIX: Perform shell arithmetic and export BATCH_NUMBER to env ---
+          # Perform shell arithmetic and export BATCH_NUMBER to env
           export BATCH_NUMBER=$(( ${{ github.event.inputs.batch_start_num }} + ${{ matrix.offset }} ))
           echo "BATCH_NUMBER=${BATCH_NUMBER}" >> $GITHUB_ENV
           echo "--- Starting Hybrid Backtest: Batch ${BATCH_NUMBER} ---"
           
-          python hybrid_model_backtester.py
+          # Use -u for unbuffered output to see logs in real-time
+          python -u hybrid_model_backtester.py
 
       - name: 5. Upload Batch Report
         uses: actions/upload-artifact@v4
         with:
           name: batch-reports
-          # --- FIX: Use the clean env.BATCH_NUMBER variable ---
+          # Use the clean env.BATCH_NUMBER variable
           path: backtest_results/batch_${{ env.BATCH_NUMBER }}_report.json
 
   summarize-results:
@@ -87,6 +90,7 @@ jobs:
           path: backtest_results/
 
       - name: 5. Run Summary Collector
+        id: summary
         run: |
           echo "All batches complete. Summarizing results..."
           python collect_reports.py
