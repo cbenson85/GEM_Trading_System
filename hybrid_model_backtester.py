@@ -46,6 +46,7 @@ PASS_THRESHOLD = 80
 class FullMarketBacktester:
     def __init__(self, api_key: str):
         self.api_key = api_key
+        self.base_url = "https://api.polygon.io" # Store base_url
         self.polygon_client = RESTClient(api_key)
         self.api_calls = 0
         self.scan_start_dt = datetime.strptime(SCAN_START_DATE, '%Y-%m-%d')
@@ -75,6 +76,10 @@ class FullMarketBacktester:
         try:
             # Iterate over the paginated generator to get *all* tickers
             for t in self.polygon_client.list_tickers(market="stocks", active=True, limit=1000):
+                self.log_call()
+                # --- LOGIC FIX: Do NOT filter by SIC code here ---
+                # The SIC code in list_tickers is unreliable.
+                # We will only filter on the full profile call.
                 all_tickers.append({
                     'ticker': t.ticker,
                     'name': t.name
@@ -92,7 +97,7 @@ class FullMarketBacktester:
         
         my_batch = all_tickers[start_index:end_index]
         
-        print(f"Total tickers found: {len(all_tickers)}")
+        print(f"Total tickers found (unfiltered): {len(all_tickers)}")
         print(f"Processing Batch #{BATCH_NUMBER}: Tickers {start_index} to {end_index} ({len(my_batch)} stocks)")
         return my_batch
 
@@ -100,16 +105,16 @@ class FullMarketBacktester:
         """
         Runs the 'Setup' filter (Phase 1) on a list of tickers.
         Returns a smaller 'Watchlist' of stocks that pass.
+        --- (LOGIC V2.1: Fixed SIC code filtering) ---
         """
         watchlist = []
+        # --- LOGIC FIX: Iterate over the BATCH tickers, not the *full* ticker list ---
         for ticker_info in tickers:
             ticker = ticker_info['ticker']
 
             try:
-                # --- THIS IS THE CRITICAL FIX ---
-                # We must get the *full profile* for each stock to get the
-                # reliable SIC code. The list_tickers endpoint is unreliable.
-                url = f"https://api.polygon.io/v3/reference/tickers/{ticker}?date={as_of_date}&apiKey={self.api_key}"
+                # Get the *full profile* for each stock to get the reliable SIC code.
+                url = f"{self.base_url}/v3/reference/tickers/{ticker}?date={as_of_date}&apiKey={self.api_key}"
                 response = requests.get(url)
                 self.log_call()
                 
@@ -118,6 +123,7 @@ class FullMarketBacktester:
                     
                 data = response.json().get('results', {})
                 
+                # --- LOGIC FIX: Check sector, MC, and float here ---
                 sic_desc = data.get('sic_description', '')
                 sector = self.map_sic_to_sector(sic_desc)
                 is_hot_sector = sector in ["BIOTECH/HEALTH", "TECH", "ENERGY/MINING"]
@@ -147,7 +153,7 @@ class FullMarketBacktester:
                 watchlist.append(ticker_info)
             
             except Exception as e:
-                print(f"  > Error (Watchlist) {ticker}: {e}")
+                # print(f"  > Error (Watchlist) {ticker}: {e}") # Too noisy
                 continue
                 
         return watchlist
@@ -162,7 +168,7 @@ class FullMarketBacktester:
             start_170d = (as_of_dt - timedelta(days=170)).strftime('%Y-%m-%d')
             
             # Get Stock Bars
-            url = f"https://api.polygon.io/v2/aggs/ticker/{ticker}/range/1/day/{start_170d}/{as_of_date}?apiKey={self.api_key}&adjusted=true&sort=asc&limit=120"
+            url = f"{self.base_url}/v2/aggs/ticker/{ticker}/range/1/day/{start_170d}/{as_of_date}?apiKey={self.api_key}&adjusted=true&sort=asc&limit=120"
             response = requests.get(url)
             self.log_call()
             
@@ -176,7 +182,7 @@ class FullMarketBacktester:
             is_golden_cross = price_ma20 > price_ma50
 
             # Get SPY Bars
-            spy_url = f"https://api.polygon.io/v2/aggs/ticker/SPY/range/1/day/{start_170d}/{as_of_date}?apiKey={self.api_key}&adjusted=true&sort=asc&limit=120"
+            spy_url = f"{self.base_url}/v2/aggs/ticker/SPY/range/1/day/{start_170d}/{as_of_date}?apiKey={self.api_key}&adjusted=true&sort=asc&limit=120"
             spy_response = requests.get(spy_url)
             self.log_call()
             
@@ -220,7 +226,7 @@ class FullMarketBacktester:
             start_date_str = start_dt.strftime('%Y-%m-%d')
             end_date_str = end_dt.strftime('%Y-%m-%d')
 
-            url = f"https://api.polygon.io/v2/aggs/ticker/{ticker}/range/1/day/{start_date_str}/{end_date_str}?apiKey={self.api_key}&adjusted=true&sort=asc&limit=90"
+            url = f"{self.base_url}/v2/aggs/ticker/{ticker}/range/1/day/{start_date_str}/{end_date_str}?apiKey={self.api_key}&adjusted=true&sort=asc&limit=90"
             response = requests.get(url)
             self.log_call()
 
@@ -256,6 +262,7 @@ class FullMarketBacktester:
             print(f"\n--- Scanning Date: {day_str} ({i+1}/{len(date_range)}) ---")
             
             # Phase 1: Filter tickers down to a small watchlist
+            # This is the corrected logic:
             watchlist = self.get_daily_watchlist(all_tickers, day_str)
             print(f"  > [Setup] Filtered {len(all_tickers)} tickers down to {len(watchlist)} on watchlist.")
             
@@ -272,6 +279,8 @@ class FullMarketBacktester:
                 current_watchlist[ticker] = gem_score
                 
                 if gem_score >= PASS_THRESHOLD:
+                    # This is the "Trigger":
+                    # Only log if it's a *new* signal (was below threshold yesterday)
                     if last_watchlist.get(ticker, 0) < PASS_THRESHOLD:
                         
                         print(f"  ✅✅✅ NEW 'BUY' SIGNAL: {ticker} (Score: {gem_score}) ✅✅✅")
