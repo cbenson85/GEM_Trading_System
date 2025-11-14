@@ -1,0 +1,53 @@
+--- MASTER BACKTEST REPORT (2022-2023) ---
+
+Total 'BUY' Signals Generated: 3600
+
+--- Overall Performance (90-Day Hold) ---
+Win Rate (vs. SPY): 24.56%
+Win Rate (vs. 0%): 25.14%
+False Positive Rate (<= 0%): 74.86%
+---------------------------------------
+Average Gain: -16.80%
+Median Gain: -22.12%
+Average SPY Gain: 2.14%
+---------------------------------------
+Supernova Hits (500%+): 1
+Total Tickers Found: 295
+
+--- Top 10 Winners ---
+  - 2022-08-10 | BIVI     | +552.68%
+  - 2022-05-04 | TCRT     | +359.79%
+  - 2023-04-20 | HOLO     | +333.61%
+  - 2022-08-02 | BIVI     | +327.23%
+  - 2023-09-22 | CRBP     | +308.68%
+  - 2023-09-28 | CRBP     | +260.66%
+  - 2022-09-29 | IPDN     | +258.03%
+  - 2022-09-27 | IPDN     | +257.14%
+  - 2023-11-03 | MRSN     | +254.93%
+  - 2023-05-04 | MRKR     | +251.97%
+
+--- Top 10 Losers (False Positives) ---
+  - 2023-09-25 | RNAZ     | -99.38%
+  - 2023-06-15 | AVTX     | -97.17%
+  - 2023-05-01 | AVTX     | -96.98%
+  - 2023-04-17 | AVTX     | -96.80%
+  - 2023-10-17 | ACON     | -96.15%
+  - 2023-04-11 | AVTX     | -96.13%
+  - 2023-06-07 | AVTX     | -95.89%
+  - 2023-10-25 | ACON     | -95.10%
+  - 2022-08-31 | NUWE     | -94.86%
+  - 2023-05-26 | AVTX     | -94.76%
+
+--- Performance by Sector ---
+  Sector: TECH
+    Signals: 1281
+    Win Rate: 28.73%
+    Avg Gain: -10.14%
+  Sector: ENERGY/MINING
+    Signals: 252
+    Win Rate: 36.11%
+    Avg Gain: -6.30%
+  Sector: BIOTECH/HEALTH
+    Signals: 2067
+    Win Rate: 20.56%
+    Avg Gain: -22.21%
