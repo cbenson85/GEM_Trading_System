@@ -111,8 +111,8 @@ jobs:
           # Add all 4 new/updated report files
           git add FINAL_backtest_report.txt
           git add FINAL_buy_signals.json
-          FINAL_ENRICHED_report.txt
-          FINAL_ENRICHED_signals.json
+          git add FINAL_ENRICHED_report.txt  # <-- FIX: Added 'git add'
+          git add FINAL_ENRICHED_signals.json # <-- FIX: Added 'git add'
           
           git status
           
