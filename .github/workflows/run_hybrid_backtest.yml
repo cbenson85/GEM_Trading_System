@@ -45,17 +45,19 @@ jobs:
       - name: 3. Install dependencies
         run: pip install -r requirements.txt
 
-      - name: 4. Run Optimized Backtest Batch
+      - name: 4. Calculate batch range and run backtest
         env:
           POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
-          BATCH_START: ${{ matrix.batch_num * 250 }}
-          BATCH_END: ${{ (matrix.batch_num + 1) * 250 }}
-        run: python hybrid_model_backtester.py
+        run: |
+          export BATCH_START=$((250 * ${{ matrix.batch_num }}))
+          export BATCH_END=$((250 * (${{ matrix.batch_num }} + 1)))
+          echo "Running batch ${{ matrix.batch_num }}: $BATCH_START to $BATCH_END"
+          python hybrid_model_backtester.py
 
       - name: 5. Upload Batch Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: backtest-artifacts-${{ matrix.batch_num * 250 }}
+          name: backtest-artifacts-${{ matrix.batch_num }}
           path: |
             backtest_report_*.txt
             buy_signals_*.json
