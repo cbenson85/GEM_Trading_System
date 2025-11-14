@@ -60,7 +60,7 @@ def get_signal_context(ticker: str, signal_date_str: str) -> dict:
     signal_date = pd.to_datetime(signal_date_str)
     # Need 20 days prior for BB/Vol, plus the signal day
     start_date = (signal_date - pd.DateOffset(days=45)).strftime('%Y-%m-%d') 
-    end_date = signal_date_str # Get data up to and including the signal day
+    end_date = signal_date.strftime('%Y-%m-%d') # <-- FIX: Force YYYY-MM-DD format
 
     url = f"{POLYGON_BASE_URL}/v2/aggs/ticker/{ticker}/range/1/day/{start_date}/{end_date}"
     params = {"adjusted": "true", "sort": "asc", "limit": 500, "apiKey": POLYGON_API_KEY}
@@ -118,7 +118,7 @@ def get_sec_filings(ticker: str, signal_date_str: str) -> bool:
     """Checks for 8-K, 13D/G filings 3 days prior to signal."""
     signal_date = pd.to_datetime(signal_date_str)
     start_date = (signal_date - pd.DateOffset(days=5)).strftime('%Y-%m-%d')
-    end_date = signal_date_str
+    end_date = signal_date.strftime('%Y-%m-%d') # <-- FIX: Force YYYY-MM-DD format
     
     url = f"{POLYGON_BASE_URL}/v2/reference/filings"
     params = {
