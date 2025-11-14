@@ -1,0 +1,34 @@
+--- POST-PROCESSOR ENRICHMENT REPORT (v3) ---
+
+Testing new filters based on 0.22 (BB Squeeze) correlation.
+Timestamp: 2025-11-14T20:15:34.226117
+
+--- Baseline (All 3600 Signals) ---
+  Total Signals: 3600
+  Win Rate (vs 0%): 25.14%
+  Average Gain: -16.80%
+  Median Gain: -22.12%
+  Supernovas (500%+): 1
+
+--- FILTER: BB Squeeze (< 0.1) ---
+  Total Signals: 0 (0 with valid 90-day data)
+  No signals matched this filter with valid data.
+
+--- FILTER: Volume Spike (>= 10.0x) ---
+  Total Signals: 243
+  Win Rate (vs 0%): 12.76%
+  Average Gain: -36.54%
+  Median Gain: -43.04%
+  Supernovas (500%+): 0
+
+--- FILTER: Catalyst (8-K or 13D Filing) ---
+  Total Signals: 0 (0 with valid 90-day data)
+  No signals matched this filter with valid data.
+
+--- TIER 3 COMBO: BB Squeeze + Catalyst ---
+  Total Signals: 0 (0 with valid 90-day data)
+  No signals matched this filter with valid data.
+
+--- TIER 3 COMBO 2: BB Squeeze + Volume Spike ---
+  Total Signals: 0 (0 with valid 90-day data)
+  No signals matched this filter with valid data.
