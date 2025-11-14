@@ -22,7 +22,6 @@ jobs:
       - name: 4. Run unit tests (placeholder)
         run: |
           echo "Running unit tests..."
-          # Add test commands here, e.g., pytest
           echo "Tests passed."
 
   run-parallel-backtest:
@@ -31,9 +30,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # 40 jobs, 250 tickers each = 10,000 tickers
-        batch_start: [0, 250, 500, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3250, 3500, 3750, 4000, 4250, 4500, 4750, 5000, 5250, 5500, 5750, 6000, 6250, 6500, 6750, 7000, 7250, 7500, 7750, 8000, 8250, 8500, 8750, 9000, 9250, 9500, 9750]
-        batch_end: [250, 500, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3250, 3500, 3750, 4000, 4250, 4500, 4750, 5000, 5250, 5500, 5750, 6000, 6250, 6500, 6750, 7000, 7250, 7500, 7750, 8000, 8250, 8500, 8750, 9000, 9250, 9500, 9750, 10000]
+        batch_num: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39]
 
     steps:
       - name: 1. Check out repository code
@@ -51,14 +48,14 @@ jobs:
       - name: 4. Run Optimized Backtest Batch
         env:
           POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
-          BATCH_START: ${{ matrix.batch_start }}
-          BATCH_END: ${{ matrix.batch_end }}
+          BATCH_START: ${{ matrix.batch_num * 250 }}
+          BATCH_END: ${{ (matrix.batch_num + 1) * 250 }}
         run: python hybrid_model_backtester.py
 
       - name: 5. Upload Batch Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: backtest-artifacts-${{ matrix.batch_start }}
+          name: backtest-artifacts-${{ matrix.batch_num * 250 }}
           path: |
             backtest_report_*.txt
             buy_signals_*.json
@@ -67,7 +64,7 @@ jobs:
   collect-reports:
     needs: run-parallel-backtest
     runs-on: ubuntu-latest
-    if: success() # Only run if all parallel jobs succeed
+    if: success()
     steps:
       - name: 1. Check out repository code
         uses: actions/checkout@v4
@@ -85,8 +82,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: all_artifacts
-          pattern: backtest-artifacts-* # Download all artifacts starting with this prefix
-          merge-multiple: true # Merges all downloaded artifacts into the 'all_artifacts' directory
+          pattern: backtest-artifacts-*
+          merge-multiple: true
 
       - name: 5. Run Collection Script
         run: python collect_reports.py
