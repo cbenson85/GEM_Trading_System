@@ -1,107 +1,128 @@
-name: Enrich Stock Data
+name: 4. Run Hybrid Model Full Backtest
+
 on:
   workflow_dispatch:
-    inputs:
-      reason:
-        description: 'Reason for enrichment'
-        required: false
-        default: 'Comprehensive data enrichment for all 200 stocks'
 
 jobs:
-  enrich-data:
+  build-and-test:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
-    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: 1. Check out repository code
+        uses: actions/checkout@v4
+      - name: 2. Set up Python 3.10
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
-      
-      - name: Install dependencies
+          python-version: '3.10'
+          cache: 'pip'
+      - name: 3. Install dependencies
+        run: pip install -r requirements.txt
+      - name: 4. Run unit tests (placeholder)
         run: |
-          python -m pip install --upgrade pip
-          pip install requests
-      
-      - name: Pre-Enrichment Status
-        run: |
-          echo "📊 PRE-ENRICHMENT STATUS"
-          echo "=================================="
-          echo ""
-          python -c "
-          import json
-          data = json.load(open('Verified_Backtest_Data/explosive_stocks_CLEAN.json'))
-          stocks = data.get('stocks', data) if isinstance(data, dict) else data
-          enriched = sum(1 for s in stocks if 'entry_date' in s and 'entry_price' in s)
-          print(f'Total stocks: {len(stocks)}')
-          print(f'Already enriched: {enriched}')
-          print(f'Need enrichment: {len(stocks) - enriched}')
-          "
-          echo ""
-          echo "⚡ Running comprehensive enrichment..."
-          echo "⏱️  Estimated time: 20-30 minutes"
-          echo ""
-      
-      - name: Run Data Enrichment
-        run: |
-          python enrich_stock_data.py
+          echo "Running unit tests..."
+          echo "Tests passed."
+
+  run-parallel-backtest:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        batch_num: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39]
+    steps:
+      - name: 1. Check out repository code
+        uses: actions/checkout@v4
+      - name: 2. Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+      - name: 3. Install dependencies
+        run: pip install -r requirements.txt
+      - name: 4. Run Optimized Backtest Batch
         env:
-          PYTHONUNBUFFERED: 1
-      
-      - name: Post-Enrichment Status
+          POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+          MATRIX_BATCH_NUM: ${{ matrix.batch_num }}
         run: |
-          echo ""
-          echo "=================================="
-          echo "📊 POST-ENRICHMENT STATUS"
-          echo "=================================="
-          echo ""
-          python -c "
-          import json
-          data = json.load(open('Verified_Backtest_Data/explosive_stocks_CLEAN.json'))
-          stocks = data.get('stocks', data) if isinstance(data, dict) else data
-          enriched = sum(1 for s in stocks if 'entry_date' in s and 'entry_price' in s)
-          print(f'Total stocks: {len(stocks)}')
-          print(f'Enriched stocks: {enriched}')
-          print(f'Enrichment rate: {enriched/len(stocks)*100:.1f}%')
-          "
-          echo ""
-          echo "📈 Enrichment Log:"
-          cat Verified_Backtest_Data/enrichment_log.json | python -m json.tool
-          echo ""
-      
-      - name: Commit and Push Changes
+          export BATCH_START=$(( ${MATRIX_BATCH_NUM} * 250 ))
+          export BATCH_END=$(( (${MATRIX_BATCH_NUM} + 1) * 250 ))
+          echo "BATCH_START=${BATCH_START}" >> $GITHUB_ENV
+          echo "BATCH_END=${BATCH_END}" >> $GITHUB_ENV
+          echo "--- Running Batch ${MATRIX_BATCH_NUM}: Tickers ${BATCH_START} to ${BATCH_END} ---"
+          python hybrid_model_backtester.py
+      - name: 5. Upload Batch Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: backtest-artifacts-${{ env.BATCH_START }}
+          path: |
+            backtest_report_*.txt
+            buy_signals_*.json
+          retention-days: 7
+
+  collect-and-enrich:
+    # This job name is more accurate now
+    needs: run-parallel-backtest # <-- THIS IS THE CRITICAL FIX
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - name: 1. Check out repository code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Get full history for commit/push
+
+      - name: 2. Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+      - name: 3. Install dependencies
+        run: pip install -r requirements.txt
+      - name: 4. Download all batch artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: all_artifacts
+          pattern: backtest-artifacts-*
+          merge-multiple: true
+      - name: 5. Run Collection Script
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add Verified_Backtest_Data/explosive_stocks_CLEAN.json
-          git add Verified_Backtest_Data/enrichment_log.json
-          git diff --staged --quiet || git commit -m "📊 Data Enrichment: Added complete data for all stocks
+          echo "--- Collection Step ---"
+          python collect_reports.py
+      - name: 6. Run Enrichment Script (Post-Processor)
+        env:
+          POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+        run: |
+          echo "--- Enrichment Step ---"
+          python post_processor.py
+      - name: 7. Upload Final Master Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: FINAL-Backtest-Report
+          path: |
+            FINAL_backtest_report.txt
+            FINAL_buy_signals.json
+            FINAL_ENRICHED_report.txt
+            FINAL_ENRICHED_signals.json
+          retention-days: 30
+      
+      # --- NEW STEP TO COMMIT REPORTS ---
+      - name: 8. Commit Final Reports
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
-          - Enriched stocks with entry dates, prices, peak data
-          - Used Polygon Developer API for data collection
-          - Created enrichment_log.json for tracking
-          - Prepared for sustainability filtering
+          # Add all 4 new/updated report files
+          git add FINAL_backtest_report.txt
+          git add FINAL_buy_signals.json
+          git add FINAL_ENRICHED_report.txt  # <-- FIX: Added 'git add'
+          git add FINAL_ENRICHED_signals.json # <-- FIX: Added 'git add'
           
-          Reason: ${{ github.event.inputs.reason }}"
+          git status
+          
+          # Check if there are any changes to commit
+          if git diff --cached --quiet; then
+            echo "No changes to commit. Reports are up-to-date."
+            exit 0
+          fi
+          
+          echo "Committing new reports..."
+          git commit -m "Automated Workflow: Update Final Backtest Reports - $(date)"
           git push
-      
-      - name: Final Summary
-        if: always()
-        run: |
-          echo ""
-          echo "=================================="
-          echo "✅ ENRICHMENT COMPLETE"
-          echo "=================================="
-          echo ""
-          echo "Files Updated:"
-          echo "  - explosive_stocks_CLEAN.json (enriched with complete data)"
-          echo "  - enrichment_log.json (success/failure tracking)"
-          echo ""
-          echo "Next Steps:"
-          echo "  1. Review enrichment_log.json for any failures"
-          echo "  2. Run sustainability filter with enriched data"
-          echo "  3. Filter will now work properly with complete data"
-          echo ""
