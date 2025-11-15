@@ -1,408 +1,267 @@
 #!/usr/bin/env python3
 """
-GEM Trading System - Comprehensive Data Enrichment Scanner
-Version: 1.0
-Created: 2025-11-02
+GEM TRADING SYSTEM - POST-PROCESSOR & ENRICHER (v4)
 
-PURPOSE:
-Enrich all 200 stocks in CLEAN.json with complete data from Polygon API.
-This prepares stocks for proper sustainability filtering.
-
-WHAT IT DOES:
-1. Reads all stocks from CLEAN.json (ticker, year, gain%, days_to_peak)
-2. For each stock, finds:
-   - Entry date (when explosive move started)
-   - Entry price
-   - Peak date (highest price in 180-day window)
-   - Peak price
-   - Days to peak
-   - Test price (30 days after peak)
-3. Enriches CLEAN.json with this data
-4. Logs any stocks where data can't be found
-
-DATA SOURCES:
-- Primary: Polygon API (Developer tier - unlimited)
-- Backup: Yahoo Finance (if Polygon fails)
-
-OUTPUT:
-- explosive_stocks_CLEAN.json (ENRICHED with full data)
-- enrichment_log.json (success/failure tracking)
+Fixes bugs from v3 and implements smarter analysis.
+1.  FIXED: `get_sec_filings` now uses correct `form_type` param.
+2.  CHANGED: Now *measures* `bb_squeeze_value` instead of filtering.
+3.  ADDED: Report now analyzes performance by squeeze *quantiles*.
 """
 
+import os
 import json
 import requests
+import pandas as pd
 import time
 from datetime import datetime, timedelta
-from pathlib import Path
+from typing import Optional, List, Dict
+import numpy as np
 
-# Polygon API Configuration
-POLYGON_API_KEY = "pvv6DNmKAoxojCc0B5HOaji6I_k1egv0"
-POLYGON_BASE_URL = "https://api.polygon.io/v2"
+# === CONFIGURATION ===
+POLYGON_API_KEY = os.getenv('POLYGON_API_KEY')
+if not POLYGON_API_KEY:
+    raise ValueError("POLYGON_API_KEY environment variable not set.")
 
-# File paths
-DATA_DIR = "Verified_Backtest_Data"
-INPUT_FILE = f"{DATA_DIR}/explosive_stocks_CLEAN.json"
-OUTPUT_FILE = f"{DATA_DIR}/explosive_stocks_CLEAN.json"
-LOG_FILE = f"{DATA_DIR}/enrichment_log.json"
+POLYGON_BASE_URL = "https://api.polygon.io"
+INPUT_FILE = "FINAL_buy_signals.json"
+OUTPUT_FILE = "FINAL_ENRICHED_signals.json"
+OUTPUT_REPORT = "FINAL_ENRICHED_report.txt"
 
-# Progress tracking
-enrichment_log = {
-    'started': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-    'total_stocks': 0,
-    'enriched': 0,
-    'already_enriched': 0,
-    'failed': 0,
-    'skipped': 0,
-    'failures': []
-}
+# Filter thresholds to test
+VOLUME_SPIKE_RATIO = 10.0  # 10x average volume
 
+# === API FUNCTIONS ===
 
-def get_daily_prices(ticker, start_date, end_date, api_key):
-    """Get daily price data from Polygon"""
-    url = f"{POLYGON_BASE_URL}/aggs/ticker/{ticker}/range/1/day/{start_date}/{end_date}"
-    params = {"apiKey": api_key, "adjusted": "true", "sort": "asc", "limit": 50000}
+def fetch_with_retry(url: str, params: dict = None, retries: int = 5, backoff_factor: float = 0.5) -> Optional[dict]:
+    """Fetches from Polygon API with exponential backoff retry logic."""
+    headers = {"Authorization": f"Bearer {POLYGON_API_KEY}"}
+    for i in range(retries):
+        try:
+            response = requests.get(url, headers=headers, params=params, timeout=10)
+            if response.status_code == 404: return None
+            response.raise_for_status()
+            return response.json()
+        except Exception as e:
+            if i == retries - 1:
+                print(f"    [ERROR] API call failed after {retries} retries: {e}")
+                return None
+            time.sleep(backoff_factor * (2 ** i))
+    return None
+
+def get_signal_context(ticker: str, signal_date_str: str) -> dict:
+    """
+    Gets rich context data *leading up to* the signal date.
+    Calculates:
+    1.  Bollinger Band Squeeze value (on day *before* signal)
+    2.  Volume Spike ratio (on signal day vs. 20-day avg)
+    """
+    signal_date = pd.to_datetime(signal_date_str)
+    # Need 20 days prior for BB/Vol, plus the signal day
+    start_date = (signal_date - pd.DateOffset(days=45)).strftime('%Y-%m-%d') 
+    end_date = signal_date.strftime('%Y-%m-%d') # Force YYYY-MM-DD format
+
+    url = f"{POLYGON_BASE_URL}/v2/aggs/ticker/{ticker}/range/1/day/{start_date}/{end_date}"
+    params = {"adjusted": "true", "sort": "asc", "limit": 500, "apiKey": POLYGON_API_KEY}
     
+    data = fetch_with_retry(url, params)
+    
+    if not data or not data.get("results") or len(data.get("results", [])) < 21:
+        return {"bb_squeeze_value": None, "volume_spike_ratio": None} # Not enough data
+
+    df = pd.DataFrame(data["results"])
+    df['date'] = pd.to_datetime(df['t'], unit='ms')
+    df = df.set_index('date')
+    
+    # 1. Calculate Bollinger Bands (20-day)
+    df['middle_band'] = df['c'].rolling(window=20).mean()
+    df['std_dev'] = df['c'].rolling(window=20).std()
+    df['upper_band'] = df['middle_band'] + (df['std_dev'] * 2)
+    df['lower_band'] = df['middle_band'] - (df['std_dev'] * 2)
+    
+    # The "Squeeze" is the width of the bands as a % of price
+    df['bb_squeeze_value'] = (df['upper_band'] - df['lower_band']) / df['middle_band']
+    
+    # 2. Calculate Volume Spike
+    df['avg_20d_vol'] = df['v'].rolling(window=20).mean().shift(1) # Avg *before* today
+    df['volume_spike_ratio'] = df['v'] / df['avg_20d_vol']
+    
+    # Get the data for the actual signal date
     try:
-        response = requests.get(url, params=params, timeout=30)
-        
-        if response.status_code == 429:
-            print(f"  ⚠️  Rate limited, waiting 5 seconds...")
-            time.sleep(5)
-            return get_daily_prices(ticker, start_date, end_date, api_key)
-        
-        if response.status_code == 200:
-            data = response.json()
-            if data.get('resultsCount', 0) > 0 and 'results' in data:
-                prices = []
-                for bar in data['results']:
-                    prices.append({
-                        'date': datetime.fromtimestamp(bar['t'] / 1000).strftime('%Y-%m-%d'),
-                        'open': bar['o'],
-                        'high': bar['h'],
-                        'low': bar['l'],
-                        'close': bar['c'],
-                        'volume': bar['v']
-                    })
-                return prices
-        
-        return []
-        
-    except Exception as e:
-        print(f"  ❌ Error: {e}")
-        return []
+        signal_row = df.loc[signal_date_str]
+    except KeyError:
+        if not df.empty:
+            signal_row = df.iloc[-1]
+        else:
+            return {"bb_squeeze_value": None, "volume_spike_ratio": None}
 
+    # Get the squeeze value from the day *before* the signal
+    bb_squeeze_value = None
+    try:
+        prev_day_index = df.index.get_loc(signal_date_str) - 1
+        if prev_day_index >= 0:
+            bb_squeeze_value = df.iloc[prev_day_index]['bb_squeeze_value']
+    except Exception:
+        pass # Will be None if not found
 
-def analyze_drawdown_velocity(prices):
-    """
-    Analyze how fast stock drops during the explosive window
-    Returns: dict with drawdown metrics
-    """
-    if len(prices) < 2:
-        return None
-    
-    # Find all significant drops
-    max_single_day_drop = 0
-    max_single_day_drop_date = None
-    
-    # Find largest multi-day drawdowns
-    drawdowns = []
-    
-    for i in range(1, len(prices)):
-        # Single day drop
-        prev_close = prices[i-1]['close']
-        curr_close = prices[i]['close']
-        daily_drop_pct = ((prev_close - curr_close) / prev_close) * 100
-        
-        if daily_drop_pct > max_single_day_drop:
-            max_single_day_drop = daily_drop_pct
-            max_single_day_drop_date = prices[i]['date']
-        
-        # Look for drawdowns >20% over multiple days
-        if i >= 10:  # Need at least 10 days of history
-            window = prices[i-10:i+1]
-            high = max(d['high'] for d in window)
-            low = min(d['low'] for d in window)
-            drawdown_pct = ((high - low) / high) * 100
-            
-            if drawdown_pct > 20:
-                # Find how many days it took
-                high_idx = next(j for j, d in enumerate(window) if d['high'] == high)
-                low_idx = next(j for j, d in enumerate(window) if d['low'] == low)
-                days = abs(low_idx - high_idx)
-                
-                if days > 0:
-                    velocity = drawdown_pct / days
-                    drawdowns.append({
-                        'drawdown_pct': round(drawdown_pct, 2),
-                        'days': days,
-                        'velocity_per_day': round(velocity, 2)
-                    })
-    
-    # Classify tradeability based on 35% trailing stop loss
-    # We need to exit if stock drops 35% from peak
-    # Problem: If it drops >35% in ONE day, our stop won't fill
-    
-    if max_single_day_drop > 35:
-        tradeable = "UNTRADEABLE"
-        reason = f"Single-day drop of {max_single_day_drop:.1f}% - would gap past 35% stop loss"
-    elif max_single_day_drop > 25:
-        tradeable = "RISKY"
-        reason = f"Single-day drop of {max_single_day_drop:.1f}% - might gap through stop"
-    elif max_single_day_drop == 0:
-        tradeable = "IDEAL"
-        reason = "No significant drops - plenty of time to exit at any point"
-    else:
-        tradeable = "TRADEABLE"
-        reason = f"Max drop {max_single_day_drop:.1f}% - 35% trailing stop should fill"
-    
     return {
-        'max_single_day_drop_pct': round(max_single_day_drop, 2),
-        'max_drop_date': max_single_day_drop_date,
-        'significant_drawdowns': drawdowns[:3] if drawdowns else [],  # Top 3
-        'tradeable_classification': tradeable,
-        'tradeable_reason': reason
+        "bb_squeeze_value": bb_squeeze_value,
+        "volume_spike_ratio": signal_row['volume_spike_ratio']
     }
 
+def get_sec_filings(ticker: str, signal_date_str: str) -> bool:
+    """Checks for 8-K, 13D/G filings 3 days prior to signal."""
+    signal_date = pd.to_datetime(signal_date_str)
+    start_date = (signal_date - pd.DateOffset(days=5)).strftime('%Y-%m-%d')
+    end_date = signal_date.strftime('%Y-%m-%d') # Force YYYY-MM-DD format
+    
+    url = f"{POLYGON_BASE_URL}/v2/reference/filings"
+    
+    # --- THIS IS THE BUG FIX ---
+    # The parameter is 'form_type', NOT 'form_type.in'
+    params = {
+        "ticker": ticker,
+        "filing_date.gte": start_date,
+        "filing_date.lte": end_date,
+        "form_type": "8-K,13D,13G", # Catalyst filings
+        "limit": 10,
+        "apiKey": POLYGON_API_KEY
+    }
+    data = fetch_with_retry(url, params)
+    return bool(data and data.get("results"))
 
-def find_explosive_window(ticker, year, target_gain_pct, api_key):
-    """
-    Find the 180-day window with the explosive gain
-    Returns complete enrichment data
-    """
-    # Search range: 6 months before year to 6 months after
-    start_date = f"{year - 1}-07-01"
-    end_date = f"{year + 1}-06-30"
-    
-    print(f"  📊 Fetching data: {start_date} to {end_date}")
-    prices = get_daily_prices(ticker, start_date, end_date, api_key)
-    
-    if len(prices) < 180:
-        print(f"  ⚠️  Insufficient data: only {len(prices)} days")
-        return None
-    
-    print(f"  ✅ Got {len(prices)} days of data")
-    
-    # Find best 180-day window
-    best_window = None
-    max_gain = 0
-    
-    for i in range(len(prices) - 180):
-        window = prices[i:i+180]
-        entry_price = window[0]['close']
-        
-        # Find peak in window
-        peak_idx = 0
-        peak_price = entry_price
-        
-        for j, day in enumerate(window):
-            if day['high'] > peak_price:
-                peak_price = day['high']
-                peak_idx = j
-        
-        gain_pct = ((peak_price - entry_price) / entry_price) * 100
-        
-        # Accept ANY window with 500%+ gain (not just matching target)
-        if gain_pct >= 500:
-            if gain_pct > max_gain:
-                max_gain = gain_pct
-                
-                # Get test price (30 days after peak)
-                peak_date = window[peak_idx]['date']
-                peak_dt = datetime.strptime(peak_date, '%Y-%m-%d')
-                test_dt = peak_dt + timedelta(days=30)
-                
-                # Find test price
-                test_price = None
-                for k in range(peak_idx, min(peak_idx + 40, len(window))):
-                    if datetime.strptime(window[k]['date'], '%Y-%m-%d') >= test_dt:
-                        test_price = window[k]['close']
-                        break
-                
-                best_window = {
-                    'entry_date': window[0]['date'],
-                    'entry_price': round(entry_price, 4),
-                    'peak_date': peak_date,
-                    'peak_price': round(peak_price, 4),
-                    'days_to_peak': peak_idx,
-                    'gain_percent': round(gain_pct, 2),
-                    'test_price': round(test_price, 4) if test_price else None,
-                    'test_date': test_dt.strftime('%Y-%m-%d') if test_price else None
-                }
-    
-    if best_window:
-        print(f"  ✅ Found window:")
-        print(f"     Entry: {best_window['entry_date']} @ ${best_window['entry_price']}")
-        print(f"     Peak:  {best_window['peak_date']} @ ${best_window['peak_price']}")
-        print(f"     Gain:  {best_window['gain_percent']}% in {best_window['days_to_peak']} days")
-        if best_window['test_price']:
-            print(f"     Test:  {best_window['test_date']} @ ${best_window['test_price']}")
-        
-        # Analyze drawdown velocity for tradeability
-        print(f"  📊 Analyzing drawdown velocity...")
-        drawdown_analysis = analyze_drawdown_velocity(prices)
-        if drawdown_analysis:
-            best_window['drawdown_analysis'] = drawdown_analysis
-            print(f"     Max single-day drop: {drawdown_analysis['max_single_day_drop_pct']:.1f}%")
-            print(f"     Tradeable: {drawdown_analysis['tradeable_classification']}")
-            print(f"     {drawdown_analysis['tradeable_reason']}")
-    
-    return best_window
-
-
-def enrich_stock(stock, api_key):
-    """Enrich a single stock with complete data"""
-    ticker = stock.get('ticker')
-    year = stock.get('year', stock.get('year_discovered'))
-    gain_percent = stock.get('gain_percent')
-    
-    # Check if already enriched
-    if 'entry_date' in stock and 'entry_price' in stock and 'peak_price' in stock:
-        print(f"  ℹ️  Already enriched - skipping")
-        enrichment_log['already_enriched'] += 1
-        return stock
-    
-    if not all([ticker, year, gain_percent]):
-        print(f"  ❌ Missing required fields")
-        enrichment_log['failed'] += 1
-        enrichment_log['failures'].append({
-            'ticker': ticker,
-            'year': year,
-            'reason': 'Missing required fields (ticker, year, or gain_percent)'
-        })
-        return stock
-    
-    # Find explosive window
-    window_data = find_explosive_window(ticker, year, gain_percent, api_key)
-    
-    if not window_data:
-        print(f"  ❌ Could not find explosive window")
-        enrichment_log['failed'] += 1
-        enrichment_log['failures'].append({
-            'ticker': ticker,
-            'year': year,
-            'reason': 'Could not find explosive window in Polygon data'
-        })
-        return stock
-    
-    # Enrich stock with found data
-    enriched_stock = stock.copy()
-    enriched_stock.update({
-        'entry_date': window_data['entry_date'],
-        'entry_price': window_data['entry_price'],
-        'peak_date': window_data['peak_date'],
-        'peak_price': window_data['peak_price'],
-        'days_to_peak': window_data['days_to_peak'],
-        'gain_percent': window_data['gain_percent'],
-        'enriched': True,
-        'enrichment_date': datetime.now().strftime('%Y-%m-%d'),
-        'data_source': 'Polygon API'
-    })
-    
-    if window_data['test_price']:
-        enriched_stock['test_price_30d'] = window_data['test_price']
-        enriched_stock['test_date_30d'] = window_data['test_date']
-    
-    # Add drawdown analysis
-    if 'drawdown_analysis' in window_data:
-        enriched_stock['drawdown_analysis'] = window_data['drawdown_analysis']
-    
-    enrichment_log['enriched'] += 1
-    return enriched_stock
-
-
-def save_progress(clean_data, stocks_processed):
-    """Save progress periodically"""
-    if isinstance(clean_data, dict) and 'stocks' in clean_data:
-        clean_data['stocks'] = stocks_processed
-        clean_data['metadata']['last_enrichment'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    else:
-        clean_data = stocks_processed
-    
-    with open(OUTPUT_FILE, 'w') as f:
-        json.dump(clean_data, f, indent=2)
-    
-    with open(LOG_FILE, 'w') as f:
-        json.dump(enrichment_log, f, indent=2)
-
+# === MAIN PROCESSING LOGIC ===
 
 def run_enrichment():
-    """Main enrichment process"""
-    print("\n" + "="*70)
-    print("🔬 COMPREHENSIVE DATA ENRICHMENT SCANNER")
-    print("="*70)
-    print(f"📅 Started: {enrichment_log['started']}")
-    print("🎯 Goal: Enrich all 200 stocks with complete Polygon data")
-    print("="*70 + "\n")
-    
-    # Load CLEAN.json
-    print(f"📂 Loading {INPUT_FILE}...")
-    if not Path(INPUT_FILE).exists():
-        print(f"❌ ERROR: {INPUT_FILE} not found!")
+    print("--- Starting Post-Processor Enrichment (v4) ---")
+    print(f"Loading '{INPUT_FILE}'...")
+    try:
+        df = pd.read_json(INPUT_FILE)
+    except Exception as e:
+        print(f"ERROR: Could not read '{INPUT_FILE}'. Error: {e}")
+        with open(OUTPUT_REPORT, 'w') as f: f.write(f"Post-processing failed: Could not read {INPUT_FILE}.\n")
+        with open(OUTPUT_FILE, 'w') as f: json.dump([], f)
         return
-    
-    with open(INPUT_FILE, 'r') as f:
-        clean_data = json.load(f)
-    
-    # Extract stocks
-    if isinstance(clean_data, dict) and 'stocks' in clean_data:
-        all_stocks = clean_data['stocks']
-    else:
-        all_stocks = clean_data
-        clean_data = {'stocks': all_stocks}
-    
-    enrichment_log['total_stocks'] = len(all_stocks)
-    
-    print(f"✅ Loaded {len(all_stocks)} stocks")
-    print(f"⚡ Using Polygon Developer API (unlimited requests)\n")
-    
-    # Process each stock
-    enriched_stocks = []
-    
-    for i, stock in enumerate(all_stocks, 1):
-        ticker = stock.get('ticker', 'UNKNOWN')
-        year = stock.get('year', stock.get('year_discovered', 'UNKNOWN'))
-        
-        print(f"\n[{i}/{len(all_stocks)}] {ticker} ({year})")
-        print("="*70)
-        
-        enriched_stock = enrich_stock(stock, POLYGON_API_KEY)
-        enriched_stocks.append(enriched_stock)
-        
-        # Save progress every 10 stocks
-        if i % 10 == 0:
-            print(f"\n💾 Saving progress...")
-            save_progress(clean_data, enriched_stocks)
-        
-        # Small delay to be polite
-        time.sleep(0.1)
-    
-    # Final save
-    print("\n" + "="*70)
-    print("💾 SAVING FINAL RESULTS")
-    print("="*70)
-    
-    save_progress(clean_data, enriched_stocks)
-    
-    enrichment_log['completed'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    
-    with open(LOG_FILE, 'w') as f:
-        json.dump(enrichment_log, f, indent=2)
-    
-    # Final summary
-    print("\n" + "="*70)
-    print("📊 ENRICHMENT COMPLETE")
-    print("="*70)
-    print(f"Total Stocks: {enrichment_log['total_stocks']}")
-    print(f"✅ Enriched: {enrichment_log['enriched']}")
-    print(f"ℹ️  Already Had Data: {enrichment_log['already_enriched']}")
-    print(f"❌ Failed: {enrichment_log['failed']}")
-    print(f"\nSuccess Rate: {(enrichment_log['enriched'] + enrichment_log['already_enriched'])/enrichment_log['total_stocks']*100:.1f}%")
-    print("="*70)
-    
-    if enrichment_log['failed'] > 0:
-        print(f"\n⚠️  {enrichment_log['failed']} stocks failed enrichment")
-        print(f"   See {LOG_FILE} for details")
 
+    if df.empty:
+        print("No signals to enrich. Exiting.")
+        with open(OUTPUT_REPORT, 'w') as f: f.write("Post-processing: No signals found to enrich.\n")
+        with open(OUTPUT_FILE, 'w') as f: json.dump([], f)
+        return
+        
+    print(f"Found {len(df)} signals to enrich...")
+    enriched_data = []
+    
+    for i, signal in df.iterrows():
+        ticker = signal["ticker"]
+        date = signal["date"]
+        
+        if (i + 1) % 50 == 0:
+            print(f"  Processing signal {i+1}/{len(df)} ({ticker} on {date})...")
+            
+        context = get_signal_context(ticker, date)
+        has_catalyst_filing = get_sec_filings(ticker, date)
+        
+        signal_dict = signal.to_dict()
+        signal_dict.update(context)
+        signal_dict["has_catalyst_filing"] = has_catalyst_filing
+        
+        enriched_data.append(signal_dict)
+
+    print("Enrichment complete. Analyzing filtered results...")
+
+    if not enriched_data:
+        print("No signals were enriched.")
+        return
+
+    enriched_df = pd.DataFrame(enriched_data)
+    # Clean data for analysis
+    for col in ['fwd_return_90d', 'bb_squeeze_value', 'volume_spike_ratio']:
+        enriched_df[col] = pd.to_numeric(enriched_df[col], errors='coerce')
+
+    # --- Generate Report ---
+    report_content = "--- POST-PROCESSOR ENRICHMENT REPORT (v4) ---\n\n"
+    report_content += "Testing filters and analyzing squeeze quantiles.\n"
+    report_content += f"Timestamp: {datetime.now().isoformat()}\n"
+
+    # Baseline (all signals with valid 90-day data)
+    baseline_df = enriched_df.dropna(subset=['fwd_return_90d'])
+    report_content += get_performance_stats(baseline_df, "Baseline (All Signals w/ 90d Data)")
+
+    # --- Test Filters ---
+    
+    # 1. Volume Spike Filter (from v3)
+    vol_filter_df = baseline_df[baseline_df["volume_spike_ratio"] >= VOLUME_SPIKE_RATIO]
+    report_content += get_performance_stats(vol_filter_df, f"FILTER: Volume Spike (>= {VOLUME_SPIKE_RATIO}x)")
+
+    # 2. Catalyst Filter (FIXED)
+    catalyst_df = baseline_df[baseline_df["has_catalyst_filing"] == True]
+    report_content += get_performance_stats(catalyst_df, "FILTER: Catalyst (8-K or 13D Filing)")
+    
+    # --- Analyze BB Squeeze Quantiles ---
+    
+    # First, get all signals that *have* a squeeze value
+    squeeze_df = baseline_df.dropna(subset=['bb_squeeze_value'])
+    if not squeeze_df.empty:
+        # Calculate quantiles (q=0 is min, q=0.25 is 1st quartile, etc.)
+        # A *lower* value means a *tighter* squeeze
+        q_tightest = squeeze_df['bb_squeeze_value'].quantile(0.25)
+        q_loosest = squeeze_df['bb_squeeze_value'].quantile(0.75)
+        
+        tight_squeeze_df = squeeze_df[squeeze_df['bb_squeeze_value'] <= q_tightest]
+        loose_squeeze_df = squeeze_df[squeeze_df['bb_squeeze_value'] >= q_loosest]
+        
+        report_content += get_performance_stats(squeeze_df, "All Signals with BB Squeeze Data")
+        report_content += get_performance_stats(tight_squeeze_df, f"SQUEEZE (Top 25% Tightest, <= {q_tightest:.4f})")
+        report_content += get_performance_stats(loose_squeeze_df, f"SQUEEZE (Bottom 25% Loosest, >= {q_loosest:.4f})")
+        
+    else:
+        report_content += "\n--- BB Squeeze Analysis ---"
+        report_content += "  No signals had valid BB Squeeze data to analyze.\n"
+
+    # --- Test "Tier 3" Combo ---
+    combo_df = baseline_df[
+        (baseline_df["has_catalyst_filing"] == True) &
+        (baseline_df["bb_squeeze_value"].notna()) &
+        (baseline_df["bb_squeeze_value"] <= baseline_df["bb_squeeze_value"].quantile(0.50)) # Tighter half
+    ]
+    report_content += get_performance_stats(combo_df, "TIER 3 COMBO: Catalyst + Top 50% Squeeze")
+
+    print(report_content)
+
+    # Save files
+    with open(OUTPUT_REPORT, 'w') as f:
+        f.write(report_content)
+        
+    enriched_df.to_json(OUTPUT_FILE, orient='records', indent=2)
+    print(f"Saved enriched report to '{OUTPUT_REPORT}'")
+    print(f"Saved enriched data to '{OUTPUT_FILE}'")
+
+def get_performance_stats(df: pd.DataFrame, title: str) -> str:
+    """Helper function to generate performance stats for a DataFrame slice."""
+    content = f"\n--- {title} ---\n"
+    
+    total_signals = len(df)
+    
+    if total_signals == 0:
+        content += "  Total Signals: 0\n"
+        content += "  No signals matched this filter.\n"
+        return content
+
+    avg_gain = df['fwd_return_90d'].mean() * 100
+    median_gain = df['fwd_return_90d'].median() * 100
+    win_rate_vs_0 = (len(df[df['fwd_return_90d'] > 0]) / total_signals) * 100
+    supernovas = len(df[df['fwd_return_90d'] >= 5.0]) # 500%+
+
+    content_template = (
+        f"  Total Signals: {total_signals}\n"
+        f"  Win Rate (vs 0%): {win_rate_vs_0:.2f}%\n"
+        f"  Average Gain: {avg_gain:.2f}%\n"
+        f"  Median Gain: {median_gain:.2f}%\n"
+        f"  Supernovas (500%+): {supernovas}\n"
+    )
+    content += content_template
+    
+    return content
 
 if __name__ == "__main__":
     run_enrichment()
